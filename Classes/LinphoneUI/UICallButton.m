@@ -100,6 +100,11 @@
 		if (contact) {
 			displayName = [FastAddressBook getContactDisplayName:contact];
 		}
+        if ([address rangeOfString:@"@"].location != NSNotFound)
+        {
+            address = [address stringByReplacingOccurrencesOfString:@"@" withString:@"%"];
+            NSLog(@"New Address: %@", address);
+        }
 		[[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
 	}
 }
