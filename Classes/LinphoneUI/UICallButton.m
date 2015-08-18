@@ -102,6 +102,7 @@
 		}
         if ([address rangeOfString:@"@"].location != NSNotFound)
         {
+            displayName = [NSString stringWithString:address];
             address = [address stringByReplacingOccurrencesOfString:@"@" withString:@"%"];
             NSLog(@"New Address: %@", address);
         }
