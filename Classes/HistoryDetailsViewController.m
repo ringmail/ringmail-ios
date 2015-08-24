@@ -344,9 +344,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 			displayName = [NSString stringWithUTF8String:lUserName];
 	}
 
-	DialerViewController *controller =
-		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]],
-					 DialerViewController);
+	RgMainViewController *controller =
+		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
+					 RgMainViewController);
 	if (controller != nil) {
 		if (displayName != nil) {
 			[controller call:[NSString stringWithUTF8String:lAddress] displayName:displayName];

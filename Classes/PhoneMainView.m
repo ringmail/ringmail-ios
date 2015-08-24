@@ -336,8 +336,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 	case LinphoneCallEnd: {
 		if (canHideInCallView) {
 			// Go to dialer view
-			DialerViewController *controller = DYNAMIC_CAST(
-				[self changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
+			RgMainViewController *controller = DYNAMIC_CAST(
+				[self changeCurrentView:[RgMainViewController compositeViewDescription]], RgMainViewController);
 			if (controller != nil) {
 				[controller setAddress:@""];
 				[controller setTransferMode:FALSE];
@@ -389,7 +389,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		core = [LinphoneManager getLc];
 		LinphoneManager *lm = [LinphoneManager instance];
 		if (linphone_core_get_global_state(core) != LinphoneGlobalOn) {
-			[self changeCurrentView:[DialerViewController compositeViewDescription]];
+			[self changeCurrentView:[RgMainViewController compositeViewDescription]];
 		} else if ([[LinphoneManager instance] lpConfigBoolForKey:@"enable_first_login_view_preference"] == true) {
 			// Change to fist login view
 			[self changeCurrentView:[FirstLoginViewController compositeViewDescription]];
@@ -398,7 +398,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 			// Change to default view
 			const MSList *list = linphone_core_get_proxy_config_list(core);
 			if (list != NULL || ([lm lpConfigBoolForKey:@"hide_wizard_preference"] == true) || lm.isTesting) {
-				[self changeCurrentView:[DialerViewController compositeViewDescription]];
+				[self changeCurrentView:[RgMainViewController compositeViewDescription]];
 			} else {
 				WizardViewController *controller = DYNAMIC_CAST(
 					[[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
@@ -451,18 +451,18 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 	if ([old equal:[ChatViewController compositeViewDescription]]) {
 		if ([new equal:[ContactsViewController compositeViewDescription]] ||
-			[new equal:[DialerViewController compositeViewDescription]] ||
+			[new equal:[RgMainViewController compositeViewDescription]] ||
 			[new equal:[HistoryViewController compositeViewDescription]]) {
 			left = true;
 		}
 	} else if ([old equal:[SettingsViewController compositeViewDescription]]) {
-		if ([new equal:[DialerViewController compositeViewDescription]] ||
+		if ([new equal:[RgMainViewController compositeViewDescription]] ||
 			[new equal:[ContactsViewController compositeViewDescription]] ||
 			[new equal:[HistoryViewController compositeViewDescription]] ||
 			[new equal:[ChatViewController compositeViewDescription]]) {
 			left = true;
 		}
-	} else if ([old equal:[DialerViewController compositeViewDescription]]) {
+	} else if ([old equal:[RgMainViewController compositeViewDescription]]) {
 		if ([new equal:[ContactsViewController compositeViewDescription]] ||
 			[new equal:[HistoryViewController compositeViewDescription]]) {
 			left = true;

@@ -378,7 +378,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 	} else {
 		contactsButton.selected = FALSE;
 	}
-	if ([view equal:[DialerViewController compositeViewDescription]]) {
+	if ([view equal:[RgMainViewController compositeViewDescription]]) {
 		dialerButton.selected = TRUE;
 	} else {
 		dialerButton.selected = FALSE;
@@ -411,7 +411,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 }
 
 - (IBAction)onDialerClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
 }
 
 - (IBAction)onSettingsClick:(id)event {

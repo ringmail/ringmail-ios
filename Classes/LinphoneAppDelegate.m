@@ -253,9 +253,9 @@
 			NSString *sipUri = [[url resourceSpecifier]
 				stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"/"]];
 
-			DialerViewController *controller = DYNAMIC_CAST(
-				[[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]],
-				DialerViewController);
+			RgMainViewController *controller = DYNAMIC_CAST(
+				[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
+				RgMainViewController);
 			if (controller != nil) {
 				[controller setAddress:sipUri];
 			}

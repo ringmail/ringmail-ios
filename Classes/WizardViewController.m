@@ -547,7 +547,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	switch (state) {
 	case LinphoneRegistrationOk: {
 		[waitView setHidden:true];
-		[[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+		[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
 		break;
 	}
 	case LinphoneRegistrationNone:
@@ -672,7 +672,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onCancelClick:(id)sender {
-	[[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
 }
 
 - (IBAction)onCreateAccountClick:(id)sender {
@@ -758,7 +758,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 							   [waitView setHidden:true];
 							   [self addProxyConfig:username password:password domain:domain withTransport:transport];
 							   [[PhoneMainView instance]
-								   changeCurrentView:[DialerViewController compositeViewDescription]];
+								   changeCurrentView:[RgMainViewController compositeViewDescription]];
 							 }];
 			[alert show];
 		} else {

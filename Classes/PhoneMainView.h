@@ -29,7 +29,7 @@
 #import "IncomingCallViewController.h"
 #import "ChatRoomViewController.h"
 #import "ChatViewController.h"
-#import "DialerViewController.h"
+#import "RgMainViewController.h"
 #import "ContactsViewController.h"
 #import "ContactDetailsViewController.h"
 #import "ContactDetailsLabelViewController.h"

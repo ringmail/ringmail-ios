@@ -192,7 +192,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 			cancelButtonTitle:NSLocalizedString(@"Continue", nil)
 			otherButtonTitles:nil];
 		[error show];
-		[[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+		[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
 	}
 }
 
@@ -336,9 +336,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	CFIndex valueIdx = ABMultiValueGetIndexForIdentifier(multiValue, identifier);
 	NSString *phoneNumber = (NSString *)CFBridgingRelease(ABMultiValueCopyValueAtIndex(multiValue, valueIdx));
 	// Go to dialer view
-	DialerViewController *controller =
-		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]],
-					 DialerViewController);
+	RgMainViewController *controller =
+		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
+					 RgMainViewController);
 	if (controller != nil) {
 		[controller call:phoneNumber displayName:(NSString *)CFBridgingRelease(ABRecordCopyCompositeName(person))];
 	}

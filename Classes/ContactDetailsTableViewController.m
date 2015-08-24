@@ -628,9 +628,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 			NSString *displayName = [FastAddressBook getContactDisplayName:contact];
 			if ([ContactSelection getSelectionMode] != ContactSelectionModeMessage) {
 				// Go to dialer view
-				DialerViewController *controller = DYNAMIC_CAST(
-					[[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]],
-					DialerViewController);
+				RgMainViewController *controller = DYNAMIC_CAST(
+					[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
+					RgMainViewController);
 				if (controller != nil) {
 					[controller call:dest displayName:displayName];
 				}

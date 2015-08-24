@@ -114,7 +114,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	case LinphoneRegistrationOk: {
 		[[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"enable_first_login_view_preference"];
 		[waitView setHidden:true];
-		[[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+		[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
 		break;
 	}
 	case LinphoneRegistrationNone:
