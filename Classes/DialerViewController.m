@@ -41,19 +41,6 @@
 @synthesize callButton;
 @synthesize eraseButton;
 
-@synthesize oneButton;
-@synthesize twoButton;
-@synthesize threeButton;
-@synthesize fourButton;
-@synthesize fiveButton;
-@synthesize sixButton;
-@synthesize sevenButton;
-@synthesize eightButton;
-@synthesize nineButton;
-@synthesize starButton;
-@synthesize zeroButton;
-@synthesize sharpButton;
-
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
@@ -169,19 +156,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-
-	[zeroButton setDigit:'0'];
-	[oneButton setDigit:'1'];
-	[twoButton setDigit:'2'];
-	[threeButton setDigit:'3'];
-	[fourButton setDigit:'4'];
-	[fiveButton setDigit:'5'];
-	[sixButton setDigit:'6'];
-	[sevenButton setDigit:'7'];
-	[eightButton setDigit:'8'];
-	[nineButton setDigit:'9'];
-	[starButton setDigit:'*'];
-	[sharpButton setDigit:'#'];
 
 	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
 
