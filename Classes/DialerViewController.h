@@ -44,6 +44,18 @@
 @property (nonatomic, strong) IBOutlet UIButton* backButton;
 @property (nonatomic, strong) IBOutlet UIEraseButton* eraseButton;
 
+@property (nonatomic, strong) IBOutlet UIDigitButton* oneButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* twoButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* threeButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* fourButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* fiveButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* sixButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* sevenButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* eightButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* nineButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* starButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* zeroButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* sharpButton;
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
