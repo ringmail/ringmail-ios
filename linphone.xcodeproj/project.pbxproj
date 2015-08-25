@@ -43,8 +43,6 @@
 		15AF3C9A16F37A5D00FC52EC /* routes_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AF3C9516F37A5D00FC52EC /* routes_disabled.png */; };
 		15AF3C9C16F37A5D00FC52EC /* routes_over.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AF3C9616F37A5D00FC52EC /* routes_over.png */; };
 		15AF3C9E16F37A5D00FC52EC /* routes_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AF3C9716F37A5D00FC52EC /* routes_selected.png */; };
-		15F728731B16FF8B00A1C901 /* libilbcrfc3951.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 152F22331B15E83B008C0621 /* libilbcrfc3951.a */; };
-		15F728741B16FF9A00A1C901 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 152F22351B15E889008C0621 /* libxml2.dylib */; };
 		1D3623260D0F684500981E51 /* LinphoneAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* LinphoneAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -108,50 +106,10 @@
 		57F005C415EE2CCF00914747 /* linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C315EE2CCF00914747 /* linphonerc */; };
 		57F005C815EE2D9200914747 /* linphonerc-factory in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C615EE2D9200914747 /* linphonerc-factory */; };
 		57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C715EE2D9200914747 /* linphonerc-factory~ipad */; };
-		630589E71B4E810900EFAE36 /* ChatTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 630589DF1B4E810900EFAE36 /* ChatTester.m */; };
-		630589E81B4E810900EFAE36 /* ContactsTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 630589E11B4E810900EFAE36 /* ContactsTester.m */; };
-		630589EA1B4E810900EFAE36 /* LinphoneTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 630589E41B4E810900EFAE36 /* LinphoneTestCase.m */; };
-		630589EB1B4E810900EFAE36 /* WizardTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 630589E61B4E810900EFAE36 /* WizardTester.m */; };
-		63058A241B4E821E00EFAE36 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63058A0E1B4E821E00EFAE36 /* AppDelegate.m */; };
-		63058A251B4E821E00EFAE36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63058A0F1B4E821E00EFAE36 /* InfoPlist.strings */; };
-		63058A261B4E821E00EFAE36 /* Main_iPad.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63058A111B4E821E00EFAE36 /* Main_iPad.strings */; };
-		63058A271B4E821E00EFAE36 /* Main_iPhone.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63058A131B4E821E00EFAE36 /* Main_iPhone.strings */; };
-		63058A281B4E821E00EFAE36 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63058A151B4E821E00EFAE36 /* Main_iPad.storyboard */; };
-		63058A291B4E821E00EFAE36 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63058A171B4E821E00EFAE36 /* Main_iPhone.storyboard */; };
-		63058A2A1B4E821E00EFAE36 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63058A1A1B4E821E00EFAE36 /* DetailViewController.m */; };
-		63058A2B1B4E821E00EFAE36 /* LinphoneTester-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63058A1C1B4E821E00EFAE36 /* LinphoneTester-Info.plist */; };
-		63058A2C1B4E821E00EFAE36 /* LogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63058A1F1B4E821E00EFAE36 /* LogsViewController.m */; };
-		63058A2D1B4E821E00EFAE36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63058A201B4E821E00EFAE36 /* main.m */; };
-		63058A2E1B4E821E00EFAE36 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63058A221B4E821E00EFAE36 /* MasterViewController.m */; };
-		63058A2F1B4E821E00EFAE36 /* TesterImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63058A231B4E821E00EFAE36 /* TesterImages.xcassets */; };
-		63058A3B1B4E822F00EFAE36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63058A311B4E822F00EFAE36 /* InfoPlist.strings */; };
-		63058A3C1B4E822F00EFAE36 /* DTObjectBlockExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 63058A341B4E822F00EFAE36 /* DTObjectBlockExecutor.m */; };
-		63058A3E1B4E822F00EFAE36 /* LinphoneTester_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 63058A381B4E822F00EFAE36 /* LinphoneTester_Tests.m */; };
-		63058A3F1B4E823000EFAE36 /* NSObject+DTRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 63058A3A1B4E822F00EFAE36 /* NSObject+DTRuntime.m */; };
-		63058A4F1B4E835200EFAE36 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 630589FD1B4E816A00EFAE36 /* libKIF.a */; };
-		63058ACF1B4E922500EFAE36 /* certificates in Resources */ = {isa = PBXBuildFile; fileRef = 63058AC81B4E922500EFAE36 /* certificates */; };
-		63058AD01B4E922500EFAE36 /* flexisip in Resources */ = {isa = PBXBuildFile; fileRef = 63058AC91B4E922500EFAE36 /* flexisip */; };
-		63058AD11B4E922500EFAE36 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACA1B4E922500EFAE36 /* images */; };
-		63058AD21B4E922500EFAE36 /* marie_xml in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACB1B4E922500EFAE36 /* marie_xml */; };
-		63058AD31B4E922500EFAE36 /* messages.db in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACC1B4E922500EFAE36 /* messages.db */; };
-		63058AD41B4E922500EFAE36 /* rcfiles in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACD1B4E922500EFAE36 /* rcfiles */; };
-		63058AD51B4E922500EFAE36 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACE1B4E922500EFAE36 /* sounds */; };
-		63058AD61B4E92D400EFAE36 /* liblinphonetester.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C0F193623F200974404 /* liblinphonetester.a */; };
-		63058ADA1B4E937300EFAE36 /* certificates in Resources */ = {isa = PBXBuildFile; fileRef = 63058AC81B4E922500EFAE36 /* certificates */; };
-		63058ADB1B4E937300EFAE36 /* flexisip in Resources */ = {isa = PBXBuildFile; fileRef = 63058AC91B4E922500EFAE36 /* flexisip */; };
-		63058ADC1B4E937300EFAE36 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACA1B4E922500EFAE36 /* images */; };
-		63058ADD1B4E937300EFAE36 /* marie_xml in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACB1B4E922500EFAE36 /* marie_xml */; };
-		63058ADE1B4E937300EFAE36 /* messages.db in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACC1B4E922500EFAE36 /* messages.db */; };
-		63058ADF1B4E937300EFAE36 /* rcfiles in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACD1B4E922500EFAE36 /* rcfiles */; };
-		63058AE01B4E937300EFAE36 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 63058ACE1B4E922500EFAE36 /* sounds */; };
-		63058AE21B4E93A100EFAE36 /* tester_hosts in Resources */ = {isa = PBXBuildFile; fileRef = 63058AE11B4E93A100EFAE36 /* tester_hosts */; };
-		63058AE31B4E93B300EFAE36 /* tester_hosts in Resources */ = {isa = PBXBuildFile; fileRef = 63058AE11B4E93A100EFAE36 /* tester_hosts */; };
 		630CF5571AF7CE1500539F7A /* UITextField+DoneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 630CF5561AF7CE1500539F7A /* UITextField+DoneButton.m */; };
 		63158FAD1B468E0E00969917 /* ImageOptim.sh in Resources */ = {isa = PBXBuildFile; fileRef = 63158FAC1B468E0E00969917 /* ImageOptim.sh */; };
 		631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */; };
 		631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */; };
-		632DA24D1B43EE9400EB356A /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D35860D515B549B500513429 /* Utils.m */; };
-		632DA24E1B43EEEF00EB356A /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D35860D515B549B500513429 /* Utils.m */; };
 		636316D11A1DEBCB0009B839 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D31A1DEBCB0009B839 /* AboutViewController.xib */; };
 		636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D61A1DEC650009B839 /* SettingsViewController.xib */; };
 		636316D91A1DECC90009B839 /* PhoneMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D71A1DECC90009B839 /* PhoneMainView.xib */; };
@@ -167,7 +125,6 @@
 		63B81A0E1B57DA33009604A6 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B81A071B57DA33009604A6 /* TPKeyboardAvoidingScrollView.m */; };
 		63B81A0F1B57DA33009604A6 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B81A091B57DA33009604A6 /* TPKeyboardAvoidingTableView.m */; };
 		63B81A101B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B81A0B1B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
-		63C458261B5680AC009F2D7E /* ring.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2237D4081084D7A9001383EE /* ring.wav */; };
 		63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */; };
 		63D2680F1B174A5E00A2CC11 /* numpad_one_voicemail_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 63D2680D1B174A5E00A2CC11 /* numpad_one_voicemail_default.png */; };
 		63D268101B174A5E00A2CC11 /* numpad_one_voicemail_over.png in Resources */ = {isa = PBXBuildFile; fileRef = 63D2680E1B174A5E00A2CC11 /* numpad_one_voicemail_over.png */; };
@@ -187,6 +144,11 @@
 		C41EF31C1B8BD87B0085E75B /* ringmail_input1.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3191B8BD87B0085E75B /* ringmail_input1.png */; };
 		C41EF31D1B8BD87B0085E75B /* ringmail_logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF31A1B8BD87B0085E75B /* ringmail_logo1.png */; };
 		C41EF31F1B8BD9D10085E75B /* ringmail_button2.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF31E1B8BD9D10085E75B /* ringmail_button2.png */; };
+		C41EF3231B8CEDA60085E75B /* ringmail_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3221B8CEDA60085E75B /* ringmail_icon.png */; };
+		C41EF3251B8CEF4C0085E75B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3241B8CEF4C0085E75B /* Images.xcassets */; };
+		C41EF33B1B8CF1200085E75B /* ringmail_icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */; };
+		C41EF33C1B8CF1200085E75B /* ringmail_icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */; };
+		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
@@ -731,7 +693,6 @@
 		F01A77EB18ED989B00E287CA /* shortring.caf in Resources */ = {isa = PBXBuildFile; fileRef = F01A77EA18ED989B00E287CA /* shortring.caf */; };
 		F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */; };
 		F05BAA621A5D594E00411815 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F05BAA611A5D594E00411815 /* libz.dylib */; };
-		F05BAA631A5D75BC00411815 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F05BAA611A5D594E00411815 /* libz.dylib */; };
 		F0642EF119DAC891009DB336 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */; };
 		F066515517F9A02E0064280C /* UITransparentTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F066515417F9A02E0064280C /* UITransparentTVCell.m */; };
 		F070E6331A2622EC00E17AFD /* dialer_padding_left.png in Resources */ = {isa = PBXBuildFile; fileRef = F070E62D1A2622EC00E17AFD /* dialer_padding_left.png */; };
@@ -741,54 +702,13 @@
 		F070E6371A2622EC00E17AFD /* incall_padding_right_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = F070E6311A2622EC00E17AFD /* incall_padding_right_landscape.png */; };
 		F070E6381A2622EC00E17AFD /* incall_padding_right.png in Resources */ = {isa = PBXBuildFile; fileRef = F070E6321A2622EC00E17AFD /* incall_padding_right.png */; };
 		F088488A19FF8C41007FFCF3 /* UIContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088488D19FF8C41007FFCF3 /* UIContactCell.xib */; };
-		F08D468D1AA86849001E8CB5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B026F21AA710AF00FF49F7 /* libiconv.dylib */; };
-		F08F118519C09C6B007D70C2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B3318C0CF7000C4D7FE /* XCTest.framework */; };
-		F08F118619C09C6B007D70C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		F08F118719C09C6B007D70C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		F0938159188E629800A55DFA /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = F0938158188E629800A55DFA /* iTunesArtwork */; };
-		F0A54B0C1AD56F4600C22733 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B9718C0DB6F00C4D7FE /* libc++.dylib */; };
-		F0A54B0D1AD56F4600C22733 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B9418C0DAE100C4D7FE /* libstdc++.dylib */; };
 		F0B026F31AA710AF00FF49F7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B026F21AA710AF00FF49F7 /* libiconv.dylib */; };
-		F0B4FB5D1A65550B00637027 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0B4FB5C1A65550B00637027 /* Images.xcassets */; };
 		F0B89C2218DC89E30050B60E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B89C2118DC89E30050B60E /* MediaPlayer.framework */; };
 		F0B89C2818DC973E0050B60E /* wizard_external_sip.rc in Resources */ = {isa = PBXBuildFile; fileRef = F0B89C2418DC973E0050B60E /* wizard_external_sip.rc */; };
 		F0B89C2A18DC973E0050B60E /* wizard_linphone_create.rc in Resources */ = {isa = PBXBuildFile; fileRef = F0B89C2518DC973E0050B60E /* wizard_linphone_create.rc */; };
 		F0B89C2C18DC973E0050B60E /* wizard_linphone_existing.rc in Resources */ = {isa = PBXBuildFile; fileRef = F0B89C2618DC973E0050B60E /* wizard_linphone_existing.rc */; };
 		F0B89C2E18DC973E0050B60E /* wizard_remote.rc in Resources */ = {isa = PBXBuildFile; fileRef = F0B89C2718DC973E0050B60E /* wizard_remote.rc */; };
-		F0BB8BD61936208100974404 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		F0BB8BD71936208100974404 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		F0BB8BD81936208100974404 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		F0BB8C10193623F300974404 /* liblinphonetester.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C0F193623F200974404 /* liblinphonetester.a */; };
-		F0BB8C121936240300974404 /* libcunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C111936240300974404 /* libcunit.a */; };
-		F0BB8C131936242400974404 /* liblinphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211DB911475562600DEE054 /* liblinphone.a */; };
-		F0BB8C141936242400974404 /* libmediastreamer_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22405EE916006F0700B92522 /* libmediastreamer_base.a */; };
-		F0BB8C151936242400974404 /* libmediastreamer_voip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22405EEA16006F0700B92522 /* libmediastreamer_voip.a */; };
-		F0BB8C161936245300974404 /* libantlr3c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 223CA7E416D9255800EF1BEC /* libantlr3c.a */; };
-		F0BB8C171936245300974404 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22276E8013C73D3100210156 /* libavcodec.a */; };
-		F0BB8C181936245300974404 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22276E8113C73D3100210156 /* libavutil.a */; };
-		F0BB8C191936245300974404 /* libbellesip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 223CA7E516D9255800EF1BEC /* libbellesip.a */; };
-		F0BB8C1A1936245300974404 /* libbzrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045B5CB218D72E9A0088350C /* libbzrtp.a */; };
-		F0BB8C1B1936245300974404 /* libgsm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220FAD2910765B400068D98F /* libgsm.a */; };
-		F0BB8C1D1936245300974404 /* libmsamr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F2ED51344B0EF00F6EF27 /* libmsamr.a */; };
-		F0BB8C1E1936245300974404 /* libmsbcg729.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 226CDADE14E2D0B800513B67 /* libmsbcg729.a */; };
-		F0BB8C1F1936245300974404 /* libmsilbc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 223148E51178A09900637D6A /* libmsilbc.a */; };
-		F0BB8C201936245300974404 /* libmssilk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 226183AF147259670037138E /* libmssilk.a */; };
-		F0BB8C221936245300974404 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F2ED41344B0EF00F6EF27 /* libopencore-amrnb.a */; };
-		F0BB8C231936245300974404 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F2ED31344B0EF00F6EF27 /* libopencore-amrwb.a */; };
-		F0BB8C241936245300974404 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22AF73C11754C0D000BE8398 /* libopus.a */; };
-		F0BB8C251936245300974404 /* libortp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220FAD2C10765B400068D98F /* libortp.a */; };
-		F0BB8C261936245300974404 /* libpolarssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0E35F173C010400A476B8 /* libpolarssl.a */; };
-		F0BB8C281936245300974404 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220FAD2F10765B400068D98F /* libspeex.a */; };
-		F0BB8C291936245300974404 /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220FAD3010765B400068D98F /* libspeexdsp.a */; };
-		F0BB8C2A1936245300974404 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 226183AB1472527D0037138E /* libsrtp.a */; };
-		F0BB8C2B1936245300974404 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22276E8213C73D3100210156 /* libswscale.a */; };
-		F0BB8C2C1936245300974404 /* libtunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D30BF33216A427BC00AF0026 /* libtunnel.a */; };
-		F0BB8C2D1936245300974404 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066FC0B13E830E400EFC6DC /* libvpx.a */; };
-		F0BB8C301936246600974404 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2274402E106F335E006EC466 /* AudioToolbox.framework */; };
-		F0BB8C331936247C00974404 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D32B6E2E15A5C0AC0033019F /* libsqlite3.dylib */; };
-		F0BB8C35193624C800974404 /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C34193624C800974404 /* libresolv.9.dylib */; };
-		F0BB8C4C193631D200974404 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22276E8813C73DC000210156 /* CoreMedia.framework */; };
-		F0BB8C4D193631DF00974404 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224567C1107B968500F10948 /* AVFoundation.framework */; };
 		F0C1F8EB1A277ADA009402C9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0C1F8EA1A277ADA009402C9 /* LaunchScreen.xib */; };
 		F0C1F90E1A28781F009402C9 /* background-launch.png in Resources */ = {isa = PBXBuildFile; fileRef = F0C1F9041A28781F009402C9 /* background-launch.png */; };
 		F0C1F9101A28781F009402C9 /* corner-left-bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = F0C1F9061A28781F009402C9 /* corner-left-bottom.png */; };
@@ -798,11 +718,7 @@
 		F0C1F9141A28781F009402C9 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F0C1F90A1A28781F009402C9 /* logo.png */; };
 		F0C1F9151A28781F009402C9 /* strech-bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = F0C1F90B1A28781F009402C9 /* strech-bottom.png */; };
 		F0C1F9161A28781F009402C9 /* strech-top.png in Resources */ = {isa = PBXBuildFile; fileRef = F0C1F90C1A28781F009402C9 /* strech-top.png */; };
-		F0FF66AC1ACAEF4F008A4486 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FF66AA1ACAEEB0008A4486 /* IOKit.framework */; };
 		F476004B147AAF2800FFF19B /* liblinphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211DB911475562600DEE054 /* liblinphone.a */; };
-		F84015BF1939FE37006ABAB5 /* test_failed.png in Resources */ = {isa = PBXBuildFile; fileRef = F84015BC1939FE37006ABAB5 /* test_failed.png */; };
-		F84015C01939FE37006ABAB5 /* test_inprogress.png in Resources */ = {isa = PBXBuildFile; fileRef = F84015BD1939FE37006ABAB5 /* test_inprogress.png */; };
-		F84015C11939FE37006ABAB5 /* test_passed.png in Resources */ = {isa = PBXBuildFile; fileRef = F84015BE1939FE37006ABAB5 /* test_passed.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -848,13 +764,6 @@
 			remoteGlobalIDString = 9CC9673B1AD4B1B600576D13;
 			remoteInfo = KIFFramework;
 		};
-		63058A4D1B4E832500EFAE36 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 630589F21B4E816900EFAE36 /* KIF.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = EABD46791857A0C700A5F081;
-			remoteInfo = KIF;
-		};
 		D3554ED015CA79AA00478841 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */;
@@ -882,20 +791,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = NinePatch;
-		};
-		F08F119119C09C6B007D70C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F0BB8BD41936208100974404;
-			remoteInfo = LinphoneTester;
-		};
-		F0F952061A6AEB1000254160 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
-			remoteInfo = linphone;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1138,6 +1033,11 @@
 		C41EF3191B8BD87B0085E75B /* ringmail_input1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_input1.png; path = Resources/ringmail_input1.png; sourceTree = "<group>"; };
 		C41EF31A1B8BD87B0085E75B /* ringmail_logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_logo1.png; path = Resources/ringmail_logo1.png; sourceTree = "<group>"; };
 		C41EF31E1B8BD9D10085E75B /* ringmail_button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_button2.png; path = Resources/ringmail_button2.png; sourceTree = "<group>"; };
+		C41EF3221B8CEDA60085E75B /* ringmail_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon.png; path = Resources/ringmail_icon.png; sourceTree = "<group>"; };
+		C41EF3241B8CEF4C0085E75B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RingMail/Images.xcassets; sourceTree = "<group>"; };
+		C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_57.png; path = Resources/ringmail_icon_57.png; sourceTree = "<group>"; };
+		C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_114.png; path = Resources/ringmail_icon_114.png; sourceTree = "<group>"; };
+		C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_120.png; path = Resources/ringmail_icon_120.png; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
@@ -1752,7 +1652,6 @@
 		F070E6321A2622EC00E17AFD /* incall_padding_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incall_padding_right.png; path = Resources/incall_padding_right.png; sourceTree = "<group>"; };
 		F088488C19FF8C41007FFCF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIContactCell.xib; sourceTree = "<group>"; };
 		F088488F19FF8C44007FFCF3 /* fr */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UIContactCell.strings; sourceTree = "<group>"; };
-		F08F118419C09C6A007D70C2 /* liblinphoneTesterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = liblinphoneTesterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0938158188E629800A55DFA /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		F09548181883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ChatRoomViewController.xib; sourceTree = "<group>"; };
 		F09548191883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ChatViewController.xib; sourceTree = "<group>"; };
@@ -1861,13 +1760,11 @@
 		F0AF07101A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/WizardViewController~ipad.strings"; sourceTree = "<group>"; };
 		F0AF07111A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/WizardViews.strings; sourceTree = "<group>"; };
 		F0B026F21AA710AF00FF49F7 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		F0B4FB5C1A65550B00637027 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
 		F0B89C2118DC89E30050B60E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		F0B89C2418DC973E0050B60E /* wizard_external_sip.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wizard_external_sip.rc; path = Resources/wizard_external_sip.rc; sourceTree = "<group>"; };
 		F0B89C2518DC973E0050B60E /* wizard_linphone_create.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wizard_linphone_create.rc; path = Resources/wizard_linphone_create.rc; sourceTree = "<group>"; };
 		F0B89C2618DC973E0050B60E /* wizard_linphone_existing.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wizard_linphone_existing.rc; path = Resources/wizard_linphone_existing.rc; sourceTree = "<group>"; };
 		F0B89C2718DC973E0050B60E /* wizard_remote.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wizard_remote.rc; path = Resources/wizard_remote.rc; sourceTree = "<group>"; };
-		F0BB8BD51936208100974404 /* liblinphoneTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = liblinphoneTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0BB8C0F193623F200974404 /* liblinphonetester.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblinphonetester.a; path = "liblinphone-sdk/apple-darwin/lib/liblinphonetester.a"; sourceTree = "<group>"; };
 		F0BB8C111936240300974404 /* libcunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcunit.a; path = "liblinphone-sdk/apple-darwin/lib/libcunit.a"; sourceTree = "<group>"; };
 		F0BB8C311936246600974404 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -1882,7 +1779,6 @@
 		F0C1F90A1A28781F009402C9 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		F0C1F90B1A28781F009402C9 /* strech-bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strech-bottom.png"; sourceTree = "<group>"; };
 		F0C1F90C1A28781F009402C9 /* strech-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strech-top.png"; sourceTree = "<group>"; };
-		F0F952001A6AEB1000254160 /* linphoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = linphoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FF66AA1ACAEEB0008A4486 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = ../../../../Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = "<group>"; };
 		F84015BC1939FE37006ABAB5 /* test_failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test_failed.png; path = Resources/test_failed.png; sourceTree = "<group>"; };
 		F84015BD1939FE37006ABAB5 /* test_inprogress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test_inprogress.png; path = Resources/test_inprogress.png; sourceTree = "<group>"; };
@@ -1952,73 +1848,6 @@
 				226183AE1472527D0037138E /* libsrtp.a in Frameworks */,
 				22276E8513C73D3100210156 /* libswscale.a in Frameworks */,
 				7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F08F118119C09C6A007D70C2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				63058AD61B4E92D400EFAE36 /* liblinphonetester.a in Frameworks */,
-				F08F118519C09C6B007D70C2 /* XCTest.framework in Frameworks */,
-				F08F118719C09C6B007D70C2 /* UIKit.framework in Frameworks */,
-				F08F118619C09C6B007D70C2 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F0BB8BD21936208100974404 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				15F728741B16FF9A00A1C901 /* libxml2.dylib in Frameworks */,
-				15F728731B16FF8B00A1C901 /* libilbcrfc3951.a in Frameworks */,
-				F0A54B0C1AD56F4600C22733 /* libc++.dylib in Frameworks */,
-				F0A54B0D1AD56F4600C22733 /* libstdc++.dylib in Frameworks */,
-				F08D468D1AA86849001E8CB5 /* libiconv.dylib in Frameworks */,
-				F05BAA631A5D75BC00411815 /* libz.dylib in Frameworks */,
-				F0BB8C4D193631DF00974404 /* AVFoundation.framework in Frameworks */,
-				F0BB8C4C193631D200974404 /* CoreMedia.framework in Frameworks */,
-				F0BB8C35193624C800974404 /* libresolv.9.dylib in Frameworks */,
-				F0BB8C331936247C00974404 /* libsqlite3.dylib in Frameworks */,
-				F0BB8C301936246600974404 /* AudioToolbox.framework in Frameworks */,
-				F0BB8BD71936208100974404 /* CoreGraphics.framework in Frameworks */,
-				F0BB8C161936245300974404 /* libantlr3c.a in Frameworks */,
-				F0BB8C171936245300974404 /* libavcodec.a in Frameworks */,
-				F0BB8C181936245300974404 /* libavutil.a in Frameworks */,
-				F0BB8C191936245300974404 /* libbellesip.a in Frameworks */,
-				F0BB8C1A1936245300974404 /* libbzrtp.a in Frameworks */,
-				F0BB8C121936240300974404 /* libcunit.a in Frameworks */,
-				F0BB8C1B1936245300974404 /* libgsm.a in Frameworks */,
-				F0BB8C131936242400974404 /* liblinphone.a in Frameworks */,
-				F0BB8C10193623F300974404 /* liblinphonetester.a in Frameworks */,
-				F0BB8C141936242400974404 /* libmediastreamer_base.a in Frameworks */,
-				F0BB8C151936242400974404 /* libmediastreamer_voip.a in Frameworks */,
-				F0BB8C1D1936245300974404 /* libmsamr.a in Frameworks */,
-				F0BB8C1E1936245300974404 /* libmsbcg729.a in Frameworks */,
-				F0BB8C1F1936245300974404 /* libmsilbc.a in Frameworks */,
-				F0BB8C201936245300974404 /* libmssilk.a in Frameworks */,
-				F0BB8C221936245300974404 /* libopencore-amrnb.a in Frameworks */,
-				F0BB8C231936245300974404 /* libopencore-amrwb.a in Frameworks */,
-				F0BB8C241936245300974404 /* libopus.a in Frameworks */,
-				F0BB8C251936245300974404 /* libortp.a in Frameworks */,
-				F0BB8C261936245300974404 /* libpolarssl.a in Frameworks */,
-				F0BB8C281936245300974404 /* libspeex.a in Frameworks */,
-				F0BB8C291936245300974404 /* libspeexdsp.a in Frameworks */,
-				F0BB8C2A1936245300974404 /* libsrtp.a in Frameworks */,
-				F0BB8C2B1936245300974404 /* libswscale.a in Frameworks */,
-				F0BB8C2C1936245300974404 /* libtunnel.a in Frameworks */,
-				F0BB8C2D1936245300974404 /* libvpx.a in Frameworks */,
-				F0BB8BD81936208100974404 /* UIKit.framework in Frameworks */,
-				F0BB8BD61936208100974404 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F0F951FD1A6AEB1000254160 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				63058A4F1B4E835200EFAE36 /* libKIF.a in Frameworks */,
-				F0FF66AC1ACAEF4F008A4486 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2121,9 +1950,6 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* linphone.app */,
-				F0BB8BD51936208100974404 /* liblinphoneTester.app */,
-				F08F118419C09C6A007D70C2 /* liblinphoneTesterTests.xctest */,
-				F0F952001A6AEB1000254160 /* linphoneTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2257,8 +2083,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C41EF3241B8CEF4C0085E75B /* Images.xcassets */,
 				D3C714B2159DB84400705B8E /* hold.wav */,
-				F0B4FB5C1A65550B00637027 /* Images.xcassets */,
 				F0B89C2318DC90850050B60E /* images */,
 				D37E3ECF1619DCC50087659A /* licenses.html */,
 				8D1107310486CEB800E47090 /* linphone-Info.plist */,
@@ -2639,6 +2465,10 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */,
+				C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */,
+				C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */,
+				C41EF3221B8CEDA60085E75B /* ringmail_icon.png */,
 				C41EF31E1B8BD9D10085E75B /* ringmail_button2.png */,
 				C41EF3181B8BD87B0085E75B /* ringmail_button1.png */,
 				C41EF3191B8BD87B0085E75B /* ringmail_input1.png */,
@@ -3148,9 +2978,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* linphone */ = {
+		1D6058900D05DD3D006BFB54 /* RingMail */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "linphone" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "RingMail" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				63DCC71D1A07B08E00916627 /* Run Script */,
@@ -3165,65 +2995,10 @@
 				D3554ED515CA79B900478841 /* PBXTargetDependency */,
 				D3B90E1B15C2CBC800F64F8C /* PBXTargetDependency */,
 			);
-			name = linphone;
+			name = RingMail;
 			productName = linphone;
 			productReference = 1D6058910D05DD3D006BFB54 /* linphone.app */;
 			productType = "com.apple.product-type.application";
-		};
-		F08F118319C09C6A007D70C2 /* liblinphoneTesterTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F08F119319C09C6B007D70C2 /* Build configuration list for PBXNativeTarget "liblinphoneTesterTests" */;
-			buildPhases = (
-				F08F118019C09C6A007D70C2 /* Sources */,
-				F08F118119C09C6A007D70C2 /* Frameworks */,
-				F08F118219C09C6A007D70C2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F08F119219C09C6B007D70C2 /* PBXTargetDependency */,
-			);
-			name = liblinphoneTesterTests;
-			productName = LinphoneTesterTests;
-			productReference = F08F118419C09C6A007D70C2 /* liblinphoneTesterTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		F0BB8BD41936208100974404 /* liblinphoneTester */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F0BB8C051936208200974404 /* Build configuration list for PBXNativeTarget "liblinphoneTester" */;
-			buildPhases = (
-				F0BB8BD11936208100974404 /* Sources */,
-				F0BB8BD21936208100974404 /* Frameworks */,
-				F0BB8BD31936208100974404 /* Resources */,
-				F08F11A219C0AC2F007D70C2 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = liblinphoneTester;
-			productName = LinphoneTester;
-			productReference = F0BB8BD51936208100974404 /* liblinphoneTester.app */;
-			productType = "com.apple.product-type.application";
-		};
-		F0F951FF1A6AEB1000254160 /* linphoneTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F0F9520C1A6AEB1100254160 /* Build configuration list for PBXNativeTarget "linphoneTests" */;
-			buildPhases = (
-				F0F951FC1A6AEB1000254160 /* Sources */,
-				F0F951FD1A6AEB1000254160 /* Frameworks */,
-				F0F951FE1A6AEB1000254160 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				63058A4E1B4E832500EFAE36 /* PBXTargetDependency */,
-				F0F952071A6AEB1000254160 /* PBXTargetDependency */,
-			);
-			name = linphoneTests;
-			productName = KifTests;
-			productReference = F0F952001A6AEB1000254160 /* linphoneTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -3234,24 +3009,12 @@
 				LastUpgradeCheck = 0610;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = Z2V957B3D6;
+						DevelopmentTeam = 3V7D3ULU9N;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
 							};
 						};
-					};
-					F08F118319C09C6A007D70C2 = {
-						DevelopmentTeam = Z2V957B3D6;
-						TestTargetID = F0BB8BD41936208100974404;
-					};
-					F0BB8BD41936208100974404 = {
-						DevelopmentTeam = Z2V957B3D6;
-					};
-					F0F951FF1A6AEB1000254160 = {
-						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = Z2V957B3D6;
-						TestTargetID = 1D6058900D05DD3D006BFB54;
 					};
 				};
 			};
@@ -3288,10 +3051,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* linphone */,
-				F0F951FF1A6AEB1000254160 /* linphoneTests */,
-				F0BB8BD41936208100974404 /* liblinphoneTester */,
-				F08F118319C09C6A007D70C2 /* liblinphoneTesterTests */,
+				1D6058900D05DD3D006BFB54 /* RingMail */,
 			);
 		};
 /* End PBXProject section */
@@ -3428,7 +3188,6 @@
 				D3F83F781582253100336684 /* accept_default.png in Resources */,
 				D3F83F7A1582253100336684 /* accept_over.png in Resources */,
 				D3F83F7C1582253100336684 /* decline_default.png in Resources */,
-				F0B4FB5D1A65550B00637027 /* Images.xcassets in Resources */,
 				D3F83F7E1582253100336684 /* decline_over.png in Resources */,
 				D3ED3E411585FB4A006C0DE4 /* background.png in Resources */,
 				D3ED3E451585FB8C006C0DE4 /* dialer_address_background.png in Resources */,
@@ -3487,6 +3246,7 @@
 				D36C43EB158F3F7E0048BA40 /* pause_on_over.png in Resources */,
 				D36C43F1158F61EA0048BA40 /* call_state_pause_default.png in Resources */,
 				D36C43F3158F61EA0048BA40 /* call_state_pause_over.png in Resources */,
+				C41EF3251B8CEF4C0085E75B /* Images.xcassets in Resources */,
 				D36C43F5158F61EA0048BA40 /* call_state_play_default.png in Resources */,
 				D36C43F7158F61EA0048BA40 /* call_state_play_over.png in Resources */,
 				D35E757815931E5D0066B1C1 /* switch_camera_default.png in Resources */,
@@ -3515,6 +3275,7 @@
 				D31B4B2A1598A390002E6C72 /* avatar_unknown_small.png in Resources */,
 				D3F34F301599B008005BE94F /* avatar_shadow.png in Resources */,
 				D3D6A39E159B0EEF005F692C /* add_call_default.png in Resources */,
+				C41EF33C1B8CF1200085E75B /* ringmail_icon_114.png in Resources */,
 				D3D6A3A0159B0EEF005F692C /* add_call_disabled.png in Resources */,
 				D3D6A3A2159B0EEF005F692C /* add_call_over.png in Resources */,
 				D3D6A3AB159B0EFE005F692C /* security_ko.png in Resources */,
@@ -3527,6 +3288,7 @@
 				D31AAF65159B5B6F002C6B02 /* conference_over.png in Resources */,
 				D31AAF6E159B65E1002C6B02 /* call_state_ringing_default.png in Resources */,
 				D3211BA6159C3D410098460B /* call_state_outgoing_default.png in Resources */,
+				C41EF33B1B8CF1200085E75B /* ringmail_icon_57.png in Resources */,
 				D38187F015FE354000C3EDCA /* UIConferenceHeader.xib in Resources */,
 				D3211BB9159C8A820098460B /* cell_call_first.png in Resources */,
 				D3211BBE159CBFD60098460B /* back_default.png in Resources */,
@@ -3786,6 +3548,7 @@
 				D33988EE15C6DD1600CAF1E4 /* speaker_on_default_landscape~ipad.png in Resources */,
 				D33988F015C6DD1600CAF1E4 /* speaker_on_disabled_landscape~ipad.png in Resources */,
 				D33988F215C6DD1600CAF1E4 /* speaker_on_over_landscape~ipad.png in Resources */,
+				C41EF3231B8CEDA60085E75B /* ringmail_icon.png in Resources */,
 				D33988F815C6DD1600CAF1E4 /* video_off_default_landscape~ipad.png in Resources */,
 				D33988FA15C6DD1600CAF1E4 /* video_off_disabled_landscape~ipad.png in Resources */,
 				D33988FC15C6DD1600CAF1E4 /* video_off_over_landscape~ipad.png in Resources */,
@@ -3850,6 +3613,7 @@
 				D3328646160B5BC300E6435D /* dialer_alt_disabled_landscape.png in Resources */,
 				D3328648160B5BC300E6435D /* dialer_alt_disabled_landscape~ipad.png in Resources */,
 				D332864A160B5BC300E6435D /* dialer_alt_disabled.png in Resources */,
+				C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */,
 				D332864C160B5BC300E6435D /* dialer_alt_disabled~ipad.png in Resources */,
 				F070E6331A2622EC00E17AFD /* dialer_padding_left.png in Resources */,
 				F0C1F8EB1A277ADA009402C9 /* LaunchScreen.xib in Resources */,
@@ -3911,55 +3675,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F08F118219C09C6A007D70C2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				63058AE31B4E93B300EFAE36 /* tester_hosts in Resources */,
-				63058ACF1B4E922500EFAE36 /* certificates in Resources */,
-				63058AD01B4E922500EFAE36 /* flexisip in Resources */,
-				63058AD11B4E922500EFAE36 /* images in Resources */,
-				63058AD21B4E922500EFAE36 /* marie_xml in Resources */,
-				63058AD31B4E922500EFAE36 /* messages.db in Resources */,
-				63058AD41B4E922500EFAE36 /* rcfiles in Resources */,
-				63058AD51B4E922500EFAE36 /* sounds in Resources */,
-				63058A3B1B4E822F00EFAE36 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F0BB8BD31936208100974404 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				63C458261B5680AC009F2D7E /* ring.wav in Resources */,
-				63058ADA1B4E937300EFAE36 /* certificates in Resources */,
-				63058ADB1B4E937300EFAE36 /* flexisip in Resources */,
-				63058ADC1B4E937300EFAE36 /* images in Resources */,
-				63058ADD1B4E937300EFAE36 /* marie_xml in Resources */,
-				63058ADE1B4E937300EFAE36 /* messages.db in Resources */,
-				63058ADF1B4E937300EFAE36 /* rcfiles in Resources */,
-				63058AE01B4E937300EFAE36 /* sounds in Resources */,
-				63058AE21B4E93A100EFAE36 /* tester_hosts in Resources */,
-				F84015C11939FE37006ABAB5 /* test_passed.png in Resources */,
-				63058A2B1B4E821E00EFAE36 /* LinphoneTester-Info.plist in Resources */,
-				63058A2F1B4E821E00EFAE36 /* TesterImages.xcassets in Resources */,
-				63058A251B4E821E00EFAE36 /* InfoPlist.strings in Resources */,
-				63058A271B4E821E00EFAE36 /* Main_iPhone.strings in Resources */,
-				63058A261B4E821E00EFAE36 /* Main_iPad.strings in Resources */,
-				63058A291B4E821E00EFAE36 /* Main_iPhone.storyboard in Resources */,
-				F84015BF1939FE37006ABAB5 /* test_failed.png in Resources */,
-				63058A281B4E821E00EFAE36 /* Main_iPad.storyboard in Resources */,
-				F84015C01939FE37006ABAB5 /* test_inprogress.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F0F951FE1A6AEB1000254160 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -3989,19 +3704,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = $SRCROOT/Tools/ImageOptim.sh;
-		};
-		F08F11A219C0AC2F007D70C2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$RUN_UNIT_TEST_WITH_IOS_SIM\" = \"YES\" ]; then\ntest_bundle_path=\"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.$WRAPPER_EXTENSION\"\nios-sim launch \"$(dirname \"$TEST_HOST\")\" --setenv DYLD_INSERT_LIBRARIES=/../../Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection --setenv XCInjectBundle=\"$test_bundle_path\" --setenv XCInjectBundleInto=\"$TEST_HOST\" --args -SenTest All \"$test_bundle_path\"\necho \"Finished running tests with ios-sim\"\nelse\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -4116,49 +3818,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F08F118019C09C6A007D70C2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				632DA24E1B43EEEF00EB356A /* Utils.m in Sources */,
-				63058A3C1B4E822F00EFAE36 /* DTObjectBlockExecutor.m in Sources */,
-				63058A3F1B4E823000EFAE36 /* NSObject+DTRuntime.m in Sources */,
-				63058A3E1B4E822F00EFAE36 /* LinphoneTester_Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F0BB8BD11936208100974404 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				63058A2D1B4E821E00EFAE36 /* main.m in Sources */,
-				63058A241B4E821E00EFAE36 /* AppDelegate.m in Sources */,
-				632DA24D1B43EE9400EB356A /* Utils.m in Sources */,
-				63058A2A1B4E821E00EFAE36 /* DetailViewController.m in Sources */,
-				63058A2E1B4E821E00EFAE36 /* MasterViewController.m in Sources */,
-				63058A2C1B4E821E00EFAE36 /* LogsViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F0F951FC1A6AEB1000254160 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				630589EA1B4E810900EFAE36 /* LinphoneTestCase.m in Sources */,
-				630589EB1B4E810900EFAE36 /* WizardTester.m in Sources */,
-				630589E71B4E810900EFAE36 /* ChatTester.m in Sources */,
-				630589E81B4E810900EFAE36 /* ContactsTester.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		63058A4E1B4E832500EFAE36 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = KIF;
-			targetProxy = 63058A4D1B4E832500EFAE36 /* PBXContainerItemProxy */;
-		};
 		D3554ED515CA79B900478841 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = libXMLRPC;
@@ -4168,16 +3830,6 @@
 			isa = PBXTargetDependency;
 			name = NinePatch;
 			targetProxy = D3B90E1A15C2CBC800F64F8C /* PBXContainerItemProxy */;
-		};
-		F08F119219C09C6B007D70C2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F0BB8BD41936208100974404 /* liblinphoneTester */;
-			targetProxy = F08F119119C09C6B007D70C2 /* PBXContainerItemProxy */;
-		};
-		F0F952071A6AEB1000254160 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D6058900D05DD3D006BFB54 /* linphone */;
-			targetProxy = F0F952061A6AEB1000254160 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4654,7 +4306,7 @@
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
 					"-Werror=incomplete-implementation",
@@ -4743,7 +4395,7 @@
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
 					"-Werror=incomplete-implementation",
@@ -4831,7 +4483,7 @@
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
 					"-Werror=incomplete-implementation",
@@ -4919,7 +4571,7 @@
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
 					"-Werror=incomplete-implementation",
@@ -4960,608 +4612,10 @@
 			};
 			name = Debug;
 		};
-		F08F119419C09C6B007D70C2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TestsLiblinphone/LinphoneTesterTests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"liblinphone-sdk/apple-darwin/include",
-					Classes/Utils/NinePatch/,
-					Classes/Utils/XMLRPC/,
-				);
-				INFOPLIST_FILE = "TestsLiblinphone/LinphoneTesterTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
-				);
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/liblinphoneTester.app/liblinphoneTester";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		F08F119519C09C6B007D70C2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TestsLiblinphone/LinphoneTesterTests-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"liblinphone-sdk/apple-darwin/include",
-					Classes/Utils/NinePatch/,
-					Classes/Utils/XMLRPC/,
-				);
-				INFOPLIST_FILE = "TestsLiblinphone/LinphoneTesterTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/liblinphoneTester.app/liblinphoneTester";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-		F08F119619C09C6B007D70C2 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TestsLiblinphone/LinphoneTesterTests-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"liblinphone-sdk/apple-darwin/include",
-					Classes/Utils/NinePatch/,
-					Classes/Utils/XMLRPC/,
-				);
-				INFOPLIST_FILE = "TestsLiblinphone/LinphoneTesterTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/liblinphoneTester.app/liblinphoneTester";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Distribution;
-		};
-		F08F119719C09C6B007D70C2 /* DistributionAdhoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TestsLiblinphone/LinphoneTesterTests-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"liblinphone-sdk/apple-darwin/include",
-					Classes/Utils/NinePatch/,
-					Classes/Utils/XMLRPC/,
-				);
-				INFOPLIST_FILE = "TestsLiblinphone/LinphoneTesterTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/liblinphoneTester.app/liblinphoneTester";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = DistributionAdhoc;
-		};
-		F0BB8C061936208200974404 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LiblinphoneTester/LinphoneTester-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"liblinphone-sdk/apple-darwin/include",
-					Classes/Utils/NinePatch/,
-					Classes/Utils/XMLRPC/,
-				);
-				INFOPLIST_FILE = "LiblinphoneTester/LinphoneTester-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
-				);
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		F0BB8C071936208200974404 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LiblinphoneTester/LinphoneTester-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"liblinphone-sdk/apple-darwin/include",
-					Classes/Utils/NinePatch/,
-					Classes/Utils/XMLRPC/,
-				);
-				INFOPLIST_FILE = "LiblinphoneTester/LinphoneTester-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		F0BB8C081936208200974404 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LiblinphoneTester/LinphoneTester-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"liblinphone-sdk/apple-darwin/include",
-					Classes/Utils/NinePatch/,
-					Classes/Utils/XMLRPC/,
-				);
-				INFOPLIST_FILE = "LiblinphoneTester/LinphoneTester-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Distribution;
-		};
-		F0BB8C091936208200974404 /* DistributionAdhoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LiblinphoneTester/LinphoneTester-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"liblinphone-sdk/apple-darwin/include",
-					Classes/Utils/NinePatch/,
-					Classes/Utils/XMLRPC/,
-				);
-				INFOPLIST_FILE = "LiblinphoneTester/LinphoneTester-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
-					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
-			};
-			name = DistributionAdhoc;
-		};
-		F0F952081A6AEB1000254160 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
-					"$(SRCROOT)/Classes/Utils/XMLRPC/",
-				);
-				INFOPLIST_FILE = TestsUI/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/linphone.app/linphone";
-			};
-			name = Debug;
-		};
-		F0F952091A6AEB1000254160 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
-					"$(SRCROOT)/Classes/Utils/XMLRPC/",
-				);
-				INFOPLIST_FILE = TestsUI/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/linphone.app/linphone";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		F0F9520A1A6AEB1000254160 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
-					"$(SRCROOT)/Classes/Utils/XMLRPC/",
-				);
-				INFOPLIST_FILE = TestsUI/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/linphone.app/linphone";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Distribution;
-		};
-		F0F9520B1A6AEB1000254160 /* DistributionAdhoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
-					"$(SRCROOT)/Classes/Utils/XMLRPC/",
-				);
-				INFOPLIST_FILE = TestsUI/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/linphone.app/linphone";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = DistributionAdhoc;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "linphone" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "RingMail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -5579,39 +4633,6 @@
 				22F3D55513CC3C9100A0DA02 /* Release */,
 				22F51EE7107FA53D00F98953 /* Distribution */,
 				228B19A61302902F00F154D3 /* DistributionAdhoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		F08F119319C09C6B007D70C2 /* Build configuration list for PBXNativeTarget "liblinphoneTesterTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F08F119419C09C6B007D70C2 /* Debug */,
-				F08F119519C09C6B007D70C2 /* Release */,
-				F08F119619C09C6B007D70C2 /* Distribution */,
-				F08F119719C09C6B007D70C2 /* DistributionAdhoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		F0BB8C051936208200974404 /* Build configuration list for PBXNativeTarget "liblinphoneTester" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F0BB8C061936208200974404 /* Debug */,
-				F0BB8C071936208200974404 /* Release */,
-				F0BB8C081936208200974404 /* Distribution */,
-				F0BB8C091936208200974404 /* DistributionAdhoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		F0F9520C1A6AEB1100254160 /* Build configuration list for PBXNativeTarget "linphoneTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F0F952081A6AEB1000254160 /* Debug */,
-				F0F952091A6AEB1000254160 /* Release */,
-				F0F9520A1A6AEB1000254160 /* Distribution */,
-				F0F9520B1A6AEB1000254160 /* DistributionAdhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
