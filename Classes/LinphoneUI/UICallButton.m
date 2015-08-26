@@ -19,6 +19,9 @@
 
 #import "UICallButton.h"
 #import "LinphoneManager.h"
+#import "SVWebViewController.h"
+
+#import "PhoneMainView.h"
 
 #import <CoreTelephony/CTCallCenter.h>
 
@@ -105,6 +108,14 @@
             displayName = [NSString stringWithString:address];
             address = [address stringByReplacingOccurrencesOfString:@"@" withString:@"%"];
             NSLog(@"New Address: %@", address);
+        }
+        else if ([address rangeOfString:@"#"].location != NSNotFound)
+        {
+            // Test Webview
+            UIViewController* cur = (UIViewController *)[[PhoneMainView instance] currentView];
+            NSURL *URL = [NSURL URLWithString:@"http://staging.ringmail.com"];
+            SVWebViewController *webViewController = [[SVWebViewController alloc] initWithURL:URL];
+            [cur.navigationController pushViewController:webViewController animated:YES];
         }
 		[[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
 	}

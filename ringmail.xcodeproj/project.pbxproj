@@ -149,6 +149,20 @@
 		C41EF33B1B8CF1200085E75B /* ringmail_icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */; };
 		C41EF33C1B8CF1200085E75B /* ringmail_icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */; };
 		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
+		C4CF9FD81B8D4C6C00B9CC85 /* da.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FC81B8D4C6C00B9CC85 /* da.lproj */; };
+		C4CF9FD91B8D4C6C00B9CC85 /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FC91B8D4C6C00B9CC85 /* de.lproj */; };
+		C4CF9FDA1B8D4C6C00B9CC85 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FCA1B8D4C6C00B9CC85 /* en.lproj */; };
+		C4CF9FDB1B8D4C6C00B9CC85 /* es-ES.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FCB1B8D4C6C00B9CC85 /* es-ES.lproj */; };
+		C4CF9FDC1B8D4C6C00B9CC85 /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FCC1B8D4C6C00B9CC85 /* es.lproj */; };
+		C4CF9FDD1B8D4C6C00B9CC85 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FCD1B8D4C6C00B9CC85 /* fr.lproj */; };
+		C4CF9FDE1B8D4C6C00B9CC85 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FCE1B8D4C6C00B9CC85 /* ja.lproj */; };
+		C4CF9FDF1B8D4C6C00B9CC85 /* pt.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FCF1B8D4C6C00B9CC85 /* pt.lproj */; };
+		C4CF9FE01B8D4C6C00B9CC85 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF9FD11B8D4C6C00B9CC85 /* SVModalWebViewController.m */; };
+		C4CF9FE11B8D4C6C00B9CC85 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FD21B8D4C6C00B9CC85 /* SVWebViewController.bundle */; };
+		C4CF9FE21B8D4C6C00B9CC85 /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF9FD41B8D4C6C00B9CC85 /* SVWebViewController.m */; };
+		C4CF9FE31B8D4C6C00B9CC85 /* UIActivities in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FD51B8D4C6C00B9CC85 /* UIActivities */; };
+		C4CF9FE41B8D4C6C00B9CC85 /* zh-Hans.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FD61B8D4C6C00B9CC85 /* zh-Hans.lproj */; };
+		C4CF9FE51B8D4C6C00B9CC85 /* zh-Hant.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FD71B8D4C6C00B9CC85 /* zh-Hant.lproj */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
@@ -1038,6 +1052,22 @@
 		C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_57.png; path = Resources/ringmail_icon_57.png; sourceTree = "<group>"; };
 		C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_114.png; path = Resources/ringmail_icon_114.png; sourceTree = "<group>"; };
 		C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_120.png; path = Resources/ringmail_icon_120.png; sourceTree = "<group>"; };
+		C4CF9FC81B8D4C6C00B9CC85 /* da.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = da.lproj; path = Utils/SVWebViewController/da.lproj; sourceTree = "<group>"; };
+		C4CF9FC91B8D4C6C00B9CC85 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = de.lproj; path = Utils/SVWebViewController/de.lproj; sourceTree = "<group>"; };
+		C4CF9FCA1B8D4C6C00B9CC85 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en.lproj; path = Utils/SVWebViewController/en.lproj; sourceTree = "<group>"; };
+		C4CF9FCB1B8D4C6C00B9CC85 /* es-ES.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "es-ES.lproj"; path = "Utils/SVWebViewController/es-ES.lproj"; sourceTree = "<group>"; };
+		C4CF9FCC1B8D4C6C00B9CC85 /* es.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = es.lproj; path = Utils/SVWebViewController/es.lproj; sourceTree = "<group>"; };
+		C4CF9FCD1B8D4C6C00B9CC85 /* fr.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fr.lproj; path = Utils/SVWebViewController/fr.lproj; sourceTree = "<group>"; };
+		C4CF9FCE1B8D4C6C00B9CC85 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ja.lproj; path = Utils/SVWebViewController/ja.lproj; sourceTree = "<group>"; };
+		C4CF9FCF1B8D4C6C00B9CC85 /* pt.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pt.lproj; path = Utils/SVWebViewController/pt.lproj; sourceTree = "<group>"; };
+		C4CF9FD01B8D4C6C00B9CC85 /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVModalWebViewController.h; path = Utils/SVWebViewController/SVModalWebViewController.h; sourceTree = "<group>"; };
+		C4CF9FD11B8D4C6C00B9CC85 /* SVModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVModalWebViewController.m; path = Utils/SVWebViewController/SVModalWebViewController.m; sourceTree = "<group>"; };
+		C4CF9FD21B8D4C6C00B9CC85 /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVWebViewController.bundle; path = Utils/SVWebViewController/SVWebViewController.bundle; sourceTree = "<group>"; };
+		C4CF9FD31B8D4C6C00B9CC85 /* SVWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVWebViewController.h; path = Utils/SVWebViewController/SVWebViewController.h; sourceTree = "<group>"; };
+		C4CF9FD41B8D4C6C00B9CC85 /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVWebViewController.m; path = Utils/SVWebViewController/SVWebViewController.m; sourceTree = "<group>"; };
+		C4CF9FD51B8D4C6C00B9CC85 /* UIActivities */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UIActivities; path = Utils/SVWebViewController/UIActivities; sourceTree = "<group>"; };
+		C4CF9FD61B8D4C6C00B9CC85 /* zh-Hans.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "zh-Hans.lproj"; path = "Utils/SVWebViewController/zh-Hans.lproj"; sourceTree = "<group>"; };
+		C4CF9FD71B8D4C6C00B9CC85 /* zh-Hant.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "zh-Hant.lproj"; path = "Utils/SVWebViewController/zh-Hant.lproj"; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
@@ -2281,9 +2311,33 @@
 			path = Utils/TPKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
+		C4CF9FE61B8D4C7800B9CC85 /* SVWebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C4CF9FC81B8D4C6C00B9CC85 /* da.lproj */,
+				C4CF9FC91B8D4C6C00B9CC85 /* de.lproj */,
+				C4CF9FCA1B8D4C6C00B9CC85 /* en.lproj */,
+				C4CF9FCB1B8D4C6C00B9CC85 /* es-ES.lproj */,
+				C4CF9FCC1B8D4C6C00B9CC85 /* es.lproj */,
+				C4CF9FCD1B8D4C6C00B9CC85 /* fr.lproj */,
+				C4CF9FCE1B8D4C6C00B9CC85 /* ja.lproj */,
+				C4CF9FCF1B8D4C6C00B9CC85 /* pt.lproj */,
+				C4CF9FD01B8D4C6C00B9CC85 /* SVModalWebViewController.h */,
+				C4CF9FD11B8D4C6C00B9CC85 /* SVModalWebViewController.m */,
+				C4CF9FD21B8D4C6C00B9CC85 /* SVWebViewController.bundle */,
+				C4CF9FD31B8D4C6C00B9CC85 /* SVWebViewController.h */,
+				C4CF9FD41B8D4C6C00B9CC85 /* SVWebViewController.m */,
+				C4CF9FD51B8D4C6C00B9CC85 /* UIActivities */,
+				C4CF9FD61B8D4C6C00B9CC85 /* zh-Hans.lproj */,
+				C4CF9FD71B8D4C6C00B9CC85 /* zh-Hant.lproj */,
+			);
+			name = SVWebViewController;
+			sourceTree = "<group>";
+		};
 		D326483415887D4400930C67 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C4CF9FE61B8D4C7800B9CC85 /* SVWebViewController */,
 				D37E3ECA1619C27A0087659A /* CAAnimationBlocks */,
 				D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */,
 				D380801115C29984005BE9BC /* ColorSpaceUtilities.h */,
@@ -3018,7 +3072,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "linphone" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ringmail" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -3160,6 +3214,7 @@
 				D3F83F24158205A100336684 /* video_off_default.png in Resources */,
 				D3F83F26158205A100336684 /* video_off_over.png in Resources */,
 				D3F83F28158205A100336684 /* video_on_default.png in Resources */,
+				C4CF9FE51B8D4C6C00B9CC85 /* zh-Hant.lproj in Resources */,
 				D3F83F2A158205A100336684 /* video_on_over.png in Resources */,
 				D3F83F441582223B00336684 /* numpad_zero_default.png in Resources */,
 				D3F83F461582223B00336684 /* numpad_zero_over.png in Resources */,
@@ -3178,6 +3233,7 @@
 				D3F83F5E1582223B00336684 /* numpad_six_over.png in Resources */,
 				D3F83F601582223B00336684 /* numpad_seven_default.png in Resources */,
 				D3F83F621582223B00336684 /* numpad_seven_over.png in Resources */,
+				C4CF9FDC1B8D4C6C00B9CC85 /* es.lproj in Resources */,
 				D3F83F641582223B00336684 /* numpad_eight_default.png in Resources */,
 				D3F83F661582223B00336684 /* numpad_eight_over.png in Resources */,
 				D3F83F681582223B00336684 /* numpad_nine_default.png in Resources */,
@@ -3198,11 +3254,13 @@
 				D3ED3E6E15861A53006C0DE4 /* add_contact_over.png in Resources */,
 				D3ED3E7215861ABD006C0DE4 /* call_default.png in Resources */,
 				D3ED3E7415861ABD006C0DE4 /* call_over.png in Resources */,
+				C4CF9FDD1B8D4C6C00B9CC85 /* fr.lproj in Resources */,
 				D3ED3E7815861B1B006C0DE4 /* backspace_default.png in Resources */,
 				D3ED3E7A15861B1B006C0DE4 /* backspace_over.png in Resources */,
 				D38187F815FE355D00C3EDCA /* UIMainBar.xib in Resources */,
 				D3ED3E9815872EF1006C0DE4 /* history_all_selected.png in Resources */,
 				D3ED3E9A15872EF1006C0DE4 /* history_all_default.png in Resources */,
+				C4CF9FD81B8D4C6C00B9CC85 /* da.lproj in Resources */,
 				D3ED3E9C15872EF1006C0DE4 /* history_edit_default.png in Resources */,
 				D3ED3E9E15872EF1006C0DE4 /* history_edit_over.png in Resources */,
 				D3ED3EA015872EF1006C0DE4 /* history_missed_selected.png in Resources */,
@@ -3327,6 +3385,7 @@
 				D3B9A3E115A58C450096EA4E /* chat_ok_default.png in Resources */,
 				D3B9A3E315A58C450096EA4E /* chat_ok_over.png in Resources */,
 				D3B9A3E515A58C450096EA4E /* chat_send_default.png in Resources */,
+				C4CF9FDA1B8D4C6C00B9CC85 /* en.lproj in Resources */,
 				D3B9A3E715A58C450096EA4E /* chat_send_over.png in Resources */,
 				D32B6E2415A5B2020033019F /* chat_send_disabled.png in Resources */,
 				639CEB061A1DF4F1004DE38F /* UIChatRoomCell.xib in Resources */,
@@ -3371,6 +3430,7 @@
 				D3E84F3A15B011AF00420DAC /* contact_cancel_over.png in Resources */,
 				D3157A8A15B4466F00DD8C4C /* history_details_add_default.png in Resources */,
 				D3157A8C15B4466F00DD8C4C /* history_details_add_over.png in Resources */,
+				C4CF9FDB1B8D4C6C00B9CC85 /* es-ES.lproj in Resources */,
 				D3157A9015B446CB00DD8C4C /* history_details_back_default.png in Resources */,
 				D3157A9215B446CB00DD8C4C /* history_details_back_over.png in Resources */,
 				D3119E7215B6A4710005D4A4 /* contacts_back_default.png in Resources */,
@@ -3468,6 +3528,7 @@
 				D3A74F0C15C69392001500B9 /* micro_on_default~ipad.png in Resources */,
 				D3A74F0E15C69392001500B9 /* micro_on_disabled~ipad.png in Resources */,
 				D3A74F1015C69392001500B9 /* micro_on_over~ipad.png in Resources */,
+				C4CF9FDF1B8D4C6C00B9CC85 /* pt.lproj in Resources */,
 				D3A74F1215C69392001500B9 /* options_add_default~ipad.png in Resources */,
 				D3A74F1415C69392001500B9 /* options_add_disabled~ipad.png in Resources */,
 				D3A74F1615C69392001500B9 /* options_add_over~ipad.png in Resources */,
@@ -3475,6 +3536,7 @@
 				D3A74F1A15C69392001500B9 /* options_disabled~ipad.png in Resources */,
 				D3A74F1C15C69392001500B9 /* options_over~ipad.png in Resources */,
 				F070E6371A2622EC00E17AFD /* incall_padding_right_landscape.png in Resources */,
+				C4CF9FD91B8D4C6C00B9CC85 /* de.lproj in Resources */,
 				C41EF31B1B8BD87B0085E75B /* ringmail_button1.png in Resources */,
 				D3A74F1E15C69392001500B9 /* options_selected~ipad.png in Resources */,
 				D3A74F2015C69392001500B9 /* options_transfer_default~ipad.png in Resources */,
@@ -3508,6 +3570,7 @@
 				D3A74F5215C69392001500B9 /* video_off_over~ipad.png in Resources */,
 				F0B89C2818DC973E0050B60E /* wizard_external_sip.rc in Resources */,
 				D3A74F5415C69392001500B9 /* video_on_default~ipad.png in Resources */,
+				C4CF9FE11B8D4C6C00B9CC85 /* SVWebViewController.bundle in Resources */,
 				D3A74F5615C69392001500B9 /* video_on_disabled~ipad.png in Resources */,
 				D3A74F5815C69392001500B9 /* video_on_over~ipad.png in Resources */,
 				D38187C515FE345F00C3EDCA /* DialerViewController~ipad.xib in Resources */,
@@ -3541,6 +3604,7 @@
 				D33988E015C6DD1600CAF1E4 /* pause_off_default_landscape~ipad.png in Resources */,
 				D33988E215C6DD1600CAF1E4 /* pause_off_over_landscape~ipad.png in Resources */,
 				D33988E415C6DD1600CAF1E4 /* pause_on_default_landscape~ipad.png in Resources */,
+				C4CF9FE31B8D4C6C00B9CC85 /* UIActivities in Resources */,
 				D33988E615C6DD1600CAF1E4 /* pause_on_over_landscape~ipad.png in Resources */,
 				D33988E815C6DD1600CAF1E4 /* speaker_off_default_landscape~ipad.png in Resources */,
 				D33988EA15C6DD1600CAF1E4 /* speaker_off_disabled_landscape~ipad.png in Resources */,
@@ -3621,6 +3685,7 @@
 				D35E91EE160CA0C70023116B /* button_background_default.9@2x.png in Resources */,
 				D35E91F0160CA0C70023116B /* button_background_over.9@2x.png in Resources */,
 				D35E9209160CAA1F0023116B /* field_background.9.png in Resources */,
+				C4CF9FDE1B8D4C6C00B9CC85 /* ja.lproj in Resources */,
 				D35E920D160CABD70023116B /* button_background_default.9.png in Resources */,
 				D35E920F160CABD70023116B /* button_background_over.9.png in Resources */,
 				D3012CC41610467D007CD926 /* linphone_logo.png in Resources */,
@@ -3651,6 +3716,7 @@
 				15AF3C8416F37A5500FC52EC /* route_speaker_off_default.png in Resources */,
 				15AF3C8616F37A5500FC52EC /* route_speaker_off_disabled.png in Resources */,
 				15AF3C8816F37A5500FC52EC /* route_speaker_off_over.png in Resources */,
+				C4CF9FE41B8D4C6C00B9CC85 /* zh-Hans.lproj in Resources */,
 				15AF3C8C16F37A5500FC52EC /* route_speaker_on_default.png in Resources */,
 				15AF3C9816F37A5D00FC52EC /* routes_default.png in Resources */,
 				15AF3C9A16F37A5D00FC52EC /* routes_disabled.png in Resources */,
@@ -3788,6 +3854,7 @@
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
+				C4CF9FE21B8D4C6C00B9CC85 /* SVWebViewController.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
 				D3807FEC15C2894A005BE9BC /* IASKSpecifierValuesViewController.m in Sources */,
@@ -3808,6 +3875,7 @@
 				637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerViewController.m in Sources */,
 				22405F001601C19200B92522 /* ImageViewController.m in Sources */,
+				C4CF9FE01B8D4C6C00B9CC85 /* SVModalWebViewController.m in Sources */,
 				D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */,
 				D3ED401B1602172200BF332B /* HPTextViewInternal.m in Sources */,
 				D37EE162160377D7003608A6 /* DTActionSheet.m in Sources */,
@@ -4290,6 +4358,8 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
 					"$(SRCROOT)/Classes/Utils/NinePatch/",
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
+					"$(SRCROOT)/Classes/Utils/SVWebViewController/",
+					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities",
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -4379,6 +4449,8 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
 					"$(SRCROOT)/Classes/Utils/NinePatch/",
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
+					"$(SRCROOT)/Classes/Utils/SVWebViewController/",
+					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities",
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -4467,6 +4539,8 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
 					"$(SRCROOT)/Classes/Utils/NinePatch/",
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
+					"$(SRCROOT)/Classes/Utils/SVWebViewController/",
+					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities",
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -4555,6 +4629,8 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
 					"$(SRCROOT)/Classes/Utils/NinePatch/",
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
+					"$(SRCROOT)/Classes/Utils/SVWebViewController/",
+					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities",
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -4626,7 +4702,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "linphone" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ringmail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
