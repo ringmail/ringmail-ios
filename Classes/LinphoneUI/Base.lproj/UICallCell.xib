@@ -354,11 +354,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cell_call_first.png" id="52" userLabel="headerBackgroundImage">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="cell_call_first.png" id="52" userLabel="headerBackgroundImage">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" id="56" userLabel="headerBackgroundHighlightImage">
+                        <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" id="56" userLabel="headerBackgroundHighlightImage">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -369,7 +369,6 @@
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="18" userLabel="stateImage">

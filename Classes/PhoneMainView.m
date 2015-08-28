@@ -24,6 +24,7 @@
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "DTActionSheet.h"
+#import "SVModalWebViewController.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 
@@ -331,7 +332,17 @@ static RootViewManager *rootViewManagerInstance = nil;
 		break;
 	}
 	case LinphoneCallError: {
-		[self displayCallError:call message:message];
+        if (linphone_call_get_reason(call) == LinphoneReasonMovedPermanently) // Not an error, just a URL
+        {
+            // Assume HTTP(S) urls for now, check for ring:// later
+            UIViewController* cur = (UIViewController *)[PhoneMainView instance];
+            SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithAddress:message];
+            [cur presentViewController:webViewController animated:YES completion:NULL];
+        }
+        else
+        {
+            [self displayCallError:call message:message];
+        }
 	}
 	case LinphoneCallEnd: {
 		if (canHideInCallView) {
@@ -613,7 +624,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 	if (linphone_call_get_reason(call) == LinphoneReasonNotFound) {
 		lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@ not registered", nil), lUserName];
-	} else {
+    } else {
 		if (message != nil) {
 			lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@\nReason was: %@", nil), lMessage, message];
 		}

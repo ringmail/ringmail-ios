@@ -30,8 +30,10 @@
 
 - (void)onOn {
 	// redirect audio to bluetooth
+    
+    // TODO: fix the bluetooth for iOS 7 SDK
 
-	UInt32 size = sizeof(CFStringRef);
+	/*UInt32 size = sizeof(CFStringRef);
 	CFStringRef route = CFSTR("HeadsetBT");
 	OSStatus result = AudioSessionSetProperty(kAudioSessionProperty_AudioRoute, size, &route);
 	check_auresult(result, "set kAudioSessionProperty_AudioRoute HeadsetBT");
@@ -39,19 +41,19 @@
 	int allowBluetoothInput = 1;
 	result = AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryEnableBluetoothInput,
 									 sizeof(allowBluetoothInput), &allowBluetoothInput);
-	check_auresult(result, "set kAudioSessionProperty_OverrideCategoryEnableBluetoothInput 1");
+	check_auresult(result, "set kAudioSessionProperty_OverrideCategoryEnableBluetoothInput 1");*/
 }
 
 - (void)onOff {
 	// redirect audio to bluetooth
-	int allowBluetoothInput = 0;
+	/*int allowBluetoothInput = 0;
 	OSStatus result = AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryEnableBluetoothInput,
 											  sizeof(allowBluetoothInput), &allowBluetoothInput);
 	check_auresult(result, "set kAudioSessionProperty_OverrideCategoryEnableBluetoothInput 0");
 	UInt32 size = sizeof(CFStringRef);
 	CFStringRef route = CFSTR("ReceiverAndMicrophone");
 	result = AudioSessionSetProperty(kAudioSessionProperty_AudioRoute, size, &route);
-	check_auresult(result, "set kAudioSessionProperty_AudioRoute ReceiverAndMicrophone");
+	check_auresult(result, "set kAudioSessionProperty_AudioRoute ReceiverAndMicrophone");*/
 }
 
 - (bool)onUpdate {
