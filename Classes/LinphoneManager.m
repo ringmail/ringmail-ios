@@ -634,8 +634,13 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 		// contact name
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
+            NSLog(@"***** ADDRESS LOOKUP %@", [NSString stringWithUTF8String:lAddress]);
 			NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-			ABRecordRef contact = [fastAddressBook getContact:normalizedSipAddress];
+            NSString *lookupAddress = [self decodeSipUri:normalizedSipAddress];
+            lookupAddress = [NSString stringWithFormat:@"ring://%@", lookupAddress];
+
+            NSLog(@"***** ADDRESS LOOKUP NORMALIZED %@", lookupAddress);
+			ABRecordRef contact = [fastAddressBook getContact:lookupAddress];
 			if (contact) {
 				address = [FastAddressBook getContactDisplayName:contact];
 				useLinphoneAddress = false;
@@ -646,14 +651,21 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 			const char *lDisplayName = linphone_address_get_display_name(addr);
 			const char *lUserName = linphone_address_get_username(addr);
 			if (lDisplayName)
+            {
 				address = [NSString stringWithUTF8String:lDisplayName];
+                NSLog(@"***** ADDRESS LOOKUP DISPLAY NAME %@", address);
+            }
 			else if (lUserName)
+            {
 				address = [NSString stringWithUTF8String:lUserName];
+                NSLog(@"***** ADDRESS LOOKUP USER NAME %@", address);
+            }
 		}
 	}
 	if (address == nil) {
 		address = NSLocalizedString(@"Unknown", nil);
 	}
+    NSLog(@"***** ADDRESS LOOKUP RESULT %@", address);
 
 	if (state == LinphoneCallIncomingReceived) {
 
@@ -2331,4 +2343,20 @@ static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 	// Query our in-app server to retrieve InApp purchases
 	[_iapManager retrievePurchases];
 }
+
+#pragma mark - RingMail
+
+- (NSString *)decodeSipUri:(NSString*)input
+{
+    // RingMail
+    NSMutableString* result = [input mutableCopy];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:
+                                  @"^sip:" options:0 error:nil];
+    [regex replaceMatchesInString:result options:0 range:NSMakeRange(0, [result length]) withTemplate:@""];
+    regex = [NSRegularExpression regularExpressionWithPattern:
+                                  @"\\@.*" options:0 error:nil];
+    [regex replaceMatchesInString:result options:0 range:NSMakeRange(0, [result length]) withTemplate:@""];
+    return [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
 @end

@@ -187,21 +187,31 @@ static UICompositeViewDescription *compositeDescription = nil;
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
 			NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-			contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            NSString *lookupAddress = [[LinphoneManager instance] decodeSipUri:normalizedSipAddress];
+            lookupAddress = [NSString stringWithFormat:@"ring://%@", lookupAddress];
+			contact = [[[LinphoneManager instance] fastAddressBook] getContact:lookupAddress];
 			if (contact) {
 				image = [FastAddressBook getContactImage:contact thumbnail:true];
 				address = [FastAddressBook getContactDisplayName:contact];
 				useLinphoneAddress = false;
 			}
+            else
+            {
+                address = lookupAddress;
+            }
 			ms_free(lAddress);
 		}
 		if (useLinphoneAddress) {
 			const char *lDisplayName = linphone_address_get_display_name(addr);
 			const char *lUserName = linphone_address_get_username(addr);
 			if (lDisplayName)
+            {
 				address = [NSString stringWithUTF8String:lDisplayName];
+            }
 			else if (lUserName)
-				address = [NSString stringWithUTF8String:lUserName];
+            {
+				address = [[LinphoneManager instance] decodeSipUri:[NSString stringWithUTF8String:lUserName]];
+            }
 		}
 	}
 
@@ -266,7 +276,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 		} else {
 			char *lAddress = linphone_address_as_string_uri_only(addr);
 			if (lAddress != NULL) {
-				[plainAddressLabel setText:[NSString stringWithUTF8String:lAddress]];
+                NSString *lookupAddress = [[LinphoneManager instance] decodeSipUri:[NSString stringWithUTF8String:lAddress]];
+                lookupAddress = [lookupAddress stringByReplacingOccurrencesOfString:@"%" withString:@"@"];
+				[plainAddressLabel setText:lookupAddress];
 				ms_free(lAddress);
 			}
 		}
@@ -348,10 +360,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
 					 RgMainViewController);
 	if (controller != nil) {
+        NSString* address = [NSString stringWithUTF8String:lAddress];
 		if (displayName != nil) {
-			[controller call:[NSString stringWithUTF8String:lAddress] displayName:displayName];
+			[controller call:address displayName:displayName];
 		} else {
-			[controller call:[NSString stringWithUTF8String:lAddress]];
+			[controller call:address];
 		}
 	}
 	ms_free(lAddress);

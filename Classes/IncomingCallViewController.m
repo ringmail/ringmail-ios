@@ -113,7 +113,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
 			NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-			ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            NSString *lookupAddress = [[LinphoneManager instance] decodeSipUri:normalizedSipAddress];
+            lookupAddress = [NSString stringWithFormat:@"ring://%@", lookupAddress];
+			ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:lookupAddress];
 			if (contact) {
 				UIImage *tmpImage = [FastAddressBook getContactImage:contact thumbnail:false];
 				if (tmpImage != nil) {

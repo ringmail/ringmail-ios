@@ -191,6 +191,8 @@ typedef struct _LinphoneManagerSounds {
 
 - (void)silentPushFailed:(NSTimer*)timer;
 
+- (NSString *)decodeSipUri:(NSString*)input;
+
 @property (readonly) BOOL isTesting;
 @property (readonly, strong) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;
