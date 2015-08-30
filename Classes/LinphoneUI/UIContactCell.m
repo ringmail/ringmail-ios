@@ -94,8 +94,8 @@
 	CGRect lastNameFrame = [lastNameLabel frame];
 
 	// Compute firstName size
-	CGSize firstNameSize = [[firstNameLabel text] sizeWithFont:[firstNameLabel font]];
-	CGSize lastNameSize = [[lastNameLabel text] sizeWithFont:[lastNameLabel font]];
+	CGSize firstNameSize = [[firstNameLabel text] sizeWithAttributes:@{NSFontAttributeName: [firstNameLabel font]}];
+    CGSize lastNameSize = [[lastNameLabel text] sizeWithAttributes:@{NSFontAttributeName:[lastNameLabel font]}];
 	float sum = firstNameSize.width + 5 + lastNameSize.width;
 	float limit = self.bounds.size.width - 5 - firstNameFrame.origin.x;
 	if (sum > limit) {

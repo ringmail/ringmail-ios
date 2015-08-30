@@ -40,12 +40,12 @@ static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 }
 
 - (void)initUISpeakerButton {
-	AudioSessionInitialize(NULL, NULL, NULL, NULL);
+	/*AudioSessionInitialize(NULL, NULL, NULL, NULL);
 	OSStatus lStatus = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange,
 													   audioRouteChangeListenerCallback, (__bridge void *)(self));
 	if (lStatus) {
 		LOGE(@"cannot register route change handler [%ld]", lStatus);
-	}
+	}*/
 }
 
 - (id)init {
@@ -73,11 +73,11 @@ static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 }
 
 - (void)dealloc {
-	OSStatus lStatus = AudioSessionRemovePropertyListenerWithUserData(
+	/*OSStatus lStatus = AudioSessionRemovePropertyListenerWithUserData(
 		kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, (__bridge void *)(self));
 	if (lStatus) {
 		LOGE(@"cannot un register route change handler [%ld]", lStatus);
-	}
+	}*/
 }
 
 #pragma mark - UIToggleButtonDelegate Functions

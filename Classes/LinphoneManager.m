@@ -252,12 +252,31 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 
 - (id)init {
 	if ((self = [super init])) {
-		AudioSessionInitialize(NULL, NULL, NULL, NULL);
+        /* Audio session */
+        /*BOOL success = NO;
+        NSError *error = nil;
+        
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        
+        success = [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
+        if (! success)
+        {
+            NSLog(@"%@ Error setting audio session category: %@",
+                  NSStringFromSelector(_cmd), [error localizedDescription]);
+        }
+        success = [session setActive:YES error:&error];
+        if (! success)
+        {
+            NSLog(@"Error activating audio session: %@", [error localizedDescription]);
+        }*/
+        /* End Audio session */
+        
+		/*AudioSessionInitialize(NULL, NULL, NULL, NULL);
 		OSStatus lStatus = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange,
 														   audioRouteChangeListenerCallback, (__bridge void *)(self));
 		if (lStatus) {
 			LOGE(@"cannot register route change handler [%ld]", lStatus);
-		}
+		}*/
 
 		NSString *path = [[NSBundle mainBundle] pathForResource:@"msg" ofType:@"wav"];
 		self.messagePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:path] error:nil];
@@ -296,14 +315,15 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 
 - (void)dealloc {
 
-	OSStatus lStatus = AudioSessionRemovePropertyListenerWithUserData(
+	/*OSStatus lStatus = AudioSessionRemovePropertyListenerWithUserData(
 		kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, (__bridge void *)(self));
 	if (lStatus) {
 		LOGE(@"cannot un register route change handler [%ld]", lStatus);
-	}
+	}*/
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kLinphoneGlobalStateUpdate];
 	[[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kLinphoneConfiguringStateUpdate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AVAudioSessionRouteChangeNotification];
 }
 
 - (void)silentPushFailed:(NSTimer *)timer {
@@ -1499,6 +1519,12 @@ static BOOL libStarted = FALSE;
 												 name:kLinphoneConfiguringStateUpdate
 											   object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inappReady:) name:kIAPReady object:nil];
+    
+    /* Audio observers */
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(audioRouteChanged:)
+                                                 name:AVAudioSessionRouteChangeNotification
+                                               object:nil];
 
 	/*call iterate once immediately in order to initiate background connections with sip server or remote provisioning
 	 * grab, if any */
@@ -1798,20 +1824,46 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 
 - (bool)allowSpeaker {
 	bool notallow = false;
-	CFStringRef lNewRoute = CFSTR("Unknown");
-	UInt32 lNewRouteSize = sizeof(lNewRoute);
-	OSStatus lStatus = AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &lNewRouteSize, &lNewRoute);
-	if (!lStatus && lNewRouteSize > 0) {
-		NSString *route = (__bridge NSString *)lNewRoute;
-		notallow = [route isEqualToString:@"Headset"] || [route isEqualToString:@"Headphone"] ||
-				   [route isEqualToString:@"HeadphonesAndMicrophone"] || [route isEqualToString:@"HeadsetInOut"] ||
-				   [route isEqualToString:@"Lineout"] || [LinphoneManager runningOnIpad];
-		CFRelease(lNewRoute);
-	}
+    AVAudioSessionRouteDescription* route = [[AVAudioSession sharedInstance] currentRoute];
+    for (AVAudioSessionPortDescription* desc in [route outputs])
+    {
+        NSString *route = [desc portType];
+        if (! notallow)
+        {
+            notallow =
+                [route isEqualToString:AVAudioSessionPortLineOut] ||
+                [route isEqualToString:AVAudioSessionPortHeadphones] ||
+                [LinphoneManager runningOnIpad];
+        }
+    }
 	return !notallow;
 }
 
-static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
+- (void)audioRouteChanged:(NSNotification *)notif
+{
+    LinphoneManager* lm = [LinphoneManager instance];
+    AVAudioSessionRouteDescription* route = [[AVAudioSession sharedInstance] currentRoute];
+    lm.bluetoothEnabled = FALSE;
+    lm.speakerEnabled = FALSE;
+    for (AVAudioSessionPortDescription* desc in [route outputs])
+    {
+        NSString *route = [desc portType];
+        LOGI(@"Current audio route is [%@]", route);
+        if ([route isEqualToString:AVAudioSessionPortBuiltInSpeaker])
+        {
+            lm.speakerEnabled = TRUE;
+        }
+        if (![LinphoneManager runningOnIpad] && ([route isEqualToString:AVAudioSessionPortBluetoothA2DP] || [route isEqualToString:AVAudioSessionPortBluetoothLE]) && !lm.speakerEnabled)
+        {
+            lm.bluetoothEnabled = TRUE;
+            lm.bluetoothAvailable = TRUE;
+            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:lm.bluetoothAvailable], @"available", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneBluetoothAvailabilityUpdate object:lm userInfo:dict];
+        }
+    }
+}
+
+/*static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 											 AudioSessionPropertyID inPropertyID, // 2
 											 UInt32 inPropertyValueSize,		  // 3
 											 const void *inPropertyValue		  // 4
@@ -1846,27 +1898,41 @@ static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 	if (speakerEnabled != lm.speakerEnabled) { // Reforce value
 		lm.speakerEnabled = lm.speakerEnabled;
 	}
-}
+}*/
 
 - (void)setSpeakerEnabled:(BOOL)enable {
 	speakerEnabled = enable;
+    
+    BOOL success = NO;
+    NSError *error = nil;
+    AVAudioSession *session = [AVAudioSession sharedInstance];
 
 	if (enable && [self allowSpeaker]) {
-		UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+
+        success = [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:&error];
+		/*UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
 		AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride),
-								&audioRouteOverride);
+								&audioRouteOverride);*/
 		bluetoothEnabled = FALSE;
 	} else {
-		UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
+		/*UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
 		AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride),
-								&audioRouteOverride);
+								&audioRouteOverride);*/
+        success = [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:0 error:&error];
 	}
 
 	if (bluetoothAvailable) {
-		UInt32 bluetoothInputOverride = bluetoothEnabled;
+        // TODO: bluetooth
+		/*UInt32 bluetoothInputOverride = bluetoothEnabled;
 		AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryEnableBluetoothInput,
-								sizeof(bluetoothInputOverride), &bluetoothInputOverride);
+								sizeof(bluetoothInputOverride), &bluetoothInputOverride);*/
 	}
+    
+    if (! success)
+    {
+        NSLog(@"%@ Error setting audio session category: %@",
+              NSStringFromSelector(_cmd), [error localizedDescription]);
+    }
 }
 
 - (void)setBluetoothEnabled:(BOOL)enable {

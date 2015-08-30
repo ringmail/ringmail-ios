@@ -149,14 +149,6 @@
 		C41EF33B1B8CF1200085E75B /* ringmail_icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */; };
 		C41EF33C1B8CF1200085E75B /* ringmail_icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */; };
 		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
-		C4CF9FE01B8D4C6C00B9CC85 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF9FD11B8D4C6C00B9CC85 /* SVModalWebViewController.m */; };
-		C4CF9FE11B8D4C6C00B9CC85 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FD21B8D4C6C00B9CC85 /* SVWebViewController.bundle */; };
-		C4CF9FE21B8D4C6C00B9CC85 /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF9FD41B8D4C6C00B9CC85 /* SVWebViewController.m */; };
-		C4CF9FE91B8D4DE200B9CC85 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FE71B8D4DE200B9CC85 /* en.lproj */; };
-		C4CF9FEA1B8D4DE200B9CC85 /* UIActivities in Resources */ = {isa = PBXBuildFile; fileRef = C4CF9FE81B8D4DE200B9CC85 /* UIActivities */; };
-		C4CF9FEC1B8D4ED600B9CC85 /* SVWebViewControllerActivityChrome.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF9FEB1B8D4ED600B9CC85 /* SVWebViewControllerActivityChrome.m */; };
-		C4CF9FEE1B8D4EE000B9CC85 /* SVWebViewControllerActivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF9FED1B8D4EE000B9CC85 /* SVWebViewControllerActivitySafari.m */; };
-		C4CF9FF01B8D4F0D00B9CC85 /* SVWebViewControllerActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF9FEF1B8D4F0D00B9CC85 /* SVWebViewControllerActivity.m */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
@@ -698,6 +690,7 @@
 		D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F83F8D15822ABD00336684 /* PhoneMainView.m */; };
 		D3F9A9DB15AEEB940045320F /* history_notification.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F9A9DA15AEEB940045320F /* history_notification.png */; };
 		D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F9A9ED15AF277D0045320F /* UACellBackgroundView.m */; };
+		D48FB9BFFE75334EBAF92C39 /* libPods-RingMail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 696EDB60C3EFE5D9F732C406 /* libPods-RingMail.a */; };
 		F01A77EB18ED989B00E287CA /* shortring.caf in Resources */ = {isa = PBXBuildFile; fileRef = F01A77EA18ED989B00E287CA /* shortring.caf */; };
 		F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */; };
 		F05BAA621A5D594E00411815 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F05BAA611A5D594E00411815 /* libz.dylib */; };
@@ -1028,11 +1021,15 @@
 		63EF7FDC1A24B5810017A416 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AboutViewController.strings; sourceTree = "<group>"; };
 		63FB30331A680E73008CA393 /* UIRoundedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRoundedImageView.h; sourceTree = "<group>"; };
 		63FB30341A680E73008CA393 /* UIRoundedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRoundedImageView.m; sourceTree = "<group>"; };
+		696EDB60C3EFE5D9F732C406 /* libPods-RingMail.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RingMail.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70571E1913FABCB000CDD3C2 /* rootca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rootca.pem; path = "liblinphone-sdk/apple-darwin/share/linphone/rootca.pem"; sourceTree = "<group>"; };
+		7061EAD7F945CD8977375CE3 /* Pods-RingMail.distributionadhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.distributionadhoc.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.distributionadhoc.xcconfig"; sourceTree = "<group>"; };
 		7066FC0B13E830E400EFC6DC /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = "liblinphone-sdk/apple-darwin/lib/libvpx.a"; sourceTree = "<group>"; };
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7F787A8F4AFE4EC37D570FB3 /* Pods-RingMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.debug.xcconfig"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* linphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "linphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		9035CFA62FDF2CF9AA4F7FCF /* Pods-RingMail.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.distribution.xcconfig"; sourceTree = "<group>"; };
 		C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RgMainController~ipad.xib"; sourceTree = "<group>"; };
 		C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMainViewController.h; sourceTree = "<group>"; };
 		C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMainViewController.m; sourceTree = "<group>"; };
@@ -1046,18 +1043,9 @@
 		C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_57.png; path = Resources/ringmail_icon_57.png; sourceTree = "<group>"; };
 		C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_114.png; path = Resources/ringmail_icon_114.png; sourceTree = "<group>"; };
 		C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_120.png; path = Resources/ringmail_icon_120.png; sourceTree = "<group>"; };
-		C4CF9FD01B8D4C6C00B9CC85 /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVModalWebViewController.h; path = Utils/SVWebViewController/SVModalWebViewController.h; sourceTree = "<group>"; };
-		C4CF9FD11B8D4C6C00B9CC85 /* SVModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVModalWebViewController.m; path = Utils/SVWebViewController/SVModalWebViewController.m; sourceTree = "<group>"; };
-		C4CF9FD21B8D4C6C00B9CC85 /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVWebViewController.bundle; path = Utils/SVWebViewController/SVWebViewController.bundle; sourceTree = "<group>"; };
-		C4CF9FD31B8D4C6C00B9CC85 /* SVWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVWebViewController.h; path = Utils/SVWebViewController/SVWebViewController.h; sourceTree = "<group>"; };
-		C4CF9FD41B8D4C6C00B9CC85 /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVWebViewController.m; path = Utils/SVWebViewController/SVWebViewController.m; sourceTree = "<group>"; };
-		C4CF9FE71B8D4DE200B9CC85 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en.lproj; path = Utils/SVWebViewController/en.lproj; sourceTree = "<group>"; };
-		C4CF9FE81B8D4DE200B9CC85 /* UIActivities */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UIActivities; path = Utils/SVWebViewController/UIActivities; sourceTree = "<group>"; };
-		C4CF9FEB1B8D4ED600B9CC85 /* SVWebViewControllerActivityChrome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SVWebViewControllerActivityChrome.m; path = Classes/Utils/SVWebViewController/UIActivities/Chrome/SVWebViewControllerActivityChrome.m; sourceTree = "<group>"; };
-		C4CF9FED1B8D4EE000B9CC85 /* SVWebViewControllerActivitySafari.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SVWebViewControllerActivitySafari.m; path = Classes/Utils/SVWebViewController/UIActivities/Safari/SVWebViewControllerActivitySafari.m; sourceTree = "<group>"; };
-		C4CF9FEF1B8D4F0D00B9CC85 /* SVWebViewControllerActivity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SVWebViewControllerActivity.m; path = Classes/Utils/SVWebViewController/UIActivities/SVWebViewControllerActivity.m; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
+		C913F326854608AF66812CBF /* Pods-RingMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.release.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.release.xcconfig"; sourceTree = "<group>"; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
 		C9C8253F15AE204D00D493FA /* options_add_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_add_disabled.png; path = Resources/options_add_disabled.png; sourceTree = "<group>"; };
 		C9C8254015AE204D00D493FA /* options_transfer_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_transfer_disabled.png; path = Resources/options_transfer_disabled.png; sourceTree = "<group>"; };
@@ -1866,6 +1854,7 @@
 				226183AE1472527D0037138E /* libsrtp.a in Frameworks */,
 				22276E8513C73D3100210156 /* libswscale.a in Frameworks */,
 				7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */,
+				D48FB9BFFE75334EBAF92C39 /* libPods-RingMail.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1962,6 +1951,17 @@
 				D3D5126A160B3A8E00946DF8 /* WizardViews.xib */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		15A3A218E25F260B2A833F2A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7F787A8F4AFE4EC37D570FB3 /* Pods-RingMail.debug.xcconfig */,
+				C913F326854608AF66812CBF /* Pods-RingMail.release.xcconfig */,
+				9035CFA62FDF2CF9AA4F7FCF /* Pods-RingMail.distribution.xcconfig */,
+				7061EAD7F945CD8977375CE3 /* Pods-RingMail.distributionadhoc.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -2074,9 +2074,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				C4CF9FEF1B8D4F0D00B9CC85 /* SVWebViewControllerActivity.m */,
-				C4CF9FED1B8D4EE000B9CC85 /* SVWebViewControllerActivitySafari.m */,
-				C4CF9FEB1B8D4ED600B9CC85 /* SVWebViewControllerActivityChrome.m */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				F0938158188E629800A55DFA /* iTunesArtwork */,
@@ -2088,6 +2085,7 @@
 				D398D3031594B0FB00FD553C /* Settings */,
 				63058A301B4E822F00EFAE36 /* TestsLiblinphone */,
 				630589DD1B4E810900EFAE36 /* TestsUI */,
+				15A3A218E25F260B2A833F2A /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -2203,6 +2201,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				F03A9B3318C0CF7000C4D7FE /* XCTest.framework */,
 				F03A9B7E18C0D9C900C4D7FE /* libcunit.a */,
+				696EDB60C3EFE5D9F732C406 /* libPods-RingMail.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2302,24 +2301,9 @@
 			path = Utils/TPKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
-		C4CF9FE61B8D4C7800B9CC85 /* SVWebViewController */ = {
-			isa = PBXGroup;
-			children = (
-				C4CF9FE71B8D4DE200B9CC85 /* en.lproj */,
-				C4CF9FE81B8D4DE200B9CC85 /* UIActivities */,
-				C4CF9FD01B8D4C6C00B9CC85 /* SVModalWebViewController.h */,
-				C4CF9FD11B8D4C6C00B9CC85 /* SVModalWebViewController.m */,
-				C4CF9FD21B8D4C6C00B9CC85 /* SVWebViewController.bundle */,
-				C4CF9FD31B8D4C6C00B9CC85 /* SVWebViewController.h */,
-				C4CF9FD41B8D4C6C00B9CC85 /* SVWebViewController.m */,
-			);
-			name = SVWebViewController;
-			sourceTree = "<group>";
-		};
 		D326483415887D4400930C67 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				C4CF9FE61B8D4C7800B9CC85 /* SVWebViewController */,
 				D37E3ECA1619C27A0087659A /* CAAnimationBlocks */,
 				D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */,
 				D380801115C29984005BE9BC /* ColorSpaceUtilities.h */,
@@ -3018,12 +3002,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "RingMail" */;
 			buildPhases = (
+				58C4F70AC5CA9D0E86712116 /* Check Pods Manifest.lock */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				63DCC71D1A07B08E00916627 /* Run Script */,
 				D33CF34715D3985000CD4B85 /* ShellScript */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				2247673A129C3B9C002B94B4 /* CopyFiles */,
+				6087764103D0F78387183507 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3316,7 +3302,6 @@
 				D3D6A3A2159B0EEF005F692C /* add_call_over.png in Resources */,
 				D3D6A3AB159B0EFE005F692C /* security_ko.png in Resources */,
 				D3D6A3AD159B0EFE005F692C /* security_pending.png in Resources */,
-				C4CF9FE91B8D4DE200B9CC85 /* en.lproj in Resources */,
 				D3D6A3AF159B0EFE005F692C /* security_ok.png in Resources */,
 				D3D6A3B1159B0EFE005F692C /* options_default.png in Resources */,
 				D3D6A3B3159B0EFE005F692C /* options_disabled.png in Resources */,
@@ -3491,7 +3476,6 @@
 				D3A74EF215C69392001500B9 /* dialer_alt_default~ipad.png in Resources */,
 				D3A74EF415C69392001500B9 /* dialer_alt_over~ipad.png in Resources */,
 				D3A74EF615C69392001500B9 /* hangup_default~ipad.png in Resources */,
-				C4CF9FEA1B8D4DE200B9CC85 /* UIActivities in Resources */,
 				D3A74EF815C69392001500B9 /* hangup_over~ipad.png in Resources */,
 				D3A74EFA15C69392001500B9 /* history_default_landscape~ipad.png in Resources */,
 				D3A74EFC15C69392001500B9 /* history_default~ipad.png in Resources */,
@@ -3546,7 +3530,6 @@
 				D3A74F5215C69392001500B9 /* video_off_over~ipad.png in Resources */,
 				F0B89C2818DC973E0050B60E /* wizard_external_sip.rc in Resources */,
 				D3A74F5415C69392001500B9 /* video_on_default~ipad.png in Resources */,
-				C4CF9FE11B8D4C6C00B9CC85 /* SVWebViewController.bundle in Resources */,
 				D3A74F5615C69392001500B9 /* video_on_disabled~ipad.png in Resources */,
 				D3A74F5815C69392001500B9 /* video_on_over~ipad.png in Resources */,
 				D38187C515FE345F00C3EDCA /* DialerViewController~ipad.xib in Resources */,
@@ -3717,6 +3700,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		58C4F70AC5CA9D0E86712116 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6087764103D0F78387183507 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingMail/Pods-RingMail-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		63DCC71D1A07B08E00916627 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3827,7 +3840,6 @@
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
-				C4CF9FE21B8D4C6C00B9CC85 /* SVWebViewController.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
 				D3807FEC15C2894A005BE9BC /* IASKSpecifierValuesViewController.m in Sources */,
@@ -3848,7 +3860,6 @@
 				637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerViewController.m in Sources */,
 				22405F001601C19200B92522 /* ImageViewController.m in Sources */,
-				C4CF9FE01B8D4C6C00B9CC85 /* SVModalWebViewController.m in Sources */,
 				D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */,
 				D3ED401B1602172200BF332B /* HPTextViewInternal.m in Sources */,
 				D37EE162160377D7003608A6 /* DTActionSheet.m in Sources */,
@@ -3856,9 +3867,6 @@
 				D35E91F8160CA4FF0023116B /* UILinphoneButton.m in Sources */,
 				D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */,
 				D37E3ECD1619C27A0087659A /* CAAnimation+Blocks.m in Sources */,
-				C4CF9FEC1B8D4ED600B9CC85 /* SVWebViewControllerActivityChrome.m in Sources */,
-				C4CF9FEE1B8D4EE000B9CC85 /* SVWebViewControllerActivitySafari.m in Sources */,
-				C4CF9FF01B8D4F0D00B9CC85 /* SVWebViewControllerActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4302,6 +4310,7 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F787A8F4AFE4EC37D570FB3 /* Pods-RingMail.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4325,6 +4334,7 @@
 					HAVE_SSL,
 					DEBUG,
 					USE_APN_DEV,
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -4333,13 +4343,10 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
 					"$(SRCROOT)/Classes/Utils/NinePatch/",
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities/Chrome",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities/Safari",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -4349,7 +4356,7 @@
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
@@ -4396,6 +4403,7 @@
 		};
 		228B19A71302902F00F154D3 /* DistributionAdhoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7061EAD7F945CD8977375CE3 /* Pods-RingMail.distributionadhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4418,6 +4426,7 @@
 					HAVE_SILK,
 					HAVE_SSL,
 					HAVE_OPENH264,
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -4426,13 +4435,10 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
 					"$(SRCROOT)/Classes/Utils/NinePatch/",
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities/Chrome",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities/Safari",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
@@ -4442,7 +4448,7 @@
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
@@ -4489,6 +4495,7 @@
 		};
 		22F3D55613CC3C9100A0DA02 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C913F326854608AF66812CBF /* Pods-RingMail.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4510,6 +4517,7 @@
 					HAVE_SILK,
 					HAVE_SSL,
 					USE_APN_DEV,
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -4518,13 +4526,10 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
 					"$(SRCROOT)/Classes/Utils/NinePatch/",
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities/Chrome",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities/Safari",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
@@ -4534,7 +4539,7 @@
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
@@ -4581,6 +4586,7 @@
 		};
 		22F51EE8107FA53D00F98953 /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9035CFA62FDF2CF9AA4F7FCF /* Pods-RingMail.distribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4602,6 +4608,7 @@
 					VIDEO_ENABLED,
 					HAVE_SILK,
 					HAVE_SSL,
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -4610,13 +4617,10 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
 					"$(SRCROOT)/Classes/Utils/NinePatch/",
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities/Chrome",
-					"$(SRCROOT)/Classes/Utils/SVWebViewController/UIActivities/Safari",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
@@ -4626,7 +4630,7 @@
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;

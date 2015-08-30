@@ -245,7 +245,12 @@
 	CGSize contraints;
 	contraints.height = [label frame].size.height;
 	contraints.width = ([field frame].size.width + [field frame].origin.x) - [label frame].origin.x;
-	CGSize firstNameSize = [[label text] sizeWithFont:[label font] constrainedToSize:contraints];
+    
+    CGRect frame = [[label text] boundingRectWithSize:contraints
+                                      options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                           attributes:@{NSFontAttributeName:[label font]}
+                                              context:nil];
+    CGSize firstNameSize = frame.size;
 	labelFrame.size.width = firstNameSize.width;
 
 	// Compute lastName size & position

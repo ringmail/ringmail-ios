@@ -160,7 +160,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	if ([navigationController isKindOfClass:[UIImagePickerController class]]) {
 		[[UIApplication sharedApplication] setStatusBarHidden:NO]; // Fix UIImagePickerController status bar hide
 		[[UIApplication sharedApplication]
-			setStatusBarStyle:UIStatusBarStyleBlackOpaque]; // Fix UIImagePickerController status bar style change
+			setStatusBarStyle:UIStatusBarStyleLightContent]; // Fix UIImagePickerController status bar style change
 	}
 }
 

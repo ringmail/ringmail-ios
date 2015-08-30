@@ -302,9 +302,11 @@ static UIFont *CELL_FONT = nil;
 		} else
 #endif
 		{
-			messageSize = [messageText sizeWithFont:CELL_FONT
-								  constrainedToSize:CGSizeMake(width - CELL_MESSAGE_X_MARGIN, 10000.0f)
-									  lineBreakMode:NSLineBreakByTruncatingTail];
+            CGRect frame = [messageText boundingRectWithSize:CGSizeMake(width - CELL_MESSAGE_X_MARGIN, 10000.0f)
+            options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+            attributes:@{NSFontAttributeName:CELL_FONT}
+            context:nil];
+            messageSize = frame.size;
 		}
 	} else {
 		messageSize = CGSizeMake(CELL_IMAGE_WIDTH, CELL_IMAGE_HEIGHT);

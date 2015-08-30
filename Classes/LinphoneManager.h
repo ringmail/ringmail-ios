@@ -191,6 +191,7 @@ typedef struct _LinphoneManagerSounds {
 
 - (void)silentPushFailed:(NSTimer*)timer;
 
+- (void)audioRouteChanged:(NSNotification *)notif;
 - (NSString *)decodeSipUri:(NSString*)input;
 
 @property (readonly) BOOL isTesting;
