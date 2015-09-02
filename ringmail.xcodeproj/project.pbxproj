@@ -137,6 +137,8 @@
 		7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066FC0B13E830E400EFC6DC /* libvpx.a */; };
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
 		70E542F513E147EB002BA2C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F413E147EB002BA2C0 /* QuartzCore.framework */; };
+		C401E5DC1B95E9ED006C915A /* RgChatModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E5DB1B95E9ED006C915A /* RgChatModelData.m */; };
+		C401E5E61B960B35006C915A /* RgChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E5E51B960B35006C915A /* RgChatManager.m */; };
 		C41EF3111B8BCFD40085E75B /* RgMainController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */; };
 		C41EF3121B8BCFD40085E75B /* RgMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */; };
 		C41EF3131B8BCFD40085E75B /* RgMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3101B8BCFD40085E75B /* RgMainViewController.xib */; };
@@ -149,6 +151,8 @@
 		C41EF33B1B8CF1200085E75B /* ringmail_icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */; };
 		C41EF33C1B8CF1200085E75B /* ringmail_icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */; };
 		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
+		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
+		C4D999521B96910A003CC323 /* RgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D999511B96910A003CC323 /* RgManager.m */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
@@ -1030,6 +1034,10 @@
 		7F787A8F4AFE4EC37D570FB3 /* Pods-RingMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.debug.xcconfig"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* linphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "linphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9035CFA62FDF2CF9AA4F7FCF /* Pods-RingMail.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.distribution.xcconfig"; sourceTree = "<group>"; };
+		C401E5DA1B95E9ED006C915A /* RgChatModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgChatModelData.h; sourceTree = "<group>"; };
+		C401E5DB1B95E9ED006C915A /* RgChatModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatModelData.m; sourceTree = "<group>"; };
+		C401E5E41B960B35006C915A /* RgChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgChatManager.h; sourceTree = "<group>"; };
+		C401E5E51B960B35006C915A /* RgChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatManager.m; sourceTree = "<group>"; };
 		C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RgMainController~ipad.xib"; sourceTree = "<group>"; };
 		C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMainViewController.h; sourceTree = "<group>"; };
 		C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMainViewController.m; sourceTree = "<group>"; };
@@ -1043,6 +1051,10 @@
 		C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_57.png; path = Resources/ringmail_icon_57.png; sourceTree = "<group>"; };
 		C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_114.png; path = Resources/ringmail_icon_114.png; sourceTree = "<group>"; };
 		C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_120.png; path = Resources/ringmail_icon_120.png; sourceTree = "<group>"; };
+		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
+		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
+		C4D999501B96910A003CC323 /* RgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgManager.h; sourceTree = "<group>"; };
+		C4D999511B96910A003CC323 /* RgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgManager.m; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C913F326854608AF66812CBF /* Pods-RingMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.release.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.release.xcconfig"; sourceTree = "<group>"; };
@@ -1864,10 +1876,18 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C4D999501B96910A003CC323 /* RgManager.h */,
+				C4D999511B96910A003CC323 /* RgManager.m */,
 				C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */,
 				C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */,
 				C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */,
 				C41EF3101B8BCFD40085E75B /* RgMainViewController.xib */,
+				C401E5E41B960B35006C915A /* RgChatManager.h */,
+				C401E5E51B960B35006C915A /* RgChatManager.m */,
+				C431598A1B95354C001A795E /* RgMessagesViewController.h */,
+				C431598B1B95354C001A795E /* RgMessagesViewController.m */,
+				C401E5DA1B95E9ED006C915A /* RgChatModelData.h */,
+				C401E5DB1B95E9ED006C915A /* RgChatModelData.m */,
 				22E0A81D111C44E100B04932 /* AboutViewController.h */,
 				22E0A81C111C44E100B04932 /* AboutViewController.m */,
 				636316D31A1DEBCB0009B839 /* AboutViewController.xib */,
@@ -3798,6 +3818,7 @@
 				D31C9C98158A1CDF00756B45 /* UIHistoryCell.m in Sources */,
 				D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */,
 				D36C43C6158F2E5A0048BA40 /* UICallCell.m in Sources */,
+				C401E5E61B960B35006C915A /* RgChatManager.m in Sources */,
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				D35E7597159460580066B1C1 /* ChatViewController.m in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
@@ -3838,7 +3859,9 @@
 				D3F7998115BD32370018C273 /* TPMultiLayoutViewController.m in Sources */,
 				D3807FBF15C28940005BE9BC /* DCRoundSwitch.m in Sources */,
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
+				C4D999521B96910A003CC323 /* RgManager.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
+				C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
@@ -3851,6 +3874,7 @@
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
 				D3807FFA15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
 				631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */,
+				C401E5DC1B95E9ED006C915A /* RgChatModelData.m in Sources */,
 				D3807FFC15C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
 				D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */,
 				D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */,
@@ -4353,6 +4377,7 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
+					"$(inherited)",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
@@ -4445,6 +4470,7 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
+					"$(inherited)",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
@@ -4536,6 +4562,7 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
+					"$(inherited)",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
@@ -4627,6 +4654,7 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
+					"$(inherited)",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";

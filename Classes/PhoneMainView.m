@@ -255,7 +255,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (void)textReceived:(NSNotification *)notif {
 	LinphoneAddress *from = [[notif.userInfo objectForKey:@"from_address"] pointerValue];
 	NSString *callID = [notif.userInfo objectForKey:@"call-id"];
-	if (from != nil) {
+	if (from != nil) { // new message
 		[self playMessageSoundForCallID:callID];
 	}
 	[self updateApplicationBadgeNumber];

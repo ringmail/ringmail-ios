@@ -25,40 +25,28 @@
 #import "HPGrowingTextView.h"
 #import "ImagePickerViewController.h"
 #import "OrderedDictionary.h"
+#import "RgMessagesViewController.h"
 
 #include "linphone/linphonecore.h"
 
-@interface ChatRoomViewController : UIViewController<HPGrowingTextViewDelegate, UICompositeViewDelegate, ImagePickerDelegate, ChatRoomDelegate> {
+@interface ChatRoomViewController : UIViewController<UICompositeViewDelegate, ImagePickerDelegate, ChatRoomDelegate> {
     LinphoneChatRoom *chatRoom;
     OrderedDictionary *imageQualities;
     BOOL scrollOnGrowingEnabled;
     BOOL composingVisible;
 }
 
-@property (nonatomic, strong) IBOutlet ChatRoomTableViewController* tableController;
 @property (nonatomic, strong) IBOutlet UIToggleButton *editButton;
-@property (nonatomic, strong) IBOutlet HPGrowingTextView* messageField;
-@property (nonatomic, strong) IBOutlet UIButton* sendButton;
 @property (nonatomic, strong) IBOutlet UILabel *addressLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImage;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIView *chatView;
-@property (nonatomic, strong) IBOutlet UIView *messageView;
-@property (nonatomic, strong) IBOutlet UIImageView *messageBackgroundImage;
-@property (nonatomic, strong) IBOutlet UIImageView *transferBackgroundImage;
-@property (nonatomic, strong) IBOutlet UITapGestureRecognizer *listTapGestureRecognizer;
-@property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *listSwipeGestureRecognizer;
-@property (strong, nonatomic) IBOutlet UILabel *composeLabel;
-@property (strong, nonatomic) IBOutlet UIView *composeIndicatorView;
+@property (nonatomic, strong) IBOutlet RgMessagesViewController *chatViewController;
 
 @property (nonatomic, strong) IBOutlet UIButton* pictureButton;
 
 - (IBAction)onBackClick:(id)event;
 - (IBAction)onEditClick:(id)event;
-- (IBAction)onMessageChange:(id)sender;
-- (IBAction)onSendClick:(id)event;
-- (IBAction)onPictureClick:(id)event;
-- (IBAction)onListTap:(id)sender;
 
 - (void)setChatRoom:(LinphoneChatRoom*)room;
 

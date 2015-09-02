@@ -2,7 +2,10 @@
 # platform :ios, '6.0'
 
 target 'RingMail' do
-  pod 'JSQMessagesViewController'
+  pod 'JSQMessagesViewController', :head
   pod 'SVWebViewController', :head
+  pod 'XMPPFramework'
+  pod 'RegexKitLite'
+  pod 'FMDB'
 end
 

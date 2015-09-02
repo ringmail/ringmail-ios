@@ -42,6 +42,7 @@
 
 #import <AVFoundation/AVAudioPlayer.h>
 
+
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
 static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
@@ -70,6 +71,7 @@ NSString *const kLinphoneGlobalStateUpdate = @"LinphoneGlobalStateUpdate";
 NSString *const kLinphoneNotifyReceived = @"LinphoneNotifyReceived";
 NSString *const kLinphoneFileTransferSendUpdate = @"LinphoneFileTransferSendUpdate";
 NSString *const kLinphoneFileTransferRecvUpdate = @"LinphoneFileTransferRecvUpdate";
+
 
 const int kLinphoneAudioVbrCodecDefaultBitrate = 36; /*you can override this from linphonerc or linphonerc-factory*/
 
@@ -125,6 +127,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize silentPushCompletion;
 @synthesize wasRemoteProvisioned;
 @synthesize configDb;
+@synthesize chatManager;
 
 struct codec_name_pref_table {
 	const char *name;
@@ -309,6 +312,10 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 		}
 
 		[self migrateFromUserPrefs];
+        
+        /* RingMail XMPP */
+        self.chatManager = [[RgChatManager alloc] init];
+        [self.chatManager connectWithJID:@"" password:@""];
 	}
 	return self;
 }
@@ -969,6 +976,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 		}
 	}
 
+    /* Obsolete in RingMail */
 	// Post event
 	NSDictionary *dict = @{
 		@"room" : [NSValue valueWithPointer:room],
