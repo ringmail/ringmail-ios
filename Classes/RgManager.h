@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RegexKitLite/RegexKitLite.h"
+#import "LevelDB.h"
 
 /* RingMail */
 extern NSString *const kRgTextReceived;
@@ -22,5 +23,7 @@ extern NSString *const kRgSelfName;
 + (NSString*)addressFromSIP:(NSString*)addr;
 + (NSString*)addressToXMPP:(NSString*)addr;
 + (NSString*)addressFromXMPP:(NSString*)addr;
+
++ (LevelDB*)configDatabase;
 
 @end

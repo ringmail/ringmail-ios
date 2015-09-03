@@ -7,5 +7,6 @@ target 'RingMail' do
   pod 'XMPPFramework'
   pod 'RegexKitLite'
   pod 'FMDB'
+  pod 'Objective-LevelDB'
 end
 

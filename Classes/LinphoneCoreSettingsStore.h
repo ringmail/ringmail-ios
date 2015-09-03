@@ -19,6 +19,8 @@
 
 #import <Foundation/Foundation.h>
 #import "IASKSettingsStore.h"
+#import "LevelDB.h"
+#import "RgManager.h"
 
 #import "LinphoneManager.h"
 

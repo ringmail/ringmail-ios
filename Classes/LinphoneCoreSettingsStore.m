@@ -335,6 +335,18 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		linphone_address_destroy(parsed);
 		[self setObject:[lm lpConfigStringForKey:@"sharing_server_preference"] forKey:@"sharing_server_preference"];
 	}
+    
+    
+    // RingMail section
+    NSArray* rgKeys = @[
+        @"ringmail_login",
+        @"ringmail_password"
+    ];
+    LevelDB* rgConfig = [RgManager configDatabase];
+    for (NSString *key in rgKeys)
+    {
+        [self setObject:[rgConfig objectForKey:key] forKey:key];
+    }
 
 	changedDict = [[NSMutableDictionary alloc] init];
 
@@ -552,6 +564,20 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 }
 
 - (BOOL)synchronize {
+    NSLog(@"RingMail Login: %@", [self objectForKey:@"ringmail_login"]);
+    NSLog(@"RingMail Password: %@", [self objectForKey:@"ringmail_password"]);
+    
+    // RingMail section
+    NSArray* rgKeys = @[
+                        @"ringmail_login",
+                        @"ringmail_password"
+                        ];
+    LevelDB* rgConfig = [RgManager configDatabase];
+    for (NSString *key in rgKeys)
+    {
+        [rgConfig setObject:[self objectForKey:key] forKey:key];
+    }
+    
 	LinphoneManager *lm = [LinphoneManager instance];
 	LinphoneCore *lc = [LinphoneManager getLc];
 	// root section

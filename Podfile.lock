@@ -13,6 +13,9 @@ PODS:
   - JSQMessagesViewController (HEAD based on 7.1.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - leveldb-library (1.18.1)
+  - Objective-LevelDB (2.1.4):
+    - leveldb-library (~> 1.18)
   - RegexKitLite (4.0)
   - SVWebViewController (HEAD based on 1.0)
   - XMPPFramework (3.6.5):
@@ -161,6 +164,7 @@ PODS:
 DEPENDENCIES:
   - FMDB
   - JSQMessagesViewController (HEAD)
+  - Objective-LevelDB
   - RegexKitLite
   - SVWebViewController (HEAD)
   - XMPPFramework
@@ -171,6 +175,8 @@ SPEC CHECKSUMS:
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   JSQMessagesViewController: ca11f86fa68ca70835f05e169df9244147c1dc40
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  leveldb-library: 4b0b6d3bdf102d072d6cf6e046615a6f88ea4bf1
+  Objective-LevelDB: 016f27f24c9976527938a40f043b585e82c27cfc
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
   XMPPFramework: 7ae77710dd86f1826f5451dc5f3cf9f4d2a62072

@@ -39,4 +39,9 @@ NSString *const kRgSelfName = @"Self";
     return [NSString stringWithFormat:@""];
 }
 
++ (LevelDB*)configDatabase
+{
+    return [LevelDB databaseInLibraryWithName:@"ringmail_config.ldb"];
+}
+
 @end

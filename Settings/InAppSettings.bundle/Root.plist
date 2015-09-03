@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>Title</key>
-			<string>SIP account</string>
+			<string>RingMail Account</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -14,7 +14,7 @@
 			<key>Key</key>
 			<string>wizard_button</string>
 			<key>Title</key>
-			<string>Run assistant</string>
+			<string>Create New Account</string>
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 		</dict>
@@ -22,7 +22,7 @@
 			<key>Key</key>
 			<string>clear_proxy_button</string>
 			<key>Title</key>
-			<string>Clear Account</string>
+			<string>Sign Out</string>
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 		</dict>
@@ -36,14 +36,50 @@
 			<key>IsSecure</key>
 			<false/>
 			<key>Key</key>
-			<string>username_preference</string>
+			<string>ringmail_login</string>
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>Title</key>
-			<string>User name</string>
+			<string>Email</string>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 		</dict>
+        <dict>
+            <key>AutocapitalizationType</key>
+            <string>None</string>
+            <key>AutocorrectionType</key>
+            <string>No</string>
+            <key>DefaultValue</key>
+            <string></string>
+            <key>IsSecure</key>
+            <true/>
+            <key>Key</key>
+            <string>ringmail_password</string>
+            <key>KeyboardType</key>
+            <string>Alphabet</string>
+            <key>Title</key>
+            <string>Password</string>
+            <key>Type</key>
+            <string>PSTextFieldSpecifier</string>
+        </dict>
+        <dict>
+            <key>AutocapitalizationType</key>
+            <string>None</string>
+            <key>AutocorrectionType</key>
+            <string>No</string>
+            <key>DefaultValue</key>
+            <string></string>
+            <key>IsSecure</key>
+            <false/>
+            <key>Key</key>
+            <string>username_preference</string>
+            <key>KeyboardType</key>
+            <string>Alphabet</string>
+            <key>Title</key>
+            <string>User name</string>
+            <key>Type</key>
+            <string>PSTextFieldSpecifier</string>
+        </dict>
 		<dict>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
