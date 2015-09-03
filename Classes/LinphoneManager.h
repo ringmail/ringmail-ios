@@ -220,5 +220,6 @@ typedef struct _LinphoneManagerSounds {
 @property (readonly) InAppProductsManager *iapManager;
 @property(strong, nonatomic) NSMutableArray *fileTransferDelegates;
 @property (nonatomic, strong) RgChatManager *chatManager;
+@property (nonatomic, strong) NSString *chatTag;
 
 @end

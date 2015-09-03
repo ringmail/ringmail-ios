@@ -21,6 +21,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "JSQMessages.h"
+#import "RgManager.h"
 #import "LinphoneManager.h"
 
 /**
@@ -48,12 +49,8 @@ static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
 @property (strong, nonatomic) NSDictionary *users;
 @property (strong, nonatomic) NSString *chatRoom;
 
+- (id)initWithChatRoom:(NSString *)room;
 - (void)loadMessages;
 
-- (void)addPhotoMediaMessage;
-
-- (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion;
-
-- (void)addVideoMediaMessage;
 
 @end

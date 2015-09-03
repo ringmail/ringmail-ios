@@ -64,6 +64,8 @@
     // There's a bunch more information in the XMPPReconnect header file.
     
     self.xmppReconnect = [[XMPPReconnect alloc] init];
+    XMPPvCardCoreDataStorage* vCardStore = [[XMPPvCardCoreDataStorage alloc] initWithInMemoryStore];
+    self.xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:vCardStore];
     
     // Setup capabilities
     //
@@ -95,7 +97,7 @@
     
     [self.xmppReconnect         activate:self.xmppStream];
     //[self.xmppRoster            activate:self.xmppStream];
-    //[self.xmppvCardTempModule   activate:self.xmppStream];
+    [self.xmppvCardTempModule   activate:self.xmppStream];
     //[self.xmppvCardAvatarModule activate:self.xmppStream];
     [self.xmppCapabilities      activate:self.xmppStream];
     
@@ -126,11 +128,13 @@
     [_xmppCapabilities removeDelegate:self];
     
     [_xmppReconnect deactivate];
+    [_xmppvCardTempModule deactivate];
     [_xmppCapabilities deactivate];
     [_xmppStream disconnect];
     
     _xmppStream = nil;
     _xmppReconnect = nil;
+    _xmppvCardTempModule = nil;
     _xmppCapabilities = nil;
 }
 
@@ -163,13 +167,15 @@
 - (void)authenticateWithStream:(XMPPStream *)stream {
     NSError * error = nil;
     BOOL status = YES;
-    status = [stream authenticateWithPassword:@"test123" error:&error];
+    status = [stream authenticateWithPassword:@"f5x7veqlldsz" error:&error];
 }
 
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword
 {
-
-    self.JID = [XMPPJID jidWithString:@"test@staging.ringmail.com" resource:@"resource_1"];
+    myJID = @"mfrager+14@gmail.com";
+    myJID = [myJID stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLUserAllowedCharacterSet];
+    myJID = [myJID stringByAppendingString:@"@staging.ringmail.com"];
+    self.JID = [XMPPJID jidWithString:myJID resource:@"RingMail"];
     
     //if (![self.JID.domain isEqualToString:self.xmppStream.myJID.domain]) {
     //    [self.xmppStream disconnect];
@@ -255,6 +261,7 @@
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
 {
     NSLog(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, [iq elementID]);
+    NSLog(@"%@", iq);
     return NO;
 }
 
@@ -272,6 +279,7 @@
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)xmppMessage
 {
     NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSLog(@"%@", xmppMessage);
     if ([xmppMessage isMessageWithBody] && ![xmppMessage isErrorMessage])
     {
         NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
@@ -279,10 +287,10 @@
         NSString *fromName = [from stringByMatching:@"^(.*?)\\@" capture:1];
         NSString *chatFrom = [NSString stringWithFormat:@"%@@staging.ringmail.com", fromName];
         
-        [self dbInsertMessage:chatFrom body:body];
+        [self dbInsertMessage:chatFrom body:body inbound:YES];
         
         NSDictionary *dict = @{
-            @"new": [NSNumber numberWithBool:YES]
+            @"tag": chatFrom
         };
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
@@ -377,9 +385,11 @@
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
+                                //@"DROP TABLE chat_session;",
                                 @"CREATE TABLE IF NOT EXISTS chat_session (session_tag TEXT NOT NULL);",
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON chat_session (session_tag);",
-                                @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL);",
+                                //@"DROP TABLE chat;",
+                                @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER);",
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
                           nil];
         for (NSString *sql in setup)
@@ -416,12 +426,12 @@
     return result;
 }
 
-- (void)dbInsertMessage:(NSString *)from body:(NSString *)body
+- (void)dbInsertMessage:(NSString *)from body:(NSString *)body inbound:(BOOL)inbound
 {
     FMDatabaseQueue *dbq = [self database];
     NSNumber* session = [self dbGetSessionID:from];
     [dbq inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"INSERT INTO chat (session_id, msg_body, msg_time) VALUES (?, ?, datetime('now'));", session, body];
+        [db executeUpdate:@"INSERT INTO chat (session_id, msg_body, msg_time, msg_inbound) VALUES (?, ?, datetime('now'), ?);", session, body, [NSNumber numberWithBool:inbound]];
     }];
     [dbq close];
 }
@@ -448,12 +458,13 @@
     NSNumber* session = [self dbGetSessionID:from];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT msg_body, STRFTIME('%s', msg_time) FROM chat WHERE session_id = ? ORDER BY rowid ASC", session];
+        FMResultSet *rs = [db executeQuery:@"SELECT msg_body, STRFTIME('%s', msg_time), msg_inbound FROM chat WHERE session_id = ? ORDER BY rowid ASC", session];
         while ([rs next])
         {
             [result addObject:@{
                 @"body": [rs stringForColumnIndex:0],
-                @"time": [NSDate dateWithTimeIntervalSince1970:[rs doubleForColumnIndex:1]]
+                @"time": [NSDate dateWithTimeIntervalSince1970:[rs doubleForColumnIndex:1]],
+                @"direction": ([rs boolForColumnIndex:2]) ? @"inbound" : @"outbound",
             }];
         }
         [rs close];

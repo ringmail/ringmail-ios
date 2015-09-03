@@ -30,6 +30,7 @@
 @synthesize deleteButton;
 @synthesize unreadMessageLabel;
 @synthesize unreadMessageView;
+@synthesize chatTag = _chatTag;
 
 #pragma mark - Lifecycle Functions
 
@@ -48,8 +49,8 @@
 
 #pragma mark - Property Funcitons
 
-- (void)setChatRoom:(LinphoneChatRoom *)achat {
-	self->chatRoom = achat;
+- (void)setChatTag:(NSString*)achat {
+	_chatTag = achat;
 	[self update];
 }
 
@@ -67,30 +68,22 @@
 - (void)update {
 	NSString *displayName = nil;
 	UIImage *image = nil;
-	if (chatRoom == nil) {
+	if (_chatTag == nil) {
 		LOGW(@"Cannot update chat cell: null chat");
 		return;
 	}
-	const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
 
-	if (linphoneAddress == NULL)
-		return;
-	char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
-	NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
-	ms_free(tmp);
+	/*NSString *normalizedSipAddress = @"FIX";
 
 	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
 	if (contact != nil) {
 		displayName = [FastAddressBook getContactDisplayName:contact];
 		image = [FastAddressBook getContactImage:contact thumbnail:true];
-	}
+	}*/
 
 	// Display name
 	if (displayName == nil) {
-		const char *username = linphone_address_get_username(linphoneAddress);
-		char *address = linphone_address_as_string(linphoneAddress);
-		displayName = [NSString stringWithUTF8String:username ?: address];
-		ms_free(address);
+        displayName = [_chatTag stringByMatching:@"^(.*?)\\@" capture:1];
 	}
 	[addressLabel setText:displayName];
 
@@ -100,9 +93,9 @@
 	}
 	[avatarImage setImage:image];
 
-	LinphoneChatMessage *last_message = linphone_chat_room_get_user_data(chatRoom);
+	//LinphoneChatMessage *last_message = linphone_chat_room_get_user_data(chatRoom);
 
-	if (last_message) {
+	/*if (last_message) {
 
 		const char *text = linphone_chat_message_get_text(last_message);
 		const char *url = linphone_chat_message_get_external_body_url(last_message);
@@ -122,11 +115,11 @@
 		int count = linphone_chat_room_get_unread_messages_count(chatRoom);
 		unreadMessageLabel.text = [NSString stringWithFormat:@"%i", count];
 		[unreadMessageView setHidden:(count <= 0)];
-	} else {
+	} else {*/
 		chatContentLabel.text = nil;
 		unreadMessageLabel.text = [NSString stringWithFormat:@"0"];
 		[unreadMessageView setHidden:TRUE];
-	}
+	//}
 }
 
 - (void)setEditing:(BOOL)editing {
@@ -151,7 +144,7 @@
 #pragma mark - Action Functions
 
 - (IBAction)onDeleteClick:(id)event {
-	if (chatRoom != NULL) {
+	/*if (chatRoom != NULL) {
 		UIView *view = [self superview];
 		// Find TableViewCell
 		while (view != nil && ![view isKindOfClass:[UITableView class]])
@@ -163,7 +156,7 @@
 						   commitEditingStyle:UITableViewCellEditingStyleDelete
 							forRowAtIndexPath:indexPath];
 		}
-	}
+	}*/
 }
 
 @end

@@ -9,18 +9,12 @@
 
 @implementation RgChatModelData
 
+@synthesize chatRoom;
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        [self loadMessages];
-        
-        //if ([NSUserDefaults emptyMessagesSetting]) {
-            //self.messages = [NSMutableArray new];
-
-            //[self loadFakeMessages];
-        //}
-        
         
         /**
          *  Create avatar images once.
@@ -29,17 +23,6 @@
          *
          *  If you are not using avatars, ignore this.
          */
-        JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"JSQ"
-                                                                                      backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                                                            textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                                                 font:[UIFont systemFontOfSize:14.0f]
-                                                                                             diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-        
-        JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"TC"
-                                                                                       backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                                                             textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                                                  font:[UIFont systemFontOfSize:14.0f]
-                                                                                              diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
         JSQMessagesAvatarImage *jobsImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"SJ"
                                                                                        backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
@@ -47,21 +30,11 @@
                                                                                                   font:[UIFont systemFontOfSize:14.0f]
                                                                                               diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"WOZ"
-                                                                                      backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                                                            textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                                                 font:[UIFont systemFontOfSize:14.0f]
-                                                                                             diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-        self.avatars = @{ kJSQDemoAvatarIdSquires : jsqImage,
-                          kJSQDemoAvatarIdCook : cookImage,
-                          kJSQDemoAvatarIdJobs : jobsImage,
-                          kJSQDemoAvatarIdWoz : wozImage };
+        self.avatars = @{ kJSQDemoAvatarIdJobs : jobsImage };
         
+        self.users = @{ kJSQDemoAvatarIdJobs : kJSQDemoAvatarDisplayNameJobs };
         
-        self.users = @{ kJSQDemoAvatarIdJobs : kJSQDemoAvatarDisplayNameJobs,
-                        kJSQDemoAvatarIdCook : kJSQDemoAvatarDisplayNameCook,
-                        kJSQDemoAvatarIdWoz : kJSQDemoAvatarDisplayNameWoz,
-                        kJSQDemoAvatarIdSquires : kJSQDemoAvatarDisplayNameSquires };
+        self.messages = [NSMutableArray array];
         
         
         /**
@@ -79,106 +52,45 @@
     return self;
 }
 
-- (void)loadFakeMessages
+- (id)initWithChatRoom:(NSString *)room
 {
-    /**
-     *  Load some fake messages for demo.
-     *
-     *  You should have a mutable array or orderedSet, or something.
-     */
-    self.messages = [[NSMutableArray alloc] initWithObjects:
-                     /*[[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
-                                        senderDisplayName:kJSQDemoAvatarDisplayNameSquires
-                                                     date:[NSDate distantPast]
-                                                     text:@"Welcome to JSQMessages: A messaging UI framework for iOS."],
-                     
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz
-                                        senderDisplayName:kJSQDemoAvatarDisplayNameWoz
-                                                     date:[NSDate distantPast]
-                                                     text:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy."],
-                     
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
-                                        senderDisplayName:kJSQDemoAvatarDisplayNameSquires
-                                                     date:[NSDate distantPast]
-                                                     text:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com."],
-                     
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdJobs
-                                        senderDisplayName:kJSQDemoAvatarDisplayNameJobs
-                                                     date:[NSDate date]
-                                                     text:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better."],*/
-                     
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdCook
-                                        senderDisplayName:kJSQDemoAvatarDisplayNameCook
-                                                     date:[NSDate date]
-                                                     text:@"It is unit-tested, free, open-source, and documented."],
-                     
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
-                                        senderDisplayName:kJSQDemoAvatarDisplayNameSquires
-                                                     date:[NSDate date]
-                                                     text:@"Now with media messages!"],
-                     nil];
-    
-    /*[self addPhotoMediaMessage];*/
-    
-    /**
-     *  Setting to load extra messages for testing/demo
-     */
-    if (0) {
-        NSArray *copyOfMessages = [self.messages copy];
-        for (NSUInteger i = 0; i < 4; i++) {
-            [self.messages addObjectsFromArray:copyOfMessages];
-        }
+    if (self = [self init])
+    {
+        chatRoom = room;
+        [self loadMessages];
     }
+    return self;
 }
 
 - (void)loadMessages
 {
-    NSLog(@"**** RELOAD MESSAGES ****");
-    NSMutableArray* msgs = [NSMutableArray array];
-    NSArray* input = [[LinphoneManager instance].chatManager dbGetMessages:@"test2@staging.ringmail.com"];
-    for (NSDictionary* msgdata in input)
+    if (! [chatRoom isEqualToString:@""])
     {
-        [msgs addObject:[[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdCook
-                                        senderDisplayName:kJSQDemoAvatarDisplayNameCook
-                                                        date:[msgdata objectForKey:@"time"]
-                                                        text:[msgdata objectForKey:@"body"]]];
+        NSLog(@"**** RELOAD MESSAGES ****");
+        NSMutableArray* msgs = [NSMutableArray array];
+        NSArray* input = [[LinphoneManager instance].chatManager dbGetMessages:self.chatRoom];
+        for (NSDictionary* msgdata in input)
+        {
+            if ([(NSString*)[msgdata objectForKey:@"direction"] isEqualToString:@"outbound"])
+            {
+                [msgs addObject:[[JSQMessage alloc] initWithSenderId:kRgSelf
+                                                   senderDisplayName:kRgSelfName
+                                                                date:[msgdata objectForKey:@"time"]
+                                                                text:[msgdata objectForKey:@"body"]]];
+            }
+            else
+            {
+                [msgs addObject:[[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdJobs
+                                                   senderDisplayName:kJSQDemoAvatarDisplayNameJobs
+                                                                date:[msgdata objectForKey:@"time"]
+                                                                text:[msgdata objectForKey:@"body"]]];
+            }
+
+        }
+        self.messages = msgs;
     }
-    self.messages = msgs;
 }
 
 
-- (void)addPhotoMediaMessage
-{
-    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
-    JSQMessage *photoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                   displayName:kJSQDemoAvatarDisplayNameSquires
-                                                         media:photoItem];
-    [self.messages addObject:photoMessage];
-}
-
-- (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion
-{
-    CLLocation *ferryBuildingInSF = [[CLLocation alloc] initWithLatitude:37.795313 longitude:-122.393757];
-    
-    JSQLocationMediaItem *locationItem = [[JSQLocationMediaItem alloc] init];
-    [locationItem setLocation:ferryBuildingInSF withCompletionHandler:completion];
-    
-    JSQMessage *locationMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                      displayName:kJSQDemoAvatarDisplayNameSquires
-                                                            media:locationItem];
-    [self.messages addObject:locationMessage];
-}
-
-- (void)addVideoMediaMessage
-{
-    // don't have a real video, just pretending
-    NSURL *videoURL = [NSURL URLWithString:@"file://"];
-    
-    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
-    JSQMessage *videoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                   displayName:kJSQDemoAvatarDisplayNameSquires
-                                                         media:videoItem];
-    [self.messages addObject:videoMessage];
-}
 
 @end

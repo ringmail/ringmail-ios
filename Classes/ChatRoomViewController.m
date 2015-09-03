@@ -80,12 +80,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    
-    RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
-    [self setChatViewController:mc];
-    [chatView addSubview:[mc view]];
-    [mc view].autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [mc view].frame = chatView.superview.bounds;
 
 	// Set selected+over background: IB lack !
 	[editButton setBackgroundImage:[UIImage imageNamed:@"chat_ok_over.png"]
@@ -108,15 +102,24 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(textComposeEvent:)
 												 name:kLinphoneTextComposeEvent
 											   object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(chatReceivedEvent:)
+                                                 name:kRgTextReceived
+                                               object:nil];
 
 	[editButton setOff];
-    [chatViewController.demoData loadMessages];
-    [chatViewController.collectionView reloadData];
 
 	/*BOOL fileSharingEnabled =
 		[[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] != NULL &&
 		[[[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] length] > 0;
 	[pictureButton setEnabled:fileSharingEnabled];*/
+    
+    RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
+    [mc setChatRoom:[[LinphoneManager instance] chatTag]];
+    [self setChatViewController:mc];
+    [chatView addSubview:[mc view]];
+    [mc view].autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [mc view].frame = chatView.superview.bounds;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -125,6 +128,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self setComposingVisible:FALSE withDelay:0]; // will hide the "user is composing.." message
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [[self.chatViewController view] removeFromSuperview];
+    [self setChatViewController:nil]; // De-allocate
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
@@ -330,6 +336,14 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
 		BOOL composing = linphone_chat_room_is_remote_composing(room);
 		[self setComposingVisible:composing withDelay:0.3];
 	}
+}
+
+- (void)chatReceivedEvent:(NSNotification *)notif {
+    NSString *room = [[notif userInfo] objectForKey:@"tag"];
+    if ([room isEqualToString:chatViewController.chatRoom])
+    {
+        [chatViewController receiveMessage];
+    }
 }
 
 #pragma mark - Action Functions

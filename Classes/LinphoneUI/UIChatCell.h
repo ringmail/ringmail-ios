@@ -23,9 +23,7 @@
 
 #include "linphone/linphonecore.h"
 
-@interface UIChatCell : UITransparentTVCell {
-    LinphoneChatRoom* chatRoom;
-}
+@interface UIChatCell : UITransparentTVCell
 
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImage;
 @property (nonatomic, strong) IBOutlet UILabel* addressLabel;
@@ -33,10 +31,11 @@
 @property (nonatomic, strong) IBOutlet UIButton * deleteButton;
 @property (nonatomic, strong) IBOutlet UIView * unreadMessageView;
 @property (nonatomic, strong) IBOutlet UILabel * unreadMessageLabel;
+@property (nonatomic, strong) NSString* chatTag;
 
 - (id)initWithIdentifier:(NSString*)identifier;
 
 - (IBAction)onDeleteClick:(id)event;
 
-- (void)setChatRoom:(LinphoneChatRoom *)achat;
+
 @end

@@ -26,6 +26,7 @@
 #import "ImagePickerViewController.h"
 #import "OrderedDictionary.h"
 #import "RgMessagesViewController.h"
+#import "RgManager.h"
 
 #include "linphone/linphonecore.h"
 

@@ -11,3 +11,6 @@
 /* RingMail */
 
 NSString *const kRgTextReceived = @"RgTextReceived";
+
+NSString *const kRgSelf = @"self";
+NSString *const kRgSelfName = @"Self";

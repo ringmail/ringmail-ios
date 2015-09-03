@@ -10,3 +10,6 @@
 
 /* RingMail */
 extern NSString *const kRgTextReceived;
+
+extern NSString *const kRgSelf;
+extern NSString *const kRgSelfName;

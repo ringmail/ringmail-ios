@@ -19,9 +19,13 @@
 
 #import <UIKit/UIKit.h>
 #include "linphone/linphonecore.h"
+#import "RgChatManager.h"
+#import "LinphoneManager.h"
 
 @interface ChatTableViewController : UITableViewController {
 }
+
+@property (nonatomic, strong) NSArray *chatList;
 
 - (void)loadData;
 @end

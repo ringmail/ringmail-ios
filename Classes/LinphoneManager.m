@@ -128,6 +128,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize wasRemoteProvisioned;
 @synthesize configDb;
 @synthesize chatManager;
+@synthesize chatTag;
 
 struct codec_name_pref_table {
 	const char *name;
@@ -314,6 +315,7 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 		[self migrateFromUserPrefs];
         
         /* RingMail XMPP */
+        self.chatTag = @"";
         self.chatManager = [[RgChatManager alloc] init];
         [self.chatManager connectWithJID:@"" password:@""];
 	}
