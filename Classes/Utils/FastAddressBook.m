@@ -250,9 +250,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
                 if (lMap) {
                     for (int i = 0; i < ABMultiValueGetCount(lMap); ++i) {
                         NSString *valueRef = CFBridgingRelease(ABMultiValueCopyValueAtIndex(lMap, i));
-                        NSString *emailKey = [NSString stringWithFormat:@"ring://%@", valueRef];
-                        NSLog(@"Add Email Key: %@", emailKey);
-                        [addressBookMap setObject:(__bridge id)(lPerson)forKey:emailKey];
+                        NSLog(@"Add Email Key: %@", valueRef);
+                        [addressBookMap setObject:(__bridge id)(lPerson)forKey:valueRef];
                     }
                     CFRelease(lMap);
                 }

@@ -153,23 +153,20 @@
 	NSString *displayName = nil;
 	NSString *address = nil;
 	if (addr != NULL) {
-		BOOL useLinphoneAddress = true;
 		// contact name
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
 			address = [NSString stringWithUTF8String:lAddress];
-			NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:address];
+            NSString *normalizedSipAddress = [RgManager addressFromSIP:address];
 			ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
 			if (contact) {
 				displayName = [FastAddressBook getContactDisplayName:contact];
-				useLinphoneAddress = false;
 			}
+            else
+            {
+                displayName = normalizedSipAddress;
+            }
 			ms_free(lAddress);
-		}
-		if (useLinphoneAddress) {
-			const char *lDisplayName = linphone_address_get_display_name(addr);
-			if (lDisplayName)
-				displayName = [NSString stringWithUTF8String:lDisplayName];
 		}
 	}
 

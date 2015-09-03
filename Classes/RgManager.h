@@ -7,9 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RegexKitLite/RegexKitLite.h"
 
 /* RingMail */
 extern NSString *const kRgTextReceived;
 
 extern NSString *const kRgSelf;
 extern NSString *const kRgSelfName;
+
+
+@interface RgManager : NSObject
+
++ (NSString*)addressToSIP:(NSString*)addr;
++ (NSString*)addressFromSIP:(NSString*)addr;
++ (NSString*)addressToXMPP:(NSString*)addr;
++ (NSString*)addressFromXMPP:(NSString*)addr;
+
+@end

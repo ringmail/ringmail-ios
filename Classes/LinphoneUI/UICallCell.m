@@ -50,16 +50,12 @@
 	const LinphoneAddress *addr = linphone_call_get_remote_address(call);
 
 	if (addr != NULL) {
-		BOOL useLinphoneAddress = true;
 		// contact name
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
-			NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            NSString *lookupAddress = [[LinphoneManager instance] decodeSipUri:normalizedSipAddress];
-            lookupAddress = [NSString stringWithFormat:@"ring://%@", lookupAddress];
-			ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:lookupAddress];
+            self.address = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
+			ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:self.address];
 			if (contact) {
-				useLinphoneAddress = false;
 				self.address = [FastAddressBook getContactDisplayName:contact];
 				UIImage *tmpImage = [FastAddressBook getContactImage:contact thumbnail:false];
 				if (tmpImage != nil) {
@@ -73,14 +69,6 @@
 				}
 			}
 			ms_free(lAddress);
-		}
-		if (useLinphoneAddress) {
-			const char *lDisplayName = linphone_address_get_display_name(addr);
-			const char *lUserName = linphone_address_get_username(addr);
-			if (lDisplayName)
-				self.address = [NSString stringWithUTF8String:lDisplayName];
-			else if (lUserName)
-				self.address = [NSString stringWithUTF8String:lUserName];
 		}
 	}
 }

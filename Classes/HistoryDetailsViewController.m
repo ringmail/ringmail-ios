@@ -183,36 +183,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 	UIImage *image = nil;
 	NSString *address = nil;
 	if (addr != NULL) {
-		BOOL useLinphoneAddress = true;
 		// contact name
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
-			NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            NSString *lookupAddress = [[LinphoneManager instance] decodeSipUri:normalizedSipAddress];
-            lookupAddress = [NSString stringWithFormat:@"ring://%@", lookupAddress];
-			contact = [[[LinphoneManager instance] fastAddressBook] getContact:lookupAddress];
+            address = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
+			contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
 			if (contact) {
 				image = [FastAddressBook getContactImage:contact thumbnail:true];
 				address = [FastAddressBook getContactDisplayName:contact];
-				useLinphoneAddress = false;
 			}
-            else
-            {
-                address = lookupAddress;
-            }
 			ms_free(lAddress);
-		}
-		if (useLinphoneAddress) {
-			const char *lDisplayName = linphone_address_get_display_name(addr);
-			const char *lUserName = linphone_address_get_username(addr);
-			if (lDisplayName)
-            {
-				address = [NSString stringWithUTF8String:lDisplayName];
-            }
-			else if (lUserName)
-            {
-				address = [[LinphoneManager instance] decodeSipUri:[NSString stringWithUTF8String:lUserName]];
-            }
 		}
 	}
 
@@ -270,19 +250,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// contact name
 	[plainAddressLabel setText:@""];
 	if (addr != NULL) {
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"contact_display_username_only"]) {
-			[plainAddressLabel setText:[NSString stringWithUTF8String:linphone_address_get_username(addr)
-																		  ? linphone_address_get_username(addr)
-																		  : ""]];
-		} else {
-			char *lAddress = linphone_address_as_string_uri_only(addr);
-			if (lAddress != NULL) {
-                NSString *lookupAddress = [[LinphoneManager instance] decodeSipUri:[NSString stringWithUTF8String:lAddress]];
-                lookupAddress = [lookupAddress stringByReplacingOccurrencesOfString:@"%" withString:@"@"];
-				[plainAddressLabel setText:lookupAddress];
-				ms_free(lAddress);
-			}
-		}
+        char *lAddress = linphone_address_as_string_uri_only(addr);
+        if (lAddress != NULL) {
+            NSString *lookupAddress = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];;
+            [plainAddressLabel setText:lookupAddress];
+            ms_free(lAddress);
+        }
 	}
 
 	if (addr != NULL) {

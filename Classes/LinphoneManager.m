@@ -659,36 +659,18 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 	const LinphoneAddress *addr = linphone_call_get_remote_address(call);
 	NSString *address = nil;
 	if (addr != NULL) {
-		BOOL useLinphoneAddress = true;
 		// contact name
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
-            NSLog(@"***** ADDRESS LOOKUP %@", [NSString stringWithUTF8String:lAddress]);
-			NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            NSString *lookupAddress = [self decodeSipUri:normalizedSipAddress];
-            lookupAddress = [NSString stringWithFormat:@"ring://%@", lookupAddress];
+            address = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
 
-            NSLog(@"***** ADDRESS LOOKUP NORMALIZED %@", lookupAddress);
-			ABRecordRef contact = [fastAddressBook getContact:lookupAddress];
-			if (contact) {
+            NSLog(@"***** ADDRESS LOOKUP %@", address);
+			ABRecordRef contact = [fastAddressBook getContact:address];
+			if (contact)
+            {
 				address = [FastAddressBook getContactDisplayName:contact];
-				useLinphoneAddress = false;
 			}
 			ms_free(lAddress);
-		}
-		if (useLinphoneAddress) {
-			const char *lDisplayName = linphone_address_get_display_name(addr);
-			const char *lUserName = linphone_address_get_username(addr);
-			if (lDisplayName)
-            {
-				address = [NSString stringWithUTF8String:lDisplayName];
-                NSLog(@"***** ADDRESS LOOKUP DISPLAY NAME %@", address);
-            }
-			else if (lUserName)
-            {
-				address = [NSString stringWithUTF8String:lUserName];
-                NSLog(@"***** ADDRESS LOOKUP USER NAME %@", address);
-            }
 		}
 	}
 	if (address == nil) {

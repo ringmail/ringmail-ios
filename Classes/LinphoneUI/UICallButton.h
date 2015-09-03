@@ -18,6 +18,7 @@
  */              
 
 #import <UIKit/UIKit.h>
+#import "RgManager.h"
 
 
 @interface UICallButton : UIButton {

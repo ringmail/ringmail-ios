@@ -105,7 +105,7 @@
         if ([address rangeOfString:@"@"].location != NSNotFound)
         {
             displayName = [NSString stringWithString:address];
-            address = [address stringByReplacingOccurrencesOfString:@"@" withString:@"%"];
+            address = [RgManager addressToSIP:address];
             NSLog(@"New Address: %@", address);
         }
 		[[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
