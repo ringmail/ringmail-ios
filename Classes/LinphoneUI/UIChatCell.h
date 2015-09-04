@@ -23,6 +23,8 @@
 
 #include "linphone/linphonecore.h"
 
+#import "RgManager.h"
+
 @interface UIChatCell : UITransparentTVCell
 
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImage;

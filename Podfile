@@ -8,5 +8,6 @@ target 'RingMail' do
   pod 'RegexKitLite'
   pod 'FMDB'
   pod 'Objective-LevelDB'
+  pod "AFNetworking", "~> 2.0"
 end
 

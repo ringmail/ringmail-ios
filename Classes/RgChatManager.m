@@ -13,12 +13,15 @@
 
 @implementation RgChatManager
 
+@synthesize chatPassword;
+
 - (id)init
 {
     if (self = [super init])
     {
         NSString *queueLabel = [NSString stringWithFormat:@"%@.work.%@", [self class], self];
         self.workQueue = dispatch_queue_create([queueLabel UTF8String], 0);
+        self.chatPassword = @"";
         [self setupDatabase];
         [self setupStream];
     }
@@ -167,12 +170,12 @@
 - (void)authenticateWithStream:(XMPPStream *)stream {
     NSError * error = nil;
     BOOL status = YES;
-    status = [stream authenticateWithPassword:@"f5x7veqlldsz" error:&error];
+    status = [stream authenticateWithPassword:chatPassword error:&error];
 }
 
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword
 {
-    myJID = @"mfrager+14@gmail.com";
+    NSLog(@"RingMail Chat Connect: %@", myJID);
     myJID = [myJID stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLUserAllowedCharacterSet];
     myJID = [myJID stringByAppendingString:@"@staging.ringmail.com"];
     self.JID = [XMPPJID jidWithString:myJID resource:@"RingMail"];
@@ -196,6 +199,7 @@
     //	myJID = @"user@gmail.com/xmppframework";
     //	myPassword = @"";
     
+    self.chatPassword = myPassword;
     
     NSError* error = nil;
     if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])

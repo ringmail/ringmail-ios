@@ -15,6 +15,8 @@ NSString *const kRgTextReceived = @"RgTextReceived";
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
 
+static LevelDB* theConfigDatabase = nil;
+
 @implementation RgManager
 
 + (NSString*)addressToSIP:(NSString*)addr
@@ -31,17 +33,28 @@ NSString *const kRgSelfName = @"Self";
 
 + (NSString*)addressToXMPP:(NSString*)addr
 {
-    return [NSString stringWithFormat:@""];
+    addr = [addr stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLUserAllowedCharacterSet];
+    return [NSString stringWithFormat:@"%@@staging.ringmail.com", addr];
 }
 
 + (NSString*)addressFromXMPP:(NSString*)addr
 {
-    return [NSString stringWithFormat:@""];
+    NSString *res = [addr stringByMatching:@"^(.*?)\\@" capture:1];
+    return [res stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 + (LevelDB*)configDatabase
 {
-    return [LevelDB databaseInLibraryWithName:@"ringmail_config.ldb"];
+    if (theConfigDatabase == nil)
+    {
+        theConfigDatabase = [LevelDB databaseInLibraryWithName:@"ringmail_config.ldb"];
+    }
+    return theConfigDatabase;
+}
+
++ (void)closeConfigDatabase
+{
+    theConfigDatabase = nil;
 }
 
 @end

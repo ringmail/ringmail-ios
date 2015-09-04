@@ -66,25 +66,19 @@
 }
 
 - (void)update {
-	NSString *displayName = nil;
+    NSString *displayName = [RgManager addressFromXMPP:_chatTag];
 	UIImage *image = nil;
 	if (_chatTag == nil) {
 		LOGW(@"Cannot update chat cell: null chat");
 		return;
 	}
 
-	/*NSString *normalizedSipAddress = @"FIX";
-
-	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:displayName];
 	if (contact != nil) {
 		displayName = [FastAddressBook getContactDisplayName:contact];
 		image = [FastAddressBook getContactImage:contact thumbnail:true];
-	}*/
-
-	// Display name
-	if (displayName == nil) {
-        displayName = [_chatTag stringByMatching:@"^(.*?)\\@" capture:1];
 	}
+
 	[addressLabel setText:displayName];
 
 	// Avatar

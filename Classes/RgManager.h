@@ -25,5 +25,6 @@ extern NSString *const kRgSelfName;
 + (NSString*)addressFromXMPP:(NSString*)addr;
 
 + (LevelDB*)configDatabase;
++ (void)closeConfigDatabase;
 
 @end

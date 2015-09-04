@@ -42,6 +42,8 @@
 
 #import <AVFoundation/AVAudioPlayer.h>
 
+#import "RgNetwork.h"
+
 
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
@@ -129,6 +131,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize configDb;
 @synthesize chatManager;
 @synthesize chatTag;
+@synthesize ringLogin;
 
 struct codec_name_pref_table {
 	const char *name;
@@ -314,10 +317,29 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 
 		[self migrateFromUserPrefs];
         
-        /* RingMail XMPP */
+        /* RingMail */
         self.chatTag = @"";
-        self.chatManager = [[RgChatManager alloc] init];
-        [self.chatManager connectWithJID:@"" password:@""];
+        self.chatManager = nil;
+        
+        LevelDB* cfg = [RgManager configDatabase];
+        NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+        NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+        NSString *chatPass = [cfg objectForKey:@"ringmail_chat_password"];
+        NSLog(@"Chat Pass: %@", chatPass);
+        if (rgLogin != nil && rgPass != nil)
+        {
+            self.ringLogin = rgLogin;
+            if (chatPass != nil)
+            {
+                self.chatManager = [[RgChatManager alloc] init];
+                [self.chatManager connectWithJID:rgLogin password:chatPass];
+            }
+            [[RgNetwork instance] login:rgLogin password:rgPass];
+        }
+        else
+        {
+            self.ringLogin = @"";
+        }
 	}
 	return self;
 }
@@ -2404,17 +2426,50 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 
 #pragma mark - RingMail
 
-- (NSString *)decodeSipUri:(NSString*)input
+- (void)rgUpdateCredentials:(NSDictionary*)cred
 {
-    // RingMail
-    NSMutableString* result = [input mutableCopy];
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:
-                                  @"^sip:" options:0 error:nil];
-    [regex replaceMatchesInString:result options:0 range:NSMakeRange(0, [result length]) withTemplate:@""];
-    regex = [NSRegularExpression regularExpressionWithPattern:
-                                  @"\\@.*" options:0 error:nil];
-    [regex replaceMatchesInString:result options:0 range:NSMakeRange(0, [result length]) withTemplate:@""];
-    return [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"RingMail Update Credentials: %@", cred);
+    LinphoneCoreSettingsStore* settings = [[LinphoneCoreSettingsStore alloc] init];
+    [settings transformLinphoneCoreToKeys];
+    NSString *newSipUser = [cred objectForKey:@"sip_login"];
+    NSString *oldSipUser = [settings objectForKey:@"username_preference"];
+    NSString *newSipPass = [cred objectForKey:@"sip_password"];
+    NSString *oldSipPass = [settings objectForKey:@"password_preference"];
+    if ((! [oldSipUser isEqualToString:newSipUser]) || (! [oldSipPass isEqualToString:newSipPass]))
+    {
+        [settings setObject:newSipUser forKey:@"username_preference"];
+        [settings setObject:newSipPass forKey:@"password_preference"];
+        [settings synchronize];
+    }
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *newChatPass = [cred objectForKey:@"chat_password"];
+    NSString *oldChatPass = [cfg objectForKey:@"ringmail_chat_password"];
+    BOOL chatRefresh = NO;
+    if (oldChatPass == nil)
+    {
+        [cfg setObject:newChatPass forKey:@"ringmail_chat_password"];
+        chatRefresh = YES;
+    }
+    else if (! [oldChatPass isEqualToString:newChatPass])
+    {
+        [cfg setObject:newChatPass forKey:@"ringmail_chat_password"];
+        chatRefresh = YES;
+    }
+    if (chatRefresh)
+    {
+        if (self.chatManager != nil)
+        {
+            if (![[self.chatManager xmppStream] isDisconnected])
+            {
+                [self.chatManager disconnect];
+            }
+        }
+        else
+        {
+            self.chatManager = [[RgChatManager alloc] init];
+        }
+        [self.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:newChatPass];
+    }
 }
 
 @end

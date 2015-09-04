@@ -115,6 +115,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[pictureButton setEnabled:fileSharingEnabled];*/
     
     RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
+    [self update];
     [mc setChatRoom:[[LinphoneManager instance] chatTag]];
     [self setChatViewController:mc];
     [chatView addSubview:[mc view]];
@@ -162,54 +163,28 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)update {
-	if (chatRoom == NULL) {
-		LOGW(@"Cannot update chat room header: null contact");
-		return;
-	}
+    NSString *chatTag = [[LinphoneManager instance] chatTag];
+    NSLog(@"RingMail Chat Update: %@", chatTag);
+    if (! [chatTag isEqualToString:@""])
+    {
+        NSString *displayName = [RgManager addressFromXMPP:chatTag];
+        UIImage *image = nil;
 
-	NSString *displayName = nil;
-	UIImage *image = nil;
-	const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
-	if (linphoneAddress == NULL) {
-		[[PhoneMainView instance] popCurrentView];
-		UIAlertView *error = [[UIAlertView alloc]
-				initWithTitle:NSLocalizedString(@"Invalid SIP address", nil)
-					  message:NSLocalizedString(@"Either configure a SIP proxy server from settings prior to send a "
-												@"message or use a valid SIP address (I.E sip:john@example.net)",
-												nil)
-					 delegate:nil
-			cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-			otherButtonTitles:nil];
-		[error show];
-		return;
-	}
-	char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
-	NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
-	ms_free(tmp);
+        ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:displayName];
+        if (acontact != nil) {
+            displayName = [FastAddressBook getContactDisplayName:acontact];
+            image = [FastAddressBook getContactImage:acontact thumbnail:true];
+        }
 
-	ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
-	if (acontact != nil) {
-		displayName = [FastAddressBook getContactDisplayName:acontact];
-		image = [FastAddressBook getContactImage:acontact thumbnail:true];
-	}
+        addressLabel.text = displayName;
+        addressLabel.accessibilityValue = displayName;
 
-	// Display name
-	if (displayName == nil) {
-		const char *username = linphone_address_get_username(linphoneAddress);
-		char *address = linphone_address_as_string(linphoneAddress);
-		displayName = [NSString stringWithUTF8String:username ?: address];
-		ms_free(address);
-	}
-	if (displayName == nil)
-		LOGF(@"No display name");
-	addressLabel.text = displayName;
-	addressLabel.accessibilityValue = displayName;
-
-	// Avatar
-	if (image == nil) {
-		image = [UIImage imageNamed:@"avatar_unknown_small.png"];
-	}
-	[avatarImage setImage:image];
+        // Avatar
+        if (image == nil) {
+            image = [UIImage imageNamed:@"avatar_unknown_small.png"];
+        }
+        [avatarImage setImage:image];
+    }
 }
 
 static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState state, void *ud) {

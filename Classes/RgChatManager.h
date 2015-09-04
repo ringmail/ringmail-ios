@@ -31,8 +31,10 @@
 @property (nonatomic, strong) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
 @property (nonatomic, strong) XMPPvCardTempModule *xmppvCardTempModule;
 @property (nonatomic, strong) XMPPJID *JID;
+@property (atomic, strong) NSString* chatPassword;
 
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
+- (void)disconnect;
 - (NSArray *)dbGetSessions;
 - (NSArray *)dbGetMessages:(NSString *)from;
 - (void)dbInsertMessage:(NSString *)from body:(NSString *)body inbound:(BOOL)inbound;

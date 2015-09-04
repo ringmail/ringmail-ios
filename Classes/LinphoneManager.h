@@ -194,7 +194,8 @@ typedef struct _LinphoneManagerSounds {
 - (void)silentPushFailed:(NSTimer*)timer;
 
 - (void)audioRouteChanged:(NSNotification *)notif;
-- (NSString *)decodeSipUri:(NSString*)input;
+
+- (void)rgUpdateCredentials:(NSDictionary*)cred;
 
 @property (readonly) BOOL isTesting;
 @property (readonly, strong) FastAddressBook* fastAddressBook;
@@ -221,5 +222,6 @@ typedef struct _LinphoneManagerSounds {
 @property(strong, nonatomic) NSMutableArray *fileTransferDelegates;
 @property (nonatomic, strong) RgChatManager *chatManager;
 @property (nonatomic, strong) NSString *chatTag;
+@property (nonatomic, strong) NSString *ringLogin;
 
 @end

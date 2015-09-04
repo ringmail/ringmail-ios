@@ -338,14 +338,16 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
     
     
     // RingMail section
-    NSArray* rgKeys = @[
-        @"ringmail_login",
-        @"ringmail_password"
-    ];
-    LevelDB* rgConfig = [RgManager configDatabase];
-    for (NSString *key in rgKeys)
     {
-        [self setObject:[rgConfig objectForKey:key] forKey:key];
+        NSArray* rgKeys = @[
+            @"ringmail_login",
+            @"ringmail_password"
+        ];
+        LevelDB* rgConfig = [RgManager configDatabase];
+        for (NSString *key in rgKeys)
+        {
+            [self setObject:[rgConfig objectForKey:key] forKey:key];
+        }
     }
 
 	changedDict = [[NSMutableDictionary alloc] init];

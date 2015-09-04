@@ -62,24 +62,6 @@
             <key>Type</key>
             <string>PSTextFieldSpecifier</string>
         </dict>
-        <dict>
-            <key>AutocapitalizationType</key>
-            <string>None</string>
-            <key>AutocorrectionType</key>
-            <string>No</string>
-            <key>DefaultValue</key>
-            <string></string>
-            <key>IsSecure</key>
-            <false/>
-            <key>Key</key>
-            <string>username_preference</string>
-            <key>KeyboardType</key>
-            <string>Alphabet</string>
-            <key>Title</key>
-            <string>User name</string>
-            <key>Type</key>
-            <string>PSTextFieldSpecifier</string>
-        </dict>
 		<dict>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
@@ -95,24 +77,6 @@
 			<string>Alphabet</string>
 			<key>Title</key>
 			<string>User ID</string>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-		</dict>
-		<dict>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
-			<key>IsSecure</key>
-			<true/>
-			<key>Key</key>
-			<string>password_preference</string>
-			<key>KeyboardType</key>
-			<string>Alphabet</string>
-			<key>Title</key>
-			<string>Password</string>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 		</dict>

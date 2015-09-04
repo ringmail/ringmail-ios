@@ -351,16 +351,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 	char *lAddress = linphone_address_as_string_uri_only(addr);
 	if (lAddress == NULL)
 		return;
-	// Go to ChatRoom view
+
+    NSString* chatRoom = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
+    ms_free(lAddress);
 	[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
-	ChatRoomViewController *controller = DYNAMIC_CAST(
-		[[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE],
-		ChatRoomViewController);
-	if (controller != nil) {
-		LinphoneChatRoom *room = linphone_core_get_or_create_chat_room([LinphoneManager getLc], lAddress);
-		[controller setChatRoom:room];
-	}
-	ms_free(lAddress);
+    
+    	// Go to ChatRoom view
+    [[LinphoneManager instance] setChatTag:[RgManager addressToXMPP:chatRoom]];
+    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 }
 
 @end

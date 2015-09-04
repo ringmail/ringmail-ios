@@ -26,15 +26,11 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" id="39" userLabel="headerView">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_shadow_small.png" id="42" userLabel="avatarShadowBackground">
-                                    <rect key="frame" x="-13" y="-5" width="131" height="107"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_unknown_small.png" id="41" userLabel="avatarImage">
-                                    <rect key="frame" x="20" y="6" width="65" height="65"/>
+                                    <rect key="frame" x="2" y="2" width="40" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="Contact avatar">
                                         <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
@@ -42,7 +38,7 @@
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Contact1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="40" userLabel="addressLabel">
-                                    <rect key="frame" x="101" y="37" width="199" height="43"/>
+                                    <rect key="frame" x="50" y="1" width="199" height="43"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="Contact name">
                                         <accessibilityTraits key="traits" none="YES"/>
@@ -55,11 +51,11 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="caN-Sr-Fdm" userLabel="chatHolderView">
-                            <rect key="frame" x="0.0" y="80" width="320" height="336"/>
+                            <rect key="frame" x="0.0" y="42" width="320" height="374"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" id="5sz-iT-Jzf" userLabel="chatView">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
@@ -124,11 +120,11 @@
             <gestureRecognizers/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="76" y="222"/>
         </view>
         <viewController id="dCD-RN-Sba" userLabel="chatViewController" customClass="RgMessagesViewController"/>
     </objects>
     <resources>
-        <image name="avatar_shadow_small.png" width="262" height="214"/>
         <image name="avatar_unknown_small.png" width="131" height="131"/>
         <image name="chat_back_default.png" width="320" height="88"/>
         <image name="chat_back_over.png" width="320" height="88"/>
