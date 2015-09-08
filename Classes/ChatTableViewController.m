@@ -54,7 +54,9 @@
 
 - (void)loadData {
     self.chatList = [[LinphoneManager instance].chatManager dbGetSessions];
-	[[self tableView] reloadData];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [[self tableView] reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDataSource Functions
@@ -78,9 +80,10 @@
 		cell.selectedBackgroundView = selectedBackgroundView;
 		[selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
 	}
-
-    [cell setChatTag:[self.chatList objectAtIndex:[indexPath row]]];
-
+    NSArray *chatData = [self.chatList objectAtIndex:[indexPath row]];
+    [cell setChatTag:[chatData objectAtIndex:0]];
+    [cell setChatUnread:[chatData objectAtIndex:1]];
+    [cell update];
 	return cell;
 }
 
@@ -88,7 +91,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSString *chatRoom = [self.chatList objectAtIndex:[indexPath row]];
+    NSString *chatRoom = [[self.chatList objectAtIndex:[indexPath row]] objectAtIndex:0];
 
 	// Go to ChatRoom view
     [[LinphoneManager instance] setChatTag:chatRoom];

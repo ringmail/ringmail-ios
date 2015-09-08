@@ -34,8 +34,10 @@
 @property (nonatomic, strong) IBOutlet UIView * unreadMessageView;
 @property (nonatomic, strong) IBOutlet UILabel * unreadMessageLabel;
 @property (nonatomic, strong) NSString* chatTag;
+@property (nonatomic, strong) NSNumber* chatUnread;
 
 - (id)initWithIdentifier:(NSString*)identifier;
+- (void)update;
 
 - (IBAction)onDeleteClick:(id)event;
 

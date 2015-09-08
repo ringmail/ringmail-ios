@@ -43,6 +43,26 @@ static LevelDB* theConfigDatabase = nil;
     return [res stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
++ (NSString*)pushToken:(NSData*)tokenData
+{
+    const unsigned char *tokenBuffer = [tokenData bytes];
+    NSMutableString *tokenString = [NSMutableString stringWithCapacity:[tokenData length] * 2];
+    for (int i = 0; i < [tokenData length]; ++i) {
+        [tokenString appendFormat:@"%02X", (unsigned int)tokenBuffer[i]];
+    }
+#ifdef USE_APN_DEV
+#define APPMODE_SUFFIX @"dev"
+#else
+#define APPMODE_SUFFIX @"prod"
+#endif
+    NSString *params =
+    [NSString stringWithFormat:@"pn-type=apple;app-id=%@.%@;pn-tok=%@",
+     [[NSBundle mainBundle] bundleIdentifier], APPMODE_SUFFIX, tokenString];
+    
+    NSLog(@"APNS Set Proxy Token: %@", params);
+    return params;
+}
+
 + (LevelDB*)configDatabase
 {
     if (theConfigDatabase == nil)

@@ -15,5 +15,6 @@
 
 + (RgNetwork *)instance;
 - (void)login:(NSString*)login password:(NSString*)password;
+- (void)registerPushToken;
 
 @end

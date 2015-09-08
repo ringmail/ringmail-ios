@@ -229,7 +229,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)reset {
 	[self clearProxyConfig];
-	[[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"pushnotification_preference"];
 
 	LinphoneCore *lc = [LinphoneManager getLc];
 	LCSipTransports transportValue = {5060, 5060, -1, -1};

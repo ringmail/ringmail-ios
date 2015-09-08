@@ -140,8 +140,8 @@
 
 		self->currentCall = FALSE;
 
-		_outgoingRingCountLabel.hidden = YES;
-		_outgoingRingCountLabel.text = @"0";
+		//_outgoingRingCountLabel.hidden = YES;
+		//_outgoingRingCountLabel.text = @"0";
 
 		self->detailsRightSwipeGestureRecognizer =
 			[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doDetailsSwipe:)];
@@ -310,22 +310,22 @@
 }
 
 - (void)displayIncrementedOutgoingRingCount {
-	_outgoingRingCountLabel.hidden = NO;
+	/*_outgoingRingCountLabel.hidden = NO;
 	[UIView transitionWithView:_outgoingRingCountLabel
 					  duration:0.5f
 					   options:UIViewAnimationOptionTransitionCrossDissolve
 					animations:^{
 					  _outgoingRingCountLabel.text = [@(_outgoingRingCountLabel.text.intValue + 1) stringValue];
 					}
-					completion:nil];
+					completion:nil];*/
 }
 
 - (void)stopOutgoingRingCount {
-	if (_outgoingRingCountTimer != nil)
+	/*if (_outgoingRingCountTimer != nil)
 		[_outgoingRingCountTimer invalidate];
 	_outgoingRingCountLabel.hidden = YES;
 	_outgoingRingCountLabel.text = @"0";
-	_outgoingRingCountTimer = nil;
+	_outgoingRingCountTimer = nil;*/
 }
 
 #pragma mark -
@@ -347,7 +347,7 @@
 		if (state == LinphoneCallOutgoingRinging) {
 			[stateImage setImage:[UIImage imageNamed:@"call_state_ringing_default.png"]];
 			[stateImage setHidden:false];
-			[pauseButton setHidden:true];
+			//[pauseButton setHidden:true];
 			if (_outgoingRingCountTimer == nil) {
 				_outgoingRingCountTimer =
 					[NSTimer scheduledTimerWithTimeInterval:2.0f
@@ -360,11 +360,11 @@
 		} else if (state == LinphoneCallOutgoingInit || state == LinphoneCallOutgoingProgress) {
 			[stateImage setImage:[UIImage imageNamed:@"call_state_outgoing_default.png"]];
 			[stateImage setHidden:false];
-			[pauseButton setHidden:true];
+			//[pauseButton setHidden:true];
 			[self stopOutgoingRingCount];
 		} else {
 			[stateImage setHidden:true];
-			[pauseButton setHidden:false];
+			//[pauseButton setHidden:false];
 			[pauseButton update];
 			[self stopOutgoingRingCount];
 		}
@@ -378,7 +378,7 @@
 		}
 	} else {
 		[stateImage setHidden:true];
-		[pauseButton setHidden:true];
+		//[pauseButton setHidden:true];
 		[removeButton setHidden:false];
 		[headerBackgroundImage setImage:[UIImage imageNamed:@"cell_conference.png"]];
 	}

@@ -299,7 +299,7 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
         
-        NSLog(@"NEW CHAT FROM %@: %@\nLog: %@", chatFrom, body, [self dbGetMessages:chatFrom]);
+        //NSLog(@"NEW CHAT FROM %@: %@\nLog: %@", chatFrom, body, [self dbGetMessages:chatFrom]);
     }
     if ([xmppMessage isErrorMessage])
     {
@@ -389,10 +389,10 @@
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
-                                //@"DROP TABLE chat_session;",
-                                @"CREATE TABLE IF NOT EXISTS chat_session (session_tag TEXT NOT NULL);",
+                                @"DROP TABLE chat_session;",
+                                @"CREATE TABLE IF NOT EXISTS chat_session (session_tag TEXT NOT NULL, unread INT NOT NULL DEFAULT 0);",
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON chat_session (session_tag);",
-                                //@"DROP TABLE chat;",
+                                @"DROP TABLE chat;",
                                 @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER);",
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
                           nil];
@@ -421,7 +421,7 @@
         }
         else
         {
-            [db executeUpdate:@"INSERT INTO chat_session (session_tag) VALUES (?);", from];
+            [db executeUpdate:@"INSERT INTO chat_session (session_tag, unread) VALUES (?, 0);", from];
             result = [NSNumber numberWithLong:[db lastInsertRowId]];
         }
         [rs close];
@@ -436,6 +436,7 @@
     NSNumber* session = [self dbGetSessionID:from];
     [dbq inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"INSERT INTO chat (session_id, msg_body, msg_time, msg_inbound) VALUES (?, ?, datetime('now'), ?);", session, body, [NSNumber numberWithBool:inbound]];
+        [db executeUpdate:@"UPDATE chat_session SET unread = unread + 1 WHERE session_tag = ?", from];
     }];
     [dbq close];
 }
@@ -445,10 +446,13 @@
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT session_tag FROM chat_session ORDER BY rowid DESC"];
+        FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread FROM chat_session ORDER BY rowid DESC"];
         while ([rs next])
         {
-            [result addObject:[rs stringForColumnIndex:0]];
+            [result addObject:[NSArray arrayWithObjects:
+                               [rs stringForColumnIndex:0],
+                               [rs objectForColumnIndex:1],
+                               nil]];
         }
         [rs close];
     }];
@@ -470,6 +474,27 @@
                 @"time": [NSDate dateWithTimeIntervalSince1970:[rs doubleForColumnIndex:1]],
                 @"direction": ([rs boolForColumnIndex:2]) ? @"inbound" : @"outbound",
             }];
+        }
+        [rs close];
+        [db executeUpdate:@"UPDATE chat_session SET unread = 0 WHERE session_tag = ?", from];
+    }];
+    [dbq close];
+    return result;
+}
+
+- (NSNumber *)dbGetSessionUnread
+{
+    FMDatabaseQueue *dbq = [self database];
+    __block NSNumber* result;
+    [dbq inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT SUM(unread) FROM chat_session"];
+        if ([rs next])
+        {
+            result = [NSNumber numberWithLong:[rs longForColumnIndex:0]];
+        }
+        else
+        {
+            result = [NSNumber numberWithInt:0];
         }
         [rs close];
     }];

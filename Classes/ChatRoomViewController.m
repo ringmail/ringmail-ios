@@ -106,13 +106,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(chatReceivedEvent:)
                                                  name:kRgTextReceived
                                                object:nil];
-
 	[editButton setOff];
-
-	/*BOOL fileSharingEnabled =
-		[[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] != NULL &&
-		[[[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] length] > 0;
-	[pictureButton setEnabled:fileSharingEnabled];*/
     
     RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
     [self update];
@@ -121,6 +115,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [chatView addSubview:[mc view]];
     [mc view].autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [mc view].frame = chatView.superview.bounds;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -147,12 +142,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)setChatRoom:(LinphoneChatRoom *)room {
 	self->chatRoom = room;
-	//[messageField setText:@""];
-	//[tableController setChatRoom:room];
-	[self update];
-	linphone_chat_room_mark_as_read(chatRoom);
-	[self setComposingVisible:linphone_chat_room_is_remote_composing(chatRoom) withDelay:0];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)notif {

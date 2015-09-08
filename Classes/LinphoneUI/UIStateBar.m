@@ -197,7 +197,8 @@
 
 		switch (state) {
 		case LinphoneRegistrationOk:
-			message = NSLocalizedString(@"Registered", nil);
+			//message = NSLocalizedString(@"Registered", nil);
+            message = [[LinphoneManager instance] ringLogin];
 			break;
 		case LinphoneRegistrationNone:
 		case LinphoneRegistrationCleared:

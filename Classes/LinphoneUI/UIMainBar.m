@@ -62,7 +62,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 											   object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(textReceived:)
-												 name:kLinphoneTextReceived
+												 name:kRgTextReceived
 											   object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(settingsUpdate:)
@@ -243,7 +243,9 @@ static NSString *const kDisappearAnimation = @"disappear";
 }
 
 - (void)textReceived:(NSNotification *)notif {
-	[self updateUnreadMessage:TRUE];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self updateUnreadMessage:TRUE];
+    }];
 }
 
 #pragma mark -
@@ -255,7 +257,8 @@ static NSString *const kDisappearAnimation = @"disappear";
 }
 
 - (void)updateUnreadMessage:(BOOL)appear {
-	int unreadMessage = [LinphoneManager unreadMessageCount];
+    NSNumber* unread = [[[LinphoneManager instance] chatManager] dbGetSessionUnread];
+	long unreadMessage = [unread integerValue];
 	if (unreadMessage > 0) {
 		if ([chatNotificationView isHidden]) {
 			[chatNotificationView setHidden:FALSE];
@@ -264,18 +267,14 @@ static NSString *const kDisappearAnimation = @"disappear";
 					[self appearAnimation:kAppearAnimation
 								   target:chatNotificationView
 							   completion:^(BOOL finished) {
-								 [self startBounceAnimation:kBounceAnimation target:chatNotificationView];
 								 [chatNotificationView.layer removeAnimationForKey:kAppearAnimation];
 							   }];
-				} else {
-					[self startBounceAnimation:kBounceAnimation target:chatNotificationView];
 				}
 			}
 		}
-		[chatNotificationLabel setText:[NSString stringWithFormat:@"%i", unreadMessage]];
+		[chatNotificationLabel setText:[unread stringValue]];
 	} else {
 		if (![chatNotificationView isHidden]) {
-			[self stopBounceAnimation:kBounceAnimation target:chatNotificationView];
 			if (appear) {
 				[self disappearAnimation:kDisappearAnimation
 								  target:chatNotificationView

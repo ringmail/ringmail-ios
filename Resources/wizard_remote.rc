@@ -15,7 +15,6 @@
 	</section>
 
 	<section name="app">
-		<entry name="pushnotification_preference" overwrite="true">0</entry>
 		<entry name="sharing_server_preference" overwrite="true"></entry>
 		<entry name="ice_preference" overwrite="true"></entry>
 		<entry name="stun_preference" overwrite="true"></entry>

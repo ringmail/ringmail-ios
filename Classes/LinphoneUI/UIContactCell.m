@@ -37,6 +37,7 @@
 		if ([arrayOfViews count] >= 1) {
 			[self.contentView addSubview:[arrayOfViews objectAtIndex:0]];
 		}
+
 	}
 	return self;
 }

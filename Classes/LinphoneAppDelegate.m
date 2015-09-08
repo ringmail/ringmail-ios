@@ -174,9 +174,8 @@
 			[UIUserNotificationSettings settingsForTypes:notifTypes categories:categories];
 		[app registerUserNotificationSettings:userSettings];
 
-		if (!instance.isTesting) {
-			[app registerForRemoteNotifications];
-		}
+		
+        [app registerForRemoteNotifications];
 	} else {
 		if (!instance.isTesting) {
 			NSUInteger notifTypes = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound |

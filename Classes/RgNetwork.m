@@ -53,4 +53,31 @@ static RgNetwork* theRgNetwork = nil;
     }];
 }
 
+- (void)registerPushToken
+{
+   NSData *tokenData = [[LinphoneManager instance] pushNotificationToken];
+   if (tokenData != nil) {
+       LevelDB* cfg = [RgManager configDatabase];
+       NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+       NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+       if (rgLogin != nil && rgPass != nil)
+       {
+           NSString* tokenString = [RgManager pushToken:tokenData];
+           AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+           NSDictionary *parameters = @{@"login": rgLogin, @"password": rgPass, @"token": tokenString};
+           NSString *postUrl = [NSString stringWithFormat:@"http://%@/internal/app/register_push", self.networkHost];
+           [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               NSDictionary* res = responseObject;
+               NSString *ok = [res objectForKey:@"result"];
+               if (! [ok isEqualToString:@"ok"])
+               {
+                   NSLog(@"RingMail API Error: %@", @"Register Push Token Failed");
+               }
+           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               NSLog(@"RingMail API Error: %@", error);
+           }];
+       }
+   }
+}
+
 @end

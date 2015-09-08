@@ -23,6 +23,7 @@ extern NSString *const kRgSelfName;
 + (NSString*)addressFromSIP:(NSString*)addr;
 + (NSString*)addressToXMPP:(NSString*)addr;
 + (NSString*)addressFromXMPP:(NSString*)addr;
++ (NSString*)pushToken:(NSData*)tokenData;
 
 + (LevelDB*)configDatabase;
 + (void)closeConfigDatabase;

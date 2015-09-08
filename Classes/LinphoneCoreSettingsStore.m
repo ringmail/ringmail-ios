@@ -290,8 +290,6 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 			break;
 		}
 		[self setCString:val forKey:@"media_encryption_preference"];
-		[self setBool:[lm lpConfigBoolForKey:@"pushnotification_preference" withDefault:NO]
-			   forKey:@"pushnotification_preference"];
 		[self setInteger:linphone_core_get_upload_bandwidth(lc) forKey:@"upload_bandwidth_preference"];
 		[self setInteger:linphone_core_get_download_bandwidth(lc) forKey:@"download_bandwidth_preference"];
 		[self setBool:linphone_core_adaptive_rate_control_enabled(lc) forKey:@"adaptive_rate_control_preference"];
@@ -413,7 +411,6 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	if (username && [username length] > 0 && domain && [domain length] > 0) {
 		int expire = [self integerForKey:@"expire_preference"];
 		BOOL isWifiOnly = [self boolForKey:@"wifi_only_preference"];
-		BOOL pushnotification = [self boolForKey:@"pushnotification_preference"];
 		NSString *prefix = [self stringForKey:@"prefix_preference"];
 		NSString *proxyAddress = [self stringForKey:@"proxy_preference"];
 
@@ -493,7 +490,6 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 			linphone_proxy_config_set_dial_escape_plus(proxyCfg, substitute_plus_by_00);
 		}
 
-		[lm lpConfigSetInt:pushnotification forKey:@"pushnotification_preference"];
 		[[LinphoneManager instance] configurePushTokenForProxyConfig:proxyCfg];
 
 		linphone_proxy_config_enable_register(proxyCfg, true);
@@ -591,7 +587,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 			[self valueChangedForKey:@"transport_preference"] || [self valueChangedForKey:@"port_preference"] ||
 			[self valueChangedForKey:@"random_port_preference"] || [self valueChangedForKey:@"prefix_preference"] ||
 			[self valueChangedForKey:@"substitute_+_by_00_preference"] || [self valueChangedForKey:@"use_ipv6"] ||
-			[self valueChangedForKey:@"avpf_preference"] || [self valueChangedForKey:@"pushnotification_preference"];
+			[self valueChangedForKey:@"avpf_preference"];
 		if (account_changed)
 			[self synchronizeAccount];
 

@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="addressLabel" destination="20" id="38"/>
                 <outlet property="avatarImage" destination="19" id="30"/>
-                <outlet property="chatContentLabel" destination="21" id="24"/>
                 <outlet property="deleteButton" destination="32" id="34"/>
                 <outlet property="unreadMessageLabel" destination="41" id="42"/>
                 <outlet property="unreadMessageView" destination="39" id="43"/>
@@ -24,22 +23,6 @@
                     <rect key="frame" x="10" y="8" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="John" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="20" userLabel="addressLabel">
-                    <rect key="frame" x="62" y="2" width="218" height="38"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Contact name"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="This is a message" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" adjustsFontSizeToFit="NO" id="21" userLabel="chatContentLabel">
-                    <rect key="frame" x="62" y="39" width="218" height="21"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Message"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" id="39" userLabel="unreadMessageView">
                     <rect key="frame" x="276" y="8" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
@@ -73,6 +56,14 @@
                         <action selector="onDeleteClick:" destination="-1" eventType="touchUpInside" id="37"/>
                     </connections>
                 </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="John" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="20" userLabel="addressLabel">
+                    <rect key="frame" x="62" y="11" width="218" height="38"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Contact name"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>

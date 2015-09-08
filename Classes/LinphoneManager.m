@@ -1678,8 +1678,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 
 	// handle proxy config if any
 	if (proxyCfg) {
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"] ||
-			[[LinphoneManager instance] lpConfigBoolForKey:@"pushnotification_preference"]) {
+		if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
 
 			// For registration register
 			[self refreshRegisters];
@@ -1731,17 +1730,12 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	LOGI(@"Entering [%s] bg mode", shouldEnterBgMode ? "normal" : "lite");
 
 	if (!shouldEnterBgMode) {
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"pushnotification_preference"]) {
-			LOGI(@"Keeping lc core to handle push");
-			/*destroy voip socket if any and reset connectivity mode*/
-			connectivity = none;
-			linphone_core_set_network_reachable(theLinphoneCore, FALSE);
-			return YES;
-		}
-		return NO;
-
-	} else
-		return YES;
+        LOGI(@"Keeping lc core to handle push");
+        /*destroy voip socket if any and reset connectivity mode*/
+        connectivity = none;
+        linphone_core_set_network_reachable(theLinphoneCore, FALSE);
+	}
+    return YES;
 }
 
 - (void)becomeActive {
@@ -2077,7 +2071,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	linphone_call_params_destroy(lcallParams);
 }
 
-#pragma mark - Property Functions
+#pragma mark - Push Notification Configuration Functions
 
 - (void)setPushNotificationToken:(NSData *)apushNotificationToken {
 	if (apushNotificationToken == pushNotificationToken) {
@@ -2090,35 +2084,21 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	if (apushNotificationToken != nil) {
 		pushNotificationToken = apushNotificationToken;
 	}
-	LinphoneProxyConfig *cfg = nil;
+    // RingMail- Don't send push token to proxy.
+	/*LinphoneProxyConfig *cfg = nil;
 	linphone_core_get_default_proxy(theLinphoneCore, &cfg);
 	if (cfg) {
 		linphone_proxy_config_edit(cfg);
 		[self configurePushTokenForProxyConfig:cfg];
 		linphone_proxy_config_done(cfg);
-	}
+	}*/
+    [[RgNetwork instance] registerPushToken];
 }
 
 - (void)configurePushTokenForProxyConfig:(LinphoneProxyConfig *)proxyCfg {
 	NSData *tokenData = pushNotificationToken;
-	if (tokenData != nil && [self lpConfigBoolForKey:@"pushnotification_preference"]) {
-		const unsigned char *tokenBuffer = [tokenData bytes];
-		NSMutableString *tokenString = [NSMutableString stringWithCapacity:[tokenData length] * 2];
-		for (int i = 0; i < [tokenData length]; ++i) {
-			[tokenString appendFormat:@"%02X", (unsigned int)tokenBuffer[i]];
-		}
-// NSLocalizedString(@"IC_MSG", nil); // Fake for genstrings
-// NSLocalizedString(@"IM_MSG", nil); // Fake for genstrings
-#ifdef USE_APN_DEV
-#define APPMODE_SUFFIX @"dev"
-#else
-#define APPMODE_SUFFIX @"prod"
-#endif
-		NSString *params =
-			[NSString stringWithFormat:@"app-id=%@.%@;pn-type=apple;pn-tok=%@;pn-msg-str=IM_MSG;pn-call-str=IC_MSG;pn-"
-									   @"call-snd=ring.caf;pn-msg-snd=msg.caf",
-									   [[NSBundle mainBundle] bundleIdentifier], APPMODE_SUFFIX, tokenString];
-
+	if (tokenData != nil) {
+        NSString *params = [RgManager pushToken:tokenData];
 		linphone_proxy_config_set_contact_uri_parameters(proxyCfg, [params UTF8String]);
 		linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
 	} else {

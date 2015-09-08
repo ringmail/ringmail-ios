@@ -26,10 +26,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="mask">
-                    <rect key="frame" x="0.0" y="12" width="320" height="65"/>
+                    <rect key="frame" x="0.0" y="16" width="320" height="61"/>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.090924573910000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="65" id="SfG-nT-bfE"/>
+                        <constraint firstAttribute="height" constant="61" id="SfG-nT-bfE"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="history">
@@ -39,9 +39,9 @@
                         <constraint firstAttribute="height" constant="77" id="9fJ-Bx-Z87"/>
                         <constraint firstAttribute="width" constant="64" id="dSE-Nc-AQX"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="History" backgroundImage="history_default.png">
+                    <state key="normal" title="Recents" backgroundImage="history_default.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -62,9 +62,9 @@
                         <constraint firstAttribute="width" constant="64" id="7qG-OX-ocj"/>
                         <constraint firstAttribute="height" constant="77" id="AaL-yt-Hnd"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Contacts" backgroundImage="contacts_default.png">
+                    <state key="normal" title="Directory" backgroundImage="contacts_default.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -85,7 +85,7 @@
                         <constraint firstAttribute="width" constant="64" id="50o-3P-EEl"/>
                         <constraint firstAttribute="height" constant="77" id="cUb-Ax-J5i"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Settings" backgroundImage="settings_default.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
@@ -125,9 +125,9 @@
                         <constraint firstAttribute="width" constant="64" id="eh4-r3-oxy"/>
                         <constraint firstAttribute="height" constant="77" id="gId-1A-3gt"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Chat" backgroundImage="chat_default.png">
+                    <state key="normal" title="Messages" backgroundImage="chat_default.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -142,7 +142,7 @@
                     </connections>
                 </button>
                 <view autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37" userLabel="chatNotificationView">
-                    <rect key="frame" x="235" y="0.0" width="21" height="21"/>
+                    <rect key="frame" x="235" y="4" width="21" height="21"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="chatNotificationImage">
                             <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
@@ -156,7 +156,7 @@
                                 <constraint firstAttribute="height" constant="17" id="0L7-q4-XAQ"/>
                                 <constraint firstAttribute="width" constant="16" id="jXP-Y5-d8a"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -174,7 +174,7 @@
                     </constraints>
                 </view>
                 <view autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32" userLabel="historyNotificationView">
-                    <rect key="frame" x="43" y="0.0" width="21" height="21"/>
+                    <rect key="frame" x="43" y="4" width="21" height="21"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="33" userLabel="historyNotificationImage">
                             <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
@@ -188,7 +188,7 @@
                                 <constraint firstAttribute="height" constant="17" id="POi-z8-SlR"/>
                                 <constraint firstAttribute="width" constant="16" id="dgV-A5-wuu"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -225,29 +225,29 @@
                 <constraint firstItem="4" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="23R-LR-WSH"/>
                 <constraint firstAttribute="bottom" secondItem="f0B-Rk-Uez" secondAttribute="bottom" id="5jk-rI-3ek"/>
                 <constraint firstAttribute="bottom" secondItem="if3-GT-4eC" secondAttribute="bottom" id="BMD-5G-aiP"/>
+                <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" id="Cv7-RZ-ocZ"/>
                 <constraint firstItem="32" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" id="KAR-Oc-g9D"/>
                 <constraint firstItem="if3-GT-4eC" firstAttribute="leading" secondItem="9" secondAttribute="trailing" id="Npd-ac-VuD"/>
                 <constraint firstItem="7" firstAttribute="leading" secondItem="8" secondAttribute="trailing" id="P0e-Vb-oo3"/>
                 <constraint firstItem="5" firstAttribute="leading" secondItem="7" secondAttribute="trailing" id="Q0Q-KR-hwu"/>
-                <constraint firstItem="5" firstAttribute="top" secondItem="37" secondAttribute="top" id="QTf-I4-aYm"/>
+                <constraint firstItem="5" firstAttribute="top" secondItem="37" secondAttribute="top" constant="-4" id="QTf-I4-aYm"/>
                 <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" id="RSs-eA-XI3"/>
                 <constraint firstItem="8" firstAttribute="leading" secondItem="6" secondAttribute="trailing" id="Tim-pC-QPd"/>
                 <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" id="UNn-fP-Bhi"/>
                 <constraint firstAttribute="bottom" secondItem="8" secondAttribute="bottom" id="ZXj-CV-9DA"/>
                 <constraint firstItem="6" firstAttribute="leading" secondItem="f0B-Rk-Uez" secondAttribute="trailing" id="buH-90-U2H"/>
                 <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" id="bz1-ui-hrk"/>
-                <constraint firstItem="6" firstAttribute="top" secondItem="32" secondAttribute="top" id="dEI-FQ-VES"/>
+                <constraint firstItem="6" firstAttribute="top" secondItem="32" secondAttribute="top" constant="-4" id="dEI-FQ-VES"/>
                 <constraint firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="jmU-VM-s9L"/>
                 <constraint firstItem="5" firstAttribute="trailing" secondItem="37" secondAttribute="trailing" id="kGi-dF-bTb"/>
                 <constraint firstItem="9" firstAttribute="leading" secondItem="5" secondAttribute="trailing" id="tw3-7Q-WKv"/>
                 <constraint firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="umW-rl-qXm"/>
                 <constraint firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="wni-ky-koR"/>
                 <constraint firstAttribute="bottom" secondItem="9" secondAttribute="bottom" id="znG-Zq-s5I"/>
-                <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" id="zvN-5z-2QF"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="988" y="613.5"/>
+            <point key="canvasLocation" x="898" y="356.5"/>
         </view>
     </objects>
     <resources>

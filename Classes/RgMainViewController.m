@@ -45,8 +45,6 @@
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
 
-@synthesize loginLabel;
-
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -145,8 +143,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 		addressField.attributedPlaceholder = placeHolderString;
 	}
 #endif
-    
-    [loginLabel setText:[mgr ringLogin]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

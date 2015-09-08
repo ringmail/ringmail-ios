@@ -48,8 +48,6 @@
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
 
-@property (nonatomic, strong) IBOutlet UILabel* loginLabel;
-
 - (IBAction)onAddContactClick: (id) event;
 - (IBAction)onBackClick: (id) event;
 - (IBAction)onAddressChange: (id)sender;
