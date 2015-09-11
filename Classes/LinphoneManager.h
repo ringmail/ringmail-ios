@@ -195,8 +195,6 @@ typedef struct _LinphoneManagerSounds {
 
 - (void)audioRouteChanged:(NSNotification *)notif;
 
-- (void)rgUpdateCredentials:(NSDictionary*)cred;
-
 @property (readonly) BOOL isTesting;
 @property (readonly, strong) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;

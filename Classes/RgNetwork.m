@@ -26,29 +26,17 @@ static RgNetwork* theRgNetwork = nil;
 {
     if (self = [super init])
     {
-        self.networkHost = @"staging.ringmail.com";
+        self.networkHost = [RgManager ringmailHost];
     }
     return self;
 }
 
-- (void)login:(NSString*)login password:(NSString*)password
+- (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"login": login, @"password": password};
-    NSString *postUrl = [NSString stringWithFormat:@"http://%@/internal/app/login", self.networkHost];
-    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary* res = responseObject;
-        NSString *sip = [res objectForKey:@"sip_login"];
-        if (sip != nil)
-        {
-            LinphoneManager *mgr = [LinphoneManager instance];
-            [mgr rgUpdateCredentials:res];
-        }
-        else
-        {
-            NSLog(@"RingMail API Error: %@", @"Login Failed");
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/login", self.networkHost];
+    [manager POST:postUrl parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"RingMail API Error: %@", error);
     }];
 }
@@ -65,7 +53,7 @@ static RgNetwork* theRgNetwork = nil;
            NSString* tokenString = [RgManager pushToken:tokenData];
            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
            NSDictionary *parameters = @{@"login": rgLogin, @"password": rgPass, @"token": tokenString};
-           NSString *postUrl = [NSString stringWithFormat:@"http://%@/internal/app/register_push", self.networkHost];
+           NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/register_push", self.networkHost];
            [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary* res = responseObject;
                NSString *ok = [res objectForKey:@"result"];
@@ -78,6 +66,21 @@ static RgNetwork* theRgNetwork = nil;
            }];
        }
    }
+}
+
+- (void)registerUser:(NSDictionary*)params callback:(RgNetworkCallback)callback
+{
+    NSString *rgLogin = [params objectForKey:@"email"];
+    NSString *rgPass = [params objectForKey:@"password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters = @{@"email": rgLogin, @"password": rgPass};
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/register_user", self.networkHost];
+        [manager POST:postUrl parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"RingMail API Error: %@", error);
+        }];
+    }
 }
 
 @end

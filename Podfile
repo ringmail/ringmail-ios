@@ -9,5 +9,6 @@ target 'RingMail' do
   pod 'FMDB'
   pod 'Objective-LevelDB'
   pod "AFNetworking", "~> 2.0"
+  pod "AFNetworking-Synchronous/2.x"
 end
 

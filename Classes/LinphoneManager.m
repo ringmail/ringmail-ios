@@ -43,7 +43,7 @@
 #import <AVFoundation/AVAudioPlayer.h>
 
 #import "RgNetwork.h"
-
+#import "RgManager.h"
 
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
@@ -320,26 +320,7 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
         /* RingMail */
         self.chatTag = @"";
         self.chatManager = nil;
-        
-        LevelDB* cfg = [RgManager configDatabase];
-        NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
-        NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
-        NSString *chatPass = [cfg objectForKey:@"ringmail_chat_password"];
-        NSLog(@"Chat Pass: %@", chatPass);
-        if (rgLogin != nil && rgPass != nil)
-        {
-            self.ringLogin = rgLogin;
-            if (chatPass != nil)
-            {
-                self.chatManager = [[RgChatManager alloc] init];
-                [self.chatManager connectWithJID:rgLogin password:chatPass];
-            }
-            [[RgNetwork instance] login:rgLogin password:rgPass];
-        }
-        else
-        {
-            self.ringLogin = @"";
-        }
+        self.ringLogin = @"";
 	}
 	return self;
 }
@@ -2402,54 +2383,6 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 - (void)inappReady:(NSNotification *)notif {
 	// Query our in-app server to retrieve InApp purchases
 	[_iapManager retrievePurchases];
-}
-
-#pragma mark - RingMail
-
-- (void)rgUpdateCredentials:(NSDictionary*)cred
-{
-    NSLog(@"RingMail Update Credentials: %@", cred);
-    LinphoneCoreSettingsStore* settings = [[LinphoneCoreSettingsStore alloc] init];
-    [settings transformLinphoneCoreToKeys];
-    NSString *newSipUser = [cred objectForKey:@"sip_login"];
-    NSString *oldSipUser = [settings objectForKey:@"username_preference"];
-    NSString *newSipPass = [cred objectForKey:@"sip_password"];
-    NSString *oldSipPass = [settings objectForKey:@"password_preference"];
-    if ((! [oldSipUser isEqualToString:newSipUser]) || (! [oldSipPass isEqualToString:newSipPass]))
-    {
-        [settings setObject:newSipUser forKey:@"username_preference"];
-        [settings setObject:newSipPass forKey:@"password_preference"];
-        [settings synchronize];
-    }
-    LevelDB* cfg = [RgManager configDatabase];
-    NSString *newChatPass = [cred objectForKey:@"chat_password"];
-    NSString *oldChatPass = [cfg objectForKey:@"ringmail_chat_password"];
-    BOOL chatRefresh = NO;
-    if (oldChatPass == nil)
-    {
-        [cfg setObject:newChatPass forKey:@"ringmail_chat_password"];
-        chatRefresh = YES;
-    }
-    else if (! [oldChatPass isEqualToString:newChatPass])
-    {
-        [cfg setObject:newChatPass forKey:@"ringmail_chat_password"];
-        chatRefresh = YES;
-    }
-    if (chatRefresh)
-    {
-        if (self.chatManager != nil)
-        {
-            if (![[self.chatManager xmppStream] isDisconnected])
-            {
-                [self.chatManager disconnect];
-            }
-        }
-        else
-        {
-            self.chatManager = [[RgChatManager alloc] init];
-        }
-        [self.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:newChatPass];
-    }
 }
 
 @end

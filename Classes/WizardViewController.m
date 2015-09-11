@@ -23,19 +23,13 @@
 #import "PhoneMainView.h"
 #import "UITextField+DoneButton.h"
 
-#import <XMLRPCConnection.h>
-#import <XMLRPCConnectionManager.h>
-#import <XMLRPCResponse.h>
-#import <XMLRPCRequest.h>
-
 #import "DTAlertView.h"
+#import "RgNetwork.h"
 
 typedef enum _ViewElement {
 	ViewElement_Username = 100,
 	ViewElement_Password = 101,
 	ViewElement_Password2 = 102,
-	ViewElement_Email = 103,
-	ViewElement_Domain = 104,
 	ViewElement_Label = 200,
 	ViewElement_Error = 201,
 	ViewElement_Username_Error = 404
@@ -45,23 +39,16 @@ typedef enum _ViewElement {
 
 @synthesize contentView;
 
-@synthesize welcomeView;
 @synthesize choiceView;
 @synthesize createAccountView;
 @synthesize connectAccountView;
-@synthesize externalAccountView;
 @synthesize validateAccountView;
-@synthesize provisionedAccountView;
 @synthesize waitView;
 
 @synthesize backButton;
-@synthesize startButton;
 @synthesize createAccountButton;
 @synthesize connectAccountButton;
-@synthesize externalAccountButton;
 @synthesize remoteProvisioningButton;
-
-@synthesize provisionedDomain, provisionedPassword, provisionedUsername;
 
 @synthesize choiceViewLogoImageView;
 
@@ -131,29 +118,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[viewTapGestureRecognizer setDelegate:self];
 	[contentView addGestureRecognizer:viewTapGestureRecognizer];
 
-	if ([LinphoneManager runningOnIpad]) {
-		[LinphoneUtils adjustFontSize:welcomeView mult:2.22f];
+	/*if ([LinphoneManager runningOnIpad]) {
 		[LinphoneUtils adjustFontSize:choiceView mult:2.22f];
 		[LinphoneUtils adjustFontSize:createAccountView mult:2.22f];
 		[LinphoneUtils adjustFontSize:connectAccountView mult:2.22f];
-		[LinphoneUtils adjustFontSize:externalAccountView mult:2.22f];
 		[LinphoneUtils adjustFontSize:validateAccountView mult:2.22f];
-		[LinphoneUtils adjustFontSize:provisionedAccountView mult:2.22f];
-	}
-
-	BOOL usePhoneNumber = [[LinphoneManager instance] lpConfigBoolForKey:@"use_phone_number"];
-	for (UILinphoneTextField *text in
-		 [NSArray arrayWithObjects:provisionedUsername, _createAccountUsername, _connectAccountUsername,
-								   _externalAccountUsername, nil]) {
-		if (usePhoneNumber) {
-			text.keyboardType = UIKeyboardTypePhonePad;
-			text.placeholder = NSLocalizedString(@"Phone number", nil);
-			[text addDoneButton];
-		} else {
-			text.keyboardType = UIKeyboardTypeDefault;
-			text.placeholder = NSLocalizedString(@"Username", nil);
-		}
-	}
+	}*/
 }
 
 #pragma mark -
@@ -185,46 +155,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 				linphone_address_destroy(addr);
 				if (auth) {
 					LOGI(@"A proxy config was set up with the remote provisioning, skip wizard");
-					[self onCancelClick:nil];
 				}
 			}
 		}
 	}
-
-	LinphoneProxyConfig *default_conf = linphone_core_create_proxy_config([LinphoneManager getLc]);
-	const char *identity = linphone_proxy_config_get_identity(default_conf);
-	if (identity) {
-		LinphoneAddress *default_addr = linphone_address_new(identity);
-		if (default_addr) {
-			const char *domain = linphone_address_get_domain(default_addr);
-			const char *username = linphone_address_get_username(default_addr);
-			if (domain && strlen(domain) > 0) {
-				// UITextField* domainfield = [WizardViewController findTextField:ViewElement_Domain
-				// view:externalAccountView];
-				[provisionedDomain setText:[NSString stringWithUTF8String:domain]];
-			}
-
-			if (username && strlen(username) > 0 && username[0] != '?') {
-				// UITextField* userField = [WizardViewController findTextField:ViewElement_Username
-				// view:externalAccountView];
-				[provisionedUsername setText:[NSString stringWithUTF8String:username]];
-			}
-		}
-	}
-
-	[self changeView:provisionedAccountView back:FALSE animation:TRUE];
-
-	linphone_proxy_config_destroy(default_conf);
 }
 
 - (void)resetTextFields {
-	[WizardViewController cleanTextField:welcomeView];
 	[WizardViewController cleanTextField:choiceView];
 	[WizardViewController cleanTextField:createAccountView];
 	[WizardViewController cleanTextField:connectAccountView];
-	[WizardViewController cleanTextField:externalAccountView];
 	[WizardViewController cleanTextField:validateAccountView];
-	[WizardViewController cleanTextField:provisionedAccountView];
 }
 
 - (void)reset {
@@ -243,12 +184,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 	linphone_core_set_stun_server(lc, NULL);
 	linphone_core_set_firewall_policy(lc, LinphonePolicyNoFirewall);
 	[self resetTextFields];
-	if ([[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_welcome_view_preference"] == true) {
-		[self changeView:choiceView back:FALSE animation:FALSE];
-	} else {
-		[self changeView:welcomeView back:FALSE animation:FALSE];
-	}
+    [self changeView:choiceView back:FALSE animation:FALSE];
 	[waitView setHidden:TRUE];
+    
+    NSLog(@"RingMail: Wizard - Reset Complete");
 }
 
 + (UIView *)findView:(ViewElement)tag view:(UIView *)view {
@@ -284,63 +223,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)changeView:(UIView *)view back:(BOOL)back animation:(BOOL)animation {
 
-	static BOOL placement_done = NO; // indicates if the button placement has been done in the wizard choice view
-
 	// Change toolbar buttons following view
-	if (view == welcomeView) {
-		[startButton setHidden:false];
-		[backButton setHidden:true];
-	} else {
-		[startButton setHidden:true];
-		[backButton setHidden:false];
-	}
-
+    
 	if (view == validateAccountView) {
 		[backButton setEnabled:FALSE];
+        [backButton setHidden:TRUE];
 	} else if (view == choiceView) {
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_welcome_view_preference"] == true) {
-			[backButton setEnabled:FALSE];
-		} else {
-			[backButton setEnabled:TRUE];
-		}
+        [backButton setEnabled:FALSE];
+        [backButton setHidden:TRUE];
 	} else {
 		[backButton setEnabled:TRUE];
-	}
-
-	if (view == choiceView) {
-		// layout is this:
-		// [ Logo         ]
-		// [ Create Btn   ]
-		// [ Connect Btn  ]
-		// [ External Btn ]
-		// [ Remote Prov  ]
-
-		BOOL show_logo = [[LinphoneManager instance] lpConfigBoolForKey:@"show_wizard_logo_in_choice_view_preference"];
-		BOOL show_extern = ![[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_custom_account"];
-		BOOL show_new = ![[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_create_account"];
-
-		if (!placement_done) {
-			// visibility
-			choiceViewLogoImageView.hidden = !show_logo;
-			externalAccountButton.hidden = !show_extern;
-			createAccountButton.hidden = !show_new;
-
-			// placement
-			if (show_logo && show_new && !show_extern) {
-				// lower both remaining buttons
-				[createAccountButton setCenter:[connectAccountButton center]];
-				[connectAccountButton setCenter:[externalAccountButton center]];
-
-			} else if (!show_logo && !show_new && show_extern) {
-				// move up the extern button
-				[externalAccountButton setCenter:[createAccountButton center]];
-			}
-			placement_done = YES;
-		}
-		if (!show_extern && !show_logo) {
-			// no option to create or specify a custom account: go to connect view directly
-			view = connectAccountView;
-		}
+        [backButton setHidden:FALSE];
 	}
 
 	// Animation
@@ -452,35 +345,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	return TRUE;
 }
 
-- (void)addProvisionedProxy:(NSString *)username withPassword:(NSString *)password withDomain:(NSString *)domain {
-	[self clearProxyConfig];
-
-	LinphoneProxyConfig *proxyCfg = linphone_core_create_proxy_config([LinphoneManager getLc]);
-
-	const char *addr = linphone_proxy_config_get_domain(proxyCfg);
-	char normalizedUsername[256];
-	LinphoneAddress *linphoneAddress = linphone_address_new(addr);
-
-	linphone_proxy_config_normalize_number(proxyCfg, [username cStringUsingEncoding:[NSString defaultCStringEncoding]],
-										   normalizedUsername, sizeof(normalizedUsername));
-
-	linphone_address_set_username(linphoneAddress, normalizedUsername);
-	linphone_address_set_domain(linphoneAddress, [domain UTF8String]);
-
-	const char *identity = linphone_address_as_string_uri_only(linphoneAddress);
-	linphone_proxy_config_set_identity(proxyCfg, identity);
-
-	LinphoneAuthInfo *info =
-		linphone_auth_info_new([username UTF8String], NULL, [password UTF8String], NULL, NULL, [domain UTF8String]);
-
-	linphone_proxy_config_enable_register(proxyCfg, true);
-	linphone_core_add_auth_info([LinphoneManager getLc], info);
-	linphone_core_add_proxy_config([LinphoneManager getLc], proxyCfg);
-	linphone_core_set_default_proxy_config([LinphoneManager getLc], proxyCfg);
-	// reload address book to prepend proxy config domain to contacts' phone number
-	[[[LinphoneManager instance] fastAddressBook] reload];
-}
-
 - (NSString *)identityFromUsername:(NSString *)username {
 	char normalizedUserName[256];
 	LinphoneAddress *linphoneAddress = linphone_address_new("sip:user@domain.com");
@@ -492,52 +356,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	NSString *uri = [NSString stringWithUTF8String:linphone_address_as_string_uri_only(linphoneAddress)];
 	NSString *scheme = [NSString stringWithUTF8String:linphone_address_get_scheme(linphoneAddress)];
 	return [uri substringFromIndex:[scheme length] + 1];
-}
-
-#pragma mark - Linphone XMLRPC
-
-- (void)checkUserExist:(NSString *)username {
-	LOGI(@"XMLRPC check_account %@", username);
-
-	NSURL *URL =
-		[NSURL URLWithString:[[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
-	XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL:URL];
-	[request setMethod:@"check_account" withParameters:[NSArray arrayWithObjects:username, nil]];
-
-	XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
-	[manager spawnConnectionWithXMLRPCRequest:request delegate:self];
-
-	[waitView setHidden:false];
-}
-
-- (void)createAccount:(NSString *)identity password:(NSString *)password email:(NSString *)email {
-	NSString *useragent = [LinphoneManager getUserAgent];
-	LOGI(@"XMLRPC create_account_with_useragent %@ %@ %@ %@", identity, password, email, useragent);
-
-	NSURL *URL =
-		[NSURL URLWithString:[[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
-	XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL:URL];
-	[request setMethod:@"create_account_with_useragent"
-		withParameters:[NSArray arrayWithObjects:identity, password, email, useragent, nil]];
-
-	XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
-	[manager spawnConnectionWithXMLRPCRequest:request delegate:self];
-
-	[waitView setHidden:false];
-}
-
-- (void)checkAccountValidation:(NSString *)identity {
-	LOGI(@"XMLRPC check_account_validated %@", identity);
-
-	NSURL *URL =
-		[NSURL URLWithString:[[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
-	XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL:URL];
-	[request setMethod:@"check_account_validated" withParameters:[NSArray arrayWithObjects:identity, nil]];
-
-	XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
-	[manager spawnConnectionWithXMLRPCRequest:request delegate:self];
-
-	[waitView setHidden:false];
 }
 
 #pragma mark -
@@ -604,27 +422,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// only validate the username when creating a new account
 	if ((textField.tag == ViewElement_Username) && (currentView == createAccountView)) {
 		BOOL isValidUsername = YES;
-		BOOL usePhoneNumber = [[LinphoneManager instance] lpConfigBoolForKey:@"use_phone_number"];
-		if (usePhoneNumber) {
-			isValidUsername = linphone_proxy_config_is_phone_number(NULL, [string UTF8String]);
-		} else {
-			NSRegularExpression *regex =
-				[NSRegularExpression regularExpressionWithPattern:@"^[a-z0-9-_\\.]*$"
-														  options:NSRegularExpressionCaseInsensitive
-															error:nil];
 
-			NSArray *matches = [regex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
-			isValidUsername = ([matches count] != 0);
-		}
+        NSRegularExpression *regex =
+            [NSRegularExpression regularExpressionWithPattern:@"^[a-z0-9-_\\.@+]*$"
+                                                      options:NSRegularExpressionCaseInsensitive
+                                                        error:nil];
+
+        NSArray *matches = [regex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
+        isValidUsername = ([matches count] != 0);
 
 		if (!isValidUsername) {
 			UILabel *error = [WizardViewController findLabel:ViewElement_Username_Error view:contentView];
 
 			// show error with fade animation
-			[error setText:[NSString stringWithFormat:NSLocalizedString(@"Illegal character in %@: %@", nil),
-													  usePhoneNumber ? NSLocalizedString(@"phone number", nil)
-																	 : NSLocalizedString(@"username", nil),
-													  string]];
+			[error setText:[NSString stringWithFormat:NSLocalizedString(@"Illegal character in %@: %@", nil), NSLocalizedString(@"username", nil), string]];
 			error.alpha = 0;
 			error.hidden = NO;
 			[UIView animateWithDuration:0.3
@@ -643,6 +454,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 	return YES;
 }
+
 - (void)hideError:(NSTimer *)timer {
 	UILabel *error_label = [WizardViewController findLabel:ViewElement_Username_Error view:contentView];
 	if (error_label) {
@@ -658,10 +470,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Action Functions
 
-- (IBAction)onStartClick:(id)sender {
-	[self changeView:choiceView back:FALSE animation:TRUE];
-}
-
 - (IBAction)onBackClick:(id)sender {
 	if ([historyViews count] > 0) {
 		UIView *view = [historyViews lastObject];
@@ -670,45 +478,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-- (IBAction)onCancelClick:(id)sender {
-	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
-}
-
 - (IBAction)onCreateAccountClick:(id)sender {
 	nextView = createAccountView;
-	[self loadWizardConfig:@"wizard_linphone_create.rc"];
+	[self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
 }
 
 - (IBAction)onConnectLinphoneAccountClick:(id)sender {
 	nextView = connectAccountView;
-	[self loadWizardConfig:@"wizard_linphone_existing.rc"];
-}
-
-- (IBAction)onExternalAccountClick:(id)sender {
-	nextView = externalAccountView;
-	[self loadWizardConfig:@"wizard_external_sip.rc"];
+	[self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
 }
 
 - (IBAction)onCheckValidationClick:(id)sender {
-	NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-	NSString *identity = [self identityFromUsername:username];
-	[self checkAccountValidation:identity];
-}
-
-- (IBAction)onRemoteProvisioningClick:(id)sender {
-	UIAlertView *remoteInput = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter provisioning URL", @"")
-														  message:@""
-														 delegate:self
-												cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
-												otherButtonTitles:NSLocalizedString(@"Fetch", @""), nil];
-	remoteInput.alertViewStyle = UIAlertViewStylePlainTextInput;
-
-	UITextField *prov_url = [remoteInput textFieldAtIndex:0];
-	prov_url.keyboardType = UIKeyboardTypeURL;
-	prov_url.text = [[LinphoneManager instance] lpConfigStringForKey:@"config-uri" forSection:@"misc"];
-	prov_url.placeholder = @"URL";
-
-	[remoteInput show];
+	//NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
+	//NSString *identity = [self identityFromUsername:username];
+	//[self checkAccountValidation:identity];
+    
 }
 
 - (BOOL)verificationWithUsername:(NSString *)username
@@ -736,69 +520,79 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 	return TRUE;
 }
-- (void)verificationSignInWithUsername:(NSString *)username
-							  password:(NSString *)password
-								domain:(NSString *)domain
-						 withTransport:(NSString *)transport {
-	if ([self verificationWithUsername:username password:password domain:domain withTransport:transport]) {
-		[waitView setHidden:false];
-		if ([LinphoneManager instance].connectivity == none) {
-			DTAlertView *alert = [[DTAlertView alloc]
-				initWithTitle:NSLocalizedString(@"No connectivity", nil)
-					  message:NSLocalizedString(@"You can either skip verification or connect to the Internet first.",
-												nil)];
-			[alert addCancelButtonWithTitle:NSLocalizedString(@"Stay here", nil)
-									  block:^{
-										[waitView setHidden:true];
-									  }];
-			[alert
-				addButtonWithTitle:NSLocalizedString(@"Continue", nil)
-							 block:^{
-							   [waitView setHidden:true];
-							   [self addProxyConfig:username password:password domain:domain withTransport:transport];
-							   [[PhoneMainView instance]
-								   changeCurrentView:[RgMainViewController compositeViewDescription]];
-							 }];
-			[alert show];
-		} else {
-			BOOL success = [self addProxyConfig:username password:password domain:domain withTransport:transport];
-			if (!success) {
-				waitView.hidden = true;
-			}
-		}
-	}
-}
-
-- (IBAction)onSignInExternalClick:(id)sender {
-	NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-	NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-	NSString *domain = [WizardViewController findTextField:ViewElement_Domain view:contentView].text;
-	NSString *transport = [self.transportChooser titleForSegmentAtIndex:self.transportChooser.selectedSegmentIndex];
-
-	[self verificationSignInWithUsername:username password:password domain:domain withTransport:transport];
-}
 
 - (IBAction)onSignInClick:(id)sender {
 	NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
 	NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
 
-	// domain and server will be configured from the default proxy values
-	[self verificationSignInWithUsername:username password:password domain:nil withTransport:nil];
+    if ([self verificationWithUsername:username password:password domain:nil withTransport:nil]) {
+        [waitView setHidden:false];
+        if ([LinphoneManager instance].connectivity == none) {
+            DTAlertView *alert = [[DTAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"No connectivity", nil)
+                                  message:@"Internet connectivity required to continue"];
+            [alert addCancelButtonWithTitle:NSLocalizedString(@"Stay here", nil)
+                                      block:^{
+                                          [waitView setHidden:true];
+                                      }];
+            [alert show];
+        } else {
+            [[RgNetwork instance] login:username password:password callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [waitView setHidden:true];
+                NSDictionary* res = responseObject;
+                NSString *ok = [res objectForKey:@"result"];
+                if ([ok isEqualToString:@"ok"])
+                {
+                    // Store login and password
+                    LevelDB* cfg = [RgManager configDatabase];
+                    [cfg setObject:username forKey:@"ringmail_login"];
+                    [cfg setObject:password forKey:@"ringmail_password"];
+                    [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
+                    [[LinphoneManager instance] setRingLogin:username];
+                    [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
+                                  domain:[RgManager ringmailHostSIP] withTransport:@"tcp"];
+                    [RgManager updateCredentials:res];
+                }
+                else
+                {
+                    NSString* err = [res objectForKey:@"error"];
+                    if (err != nil)
+                    {
+                        NSLog(@"RingMail API Error: %@", err);
+                        if ([err isEqualToString:@"verify"])
+                        {
+                            LevelDB* cfg = [RgManager configDatabase];
+                            [cfg setObject:username forKey:@"ringmail_login"];
+                            [cfg setObject:password forKey:@"ringmail_password"];
+                            [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
+                            [self changeView:validateAccountView back:FALSE animation:TRUE];
+                        }
+                        else if ([err isEqualToString:@"credentials"])
+                        {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In Failure", nil)
+                                                                            message:@"Invalid email and password combination."
+                                                                           delegate:nil
+                                                                  cancelButtonTitle:@"OK"
+                                                                  otherButtonTitles:nil];
+                            [alert show];
+                        }
+                    }
+                }
+            }];
+        }
+    }
 }
 
 - (BOOL)verificationRegisterWithUsername:(NSString *)username
 								password:(NSString *)password
-							   password2:(NSString *)password2
-								   email:(NSString *)email {
+							   password2:(NSString *)password2 {
 	NSMutableString *errors = [NSMutableString string];
 	NSInteger username_length = [[LinphoneManager instance] lpConfigIntForKey:@"username_length" forSection:@"wizard"];
 	NSInteger password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" forSection:@"wizard"];
 
 	if ([username length] < username_length) {
 		[errors
-			appendString:[NSString stringWithFormat:NSLocalizedString(
-														@"The username is too short (minimum %d characters).\n", nil),
-													username_length]];
+			appendString:[NSString stringWithFormat:NSLocalizedString(@"The email is too short (minimum %d characters).\n", nil), username_length]];
 	}
 
 	if ([password length] < password_length) {
@@ -813,7 +607,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 
 	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
-	if (![emailTest evaluateWithObject:email]) {
+	if (![emailTest evaluateWithObject:username]) {
 		[errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
 	}
 
@@ -836,37 +630,48 @@ static UICompositeViewDescription *compositeDescription = nil;
 	NSString *username = username_tf.text;
 	NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
 	NSString *password2 = [WizardViewController findTextField:ViewElement_Password2 view:contentView].text;
-	NSString *email = [WizardViewController findTextField:ViewElement_Email view:contentView].text;
 
-	if ([self verificationRegisterWithUsername:username password:password password2:password2 email:email]) {
+	if ([self verificationRegisterWithUsername:username password:password password2:password2]) {
 		username = [username lowercaseString];
 		[username_tf setText:username];
-		NSString *identity = [self identityFromUsername:username];
-		[self checkUserExist:identity];
-	}
-}
-
-- (IBAction)onProvisionedLoginClick:(id)sender {
-	NSString *username = provisionedUsername.text;
-	NSString *password = provisionedPassword.text;
-
-	NSMutableString *errors = [NSMutableString string];
-	if ([username length] == 0) {
-
-		[errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a valid username.\n", nil)]];
-	}
-
-	if ([errors length]) {
-		UIAlertView *errorView =
-			[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)", nil)
-									   message:[errors substringWithRange:NSMakeRange(0, [errors length] - 1)]
-									  delegate:nil
-							 cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-							 otherButtonTitles:nil, nil];
-		[errorView show];
-	} else {
-		[self.waitView setHidden:false];
-		[self addProvisionedProxy:username withPassword:password withDomain:provisionedDomain.text];
+        NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:username, @"email", password, @"password", nil];
+        [[RgNetwork instance] registerUser:params callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary* res = responseObject;
+            NSString *ok = [res objectForKey:@"result"];
+            if (! [ok isEqualToString:@"ok"])
+            {
+                NSString *err = [res objectForKey:@"error"];
+                if ([err isEqualToString:@"duplicate"])
+                {
+                    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue", nil)
+                                               message:NSLocalizedString(@"Email already exists", nil)
+                                              delegate:nil
+                                     cancelButtonTitle:NSLocalizedString(@"Continue", nil)
+                                     otherButtonTitles:nil, nil];
+                    [errorView show];
+                }
+                else
+                {
+                    UIAlertView *errorView = [[UIAlertView alloc]
+                                              initWithTitle:NSLocalizedString(@"Account creation issue", nil)
+                                              message:NSLocalizedString(@"Can't create the account. Please try again.", nil)
+                                              delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Continue", nil)
+                                              otherButtonTitles:nil, nil];
+                    [errorView show];
+                }
+            }
+            else
+            {
+                // RingMail account created
+                LevelDB* cfg = [RgManager configDatabase];
+                [cfg setObject:username forKey:@"ringmail_login"];
+                [cfg setObject:password forKey:@"ringmail_password"];
+                [cfg setObject:@"" forKey:@"ringmail_chat_password"];
+                [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
+                [self changeView:validateAccountView back:FALSE animation:TRUE];
+            }
+        }];
 	}
 }
 
@@ -935,94 +740,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)registrationUpdateEvent:(NSNotification *)notif {
 	NSString *message = [notif.userInfo objectForKey:@"message"];
 	[self registrationUpdate:[[notif.userInfo objectForKey:@"state"] intValue] message:message];
-}
-
-#pragma mark - XMLRPCConnectionDelegate Functions
-
-- (void)request:(XMLRPCRequest *)request didReceiveResponse:(XMLRPCResponse *)response {
-	LOGI(@"XMLRPC %@: %@", [request method], [response body]);
-	[waitView setHidden:true];
-	if ([response isFault]) {
-		NSString *errorString =
-			[NSString stringWithFormat:NSLocalizedString(@"Communication issue (%@)", nil), [response faultString]];
-		UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Communication issue", nil)
-															message:errorString
-														   delegate:nil
-												  cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-												  otherButtonTitles:nil, nil];
-		[errorView show];
-	} else if ([response object] != nil) { // Don't handle if not object: HTTP/Communication Error
-		NSString *value = [response object];
-		if ([[request method] isEqualToString:@"check_account"]) {
-			if ([value integerValue] == 1) {
-				UIAlertView *errorView =
-					[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue", nil)
-											   message:NSLocalizedString(@"Username already exists", nil)
-											  delegate:nil
-									 cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-									 otherButtonTitles:nil, nil];
-				[errorView show];
-			} else {
-				NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-				NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-				NSString *email = [WizardViewController findTextField:ViewElement_Email view:contentView].text;
-				NSString *identity = [self identityFromUsername:username];
-				[self createAccount:identity password:password email:email];
-			}
-		} else if ([[request method] isEqualToString:@"create_account_with_useragent"]) {
-			if ([value integerValue] == 0) {
-				NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-				NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-				[self changeView:validateAccountView back:FALSE animation:TRUE];
-				[WizardViewController findTextField:ViewElement_Username view:contentView].text = username;
-				[WizardViewController findTextField:ViewElement_Password view:contentView].text = password;
-			} else {
-				UIAlertView *errorView = [[UIAlertView alloc]
-						initWithTitle:NSLocalizedString(@"Account creation issue", nil)
-							  message:NSLocalizedString(@"Can't create the account. Please try again.", nil)
-							 delegate:nil
-					cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-					otherButtonTitles:nil, nil];
-				[errorView show];
-			}
-		} else if ([[request method] isEqualToString:@"check_account_validated"]) {
-			if ([value integerValue] == 1) {
-				NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-				NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-				[self addProxyConfig:username password:password domain:nil withTransport:nil];
-			} else {
-				UIAlertView *errorView =
-					[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account validation issue", nil)
-											   message:NSLocalizedString(@"Your account is not validate yet.", nil)
-											  delegate:nil
-									 cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-									 otherButtonTitles:nil, nil];
-				[errorView show];
-			}
-		}
-	}
-}
-
-- (void)request:(XMLRPCRequest *)request didFailWithError:(NSError *)error {
-	NSString *errorString =
-		[NSString stringWithFormat:NSLocalizedString(@"Communication issue (%@)", nil), [error localizedDescription]];
-	UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Communication issue", nil)
-														message:errorString
-													   delegate:nil
-											  cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-											  otherButtonTitles:nil, nil];
-	[errorView show];
-	[waitView setHidden:true];
-}
-
-- (BOOL)request:(XMLRPCRequest *)request canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
-	return FALSE;
-}
-
-- (void)request:(XMLRPCRequest *)request didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-}
-
-- (void)request:(XMLRPCRequest *)request didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
 }
 
 #pragma mark - TPMultiLayoutViewController Functions

@@ -398,26 +398,27 @@ static RootViewManager *rootViewManagerInstance = nil;
 	LinphoneCore *core = nil;
 	@try {
 		core = [LinphoneManager getLc];
-		LinphoneManager *lm = [LinphoneManager instance];
 		if (linphone_core_get_global_state(core) != LinphoneGlobalOn) {
 			[self changeCurrentView:[RgMainViewController compositeViewDescription]];
-		} else if ([[LinphoneManager instance] lpConfigBoolForKey:@"enable_first_login_view_preference"] == true) {
-			// Change to fist login view
-			[self changeCurrentView:[FirstLoginViewController compositeViewDescription]];
 		} else {
 			// always start to dialer when testing
 			// Change to default view
-			const MSList *list = linphone_core_get_proxy_config_list(core);
-			if (list != NULL || ([lm lpConfigBoolForKey:@"hide_wizard_preference"] == true) || lm.isTesting) {
-				[self changeCurrentView:[RgMainViewController compositeViewDescription]];
-			} else {
-				WizardViewController *controller = DYNAMIC_CAST(
-					[[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
-					WizardViewController);
-				if (controller != nil) {
-					[controller reset];
-				}
-			}
+            if ([RgManager configReadyAndVerified])
+            {
+                NSLog(@"RingMail: Startup - Config Ready and Verified");
+                [RgManager initialLogin];
+                [self changeCurrentView:[RgMainViewController compositeViewDescription]];
+            }
+            else
+            {
+                NSLog(@"RingMail: Startup - Need Setup Wizard");
+                WizardViewController *controller = DYNAMIC_CAST(
+                    [[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
+                    WizardViewController);
+                if (controller != nil) {
+                    [controller reset];
+                }
+            }
 		}
 		[self updateApplicationBadgeNumber]; // Update Badge at startup
 	} @catch (NSException *exception) {

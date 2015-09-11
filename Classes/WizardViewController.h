@@ -18,7 +18,6 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <XMLRPCConnectionDelegate.h>
 #import "UICompositeViewController.h"
 #import "UILinphoneTextField.h"
 #import "LinphoneUI/UILinphoneButton.h"
@@ -27,7 +26,6 @@
 @interface WizardViewController : TPMultiLayoutViewController
 <UITextFieldDelegate,
     UICompositeViewDelegate,
-    XMLRPCConnectionDelegate,
     UIGestureRecognizerDelegate,
     UIAlertViewDelegate>
 {
@@ -40,18 +38,14 @@
 
 @property(nonatomic, strong) IBOutlet TPKeyboardAvoidingScrollView *contentView;
 
-@property (nonatomic, strong) IBOutlet UIView *welcomeView;
 @property (nonatomic, strong) IBOutlet UIView *choiceView;
 @property (nonatomic, strong) IBOutlet UIView *createAccountView;
 @property (nonatomic, strong) IBOutlet UIView *connectAccountView;
-@property (nonatomic, strong) IBOutlet UIView *externalAccountView;
 @property (nonatomic, strong) IBOutlet UIView *validateAccountView;
-@property (strong, nonatomic) IBOutlet UIView *provisionedAccountView;
 
 @property (nonatomic, strong) IBOutlet UIView *waitView;
 
 @property (nonatomic, strong) IBOutlet UIButton *backButton;
-@property (nonatomic, strong) IBOutlet UIButton *startButton;
 @property (nonatomic, strong) IBOutlet UIButton *createAccountButton;
 @property (nonatomic, strong) IBOutlet UIButton *connectAccountButton;
 @property (nonatomic, strong) IBOutlet UIButton *externalAccountButton;
@@ -60,11 +54,6 @@
 
 @property (strong, nonatomic) IBOutlet UILinphoneTextField *createAccountUsername;
 @property (strong, nonatomic) IBOutlet UILinphoneTextField *connectAccountUsername;
-@property (strong, nonatomic) IBOutlet UILinphoneTextField *externalAccountUsername;
-
-@property (strong, nonatomic) IBOutlet UITextField *provisionedUsername;
-@property (strong, nonatomic) IBOutlet UITextField *provisionedPassword;
-@property (strong, nonatomic) IBOutlet UITextField *provisionedDomain;
 
 @property (nonatomic, strong) IBOutlet UIImageView *choiceViewLogoImageView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *transportChooser;
@@ -74,19 +63,13 @@
 - (void)reset;
 - (void)fillDefaultValues;
 
-- (IBAction)onStartClick:(id)sender;
 - (IBAction)onBackClick:(id)sender;
-- (IBAction)onCancelClick:(id)sender;
 
 - (IBAction)onCreateAccountClick:(id)sender;
 - (IBAction)onConnectLinphoneAccountClick:(id)sender;
-- (IBAction)onExternalAccountClick:(id)sender;
 - (IBAction)onCheckValidationClick:(id)sender;
-- (IBAction)onRemoteProvisioningClick:(id)sender;
 
 - (IBAction)onSignInClick:(id)sender;
-- (IBAction)onSignInExternalClick:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
-- (IBAction)onProvisionedLoginClick:(id)sender;
 
 @end

@@ -19,6 +19,8 @@ extern NSString *const kRgSelfName;
 
 @interface RgManager : NSObject
 
++ (NSString*)ringmailHost;
++ (NSString*)ringmailHostSIP;
 + (NSString*)addressToSIP:(NSString*)addr;
 + (NSString*)addressFromSIP:(NSString*)addr;
 + (NSString*)addressToXMPP:(NSString*)addr;
@@ -27,5 +29,14 @@ extern NSString *const kRgSelfName;
 
 + (LevelDB*)configDatabase;
 + (void)closeConfigDatabase;
++ (NSDictionary *)getCredentials;
+
++ (BOOL)configReady;
++ (BOOL)configVerified;
++ (BOOL)configReadyAndVerified;
+
++ (void)updateCredentials:(NSDictionary*)cred;
++ (void)chatConnect;
++ (void)initialLogin;
 
 @end

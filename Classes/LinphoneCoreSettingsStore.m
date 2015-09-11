@@ -336,7 +336,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
     
     
     // RingMail section
-    {
+    /*{
         NSArray* rgKeys = @[
             @"ringmail_login",
             @"ringmail_password"
@@ -346,7 +346,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
         {
             [self setObject:[rgConfig objectForKey:key] forKey:key];
         }
-    }
+    }*/
 
 	changedDict = [[NSMutableDictionary alloc] init];
 
@@ -562,7 +562,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 }
 
 - (BOOL)synchronize {
-    NSLog(@"RingMail Login: %@", [self objectForKey:@"ringmail_login"]);
+    /*NSLog(@"RingMail Login: %@", [self objectForKey:@"ringmail_login"]);
     NSLog(@"RingMail Password: %@", [self objectForKey:@"ringmail_password"]);
     
     // RingMail section
@@ -574,7 +574,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
     for (NSString *key in rgKeys)
     {
         [rgConfig setObject:[self objectForKey:key] forKey:key];
-    }
+    }*/
     
 	LinphoneManager *lm = [LinphoneManager instance];
 	LinphoneCore *lc = [LinphoneManager getLc];

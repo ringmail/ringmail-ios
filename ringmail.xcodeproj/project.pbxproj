@@ -154,6 +154,7 @@
 		C422AD321B99F1A900D1F1CD /* RgNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = C422AD311B99F1A900D1F1CD /* RgNetwork.m */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
 		C4D999521B96910A003CC323 /* RgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D999511B96910A003CC323 /* RgManager.m */; };
+		C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */ = {isa = PBXBuildFile; fileRef = C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
@@ -1058,6 +1059,7 @@
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
 		C4D999501B96910A003CC323 /* RgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgManager.h; sourceTree = "<group>"; };
 		C4D999511B96910A003CC323 /* RgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgManager.m; sourceTree = "<group>"; };
+		C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_linphone_ringmail.rc; path = Resources/wizard_linphone_ringmail.rc; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C913F326854608AF66812CBF /* Pods-RingMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.release.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.release.xcconfig"; sourceTree = "<group>"; };
@@ -2147,6 +2149,7 @@
 				F0B89C2418DC973E0050B60E /* wizard_external_sip.rc */,
 				F0B89C2518DC973E0050B60E /* wizard_linphone_create.rc */,
 				F0B89C2618DC973E0050B60E /* wizard_linphone_existing.rc */,
+				C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */,
 				F0B89C2718DC973E0050B60E /* wizard_remote.rc */,
 			);
 			name = Resources;
@@ -3577,6 +3580,7 @@
 				D33988CC15C6DD1600CAF1E4 /* options_add_default_landscape~ipad.png in Resources */,
 				D33988CE15C6DD1600CAF1E4 /* options_add_disabled_landscape~ipad.png in Resources */,
 				D33988D015C6DD1600CAF1E4 /* options_add_over_landscape~ipad.png in Resources */,
+				C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */,
 				D33988D215C6DD1600CAF1E4 /* options_default_landscape~ipad.png in Resources */,
 				D33988D415C6DD1600CAF1E4 /* options_disabled_landscape~ipad.png in Resources */,
 				D33988D615C6DD1600CAF1E4 /* options_over_landscape~ipad.png in Resources */,

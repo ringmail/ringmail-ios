@@ -6,6 +6,8 @@ PODS:
     - AFNetworking/Security (= 2.6.0)
     - AFNetworking/Serialization (= 2.6.0)
     - AFNetworking/UIKit (= 2.6.0)
+  - AFNetworking-Synchronous/2.x (0.3.1):
+    - AFNetworking (~> 2.0)
   - AFNetworking/NSURLConnection (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -184,6 +186,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - AFNetworking-Synchronous/2.x
   - FMDB
   - JSQMessagesViewController (HEAD)
   - Objective-LevelDB
@@ -193,6 +196,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  AFNetworking-Synchronous: 29531ad341ec465a4ff9b66dea9cf7272080e12e
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52

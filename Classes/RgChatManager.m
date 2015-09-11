@@ -289,9 +289,29 @@
         NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
         NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
         NSString *fromName = [from stringByMatching:@"^(.*?)\\@" capture:1];
-        NSString *chatFrom = [NSString stringWithFormat:@"%@@staging.ringmail.com", fromName];
+        NSString *chatFrom = [NSString stringWithFormat:@"%@@%@", fromName, [RgManager ringmailHost]];
         
         [self dbInsertMessage:chatFrom body:body inbound:YES];
+        
+        if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
+        {
+            NSString *fromAddress = [RgManager addressFromXMPP:chatFrom];
+            
+            // Create a new notification
+            UILocalNotification *notif = [[UILocalNotification alloc] init];
+            if (notif) {
+                notif.repeatInterval = 0;
+                if ([[UIDevice currentDevice].systemVersion floatValue] >= 8) {
+                    notif.category = @"incoming_msg";
+                }
+                notif.alertBody = [NSString stringWithFormat:@"%@: %@", fromAddress, body];
+                notif.alertAction = NSLocalizedString(@"Show", nil);
+                notif.soundName = @"msg.caf";
+                notif.userInfo = @{ @"from" : fromAddress };
+                
+                [[UIApplication sharedApplication] presentLocalNotificationNow:notif];
+            }
+        }
         
         NSDictionary *dict = @{
             @"tag": chatFrom
