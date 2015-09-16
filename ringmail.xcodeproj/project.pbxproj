@@ -153,6 +153,8 @@
 		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
 		C422AD321B99F1A900D1F1CD /* RgNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = C422AD311B99F1A900D1F1CD /* RgNetwork.m */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
+		C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */; };
+		C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */; };
 		C4D999521B96910A003CC323 /* RgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D999511B96910A003CC323 /* RgManager.m */; };
 		C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */ = {isa = PBXBuildFile; fileRef = C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
@@ -1057,6 +1059,8 @@
 		C422AD311B99F1A900D1F1CD /* RgNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgNetwork.m; sourceTree = "<group>"; };
 		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
+		C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_splashscreen_iphone5.png; path = Resources/ringmail_splashscreen_iphone5.png; sourceTree = "<group>"; };
+		C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_splashscreen_iphone6.png; path = Resources/ringmail_splashscreen_iphone6.png; sourceTree = "<group>"; };
 		C4D999501B96910A003CC323 /* RgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgManager.h; sourceTree = "<group>"; };
 		C4D999511B96910A003CC323 /* RgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgManager.m; sourceTree = "<group>"; };
 		C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_linphone_ringmail.rc; path = Resources/wizard_linphone_ringmail.rc; sourceTree = "<group>"; };
@@ -2513,6 +2517,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */,
+				C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */,
 				C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */,
 				C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */,
 				C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */,
@@ -3195,6 +3201,7 @@
 				D3F83F0C158205A100336684 /* micro_off_default.png in Resources */,
 				D3F83F0E158205A100336684 /* micro_off_over.png in Resources */,
 				D3F83F10158205A100336684 /* micro_on_default.png in Resources */,
+				C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */,
 				D3F83F12158205A100336684 /* micro_on_over.png in Resources */,
 				D3F83F14158205A100336684 /* pause_off_default.png in Resources */,
 				C41EF31F1B8BD9D10085E75B /* ringmail_button2.png in Resources */,
@@ -3616,6 +3623,7 @@
 				D38187C115FE345B00C3EDCA /* DialerViewController.xib in Resources */,
 				57F005C415EE2CCF00914747 /* linphonerc in Resources */,
 				57F005C815EE2D9200914747 /* linphonerc-factory in Resources */,
+				C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */,
 				57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */,
 				F0B89C2A18DC973E0050B60E /* wizard_linphone_create.rc in Resources */,
 				2234C8E915EE2F7F00E18E83 /* chat_message_delivered.png in Resources */,
@@ -4426,7 +4434,7 @@
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
 				PROVISIONING_PROFILE = "0636A6EA-90EB-4D92-B707-19FC32F9A7CF";
 				SDKROOT = iphoneos;
@@ -4519,7 +4527,7 @@
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -4611,7 +4619,7 @@
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
 				PROVISIONING_PROFILE = "C7F794BC-6D48-41F2-B37D-E1B1B1A40901";
 				SDKROOT = iphoneos;
@@ -4703,7 +4711,7 @@
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "2AC0DC11-4546-47B6-8B8A-453CCA80903C";

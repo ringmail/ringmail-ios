@@ -156,7 +156,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSLog(@"RingMail Chat Update: %@", chatTag);
     if (! [chatTag isEqualToString:@""])
     {
-        NSString *displayName = [RgManager addressFromXMPP:chatTag];
+        NSString *displayName = chatTag;
         UIImage *image = nil;
 
         ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:displayName];

@@ -184,7 +184,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 	linphone_core_set_stun_server(lc, NULL);
 	linphone_core_set_firewall_policy(lc, LinphonePolicyNoFirewall);
 	[self resetTextFields];
-    [self changeView:choiceView back:FALSE animation:FALSE];
+    if ([RgManager configReady])
+    {
+        [self changeView:validateAccountView back:FALSE animation:FALSE];
+    }
+    else
+    {
+        [self changeView:choiceView back:FALSE animation:FALSE];
+    }
 	[waitView setHidden:TRUE];
     
     NSLog(@"RingMail: Wizard - Reset Complete");
@@ -489,10 +496,25 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onCheckValidationClick:(id)sender {
-	//NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-	//NSString *identity = [self identityFromUsername:username];
-	//[self checkAccountValidation:identity];
-    
+    [RgManager verifyLogin:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary* res = responseObject;
+        NSString *ok = [res objectForKey:@"result"];
+        if ([ok isEqualToString:@"ok"])
+        {
+            [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
+                          domain:[RgManager ringmailHostSIP] withTransport:@"tcp"];
+            [RgManager updateCredentials:res];
+        }
+        else
+        {
+            UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Email Not Verified"
+                           message:@"Please verify your email address to continue"
+                          delegate:nil
+                 cancelButtonTitle:@"OK"
+                 otherButtonTitles:nil, nil];
+            [errorView show];
+        }
+    }];
 }
 
 - (BOOL)verificationWithUsername:(NSString *)username
@@ -547,7 +569,6 @@ static UICompositeViewDescription *compositeDescription = nil;
                     LevelDB* cfg = [RgManager configDatabase];
                     [cfg setObject:username forKey:@"ringmail_login"];
                     [cfg setObject:password forKey:@"ringmail_password"];
-                    [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
                     [[LinphoneManager instance] setRingLogin:username];
                     [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
                                   domain:[RgManager ringmailHostSIP] withTransport:@"tcp"];

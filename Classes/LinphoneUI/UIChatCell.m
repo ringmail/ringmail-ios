@@ -52,7 +52,7 @@
 }
 
 - (void)update {
-    NSString *displayName = [RgManager addressFromXMPP:_chatTag];
+    NSString *displayName = _chatTag;
 	UIImage *image = nil;
 	if (_chatTag == nil) {
 		LOGW(@"Cannot update chat cell: null chat");

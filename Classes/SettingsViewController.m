@@ -693,6 +693,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
 					 WizardViewController);
 	if (controller != nil) {
+        [RgManager configReset];
+        [[[LinphoneManager instance] chatManager] disconnect];
 		[controller reset];
 	}
 }
@@ -728,14 +730,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 			return;
 		}
 		UIAlertView *alert = [[UIAlertView alloc]
-				initWithTitle:NSLocalizedString(@"Warning", nil)
-					  message:
-						  NSLocalizedString(
-							  @"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?",
-							  nil)
+				initWithTitle:@"Sign Out"
+					  message:@"Are you sure you want to sign out?"
 					 delegate:self
 			cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-			otherButtonTitles:NSLocalizedString(@"Launch Wizard", nil), nil];
+			otherButtonTitles:@"Sign Out", nil];
 		[alert show];
 	} else if ([key isEqual:@"clear_proxy_button"]) {
 		if (linphone_core_get_default_proxy_config(lc) == NULL) {

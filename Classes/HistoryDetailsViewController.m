@@ -357,7 +357,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
     
     	// Go to ChatRoom view
-    [[LinphoneManager instance] setChatTag:[RgManager addressToXMPP:chatRoom]];
+    [[LinphoneManager instance] setChatTag:chatRoom];
     [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 }
 

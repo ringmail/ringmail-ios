@@ -47,7 +47,7 @@ static LevelDB* theConfigDatabase = nil;
 + (NSString*)addressToXMPP:(NSString*)addr
 {
     addr = [addr stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLUserAllowedCharacterSet];
-    return [NSString stringWithFormat:@"%@@staging.ringmail.com", addr];
+    return [NSString stringWithFormat:@"%@@%@", addr, [RgManager ringmailHost]];
 }
 
 + (NSString*)addressFromXMPP:(NSString*)addr
@@ -88,6 +88,15 @@ static LevelDB* theConfigDatabase = nil;
 + (void)closeConfigDatabase
 {
     theConfigDatabase = nil;
+}
+
++ (void)configReset
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    [cfg setObject:@"" forKey:@"ringmail_login"];
+    [cfg setObject:@"" forKey:@"ringmail_password"];
+    [cfg setObject:@"" forKey:@"ringmail_chat_password"];
+    [cfg setObject:@"0" forKey:@"ringmail_email_verify"];
 }
 
 + (BOOL)configReady
@@ -151,27 +160,13 @@ static LevelDB* theConfigDatabase = nil;
     {
         [settings setObject:newSipUser forKey:@"username_preference"];
         [settings setObject:newSipPass forKey:@"password_preference"];
+        [settings setObject:@"tcp" forKey:@"transport_preference"];
         [settings setObject:[RgManager ringmailHostSIP] forKey:@"domain_preference"];
         [settings synchronize];
     }
     LevelDB* cfg = [RgManager configDatabase];
-    NSString *newChatPass = [cred objectForKey:@"chat_password"];
-    NSString *oldChatPass = [cfg objectForKey:@"ringmail_chat_password"];
-    BOOL chatRefresh = NO;
-    if (oldChatPass == nil)
-    {
-        [cfg setObject:newChatPass forKey:@"ringmail_chat_password"];
-        chatRefresh = YES;
-    }
-    else if (! [oldChatPass isEqualToString:newChatPass])
-    {
-        [cfg setObject:newChatPass forKey:@"ringmail_chat_password"];
-        chatRefresh = YES;
-    }
-    if (chatRefresh)
-    {
-        [RgManager chatConnect];
-    }
+    [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
+    [RgManager chatEnsureConnection];
 }
 
 + (void)chatConnect
@@ -192,6 +187,20 @@ static LevelDB* theConfigDatabase = nil;
     [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:[cfg objectForKey:@"ringmail_chat_password"]];
 }
 
++ (void)chatEnsureConnection
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    LinphoneManager* mgr = [LinphoneManager instance];
+    if (mgr.chatManager == nil)
+    {
+        mgr.chatManager = [[RgChatManager alloc] init];
+    }
+    if ([[mgr.chatManager xmppStream] isDisconnected])
+    {
+        [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:[cfg objectForKey:@"ringmail_chat_password"]];
+    }
+}
+
 + (void)initialLogin
 {
     NSLog(@"RingMail: Initial - Login");
@@ -202,7 +211,11 @@ static LevelDB* theConfigDatabase = nil;
     if (rgLogin != nil && rgPass != nil)
     {
         [mgr setRingLogin:rgLogin];
-        [RgManager chatConnect];
+        NSString *rgChatPass = [cfg objectForKey:@"ringmail_chat_password"];
+        if (rgChatPass != nil && (! [rgChatPass isEqualToString:@""])) // Check if chat password exists
+        {
+            [RgManager chatConnect];
+        }
         [[RgNetwork instance] login:rgLogin password:rgPass callback:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
@@ -221,6 +234,20 @@ static LevelDB* theConfigDatabase = nil;
                 }
             }
         }];
+    }
+}
+
++ (void)verifyLogin:(RgNetworkCallback)callback
+{
+    NSLog(@"RingMail: Verify - Login");
+    LinphoneManager* mgr = [LinphoneManager instance];
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        [mgr setRingLogin:rgLogin];
+        [[RgNetwork instance] login:rgLogin password:rgPass callback:callback];
     }
 }
 

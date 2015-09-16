@@ -228,7 +228,7 @@
         [body setStringValue:text];
         NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
         [msg addAttributeWithName:@"type" stringValue:@"chat"];
-        [msg addAttributeWithName:@"to" stringValue:_chatRoom]; // TODO: fix for RingMail addresses
+        [msg addAttributeWithName:@"to" stringValue:[RgManager addressToXMPP:_chatRoom]]; // TODO: fix for RingMail addresses
         [msg addChild:body];
         
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];

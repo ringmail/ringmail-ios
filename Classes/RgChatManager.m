@@ -216,8 +216,9 @@
 
 - (void)disconnect
 {
-    [self goOffline];
-    
+    NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSLog(@"RingMail: Chat - Request Disconnect");
+    [self goOffline];    
     [self.xmppStream disconnect];
 }
 
@@ -288,15 +289,13 @@
     {
         NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
         NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
-        NSString *fromName = [from stringByMatching:@"^(.*?)\\@" capture:1];
-        NSString *chatFrom = [NSString stringWithFormat:@"%@@%@", fromName, [RgManager ringmailHost]];
+        
+        NSString *chatFrom = [RgManager addressFromXMPP:from];
         
         [self dbInsertMessage:chatFrom body:body inbound:YES];
         
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
         {
-            NSString *fromAddress = [RgManager addressFromXMPP:chatFrom];
-            
             // Create a new notification
             UILocalNotification *notif = [[UILocalNotification alloc] init];
             if (notif) {
@@ -304,10 +303,10 @@
                 if ([[UIDevice currentDevice].systemVersion floatValue] >= 8) {
                     notif.category = @"incoming_msg";
                 }
-                notif.alertBody = [NSString stringWithFormat:@"%@: %@", fromAddress, body];
+                notif.alertBody = [NSString stringWithFormat:@"%@: %@", chatFrom, body];
                 notif.alertAction = NSLocalizedString(@"Show", nil);
                 notif.soundName = @"msg.caf";
-                notif.userInfo = @{ @"from" : fromAddress };
+                notif.userInfo = @{ @"from" : chatFrom };
                 
                 [[UIApplication sharedApplication] presentLocalNotificationNow:notif];
             }
@@ -399,7 +398,7 @@
 - (FMDatabaseQueue *)database
 {
     NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat.db"];
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat_v0.2.db"];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     return queue;
 }
@@ -409,10 +408,10 @@
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
-                                @"DROP TABLE chat_session;",
+                                //@"DROP TABLE chat_session;",
                                 @"CREATE TABLE IF NOT EXISTS chat_session (session_tag TEXT NOT NULL, unread INT NOT NULL DEFAULT 0);",
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON chat_session (session_tag);",
-                                @"DROP TABLE chat;",
+                                //@"DROP TABLE chat;",
                                 @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER);",
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
                           nil];
@@ -431,6 +430,7 @@
 
 - (NSNumber *)dbGetSessionID:(NSString *)from
 {
+    NSLog(@"RingMail: Chat - Session ID:(%@)", from);
     FMDatabaseQueue *dbq = [self database];
     __block NSNumber* result;
     [dbq inDatabase:^(FMDatabase *db) {
@@ -456,7 +456,10 @@
     NSNumber* session = [self dbGetSessionID:from];
     [dbq inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"INSERT INTO chat (session_id, msg_body, msg_time, msg_inbound) VALUES (?, ?, datetime('now'), ?);", session, body, [NSNumber numberWithBool:inbound]];
-        [db executeUpdate:@"UPDATE chat_session SET unread = unread + 1 WHERE session_tag = ?", from];
+        if (inbound)
+        {
+            [db executeUpdate:@"UPDATE chat_session SET unread = unread + 1 WHERE session_tag = ?", from];
+        }
     }];
     [dbq close];
 }

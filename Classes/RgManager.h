@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RegexKitLite/RegexKitLite.h"
 #import "LevelDB.h"
+#import "RgNetwork.h"
 
 /* RingMail */
 extern NSString *const kRgTextReceived;
@@ -31,12 +32,15 @@ extern NSString *const kRgSelfName;
 + (void)closeConfigDatabase;
 + (NSDictionary *)getCredentials;
 
++ (void)configReset;
 + (BOOL)configReady;
 + (BOOL)configVerified;
 + (BOOL)configReadyAndVerified;
 
 + (void)updateCredentials:(NSDictionary*)cred;
 + (void)chatConnect;
++ (void)chatEnsureConnection;
 + (void)initialLogin;
++ (void)verifyLogin:(RgNetworkCallback)callback;
 
 @end
