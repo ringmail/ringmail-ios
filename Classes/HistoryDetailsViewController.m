@@ -354,7 +354,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     NSString* chatRoom = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
     ms_free(lAddress);
-	[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+	//[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
     
     	// Go to ChatRoom view
     [[LinphoneManager instance] setChatTag:chatRoom];

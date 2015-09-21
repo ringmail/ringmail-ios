@@ -83,4 +83,28 @@ static RgNetwork* theRgNetwork = nil;
     }
 }
 
+- (void)signOut
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters = @{@"email": rgLogin, @"password": rgPass};
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/sign_out", self.networkHost];
+        [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary* res = responseObject;
+            NSString *ok = [res objectForKey:@"result"];
+            if (! [ok isEqualToString:@"ok"])
+            {
+                NSLog(@"RingMail API Error: %@", @"Sign Out Failed");
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"RingMail API Error: %@", error);
+        }];
+    }
+}
+
+
 @end

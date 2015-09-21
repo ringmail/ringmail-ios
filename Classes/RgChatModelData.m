@@ -10,6 +10,7 @@
 @implementation RgChatModelData
 
 @synthesize chatRoom;
+@synthesize chatError;
 
 - (instancetype)init
 {
@@ -29,10 +30,15 @@
                                                                                              textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                                                                                                   font:[UIFont systemFontOfSize:14.0f]
                                                                                               diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *ringImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"RM"
+                                                                                       backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
+                                                                                             textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
+                                                                                                  font:[UIFont systemFontOfSize:14.0f]
+                                                                                              diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        self.avatars = @{ kJSQDemoAvatarIdJobs : jobsImage };
+        self.avatars = @{ kJSQDemoAvatarIdJobs : jobsImage, kJSQDemoAvatarIdWoz : ringImage };
         
-        self.users = @{ kJSQDemoAvatarIdJobs : kJSQDemoAvatarDisplayNameJobs };
+        self.users = @{ kJSQDemoAvatarIdJobs : kJSQDemoAvatarDisplayNameJobs, kJSQDemoAvatarIdWoz : @"RingMail" };
         
         self.messages = [NSMutableArray array];
         
@@ -85,7 +91,13 @@
                                                                 date:[msgdata objectForKey:@"time"]
                                                                 text:[msgdata objectForKey:@"body"]]];
             }
-
+        }
+        if (chatError != nil && ![chatError isEqualToString:@""])
+        {
+            [msgs addObject:[[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz
+                                               senderDisplayName:@"RingMail"
+                                                            date:[NSDate date] // TODO: correct error date
+                                                            text:[NSString stringWithFormat:@"Error: %@", chatError]]];
         }
         self.messages = msgs;
     }

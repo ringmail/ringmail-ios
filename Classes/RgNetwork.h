@@ -18,6 +18,8 @@ typedef void (^RgNetworkCallback)(AFHTTPRequestOperation *operation, id response
 + (RgNetwork *)instance;
 - (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback;
 - (void)registerPushToken;
+- (void)signOut;
 - (void)registerUser:(NSDictionary*)params callback:(RgNetworkCallback)callback;
+- (void)resendVerify:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 
 @end

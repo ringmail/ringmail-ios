@@ -159,8 +159,6 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	} else if ((linphone_proxy_config_is_phone_number(NULL, [username UTF8String])) &&
 			   ([[LinphoneManager instance] lpConfigBoolForKey:@"save_new_contacts_as_phone_number"] == true)) {
 		[tableController addPhoneField:username];
-	} else {
-		[tableController addSipField:address];
 	}
 	linphone_address_destroy(linphoneAddress);
 

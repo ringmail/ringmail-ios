@@ -53,9 +53,9 @@
 {
     [self.chatData loadMessages];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
         [self scrollToBottomAnimated:YES];
         [self finishReceivingMessageAnimated:YES];
+        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     });
 }
 
@@ -228,7 +228,9 @@
         [body setStringValue:text];
         NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
         [msg addAttributeWithName:@"type" stringValue:@"chat"];
-        [msg addAttributeWithName:@"to" stringValue:[RgManager addressToXMPP:_chatRoom]]; // TODO: fix for RingMail addresses
+        NSString* msgTo = [RgManager addressToXMPP:_chatRoom];
+        NSLog(@"RingMail - Send Message To: %@ -> %@", _chatRoom, msgTo);
+        [msg addAttributeWithName:@"to" stringValue:msgTo];
         [msg addChild:body];
         
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
@@ -250,6 +252,7 @@
                                                               text:text];
         
         [self.chatData.messages addObject:message];
+        [self.chatData setChatError:@""];
         
         [self finishSendingMessageAnimated:YES];
         

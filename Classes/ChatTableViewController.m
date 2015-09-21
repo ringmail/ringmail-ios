@@ -83,6 +83,7 @@
     NSArray *chatData = [self.chatList objectAtIndex:[indexPath row]];
     [cell setChatTag:[chatData objectAtIndex:0]];
     [cell setChatUnread:[chatData objectAtIndex:1]];
+    [cell setLastMessage:[chatData objectAtIndex:2]];
     [cell update];
 	return cell;
 }

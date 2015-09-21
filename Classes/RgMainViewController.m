@@ -39,6 +39,8 @@
 @synthesize addCallButton;
 @synthesize transferButton;
 @synthesize callButton;
+@synthesize goButton;
+@synthesize messageButton;
 @synthesize eraseButton;
 
 @synthesize backgroundView;
@@ -409,11 +411,27 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[eraseButton setEnabled:TRUE];
 		[addCallButton setEnabled:TRUE];
 		[transferButton setEnabled:TRUE];
+        NSString* addr = [addressField text];
+        if ([[addr substringToIndex:1] isEqualToString:@"#"])
+        {
+            messageButton.hidden = YES;
+            callButton.hidden = YES;
+            goButton.hidden = NO;
+        }
+        else
+        {
+            messageButton.hidden = NO;
+            callButton.hidden = NO;
+            goButton.hidden = YES;
+        }
 	} else {
 		[addContactButton setEnabled:FALSE];
 		[eraseButton setEnabled:FALSE];
 		[addCallButton setEnabled:FALSE];
 		[transferButton setEnabled:FALSE];
+        messageButton.hidden = NO;
+        callButton.hidden = NO;
+        goButton.hidden = YES;
 	}
 }
 

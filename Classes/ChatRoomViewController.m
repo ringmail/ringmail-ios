@@ -95,10 +95,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 												 name:UIApplicationDidBecomeActiveNotification
 											   object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(textReceivedEvent:)
-												 name:kLinphoneTextReceived
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(textComposeEvent:)
 												 name:kLinphoneTextComposeEvent
 											   object:nil];
@@ -267,33 +263,6 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
 
 #pragma mark - Event Functions
 
-- (void)textReceivedEvent:(NSNotification *)notif {
-	LinphoneAddress *from = [[[notif userInfo] objectForKey:@"from_address"] pointerValue];
-	LinphoneChatRoom *room = [[notif.userInfo objectForKey:@"room"] pointerValue];
-	LinphoneChatMessage *chat = [[notif.userInfo objectForKey:@"message"] pointerValue];
-
-	if (from == NULL || chat == NULL) {
-		return;
-	}
-	char *fromStr = linphone_address_as_string_uri_only(from);
-	const LinphoneAddress *cr_from = linphone_chat_room_get_peer_address(chatRoom);
-	char *cr_from_string = linphone_address_as_string_uri_only(cr_from);
-
-	if (fromStr && cr_from_string) {
-
-		if (strcasecmp(cr_from_string, fromStr) == 0) {
-			if ([UIApplication sharedApplication].applicationState != UIApplicationStateBackground) {
-				linphone_chat_room_mark_as_read(room);
-				[[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
-			}
-			//[tableController addChatEntry:chat];
-			//[tableController scrollToLastUnread:TRUE];
-		}
-	}
-	ms_free(fromStr);
-	ms_free(cr_from_string);
-}
-
 - (void)textComposeEvent:(NSNotification *)notif {
 	LinphoneChatRoom *room = [[[notif userInfo] objectForKey:@"room"] pointerValue];
 	if (room && room == chatRoom) {
@@ -306,6 +275,14 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
     NSString *room = [[notif userInfo] objectForKey:@"tag"];
     if ([room isEqualToString:chatViewController.chatRoom])
     {
+        if ([[notif userInfo] objectForKey:@"error"] != nil)
+        {
+            [chatViewController.chatData setChatError:[[notif userInfo] objectForKey:@"error"]];
+        }
+        else
+        {
+            [chatViewController.chatData setChatError:@""];
+        }
         [chatViewController receiveMessage];
     }
 }

@@ -60,6 +60,8 @@
 
 @property (nonatomic, strong) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 
+@property (nonatomic, strong) IBOutlet UILabel *verifyEmailLabel;
+
 - (void)reset;
 - (void)fillDefaultValues;
 

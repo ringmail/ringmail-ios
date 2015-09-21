@@ -27,11 +27,13 @@
 
 @synthesize avatarImage;
 @synthesize addressLabel;
+@synthesize messageLabel;
 @synthesize deleteButton;
 @synthesize unreadMessageLabel;
 @synthesize unreadMessageView;
 @synthesize chatTag = _chatTag;
 @synthesize chatUnread = _chatUnread;
+@synthesize lastMessage = _lastMessage;
 
 #pragma mark - Lifecycle Functions
 
@@ -66,6 +68,7 @@
 	}
 
 	[addressLabel setText:displayName];
+    [messageLabel setText:_lastMessage];
 
 	// Avatar
 	if (image == nil) {

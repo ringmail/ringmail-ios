@@ -166,6 +166,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     LevelDB* cfg = [RgManager configDatabase];
     [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
+    [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
     [RgManager chatEnsureConnection];
 }
 
@@ -212,6 +213,7 @@ static LevelDB* theConfigDatabase = nil;
     {
         [mgr setRingLogin:rgLogin];
         NSString *rgChatPass = [cfg objectForKey:@"ringmail_chat_password"];
+        NSLog(@"Initial Chat Pass: %@", rgChatPass);
         if (rgChatPass != nil && (! [rgChatPass isEqualToString:@""])) // Check if chat password exists
         {
             [RgManager chatConnect];

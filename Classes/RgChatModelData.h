@@ -48,6 +48,7 @@ static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
 @property (strong, nonatomic) NSDictionary *users;
 @property (strong, nonatomic) NSString *chatRoom;
+@property (strong, nonatomic) NSString *chatError;
 
 - (id)initWithChatRoom:(NSString *)room;
 - (void)loadMessages;

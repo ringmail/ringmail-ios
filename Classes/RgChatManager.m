@@ -176,8 +176,8 @@
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword
 {
     NSLog(@"RingMail Chat Connect: %@", myJID);
-    myJID = [myJID stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLUserAllowedCharacterSet];
-    myJID = [myJID stringByAppendingString:@"@staging.ringmail.com"];
+    NSLog(@"RingMail Chat Password: %@", myPassword);
+    myJID = [RgManager addressToXMPP:myJID];
     self.JID = [XMPPJID jidWithString:myJID resource:@"RingMail"];
     
     //if (![self.JID.domain isEqualToString:self.xmppStream.myJID.domain]) {
@@ -323,6 +323,18 @@
     if ([xmppMessage isErrorMessage])
     {
         NSError *error = [xmppMessage errorMessage];
+        NSLog(@"XMPP Error Code: %tu", [error code]);
+        if ([error code] == 503)
+        {
+            NSLog(@"XMPP Error: Bad RingMail Address");
+            NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
+            NSString *chatFrom = [RgManager addressFromXMPP:from];
+            NSDictionary *dict = @{
+                                   @"tag": chatFrom,
+                                   @"error": @"Address not registered",
+            };
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
+        }
         NSLog(@"XMPP Error: %@", error);
     }
 
@@ -469,12 +481,13 @@
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread FROM chat_session ORDER BY rowid DESC"];
+        FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread, (SELECT msg_body FROM chat WHERE chat.session_id=chat_session.rowid ORDER BY rowid DESC LIMIT 1) as last_message FROM chat_session ORDER BY rowid DESC"];
         while ([rs next])
         {
             [result addObject:[NSArray arrayWithObjects:
                                [rs stringForColumnIndex:0],
                                [rs objectForColumnIndex:1],
+                               [rs stringForColumnIndex:2],
                                nil]];
         }
         [rs close];
@@ -489,7 +502,7 @@
     NSNumber* session = [self dbGetSessionID:from];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT msg_body, STRFTIME('%s', msg_time), msg_inbound FROM chat WHERE session_id = ? ORDER BY rowid ASC", session];
+        FMResultSet *rs = [db executeQuery:@"SELECT msg_body, STRFTIME('%s', msg_time), msg_inbound FROM chat WHERE session_id = ? ORDER BY rowid ASC LIMIT 50", session];
         while ([rs next])
         {
             [result addObject:@{

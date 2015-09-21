@@ -260,12 +260,12 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 - (id)init {
 	if ((self = [super init])) {
         /* Audio session */
-        /*BOOL success = NO;
+        BOOL success = NO;
         NSError *error = nil;
         
         AVAudioSession *session = [AVAudioSession sharedInstance];
         
-        success = [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
+        success = [session setCategory:AVAudioSessionCategoryPlayback error:&error];
         if (! success)
         {
             NSLog(@"%@ Error setting audio session category: %@",
@@ -275,7 +275,7 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
         if (! success)
         {
             NSLog(@"Error activating audio session: %@", [error localizedDescription]);
-        }*/
+        }
         /* End Audio session */
         
 		/*AudioSessionInitialize(NULL, NULL, NULL, NULL);

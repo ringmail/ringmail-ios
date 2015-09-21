@@ -24,6 +24,7 @@
 #import "UIEraseButton.h"
 #import "UICamSwitch.h"
 #import "UICallButton.h"
+#import "UIMessageButton.h"
 #import "UITransferButton.h"
 #import "UIDigitButton.h"
 
@@ -39,6 +40,8 @@
 @property (nonatomic, strong) IBOutlet UITextField* addressField;
 @property (nonatomic, strong) IBOutlet UIButton* addContactButton;
 @property (nonatomic, strong) IBOutlet UICallButton* callButton;
+@property (nonatomic, strong) IBOutlet UICallButton* goButton;
+@property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;
 @property (nonatomic, strong) IBOutlet UICallButton* addCallButton;
 @property (nonatomic, strong) IBOutlet UITransferButton* transferButton;
 @property (nonatomic, strong) IBOutlet UIButton* backButton;

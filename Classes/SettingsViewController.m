@@ -693,6 +693,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
 					 WizardViewController);
 	if (controller != nil) {
+        [RgNetwork signOut];
         [RgManager configReset];
         [[[LinphoneManager instance] chatManager] disconnect];
 		[controller reset];

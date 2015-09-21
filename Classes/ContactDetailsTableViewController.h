@@ -48,7 +48,6 @@ typedef enum _ContactSections {
 
 - (BOOL)isValid;
 - (void)addPhoneField:(NSString*)number;
-- (void)addSipField:(NSString*)address;
 - (void)addEmailField:(NSString*)address;
 - (void)setContact:(ABRecordRef)contact;
 

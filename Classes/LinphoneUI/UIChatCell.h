@@ -29,11 +29,13 @@
 
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImage;
 @property (nonatomic, strong) IBOutlet UILabel* addressLabel;
+@property (nonatomic, strong) IBOutlet UILabel* messageLabel;
 @property (nonatomic, strong) IBOutlet UILabel* chatContentLabel;
 @property (nonatomic, strong) IBOutlet UIButton * deleteButton;
 @property (nonatomic, strong) IBOutlet UIView * unreadMessageView;
 @property (nonatomic, strong) IBOutlet UILabel * unreadMessageLabel;
 @property (nonatomic, strong) NSString* chatTag;
+@property (nonatomic, strong) NSString* lastMessage;
 @property (nonatomic, strong) NSNumber* chatUnread;
 
 - (id)initWithIdentifier:(NSString*)identifier;

@@ -54,6 +54,8 @@ typedef enum _ViewElement {
 
 @synthesize viewTapGestureRecognizer;
 
+@synthesize verifyEmailLabel;
+
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -104,11 +106,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(configuringUpdate:)
 												 name:kLinphoneConfiguringStateUpdate
 											   object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(checkValidation:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
+                                                  object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 - (void)viewDidLoad {
@@ -228,6 +238,23 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[historyViews removeAllObjects];
 }
 
+- (void)checkValidation:(NSNotification *)notif {
+    // Check once if validated, if so, this screen can be skipped
+    if ([RgManager configReady] && ! [RgManager configVerified])
+    {
+        [RgManager verifyLogin:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary* res = responseObject;
+            NSString *ok = [res objectForKey:@"result"];
+            if ([ok isEqualToString:@"ok"])
+            {
+                [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
+                              domain:[RgManager ringmailHostSIP] withTransport:@"tcp"];
+                [RgManager updateCredentials:res];
+            }
+        }];
+    }
+}
+
 - (void)changeView:(UIView *)view back:(BOOL)back animation:(BOOL)animation {
 
 	// Change toolbar buttons following view
@@ -235,6 +262,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	if (view == validateAccountView) {
 		[backButton setEnabled:FALSE];
         [backButton setHidden:TRUE];
+        
 	} else if (view == choiceView) {
         [backButton setEnabled:FALSE];
         [backButton setHidden:TRUE];
@@ -242,6 +270,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[backButton setEnabled:TRUE];
         [backButton setHidden:FALSE];
 	}
+    
+    if (view == validateAccountView)
+    {
+        LevelDB* cfg = [RgManager configDatabase];
+        NSLog(@"RingMail: Change View - validate: %@", [cfg objectForKey:@"ringmail_login"]);
+        [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
+    }
 
 	// Animation
 	if (animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
@@ -493,6 +528,40 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onConnectLinphoneAccountClick:(id)sender {
 	nextView = connectAccountView;
 	[self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
+}
+
+- (IBAction)onGoToMailClick:(id)sender {
+    NSURL* mailURL = [NSURL URLWithString:@"message://"];
+    if ([[UIApplication sharedApplication] canOpenURL:mailURL]) {
+        [[UIApplication sharedApplication] openURL:mailURL];
+    }
+    else
+    {
+        NSLog(@"RingMail: Mail - Goto failed");
+    }
+}
+
+- (IBAction)onResendVerifyClick:(id)sender {
+    LevelDB* cfg = [RgManager configDatabase];
+    [[RgNetwork instance] resendVerify:@{@"email": [cfg objectForKey:@"ringmail_login"]} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [waitView setHidden:true];
+        NSDictionary* res = responseObject;
+        NSString *ok = [res objectForKey:@"result"];
+        if ([ok isEqualToString:@"ok"])
+        {
+            UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"Email Sent"
+                                                                message:@"Please check your email inbox."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil, nil];
+            [confirmView show];
+        }
+        else
+        {
+            NSString* error = [res objectForKey:@"error"];
+            NSLog(@"RingMail: Error - API resend verify: %@", error);
+        }
+    }];
 }
 
 - (IBAction)onCheckValidationClick:(id)sender {
