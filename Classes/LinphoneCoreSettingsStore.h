@@ -31,5 +31,6 @@
 }
 
 - (void)transformLinphoneCoreToKeys;
+- (NSDictionary*)getSettings;
 
 @end

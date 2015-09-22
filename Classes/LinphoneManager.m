@@ -2073,7 +2073,6 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		[self configurePushTokenForProxyConfig:cfg];
 		linphone_proxy_config_done(cfg);
 	}*/
-    [[RgNetwork instance] registerPushToken];
 }
 
 - (void)configurePushTokenForProxyConfig:(LinphoneProxyConfig *)proxyCfg {

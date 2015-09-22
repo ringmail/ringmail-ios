@@ -128,13 +128,13 @@
 		}
 		linphone_chat_room_delete_history(chatRoom);
 		linphone_chat_room_unref(chatRoom);
-		data = ms_list_remove(data, chatRoom);
+		data = ms_list_remove(data, chatRoom);*/
 
 		// will force a call to [self loadData]
-		[[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self];
 
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-						 withRowAnimation:UITableViewRowAnimationFade];*/
+						 withRowAnimation:UITableViewRowAnimationFade];
 		[tableView endUpdates];
 	}
 }

@@ -459,49 +459,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Event Functions
 
 - (void)appSettingChanged:(NSNotification *)notif {
-	NSMutableSet *hiddenKeys = [NSMutableSet setWithSet:[settingsController hiddenKeys]];
-	NSMutableArray *keys = [NSMutableArray array];
-	BOOL removeFromHiddenKeys = TRUE;
-
-	if ([@"enable_video_preference" compare:notif.object] == NSOrderedSame) {
-		removeFromHiddenKeys = [[notif.userInfo objectForKey:@"enable_video_preference"] boolValue];
-		[keys addObject:@"video_menu"];
-	} else if ([@"random_port_preference" compare:notif.object] == NSOrderedSame) {
-		removeFromHiddenKeys = ![[notif.userInfo objectForKey:@"random_port_preference"] boolValue];
-		[keys addObject:@"port_preference"];
-	} else if ([@"backgroundmode_preference" compare:notif.object] == NSOrderedSame) {
-		removeFromHiddenKeys = [[notif.userInfo objectForKey:@"backgroundmode_preference"] boolValue];
-		[keys addObject:@"start_at_boot_preference"];
-	} else if ([@"stun_preference" compare:notif.object] == NSOrderedSame) {
-		NSString *stun_server = [notif.userInfo objectForKey:@"stun_preference"];
-		removeFromHiddenKeys = (stun_server && ([stun_server length] > 0));
-		[keys addObject:@"ice_preference"];
-	} else if ([@"debugenable_preference" compare:notif.object] == NSOrderedSame) {
-		BOOL debugEnabled = [[notif.userInfo objectForKey:@"debugenable_preference"] boolValue];
-		removeFromHiddenKeys = debugEnabled;
-		[keys addObject:@"send_logs_button"];
-		[keys addObject:@"reset_logs_button"];
-		[[LinphoneManager instance] setLogsEnabled:debugEnabled];
-	} else if ([@"advanced_account_preference" compare:notif.object] == NSOrderedSame) {
-		removeFromHiddenKeys = [[notif.userInfo objectForKey:@"advanced_account_preference"] boolValue];
-		[keys addObject:@"userid_preference"];
-		[keys addObject:@"proxy_preference"];
-		[keys addObject:@"outbound_proxy_preference"];
-		[keys addObject:@"avpf_preference"];
-	} else if ([@"video_preset_preference" compare:notif.object] == NSOrderedSame) {
-		NSString *video_preset = [notif.userInfo objectForKey:@"video_preset_preference"];
-		removeFromHiddenKeys = [video_preset isEqualToString:@"custom"];
-		[keys addObject:@"video_preferred_fps_preference"];
-		[keys addObject:@"download_bandwidth_preference"];
-	}
-
-	for (NSString *key in keys) {
-		if (removeFromHiddenKeys)
-			[hiddenKeys removeObject:key];
-		else
-			[hiddenKeys addObject:key];
-	}
-
+	NSMutableSet *hiddenKeys = [NSMutableSet set];
 	[settingsController setHiddenKeys:hiddenKeys animated:TRUE];
 }
 
@@ -581,110 +539,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (NSSet *)findHiddenKeys {
-	LinphoneManager *lm = [LinphoneManager instance];
 	NSMutableSet *hiddenKeys = [NSMutableSet set];
-
-#ifndef HAVE_SSL
-	[hiddenKeys addObject:@"media_encryption_preference"];
-#endif
-
-#ifndef DEBUG
-	[hiddenKeys addObject:@"release_button"];
-	[hiddenKeys addObject:@"clear_cache_button"];
-	[hiddenKeys addObject:@"battery_alert_button"];
-#endif
-
-	if (![[LinphoneManager instance] lpConfigBoolForKey:@"debugenable_preference"]) {
-		[hiddenKeys addObject:@"send_logs_button"];
-		[hiddenKeys addObject:@"reset_logs_button"];
-	}
-
-	[hiddenKeys addObject:@"playback_gain_preference"];
-	[hiddenKeys addObject:@"microphone_gain_preference"];
-
-	[hiddenKeys addObject:@"network_limit_group"];
-
-	[hiddenKeys addObject:@"incoming_call_timeout_preference"];
-	[hiddenKeys addObject:@"in_call_timeout_preference"];
-
-	[hiddenKeys addObject:@"wifi_only_preference"];
-
-	[hiddenKeys addObject:@"quit_button"];  // Hide for the moment
-	[hiddenKeys addObject:@"about_button"]; // Hide for the moment
-
-	if (!linphone_core_video_supported([LinphoneManager getLc]))
-		[hiddenKeys addObject:@"video_menu"];
-
-	if (![LinphoneManager isNotIphone3G])
-		[hiddenKeys addObject:@"silk_24k_preference"];
-
-	UIDevice *device = [UIDevice currentDevice];
-	if (![device respondsToSelector:@selector(isMultitaskingSupported)] || ![device isMultitaskingSupported]) {
-		[hiddenKeys addObject:@"backgroundmode_preference"];
-		[hiddenKeys addObject:@"start_at_boot_preference"];
-	} else {
-		if (![lm lpConfigBoolForKey:@"backgroundmode_preference"]) {
-			[hiddenKeys addObject:@"start_at_boot_preference"];
-		}
-	}
-
-	[hiddenKeys addObject:@"enable_first_login_view_preference"];
-
-#ifndef VIDEO_ENABLED
-	[hiddenKeys addObject:@"enable_video_preference"];
-#endif // VIDEO_ENABLED
-
-	if (!linphone_core_video_enabled([LinphoneManager getLc])) {
-		[hiddenKeys addObject:@"video_menu"];
-	}
-
-	if (!linphone_core_get_video_preset([LinphoneManager getLc]) ||
-		strcmp(linphone_core_get_video_preset([LinphoneManager getLc]), "custom") != 0) {
-		[hiddenKeys addObject:@"video_preferred_fps_preference"];
-		[hiddenKeys addObject:@"download_bandwidth_preference"];
-	}
-
-	[hiddenKeys addObjectsFromArray:[[LinphoneManager unsupportedCodecs] allObjects]];
-
-	BOOL random_port = [lm lpConfigBoolForKey:@"random_port_preference"];
-	if (random_port) {
-		[hiddenKeys addObject:@"port_preference"];
-	}
-
-	if (linphone_core_get_stun_server([LinphoneManager getLc]) == NULL) {
-		[hiddenKeys addObject:@"ice_preference"];
-	}
-
-	if (![lm lpConfigBoolForKey:@"debugenable_preference"]) {
-		[hiddenKeys addObject:@"console_button"];
-	}
-
-	if (![LinphoneManager runningOnIpad]) {
-		[hiddenKeys addObject:@"preview_preference"];
-	}
-	if ([lm lpConfigBoolForKey:@"hide_run_assistant_preference"]) {
-		[hiddenKeys addObject:@"wizard_button"];
-	}
-
-	if (!linphone_core_tunnel_available()) {
-		[hiddenKeys addObject:@"tunnel_menu"];
-	}
-
-	if (![lm lpConfigBoolForKey:@"advanced_account_preference"]) {
-		[hiddenKeys addObject:@"userid_preference"];
-		[hiddenKeys addObject:@"proxy_preference"];
-		[hiddenKeys addObject:@"outbound_proxy_preference"];
-		[hiddenKeys addObject:@"avpf_preference"];
-	}
-
-	if (![[[LinphoneManager instance] iapManager] enabled]) {
-		[hiddenKeys addObject:@"in_app_products_button"];
-	}
-
-	if ([[UIDevice currentDevice].systemVersion floatValue] < 8) {
-		[hiddenKeys addObject:@"repeat_call_notification_preference"];
-	}
-
 	return hiddenKeys;
 }
 
@@ -693,7 +548,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
 					 WizardViewController);
 	if (controller != nil) {
-        [RgNetwork signOut];
+        [[RgNetwork instance] signOut];
         [RgManager configReset];
         [[[LinphoneManager instance] chatManager] disconnect];
 		[controller reset];

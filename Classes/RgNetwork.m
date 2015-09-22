@@ -83,6 +83,20 @@ static RgNetwork* theRgNetwork = nil;
     }
 }
 
+- (void)resendVerify:(NSDictionary *)params callback:(RgNetworkCallback)callback
+{
+    NSString *rgLogin = [params objectForKey:@"email"];
+    if (rgLogin != nil)
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters = @{@"email": rgLogin};
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/resend_verify", self.networkHost];
+        [manager POST:postUrl parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"RingMail API Error: %@", error);
+        }];
+    }
+}
+
 - (void)signOut
 {
     LevelDB* cfg = [RgManager configDatabase];
@@ -91,7 +105,7 @@ static RgNetwork* theRgNetwork = nil;
     if (rgLogin != nil && rgPass != nil)
     {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *parameters = @{@"email": rgLogin, @"password": rgPass};
+        NSDictionary *parameters = @{@"login": rgLogin, @"password": rgPass};
         NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/sign_out", self.networkHost];
         [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary* res = responseObject;

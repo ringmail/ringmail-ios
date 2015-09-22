@@ -35,6 +35,11 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	return self;
 }
 
+- (NSDictionary*)getSettings
+{
+    return [NSDictionary dictionaryWithDictionary:dict];
+}
+
 - (void)setCString:(const char *)value forKey:(NSString *)key {
 	id obj = Nil;
 	if (value)

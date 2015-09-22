@@ -462,6 +462,18 @@
     return result;
 }
 
+- (void)dbDeleteSessionID:(NSString *)from
+{
+    NSLog(@"RingMail: Chat  Delete - Session ID:(%@)", from);
+    FMDatabaseQueue *dbq = [self database];
+    NSNumber* session = [self dbGetSessionID:from];
+    [dbq inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"DELETE FROM chat WHERE session_id = ?;", session];
+        [db executeUpdate:@"DELETE FROM chat_session WHERE session_tag = ?;", from];
+    }];
+    [dbq close];
+}
+
 - (void)dbInsertMessage:(NSString *)from body:(NSString *)body inbound:(BOOL)inbound
 {
     FMDatabaseQueue *dbq = [self database];

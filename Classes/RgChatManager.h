@@ -39,5 +39,6 @@
 - (NSArray *)dbGetMessages:(NSString *)from;
 - (void)dbInsertMessage:(NSString *)from body:(NSString *)body inbound:(BOOL)inbound;
 - (NSNumber *)dbGetSessionUnread;
+- (void)dbDeleteSessionID:(NSString *)from;
 
 @end

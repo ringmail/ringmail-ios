@@ -152,6 +152,30 @@ static LevelDB* theConfigDatabase = nil;
     NSLog(@"RingMail Update Credentials: %@", cred);
     LinphoneCoreSettingsStore* settings = [[LinphoneCoreSettingsStore alloc] init];
     [settings transformLinphoneCoreToKeys];
+    NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
+    
+    // RingMail Defaults
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"start_at_boot_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"backgroundmode_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"enable_video_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"opus_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"pcmu_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"g722_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"vp8_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"ice_preference"];
+    [settings setObject:@"stun1.l.google.com:19302" forKey:@"stun_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"adaptive_rate_control_preference"];
+    [settings setObject:@"Simple" forKey:@"adaptive_rate_algorithm_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"autoanswer_notif_preference"];
+    [settings setObject:[NSNumber numberWithInt:36] forKey:@"audio_codec_bitrate_limit_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"adaptive_rate_control_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"voiceproc_preference"];
+    
+    for (NSString *i in @[@"aaceld_16k", @"aaceld_22k", @"aaceld_32k", @"aaceld_44k", @"aaceld_48k", @"avpf", @"gsm", @"ilbc", @"pcma", @"silk_16k", @"silk_24k", @"speex_16k", @"speex_8k", @"h264", @"mp4v-es"])
+    {
+        [settings setObject:[NSNumber numberWithBool:0] forKey:[NSString stringWithFormat:@"%@_preference", i]];
+    }
+    
     NSString *newSipUser = [cred objectForKey:@"sip_login"];
     NSString *oldSipUser = [settings objectForKey:@"username_preference"];
     NSString *newSipPass = [cred objectForKey:@"sip_password"];
@@ -162,12 +186,15 @@ static LevelDB* theConfigDatabase = nil;
         [settings setObject:newSipPass forKey:@"password_preference"];
         [settings setObject:@"tcp" forKey:@"transport_preference"];
         [settings setObject:[RgManager ringmailHostSIP] forKey:@"domain_preference"];
-        [settings synchronize];
     }
+    NSLog(@"RingMail - New Settings: %@", [settings getSettings]);
+    [settings synchronize];
+    
     LevelDB* cfg = [RgManager configDatabase];
     [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
     [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
     [RgManager chatEnsureConnection];
+    [[RgNetwork instance] registerPushToken];
 }
 
 + (void)chatConnect

@@ -111,19 +111,21 @@
 #pragma mark - Action Functions
 
 - (IBAction)onDeleteClick:(id)event {
-	/*if (chatRoom != NULL) {
+    NSLog(@"On Delete Click: %@", _chatTag);
+	if (_chatTag) {
 		UIView *view = [self superview];
 		// Find TableViewCell
 		while (view != nil && ![view isKindOfClass:[UITableView class]])
 			view = [view superview];
 		if (view != nil) {
+            [[[LinphoneManager instance] chatManager] dbDeleteSessionID:_chatTag];
 			UITableView *tableView = (UITableView *)view;
 			NSIndexPath *indexPath = [tableView indexPathForCell:self];
 			[[tableView dataSource] tableView:tableView
 						   commitEditingStyle:UITableViewCellEditingStyleDelete
 							forRowAtIndexPath:indexPath];
 		}
-	}*/
+	}
 }
 
 @end
