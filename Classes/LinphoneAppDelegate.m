@@ -233,32 +233,11 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	NSString *scheme = [[url scheme] lowercaseString];
-	if ([scheme isEqualToString:@"linphone-config"] || [scheme isEqualToString:@"linphone-config"]) {
-		NSString *encodedURL =
-			[[url absoluteString] stringByReplacingOccurrencesOfString:@"linphone-config://" withString:@""];
-		self.configURL = [encodedURL stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		UIAlertView *confirmation = [[UIAlertView alloc]
-				initWithTitle:NSLocalizedString(@"Remote configuration", nil)
-					  message:NSLocalizedString(@"This operation will load a remote configuration. Continue ?", nil)
-					 delegate:self
-			cancelButtonTitle:NSLocalizedString(@"No", nil)
-			otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
-		confirmation.tag = 1;
-		[confirmation show];
-	} else {
-		if ([[url scheme] isEqualToString:@"sip"]) {
-			// remove "sip://" from the URI, and do it correctly by taking resourceSpecifier and removing leading and
-			// trailing "/"
-			NSString *sipUri = [[url resourceSpecifier]
-				stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"/"]];
-
-			RgMainViewController *controller = DYNAMIC_CAST(
-				[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
-				RgMainViewController);
-			if (controller != nil) {
-				[controller setAddress:sipUri];
-			}
-		}
+	if ([scheme isEqualToString:@"ring"])
+    {
+        NSString *encodedURL = [url absoluteString];
+		NSString *finalURL = [encodedURL stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [RgManager processRingURI:finalURL];
 	}
 	return YES;
 }
@@ -377,7 +356,16 @@
 	didReceiveRemoteNotification:(NSDictionary *)userInfo
 		  fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 	LOGI(@"%@ : %@", NSStringFromSelector(_cmd), userInfo);
-	LinphoneManager *lm = [LinphoneManager instance];
+    
+    LinphoneManager *lm = [LinphoneManager instance];
+    
+    NSString *actionKey = [[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"action-loc-key"];
+    if ([actionKey isEqualToString:@"CHAT"])
+    {
+        NSString *chatMd5 = [userInfo objectForKey:@"tag"];
+        [lm setChatMd5:chatMd5];
+        [RgManager startMessageMD5];
+    }
 
 	// save the completion handler for later execution.
 	// 2 outcomes:
@@ -394,6 +382,7 @@
 	// If no call is yet received at this time, then force Linphone to drop the current socket and make new one to
 	// register, so that we get
 	// a better chance to receive the INVITE.
+    
 	if (linphone_core_get_calls(lc) == NULL) {
 		linphone_core_set_network_reachable(lc, FALSE);
 		lm.connectivity = none; /*force connectivity to be discovered again*/

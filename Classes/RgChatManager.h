@@ -33,6 +33,7 @@
 @property (nonatomic, strong) XMPPJID *JID;
 @property (atomic, strong) NSString* chatPassword;
 
+- (BOOL)isConnected;
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
 - (void)disconnect;
 - (NSArray *)dbGetSessions;
@@ -40,5 +41,6 @@
 - (void)dbInsertMessage:(NSString *)from body:(NSString *)body inbound:(BOOL)inbound;
 - (NSNumber *)dbGetSessionUnread;
 - (void)dbDeleteSessionID:(NSString *)from;
+- (NSString *)dbGetSessionByMD5:(NSString*)lookup;
 
 @end

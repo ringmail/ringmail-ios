@@ -7,6 +7,7 @@
 //
 
 #import "RgChatManager.h"
+#import "NSString+MD5.h"
 
 #define THIS_FILE   @"RgChatManager"
 #define THIS_METHOD NSStringFromSelector(_cmd)
@@ -151,6 +152,11 @@
     return _xmppStream;
 }
 
+- (BOOL)isConnected
+{
+    return (! [_xmppStream isDisconnected]);
+}
+
 
 - (void)goOnline
 {
@@ -176,7 +182,7 @@
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword
 {
     NSLog(@"RingMail Chat Connect: %@", myJID);
-    NSLog(@"RingMail Chat Password: %@", myPassword);
+    //  NSLog(@"RingMail Chat Password: %@", myPassword);
     myJID = [RgManager addressToXMPP:myJID];
     self.JID = [XMPPJID jidWithString:myJID resource:@"RingMail"];
     
@@ -216,8 +222,8 @@
 
 - (void)disconnect
 {
-    NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
-    NSLog(@"RingMail: Chat - Request Disconnect");
+    //NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
+    //NSLog(@"RingMail: Chat - Request Disconnect");
     [self goOffline];    
     [self.xmppStream disconnect];
 }
@@ -294,6 +300,9 @@
         
         [self dbInsertMessage:chatFrom body:body inbound:YES];
         
+        [RgManager startMessageMD5]; // check if a push for a new chat arrived first
+        
+        // Should not happen because we log out of chat when we enter the background now
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
         {
             // Create a new notification
@@ -410,7 +419,7 @@
 - (FMDatabaseQueue *)database
 {
     NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat_v0.2.db"];
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat_v0.3.db"];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     return queue;
 }
@@ -421,8 +430,9 @@
     [dbq inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
                                 //@"DROP TABLE chat_session;",
-                                @"CREATE TABLE IF NOT EXISTS chat_session (session_tag TEXT NOT NULL, unread INT NOT NULL DEFAULT 0);",
+                                @"CREATE TABLE IF NOT EXISTS chat_session (session_tag TEXT NOT NULL, unread INT NOT NULL DEFAULT 0, session_md5 TEXT NOT NULL);",
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON chat_session (session_tag);",
+                                @"CREATE INDEX IF NOT EXISTS session_md5_1 ON chat_session (session_md5);",
                                 //@"DROP TABLE chat;",
                                 @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER);",
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
@@ -453,7 +463,7 @@
         }
         else
         {
-            [db executeUpdate:@"INSERT INTO chat_session (session_tag, unread) VALUES (?, 0);", from];
+            [db executeUpdate:@"INSERT INTO chat_session (session_tag, session_md5, unread) VALUES (?, ?, 0);", from, [from md5HexDigest]];
             result = [NSNumber numberWithLong:[db lastInsertRowId]];
         }
         [rs close];
@@ -543,6 +553,28 @@
         else
         {
             result = [NSNumber numberWithInt:0];
+        }
+        [rs close];
+    }];
+    [dbq close];
+    return result;
+}
+
+- (NSString *)dbGetSessionByMD5:(NSString*)lookup
+{
+    NSLog(@"RingMail: Chat - Session MD5:(%@)", lookup);
+    if (! [lookup isMatchedByRegex:@"^[A-Fa-f0-9]{6,32}$"])
+    {
+        return @"";
+    }
+    lookup = [lookup stringByAppendingString:@"%"];
+    FMDatabaseQueue *dbq = [self database];
+    __block NSString* result = @"";
+    [dbq inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT session_tag FROM chat_session WHERE session_md5 LIKE ?", lookup];
+        if ([rs next])
+        {
+            result = [rs stringForColumnIndex:0];
         }
         [rs close];
     }];

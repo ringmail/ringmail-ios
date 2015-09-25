@@ -75,6 +75,7 @@
 - (UIViewController*)popCurrentView;
 - (void)popToView:(UICompositeViewDescription *)currentView;
 - (UICompositeViewDescription *)firstView;
+- (UICompositeViewDescription *)topView;
 - (void)showStateBar:(BOOL)show;
 - (void)showTabBar:(BOOL)show;
 - (void)fullScreen:(BOOL)enabled;
@@ -82,6 +83,7 @@
 - (void)startUp;
 - (void)displayIncomingCall:(LinphoneCall*) call;
 - (void)setVolumeHidden:(BOOL)hidden;
+
 
 - (void)addInhibitedEvent:(id)event;
 - (BOOL)removeInhibitedEvent:(id)event;

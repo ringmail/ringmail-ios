@@ -56,6 +56,54 @@ static LevelDB* theConfigDatabase = nil;
     return [res stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
++ (void)startCall:(NSString*)address
+{
+    NSString* displayName = [address copy];
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+    if (contact) {
+        displayName = [FastAddressBook getContactDisplayName:contact];
+    }
+    if ([address rangeOfString:@"@"].location != NSNotFound)
+    {
+        displayName = [NSString stringWithString:address];
+        address = [RgManager addressToSIP:address];
+        NSLog(@"New Address: %@", address);
+    }
+    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+}
+
++ (void)startMessage:(NSString*)address
+{
+    [[LinphoneManager instance] setChatTag:address];
+    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+}
+
++ (void)startMessageMD5
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        LinphoneManager *lm = [LinphoneManager instance];
+        NSString* md5 = [lm chatMd5];
+        if (md5 != nil && ! [md5 isEqualToString:@""])
+        {
+            NSString *chat = [[lm chatManager] dbGetSessionByMD5:md5];
+            if (![chat isEqualToString:@""])
+            {
+                [lm setChatMd5:@""];
+                UICompositeViewDescription* curView = [[PhoneMainView instance] topView];
+                if ((curView == nil) || (!
+                    ( // If not in the same chat room already
+                        [curView equal:[ChatRoomViewController compositeViewDescription]] &&
+                        [lm chatTag] != nil &&
+                        [chat isEqualToString:[lm chatTag]]
+                     )
+                )) {
+                    [RgManager startMessage:chat];
+                }
+            }
+        }
+    }];
+}
+
 + (NSString*)pushToken:(NSData*)tokenData
 {
     const unsigned char *tokenBuffer = [tokenData bytes];
@@ -74,6 +122,106 @@ static LevelDB* theConfigDatabase = nil;
     
     NSLog(@"APNS Set Proxy Token: %@", params);
     return params;
+}
+
++(BOOL)checkEmailAddress:(NSString *)checkString
+{
+    // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    
+    BOOL stricterFilter = YES;
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
++ (BOOL)checkRingMailAddress:(NSString*)address
+{
+    //NSLog(@"RingMail: URI - Check Address: %@", address);
+    if ([address length] > 200)
+    {
+        return false; // Too long, you're probably trying something fishy
+    }
+    NSString *lcAddress = [address lowercaseString];
+    NSMutableString *numAddress = [address mutableCopy];
+    [numAddress replaceOccurrencesOfRegex:@"[^0-9]" withString:@""];
+    if ([address isMatchedByRegex:@"\\@"])
+    {
+        //NSLog(@"RingMail: URI - Email Address: %@", address);
+        // check email
+        return [RgManager checkEmailAddress:address];
+    }
+    else if ([address isMatchedByRegex:@"\\."])
+    {
+        //NSLog(@"RingMail: URI - Domain Address: %@", address);
+        // check domain
+        if ([address isMatchedByRegex:@"([A-Za-z0-9-]+\\.)+[A-Za-z]{1,}$"])
+        {
+            return true;
+        }
+    }
+    else if ([lcAddress isMatchedByRegex:@"^#[a-z0-9_]+$"]) // check hashtag
+    {
+        return true;
+    }
+    /*else if ([numAddress length]) // has a digit
+    {
+        // TODO: calling DIDs, etc...
+        return false;
+    }*/
+    NSLog(@"RingMail: URI - Bad Address: %@", address);
+    return false;
+}
+
++ (NSString *)filterRingMailAddress:(NSString*)address
+{
+    // only call after address has been checked
+    NSString *lcAddress = [address lowercaseString];
+    NSMutableString *numAddress = [address mutableCopy];
+    [numAddress replaceOccurrencesOfRegex:@"[^0-9]" withString:@""];
+    if ([address isMatchedByRegex:@"\\@"])
+    {
+        return address;
+    }
+    else if ([address isMatchedByRegex:@"\\."])
+    {
+        return address;
+    }
+    else if ([lcAddress isMatchedByRegex:@"^#"])
+    {
+        return address;
+    }
+    else if ([numAddress length])
+    {
+        return numAddress;
+    }
+    return @""; // Bad address
+}
+
++ (void)processRingURI:(NSString*)uri
+{
+    NSMutableString *ringuri = [uri mutableCopy];
+    [ringuri replaceOccurrencesOfRegex:@"^ring:(//)?" withString:@""];
+    NSLog(@"RingMail: URI - %@ (from: %@)", ringuri, uri);
+    if ([ringuri isMatchedByRegex:@"^message/"])
+    {
+        [ringuri replaceOccurrencesOfRegex:@"^message/" withString:@""];
+        if ([RgManager checkRingMailAddress:ringuri])
+        {
+            [RgManager startMessage:[RgManager filterRingMailAddress:ringuri]];
+        }
+        return;
+    }
+    else if ([ringuri isMatchedByRegex:@"^call/"])
+    {
+        [ringuri replaceOccurrencesOfRegex:@"^call/" withString:@""];
+    }
+    if ([RgManager checkRingMailAddress:ringuri])
+    {
+        NSLog(@"RingMail: URI - Valid For Call: %@", ringuri);
+        [RgManager startCall:[RgManager filterRingMailAddress:ringuri]];
+    }
 }
 
 + (LevelDB*)configDatabase
@@ -212,7 +360,11 @@ static LevelDB* theConfigDatabase = nil;
     {
         mgr.chatManager = [[RgChatManager alloc] init];
     }
-    [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:[cfg objectForKey:@"ringmail_chat_password"]];
+    NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
+    if (chatPass != nil && ! [chatPass isEqualToString:@""])
+    {
+        [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
+    }
 }
 
 + (void)chatEnsureConnection
@@ -225,7 +377,11 @@ static LevelDB* theConfigDatabase = nil;
     }
     if ([[mgr.chatManager xmppStream] isDisconnected])
     {
-        [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:[cfg objectForKey:@"ringmail_chat_password"]];
+        NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
+        if (chatPass != nil && ! [chatPass isEqualToString:@""])
+        {
+            [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
+        }
     }
 }
 

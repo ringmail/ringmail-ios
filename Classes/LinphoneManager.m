@@ -131,6 +131,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize configDb;
 @synthesize chatManager;
 @synthesize chatTag;
+@synthesize chatMd5;
 @synthesize ringLogin;
 
 struct codec_name_pref_table {
@@ -1629,6 +1630,12 @@ static int comp_call_id(const LinphoneCall *call, const char *callid) {
 - (BOOL)resignActive {
 	linphone_core_stop_dtmf_stream(theLinphoneCore);
 
+    LinphoneManager *instance = [LinphoneManager instance];
+    if ([[instance chatManager] isConnected]) // if connected
+    {
+        [[instance chatManager] disconnect];
+    }
+    
 	return YES;
 }
 
@@ -1746,6 +1753,15 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 			LOGW(@"keepalive handler was called for the last time at %@", datestr);
 		}
 	}
+    
+    LinphoneManager *instance = [LinphoneManager instance];
+    if (! [[instance chatManager] isConnected]) // if connected
+    {
+        if ([RgManager configReadyAndVerified])
+        {
+            [RgManager chatConnect];
+        }
+    }
 }
 
 - (void)beginInterruption {

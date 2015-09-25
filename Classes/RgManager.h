@@ -27,6 +27,13 @@ extern NSString *const kRgSelfName;
 + (NSString*)addressToXMPP:(NSString*)addr;
 + (NSString*)addressFromXMPP:(NSString*)addr;
 + (NSString*)pushToken:(NSData*)tokenData;
++ (void)processRingURI:(NSString*)uri;
++ (BOOL)checkEmailAddress:(NSString *)checkString;
++ (BOOL)checkRingMailAddress:(NSString *)checkString;
++ (NSString*)filterRingMailAddress:(NSString*)address;
++ (void)startCall:(NSString*)address;
++ (void)startMessage:(NSString*)address;
++ (void)startMessageMD5;
 
 + (LevelDB*)configDatabase;
 + (void)closeConfigDatabase;

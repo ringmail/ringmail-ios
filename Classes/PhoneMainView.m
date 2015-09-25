@@ -594,6 +594,15 @@ static RootViewManager *rootViewManagerInstance = nil;
 	return view;
 }
 
+- (UICompositeViewDescription *)topView {
+    UICompositeViewDescription *view = nil;
+    NSArray *viewStack = [RootViewManager instance].viewDescriptionStack;
+    if ([viewStack count]) {
+        view = [viewStack objectAtIndex:([viewStack count] - 1)];
+    }
+    return view;
+}
+
 - (UIViewController *)popCurrentView {
 	LOGI(@"PhoneMainView: Pop view");
 	NSMutableArray *viewStack = [RootViewManager instance].viewDescriptionStack;
