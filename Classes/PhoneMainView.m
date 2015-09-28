@@ -25,6 +25,7 @@
 #import "Utils.h"
 #import "DTActionSheet.h"
 #import "SVModalWebViewController.h"
+#import "RgWebViewDelegate.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 
@@ -334,10 +335,15 @@ static RootViewManager *rootViewManagerInstance = nil;
 	case LinphoneCallError: {
         if (linphone_call_get_reason(call) == LinphoneReasonMovedPermanently) // Not an error, just a URL
         {
-            // Assume HTTP(S) urls for now, check for ring:// later
-            UIViewController* cur = (UIViewController *)[PhoneMainView instance];
-            SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithAddress:message];
-            [cur presentViewController:webViewController animated:YES completion:NULL];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                // Assume HTTP(S) urls for now, check for ring:// later
+                NSLog(@"RingMail: Redirect to URL: %@", message);
+                UIViewController* cur = (UIViewController *)[PhoneMainView instance];
+                SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithAddress:message];
+                RgWebViewDelegate *webDelegate = [[RgWebViewDelegate alloc] init];
+                [webViewController setWebViewDelegate:webDelegate];
+                [cur presentViewController:webViewController animated:NO completion:NULL];
+            }];
         }
         else
         {

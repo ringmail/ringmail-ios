@@ -153,6 +153,7 @@
 		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
 		C422AD321B99F1A900D1F1CD /* RgNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = C422AD311B99F1A900D1F1CD /* RgNetwork.m */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
+		C4B9B9D61BB9BEDF00677220 /* RgWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */; };
 		C4D0BC6B1BB4F0A400D1728A /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */; };
 		C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */; };
 		C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */; };
@@ -1061,6 +1062,8 @@
 		C422AD311B99F1A900D1F1CD /* RgNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgNetwork.m; sourceTree = "<group>"; };
 		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
+		C4B9B9D41BB9BEDF00677220 /* RgWebViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgWebViewDelegate.h; sourceTree = "<group>"; };
+		C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgWebViewDelegate.m; sourceTree = "<group>"; };
 		C4D0BC691BB4F0A400D1728A /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_splashscreen_iphone5.png; path = Resources/ringmail_splashscreen_iphone5.png; sourceTree = "<group>"; };
@@ -1905,6 +1908,8 @@
 				C431598B1B95354C001A795E /* RgMessagesViewController.m */,
 				C401E5DA1B95E9ED006C915A /* RgChatModelData.h */,
 				C401E5DB1B95E9ED006C915A /* RgChatModelData.m */,
+				C4B9B9D41BB9BEDF00677220 /* RgWebViewDelegate.h */,
+				C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */,
 				22E0A81D111C44E100B04932 /* AboutViewController.h */,
 				22E0A81C111C44E100B04932 /* AboutViewController.m */,
 				636316D31A1DEBCB0009B839 /* AboutViewController.xib */,
@@ -3869,6 +3874,7 @@
 				D350F20E15A43BB100149E54 /* WizardViewController.m in Sources */,
 				D3F795D615A582810077328B /* ChatRoomViewController.m in Sources */,
 				D32B6E2915A5BC440033019F /* ChatRoomTableViewController.m in Sources */,
+				C4B9B9D61BB9BEDF00677220 /* RgWebViewDelegate.m in Sources */,
 				C422AD321B99F1A900D1F1CD /* RgNetwork.m in Sources */,
 				D3A8BB7015A6C7D500F96BE5 /* UIChatRoomCell.m in Sources */,
 				D3128FE115AABC7E00A2147A /* ContactDetailsViewController.m in Sources */,

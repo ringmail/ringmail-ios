@@ -101,12 +101,20 @@
 	bool video_enabled = TRUE;
 	LinphoneCall *currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
 	[self setEnabled:video_enabled];
-	video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
-	if (last_update_state != video_enabled)
+    if (currentCall)
     {
-		[waitView stopAnimating];
+        const LinphoneCallParams *call_params = linphone_call_get_current_params(currentCall);
+        video_enabled = linphone_call_params_video_enabled(call_params);
+    	if (last_update_state != video_enabled)
+        {
+    		[waitView stopAnimating];
+        }
     }
-	last_update_state = video_enabled;
+    else
+    {
+        video_enabled = FALSE;
+    }
+    last_update_state = video_enabled;
 	return video_enabled;
 }
 
