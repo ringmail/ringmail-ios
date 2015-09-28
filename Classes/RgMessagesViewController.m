@@ -1,4 +1,5 @@
 #import "RgMessagesViewController.h"
+#import "LinphoneManager.h"
 
 @implementation RgMessagesViewController
 
@@ -224,18 +225,21 @@
     
     if([text length] > 0)
     {
+        NSString *msgTo = [RgManager addressToXMPP:_chatRoom];
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
         [body setStringValue:text];
-        NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
-        [msg addAttributeWithName:@"type" stringValue:@"chat"];
-        NSString* msgTo = [RgManager addressToXMPP:_chatRoom];
-        NSLog(@"RingMail - Send Message To: %@ -> %@", _chatRoom, msgTo);
-        [msg addAttributeWithName:@"to" stringValue:msgTo];
-        [msg addChild:body];
+        NSString *messageID = [[[[LinphoneManager instance] chatManager] xmppStream] generateUUID];
+        NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+        [message addAttributeWithName:@"id" stringValue:messageID];
+        [message addAttributeWithName:@"type" stringValue:@"chat"];
+        [message addAttributeWithName:@"to" stringValue:msgTo];
+        [message addChild:body];
         
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-        [mgr dbInsertMessage:_chatRoom body:text inbound:NO];
-        [[mgr xmppStream] sendElement:msg];
+        [mgr dbInsertMessage:_chatRoom body:text uuid:messageID inbound:NO];
+        [[mgr xmppStream] sendElement:message];
+        
+        //NSLog(@"RingMail - Send Message To: %@ -> %@", _chatRoom, msgTo);
     
     /**
      *  Sending a message. Your implementation of this method should do *at least* the following:
@@ -246,12 +250,12 @@
      */
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
         
-        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
+        JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:senderId
                                                  senderDisplayName:senderDisplayName
                                                               date:date
                                                               text:text];
         
-        [self.chatData.messages addObject:message];
+        [self.chatData.messages addObject:msg];
         [self.chatData setChatError:@""];
         
         [self finishSendingMessageAnimated:YES];
@@ -367,7 +371,8 @@
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    return [[NSAttributedString alloc] initWithString:@"Result"];
+    //return nil;
 }
 
 #pragma mark - UICollectionView DataSource

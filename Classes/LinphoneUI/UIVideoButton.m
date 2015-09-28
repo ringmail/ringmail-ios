@@ -98,25 +98,15 @@
 }
 
 - (bool)onUpdate {
-	bool video_enabled = false;
-
-#ifdef VIDEO_ENABLED
+	bool video_enabled = TRUE;
 	LinphoneCall *currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
-	if (linphone_core_video_enabled([LinphoneManager getLc]) && currentCall &&
-		!linphone_call_media_in_progress(currentCall) &&
-		linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
-		video_enabled = TRUE;
-	}
-#endif // VIDEO_ENABLED
-
 	[self setEnabled:video_enabled];
+	video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
 	if (last_update_state != video_enabled)
+    {
 		[waitView stopAnimating];
-	if (video_enabled) {
-		video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
-	}
+    }
 	last_update_state = video_enabled;
-
 	return video_enabled;
 }
 

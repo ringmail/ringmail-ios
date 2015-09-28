@@ -8,6 +8,7 @@
 
 #import "RgChatManager.h"
 #import "NSString+MD5.h"
+#import "NSXMLElement+XMPP.h"
 
 #define THIS_FILE   @"RgChatManager"
 #define THIS_METHOD NSStringFromSelector(_cmd)
@@ -96,6 +97,9 @@
     self.xmppCapabilities.autoFetchHashedCapabilities = YES;
     self.xmppCapabilities.autoFetchNonHashedCapabilities = NO;
     
+    self.xmppDeliveryReceipts = [[XMPPMessageDeliveryReceipts alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    [self.xmppDeliveryReceipts setAutoSendMessageDeliveryReceipts:YES];
+    [self.xmppDeliveryReceipts setAutoSendMessageDeliveryRequests:YES];
     
     // Activate xmpp modules
     
@@ -104,12 +108,14 @@
     [self.xmppvCardTempModule   activate:self.xmppStream];
     //[self.xmppvCardAvatarModule activate:self.xmppStream];
     [self.xmppCapabilities      activate:self.xmppStream];
+    [self.xmppDeliveryReceipts      activate:self.xmppStream];
     
     // Add ourself as a delegate to anything we may be interested in
     
     [self.xmppStream addDelegate:self delegateQueue:self.workQueue];
     //[self.xmppRoster addDelegate:self delegateQueue:self.workQueue];
     [self.xmppCapabilities addDelegate:self delegateQueue:self.workQueue];
+    [self.xmppDeliveryReceipts addDelegate:self delegateQueue:self.workQueue];
     
     // Optional:
     //
@@ -122,7 +128,7 @@
     // 
     // If you don't specify a hostPort, then the default (5222) will be used.
     
-    [self.xmppStream setHostName:@"staging.ringmail.com"];
+    [self.xmppStream setHostName:[RgManager ringmailHost]];
     [self.xmppStream setHostPort:5222];
 }
 
@@ -287,6 +293,17 @@
     //[self failedToRegisterNewAccount:error];
 }
 
+- (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)xmppMessage
+{
+    NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSLog(@"%@", xmppMessage);
+    if ([xmppMessage isMessageWithBody] && ![xmppMessage isErrorMessage])
+    {
+        NSString* uuid = [[xmppMessage attributeForName:@"id"] stringValue];
+        [self dbUpdateMessageStatus:@"sent" forUUID:uuid];
+    }
+}
+
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)xmppMessage
 {
     NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
@@ -298,7 +315,7 @@
         
         NSString *chatFrom = [RgManager addressFromXMPP:from];
         
-        [self dbInsertMessage:chatFrom body:body inbound:YES];
+        [self dbInsertMessage:chatFrom body:body uuid:[[xmppMessage attributeForName:@"id"] stringValue] inbound:YES];
         
         [RgManager startMessageMD5]; // check if a push for a new chat arrived first
         
@@ -329,7 +346,16 @@
         
         //NSLog(@"NEW CHAT FROM %@: %@\nLog: %@", chatFrom, body, [self dbGetMessages:chatFrom]);
     }
-    if ([xmppMessage isErrorMessage])
+    else if ([xmppMessage isTo:self.JID])
+    {
+        NSXMLElement *received = [xmppMessage elementForName:@"received" xmlns:@"urn:xmpp:receipts"];
+        if (received != nil)
+        {
+            NSString* uuid = [[received attributeForName:@"id"] stringValue];
+            [self dbUpdateMessageStatus:@"received" forUUID:uuid];
+        }
+    }
+    else if ([xmppMessage isErrorMessage])
     {
         NSError *error = [xmppMessage errorMessage];
         NSLog(@"XMPP Error Code: %tu", [error code]);
@@ -419,7 +445,7 @@
 - (FMDatabaseQueue *)database
 {
     NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat_v0.3.db"];
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat_v0.4.db"];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     return queue;
 }
@@ -434,8 +460,30 @@
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON chat_session (session_tag);",
                                 @"CREATE INDEX IF NOT EXISTS session_md5_1 ON chat_session (session_md5);",
                                 //@"DROP TABLE chat;",
-                                @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER);",
+                                @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER, msg_uuid TEXT NOT NULL, msg_status TEXT NOT NULL DEFAULT '');",
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
+                                @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON chat (msg_uuid);",
+                          nil];
+        for (NSString *sql in setup)
+        {
+            [db executeStatements:sql];
+            if ([db hadError])
+            {
+                NSLog(@"SQL Error: %@\nSQL:\n%@", [db lastErrorMessage], sql);
+            }
+        }
+    }];
+    [dbq close];
+    NSLog(@"SQL Database Ready");
+}
+
+- (void)dropTables
+{
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        NSArray *setup = [NSArray arrayWithObjects:
+                                @"DROP TABLE chat_session;",
+                                @"DROP TABLE chat;",
                           nil];
         for (NSString *sql in setup)
         {
@@ -484,16 +532,26 @@
     [dbq close];
 }
 
-- (void)dbInsertMessage:(NSString *)from body:(NSString *)body inbound:(BOOL)inbound
+- (void)dbInsertMessage:(NSString *)from body:(NSString *)body uuid:(NSString*)uuid inbound:(BOOL)inbound
 {
     FMDatabaseQueue *dbq = [self database];
     NSNumber* session = [self dbGetSessionID:from];
+    NSString* status = (inbound) ? @"" : @"sending";
     [dbq inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"INSERT INTO chat (session_id, msg_body, msg_time, msg_inbound) VALUES (?, ?, datetime('now'), ?);", session, body, [NSNumber numberWithBool:inbound]];
+        [db executeUpdate:@"INSERT INTO chat (session_id, msg_body, msg_time, msg_inbound, msg_uuid, msg_status) VALUES (?, ?, datetime('now'), ?, ?, ?);", session, body, [NSNumber numberWithBool:inbound], uuid, status];
         if (inbound)
         {
             [db executeUpdate:@"UPDATE chat_session SET unread = unread + 1 WHERE session_tag = ?", from];
         }
+    }];
+    [dbq close];
+}
+
+- (void)dbUpdateMessageStatus:(NSString*)status forUUID:(NSString*)uuid
+{
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"UPDATE chat SET msg_status = ? WHERE msg_uuid = ?", status, uuid];
     }];
     [dbq close];
 }
@@ -503,7 +561,7 @@
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread, (SELECT msg_body FROM chat WHERE chat.session_id=chat_session.rowid ORDER BY rowid DESC LIMIT 1) as last_message FROM chat_session ORDER BY rowid DESC"];
+        FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread, (SELECT msg_body FROM chat WHERE chat.session_id=chat_session.rowid ORDER BY rowid DESC LIMIT 1) as last_message, (SELECT msg_time FROM chat WHERE chat.session_id=chat_session.rowid ORDER BY rowid DESC LIMIT 1) as last_time FROM chat_session ORDER BY last_time DESC"];
         while ([rs next])
         {
             [result addObject:[NSArray arrayWithObjects:
