@@ -148,16 +148,16 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 - (void)addCurrentContactContactField:(NSString *)address {
-
 	LinphoneAddress *linphoneAddress =
 		linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 	NSString *username = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
-
-	if (([username rangeOfString:@"@"].length > 0) &&
-		([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true)) {
+    username = [RgManager addressFromSIPUser:username];
+	if ([username rangeOfString:@"@"].length > 0)
+    {
 		[tableController addEmailField:username];
-	} else if ((linphone_proxy_config_is_phone_number(NULL, [username UTF8String])) &&
-			   ([[LinphoneManager instance] lpConfigBoolForKey:@"save_new_contacts_as_phone_number"] == true)) {
+	}
+    else if (linphone_proxy_config_is_phone_number(NULL, [username UTF8String]))
+    {
 		[tableController addPhoneField:username];
 	}
 	linphone_address_destroy(linphoneAddress);

@@ -42,6 +42,7 @@
 #import "WizardViewController.h"
 #import "IncomingCallViewController.h"
 #import "ImageViewController.h"
+#import "RgWebViewDelegate.h"
 
 
 @class PhoneMainView;
@@ -69,6 +70,7 @@
 @property (nonatomic, strong) NSString* name;
 @property (weak, readonly) UICompositeViewDescription *currentView;
 @property (readonly, strong) MPVolumeView* volumeView;
+@property (nonatomic, strong) RgWebViewDelegate* webDelegate;
 
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView;
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView push:(BOOL)push;

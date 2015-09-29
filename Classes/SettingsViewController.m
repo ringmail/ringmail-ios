@@ -548,7 +548,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
 					 WizardViewController);
 	if (controller != nil) {
-        // TODO: clear linphone recent calls
+        // clear linphone recent calls
+        linphone_core_clear_call_logs([LinphoneManager getLc]);
         [[RgNetwork instance] signOut];
         [[[LinphoneManager instance] chatManager] disconnect];
         [[[LinphoneManager instance] chatManager] dropTables];

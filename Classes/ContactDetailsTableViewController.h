@@ -28,9 +28,9 @@
 
 typedef enum _ContactSections {
     ContactSections_None = 0,
+    ContactSections_Email,
     ContactSections_Number,
     ContactSections_Sip,
-    ContactSections_Email,
     ContactSections_MAX
 } ContactSections_e;
 

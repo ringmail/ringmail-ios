@@ -512,7 +512,7 @@
         else
         {
             [db executeUpdate:@"INSERT INTO chat_session (session_tag, session_md5, unread) VALUES (?, ?, 0);", from, [from md5HexDigest]];
-            result = [NSNumber numberWithLong:[db lastInsertRowId]];
+            result = [NSNumber numberWithLongLong:[db lastInsertRowId]];
         }
         [rs close];
     }];
@@ -564,10 +564,15 @@
         FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread, (SELECT msg_body FROM chat WHERE chat.session_id=chat_session.rowid ORDER BY rowid DESC LIMIT 1) as last_message, (SELECT msg_time FROM chat WHERE chat.session_id=chat_session.rowid ORDER BY rowid DESC LIMIT 1) as last_time FROM chat_session ORDER BY last_time DESC"];
         while ([rs next])
         {
+            NSString* last = [rs stringForColumnIndex:2];
+            if (last == nil)
+            {
+                last = @"";
+            }
             [result addObject:[NSArray arrayWithObjects:
                                [rs stringForColumnIndex:0],
                                [rs objectForColumnIndex:1],
-                               [rs stringForColumnIndex:2],
+                               last,
                                nil]];
         }
         [rs close];

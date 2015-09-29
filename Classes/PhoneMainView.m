@@ -24,10 +24,17 @@
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "DTActionSheet.h"
+#import "SVWebViewController.h"
 #import "SVModalWebViewController.h"
 #import "RgWebViewDelegate.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
+
+@interface SVModalWebViewController ()
+
+@property (nonatomic, strong) SVWebViewController *webViewController;
+
+@end
 
 @implementation RootViewManager {
 	PhoneMainView *currentViewController;
@@ -109,12 +116,14 @@ static RootViewManager *rootViewManagerInstance = nil;
 @synthesize currentView;
 @synthesize statusBarBG;
 @synthesize volumeView;
+@synthesize webDelegate;
 
 #pragma mark - Lifecycle Functions
 
 - (void)initPhoneMainView {
 	currentView = nil;
 	inhibitedEvents = [[NSMutableArray alloc] init];
+    webDelegate = [[RgWebViewDelegate alloc] init];
 }
 
 - (id)init {
@@ -339,10 +348,10 @@ static RootViewManager *rootViewManagerInstance = nil;
                 // Assume HTTP(S) urls for now, check for ring:// later
                 NSLog(@"RingMail: Redirect to URL: %@", message);
                 UIViewController* cur = (UIViewController *)[PhoneMainView instance];
-                SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithAddress:message];
-                RgWebViewDelegate *webDelegate = [[RgWebViewDelegate alloc] init];
-                [webViewController setWebViewDelegate:webDelegate];
-                [cur presentViewController:webViewController animated:NO completion:NULL];
+                SVModalWebViewController *webViewModal = [[SVModalWebViewController alloc] initWithAddress:message];
+                [webDelegate setWebView:webViewModal.webViewController];
+                [webViewModal setWebViewDelegate:webDelegate];
+                [cur presentViewController:webViewModal animated:NO completion:NULL];
             }];
         }
         else
@@ -639,7 +648,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	}
 
 	if (linphone_call_get_reason(call) == LinphoneReasonNotFound) {
-		lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@ not registered", nil), lUserName];
+		lMessage = [NSString stringWithFormat:@"%@ not available", [RgManager addressFromSIPUser:lUserName]];
     } else {
 		if (message != nil) {
 			lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@\nReason was: %@", nil), lMessage, message];

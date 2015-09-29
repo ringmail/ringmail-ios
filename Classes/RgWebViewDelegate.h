@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SVModalWebViewController.h"
+#import "SVWebViewController.h"
 
-@interface RgWebViewDelegate : NSObject<UIWebViewDelegate>
+@interface RgWebViewDelegate : NSObject <UIWebViewDelegate>
 {
 }
-@property (weak, nonatomic) SVModalWebViewController *webView;
+@property (weak, nonatomic) SVWebViewController *webView;
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+
 @end

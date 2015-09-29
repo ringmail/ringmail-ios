@@ -69,10 +69,10 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	}
 
 	labelArray = [[NSMutableArray alloc]
-		initWithObjects:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
+		initWithObjects:[NSString stringWithString:(NSString *)kABPersonPhoneMainLabel],
+                        @"work",
 						[NSString stringWithString:(NSString *)kABPersonPhoneMobileLabel],
-						[NSString stringWithString:(NSString *)kABPersonPhoneIPhoneLabel],
-						[NSString stringWithString:(NSString *)kABPersonPhoneMainLabel], nil];
+                        nil];
 	editingIndexPath = nil;
 }
 
@@ -184,6 +184,8 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		}
 		[dataCache addObject:subArray];
 	}
+    
+    NSLog(@"RingMail: Data Cache: %@", dataCache);
 
 	if (contactDetailsDelegate != nil) {
 		[contactDetailsDelegate onModification:nil];
@@ -459,6 +461,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
 		NSString *labelRef = CFBridgingRelease(ABMultiValueCopyLabelAtIndex(lMap, index));
 		if (labelRef != NULL) {
+            NSLog(@"RingMail: Label Ref - %@", labelRef);
 			label = [FastAddressBook localizedLabel:labelRef];
 		}
 		NSString *valueRef = CFBridgingRelease(ABMultiValueCopyValueAtIndex(lMap, index));
@@ -504,7 +507,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 			NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
 			NSString *valueRef = CFBridgingRelease(ABMultiValueCopyValueAtIndex(lMap, index));
 			if (valueRef != NULL) {
-                NSLog(@"RingMail: Phone Click - %@", valueRef);
+                //NSLog(@"RingMail: Phone Click - %@", valueRef);
                 NSString *telStr = [NSString stringWithFormat:@"tel://%@", valueRef];
                 NSURL *telUrl = [NSURL URLWithString:[telStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 [[UIApplication sharedApplication] openURL:telUrl];
@@ -522,9 +525,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 			if (valueRef != NULL) {
                 destPlain = valueRef;
                 dest = [RgManager addressToSIP:valueRef];
-                NSLog(@"RingMail: Call 1 - %@", dest);
+                //NSLog(@"RingMail: Call 1 - %@", dest);
 				dest = [FastAddressBook normalizeSipURI:dest];
-                NSLog(@"RingMail: Call 2 - %@", dest);
+                //NSLog(@"RingMail: Call 2 - %@", dest);
 			}
 			CFRelease(lMap);
 		}
@@ -534,6 +537,13 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                                 initWithTitle:displayName
                                 message:@"Select Communication:"];
             [alert addCancelButtonWithTitle:@"Cancel" block:^{}];
+            [alert addButtonWithTitle:@"Message" block:^{
+                [[LinphoneManager instance] setChatTag:destPlain];
+                [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+            }];
+            [alert addButtonWithTitle:@"Email" block:^{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mailto:%@", destPlain]]];
+            }];
             [alert addButtonWithTitle:@"Call" block:^{
                 RgMainViewController *controller = DYNAMIC_CAST(
                     [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
@@ -541,10 +551,6 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                 if (controller != nil) {
                     [controller call:dest displayName:displayName];
                 }
-            }];
-            [alert addButtonWithTitle:@"Send Message" block:^{
-                [[LinphoneManager instance] setChatTag:destPlain];
-                [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
             }];
             [alert show];
 		}
@@ -594,7 +600,6 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 #pragma mark - UITableViewDelegate Functions
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-	bool_t showEmails = [[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"];
 	// Resign keyboard
 	if (!editing) {
 		[LinphoneUtils findAndResignFirstResponder:[self tableView]];
@@ -610,7 +615,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		// add phony entries so that the user can add new data
 		for (int section = 0; section < [self numberOfSectionsInTableView:[self tableView]]; ++section) {
 			if (contactSections[section] == ContactSections_Number ||
-				(showEmails && contactSections[section] == ContactSections_Email)) {
+				(contactSections[section] == ContactSections_Email)) {
 				[self addEntry:self.tableView section:section animated:animated];
 			}
 		}
@@ -618,7 +623,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		for (int section = 0; section < [self numberOfSectionsInTableView:[self tableView]]; ++section) {
 			// remove phony entries that were not filled by the user
 			if (contactSections[section] == ContactSections_Number ||
-				(showEmails && contactSections[section] == ContactSections_Email)) {
+				(contactSections[section] == ContactSections_Email)) {
 
 				[self removeEmptyEntry:self.tableView section:section animated:animated];
 				if ([[self getSectionData:section] count] == 0 && animated) { // the section is empty -> remove titles

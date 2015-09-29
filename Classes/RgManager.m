@@ -44,6 +44,11 @@ static LevelDB* theConfigDatabase = nil;
     return [res stringByReplacingOccurrencesOfString:@"\\" withString:@"@"];
 }
 
++ (NSString*)addressFromSIPUser:(NSString*)addr
+{
+    return [addr stringByReplacingOccurrencesOfString:@"\\" withString:@"@"];
+}
+
 + (NSString*)addressToXMPP:(NSString*)addr
 {
     addr = [addr stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLUserAllowedCharacterSet];

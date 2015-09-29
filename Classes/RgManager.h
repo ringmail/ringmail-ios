@@ -24,6 +24,7 @@ extern NSString *const kRgSelfName;
 + (NSString*)ringmailHostSIP;
 + (NSString*)addressToSIP:(NSString*)addr;
 + (NSString*)addressFromSIP:(NSString*)addr;
++ (NSString*)addressFromSIPUser:(NSString*)addr;
 + (NSString*)addressToXMPP:(NSString*)addr;
 + (NSString*)addressFromXMPP:(NSString*)addr;
 + (NSString*)pushToken:(NSData*)tokenData;
