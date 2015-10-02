@@ -120,5 +120,26 @@ static RgNetwork* theRgNetwork = nil;
     }
 }
 
+- (void)uploadImage:(NSData*)imageData uuid:(NSString*)uuid callback:(RgNetworkCallback)callback
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{};
+    [manager POST:[NSString stringWithFormat:@"https://%@/internal/app/chat_upload", self.networkHost] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"userfile" fileName:[NSString stringWithFormat:@"%@.png", uuid] mimeType:@"image/png"];
+    } success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"RingMail - Chat Upload Error: %@", error);
+    }];
+}
+
+- (void)downloadImage:(NSString*)url callback:(RgNetworkCallback)callback
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{};
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"image/png"];
+    [manager GET:url parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"RingMail - Chat Download Error: %@", error);
+    }];
+}
 
 @end

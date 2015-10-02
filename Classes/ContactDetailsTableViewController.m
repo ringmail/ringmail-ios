@@ -185,7 +185,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		[dataCache addObject:subArray];
 	}
     
-    NSLog(@"RingMail: Data Cache: %@", dataCache);
+    //NSLog(@"RingMail: Data Cache: %@", dataCache);
 
 	if (contactDetailsDelegate != nil) {
 		[contactDetailsDelegate onModification:nil];
@@ -526,7 +526,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                 destPlain = valueRef;
                 dest = [RgManager addressToSIP:valueRef];
                 //NSLog(@"RingMail: Call 1 - %@", dest);
-				dest = [FastAddressBook normalizeSipURI:dest];
+				//dest = [FastAddressBook normalizeSipURI:dest];
                 //NSLog(@"RingMail: Call 2 - %@", dest);
 			}
 			CFRelease(lMap);
@@ -542,7 +542,10 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                 [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
             }];
             [alert addButtonWithTitle:@"Email" block:^{
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mailto:%@", destPlain]]];
+                MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+                controller.mailComposeDelegate = self;
+                [controller setToRecipients:[NSArray arrayWithObjects:destPlain, nil]];
+                if (controller) [[PhoneMainView instance] presentViewController:controller animated:YES completion:NULL];
             }];
             [alert addButtonWithTitle:@"Call" block:^{
                 RgMainViewController *controller = DYNAMIC_CAST(
@@ -595,6 +598,18 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		[self removeEntry:tableView path:indexPath animated:TRUE];
 		[tableView endUpdates];
 	}
+}
+
+#pragma mark - Mail Compose Delegate Functions
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"sent");
+    }
+    [[PhoneMainView instance] dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark - UITableViewDelegate Functions

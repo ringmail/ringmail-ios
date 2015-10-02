@@ -83,36 +83,15 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 + (NSString *)appendCountryCodeIfPossible:(NSString *)number {
-	if (![number hasPrefix:@"+"] && ![number hasPrefix:@"00"]) {
+    return number;
+	/*if (![number hasPrefix:@"+"] && ![number hasPrefix:@"00"]) {
 		NSString *lCountryCode = [[LinphoneManager instance] lpConfigStringForKey:@"countrycode_preference"];
 		if (lCountryCode && [lCountryCode length] > 0) {
 			// append country code
 			return [lCountryCode stringByAppendingString:number];
 		}
 	}
-	return number;
-}
-
-+ (NSString *)normalizeSipURI:(NSString *)address {
-	// replace all whitespaces (non-breakable, utf8 nbsp etc.) by the "classical" whitespace
-	address = [[address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
-		componentsJoinedByString:@" "];
-	NSString *normalizedSipAddress = nil;
-	LinphoneAddress *linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [address UTF8String]);
-	if (linphoneAddress != NULL) {
-		char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
-		if (tmp != NULL) {
-			normalizedSipAddress = [NSString stringWithUTF8String:tmp];
-			// remove transport, if any
-			NSRange pos = [normalizedSipAddress rangeOfString:@";"];
-			if (pos.location != NSNotFound) {
-				normalizedSipAddress = [normalizedSipAddress substringToIndex:pos.location];
-			}
-			ms_free(tmp);
-		}
-		linphone_address_destroy(linphoneAddress);
-	}
-	return normalizedSipAddress;
+	return number;*/
 }
 
 + (NSString *)normalizePhoneNumber:(NSString *)address {
@@ -200,9 +179,6 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 						CFStringRef lValue = ABMultiValueCopyValueAtIndex(lMap, i);
 
 						NSString *lNormalizedKey = [FastAddressBook normalizePhoneNumber:(__bridge NSString *)(lValue)];
-						NSString *lNormalizedSipKey = [FastAddressBook normalizeSipURI:lNormalizedKey];
-						if (lNormalizedSipKey != NULL)
-							lNormalizedKey = lNormalizedSipKey;
 
 						[addressBookMap setObject:(__bridge id)(lPerson)forKey:lNormalizedKey];
 
@@ -213,7 +189,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 			}
 
 			// SIP
-			{
+			/*{
 				ABMultiValueRef lMap = ABRecordCopyValue(lPerson, kABPersonInstantMessageProperty);
 				if (lMap) {
 					for (int i = 0; i < ABMultiValueGetCount(lMap); ++i) {
@@ -231,10 +207,6 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 						if (add) {
 							NSString *lValue =
 								(__bridge NSString *)CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
-							NSString *lNormalizedKey = [FastAddressBook normalizeSipURI:lValue];
-							if (lNormalizedKey != NULL) {
-								[addressBookMap setObject:(__bridge id)(lPerson)forKey:lNormalizedKey];
-							} else {
 								[addressBookMap setObject:(__bridge id)(lPerson)forKey:lValue];
 							}
 						}
@@ -242,7 +214,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 					}
 					CFRelease(lMap);
 				}
-			}
+			}*/
             
             // Email
             {
@@ -250,13 +222,12 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
                 if (lMap) {
                     for (int i = 0; i < ABMultiValueGetCount(lMap); ++i) {
                         NSString *valueRef = CFBridgingRelease(ABMultiValueCopyValueAtIndex(lMap, i));
-                        NSLog(@"Add Email Key: %@", valueRef);
+                        //NSLog(@"Add Email Key: %@", valueRef);
                         [addressBookMap setObject:(__bridge id)(lPerson)forKey:valueRef];
                     }
                     CFRelease(lMap);
                 }
             }
-            
 		}
 		CFRelease(lContacts);
 	}

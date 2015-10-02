@@ -19,12 +19,12 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 #import "ContactDetailsDelegate.h"
 #import "ContactDetailsLabelViewController.h"
 #import "UIContactDetailsHeader.h"
 #import "UIContactDetailsFooter.h"
-
 
 typedef enum _ContactSections {
     ContactSections_None = 0,
@@ -34,7 +34,7 @@ typedef enum _ContactSections {
     ContactSections_MAX
 } ContactSections_e;
 
-@interface ContactDetailsTableViewController : UITableViewController<ContactDetailsLabelViewDelegate, UITextFieldDelegate> {
+@interface ContactDetailsTableViewController : UITableViewController<ContactDetailsLabelViewDelegate, UITextFieldDelegate, MFMailComposeViewControllerDelegate> {
 @private
     NSMutableArray *dataCache;
     NSMutableArray *labelArray;

@@ -102,6 +102,14 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(chatReceivedEvent:)
                                                  name:kRgTextReceived
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(chatSentEvent:)
+                                                 name:kRgTextSent
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(chatUpdateEvent:)
+                                                 name:kRgTextUpdate
+                                               object:nil];
 	[editButton setOff];
     
     RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
@@ -284,6 +292,22 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
             [chatViewController.chatData setChatError:@""];
         }
         [chatViewController receiveMessage];
+    }
+}
+
+- (void)chatSentEvent:(NSNotification *)notif {
+    NSString *room = [[notif userInfo] objectForKey:@"tag"];
+    if ([room isEqualToString:chatViewController.chatRoom])
+    {
+        [chatViewController sentMessage];
+    }
+}
+
+- (void)chatUpdateEvent:(NSNotification *)notif {
+    NSString *room = [[notif userInfo] objectForKey:@"tag"];
+    if ([room isEqualToString:chatViewController.chatRoom])
+    {
+        [chatViewController updateMessages];
     }
 }
 

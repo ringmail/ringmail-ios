@@ -1,9 +1,14 @@
 #import "RgMessagesViewController.h"
 #import "LinphoneManager.h"
+#import "PhoneMainView.h"
+#import "DTActionSheet.h"
+#import "NYXImagesKit/NYXImagesKit.h"
 
 @implementation RgMessagesViewController
 
 @synthesize chatRoom = _chatRoom;
+@synthesize popoverController;
+@synthesize imageCache;
 
 #pragma mark - Init
 
@@ -14,6 +19,7 @@
     if (self = [super init])
     {
         self.chatRoom = @"";
+        self.imageCache = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -22,7 +28,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"JSQMessages";
+    self.title = @"RingMail Messages";
     
     self.senderId = kRgSelf;
     self.senderDisplayName = kRgSelfName;
@@ -36,7 +42,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    //self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
 
 #pragma mark - Chat room switch
@@ -60,158 +66,107 @@
     });
 }
 
-- (void)receiveMessagePressed:(UIBarButtonItem *)sender
+- (void)sentMessage
 {
-    /**
-     *  DEMO ONLY
-     *
-     *  The following is simply to simulate received messages for the chat.
-     *  Do not actually do this.
-     */
-    
-    
-    /**
-     *  Show the typing indicator to be shown
-     */
-    self.showTypingIndicator = !self.showTypingIndicator;
-    
-    /**
-     *  Scroll to actually view the indicator
-     */
-    [self scrollToBottomAnimated:YES];
-    
-    /**
-     *  Copy last sent message, this will be the new "received" message
-     */
-    JSQMessage *copyMessage = [[self.chatData.messages lastObject] copy];
-    
-    if (!copyMessage) {
-        copyMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdJobs
-                                          displayName:kJSQDemoAvatarDisplayNameJobs
-                                                 text:@"First received!"];
-    }
-    
-    /**
-     *  Allow typing indicator to show
-     */
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        NSMutableArray *userIds = [[self.chatData.users allKeys] mutableCopy];
-        [userIds removeObject:self.senderId];
-        NSString *randomUserId = userIds[arc4random_uniform((int)[userIds count])];
-        
-        JSQMessage *newMessage = nil;
-        id<JSQMessageMediaData> newMediaData = nil;
-        id newMediaAttachmentCopy = nil;
-        
-        if (copyMessage.isMediaMessage) {
-            /**
-             *  Last message was a media message
-             */
-            id<JSQMessageMediaData> copyMediaData = copyMessage.media;
-            
-            if ([copyMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                JSQPhotoMediaItem *photoItemCopy = [((JSQPhotoMediaItem *)copyMediaData) copy];
-                photoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [UIImage imageWithCGImage:photoItemCopy.image.CGImage];
-                
-                /**
-                 *  Set image to nil to simulate "downloading" the image
-                 *  and show the placeholder view
-                 */
-                photoItemCopy.image = nil;
-                
-                newMediaData = photoItemCopy;
-            }
-            else if ([copyMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                JSQLocationMediaItem *locationItemCopy = [((JSQLocationMediaItem *)copyMediaData) copy];
-                locationItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [locationItemCopy.location copy];
-                
-                /**
-                 *  Set location to nil to simulate "downloading" the location data
-                 */
-                locationItemCopy.location = nil;
-                
-                newMediaData = locationItemCopy;
-            }
-            else if ([copyMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
-                JSQVideoMediaItem *videoItemCopy = [((JSQVideoMediaItem *)copyMediaData) copy];
-                videoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [videoItemCopy.fileURL copy];
-                
-                /**
-                 *  Reset video item to simulate "downloading" the video
-                 */
-                videoItemCopy.fileURL = nil;
-                videoItemCopy.isReadyToPlay = NO;
-                
-                newMediaData = videoItemCopy;
-            }
-            else {
-                NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
-            }
-            
-            newMessage = [JSQMessage messageWithSenderId:randomUserId
-                                             displayName:self.chatData.users[randomUserId]
-                                                   media:newMediaData];
-        }
-        else {
-            /**
-             *  Last message was a text message
-             */
-            newMessage = [JSQMessage messageWithSenderId:randomUserId
-                                             displayName:self.chatData.users[randomUserId]
-                                                    text:copyMessage.text];
-        }
-        
-        /**
-         *  Upon receiving a message, you should:
-         *
-         *  1. Play sound (optional)
-         *  2. Add new id<JSQMessageData> object to your data source
-         *  3. Call `finishReceivingMessage`
-         */
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-        [self.chatData.messages addObject:newMessage];
+    [self.chatData loadMessages];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self scrollToBottomAnimated:YES];
         [self finishReceivingMessageAnimated:YES];
-        
-        
-        if (newMessage.isMediaMessage) {
-            /**
-             *  Simulate "downloading" media
-             */
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                /**
-                 *  Media is "finished downloading", re-display visible cells
-                 *
-                 *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
-                 *
-                 *  Reload the specific item, or simply call `reloadData`
-                 */
-                
-                if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                    ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachmentCopy;
-                    [self.collectionView reloadData];
-                }
-                else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                    [((JSQLocationMediaItem *)newMediaData)setLocation:newMediaAttachmentCopy withCompletionHandler:^{
-                        [self.collectionView reloadData];
-                    }];
-                }
-                else if ([newMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
-                    ((JSQVideoMediaItem *)newMediaData).fileURL = newMediaAttachmentCopy;
-                    ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
-                    [self.collectionView reloadData];
-                }
-                else {
-                    NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
-                }
-                
-            });
-        }
-        
+        [JSQSystemSoundPlayer jsq_playMessageSentSound];
     });
+}
+
+- (void)updateMessages
+{
+    [self.chatData loadMessages];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
+}
+
+- (void)didPressAccessoryButton:(UIButton *)sender
+{
+    void (^showAppropriateController)(UIImagePickerControllerSourceType) =
+    ^(UIImagePickerControllerSourceType type) {
+        UICompositeViewDescription *description = [ImagePickerViewController compositeViewDescription];
+        ImagePickerViewController *controller;
+        if ([LinphoneManager runningOnIpad]) {
+            controller = DYNAMIC_CAST(
+                                      [[PhoneMainView instance].mainViewController getCachedController:description.content],
+                                      ImagePickerViewController);
+            // keep a reference to this controller so that in case of memory pressure we keep it
+            self.popoverController = controller;
+        } else {
+            controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:description push:TRUE],
+                                      ImagePickerViewController);
+        }
+        if (controller != nil) {
+            controller.sourceType = type;
+            
+            // Displays a control that allows the user to choose picture or
+            // movie capture, if both are available:
+            controller.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            
+            // Hides the controls for moving & scaling pictures, or for
+            // trimming movies. To instead show the controls, use YES.
+            controller.allowsEditing = NO;
+            controller.imagePickerDelegate = self;
+            
+            /*if ([LinphoneManager runningOnIpad]) {
+                [controller.popoverController presentPopoverFromRect:[avatarImage frame]
+                                                              inView:self.view
+                                            permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                            animated:FALSE];
+            }*/
+        }
+    };
+    DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Select picture source", nil)];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Camera", nil)
+                            block:^() {
+                                showAppropriateController(UIImagePickerControllerSourceTypeCamera);
+                            }];
+    }
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Photo Library", nil)
+                            block:^() {
+                                showAppropriateController(UIImagePickerControllerSourceTypePhotoLibrary);
+                            }];
+    }
+    [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)
+                              block:^{
+                                  self.popoverController = nil;
+                              }];
+    [sheet showInView:[PhoneMainView instance].view];
+}
+
+#pragma mark - ImagePickerDelegate Functions
+
+- (void)imagePickerDelegateImage:(UIImage *)image info:(NSDictionary *)info {
+    // Dismiss popover on iPad
+    /*if ([LinphoneManager runningOnIpad]) {
+        UICompositeViewDescription *description = [ImagePickerViewController compositeViewDescription];
+        ImagePickerViewController *controller =
+        DYNAMIC_CAST([[PhoneMainView instance].mainViewController getCachedController:description.content],
+                     ImagePickerViewController);
+        if (controller != nil) {
+            [controller.popoverController dismissPopoverAnimated:TRUE];
+            self.popoverController = nil;
+        }
+    }*/
+    
+    UIImage *imageSized = [image scaleToFitSize:(CGSize){300, 300}];
+    
+    RgChatManager* mgr = [[LinphoneManager instance] chatManager];
+    [mgr sendMessageTo:_chatRoom image:imageSized];
+    
+    NSDictionary *dict = @{
+        @"tag":_chatRoom
+    };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextSent object:self userInfo:dict];
+    
+    //JSQPhotoMediaItem* mediaData = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"ringmail_email1"]];
+    //mediaData.appliesMediaViewMaskAsOutgoing = NO;
 }
 
 #pragma mark - JSQMessagesViewController method overrides
@@ -225,19 +180,8 @@
     
     if([text length] > 0)
     {
-        NSString *msgTo = [RgManager addressToXMPP:_chatRoom];
-        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-        [body setStringValue:text];
-        NSString *messageID = [[[[LinphoneManager instance] chatManager] xmppStream] generateUUID];
-        NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
-        [message addAttributeWithName:@"id" stringValue:messageID];
-        [message addAttributeWithName:@"type" stringValue:@"chat"];
-        [message addAttributeWithName:@"to" stringValue:msgTo];
-        [message addChild:body];
-        
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-        [mgr dbInsertMessage:_chatRoom body:text uuid:messageID inbound:NO];
-        [[mgr xmppStream] sendElement:message];
+        [mgr sendMessageTo:_chatRoom body:text];
         
         //NSLog(@"RingMail - Send Message To: %@ -> %@", _chatRoom, msgTo);
     
@@ -263,11 +207,55 @@
     }
 }
 
+#pragma mark - RingMail message data
+
+-(JSQMessage*)getMessageAtIndex:(NSUInteger)index
+{
+    NSObject* data = [self.chatData.messages objectAtIndex:index];
+    JSQMessage* result = nil;
+    if ([data isKindOfClass:[NSDictionary class]])
+    {
+        NSDictionary *lazy = (NSDictionary*)data;
+        RgChatManager* mgr = [[LinphoneManager instance] chatManager];
+        UIImage* image = nil;
+        NSData* imageData;
+        NSNumber* imageID = [lazy objectForKey:@"id"];
+        NSObject* cacheData = [imageCache objectForKey:[imageID stringValue]];
+        if (cacheData == nil)
+        {
+            imageData = [mgr dbGetMessageData:imageID];
+            if (imageData != nil)
+            {
+                image = [UIImage imageWithData:imageData];
+            }
+            [imageCache setObject:image forKey:[imageID stringValue]];
+        }
+        else
+        {
+            image = (UIImage*)cacheData;
+        }
+        JSQPhotoMediaItem* mediaData = [[JSQPhotoMediaItem alloc] initWithImage:image];
+        if ([(NSString*)[lazy objectForKey:@"direction"] isEqualToString:@"inbound"])
+        {
+            [mediaData setAppliesMediaViewMaskAsOutgoing:false];
+        }
+        result = [[JSQMessage alloc] initWithSenderId:[lazy objectForKey:@"sender"]
+                                                      senderDisplayName:[lazy objectForKey:@"senderName"]
+                                                        date:[lazy objectForKey:@"time"]
+                                                       media:mediaData];
+    }
+    else
+    {
+        result = (JSQMessage*)data;
+    }
+    return (result);
+}
+
 #pragma mark - JSQMessages CollectionView DataSource
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.chatData.messages objectAtIndex:indexPath.item];
+    return [self getMessageAtIndex:indexPath.item];
 }
 
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -279,7 +267,7 @@
      *  Otherwise, return your previously created bubble image data objects.
      */
     
-    JSQMessage *message = [self.chatData.messages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self getMessageAtIndex:indexPath.item];
     
     if ([message.senderId isEqualToString:self.senderId]) {
         return self.chatData.outgoingBubbleImageData;
@@ -290,6 +278,7 @@
 
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    return nil;
     /**
      *  Return `nil` here if you do not want avatars.
      *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
@@ -310,10 +299,7 @@
      *
      *  Override the defaults in `viewDidLoad`
      */
-    JSQMessage *message = [self.chatData.messages objectAtIndex:indexPath.item];
-    
-    return nil;
-    
+    //JSQMessage *message = [self.chatData.messages objectAtIndex:indexPath.item];
     /*if ([message.senderId isEqualToString:self.senderId]) {
         if (![NSUserDefaults outgoingAvatarSetting]) {
             return nil;
@@ -324,9 +310,7 @@
             return nil;
         }
     }*/
-    
-    
-    return [self.chatData.avatars objectForKey:message.senderId];
+    //return [self.chatData.avatars objectForKey:message.senderId];
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -338,7 +322,7 @@
      *  Show a timestamp for every 3rd message
      */
     if (indexPath.item % 3 == 0) {
-        JSQMessage *message = [self.chatData.messages objectAtIndex:indexPath.item];
+        JSQMessage *message = [self getMessageAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     
@@ -347,7 +331,7 @@
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.chatData.messages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self getMessageAtIndex:indexPath.item];
     
     /**
      *  iOS7-style sender name labels
@@ -357,7 +341,7 @@
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.chatData.messages objectAtIndex:indexPath.item - 1];
+        JSQMessage *previousMessage = [self getMessageAtIndex:(indexPath.item - 1)];
         if ([[previousMessage senderId] isEqualToString:message.senderId]) {
             return nil;
         }
@@ -403,7 +387,7 @@
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
-    JSQMessage *msg = [self.chatData.messages objectAtIndex:indexPath.item];
+    JSQMessage *msg = [self getMessageAtIndex:indexPath.item];
     
     if (!msg.isMediaMessage) {
         
@@ -449,13 +433,13 @@
     /**
      *  iOS7-style sender name labels
      */
-    JSQMessage *currentMessage = [self.chatData.messages objectAtIndex:indexPath.item];
+    JSQMessage *currentMessage = [self getMessageAtIndex:indexPath.item];
     if ([[currentMessage senderId] isEqualToString:self.senderId]) {
         return 0.0f;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.chatData.messages objectAtIndex:indexPath.item - 1];
+        JSQMessage *previousMessage = [self getMessageAtIndex:indexPath.item - 1];
         if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
             return 0.0f;
         }

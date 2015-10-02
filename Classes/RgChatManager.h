@@ -40,11 +40,15 @@
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
 - (void)disconnect;
 - (void)dropTables;
+- (void)sendMessageTo:(NSString*)msgTo body:(NSString*)body;
+- (void)sendMessageTo:(NSString*)to image:(UIImage*)image;
 - (NSArray *)dbGetSessions;
 - (NSArray *)dbGetMessages:(NSString *)from;
-- (void)dbInsertMessage:(NSString *)from body:(NSString *)body uuid:(NSString*)uuid inbound:(BOOL)inbound;
+- (void)dbInsertMessage:(NSString *)from type:(NSString *)type data:(NSObject*)data uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl;
 - (NSNumber *)dbGetSessionUnread;
 - (void)dbDeleteSessionID:(NSString *)from;
 - (NSString *)dbGetSessionByMD5:(NSString*)lookup;
+- (NSData *)dbGetMessageData:(NSNumber*)msgId;
+- (void)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid;
 
 @end

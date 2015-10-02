@@ -182,10 +182,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 											 selector:@selector(textReceived:)
 												 name:kLinphoneTextReceived
 											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(onGlobalStateChanged:)
-												 name:kLinphoneGlobalStateUpdate
-											   object:nil];
 	[[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(batteryLevelChanged:)
@@ -285,24 +281,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 							 cancelButtonTitle:NSLocalizedString(@"Continue", nil)
 							 otherButtonTitles:nil, nil];
 		[error show];
-	}
-}
-
-- (void)onGlobalStateChanged:(NSNotification *)notif {
-	LinphoneGlobalState state = (LinphoneGlobalState)[[[notif userInfo] valueForKey:@"state"] integerValue];
-	static BOOL already_shown = FALSE;
-	if (state == LinphoneGlobalOn && !already_shown && [LinphoneManager instance].wasRemoteProvisioned) {
-		LinphoneProxyConfig *conf = NULL;
-		linphone_core_get_default_proxy([LinphoneManager getLc], &conf);
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_login_view" forSection:@"app"] && conf == NULL) {
-			already_shown = TRUE;
-			WizardViewController *controller = DYNAMIC_CAST(
-				[[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
-				WizardViewController);
-			if (controller != nil) {
-				[controller fillDefaultValues];
-			}
-		}
 	}
 }
 

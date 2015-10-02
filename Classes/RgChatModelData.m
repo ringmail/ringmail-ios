@@ -72,26 +72,53 @@
 {
     if (! [chatRoom isEqualToString:@""])
     {
-        NSLog(@"**** RELOAD MESSAGES ****");
+        //NSLog(@"**** RELOAD MESSAGES ****");
         NSMutableArray* msgs = [NSMutableArray array];
-        NSArray* input = [[LinphoneManager instance].chatManager dbGetMessages:self.chatRoom];
+        RgChatManager* mgr = [[LinphoneManager instance] chatManager];
+        NSArray* input = [mgr dbGetMessages:self.chatRoom];
+        //NSLog(@"RingMail: Messages: %@", input);
         for (NSDictionary* msgdata in input)
         {
+            NSString* sender;
+            NSString* senderName;
             if ([(NSString*)[msgdata objectForKey:@"direction"] isEqualToString:@"outbound"])
             {
-                [msgs addObject:[[JSQMessage alloc] initWithSenderId:kRgSelf
-                                                   senderDisplayName:kRgSelfName
-                                                                date:[msgdata objectForKey:@"time"]
-                                                                text:[msgdata objectForKey:@"body"]]];
+                sender = kRgSelf;
+                senderName = kRgSelfName;
             }
             else
             {
-                [msgs addObject:[[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdJobs
-                                                   senderDisplayName:kJSQDemoAvatarDisplayNameJobs
+                sender = kJSQDemoAvatarIdJobs;
+                senderName = kJSQDemoAvatarDisplayNameJobs;
+            }
+            NSString *type = [msgdata objectForKey:@"type"];
+            if ([type isEqualToString:@"text/plain"])
+            {
+                [msgs addObject:[[JSQMessage alloc] initWithSenderId:sender
+                                                   senderDisplayName:senderName
                                                                 date:[msgdata objectForKey:@"time"]
                                                                 text:[msgdata objectForKey:@"body"]]];
             }
+            else if ([type isEqualToString:@"image/png"])
+            {
+                [msgs addObject:@{
+                                  @"id": [msgdata objectForKey:@"id"],
+                                  @"type": type,
+                                  @"sender": sender,
+                                  @"senderName": senderName,
+                                  @"time": [msgdata objectForKey:@"time"],
+                                  @"direction": [msgdata objectForKey:@"direction"]
+                              }];
+                /*UIImage* image = [UIImage imageWithData:[mgr dbGetMessageData:[msgdata objectForKey:@"id"]]];
+                JSQPhotoMediaItem* mediaData = [[JSQPhotoMediaItem alloc] initWithImage:image];
+                [msgs addObject:[[JSQMessage alloc] initWithSenderId:sender
+                                                   senderDisplayName:senderName
+                                                                date:[msgdata objectForKey:@"time"]
+                                                               media:mediaData]];*/
+            }
         }
+        
+        // TODO: replace with something better
         if (chatError != nil && ![chatError isEqualToString:@""])
         {
             [msgs addObject:[[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz
@@ -102,7 +129,5 @@
         self.messages = msgs;
     }
 }
-
-
 
 @end
