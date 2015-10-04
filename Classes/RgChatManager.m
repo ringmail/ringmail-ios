@@ -394,7 +394,7 @@
             [RgManager startMessageMD5]; // check if a push for a new chat arrived first
             
             // Should not happen because we log out of chat when we enter the background now
-            if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
+            /*if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
             {
                 // Create a new notification
                 UILocalNotification *notif = [[UILocalNotification alloc] init];
@@ -410,13 +410,14 @@
                     
                     [[UIApplication sharedApplication] presentLocalNotificationNow:notif];
                 }
-            }
+            }*/
             
             NSDictionary *dict = @{
                 @"tag": chatFrom
             };
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
+            [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
             
             //NSLog(@"NEW CHAT FROM %@: %@\nLog: %@", chatFrom, body, [self dbGetMessages:chatFrom]);
         }

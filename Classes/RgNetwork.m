@@ -13,6 +13,8 @@ static RgNetwork* theRgNetwork = nil;
 
 @implementation RgNetwork
 
+@synthesize pushReady;
+
 + (RgNetwork *)instance {
     @synchronized(self) {
         if (theRgNetwork == nil) {
@@ -27,6 +29,7 @@ static RgNetwork* theRgNetwork = nil;
     if (self = [super init])
     {
         self.networkHost = [RgManager ringmailHost];
+        self.pushReady = [NSNumber numberWithBool:0];
     }
     return self;
 }
@@ -60,6 +63,10 @@ static RgNetwork* theRgNetwork = nil;
                if (! [ok isEqualToString:@"ok"])
                {
                    NSLog(@"RingMail API Error: %@", @"Register Push Token Failed");
+               }
+               else
+               {
+                   self.pushReady = [NSNumber numberWithBool:1];
                }
            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                NSLog(@"RingMail API Error: %@", error);

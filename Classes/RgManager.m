@@ -313,19 +313,27 @@ static LevelDB* theConfigDatabase = nil;
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"start_at_boot_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"backgroundmode_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"enable_video_preference"];
-    [settings setObject:[NSNumber numberWithBool:1] forKey:@"opus_preference"];
+    [settings setObject:@"tls" forKey:@"transport_preference"];
+    [settings setObject:@"5061" forKey:@"port_preference"];
+    [settings setObject:@"None" forKey:@"media_encryption_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"opus_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"amr_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"pcmu_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"g722_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"g729_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"vp8_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"ice_preference"];
     [settings setObject:@"stun1.l.google.com:19302" forKey:@"stun_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"adaptive_rate_control_preference"];
     [settings setObject:@"Simple" forKey:@"adaptive_rate_algorithm_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"autoanswer_notif_preference"];
-    [settings setObject:[NSNumber numberWithInt:128] forKey:@"audio_codec_bitrate_limit_preference"];
+    [settings setObject:[NSNumber numberWithInt:64] forKey:@"audio_codec_bitrate_limit_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"voiceproc_preference"];
     [settings setObject:@"8576" forKey:@"audio_port_preference"];
-    [settings setObject:@"8577" forKey:@"video_port_preference"];
+    [settings setObject:@"9078" forKey:@"video_port_preference"];
+    [settings setObject:@"default" forKey:@"video_preset_preference"];
+    [settings setObject:[NSNumber numberWithInt:0] forKey:@"video_preferred_fps_preference"];
+    [settings setObject:[NSNumber numberWithInt:0] forKey:@"video_preferred_size_preference"];
     
     for (NSString *i in @[@"aaceld_16k", @"aaceld_22k", @"aaceld_32k", @"aaceld_44k", @"aaceld_48k", @"avpf", @"gsm", @"ilbc", @"pcma", @"silk_16k", @"silk_24k", @"speex_16k", @"speex_8k", @"h264", @"mp4v-es"])
     {
@@ -340,7 +348,6 @@ static LevelDB* theConfigDatabase = nil;
     {
         [settings setObject:newSipUser forKey:@"username_preference"];
         [settings setObject:newSipPass forKey:@"password_preference"];
-        [settings setObject:@"tcp" forKey:@"transport_preference"];
         [settings setObject:[RgManager ringmailHostSIP] forKey:@"domain_preference"];
     }
     NSLog(@"RingMail - New Settings: %@", [settings getSettings]);
@@ -351,6 +358,15 @@ static LevelDB* theConfigDatabase = nil;
     [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
     [RgManager chatEnsureConnection];
     [[RgNetwork instance] registerPushToken];
+}
+
++ (void)setupPushToken
+{
+    RgNetwork* net = [RgNetwork instance];
+    if (! [[net pushReady] boolValue])
+    {
+        [[RgNetwork instance] registerPushToken];
+    }
 }
 
 + (void)chatConnect

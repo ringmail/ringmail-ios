@@ -396,6 +396,7 @@
 	didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 	LOGI(@"%@ : %@", NSStringFromSelector(_cmd), deviceToken);
 	[[LinphoneManager instance] setPushNotificationToken:deviceToken];
+    [RgManager setupPushToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

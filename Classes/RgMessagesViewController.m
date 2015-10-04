@@ -62,7 +62,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self scrollToBottomAnimated:YES];
         [self finishReceivingMessageAnimated:YES];
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+        //[JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     });
 }
 

@@ -14,6 +14,7 @@ typedef void (^RgNetworkCallback)(AFHTTPRequestOperation *operation, id response
 @interface RgNetwork : NSObject
 
 @property (nonatomic, strong) NSString* networkHost;
+@property (nonatomic, strong) NSNumber* pushReady;
 
 + (RgNetwork *)instance;
 - (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback;

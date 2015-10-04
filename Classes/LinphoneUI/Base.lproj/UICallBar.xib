@@ -18,19 +18,11 @@
                 <outlet property="microButton" destination="11" id="14"/>
                 <outlet property="nineButton" destination="66" id="78"/>
                 <outlet property="oneButton" destination="73" id="79"/>
-                <outlet property="optionsAddButton" destination="88" id="96"/>
-                <outlet property="optionsButton" destination="10" id="19"/>
-                <outlet property="optionsTransferButton" destination="90" id="97"/>
                 <outlet property="optionsView" destination="87" id="92"/>
                 <outlet property="padView" destination="31" id="45"/>
                 <outlet property="pauseButton" destination="8" id="15"/>
                 <outlet property="portraitView" destination="4" id="138"/>
                 <outlet property="rightPadding" destination="145" id="cgI-HK-3gA"/>
-                <outlet property="routesBluetoothButton" destination="174" id="203"/>
-                <outlet property="routesButton" destination="164" id="202"/>
-                <outlet property="routesReceiverButton" destination="169" id="204"/>
-                <outlet property="routesSpeakerButton" destination="168" id="205"/>
-                <outlet property="routesView" destination="167" id="206"/>
                 <outlet property="sevenButton" destination="68" id="80"/>
                 <outlet property="sharpButton" destination="65" id="81"/>
                 <outlet property="sixButton" destination="63" id="82"/>
@@ -185,123 +177,9 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view tag="33" contentMode="scaleToFill" id="167" userLabel="routesView">
-                    <rect key="frame" x="160" y="156" width="80" height="185"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="169" userLabel="routesReceiverButton">
-                            <rect key="frame" x="0.0" y="60" width="80" height="63"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Receiver"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Receiver" backgroundImage="route_phone_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="route_phone_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="route_phone_on_default.png"/>
-                            <state key="highlighted" backgroundImage="route_phone_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onRoutesReceiverClick:" destination="-1" eventType="touchUpInside" id="209"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="168" userLabel="routesSpeakerButton">
-                            <rect key="frame" x="0.0" y="118" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Speaker"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Speaker" backgroundImage="route_speaker_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="route_speaker_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="route_speaker_on_default.png"/>
-                            <state key="highlighted" backgroundImage="route_speaker_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onRoutesSpeakerClick:" destination="-1" eventType="touchUpInside" id="210"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="174" userLabel="routesBluetoothButton">
-                            <rect key="frame" x="0.0" y="0.0" width="80" height="63"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Bluetooth"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Bluetooth" backgroundImage="route_bluetooth_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="route_bluetooth_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="route_bluetooth_on_default.png"/>
-                            <state key="highlighted" backgroundImage="route_bluetooth_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onRoutesBluetoothClick:" destination="-1" eventType="touchUpInside" id="208"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
                 <view tag="15" contentMode="scaleToFill" id="87" userLabel="optionsView">
                     <rect key="frame" x="240" y="208" width="80" height="126"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="88" userLabel="optionsAddButton">
-                            <rect key="frame" x="3" y="58" width="77" height="68"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Add call"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Add call" backgroundImage="options_add_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="options_add_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="options_add_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onOptionsAddClick:" destination="-1" eventType="touchUpInside" id="93"/>
-                                <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="89"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="90" userLabel="optionsTansferButton">
-                            <rect key="frame" x="3" y="0.0" width="77" height="68"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Transfer call"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Transfer" backgroundImage="options_transfer_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="options_transfer_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="options_transfer_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="91"/>
-                                <action selector="onOptionsTransferClick:" destination="-1" eventType="touchUpInside" id="98"/>
-                            </connections>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view tag="18" contentMode="scaleToFill" id="30" userLabel="buttons">
@@ -316,8 +194,12 @@
                             <rect key="frame" x="320" y="-11" width="47" height="146"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="incall_buttons_background.png" id="JtX-KK-DPb" userLabel="buttonPadding">
+                            <rect key="frame" x="0.0" y="-11" width="320" height="146"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        </imageView>
                         <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="12" userLabel="videoButton" customClass="UIVideoButton">
-                            <rect key="frame" x="0.0" y="0.0" width="80" height="67"/>
+                            <rect key="frame" x="12" y="0.0" width="80" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Video"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -340,11 +222,11 @@
                             </connections>
                         </button>
                         <activityIndicatorView hidden="YES" opaque="NO" tag="20" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="59" userLabel="videoWaitView">
-                            <rect key="frame" x="20" y="20" width="37" height="37"/>
+                            <rect key="frame" x="34" y="22" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="11" userLabel="microButton" customClass="UIMicroButton">
-                            <rect key="frame" x="80" y="0.0" width="80" height="67"/>
+                            <rect key="frame" x="120" y="0.0" width="80" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Micro"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -362,49 +244,6 @@
                             <state key="highlighted" backgroundImage="micro_off_over.png">
                                 <color key="titleColor" red="0.42745098040000001" green="0.52549019610000003" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                        </button>
-                        <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="9" userLabel="speakerButton" customClass="UISpeakerButton">
-                            <rect key="frame" x="160" y="0.0" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Speaker"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Speaker" backgroundImage="speaker_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="speaker_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="speaker_on_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="speaker_off_over.png">
-                                <color key="titleColor" red="0.42745098040000001" green="0.52549019610000003" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                        </button>
-                        <button hidden="YES" opaque="NO" tag="29" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="164" userLabel="routesButton" customClass="UIToggleButton">
-                            <rect key="frame" x="160" y="0.0" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Route"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Route" backgroundImage="routes_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="routes_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="routes_selected.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="routes_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onRoutesClick:" destination="-1" eventType="touchUpInside" id="211"/>
-                            </connections>
                         </button>
                         <button opaque="NO" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="8" userLabel="pauseButton" customClass="UIPauseButton">
                             <rect key="frame" x="0.0" y="67" width="105" height="68"/>
@@ -455,28 +294,25 @@
                                 <action selector="onPadClick:" destination="-1" eventType="touchUpInside" id="46"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="10" userLabel="optionsButton" customClass="UIToggleButton">
-                            <rect key="frame" x="240" y="0.0" width="80" height="67"/>
+                        <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="9" userLabel="speakerButton" customClass="UISpeakerButton">
+                            <rect key="frame" x="227" y="0.0" width="80" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Options"/>
+                            <accessibility key="accessibilityConfiguration" label="Speaker"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Options" backgroundImage="options_default.png">
+                            <state key="normal" title="Speaker" backgroundImage="speaker_off_default.png">
                                 <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="disabled" backgroundImage="options_disabled.png">
+                            <state key="disabled" backgroundImage="speaker_off_disabled.png">
                                 <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
-                            <state key="selected" backgroundImage="options_selected.png">
+                            <state key="selected" backgroundImage="speaker_on_default.png">
                                 <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
                             </state>
-                            <state key="highlighted" backgroundImage="options_over.png">
+                            <state key="highlighted" backgroundImage="speaker_off_over.png">
                                 <color key="titleColor" red="0.42745098040000001" green="0.52549019610000003" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <connections>
-                                <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="20"/>
-                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -924,6 +760,7 @@
         <image name="hangup_default_landscape.png" width="180" height="163"/>
         <image name="hangup_over.png" width="222" height="136"/>
         <image name="hangup_over_landscape.png" width="180" height="163"/>
+        <image name="incall_buttons_background.png" width="640" height="292"/>
         <image name="incall_padding_left.png" width="94" height="292"/>
         <image name="incall_padding_left_landscape.png" width="256" height="210"/>
         <image name="incall_padding_right.png" width="94" height="292"/>
@@ -960,25 +797,15 @@
         <image name="numpad_two_over.png" width="220" height="113"/>
         <image name="numpad_zero_default.png" width="220" height="113"/>
         <image name="numpad_zero_over.png" width="220" height="113"/>
-        <image name="options_add_default.png" width="155" height="137"/>
         <image name="options_add_default_landscape.png" width="129" height="109"/>
-        <image name="options_add_disabled.png" width="155" height="137"/>
         <image name="options_add_disabled_landscape.png" width="129" height="109"/>
-        <image name="options_add_over.png" width="155" height="137"/>
         <image name="options_add_over_landscape.png" width="129" height="109"/>
-        <image name="options_default.png" width="160" height="134"/>
         <image name="options_default_landscape.png" width="130" height="163"/>
-        <image name="options_disabled.png" width="160" height="134"/>
         <image name="options_disabled_landscape.png" width="130" height="163"/>
-        <image name="options_over.png" width="160" height="134"/>
         <image name="options_over_landscape.png" width="130" height="163"/>
-        <image name="options_selected.png" width="160" height="134"/>
         <image name="options_selected_landscape.png" width="130" height="163"/>
-        <image name="options_transfer_default.png" width="155" height="137"/>
         <image name="options_transfer_default_landscape.png" width="129" height="109"/>
-        <image name="options_transfer_disabled.png" width="155" height="137"/>
         <image name="options_transfer_disabled_landscape.png" width="129" height="109"/>
-        <image name="options_transfer_over.png" width="155" height="137"/>
         <image name="options_transfer_over_landscape.png" width="129" height="109"/>
         <image name="pause_off_default.png" width="209" height="136"/>
         <image name="pause_off_default_landscape.png" width="130" height="163"/>
@@ -986,37 +813,21 @@
         <image name="pause_off_over_landscape.png" width="130" height="163"/>
         <image name="pause_on_default.png" width="209" height="136"/>
         <image name="pause_on_default_landscape.png" width="130" height="163"/>
-        <image name="route_bluetooth_off_default.png" width="160" height="127"/>
         <image name="route_bluetooth_off_default_landscape.png" width="130" height="114"/>
-        <image name="route_bluetooth_off_disabled.png" width="160" height="127"/>
         <image name="route_bluetooth_off_disabled_landscape.png" width="130" height="114"/>
-        <image name="route_bluetooth_off_over.png" width="160" height="127"/>
         <image name="route_bluetooth_off_over_landscape.png" width="130" height="114"/>
-        <image name="route_bluetooth_on_default.png" width="160" height="127"/>
         <image name="route_bluetooth_on_default_landscape.png" width="130" height="114"/>
-        <image name="route_phone_off_default.png" width="160" height="127"/>
         <image name="route_phone_off_default_landscape.png" width="130" height="114"/>
-        <image name="route_phone_off_disabled.png" width="160" height="127"/>
         <image name="route_phone_off_disabled_landscape.png" width="130" height="114"/>
-        <image name="route_phone_off_over.png" width="160" height="127"/>
         <image name="route_phone_off_over_landscape.png" width="130" height="114"/>
-        <image name="route_phone_on_default.png" width="160" height="127"/>
         <image name="route_phone_on_default_landscape.png" width="130" height="114"/>
-        <image name="route_speaker_off_default.png" width="160" height="127"/>
         <image name="route_speaker_off_default_landscape.png" width="130" height="114"/>
-        <image name="route_speaker_off_disabled.png" width="160" height="127"/>
         <image name="route_speaker_off_disabled_landscape.png" width="130" height="114"/>
-        <image name="route_speaker_off_over.png" width="160" height="127"/>
         <image name="route_speaker_off_over_landscape.png" width="130" height="114"/>
-        <image name="route_speaker_on_default.png" width="160" height="127"/>
         <image name="route_speaker_on_default_landscape.png" width="130" height="114"/>
-        <image name="routes_default.png" width="160" height="134"/>
         <image name="routes_default_landscape.png" width="130" height="163"/>
-        <image name="routes_disabled.png" width="160" height="134"/>
         <image name="routes_disabled_landscape.png" width="130" height="163"/>
-        <image name="routes_over.png" width="160" height="134"/>
         <image name="routes_over_landscape.png" width="130" height="163"/>
-        <image name="routes_selected.png" width="160" height="134"/>
         <image name="routes_selected_landscape.png" width="130" height="163"/>
         <image name="speaker_off_default.png" width="160" height="134"/>
         <image name="speaker_off_default_landscape.png" width="130" height="163"/>

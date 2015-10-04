@@ -51,7 +51,17 @@
 
 void linphone_iphone_log_handler(int lev, const char *fmt, va_list args) {
 	NSString *format = [[NSString alloc] initWithUTF8String:fmt];
-	NSString *formatedString = [[NSString alloc] initWithFormat:format arguments:args];
+    NSString *formatedString;
+    if (args)
+    {
+        formatedString = [[NSString alloc] initWithFormat:format arguments:args];
+    }
+    else
+    {
+        NSMutableString *tmpString = [NSMutableString stringWithString:@""];
+        [tmpString appendFormat:@"%@", format];
+        formatedString = tmpString;
+    }
 	char levelC = 'I';
 	switch ((OrtpLogLevel)lev) {
 	case ORTP_FATAL:

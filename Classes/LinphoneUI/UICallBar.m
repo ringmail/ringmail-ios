@@ -32,14 +32,14 @@
 @synthesize videoButton;
 @synthesize microButton;
 @synthesize speakerButton;
-@synthesize routesButton;
+//@synthesize routesButton;
 @synthesize optionsButton;
 @synthesize hangupButton;
-@synthesize routesBluetoothButton;
-@synthesize routesReceiverButton;
-@synthesize routesSpeakerButton;
-@synthesize optionsAddButton;
-@synthesize optionsTransferButton;
+//@synthesize routesBluetoothButton;
+//@synthesize routesReceiverButton;
+//@synthesize routesSpeakerButton;
+//@synthesize optionsAddButton;
+//@synthesize optionsTransferButton;
 @synthesize dialerButton;
 
 @synthesize padView;
@@ -145,18 +145,6 @@
 		[LinphoneUtils buttonFixStates:speakerButtonLandscape];
 	}
 
-	if (![LinphoneManager runningOnIpad]) {
-		UIButton *routesButtonLandscape = (UIButton *)[landscapeView viewWithTag:[routesButton tag]];
-		// Set selected+over background: IB lack !
-		[routesButton setBackgroundImage:[UIImage imageNamed:@"routes_over.png"]
-								forState:(UIControlStateHighlighted | UIControlStateSelected)];
-		[routesButtonLandscape setBackgroundImage:[UIImage imageNamed:@"routes_over_landscape.png"]
-										 forState:(UIControlStateHighlighted | UIControlStateSelected)];
-
-		[LinphoneUtils buttonFixStates:routesButton];
-		[LinphoneUtils buttonFixStates:routesButtonLandscape];
-	}
-
 	{
 		UIButton *microButtonLandscape = (UIButton *)[landscapeView viewWithTag:[microButton tag]];
 		// Set selected+disabled background: IB lack !
@@ -173,23 +161,6 @@
 
 		[LinphoneUtils buttonFixStates:microButton];
 		[LinphoneUtils buttonFixStates:microButtonLandscape];
-	}
-
-	{
-		UIButton *optionsButtonLandscape = (UIButton *)[landscapeView viewWithTag:[optionsButton tag]];
-		// Set selected+disabled background: IB lack !
-		[optionsButton setBackgroundImage:[UIImage imageNamed:@"options_disabled.png"]
-								 forState:(UIControlStateDisabled | UIControlStateSelected)];
-		[optionsButtonLandscape setBackgroundImage:[UIImage imageNamed:@"options_disabled_landscape.png"]
-										  forState:(UIControlStateDisabled | UIControlStateSelected)];
-
-		// Set selected+over background: IB lack !
-		[optionsButton setBackgroundImage:[UIImage imageNamed:@"options_over.png"]
-								 forState:(UIControlStateHighlighted | UIControlStateSelected)];
-		[optionsButtonLandscape setBackgroundImage:[UIImage imageNamed:@"options_over_landscape.png"]
-										  forState:(UIControlStateHighlighted | UIControlStateSelected)];
-		[LinphoneUtils buttonFixStates:optionsButton];
-		[LinphoneUtils buttonFixStates:optionsButtonLandscape];
 	}
 
 	{
@@ -304,11 +275,11 @@
 	}
 
 	// Disable transfert in conference
-	if (linphone_core_get_current_call(lc) == NULL) {
+	/*if (linphone_core_get_current_call(lc) == NULL) {
 		[optionsTransferButton setEnabled:FALSE];
 	} else {
 		[optionsTransferButton setEnabled:TRUE];
-	}
+	}*/
 
 	switch (state) {
 	case LinphoneCallEnd:
@@ -404,7 +375,7 @@
 }
 
 - (void)showRoutes:(BOOL)animated {
-	if (![LinphoneManager runningOnIpad]) {
+	/*if (![LinphoneManager runningOnIpad]) {
 		[routesButton setOn];
 		[routesBluetoothButton setSelected:[[LinphoneManager instance] bluetoothEnabled]];
 		[routesSpeakerButton setSelected:[[LinphoneManager instance] speakerEnabled]];
@@ -420,11 +391,11 @@
 				[routesView setHidden:FALSE];
 			}
 		}
-	}
+	}*/
 }
 
 - (void)hideRoutes:(BOOL)animated {
-	if (![LinphoneManager runningOnIpad]) {
+	/*if (![LinphoneManager runningOnIpad]) {
 		[routesButton setOff];
 		if (![routesView isHidden]) {
 			if (animated) {
@@ -436,7 +407,7 @@
 				[routesView setHidden:TRUE];
 			}
 		}
-	}
+	}*/
 }
 
 - (void)showOptions:(BOOL)animated {
@@ -470,14 +441,14 @@
 - (void)showSpeaker {
 	if (![LinphoneManager runningOnIpad]) {
 		[speakerButton setHidden:FALSE];
-		[routesButton setHidden:TRUE];
+		//[routesButton setHidden:TRUE];
 	}
 }
 
 - (void)hideSpeaker {
 	if (![LinphoneManager runningOnIpad]) {
 		[speakerButton setHidden:TRUE];
-		[routesButton setHidden:FALSE];
+		//[routesButton setHidden:FALSE];
 	}
 }
 

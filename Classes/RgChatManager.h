@@ -19,6 +19,7 @@
 #import "XMPPMessage+XEP_0184.h"
 
 #import "RegexKitLite/RegexKitLite.h"
+#import "JSQMessages.h"
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 #import "FMResultSet.h"

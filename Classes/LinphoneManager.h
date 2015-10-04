@@ -37,6 +37,7 @@
 #include "linphone/linphone_tunnel.h"
 
 #import "RgChatManager.h"
+#import "AudioSessionManager.h"
 
 extern NSString *const LINPHONERC_APPLICATION_KEY;
 

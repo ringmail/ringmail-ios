@@ -153,6 +153,9 @@
 		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
 		C422AD321B99F1A900D1F1CD /* RgNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = C422AD311B99F1A900D1F1CD /* RgNetwork.m */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
+		C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C46997AC1BC19168007B3658 /* incall_buttons_background.png */; };
+		C46997B61BC1A7FB007B3658 /* libvo-amrwbenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */; };
+		C46997B91BC1B82E007B3658 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46997B81BC1B82E007B3658 /* AudioSessionManager.m */; };
 		C4B9B9D61BB9BEDF00677220 /* RgWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */; };
 		C4D0BC6B1BB4F0A400D1728A /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */; };
 		C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */; };
@@ -1063,6 +1066,10 @@
 		C422AD311B99F1A900D1F1CD /* RgNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgNetwork.m; sourceTree = "<group>"; };
 		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
+		C46997AC1BC19168007B3658 /* incall_buttons_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incall_buttons_background.png; path = Resources/incall_buttons_background.png; sourceTree = "<group>"; };
+		C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libvo-amrwbenc.a"; path = "liblinphone-sdk/apple-darwin/lib/libvo-amrwbenc.a"; sourceTree = "<group>"; };
+		C46997B71BC1B82E007B3658 /* AudioSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSessionManager.h; sourceTree = "<group>"; };
+		C46997B81BC1B82E007B3658 /* AudioSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioSessionManager.m; sourceTree = "<group>"; };
 		C4B9B9D41BB9BEDF00677220 /* RgWebViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgWebViewDelegate.h; sourceTree = "<group>"; };
 		C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgWebViewDelegate.m; sourceTree = "<group>"; };
 		C4D0BC691BB4F0A400D1728A /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
@@ -1828,6 +1835,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C46997B61BC1A7FB007B3658 /* libvo-amrwbenc.a in Frameworks */,
 				63D7216D1B73975900D70E65 /* libmsx264.a in Frameworks */,
 				63D7215D1B7394D200D70E65 /* libtunnel.a in Frameworks */,
 				63D7216C1B73973D00D70E65 /* libx264.a in Frameworks */,
@@ -1876,10 +1884,10 @@
 				D37EE10A16032DA4003608A6 /* libmediastreamer_voip.a in Frameworks */,
 				226F2ED81344B0EF00F6EF27 /* libmsamr.a in Frameworks */,
 				223148E61178A09900637D6A /* libmsilbc.a in Frameworks */,
-				226183B0147259670037138E /* libmssilk.a in Frameworks */,
-				22A10F3B11F8960300373793 /* libortp.a in Frameworks */,
 				226F2ED71344B0EF00F6EF27 /* libopencore-amrnb.a in Frameworks */,
 				226F2ED61344B0EF00F6EF27 /* libopencore-amrwb.a in Frameworks */,
+				226183B0147259670037138E /* libmssilk.a in Frameworks */,
+				22A10F3B11F8960300373793 /* libortp.a in Frameworks */,
 				226CDAE014E2D0B800513B67 /* libmsbcg729.a in Frameworks */,
 				220FAD3810765B400068D98F /* libspeex.a in Frameworks */,
 				220FAD3910765B400068D98F /* libspeexdsp.a in Frameworks */,
@@ -1912,6 +1920,8 @@
 				C401E5DB1B95E9ED006C915A /* RgChatModelData.m */,
 				C4B9B9D41BB9BEDF00677220 /* RgWebViewDelegate.h */,
 				C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */,
+				C46997B71BC1B82E007B3658 /* AudioSessionManager.h */,
+				C46997B81BC1B82E007B3658 /* AudioSessionManager.m */,
 				22E0A81D111C44E100B04932 /* AboutViewController.h */,
 				22E0A81C111C44E100B04932 /* AboutViewController.m */,
 				636316D31A1DEBCB0009B839 /* AboutViewController.xib */,
@@ -2179,6 +2189,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */,
 				63EA4C941B50189D00922857 /* libmswebrtc.a */,
 				63158FAC1B468E0E00969917 /* ImageOptim.sh */,
 				152F22351B15E889008C0621 /* libxml2.dylib */,
@@ -2534,6 +2545,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C46997AC1BC19168007B3658 /* incall_buttons_background.png */,
 				C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */,
 				C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */,
 				C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */,
@@ -3693,6 +3705,7 @@
 				D332864C160B5BC300E6435D /* dialer_alt_disabled~ipad.png in Resources */,
 				F070E6331A2622EC00E17AFD /* dialer_padding_left.png in Resources */,
 				F0C1F8EB1A277ADA009402C9 /* LaunchScreen.xib in Resources */,
+				C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */,
 				D35E91EA160CA0BD0023116B /* field_background.9@2x.png in Resources */,
 				D35E91EE160CA0C70023116B /* button_background_default.9@2x.png in Resources */,
 				D35E91F0160CA0C70023116B /* button_background_over.9@2x.png in Resources */,
@@ -3835,6 +3848,7 @@
 				22BB1A69132FF16A005CD7AA /* UIEraseButton.m in Sources */,
 				22AA8B0113D83F6300B30535 /* UICamSwitch.m in Sources */,
 				340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */,
+				C46997B91BC1B82E007B3658 /* AudioSessionManager.m in Sources */,
 				34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */,
 				D3F83EEC1582021700336684 /* InCallViewController.m in Sources */,
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
@@ -4394,6 +4408,8 @@
 					HAVE_OPENH264,
 					HAVE_SILK,
 					HAVE_SSL,
+					HAVE_G729,
+					HAVE_AMR,
 					DEBUG,
 					USE_APN_DEV,
 					"$(inherited)",
@@ -4487,6 +4503,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VIDEO_ENABLED,
 					HAVE_SILK,
+					HAVE_G729,
+					HAVE_AMR,
 					HAVE_SSL,
 					HAVE_OPENH264,
 					"$(inherited)",
@@ -4579,6 +4597,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VIDEO_ENABLED,
 					HAVE_SILK,
+					HAVE_G729,
+					HAVE_AMR,
 					HAVE_SSL,
 					USE_APN_DEV,
 					"$(inherited)",
@@ -4672,6 +4692,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VIDEO_ENABLED,
 					HAVE_SILK,
+					HAVE_G729,
+					HAVE_AMR,
 					HAVE_SSL,
 					"$(inherited)",
 				);
