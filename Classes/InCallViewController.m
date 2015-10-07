@@ -179,13 +179,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 										 duration:(NSTimeInterval)duration {
-	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	//[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	// in mode display_filter_auto_rotate=0, no need to rotate the preview
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	[self previewTouchLift];
+	//[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	//[self previewTouchLift];
 }
 
 #pragma mark -
@@ -458,13 +458,9 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		return;
 
 	const char *lUserNameChars = linphone_address_get_username(linphone_call_get_remote_address(call));
-	NSString *lUserName =
-		lUserNameChars ? [[NSString alloc] initWithUTF8String:lUserNameChars] : NSLocalizedString(@"Unknown", nil);
-	const char *lDisplayNameChars = linphone_address_get_display_name(linphone_call_get_remote_address(call));
-	NSString *lDisplayName = lDisplayNameChars ? [[NSString alloc] initWithUTF8String:lDisplayNameChars] : @"";
-
-	NSString *title = [NSString stringWithFormat:NSLocalizedString(@"'%@' would like to enable video", nil),
-												 ([lDisplayName length] > 0) ? lDisplayName : lUserName];
+    NSString *lUserName = [[NSString alloc] initWithUTF8String:lUserNameChars];
+    NSString *lDisplayName = [RgManager addressFromSIPUser:lUserName];
+    NSString *title = [NSString stringWithFormat:NSLocalizedString(@"'%@' would like to enable video", nil), lDisplayName];
 	DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:title];
 	NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:30
 													  target:self

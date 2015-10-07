@@ -242,6 +242,8 @@
 #pragma mark -
 
 - (void)callSecurityUpdate {
+    return;
+    
 	BOOL pending = false;
 	BOOL security = true;
 
@@ -251,7 +253,7 @@
 		if (securitySheet) {
 			[securitySheet dismissWithClickedButtonIndex:securitySheet.destructiveButtonIndex animated:TRUE];
 		}
-		[callSecurityImage setHidden:true];
+		//[callSecurityImage setHidden:true];
 		return;
 	}
 	while (list != NULL) {
@@ -276,7 +278,7 @@
 	} else {
 		[callSecurityImage setImage:[UIImage imageNamed:@"security_ko.png"]];
 	}
-	[callSecurityImage setHidden:false];
+	//[callSecurityImage setHidden:false];
 }
 
 - (void)callQualityUpdate {

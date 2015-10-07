@@ -222,29 +222,31 @@ static RootViewManager *rootViewManagerInstance = nil;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-	if ([LinphoneManager runningOnIpad] || [mainViewController currentViewSupportsLandscape])
+	return UIInterfaceOrientationMaskPortrait;
+    
+	/*if ([LinphoneManager runningOnIpad] || [mainViewController currentViewSupportsLandscape])
 		return UIInterfaceOrientationMaskAll;
 	else {
 		return UIInterfaceOrientationMaskPortrait;
-	}
+	}*/
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 								duration:(NSTimeInterval)duration {
-	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	[mainViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	[self orientationUpdate:toInterfaceOrientation];
+	//[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	//[mainViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	//[self orientationUpdate:toInterfaceOrientation];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 										 duration:(NSTimeInterval)duration {
-	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	[mainViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	//[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	//[mainViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	[mainViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	//[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	//[mainViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 - (UIInterfaceOrientation)interfaceOrientation {
