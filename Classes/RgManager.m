@@ -311,7 +311,7 @@ static LevelDB* theConfigDatabase = nil;
     
     // RingMail Defaults
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"start_at_boot_preference"];
-    [settings setObject:[NSNumber numberWithBool:1] forKey:@"backgroundmode_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"backgroundmode_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"enable_video_preference"];
     [settings setObject:@"tls" forKey:@"transport_preference"];
     [settings setObject:@"5061" forKey:@"port_preference"];

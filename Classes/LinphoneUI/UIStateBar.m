@@ -202,13 +202,13 @@
 			break;
 		case LinphoneRegistrationNone:
 		case LinphoneRegistrationCleared:
-			message = NSLocalizedString(@"Not registered", nil);
+			message = [[LinphoneManager instance] ringLogin];
 			break;
 		case LinphoneRegistrationFailed:
-			message = NSLocalizedString(@"Registration failed", nil);
+			message = @"Not Connected";
 			break;
 		case LinphoneRegistrationProgress:
-			message = NSLocalizedString(@"Registration in progress", nil);
+			message = [[LinphoneManager instance] ringLogin];
 			break;
 		default:
 			break;

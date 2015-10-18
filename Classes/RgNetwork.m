@@ -34,6 +34,19 @@ static RgNetwork* theRgNetwork = nil;
     return self;
 }
 
+- (void)log:(NSString*)logdata
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.operationQueue waitUntilAllOperationsAreFinished];
+    NSDictionary *parameters = @{@"message": logdata};
+    NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/log", self.networkHost];
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"RingMail Logged: %@", logdata);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"RingMail API Error: %@", error);
+    }];
+}
+
 - (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -73,6 +86,36 @@ static RgNetwork* theRgNetwork = nil;
            }];
        }
    }
+}
+
+- (void)registerPushTokenVoIP:(NSData*)tokenData
+{
+    if (tokenData != nil) {
+        LevelDB* cfg = [RgManager configDatabase];
+        NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+        NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+        if (rgLogin != nil && rgPass != nil)
+        {
+            NSString* tokenString = [RgManager pushToken:tokenData];
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            NSDictionary *parameters = @{@"login": rgLogin, @"password": rgPass, @"voip_token": tokenString};
+            NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/register_push", self.networkHost];
+            [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary* res = responseObject;
+                NSString *ok = [res objectForKey:@"result"];
+                if (! [ok isEqualToString:@"ok"])
+                {
+                    NSLog(@"RingMail API Error: %@", @"Register Push Token Failed");
+                }
+                else
+                {
+                    self.pushReady = [NSNumber numberWithBool:1];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"RingMail API Error: %@", error);
+            }];
+        }
+    }
 }
 
 - (void)registerUser:(NSDictionary*)params callback:(RgNetworkCallback)callback

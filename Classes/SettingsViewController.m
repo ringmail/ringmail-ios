@@ -246,11 +246,11 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 
-	UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil)
+	/*UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil)
 																   style:UIBarButtonItemStyleBordered
 																  target:self
 																  action:@selector(onAboutClick:)];
-	self.navigationItem.rightBarButtonItem = buttonItem;
+	self.navigationItem.rightBarButtonItem = buttonItem;*/
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -33,6 +33,7 @@
 
 @synthesize configURL;
 @synthesize window;
+@synthesize pushReg;
 
 #pragma mark - Lifecycle Functions
 
@@ -82,25 +83,28 @@
 	}
 	LinphoneManager *instance = [LinphoneManager instance];
 
-	[instance becomeActive];
+    if ([[instance coreReady] boolValue])
+    {
+    	[instance becomeActive];
 
-	LinphoneCore *lc = [LinphoneManager getLc];
-	LinphoneCall *call = linphone_core_get_current_call(lc);
+    	LinphoneCore *lc = [LinphoneManager getLc];
+    	LinphoneCall *call = linphone_core_get_current_call(lc);
 
-	if (call) {
-		if (call == instance->currentCallContextBeforeGoingBackground.call) {
-			const LinphoneCallParams *params = linphone_call_get_current_params(call);
-			if (linphone_call_params_video_enabled(params)) {
-				linphone_call_enable_camera(call, instance->currentCallContextBeforeGoingBackground.cameraIsEnabled);
-			}
-			instance->currentCallContextBeforeGoingBackground.call = 0;
-		} else if (linphone_call_get_state(call) == LinphoneCallIncomingReceived) {
-			[[PhoneMainView instance] displayIncomingCall:call];
-			// in this case, the ringing sound comes from the notification.
-			// To stop it we have to do the iOS7 ring fix...
-			[self fixRing];
-		}
-	}
+    	if (call) {
+    		if (call == instance->currentCallContextBeforeGoingBackground.call) {
+    			const LinphoneCallParams *params = linphone_call_get_current_params(call);
+    			if (linphone_call_params_video_enabled(params)) {
+    				linphone_call_enable_camera(call, instance->currentCallContextBeforeGoingBackground.cameraIsEnabled);
+    			}
+    			instance->currentCallContextBeforeGoingBackground.call = 0;
+    		} else if (linphone_call_get_state(call) == LinphoneCallIncomingReceived) {
+    			[[PhoneMainView instance] displayIncomingCall:call];
+    			// in this case, the ringing sound comes from the notification.
+    			// To stop it we have to do the iOS7 ring fix...
+    			[self fixRing];
+    		}
+    	}
+    }
 }
 
 - (UIUserNotificationCategory *)getMessageNotificationCategory {
@@ -157,11 +161,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 	UIApplication *app = [UIApplication sharedApplication];
-	UIApplicationState state = app.applicationState;
+	//UIApplicationState state = app.applicationState;
 
 	LinphoneManager *instance = [LinphoneManager instance];
-	BOOL background_mode = [instance lpConfigBoolForKey:@"backgroundmode_preference"];
-	BOOL start_at_boot = [instance lpConfigBoolForKey:@"start_at_boot_preference"];
+	//BOOL background_mode = [instance lpConfigBoolForKey:@"backgroundmode_preference"];
+	//BOOL start_at_boot = [instance lpConfigBoolForKey:@"start_at_boot_preference"];
 
 	if ([app respondsToSelector:@selector(registerUserNotificationSettings:)]) {
 		/* iOS8 notifications can be actioned! Awesome: */
@@ -184,16 +188,16 @@
 			[app registerForRemoteNotificationTypes:notifTypes];
 		}
 	}
-
-	if (state == UIApplicationStateBackground) {
+    
+	/*if (state == UIApplicationStateBackground) {
 		// we've been woken up directly to background;
 		if (!start_at_boot || !background_mode) {
 			// autoboot disabled or no background, and no push: do nothing and wait for a real launch
-			/*output a log with NSLog, because the ortp logging system isn't activated yet at this time*/
+			// output a log with NSLog, because the ortp logging system isn't activated yet at this time
 			NSLog(@"Linphone launch doing nothing because start_at_boot or background_mode are not activated.", NULL);
 			return YES;
 		}
-	}
+	}*/
 	bgStartId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
 	  LOGW(@"Background task for application launching expired.");
 	  [[UIApplication sharedApplication] endBackgroundTask:bgStartId];
@@ -395,6 +399,11 @@
 - (void)application:(UIApplication *)application
 	didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 	LOGI(@"%@ : %@", NSStringFromSelector(_cmd), deviceToken);
+    
+    pushReg = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
+    pushReg.delegate = self;
+    pushReg.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+    
 	[[LinphoneManager instance] setPushNotificationToken:deviceToken];
     [RgManager setupPushToken];
 }
@@ -402,6 +411,35 @@
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 	LOGI(@"%@ : %@", NSStringFromSelector(_cmd), [error localizedDescription]);
 	[[LinphoneManager instance] setPushNotificationToken:nil];
+}
+
+#pragma mark - PushKit VoIP
+
+-(void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
+{
+    NSLog(@"RingMail: PushKit Token: %@", credentials.token);
+    [[RgNetwork instance] registerPushTokenVoIP:credentials.token];
+}
+
+-(void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
+{
+    NSLog(@"RingMail: VoIP Push Received: %@", payload);
+    
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
+    {
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        if (notification)
+        {
+            notification.soundName = @"ring.caf";
+            notification.category = @"incoming_call";
+            notification.repeatInterval = 0;
+            notification.alertBody = @"Incomming Call";
+            notification.alertAction = NSLocalizedString(@"Answer", nil);
+            notification.userInfo = @{ };
+            notification.applicationIconBadgeNumber = 1;
+            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        }
+    }
 }
 
 #pragma mark - User notifications

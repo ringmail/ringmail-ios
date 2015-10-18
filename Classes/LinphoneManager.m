@@ -133,6 +133,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize chatTag;
 @synthesize chatMd5;
 @synthesize ringLogin;
+@synthesize coreReady;
 
 struct codec_name_pref_table {
 	const char *name;
@@ -324,6 +325,7 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
         self.chatTag = @"";
         self.chatManager = nil;
         self.ringLogin = @"";
+        self.coreReady = [NSNumber numberWithBool:0];
 	}
 	return self;
 }
@@ -533,7 +535,7 @@ exit_dbmigration:
 	}
 
 	/* AVPF migration */
-	if ([self lpConfigBoolForKey:@"avpf_migration_done"] == FALSE) {
+/*	if ([self lpConfigBoolForKey:@"avpf_migration_done"] == FALSE) {
 		const MSList *proxies = linphone_core_get_proxy_config_list(theLinphoneCore);
 		while (proxies) {
 			LinphoneProxyConfig *proxy = (LinphoneProxyConfig *)proxies->data;
@@ -546,9 +548,9 @@ exit_dbmigration:
 			proxies = proxies->next;
 		}
 		[self lpConfigSetBool:TRUE forKey:@"avpf_migration_done"];
-	}
+	}*/
 	/* Quality Reporting migration */
-	if ([self lpConfigBoolForKey:@"quality_report_migration_done"] == FALSE) {
+/*	if ([self lpConfigBoolForKey:@"quality_report_migration_done"] == FALSE) {
 		const MSList *proxies = linphone_core_get_proxy_config_list(theLinphoneCore);
 		while (proxies) {
 			LinphoneProxyConfig *proxy = (LinphoneProxyConfig *)proxies->data;
@@ -563,14 +565,14 @@ exit_dbmigration:
 			proxies = proxies->next;
 		}
 		[self lpConfigSetBool:TRUE forKey:@"quality_report_migration_done"];
-	}
+	}*/
 	/* File transfer migration */
-	if ([self lpConfigBoolForKey:@"file_transfer_migration_done"] == FALSE) {
+	/*if ([self lpConfigBoolForKey:@"file_transfer_migration_done"] == FALSE) {
 		NSString *newURL = @"https://www.linphone.org:444/lft.php";
 		LOGI(@"Migrating sharing server url from %@ to %@", [self lpConfigStringForKey:@"sharing_server_preference"], newURL);
 		[self lpConfigSetString:newURL forKey:@"sharing_server_preference"];
 		[self lpConfigSetBool:TRUE forKey:@"file_transfer_migration_done"];
-	}
+	}*/
 }
 #pragma mark - Linphone Core Functions
 
@@ -1438,6 +1440,8 @@ static BOOL libStarted = FALSE;
 			otherButtonTitles:nil, nil];
 		[error show];
 	}
+    
+    [self setCoreReady:[NSNumber numberWithBool:1]];
 
 	if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
 		// go directly to bg mode
@@ -1750,8 +1754,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		}
 	}
     
-    LinphoneManager *instance = [LinphoneManager instance];
-    if (! [[instance chatManager] isConnected]) // if connected
+    if (! [[self chatManager] isConnected]) // if connected
     {
         if ([RgManager configReadyAndVerified])
         {

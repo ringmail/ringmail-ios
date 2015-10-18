@@ -76,6 +76,12 @@
         NSMutableArray* msgs = [NSMutableArray array];
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
         NSArray* input = [mgr dbGetMessages:self.chatRoom];
+        NSString *displayName = self.chatRoom;
+        
+        ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:displayName];
+        if (acontact != nil) {
+            displayName = [FastAddressBook getContactDisplayName:acontact];
+        }
         //NSLog(@"RingMail: Messages: %@", input);
         for (NSDictionary* msgdata in input)
         {
@@ -89,7 +95,7 @@
             else
             {
                 sender = kJSQDemoAvatarIdJobs;
-                senderName = kJSQDemoAvatarDisplayNameJobs;
+                senderName = displayName;
             }
             NSString *type = [msgdata objectForKey:@"type"];
             if ([type isEqualToString:@"text/plain"])
