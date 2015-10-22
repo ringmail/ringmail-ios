@@ -18,7 +18,7 @@
 		UIToolbar *numberToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
 		numberToolbar.items = [NSArray
 			arrayWithObjects:[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil)
-															  style:UIBarButtonItemStyleBordered
+															  style:UIBarButtonItemStylePlain
 															 target:self
 															 action:@selector(cancelNumberPad)],
 							 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace

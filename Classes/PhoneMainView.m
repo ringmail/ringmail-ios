@@ -78,9 +78,9 @@ static RootViewManager *rootViewManagerInstance = nil;
 		return currentViewController;
 
 	if (newMainView != currentViewController) {
-		PhoneMainView *previousMainView = currentViewController;
-		UIInterfaceOrientation nextViewOrientation = newMainView.interfaceOrientation;
-		UIInterfaceOrientation previousOrientation = currentViewController.interfaceOrientation;
+		//PhoneMainView *previousMainView = currentViewController;
+		//UIInterfaceOrientation nextViewOrientation = newMainView.interfaceOrientation;
+		//UIInterfaceOrientation previousOrientation = currentViewController.interfaceOrientation;
 
 		LOGI(@"Changing rootViewController: %@ -> %@", currentViewController.name, newMainView.name);
 		currentViewController = newMainView;
@@ -93,13 +93,14 @@ static RootViewManager *rootViewManagerInstance = nil;
 			  delegate.window.rootViewController = newMainView;
 			  // when going to landscape-enabled view, we have to get the current portrait frame and orientation,
 			  // because it could still have landscape-based size
-			  if (nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController) {
+            // TODO: RingMail only supports one orientation to start with
+			  /*if (nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController) {
 				  newMainView.view.frame = previousMainView.view.frame;
 				  [newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
 				  [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.3];
 				  [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.3];
 				  [newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
-			  }
+			  }*/
 
 			}
 			completion:^(BOOL finished){
@@ -424,7 +425,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (void)updateApplicationBadgeNumber {
 	int count = 0;
 	count += linphone_core_get_missed_calls_count([LinphoneManager getLc]);
-	count += [LinphoneManager unreadMessageCount];
+	count += [[[[LinphoneManager instance] chatManager] dbGetSessionUnread] integerValue];
 	count += linphone_core_get_calls_nb([LinphoneManager getLc]);
 	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
 }
@@ -624,7 +625,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 									 @"SIP account configuration in the settings.",
 									 nil);
 	} else {
-		lMessage = [NSString stringWithFormat:NSLocalizedString(@"Cannot call %@", nil), lUserName];
+        lMessage = [NSString stringWithFormat:NSLocalizedString(@"Cannot call %@", nil), [RgManager addressFromSIPUser:lUserName]];
 	}
 
 	if (linphone_call_get_reason(call) == LinphoneReasonNotFound) {

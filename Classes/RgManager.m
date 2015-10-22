@@ -74,7 +74,7 @@ static LevelDB* theConfigDatabase = nil;
     {
         displayName = [NSString stringWithString:address];
         address = [RgManager addressToSIP:address];
-        NSLog(@"New Address: %@", address);
+        //NSLog(@"New Address: %@", address);
     }
     [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
 }
@@ -127,7 +127,7 @@ static LevelDB* theConfigDatabase = nil;
     [NSString stringWithFormat:@"pn-type=apple;app-id=%@.%@;pn-tok=%@",
      [[NSBundle mainBundle] bundleIdentifier], APPMODE_SUFFIX, tokenString];
     
-    NSLog(@"APNS Set Proxy Token: %@", params);
+    //NSLog(@"APNS Set Proxy Token: %@", params);
     return params;
 }
 
@@ -411,7 +411,11 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)initialLogin
 {
+#ifdef DEBUG
+    NSLog(@"RingMail: Initial - Login (DEBUG)");
+#else
     NSLog(@"RingMail: Initial - Login");
+#endif
     LinphoneManager* mgr = [LinphoneManager instance];
     LevelDB* cfg = [RgManager configDatabase];
     NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];

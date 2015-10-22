@@ -271,13 +271,13 @@
 
 	controller = [[UIApplication sharedApplication] keyWindow].rootViewController;
 	CGRect frame = [[UIScreen mainScreen] bounds];
-	UIInterfaceOrientation oldOrientation = controller.interfaceOrientation;
+	//UIInterfaceOrientation oldOrientation = controller.interfaceOrientation;
 
 	NSTimeInterval animationDuration = animated ? 0.3f : 0.0;
 
-	[controller willRotateToInterfaceOrientation:orientation duration:animationDuration];
-	[controller willAnimateRotationToInterfaceOrientation:orientation duration:animationDuration];
-	[controller didRotateFromInterfaceOrientation:oldOrientation];
+	//[controller willRotateToInterfaceOrientation:orientation duration:animationDuration];
+	//[controller willAnimateRotationToInterfaceOrientation:orientation duration:animationDuration];
+	//[controller didRotateFromInterfaceOrientation:oldOrientation];
 	[UIView animateWithDuration:animationDuration
 					 animations:^{
 					   [controller.view setFrame:frame];
@@ -438,7 +438,7 @@
 		self.tabBarViewController = newTabBarViewController;
 
 		// Update rotation
-		UIInterfaceOrientation correctOrientation = [self
+		/*UIInterfaceOrientation correctOrientation = [self
 			getCorrectInterfaceOrientation:(UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation];
 		if (currentOrientation != correctOrientation) {
 			[UICompositeViewController setOrientation:correctOrientation
@@ -467,7 +467,7 @@
 				[self.stateBarViewController willAnimateRotationToInterfaceOrientation:correctOrientation duration:0];
 				[self.stateBarViewController didRotateFromInterfaceOrientation:oldOrientation];
 			}
-		}
+		}*/
 	} else {
 		oldViewDescription = (currentViewDescription != nil) ? [currentViewDescription copy] : nil;
 	}

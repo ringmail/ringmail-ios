@@ -50,7 +50,17 @@ static RgNetwork* theRgNetwork = nil;
 - (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameters = @{@"login": login, @"password": password, @"version": @"2.0.1", @"build_ts": [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__]};
+    NSDictionary *parameters = @{
+                                 @"login": login,
+                                 @"password": password,
+                                 @"version": @"2.0.1",
+                                 @"build_ts": [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__],
+#ifdef DEBUG
+                                 @"env": @"dev"
+#else
+                                 @"env": @"prod"
+#endif
+                                 };
     NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/login", self.networkHost];
     [manager POST:postUrl parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"RingMail API Error: %@", error);

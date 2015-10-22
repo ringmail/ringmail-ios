@@ -244,11 +244,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     {
         [RgManager verifyLogin:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary* res = responseObject;
+            NSLog(@"RingMail: Check Validation: %@", res);
             NSString *ok = [res objectForKey:@"result"];
             if ([ok isEqualToString:@"ok"])
             {
                 [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
-                              domain:[RgManager ringmailHostSIP] withTransport:@"tcp"];
+                              domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                 [RgManager updateCredentials:res];
             }
         }];
@@ -321,6 +322,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 			  password:(NSString *)password
 				domain:(NSString *)domain
 		 withTransport:(NSString *)transport {
+    
 	LinphoneCore *lc = [LinphoneManager getLc];
 	LinphoneProxyConfig *proxyCfg = linphone_core_create_proxy_config(lc);
 	NSString *server_address = domain;
@@ -571,7 +573,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         if ([ok isEqualToString:@"ok"])
         {
             [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
-                          domain:[RgManager ringmailHostSIP] withTransport:@"tcp"];
+                          domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
             [RgManager updateCredentials:res];
         }
         else
@@ -640,7 +642,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                     [cfg setObject:password forKey:@"ringmail_password"];
                     [[LinphoneManager instance] setRingLogin:username];
                     [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
-                                  domain:[RgManager ringmailHostSIP] withTransport:@"tcp"];
+                                  domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                     [RgManager updateCredentials:res];
                 }
                 else

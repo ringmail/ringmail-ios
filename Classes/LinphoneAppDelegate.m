@@ -163,7 +163,7 @@
 	UIApplication *app = [UIApplication sharedApplication];
 	//UIApplicationState state = app.applicationState;
 
-	LinphoneManager *instance = [LinphoneManager instance];
+	[LinphoneManager instance];
 	//BOOL background_mode = [instance lpConfigBoolForKey:@"backgroundmode_preference"];
 	//BOOL start_at_boot = [instance lpConfigBoolForKey:@"start_at_boot_preference"];
 
@@ -180,14 +180,14 @@
 
 		
         [app registerForRemoteNotifications];
-	} else {
+	} /*else {
 		if (!instance.isTesting) {
 			NSUInteger notifTypes = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound |
 									UIRemoteNotificationTypeBadge |
 									UIRemoteNotificationTypeNewsstandContentAvailability;
 			[app registerForRemoteNotificationTypes:notifTypes];
 		}
-	}
+	}*/
     
 	/*if (state == UIApplicationStateBackground) {
 		// we've been woken up directly to background;
@@ -198,10 +198,10 @@
 			return YES;
 		}
 	}*/
-	bgStartId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+	/*bgStartId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
 	  LOGW(@"Background task for application launching expired.");
 	  [[UIApplication sharedApplication] endBackgroundTask:bgStartId];
-	}];
+	}];*/
 
 	[[LinphoneManager instance] startLinphoneCore];
 	// initialize UI
@@ -215,8 +215,8 @@
 		LOGI(@"PushNotification from launch received.");
 		[self processRemoteNotification:remoteNotif];
 	}
-	if (bgStartId != UIBackgroundTaskInvalid)
-		[[UIApplication sharedApplication] endBackgroundTask:bgStartId];
+	/*if (bgStartId != UIBackgroundTaskInvalid)
+		[[UIApplication sharedApplication] endBackgroundTask:bgStartId];*/
 
 	return YES;
 }
@@ -433,7 +433,7 @@
             notification.soundName = @"ring.caf";
             notification.category = @"incoming_call";
             notification.repeatInterval = 0;
-            notification.alertBody = @"Incomming Call";
+            notification.alertBody = [NSString stringWithFormat:@"Incoming Call\n%@", [payload.dictionaryPayload objectForKey:@"from"]];
             notification.alertAction = NSLocalizedString(@"Answer", nil);
             notification.userInfo = @{ };
             notification.applicationIconBadgeNumber = 1;
