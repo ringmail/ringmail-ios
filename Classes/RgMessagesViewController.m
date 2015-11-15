@@ -58,8 +58,9 @@
 
 - (void)receiveMessage
 {
-    [self.chatData loadMessages];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.chatData loadMessages];
+        [self.collectionView reloadData];
         [self scrollToBottomAnimated:YES];
         [self finishReceivingMessageAnimated:YES];
         //[JSQSystemSoundPlayer jsq_playMessageReceivedSound];
@@ -68,8 +69,9 @@
 
 - (void)sentMessage
 {
-    [self.chatData loadMessages];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.chatData loadMessages];
+        [self.collectionView reloadData];
         [self scrollToBottomAnimated:YES];
         [self finishReceivingMessageAnimated:YES];
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
@@ -78,8 +80,8 @@
 
 - (void)updateMessages
 {
-    [self.chatData loadMessages];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.chatData loadMessages];
         [self.collectionView reloadData];
     });
 }

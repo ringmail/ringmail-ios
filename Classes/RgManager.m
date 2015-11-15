@@ -26,12 +26,20 @@ static LevelDB* theConfigDatabase = nil;
 
 + (NSString*)ringmailHost
 {
+#ifdef DEBUG
     return @"staging.ringmail.com";
+#else
+    return @"ringmail.com";
+#endif
 }
 
 + (NSString*)ringmailHostSIP
 {
+#ifdef DEBUG
     return @"sip.staging.ringmail.com";
+#else
+    return @"sip.ringmail.com";
+#endif
 }
 
 + (NSString*)addressToSIP:(NSString*)addr
@@ -310,6 +318,11 @@ static LevelDB* theConfigDatabase = nil;
     NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
     
     // RingMail Defaults
+#ifdef DEBUG
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"debugenable_preference"];
+#else
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"debugenable_preference"]; // ON for now
+#endif
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"start_at_boot_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"backgroundmode_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"enable_video_preference"];
@@ -412,7 +425,7 @@ static LevelDB* theConfigDatabase = nil;
 + (void)initialLogin
 {
 #ifdef DEBUG
-    NSLog(@"RingMail: Initial - Login (DEBUG)");
+    NSLog(@"RingMail: Initial - Login (TESTING)");
 #else
     NSLog(@"RingMail: Initial - Login");
 #endif

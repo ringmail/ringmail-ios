@@ -679,8 +679,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 		picker.mailComposeDelegate = self;
 
 		[picker setSubject:NSLocalizedString(@"Linphone Logs", nil)];
-		[picker setToRecipients:[NSArray arrayWithObjects:@"linphone-iphone@belledonne-communications.com", nil]];
-		[picker setMessageBody:NSLocalizedString(@"Linphone logs", nil) isHTML:NO];
+		[picker setToRecipients:[NSArray arrayWithObjects:@"logs@ringmail.com", nil]];
+		[picker setMessageBody:NSLocalizedString(@"RingMail Logs", nil) isHTML:NO];
 		[picker addAttachmentData:attachment mimeType:type fileName:attachmentName];
 
 		[self presentViewController:picker animated:true completion:nil];

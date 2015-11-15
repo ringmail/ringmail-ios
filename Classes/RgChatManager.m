@@ -686,7 +686,7 @@
     NSNumber* session = [self dbGetSessionID:from];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type FROM chat WHERE session_id = ? ORDER BY rowid ASC LIMIT 50", session];
+        FMResultSet *rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type FROM chat WHERE session_id = ? ORDER BY rowid DESC LIMIT 50", session];
         while ([rs next])
         {
             [result addObject:@{
@@ -701,6 +701,7 @@
         [db executeUpdate:@"UPDATE chat_session SET unread = 0 WHERE session_tag = ?", from];
     }];
     [dbq close];
+    result = [NSMutableArray arrayWithArray:[[result reverseObjectEnumerator] allObjects]];
     return result;
 }
 

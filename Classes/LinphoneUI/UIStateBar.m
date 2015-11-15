@@ -194,21 +194,25 @@
 			message = NSLocalizedString(@"Network down", nil);
 	} else {
 		state = linphone_proxy_config_get_state(config);
-
+        
+        NSString *ringLogin = [[LinphoneManager instance] ringLogin];
+#ifdef DEBUG
+        ringLogin = [ringLogin stringByAppendingString:@" [TESTING]"];
+#endif
 		switch (state) {
 		case LinphoneRegistrationOk:
 			//message = NSLocalizedString(@"Registered", nil);
-            message = [[LinphoneManager instance] ringLogin];
+            message = ringLogin;
 			break;
 		case LinphoneRegistrationNone:
 		case LinphoneRegistrationCleared:
-			message = [[LinphoneManager instance] ringLogin];
+			message = ringLogin;
 			break;
 		case LinphoneRegistrationFailed:
 			message = @"Not Connected";
 			break;
 		case LinphoneRegistrationProgress:
-			message = [[LinphoneManager instance] ringLogin];
+			message = ringLogin;
 			break;
 		default:
 			break;

@@ -10,9 +10,11 @@ if [ "$CONFIGURATION" == "Debug" ]; then
     exit 0
 fi
 
-CONVERT=$(which convert)
+#CONVERT=$(which convert)
+CONVERT=/usr/local/bin/convert
 CONVERTFILTER="-sharpen 1x0.0 -filter Catrom"
-OPTIPNG=$(which optipng)
+#OPTIPNG=$(which optipng)
+OPTIPNG=/usr/local/bin/optipng
 CMDS="${CONVERT} ${OPTIPNG}"
 for i in $CMDS; do
     command -v $i > /dev/null && continue || { echo "$i command not found"; exit 1; }
