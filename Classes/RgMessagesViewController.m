@@ -3,6 +3,7 @@
 #import "PhoneMainView.h"
 #import "DTActionSheet.h"
 #import "NYXImagesKit/NYXImagesKit.h"
+#import "RgChatQuestionSelect.h"
 
 @implementation RgMessagesViewController
 
@@ -122,9 +123,17 @@
             }*/
         }
     };
-    DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Select picture source", nil)];
+    DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Select Option", nil)];
+    [sheet addButtonWithTitle:NSLocalizedString(@"Ping", nil)
+                        block:^() {
+                            NSLog(@"RingMail: Send a ping");
+                            [[[LinphoneManager instance] chatManager] sendPingTo:_chatRoom];
+                        }];
+    [sheet addButtonWithTitle:NSLocalizedString(@"Ask Question", nil) block:^() {
+        [[PhoneMainView instance] changeCurrentView:[RgChatQuestionSelect compositeViewDescription] push:TRUE];
+    }];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Camera", nil)
+        [sheet addButtonWithTitle:NSLocalizedString(@"Camera Photo", nil)
                             block:^() {
                                 showAppropriateController(UIImagePickerControllerSourceTypeCamera);
                             }];
@@ -420,9 +429,9 @@
      *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
      *  The other label height delegate methods should follow similarly
      *
-     *  Show a timestamp for every 3rd message
+     *  Show a timestamp for every 5th message
      */
-    if (indexPath.item % 3 == 0) {
+    if (indexPath.item % 5 == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     

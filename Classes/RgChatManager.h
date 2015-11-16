@@ -17,6 +17,7 @@
 #import "XMPPvCardCoreDataStorage.h"
 #import "XMPPMessageDeliveryReceipts.h"
 #import "XMPPMessage+XEP_0184.h"
+#import "NSXMLElement+XEP_0335.h"
 
 #import "RegexKitLite/RegexKitLite.h"
 #import "JSQMessages.h"
@@ -43,6 +44,8 @@
 - (void)dropTables;
 - (void)sendMessageTo:(NSString*)msgTo body:(NSString*)body;
 - (void)sendMessageTo:(NSString*)to image:(UIImage*)image;
+- (void)sendPingTo:(NSString*)to;
+- (void)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers;
 - (NSArray *)dbGetSessions;
 - (NSArray *)dbGetMessages:(NSString *)from;
 - (void)dbInsertMessage:(NSString *)from type:(NSString *)type data:(NSObject*)data uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl;

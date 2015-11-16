@@ -158,6 +158,11 @@
 		C46997B61BC1A7FB007B3658 /* libvo-amrwbenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */; };
 		C46997B91BC1B82E007B3658 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46997B81BC1B82E007B3658 /* AudioSessionManager.m */; };
 		C4B9B9D61BB9BEDF00677220 /* RgWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */; };
+		C4BC492C1BF9474000826264 /* RgChatQuestionSelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4BC492A1BF9474000826264 /* RgChatQuestionSelect.xib */; };
+		C4BC49361BF9477B00826264 /* RgChatQuestionSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC49351BF9477B00826264 /* RgChatQuestionSelect.m */; };
+		C4BC493C1BF9517900826264 /* RgChatQuestionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC493B1BF9517900826264 /* RgChatQuestionTable.m */; };
+		C4BC49451BF9628800826264 /* RgChatQuestionInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4BC49441BF9628800826264 /* RgChatQuestionInputCell.xib */; };
+		C4BC49481BF9726000826264 /* RgChatQuestionInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC49471BF9726000826264 /* RgChatQuestionInputCell.m */; };
 		C4D0BC6B1BB4F0A400D1728A /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */; };
 		C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */; };
 		C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */; };
@@ -1074,6 +1079,14 @@
 		C46997B81BC1B82E007B3658 /* AudioSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioSessionManager.m; sourceTree = "<group>"; };
 		C4B9B9D41BB9BEDF00677220 /* RgWebViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgWebViewDelegate.h; sourceTree = "<group>"; };
 		C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgWebViewDelegate.m; sourceTree = "<group>"; };
+		C4BC492B1BF9474000826264 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RgChatQuestionSelect.xib; sourceTree = "<group>"; };
+		C4BC49341BF9476A00826264 /* RgChatQuestionSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgChatQuestionSelect.h; sourceTree = "<group>"; };
+		C4BC49351BF9477B00826264 /* RgChatQuestionSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatQuestionSelect.m; sourceTree = "<group>"; };
+		C4BC493A1BF9517900826264 /* RgChatQuestionTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgChatQuestionTable.h; sourceTree = "<group>"; };
+		C4BC493B1BF9517900826264 /* RgChatQuestionTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatQuestionTable.m; sourceTree = "<group>"; };
+		C4BC49441BF9628800826264 /* RgChatQuestionInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgChatQuestionInputCell.xib; sourceTree = "<group>"; };
+		C4BC49461BF9681700826264 /* RgChatQuestionInputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RgChatQuestionInputCell.h; sourceTree = "<group>"; };
+		C4BC49471BF9726000826264 /* RgChatQuestionInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatQuestionInputCell.m; sourceTree = "<group>"; };
 		C4D0BC691BB4F0A400D1728A /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_splashscreen_iphone5.png; path = Resources/ringmail_splashscreen_iphone5.png; sourceTree = "<group>"; };
@@ -1923,6 +1936,14 @@
 				C401E5DB1B95E9ED006C915A /* RgChatModelData.m */,
 				C4B9B9D41BB9BEDF00677220 /* RgWebViewDelegate.h */,
 				C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */,
+				C4BC49341BF9476A00826264 /* RgChatQuestionSelect.h */,
+				C4BC49351BF9477B00826264 /* RgChatQuestionSelect.m */,
+				C4BC492A1BF9474000826264 /* RgChatQuestionSelect.xib */,
+				C4BC493A1BF9517900826264 /* RgChatQuestionTable.h */,
+				C4BC493B1BF9517900826264 /* RgChatQuestionTable.m */,
+				C4BC49461BF9681700826264 /* RgChatQuestionInputCell.h */,
+				C4BC49471BF9726000826264 /* RgChatQuestionInputCell.m */,
+				C4BC49441BF9628800826264 /* RgChatQuestionInputCell.xib */,
 				C46997B71BC1B82E007B3658 /* AudioSessionManager.h */,
 				C46997B81BC1B82E007B3658 /* AudioSessionManager.m */,
 				22E0A81D111C44E100B04932 /* AboutViewController.h */,
@@ -3434,6 +3455,7 @@
 				D3128FEF15AABE4E00A2147A /* contact_back_default.png in Resources */,
 				D3128FF115AABE4E00A2147A /* contact_back_over.png in Resources */,
 				D3128FF315AABE4E00A2147A /* contact_edit_default.png in Resources */,
+				C4BC492C1BF9474000826264 /* RgChatQuestionSelect.xib in Resources */,
 				D3128FF515AABE4E00A2147A /* contact_edit_over.png in Resources */,
 				D37C638E15AAD251009D0BAC /* contact_number_over.png in Resources */,
 				D37C639015AAD251009D0BAC /* contact_number.png in Resources */,
@@ -3601,6 +3623,7 @@
 				D3A74F5615C69392001500B9 /* video_on_disabled~ipad.png in Resources */,
 				D3A74F5815C69392001500B9 /* video_on_over~ipad.png in Resources */,
 				D38187C515FE345F00C3EDCA /* DialerViewController~ipad.xib in Resources */,
+				C4BC49451BF9628800826264 /* RgChatQuestionInputCell.xib in Resources */,
 				D3BDB9B915C6B5B1007BEAC1 /* transfer_call_disabled~ipad.png in Resources */,
 				D38187E515FE349D00C3EDCA /* UICallBar~ipad.xib in Resources */,
 				D3ACB09B15C6D59500E15894 /* dialer_alt_back_default~ipad.png in Resources */,
@@ -3866,6 +3889,7 @@
 				D326483815887D5200930C67 /* OrderedDictionary.m in Sources */,
 				D326483E1588950F00930C67 /* UICallBar.m in Sources */,
 				D32648441588F6FC00930C67 /* UIToggleButton.m in Sources */,
+				C4BC493C1BF9517900826264 /* RgChatQuestionTable.m in Sources */,
 				D36FB2D51589EF7C0036F6F2 /* UIPauseButton.m in Sources */,
 				D31C9C98158A1CDF00756B45 /* UIHistoryCell.m in Sources */,
 				D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */,
@@ -3878,6 +3902,7 @@
 				F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */,
 				63B81A0D1B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				D37DC6C11594AE1800B2A5EB /* LinphoneCoreSettingsStore.m in Sources */,
+				C4BC49481BF9726000826264 /* RgChatQuestionInputCell.m in Sources */,
 				63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */,
 				C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */,
 				D3EA53FD159850E80037DC6B /* LinphoneManager.m in Sources */,
@@ -3914,6 +3939,7 @@
 				D3F7998115BD32370018C273 /* TPMultiLayoutViewController.m in Sources */,
 				D3807FBF15C28940005BE9BC /* DCRoundSwitch.m in Sources */,
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
+				C4BC49361BF9477B00826264 /* RgChatQuestionSelect.m in Sources */,
 				C4D999521B96910A003CC323 /* RgManager.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */,
@@ -4098,6 +4124,14 @@
 				F0AF07021A24BA770086C9C1 /* ar */,
 			);
 			name = UIChatCell.xib;
+			sourceTree = "<group>";
+		};
+		C4BC492A1BF9474000826264 /* RgChatQuestionSelect.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4BC492B1BF9474000826264 /* Base */,
+			);
+			name = RgChatQuestionSelect.xib;
 			sourceTree = "<group>";
 		};
 		D37EE11016035793003608A6 /* ImageViewController.xib */ = {

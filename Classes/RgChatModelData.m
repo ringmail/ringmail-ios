@@ -122,6 +122,19 @@
                                                                 date:[msgdata objectForKey:@"time"]
                                                                media:mediaData]];*/
             }
+            else if ([type isEqualToString:@"application/json"])
+            {
+                NSData* jsonData = [mgr dbGetMessageData:[msgdata objectForKey:@"id"]];
+                NSError* error;
+                NSDictionary *jsonInfo = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+                NSString *jsonType = [jsonInfo objectForKey:@"type"];
+                NSString *body = [jsonInfo objectForKey:@"body"];
+                body = [NSString stringWithFormat:@"[%@]: %@", jsonType, body];
+                [msgs addObject:[[JSQMessage alloc] initWithSenderId:sender
+                                                   senderDisplayName:senderName
+                                                                date:[msgdata objectForKey:@"time"]
+                                                                text:body]];
+            }
         }
         
         // TODO: replace with something better

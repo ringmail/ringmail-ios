@@ -286,6 +286,52 @@
     }];
 }
 
+- (void)sendPingTo:(NSString*)to
+{
+    NSString *msgTo = [RgManager addressToXMPP:to];
+    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+    [body setStringValue:@"Ping"];
+    NSString *messageID = [[self xmppStream] generateUUID];
+    __block NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+    [message addAttributeWithName:@"id" stringValue:messageID];
+    [message addAttributeWithName:@"type" stringValue:@"chat"];
+    [message addAttributeWithName:@"to" stringValue:msgTo];
+    [message addChild:body];
+    
+    //[self dbInsertMessage:to type:@"image/png" data:imageData uuid:messageID inbound:NO url:nil];
+    //NSLog(@"RingMail: Insert Image Message");
+    
+    [message addJSONContainerWithObject:@{
+                                          @"type": @"ping",
+                                          @"body": @"Ping",
+                                          }];
+    [[self xmppStream] sendElement:message];
+}
+
+- (void)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers
+{
+    NSDictionary *questionInfo = @{
+                                   @"type": @"question",
+                                   @"body": question,
+                                   @"answers": answers,
+                                   };
+    NSString *msgTo = [RgManager addressToXMPP:to];
+    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+    [body setStringValue:question];
+    NSString *messageID = [[self xmppStream] generateUUID];
+    __block NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+    [message addAttributeWithName:@"id" stringValue:messageID];
+    [message addAttributeWithName:@"type" stringValue:@"chat"];
+    [message addAttributeWithName:@"to" stringValue:msgTo];
+    [message addChild:body];
+    
+    //[self dbInsertMessage:to type:@"image/png" data:imageData uuid:messageID inbound:NO url:nil];
+    //NSLog(@"RingMail: Insert Image Message");
+    
+    [message addJSONContainerWithObject:questionInfo];
+    [[self xmppStream] sendElement:message];
+}
+
 #pragma mark XMPPStream Delegate
 
 - (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
@@ -370,6 +416,7 @@
             __block NSString *chatFrom = [RgManager addressFromXMPP:from];
             
             NSXMLElement *attach = [xmppMessage elementForName:@"attachment"];
+            NSXMLElement *jsonHolder = [xmppMessage JSONContainer];
             //NSLog(@"RingMail: Chat Attach: %@", attach);
             if (attach != nil)
             {
@@ -385,6 +432,10 @@
                     };
                     [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
                 }];
+            }
+            else if (jsonHolder != nil)
+            {
+                [self dbInsertMessage:chatFrom type:@"application/json" data:[jsonHolder JSONContainerData] uuid:[[xmppMessage attributeForName:@"id"] stringValue] inbound:YES url:nil];
             }
             else
             {
@@ -620,6 +671,10 @@
         body = (NSString*)data;
     }
     else if ([type isEqualToString:@"image/png"])
+    {
+        msgData = (NSData*)data;
+    }
+    else if ([type isEqualToString:@"application/json"])
     {
         msgData = (NSData*)data;
     }
