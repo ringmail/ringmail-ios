@@ -57,14 +57,14 @@
 
 #pragma mark - Actions
 
-- (void)receiveMessage
+- (void)receiveMessage:(NSString*)uuid
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.chatData loadMessages];
-        [self.collectionView reloadData];
-        [self scrollToBottomAnimated:YES];
+        [self.chatData loadMessages:uuid];
+        //[self.collectionView reloadData];
+        //[self scrollToBottomAnimated:YES];
+        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
         [self finishReceivingMessageAnimated:YES];
-        //[JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     });
 }
 
@@ -72,17 +72,17 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.chatData loadMessages];
-        [self.collectionView reloadData];
-        [self scrollToBottomAnimated:YES];
-        [self finishReceivingMessageAnimated:YES];
+        //[self.collectionView reloadData];
+        //[self scrollToBottomAnimated:YES];
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
+        [self finishSendingMessageAnimated:YES];
     });
 }
 
-- (void)updateMessages
+- (void)updateMessages:(NSString*)uuid
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.chatData loadMessages];
+        [self.chatData updateMessage:uuid];
         [self.collectionView reloadData];
     });
 }
@@ -127,19 +127,22 @@
     [sheet addButtonWithTitle:NSLocalizedString(@"Ping", nil)
                         block:^() {
                             NSLog(@"RingMail: Send a ping");
-                            [[[LinphoneManager instance] chatManager] sendPingTo:_chatRoom];
+                            NSString *uuid = [[[LinphoneManager instance] chatManager] sendPingTo:_chatRoom reply:nil];
+                            [self.chatData loadMessages:uuid];
+                            [JSQSystemSoundPlayer jsq_playMessageSentSound];
+                            [self finishSendingMessageAnimated:YES];
                         }];
-    [sheet addButtonWithTitle:NSLocalizedString(@"Ask Question", nil) block:^() {
+    [sheet addButtonWithTitle:NSLocalizedString(@"Question", nil) block:^() {
         [[PhoneMainView instance] changeCurrentView:[RgChatQuestionSelect compositeViewDescription] push:TRUE];
     }];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Camera Photo", nil)
+        [sheet addButtonWithTitle:NSLocalizedString(@"Camera", nil)
                             block:^() {
                                 showAppropriateController(UIImagePickerControllerSourceTypeCamera);
                             }];
     }
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Photo Library", nil)
+        [sheet addButtonWithTitle:NSLocalizedString(@"Photos", nil)
                             block:^() {
                                 showAppropriateController(UIImagePickerControllerSourceTypePhotoLibrary);
                             }];
@@ -191,30 +194,13 @@
     
     if([text length] > 0)
     {
-        RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-        [mgr sendMessageTo:_chatRoom body:text];
-        
         //NSLog(@"RingMail - Send Message To: %@ -> %@", _chatRoom, msgTo);
-    
-    /**
-     *  Sending a message. Your implementation of this method should do *at least* the following:
-     *
-     *  1. Play sound (optional)
-     *  2. Add new id<JSQMessageData> object to your data source
-     *  3. Call `finishSendingMessage`
-     */
-        [JSQSystemSoundPlayer jsq_playMessageSentSound];
-        
-        JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:senderId
-                                                 senderDisplayName:senderDisplayName
-                                                              date:date
-                                                              text:text];
-        
-        [self.chatData.messages addObject:msg];
+        RgChatManager* mgr = [[LinphoneManager instance] chatManager];
+        NSString *uuid = [mgr sendMessageTo:_chatRoom body:text];
+        [self.chatData loadMessages:uuid];
         [self.chatData setChatError:@""];
-        
+        [JSQSystemSoundPlayer jsq_playMessageSentSound];
         [self finishSendingMessageAnimated:YES];
-        
     }
 }
 
@@ -279,6 +265,45 @@
      */
     
     JSQMessage *message = [self getMessageAtIndex:indexPath.item];
+    id messageData = [self.chatData.messageData objectAtIndex:indexPath.item];
+    if (! [messageData isEqual:[NSNull null]])
+    {
+        NSDictionary* jsonInfo = (NSDictionary*)messageData;
+        NSString* jsonType = [jsonInfo objectForKey:@"type"];
+        if ([jsonType isEqualToString:@"question"])
+        {
+            if (! [message.senderId isEqualToString:self.senderId] && ! [jsonInfo objectForKey:@"answered"])
+            {
+                return self.chatData.incomingBubbleOutlineImageData;
+            }
+        }
+        else if ([jsonType isEqualToString:@"ping"])
+        {
+            BOOL replied = ([jsonInfo objectForKey:@"answered"]) ? 1 : 0;
+            if ([message.senderId isEqualToString:self.senderId])
+            {
+                if (replied)
+                {
+                    return self.chatData.outgoingBubblePingReplyImageData;
+                }
+                else
+                {
+                    return self.chatData.outgoingBubblePingImageData;
+                }
+            }
+            else
+            {
+                if (replied)
+                {
+                    return self.chatData.incomingBubblePingReplyImageData;
+                }
+                else
+                {
+                    return self.chatData.incomingBubblePingImageData;
+                }
+            }
+        }
+    }
     
     if ([message.senderId isEqualToString:self.senderId]) {
         return self.chatData.outgoingBubbleImageData;
@@ -332,7 +357,7 @@
      *
      *  Show a timestamp for every 3rd message
      */
-    if (indexPath.item % 3 == 0) {
+    if (indexPath.item % 7 == 0) {
         JSQMessage *message = [self getMessageAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
@@ -402,15 +427,47 @@
     
     if (!msg.isMediaMessage) {
         
-        if ([msg.senderId isEqualToString:self.senderId]) {
+        // Default
+        if ([msg.senderId isEqualToString:self.senderId])
+        {
             cell.textView.textColor = [UIColor blackColor];
         }
-        else {
+        else
+        {
             cell.textView.textColor = [UIColor whiteColor];
         }
-        
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+        
+        // Override Default
+        id messageData = [self.chatData.messageData objectAtIndex:indexPath.item];
+        if (! [messageData isEqual:[NSNull null]])
+        {
+            NSDictionary* jsonInfo = (NSDictionary*)messageData;
+            NSString* jsonType = [jsonInfo objectForKey:@"type"];
+            if ([jsonType isEqualToString:@"question"])
+            {
+                if (! [msg.senderId isEqualToString:self.senderId])
+                {
+                    if (! [jsonInfo objectForKey:@"answered"])
+                    {
+                        cell.textView.textColor = [UIColor jsq_messageBubbleBlueColor];
+                    }
+                }
+            }
+            if ([jsonType isEqualToString:@"ping"])
+            {
+                BOOL replied = ([jsonInfo objectForKey:@"answered"]) ? 1 : 0;
+                if (replied)
+                {
+                    cell.textView.textColor = [UIColor whiteColor];
+                }
+                else
+                {
+                    cell.textView.textColor = [UIColor jsq_messageBubbleGreenColor];
+                }
+            }
+        }
     }
     
     return cell;
@@ -431,7 +488,7 @@
      *
      *  Show a timestamp for every 5th message
      */
-    if (indexPath.item % 5 == 0) {
+    if (indexPath.item % 7 == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     
@@ -441,10 +498,11 @@
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    return 0.0f;
     /**
      *  iOS7-style sender name labels
      */
-    JSQMessage *currentMessage = [self getMessageAtIndex:indexPath.item];
+    /*JSQMessage *currentMessage = [self getMessageAtIndex:indexPath.item];
     if ([[currentMessage senderId] isEqualToString:self.senderId]) {
         return 0.0f;
     }
@@ -456,7 +514,7 @@
         }
     }
     
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;*/
 }
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -481,11 +539,78 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Tapped message bubble!");
+    id messageData = [self.chatData.messageData objectAtIndex:indexPath.item];
+    if (! [messageData isEqual:[NSNull null]])
+    {
+        NSDictionary* jsonInfo = (NSDictionary*)messageData;
+        NSString* jsonType = [jsonInfo objectForKey:@"type"];
+        JSQMessage *message = [self getMessageAtIndex:indexPath.item];
+        if ([jsonType isEqualToString:@"question"])
+        {
+            if (! [message.senderId isEqualToString:self.senderId] && ! [jsonInfo objectForKey:@"answered"])
+            {
+                self.questionData = jsonInfo;
+                self.questionIndexpath = indexPath;
+                NSLog(@"Tapped question bubble: %@", jsonInfo);
+                DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:[jsonInfo objectForKey:@"body"]];
+                [sheet setActionSheetDelegate:self];
+                for (NSString *answer in (NSArray*)[jsonInfo objectForKey:@"answers"])
+                {
+                    [sheet addButtonWithTitle:answer block:nil];
+                }
+                [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)
+                                          block:^{
+                                              self.popoverController = nil;
+                                          }];
+                [sheet showInView:[PhoneMainView instance].view];
+            }
+        }
+        else if ([jsonType isEqualToString:@"ping"])
+        {
+            if (! [message.senderId isEqualToString:self.senderId] && ! [jsonInfo objectForKey:@"answered"])
+            {
+                RgChatManager* mgr = [[LinphoneManager instance] chatManager];
+                // Send reply
+                NSString* pingUUID = [self.chatData.messageUUIDs objectAtIndex:indexPath.item];
+                [mgr sendPingTo:_chatRoom reply:pingUUID];
+                // Set to answered
+                NSMutableDictionary* newData = [NSMutableDictionary dictionaryWithDictionary:jsonInfo];
+                [newData setObject:[NSNumber numberWithBool:1] forKey:@"answered"];
+                NSError *jsonErr = nil;
+                [mgr dbUpdateMessageData:[NSJSONSerialization dataWithJSONObject:newData options:0 error:&jsonErr] forUUID:[self.chatData.messageUUIDs objectAtIndex:indexPath.item]];
+                [JSQSystemSoundPlayer jsq_playMessageSentSound];
+                [self.chatData loadMessages];
+                [self.collectionView reloadData];
+            }
+        }
+    }
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
 {
     NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
+}
+
+#pragma mark - Question action sheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSArray* answers = [self.questionData objectForKey:@"answers"];
+    if (buttonIndex < [answers count])
+    {
+        NSString* answer = answers[buttonIndex];
+        //NSLog(@"Answer(%@): %@", [NSNumber numberWithInteger:buttonIndex], answer);
+        RgChatManager* mgr = [[LinphoneManager instance] chatManager];
+        NSString *uuid = [mgr sendMessageTo:_chatRoom body:answer reply:[self.chatData.messageUUIDs objectAtIndex:self.questionIndexpath.item]];
+        NSMutableDictionary* newData = [NSMutableDictionary dictionaryWithDictionary:self.questionData];
+        [newData setObject:[NSNumber numberWithBool:1] forKey:@"answered"];
+        NSError *jsonErr = nil;
+        //NSLog(@"Answer(%@:%@): %@\nOrig: %@\nNew: %@", [NSNumber numberWithInteger:buttonIndex], [self.chatData.messageUUIDs objectAtIndex:self.questionIndexpath.item], answer, self.questionData, newData);
+        [mgr dbUpdateMessageData:[NSJSONSerialization dataWithJSONObject:newData options:0 error:&jsonErr] forUUID:[self.chatData.messageUUIDs objectAtIndex:self.questionIndexpath.item]];
+        [self.chatData loadMessages:uuid];
+        [JSQSystemSoundPlayer jsq_playMessageSentSound];
+        [self finishSendingMessageAnimated:YES];
+    }
 }
 
 @end

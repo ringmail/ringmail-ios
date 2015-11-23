@@ -119,7 +119,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [chatView addSubview:[mc view]];
     [mc view].autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [mc view].frame = chatView.superview.bounds;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -291,7 +291,7 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
         {
             [chatViewController.chatData setChatError:@""];
         }
-        [chatViewController receiveMessage];
+        [chatViewController receiveMessage:[[notif userInfo] objectForKey:@"uuid"]];
     }
 }
 
@@ -307,7 +307,7 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
     NSString *room = [[notif userInfo] objectForKey:@"tag"];
     if ([room isEqualToString:chatViewController.chatRoom])
     {
-        [chatViewController updateMessages];
+        [chatViewController updateMessages:[[notif userInfo] objectForKey:@"uuid"]];
     }
 }
 

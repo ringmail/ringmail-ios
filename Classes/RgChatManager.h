@@ -42,12 +42,14 @@
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
 - (void)disconnect;
 - (void)dropTables;
-- (void)sendMessageTo:(NSString*)msgTo body:(NSString*)body;
+- (NSString *)sendMessageTo:(NSString*)msgTo body:(NSString*)body;
+- (NSString *)sendMessageTo:(NSString*)msgTo body:(NSString*)body reply:(NSString*)reply;
 - (void)sendMessageTo:(NSString*)to image:(UIImage*)image;
-- (void)sendPingTo:(NSString*)to;
-- (void)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers;
+- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply;
+- (NSString *)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers;
 - (NSArray *)dbGetSessions;
 - (NSArray *)dbGetMessages:(NSString *)from;
+- (NSArray *)dbGetMessages:(NSString *)from uuid:(NSString*)uuid;
 - (void)dbInsertMessage:(NSString *)from type:(NSString *)type data:(NSObject*)data uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl;
 - (NSNumber *)dbGetSessionUnread;
 - (void)dbDeleteSessionID:(NSString *)from;

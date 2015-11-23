@@ -24,34 +24,29 @@
 #import "RgManager.h"
 #import "LinphoneManager.h"
 
-/**
- *  This is for demo/testing purposes only. 
- *  This object sets up some fake model data.
- *  Do not actually do anything like this.
- */
-
-static NSString * const kJSQDemoAvatarDisplayNameSquires = @"Jesse Squires";
-static NSString * const kJSQDemoAvatarDisplayNameCook = @"Tim Cook";
-static NSString * const kJSQDemoAvatarDisplayNameJobs = @"Jobs";
-static NSString * const kJSQDemoAvatarDisplayNameWoz = @"Steve Wozniak";
-
-static NSString * const kJSQDemoAvatarIdSquires = @"053496-4509-289";
-static NSString * const kJSQDemoAvatarIdCook = @"468-768355-23123";
-static NSString * const kJSQDemoAvatarIdJobs = @"707-8956784-57";
-static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
-
 @interface RgChatModelData : NSObject
 
 @property (strong, nonatomic) NSMutableArray *messages;
+@property (strong, nonatomic) NSMutableArray *messageData;
+@property (strong, nonatomic) NSMutableArray *messageUUIDs;
+@property (strong, nonatomic) NSMutableDictionary *messageRef;
 @property (strong, nonatomic) NSDictionary *avatars;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
+@property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleOutlineImageData;
+@property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleOutlineImageData;
+@property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubblePingImageData;
+@property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubblePingImageData;
+@property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubblePingReplyImageData;
+@property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubblePingReplyImageData;
 @property (strong, nonatomic) NSDictionary *users;
 @property (strong, nonatomic) NSString *chatRoom;
 @property (strong, nonatomic) NSString *chatError;
 
 - (id)initWithChatRoom:(NSString *)room;
 - (void)loadMessages;
+- (void)loadMessages:(NSString*)uuid;
+- (void)updateMessage:(NSString*)uuid;
 
 
 @end

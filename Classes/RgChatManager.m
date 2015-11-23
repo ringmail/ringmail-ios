@@ -236,7 +236,12 @@
 
 #pragma mark Chat actions
 
-- (void)sendMessageTo:(NSString*)to body:(NSString*)text
+- (NSString*)sendMessageTo:(NSString*)to body:(NSString*)body
+{
+    return [self sendMessageTo:to body:body reply:nil];
+}
+
+- (NSString*)sendMessageTo:(NSString*)to body:(NSString*)text reply:(NSString*)reply
 {
     NSString *msgTo = [RgManager addressToXMPP:to];
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
@@ -246,10 +251,15 @@
     [message addAttributeWithName:@"id" stringValue:messageID];
     [message addAttributeWithName:@"type" stringValue:@"chat"];
     [message addAttributeWithName:@"to" stringValue:msgTo];
+    if (reply)
+    {
+       [message addAttributeWithName:@"reply" stringValue:reply];
+    }
     [message addChild:body];
     
     [self dbInsertMessage:to type:@"text/plain" data:text uuid:messageID inbound:NO url:nil];
     [[self xmppStream] sendElement:message];
+    return messageID;
 }
 
 - (void)sendMessageTo:(NSString*)to image:(UIImage*)image
@@ -286,7 +296,7 @@
     }];
 }
 
-- (void)sendPingTo:(NSString*)to
+- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply
 {
     NSString *msgTo = [RgManager addressToXMPP:to];
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
@@ -301,20 +311,34 @@
     //[self dbInsertMessage:to type:@"image/png" data:imageData uuid:messageID inbound:NO url:nil];
     //NSLog(@"RingMail: Insert Image Message");
     
-    [message addJSONContainerWithObject:@{
-                                          @"type": @"ping",
-                                          @"body": @"Ping",
-                                          }];
+    NSMutableDictionary *pingData = [NSMutableDictionary dictionaryWithDictionary:@{
+          @"type": @"ping",
+          @"body": @"Ping",
+    }];
+    if (reply)
+    {
+        [pingData setObject:reply forKey:@"reply"];
+    }
+    else
+    {
+        NSError *jsonErr = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:pingData options:0 error:&jsonErr];
+        [self dbInsertMessage:to type:@"application/json" data:jsonData uuid:messageID inbound:NO url:nil];
+    }
+    
+    [message addJSONContainerWithObject:pingData];
     [[self xmppStream] sendElement:message];
+    return messageID;
 }
 
-- (void)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers
+- (NSString *)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers
 {
     NSDictionary *questionInfo = @{
                                    @"type": @"question",
                                    @"body": question,
                                    @"answers": answers,
                                    };
+    
     NSString *msgTo = [RgManager addressToXMPP:to];
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
     [body setStringValue:question];
@@ -329,7 +353,12 @@
     //NSLog(@"RingMail: Insert Image Message");
     
     [message addJSONContainerWithObject:questionInfo];
+    NSError *jsonErr = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:questionInfo options:0 error:&jsonErr];
+    [self dbInsertMessage:to type:@"application/json" data:jsonData uuid:messageID inbound:NO url:nil];
+    
     [[self xmppStream] sendElement:message];
+    return messageID;
 }
 
 #pragma mark XMPPStream Delegate
@@ -408,6 +437,8 @@
     NSLog(@"%@", xmppMessage);
     if (! [xmppMessage isErrorMessage])
     {
+        BOOL update = NO;
+        __block NSString *uuid = [[xmppMessage attributeForName:@"id"] stringValue];
         if ([xmppMessage isMessageWithBody])
         {
             NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
@@ -421,21 +452,39 @@
             if (attach != nil)
             {
                 NSString *imageUrl = [[attach attributeForName:@"url"] stringValue];
-                __block NSString *uuid = [[xmppMessage attributeForName:@"id"] stringValue];
                 [self dbInsertMessage:chatFrom type:@"image/png" data:nil uuid:uuid inbound:YES url:imageUrl];
                 [[RgNetwork instance] downloadImage:imageUrl callback:^(AFHTTPRequestOperation *operation, id responseObject) {
                     //NSLog(@"RingMail: Chat Download Complete: %@", responseObject);
                     NSData* imageData = responseObject;
                     [self dbUpdateMessageData:imageData forUUID:uuid];
                     NSDictionary *dict = @{
-                       @"tag": chatFrom
+                       @"tag": chatFrom,
+                       @"uuid": uuid,
                     };
                     [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
                 }];
             }
             else if (jsonHolder != nil)
             {
-                [self dbInsertMessage:chatFrom type:@"application/json" data:[jsonHolder JSONContainerData] uuid:[[xmppMessage attributeForName:@"id"] stringValue] inbound:YES url:nil];
+                NSData *jsonData = [jsonHolder JSONContainerData];
+                NSError *jsonErr = nil;
+                NSDictionary *jsonInfo = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&jsonErr];
+                NSString *jsonType = [jsonInfo objectForKey:@"type"];
+                if ([jsonType isEqualToString:@"ping"] && [jsonInfo objectForKey:@"reply"])
+                {
+                    NSString* replyUUID = [jsonInfo objectForKey:@"reply"];
+                    NSMutableDictionary* newData = [NSMutableDictionary dictionaryWithDictionary:jsonInfo];
+                    [newData setObject:[NSNumber numberWithBool:1] forKey:@"answered"];
+                    [newData removeObjectForKey:@"reply"];
+                    NSError *jsonErr = nil;
+                    [self dbUpdateMessageData:[NSJSONSerialization dataWithJSONObject:newData options:0 error:&jsonErr] forUUID:replyUUID];
+                    update = YES;
+                    uuid = replyUUID;
+                }
+                if (! update)
+                {
+                    [self dbInsertMessage:chatFrom type:@"application/json" data:jsonData uuid:[[xmppMessage attributeForName:@"id"] stringValue] inbound:YES url:nil];
+                }
             }
             else
             {
@@ -464,11 +513,18 @@
             }*/
             
             NSDictionary *dict = @{
-                @"tag": chatFrom
+                @"tag": chatFrom,
+                @"uuid": uuid,
             };
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
-            [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+            if (update)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
+            }
+            else
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
+            }
             
             //NSLog(@"NEW CHAT FROM %@: %@\nLog: %@", chatFrom, body, [self dbGetMessages:chatFrom]);
         }
@@ -737,11 +793,24 @@
 
 - (NSArray *)dbGetMessages:(NSString *)from
 {
+    return [self dbGetMessages:(NSString *)from uuid:nil];
+}
+
+- (NSArray *)dbGetMessages:(NSString *)from uuid:(NSString*)uuid;
+{
     FMDatabaseQueue *dbq = [self database];
     NSNumber* session = [self dbGetSessionID:from];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type FROM chat WHERE session_id = ? ORDER BY rowid DESC LIMIT 50", session];
+        FMResultSet *rs;
+        if (uuid)
+        {
+            rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type, msg_uuid FROM chat WHERE msg_uuid = ? ORDER BY rowid DESC LIMIT 50", uuid];
+        }
+        else
+        {
+            rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type, msg_uuid FROM chat WHERE session_id = ? ORDER BY rowid DESC LIMIT 50", session];
+        }
         while ([rs next])
         {
             [result addObject:@{
@@ -750,6 +819,7 @@
                 @"time": [NSDate dateWithTimeIntervalSince1970:[rs doubleForColumnIndex:2]],
                 @"direction": ([rs boolForColumnIndex:3]) ? @"inbound" : @"outbound",
                 @"type": [rs stringForColumnIndex:4],
+                @"uuid": [rs stringForColumnIndex:5],
             }];
         }
         [rs close];
@@ -786,6 +856,22 @@
     __block NSData* result = nil;
     [dbq inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:@"SELECT msg_data FROM chat WHERE rowid = ?", msgId];
+        if ([rs next])
+        {
+            result = [rs dataForColumnIndex:0];
+        }
+        [rs close];
+    }];
+    [dbq close];
+    return result;
+}
+
+- (NSData *)dbGetMessageDataByUUID:(NSString*)uuid
+{
+    FMDatabaseQueue *dbq = [self database];
+    __block NSData* result = nil;
+    [dbq inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT msg_data FROM chat WHERE msg_uuid = ?", uuid];
         if ([rs next])
         {
             result = [rs dataForColumnIndex:0];

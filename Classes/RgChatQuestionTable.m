@@ -7,6 +7,7 @@
 //
 
 #import "LinphoneManager.h"
+#import "PhoneMainView.h"
 #import "RgChatManager.h"
 #import "RgChatQuestionTable.h"
 #import "RgChatQuestionInputCell.h"
@@ -69,7 +70,7 @@
     sendRow.cellClass = [UITableViewCell class];
     sendRow.editingStyle = UITableViewCellEditingStyleNone;
     sendRow.configureCellBlock = ^(DXTableViewRow *row, UITableViewCell *cell) {
-        cell.textLabel.text = @"Send";
+        cell.textLabel.text = @"Send Question";
     };
     sendRow.didSelectRowBlock = ^(DXTableViewRow *row) {
         RgChatQuestionInputCell *inputCell = (RgChatQuestionInputCell*)questionRow.cell;
@@ -96,6 +97,7 @@
                     [answerSection deleteRows:@[aRow] withRowAnimation:UITableViewRowAnimationNone];
                 }
                 answers = [NSMutableArray array];
+                [[PhoneMainView instance] popCurrentView];
             }
             else
             {
@@ -106,6 +108,7 @@
             }
         }
         [row.tableView deselectRowAtIndexPath:row.rowIndexPath animated:YES];
+
     };
     [sendSection addRow:sendRow];
    
