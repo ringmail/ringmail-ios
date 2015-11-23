@@ -606,7 +606,9 @@
         [newData setObject:[NSNumber numberWithBool:1] forKey:@"answered"];
         NSError *jsonErr = nil;
         //NSLog(@"Answer(%@:%@): %@\nOrig: %@\nNew: %@", [NSNumber numberWithInteger:buttonIndex], [self.chatData.messageUUIDs objectAtIndex:self.questionIndexpath.item], answer, self.questionData, newData);
-        [mgr dbUpdateMessageData:[NSJSONSerialization dataWithJSONObject:newData options:0 error:&jsonErr] forUUID:[self.chatData.messageUUIDs objectAtIndex:self.questionIndexpath.item]];
+        NSString *origuuid = [self.chatData.messageUUIDs objectAtIndex:self.questionIndexpath.item];
+        [mgr dbUpdateMessageData:[NSJSONSerialization dataWithJSONObject:newData options:0 error:&jsonErr] forUUID:origuuid];
+        [self.chatData updateMessage:origuuid];
         [self.chatData loadMessages:uuid];
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
         [self finishSendingMessageAnimated:YES];
