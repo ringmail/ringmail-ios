@@ -456,7 +456,7 @@ static LevelDB* theConfigDatabase = nil;
                     [[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
                     WizardViewController);
                 if (controller != nil) {
-                    [controller reset];
+                    [controller startWizard];
                 }
             }
         }];

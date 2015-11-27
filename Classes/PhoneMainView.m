@@ -390,43 +390,33 @@ static RootViewManager *rootViewManagerInstance = nil;
 		}
 	}
 }
+
 - (void)startUp {
-	LinphoneCore *core = nil;
-	@try {
-		core = [LinphoneManager getLc];
-		if (linphone_core_get_global_state(core) != LinphoneGlobalOn) {
-			[self changeCurrentView:[RgMainViewController compositeViewDescription]];
-		} else {
-			// always start to dialer when testing
-			// Change to default view
-            if ([RgManager configReadyAndVerified])
-            {
-                NSLog(@"RingMail: Startup - Config Ready and Verified");
-                [RgManager initialLogin];
-                [self changeCurrentView:[RgMainViewController compositeViewDescription]];
-            }
-            else
-            {
-                NSLog(@"RingMail: Startup - Need Setup Wizard");
-                WizardViewController *controller = DYNAMIC_CAST(
-                    [[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
-                    WizardViewController);
-                if (controller != nil) {
-                    [controller reset];
-                }
-            }
-		}
-		[self updateApplicationBadgeNumber]; // Update Badge at startup
-	} @catch (NSException *exception) {
-		// we'll wait until the app transitions correctly
-	}
+    [self updateApplicationBadgeNumber]; // Update Badge at startup
+    if ([RgManager configReadyAndVerified])
+    {
+        NSLog(@"RingMail: Startup - Config Ready and Verified");
+        [[LinphoneManager instance] startLinphoneCore];
+        [RgManager initialLogin];
+        [self changeCurrentView:[RgMainViewController compositeViewDescription]];
+    }
+    else
+    {
+        NSLog(@"RingMail: Startup - Need Setup Wizard");
+        WizardViewController *controller = DYNAMIC_CAST(
+            [self changeCurrentView:[WizardViewController compositeViewDescription]],
+            WizardViewController);
+        if (controller != nil) {
+            [controller startWizard];
+        }
+    }
 }
 
 - (void)updateApplicationBadgeNumber {
 	int count = 0;
-	count += linphone_core_get_missed_calls_count([LinphoneManager getLc]);
+	//count += linphone_core_get_missed_calls_count([LinphoneManager getLc]);
 	count += [[[[LinphoneManager instance] chatManager] dbGetSessionUnread] integerValue];
-	count += linphone_core_get_calls_nb([LinphoneManager getLc]);
+	//count += linphone_core_get_calls_nb([LinphoneManager getLc]);
 	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
 }
 
@@ -707,6 +697,11 @@ static RootViewManager *rootViewManagerInstance = nil;
 	float level = [UIDevice currentDevice].batteryLevel;
 	UIDeviceBatteryState state = [UIDevice currentDevice].batteryState;
 	LOGD(@"Battery state:%d level:%.2f", state, level);
+    
+    if (! [[[LinphoneManager instance] coreReady] boolValue])
+    {
+        return;
+    }
 
 	LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
 	if (call && linphone_call_params_video_enabled(linphone_call_get_current_params(call))) {

@@ -1629,13 +1629,6 @@ static int comp_call_id(const LinphoneCall *call, const char *callid) {
 
 - (BOOL)resignActive {
 	linphone_core_stop_dtmf_stream(theLinphoneCore);
-
-    LinphoneManager *instance = [LinphoneManager instance];
-    if ([[instance chatManager] isConnected]) // if connected
-    {
-        [[instance chatManager] disconnect];
-    }
-    
 	return YES;
 }
 
@@ -1659,70 +1652,79 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	LOGI(@"Long running task started, remaining [%g s] because at least one call is paused",
 		 [[UIApplication sharedApplication] backgroundTimeRemaining]);
 }
+
 - (BOOL)enterBackgroundMode {
-	LinphoneProxyConfig *proxyCfg;
-	linphone_core_get_default_proxy(theLinphoneCore, &proxyCfg);
-	BOOL shouldEnterBgMode = FALSE;
+    if ([[self coreReady] boolValue])
+    {
+    	LinphoneProxyConfig *proxyCfg;
+    	linphone_core_get_default_proxy(theLinphoneCore, &proxyCfg);
+    	BOOL shouldEnterBgMode = FALSE;
 
-	// handle proxy config if any
-	if (proxyCfg) {
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
+    	// handle proxy config if any
+    	if (proxyCfg) {
+    		if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
 
-			// For registration register
-			[self refreshRegisters];
-		}
+    			// For registration register
+    			[self refreshRegisters];
+    		}
 
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
+            /* RingMail - Disabling this:
+    		if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
 
-			// register keepalive
-			if ([[UIApplication sharedApplication]
-					setKeepAliveTimeout:600 /*(NSTimeInterval)linphone_proxy_config_get_expires(proxyCfg)*/
-								handler:^{
-								  LOGW(@"keepalive handler");
-								  mLastKeepAliveDate = [NSDate date];
-								  if (theLinphoneCore == nil) {
-									  LOGW(@"It seems that Linphone BG mode was deactivated, just skipping");
-									  return;
-								  }
-								  // kick up network cnx, just in case
-								  [self refreshRegisters];
-								  linphone_core_iterate(theLinphoneCore);
-								}]) {
+    			// register keepalive
+    			if ([[UIApplication sharedApplication]
+    					setKeepAliveTimeout:600 *//*(NSTimeInterval)linphone_proxy_config_get_expires(proxyCfg)*//*
+    								handler:^{
+    								  LOGW(@"keepalive handler");
+    								  mLastKeepAliveDate = [NSDate date];
+    								  if (theLinphoneCore == nil) {
+    									  LOGW(@"It seems that Linphone BG mode was deactivated, just skipping");
+    									  return;
+    								  }
+    								  // kick up network cnx, just in case
+    								  [self refreshRegisters];
+    								  linphone_core_iterate(theLinphoneCore);
+    								}]) {
 
-				LOGI(@"keepalive handler succesfully registered");
-			} else {
-				LOGI(@"keepalive handler cannot be registered");
-			}
-			shouldEnterBgMode = TRUE;
-		}
-	}
+    				LOGI(@"keepalive handler succesfully registered");
+    			} else {
+    				LOGI(@"keepalive handler cannot be registered");
+    			}
+    			shouldEnterBgMode = TRUE;
+    		}*/
+    	}
 
-	LinphoneCall *currentCall = linphone_core_get_current_call(theLinphoneCore);
-	const MSList *callList = linphone_core_get_calls(theLinphoneCore);
-	if (!currentCall // no active call
-		&& callList // at least one call in a non active state
-		&& ms_list_find_custom((MSList *)callList, (MSCompareFunc)comp_call_state_paused, NULL)) {
-		[self startCallPausedLongRunningTask];
-	}
-	if (callList) {
-		/*if at least one call exist, enter normal bg mode */
-		shouldEnterBgMode = TRUE;
-	}
-	/*stop the video preview*/
-	if (theLinphoneCore) {
-		linphone_core_enable_video_preview(theLinphoneCore, FALSE);
-		linphone_core_iterate(theLinphoneCore);
-	}
-	linphone_core_stop_dtmf_stream(theLinphoneCore);
+    	LinphoneCall *currentCall = linphone_core_get_current_call(theLinphoneCore);
+    	const MSList *callList = linphone_core_get_calls(theLinphoneCore);
+    	if (!currentCall // no active call
+    		&& callList // at least one call in a non active state
+    		&& ms_list_find_custom((MSList *)callList, (MSCompareFunc)comp_call_state_paused, NULL)) {
+    		[self startCallPausedLongRunningTask];
+    	}
+    	if (callList) {
+    		/*if at least one call exist, enter normal bg mode */
+    		shouldEnterBgMode = TRUE;
+    	}
+    	/*stop the video preview*/
+    	if (theLinphoneCore) {
+    		linphone_core_enable_video_preview(theLinphoneCore, FALSE);
+    		linphone_core_iterate(theLinphoneCore);
+    	}
+    	linphone_core_stop_dtmf_stream(theLinphoneCore);
 
-	LOGI(@"Entering [%s] bg mode", shouldEnterBgMode ? "normal" : "lite");
+    	LOGI(@"Entering [%s] bg mode", shouldEnterBgMode ? "normal" : "lite");
 
-	if (!shouldEnterBgMode) {
-        LOGI(@"Keeping lc core to handle push");
-        /*destroy voip socket if any and reset connectivity mode*/
-        connectivity = none;
-        linphone_core_set_network_reachable(theLinphoneCore, FALSE);
-	}
+    	if (!shouldEnterBgMode) {
+            LOGI(@"Keeping lc core to handle push");
+            /*destroy voip socket if any and reset connectivity mode*/
+            connectivity = none;
+            linphone_core_set_network_reachable(theLinphoneCore, FALSE);
+    	}
+    }
+    if ([[self chatManager] isConnected]) // if connected
+    {
+        [[self chatManager] disconnect];
+    }
     return YES;
 }
 

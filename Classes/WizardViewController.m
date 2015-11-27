@@ -178,6 +178,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[WizardViewController cleanTextField:validateAccountView];
 }
 
+- (void)startWizard {
+	[self resetTextFields];
+    if ([RgManager configReady])
+    {
+        [self changeView:validateAccountView back:FALSE animation:FALSE];
+    }
+    else
+    {
+        [self changeView:choiceView back:FALSE animation:FALSE];
+    }
+	[waitView setHidden:TRUE];
+}
+
+
 - (void)reset {
 	[self clearProxyConfig];
 
@@ -193,17 +207,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[LinphoneManager instance] lpConfigSetString:@"" forKey:@"stun_preference"];
 	linphone_core_set_stun_server(lc, NULL);
 	linphone_core_set_firewall_policy(lc, LinphonePolicyNoFirewall);
-	[self resetTextFields];
-    if ([RgManager configReady])
-    {
-        [self changeView:validateAccountView back:FALSE animation:FALSE];
-    }
-    else
-    {
-        [self changeView:choiceView back:FALSE animation:FALSE];
-    }
-	[waitView setHidden:TRUE];
-    
+   
     NSLog(@"RingMail: Wizard - Reset Complete");
 }
 
@@ -248,6 +252,9 @@ static UICompositeViewDescription *compositeDescription = nil;
             NSString *ok = [res objectForKey:@"result"];
             if ([ok isEqualToString:@"ok"])
             {
+                [[LinphoneManager instance] startLinphoneCore];
+                [self reset];
+                [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
                 [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
                               domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                 [RgManager updateCredentials:res];
@@ -524,12 +531,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onCreateAccountClick:(id)sender {
 	nextView = createAccountView;
-	[self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
+    [self changeView:nextView back:false animation:TRUE];
+    nextView = nil;
 }
 
 - (IBAction)onConnectLinphoneAccountClick:(id)sender {
 	nextView = connectAccountView;
-	[self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
+    [self changeView:nextView back:false animation:TRUE];
+    nextView = nil;
 }
 
 - (IBAction)onGoToMailClick:(id)sender {
@@ -572,6 +581,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])
         {
+            [[LinphoneManager instance] startLinphoneCore];
+            [self reset];
+            [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
             [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
                           domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
             [RgManager updateCredentials:res];
@@ -641,6 +653,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                     [cfg setObject:username forKey:@"ringmail_login"];
                     [cfg setObject:password forKey:@"ringmail_password"];
                     [[LinphoneManager instance] setRingLogin:username];
+                    [[LinphoneManager instance] startLinphoneCore];
+                    [self reset];
+                    [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
                     [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
                                   domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                     [RgManager updateCredentials:res];

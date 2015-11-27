@@ -54,23 +54,28 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	LOGI(@"%@", NSStringFromSelector(_cmd));
-	LinphoneCore *lc = [LinphoneManager getLc];
-	LinphoneCall *call = linphone_core_get_current_call(lc);
+    LinphoneManager *instance = [LinphoneManager instance];
+    if ([[instance coreReady] boolValue])
+    {
+    	LinphoneCore *lc = [LinphoneManager getLc];
+    	LinphoneCall *call = linphone_core_get_current_call(lc);
 
-	if (call) {
-		/* save call context */
-		LinphoneManager *instance = [LinphoneManager instance];
-		instance->currentCallContextBeforeGoingBackground.call = call;
-		instance->currentCallContextBeforeGoingBackground.cameraIsEnabled = linphone_call_camera_enabled(call);
+    	if (call) {
+    		/* save call context */
+    		instance->currentCallContextBeforeGoingBackground.call = call;
+    		instance->currentCallContextBeforeGoingBackground.cameraIsEnabled = linphone_call_camera_enabled(call);
 
-		const LinphoneCallParams *params = linphone_call_get_current_params(call);
-		if (linphone_call_params_video_enabled(params)) {
-			linphone_call_enable_camera(call, false);
-		}
-	}
-
-	if (![[LinphoneManager instance] resignActive]) {
-	}
+    		const LinphoneCallParams *params = linphone_call_get_current_params(call);
+    		if (linphone_call_params_video_enabled(params)) {
+    			linphone_call_enable_camera(call, false);
+    		}
+    	}
+        [[LinphoneManager instance] resignActive];
+    }
+    if ([[instance chatManager] isConnected]) // if connected
+    {
+        [[instance chatManager] disconnect];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -202,13 +207,13 @@
 	  LOGW(@"Background task for application launching expired.");
 	  [[UIApplication sharedApplication] endBackgroundTask:bgStartId];
 	}];*/
-
-	[[LinphoneManager instance] startLinphoneCore];
+    
 	// initialize UI
 	[self.window makeKeyAndVisible];
 	[RootViewManager setupWithPortrait:(PhoneMainView *)self.window.rootViewController];
-	[[PhoneMainView instance] startUp];
-	[[PhoneMainView instance] updateStatusBar:nil];
+
+   	[[PhoneMainView instance] startUp];
+    [[PhoneMainView instance] updateStatusBar:nil];
 
 	NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
 	if (remoteNotif) {

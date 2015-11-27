@@ -317,6 +317,8 @@
     }];
     if (reply)
     {
+        [body setStringValue:@"Pong"];
+        [pingData setObject:@"Pong" forKey:@"body"];
         [pingData setObject:reply forKey:@"reply"];
     }
     else

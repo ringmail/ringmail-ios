@@ -63,6 +63,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *verifyEmailLabel;
 
 - (void)reset;
+- (void)startWizard;
 - (void)fillDefaultValues;
 
 - (IBAction)onBackClick:(id)sender;
