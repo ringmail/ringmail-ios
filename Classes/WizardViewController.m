@@ -106,17 +106,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(configuringUpdate:)
 												 name:kLinphoneConfiguringStateUpdate
 											   object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
+    // RingMail: Disabling this for now because of crash on launch
+    /*[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(checkValidation:)
                                                  name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
+                                               object:nil];*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
+    /*[[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
-                                                  object:nil];
+                                                  object:nil];*/
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }

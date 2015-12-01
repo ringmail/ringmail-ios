@@ -50,11 +50,13 @@ static RgNetwork* theRgNetwork = nil;
 - (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSDictionary *parameters = @{
                                  @"login": login,
                                  @"password": password,
-                                 @"version": @"2.0.1",
-                                 @"build_ts": [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__],
+                                 @"version": [info objectForKey:@"CFBundleShortVersionString"],
+                                 @"build": [info objectForKey:@"CFBundleVersion"],
+                                 @"timestamp": [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__],
 #ifdef DEBUG
                                  @"env": @"dev"
 #else

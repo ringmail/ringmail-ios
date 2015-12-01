@@ -243,7 +243,11 @@ static LevelDB* theConfigDatabase = nil;
 {
     if (theConfigDatabase == nil)
     {
+#ifdef DEBUG
+        theConfigDatabase = [LevelDB databaseInLibraryWithName:@"ringmail_config_dev.ldb"];
+#else
         theConfigDatabase = [LevelDB databaseInLibraryWithName:@"ringmail_config.ldb"];
+#endif
     }
     return theConfigDatabase;
 }

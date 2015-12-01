@@ -281,17 +281,26 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
 
 - (void)chatReceivedEvent:(NSNotification *)notif {
     NSString *room = [[notif userInfo] objectForKey:@"tag"];
+    NSLog(@"receive event: %@", room);
     if ([room isEqualToString:chatViewController.chatRoom])
     {
         if ([[notif userInfo] objectForKey:@"error"] != nil)
         {
-            [chatViewController.chatData setChatError:[[notif userInfo] objectForKey:@"error"]];
+            NSString *error = [[notif userInfo] objectForKey:@"error"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *errorAlert = [[UIAlertView alloc]
+                                           initWithTitle:@"Error"
+                                           message:error
+                                           delegate:nil
+                                           cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                           otherButtonTitles:nil, nil];
+                [errorAlert show];
+            });
         }
         else
         {
-            [chatViewController.chatData setChatError:@""];
+            [chatViewController receiveMessage:[[notif userInfo] objectForKey:@"uuid"]];
         }
-        [chatViewController receiveMessage:[[notif userInfo] objectForKey:@"uuid"]];
     }
 }
 

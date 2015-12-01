@@ -542,20 +542,31 @@
     }
     else // Is error message
     {
-        NSError *error = [xmppMessage errorMessage];
-        NSLog(@"XMPP Error Code: %tu", [error code]);
-        if ([error code] == 503)
+        NSXMLElement *received = [xmppMessage elementForName:@"received" xmlns:@"urn:xmpp:receipts"];
+        if (received == nil) // Ignore double errors from received receipts
         {
-            NSLog(@"XMPP Error: Bad RingMail Address");
-            NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
-            NSString *chatFrom = [RgManager addressFromXMPP:from];
-            NSDictionary *dict = @{
-                                   @"tag": chatFrom,
-                                   @"error": @"Address not registered",
-            };
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
+            NSError *error = [xmppMessage errorMessage];
+            NSLog(@"XMPP Error Code: %tu", [error code]);
+            if ([error code] == 503)
+            {
+                NSLog(@"XMPP Error: Bad RingMail Address");
+                NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
+                NSString *chatFrom = [RgManager addressFromXMPP:from];
+                
+                // Delete the chatroom
+                [self dbDeleteSessionID:chatFrom];
+                
+                NSDictionary *dict = @{
+                                       @"tag": chatFrom,
+                                       @"error": @"Address not registered",
+                };
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
+            }
+            else
+            {
+                NSLog(@"XMPP Error: %@", error);
+            }
         }
-        NSLog(@"XMPP Error: %@", error);
     }
 
 }
@@ -630,7 +641,12 @@
 - (FMDatabaseQueue *)database
 {
     NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat_v0.6.db"];
+#ifdef DEBUG
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat_dev"];
+#else
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_chat"];
+#endif
+    dbPath = [docsPath stringByAppendingPathComponent:@"_v1.0.db"];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     return queue;
 }
