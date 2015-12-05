@@ -32,10 +32,12 @@ PODS:
   - FMDB/common (2.5)
   - FMDB/standard (2.5):
     - FMDB/common
-  - JSQMessagesViewController (HEAD based on 7.1.0):
+  - JSQMessagesViewController (HEAD based on 7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - leveldb-library (1.18.1)
+  - libPhoneNumber-iOS (0.8.7)
+  - NSHash (1.0.2)
   - NYXImagesKit (2.3)
   - Objective-LevelDB (2.1.4):
     - leveldb-library (~> 1.18)
@@ -189,6 +191,8 @@ DEPENDENCIES:
   - DXTableViewModel (~> 0.1.0)
   - FMDB
   - JSQMessagesViewController (HEAD)
+  - libPhoneNumber-iOS (~> 0.8)
+  - NSHash (~> 1.0.2)
   - NYXImagesKit
   - Objective-LevelDB
   - RegexKitLite
@@ -201,9 +205,11 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
   DXTableViewModel: 27583f277f94e3ad5ffb0575cd84c39918319aa6
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
-  JSQMessagesViewController: ca11f86fa68ca70835f05e169df9244147c1dc40
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   leveldb-library: 4b0b6d3bdf102d072d6cf6e046615a6f88ea4bf1
+  libPhoneNumber-iOS: 1bccd3288375d954b0b904e26061cecaa0fb83d6
+  NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   Objective-LevelDB: 016f27f24c9976527938a40f043b585e82c27cfc
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661

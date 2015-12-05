@@ -423,6 +423,8 @@
 -(void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
 {
     NSLog(@"RingMail: PushKit Token: %@", credentials.token);
+    LevelDB* cfg = [RgManager configDatabase];
+    [cfg setObject:credentials.token forKey:@"ringmail_voip_token"];
     [[RgNetwork instance] registerPushTokenVoIP:credentials.token];
 }
 

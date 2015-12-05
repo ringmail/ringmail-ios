@@ -8,6 +8,7 @@
 
 #import "LinphoneCoreSettingsStore.h"
 #import "PhoneMainView.h"
+#import "NSStringAdditions.h"
 #import "RgManager.h"
 #import "RgNetwork.h"
 
@@ -249,6 +250,10 @@ static LevelDB* theConfigDatabase = nil;
         theConfigDatabase = [LevelDB databaseInLibraryWithName:@"ringmail_config.ldb"];
 #endif
     }
+    if (! [theConfigDatabase objectForKey:@"ringmail_device_uuid"])
+    {
+        [theConfigDatabase setObject:[NSString stringByGeneratingUUID] forKey:@"ringmail_device_uuid"];
+    }
     return theConfigDatabase;
 }
 
@@ -259,11 +264,14 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)configReset
 {
+    // Clear out the whole database
     LevelDB* cfg = [RgManager configDatabase];
-    [cfg setObject:@"" forKey:@"ringmail_login"];
-    [cfg setObject:@"" forKey:@"ringmail_password"];
-    [cfg setObject:@"" forKey:@"ringmail_chat_password"];
-    [cfg setObject:@"0" forKey:@"ringmail_email_verify"];
+    [cfg enumerateKeysAndObjectsUsingBlock:^(LevelDBKey *key, id value, BOOL *stop) {
+        // This step is necessary since the key could be a string or raw data (use NSDataFromLevelDBKey in that case)
+        NSString *keyString = NSStringFromLevelDBKey(key); // Assumes UTF-8 encoding
+        // Do something clever
+        [cfg removeObjectForKey:keyString];
+    }];
 }
 
 + (BOOL)configReady
@@ -316,10 +324,11 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)updateCredentials:(NSDictionary*)cred
 {
-    NSLog(@"RingMail Update Credentials: %@", cred);
+    NSLog(@"RingMail Login Complete: %@", cred);
+    //NSLog(@"RingMail Update Credentials: %@", cred);
     LinphoneCoreSettingsStore* settings = [[LinphoneCoreSettingsStore alloc] init];
     [settings transformLinphoneCoreToKeys];
-    NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
+    //NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
     
     // RingMail Defaults
 #ifdef DEBUG
@@ -367,7 +376,7 @@ static LevelDB* theConfigDatabase = nil;
         [settings setObject:newSipPass forKey:@"password_preference"];
         [settings setObject:[RgManager ringmailHostSIP] forKey:@"domain_preference"];
     }
-    NSLog(@"RingMail - New Settings: %@", [settings getSettings]);
+    //NSLog(@"RingMail - New Settings: %@", [settings getSettings]);
     [settings synchronize];
     
     LevelDB* cfg = [RgManager configDatabase];
@@ -375,6 +384,8 @@ static LevelDB* theConfigDatabase = nil;
     [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
     [RgManager chatEnsureConnection];
     [[RgNetwork instance] registerPushToken];
+    RgContactManager *contactMgr = [[LinphoneManager instance] contactManager];
+    [contactMgr sendContactData];
 }
 
 + (void)setupPushToken

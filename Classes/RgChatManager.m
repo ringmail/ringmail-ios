@@ -696,6 +696,7 @@
         }
     }];
     [dbq close];
+    [self setupDatabase]; // Set it up again
     NSLog(@"SQL Database Ready");
 }
 

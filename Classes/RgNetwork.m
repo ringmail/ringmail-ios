@@ -6,8 +6,9 @@
 //
 //
 
-#import "RgNetwork.h"
 #import "LinphoneManager.h"
+#import "RgNetwork.h"
+#import "RgContactManager.h"
 
 static RgNetwork* theRgNetwork = nil;
 
@@ -76,11 +77,16 @@ static RgNetwork* theRgNetwork = nil;
        LevelDB* cfg = [RgManager configDatabase];
        NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
        NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+       NSData *rgVoipToken = [cfg objectForKey:@"ringmail_voip_token"];
        if (rgLogin != nil && rgPass != nil)
        {
            NSString* tokenString = [RgManager pushToken:tokenData];
            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-           NSDictionary *parameters = @{@"login": rgLogin, @"password": rgPass, @"token": tokenString};
+           NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"login": rgLogin, @"password": rgPass, @"token": tokenString}];
+           if (rgVoipToken)
+           {
+               [parameters setObject:[RgManager pushToken:rgVoipToken] forKey:@"voip_token"];
+           }
            NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/register_push", self.networkHost];
            [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary* res = responseObject;
@@ -100,7 +106,7 @@ static RgNetwork* theRgNetwork = nil;
    }
 }
 
-- (void)registerPushTokenVoIP:(NSData*)tokenData
+ - (void)registerPushTokenVoIP:(NSData*)tokenData
 {
     if (tokenData != nil) {
         LevelDB* cfg = [RgManager configDatabase];
@@ -202,6 +208,27 @@ static RgNetwork* theRgNetwork = nil;
     [manager GET:url parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"RingMail - Chat Download Error: %@", error);
     }];
+}
+
+- (void)updateContacts:(NSDictionary*)params callback:(RgNetworkCallback)callback
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters = @{
+                                     @"login": rgLogin,
+                                     @"password": rgPass,
+                                     @"contacts": [params objectForKey:@"contacts"],
+                                     @"device": [cfg objectForKey:@"ringmail_device_uuid"],
+                                     };
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/update_contacts", self.networkHost];
+        [manager POST:postUrl parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"RingMail API Error: %@", error);
+        }];
+    }
 }
 
 @end

@@ -130,6 +130,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize wasRemoteProvisioned;
 @synthesize configDb;
 @synthesize chatManager;
+@synthesize contactManager;
 @synthesize chatTag;
 @synthesize chatMd5;
 @synthesize ringLogin;
@@ -324,6 +325,7 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
         /* RingMail */
         self.chatTag = @"";
         self.chatManager = nil;
+        self.contactManager = [[RgContactManager alloc] init];
         self.ringLogin = @"";
         self.coreReady = [NSNumber numberWithBool:0];
 	}
@@ -1729,6 +1731,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 }
 
 - (void)becomeActive {
+    NSLog(@"RingMail: Become Active");
 	[self refreshRegisters];
 	if (pausedCallBgTask) {
 		[[UIApplication sharedApplication] endBackgroundTask:pausedCallBgTask];

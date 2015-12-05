@@ -13,5 +13,7 @@ target 'RingMail' do
   pod "AFNetworking", "~> 2.0"
   pod 'NYXImagesKit'
   pod 'DXTableViewModel',  '~> 0.1.0'
+  pod 'libPhoneNumber-iOS', '~> 0.8'
+  pod 'NSHash', '~> 1.0.2'
 end
 

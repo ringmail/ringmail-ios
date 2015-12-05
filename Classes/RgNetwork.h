@@ -27,5 +27,6 @@ typedef void (^RgNetworkCallback)(AFHTTPRequestOperation *operation, id response
 - (void)resendVerify:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 - (void)uploadImage:(NSData*)imageData uuid:(NSString*)uuid callback:(RgNetworkCallback)callback;
 - (void)downloadImage:(NSString*)url callback:(RgNetworkCallback)callback;
+- (void)updateContacts:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 
 @end

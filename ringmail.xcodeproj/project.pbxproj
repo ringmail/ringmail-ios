@@ -139,6 +139,7 @@
 		70E542F513E147EB002BA2C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F413E147EB002BA2C0 /* QuartzCore.framework */; };
 		C401E5DC1B95E9ED006C915A /* RgChatModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E5DB1B95E9ED006C915A /* RgChatModelData.m */; };
 		C401E5E61B960B35006C915A /* RgChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E5E51B960B35006C915A /* RgChatManager.m */; };
+		C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B95261C10E0A900253BB7 /* RgContactManager.m */; };
 		C41EF3111B8BCFD40085E75B /* RgMainController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */; };
 		C41EF3121B8BCFD40085E75B /* RgMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */; };
 		C41EF3131B8BCFD40085E75B /* RgMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3101B8BCFD40085E75B /* RgMainViewController.xib */; };
@@ -1055,6 +1056,8 @@
 		C401E5DB1B95E9ED006C915A /* RgChatModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatModelData.m; sourceTree = "<group>"; };
 		C401E5E41B960B35006C915A /* RgChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgChatManager.h; sourceTree = "<group>"; };
 		C401E5E51B960B35006C915A /* RgChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatManager.m; sourceTree = "<group>"; };
+		C41B95251C10E0A900253BB7 /* RgContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgContactManager.h; sourceTree = "<group>"; };
+		C41B95261C10E0A900253BB7 /* RgContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgContactManager.m; sourceTree = "<group>"; };
 		C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RgMainController~ipad.xib"; sourceTree = "<group>"; };
 		C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMainViewController.h; sourceTree = "<group>"; };
 		C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMainViewController.m; sourceTree = "<group>"; };
@@ -1924,6 +1927,8 @@
 				C4D999511B96910A003CC323 /* RgManager.m */,
 				C422AD301B99F1A900D1F1CD /* RgNetwork.h */,
 				C422AD311B99F1A900D1F1CD /* RgNetwork.m */,
+				C41B95251C10E0A900253BB7 /* RgContactManager.h */,
+				C41B95261C10E0A900253BB7 /* RgContactManager.m */,
 				C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */,
 				C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */,
 				C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */,
@@ -3879,6 +3884,7 @@
 				34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */,
 				D3F83EEC1582021700336684 /* InCallViewController.m in Sources */,
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
+				C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */,
 				D3ED3E871586291E006C0DE4 /* UIMainBar.m in Sources */,
 				D3ED3EA71587334E006C0DE4 /* HistoryTableViewController.m in Sources */,
 				D3ED3EB81587392C006C0DE4 /* HistoryViewController.m in Sources */,
