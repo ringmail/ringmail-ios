@@ -11,6 +11,7 @@
 #import "NBPhoneNumber.h"
 #import "RgNetwork.h"
 #import "RgContactManager.h"
+#import "RgManager.h"
 
 @implementation RgContactManager
 
@@ -48,12 +49,13 @@
 {
     if (reload || contacts == nil)
     {
+        ABAddressBookRevert(addressBook);
         contacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
     }
     return contacts;
 }
 
-- (NSMutableDictionary *)getAddressBookStats:(NSArray*)contactList
+- (NSDictionary *)getAddressBookStats:(NSArray*)contactList
 {
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
     NSString *lastMod = nil;
@@ -75,18 +77,19 @@
             maxDate = modDate;
         }
     }
-    NSLog(@"Max Date: %@", maxDate);
+    //NSLog(@"Max Date: %@", maxDate);
     if (maxDate)
     {
+        [result setObject:maxDate forKey:@"date_update"];
         lastMod = [dateFormatter stringFromDate:maxDate];
-        NSLog(@"Last Mod: %@", lastMod);
+        //NSLog(@"Last Mod: %@", lastMod);
     }
     if (lastMod == nil)
     {
         lastMod = @"";
     }
     [result setObject:lastMod forKey:@"ts_update"];
-    NSString *count = [NSString stringWithFormat:@"%i", counter];
+    NSNumber *count = [NSNumber numberWithInt:counter];
     [result setObject:count forKey:@"count"];
     return result;
 }
@@ -175,6 +178,11 @@
 - (void)sendContactData
 {
     NSArray *contactList = [self getContactList];
+    [self sendContactData:contactList];
+}
+
+- (void)sendContactData:(NSArray*)contactList
+{
     NSArray *ctd = [self getContactData:contactList];
     NSLog(@"RingMail: Send Contact Data: %@", ctd);
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:ctd options:0 error:nil];
@@ -182,7 +190,17 @@
     [[RgNetwork instance] updateContacts:@{@"contacts": ctdjson} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* res = responseObject;
         NSString *ok = [res objectForKey:@"result"];
-        if (! [ok isEqualToString:@"ok"])
+        if ([ok isEqualToString:@"ok"])
+        {
+            NSArray *rgMatches = [res objectForKey:@"rg_contacts"];
+            if (rgMatches)
+            {
+                NSLog(@"RingMail: Updated Matches: %@", rgMatches);
+                [self dbUpdateEnabled:rgMatches];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
+            }
+        }
+        else
         {
             NSLog(@"RingMail API Error: %@", @"Update contacts failed");
         }
@@ -195,11 +213,11 @@
 {
     NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
 #ifdef DEBUG
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contacts_dev"];
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contact_dev"];
 #else
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contacts"];
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contact"];
 #endif
-    dbPath = [docsPath stringByAppendingPathComponent:@"_v1.0.db"];
+    dbPath = [docsPath stringByAppendingPathComponent:@"_v0.1.db"];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     return queue;
 }
@@ -242,6 +260,67 @@
         }
     }];
     [dbq close];
+}
+
+- (void)dbUpdateEnabled:(NSArray *)rgUsers
+{
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        // Get current ringmail users
+        NSMutableDictionary *cur = [NSMutableDictionary dictionary];
+        FMResultSet *rs = [db executeQuery:@"SELECT apple_id FROM contacts WHERE ringmail_enabled = 1"];
+        while ([rs next])
+        {
+            NSNumber *contactID = [rs objectForColumnIndex:0];
+            [cur setObject:@"" forKey:[contactID stringValue]];
+        }
+        [rs close];
+        
+        for (NSString *contactID in rgUsers)
+        {
+            [cur removeObjectForKey:contactID];
+            FMResultSet *rs = [db executeQuery:@"SELECT count(oid) FROM contacts WHERE apple_id=?", contactID];
+            if ([rs next])
+            {
+                NSNumber *count = [rs objectForColumnIndex:0];
+                //NSLog(@"RingMail: Contact Activate: %@ -> %@", contactID, count);
+                if ([count intValue] == 0) // Insert
+                {
+                    [db executeUpdate:@"INSERT INTO contacts (apple_id, ringmail_enabled, contact_data) VALUES (?, 1, '')", contactID];
+                }
+                else if ([count intValue] == 1) // Update
+                {
+                    [db executeUpdate:@"UPDATE contacts SET ringmail_enabled=1 WHERE apple_id=?", contactID];
+                }
+            }
+            [rs close];
+        }
+        
+        // Purge contacts that are no longer RingMail users :(
+        [cur enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            //NSLog(@"RingMail: Contact Deactivate: %@", key);
+            [db executeUpdate:@"UPDATE contacts SET ringmail_enabled=0 WHERE apple_id=?", key];
+        }];
+    }];
+    [dbq close];
+}
+
+- (NSDictionary*)dbGetRgContacts
+{
+    NSMutableDictionary *res = [NSMutableDictionary dictionary];
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT apple_id FROM contacts WHERE ringmail_enabled = 1"];
+        while ([rs next])
+        {
+            NSNumber *contactID = [rs objectForColumnIndex:0];
+            //NSLog(@"RingMail: Contact Item: %@", contactID);
+            [res setObject:@"" forKey:[contactID stringValue]];
+        }
+        [rs close];
+    }];
+    [dbq close];
+    return res;
 }
 
 @end

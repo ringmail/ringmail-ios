@@ -24,6 +24,7 @@
 #import "UACellBackgroundView.h"
 #import "UILinphone.h"
 #import "Utils.h"
+#import "RgContactManager.h"
 
 @implementation ContactsTableViewController
 
@@ -34,6 +35,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 - (void)initContactsTableViewController {
 	addressBookMap = [[OrderedDictionary alloc] init];
 	avatarMap = [[NSMutableDictionary alloc] init];
+    ringMailContacts = [NSDictionary dictionary];
 
 	addressBook = ABAddressBookCreateWithOptions(nil, nil);
 
@@ -128,6 +130,10 @@ static int ms_strcmpfuz(const char *fuzzy_word, const char *sentence) {
 
 		// Reset Address book
 		[addressBookMap removeAllObjects];
+        
+        // Read RingMail Contacts
+        ringMailContacts = [[[LinphoneManager instance] contactManager] dbGetRgContacts];
+        //NSLog(@"RingMail Enabled Contact IDs: %@", ringMailContacts);
 
 		NSArray *lContacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
 		for (id lPerson in lContacts) {
@@ -204,6 +210,7 @@ static int ms_strcmpfuz(const char *fuzzy_word, const char *sentence) {
 }
 
 static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context) {
+    //NSLog(@"ContactsTableViewController Change Detected");
 	ContactsTableViewController *controller = (__bridge ContactsTableViewController *)context;
 	ABAddressBookRevert(addressBook);
 	[controller->avatarMap removeAllObjects];
@@ -258,6 +265,13 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	}
 	[[cell avatarImage] setImage:image];
 
+    NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
+    if ([ringMailContacts objectForKey:[recordId stringValue]])
+    {
+        //NSLog(@"Found Contact: %@", recordId);
+        [[cell rgImage] setHidden:NO];
+    }
+    
 	[cell setContact:contact];
 	return cell;
 }

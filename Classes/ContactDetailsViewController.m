@@ -19,6 +19,7 @@
 
 #import "ContactDetailsViewController.h"
 #import "PhoneMainView.h"
+#import "RgContactManager.h"
 
 @implementation ContactDetailsViewController
 
@@ -100,6 +101,9 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 			LOGE(@"Save AddressBook: Fail(%@)", [(__bridge NSError *)error localizedDescription]);
 		} else {
 			LOGI(@"Save AddressBook: Success!");
+            RgContactManager *ct = [[LinphoneManager instance] contactManager];
+            NSArray *updated = [ct getContactList:YES];
+            [ct sendContactData:updated];
 		}
 		[[LinphoneManager instance].fastAddressBook reload];
 	}
@@ -131,6 +135,9 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 		LOGE(@"Save AddressBook: Fail(%@)", [(__bridge NSError *)error localizedDescription]);
 	} else {
 		LOGI(@"Save AddressBook: Success!");
+        RgContactManager *ct = [[LinphoneManager instance] contactManager];
+        NSArray *updated = [ct getContactList:YES];
+        [ct sendContactData:updated];
 	}
 	[[LinphoneManager instance].fastAddressBook reload];
 }

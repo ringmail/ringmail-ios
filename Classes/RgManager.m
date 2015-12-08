@@ -17,6 +17,7 @@
 NSString *const kRgTextReceived = @"RgTextReceived";
 NSString *const kRgTextSent = @"RgTextSent";
 NSString *const kRgTextUpdate = @"RgTextUpdate";
+NSString *const kRgContactsUpdated = @"RgContactsUpdated";
 
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
@@ -384,8 +385,38 @@ static LevelDB* theConfigDatabase = nil;
     [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
     [RgManager chatEnsureConnection];
     [[RgNetwork instance] registerPushToken];
-    RgContactManager *contactMgr = [[LinphoneManager instance] contactManager];
-    [contactMgr sendContactData];
+    
+    LinphoneManager *mgr = [LinphoneManager instance];
+    RgContactManager *contactMgr = [mgr contactManager];
+    
+    // 1st round of ringmail-enabled contact updates from server (2nd is the reply to sendContactData)
+    [contactMgr dbUpdateEnabled:[cred objectForKey:@"rg_contacts"]];
+    
+    NSString *serverTimestamp = [cred objectForKey:@"ts_latest"];
+    BOOL send = 1; // send first time
+    
+    // Check to see if contacts database is newer than server
+    if (! [serverTimestamp isEqualToString:@""]) // always send if server has no data yet
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ssZ"];
+        NSDate *serverDate = [dateFormatter dateFromString:serverTimestamp];
+        NSDate *serverCount = [cred objectForKey:@"contacts"];
+        NSArray *contactList = [contactMgr getContactList];
+        NSDictionary *summary = [contactMgr getAddressBookStats:contactList];
+        NSDate *internalDate = [summary objectForKey:@"date_update"];
+        NSNumber *internalCount = [summary objectForKey:@"count"];
+        NSLog(@"RingMail: Server(%@:%@) Internal(%@:%@)", serverDate, serverCount, internalDate, internalCount);
+        if ((! ([internalDate compare:serverDate] == NSOrderedDescending)) && [serverCount isEqual:internalCount])
+        {
+            send = 0;
+            NSLog(@"RingMail: Server Contacts Up To Date");
+        }
+    }
+    if (send)
+    {
+        [contactMgr sendContactData];
+    }
 }
 
 + (void)setupPushToken

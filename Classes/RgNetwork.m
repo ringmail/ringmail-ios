@@ -50,11 +50,14 @@ static RgNetwork* theRgNetwork = nil;
 
 - (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback
 {
+    NSLog(@"RingMail: Login Request");
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    LevelDB* cfg = [RgManager configDatabase];
     NSDictionary *parameters = @{
                                  @"login": login,
                                  @"password": password,
+                                 @"device": [cfg objectForKey:@"ringmail_device_uuid"],
                                  @"version": [info objectForKey:@"CFBundleShortVersionString"],
                                  @"build": [info objectForKey:@"CFBundleVersion"],
                                  @"timestamp": [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__],

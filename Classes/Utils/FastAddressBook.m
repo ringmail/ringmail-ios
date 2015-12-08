@@ -19,6 +19,7 @@
 
 #import "FastAddressBook.h"
 #import "LinphoneManager.h"
+#import "RgContactManager.h"
 
 @implementation FastAddressBook
 
@@ -235,6 +236,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context) {
+    //NSLog(@"FastAddressBook Change Detected");
+    [[[LinphoneManager instance] contactManager] sendContactData];
 	FastAddressBook *fastAddressBook = (__bridge FastAddressBook *)context;
 	[fastAddressBook loadData];
 }

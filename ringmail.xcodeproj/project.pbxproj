@@ -164,6 +164,7 @@
 		C4BC493C1BF9517900826264 /* RgChatQuestionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC493B1BF9517900826264 /* RgChatQuestionTable.m */; };
 		C4BC49451BF9628800826264 /* RgChatQuestionInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4BC49441BF9628800826264 /* RgChatQuestionInputCell.xib */; };
 		C4BC49481BF9726000826264 /* RgChatQuestionInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC49471BF9726000826264 /* RgChatQuestionInputCell.m */; };
+		C4C8888A1C14FD3800FD86FC /* ringmail_contact_small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C888891C14FD3800FD86FC /* ringmail_contact_small.png */; };
 		C4D0BC6B1BB4F0A400D1728A /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */; };
 		C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */; };
 		C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */; };
@@ -1090,6 +1091,7 @@
 		C4BC49441BF9628800826264 /* RgChatQuestionInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgChatQuestionInputCell.xib; sourceTree = "<group>"; };
 		C4BC49461BF9681700826264 /* RgChatQuestionInputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RgChatQuestionInputCell.h; sourceTree = "<group>"; };
 		C4BC49471BF9726000826264 /* RgChatQuestionInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatQuestionInputCell.m; sourceTree = "<group>"; };
+		C4C888891C14FD3800FD86FC /* ringmail_contact_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_contact_small.png; path = Resources/ringmail_contact_small.png; sourceTree = "<group>"; };
 		C4D0BC691BB4F0A400D1728A /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_splashscreen_iphone5.png; path = Resources/ringmail_splashscreen_iphone5.png; sourceTree = "<group>"; };
@@ -2575,6 +2577,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C4C888891C14FD3800FD86FC /* ringmail_contact_small.png */,
 				C46997AC1BC19168007B3658 /* incall_buttons_background.png */,
 				C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */,
 				C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */,
@@ -3323,6 +3326,7 @@
 				D3ED3E9E15872EF1006C0DE4 /* history_edit_over.png in Resources */,
 				D3ED3EA015872EF1006C0DE4 /* history_missed_selected.png in Resources */,
 				D3ED3EA215872EF1006C0DE4 /* history_missed_default.png in Resources */,
+				C4C8888A1C14FD3800FD86FC /* ringmail_contact_small.png in Resources */,
 				D38187D115FE346B00C3EDCA /* HistoryViewController.xib in Resources */,
 				D38187BD15FE342800C3EDCA /* ContactsViewController.xib in Resources */,
 				D354980615875534000081D8 /* contacts_all_selected.png in Resources */,

@@ -26,6 +26,7 @@
 @synthesize firstNameLabel;
 @synthesize lastNameLabel;
 @synthesize avatarImage;
+@synthesize rgImage;
 @synthesize contact;
 
 #pragma mark - Lifecycle Functions

@@ -26,8 +26,11 @@
 
 - (NSArray*)getContactList;
 - (NSArray*)getContactList:(BOOL)reload;
-- (NSMutableDictionary *)getAddressBookStats:(NSArray*)contactList;
+- (NSDictionary *)getAddressBookStats:(NSArray*)contactList;
 - (NSArray*)getContactData:(NSArray*)contactList;
 - (void)sendContactData;
+- (void)sendContactData:(NSArray*)contactList;
+- (void)dbUpdateEnabled:(NSArray *)rgUsers;
+- (NSDictionary*)dbGetRgContacts;
 
 @end

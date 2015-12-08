@@ -25,6 +25,7 @@
 @interface ContactsTableViewController : UITableViewController {
     @private
     OrderedDictionary* addressBookMap;
+    NSDictionary* ringMailContacts;
     NSMutableDictionary* avatarMap;
     
     ABAddressBookRef addressBook;

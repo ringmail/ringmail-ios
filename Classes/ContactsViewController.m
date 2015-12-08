@@ -145,7 +145,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// [searchText setFont:[UIFont fontWithName:@"CustomFont" size:12]];
 	_searchBar.showsCancelButton = (_searchBar.text.length > 0);
 
-	BOOL use_system = [[LinphoneManager instance] lpConfigBoolForKey:@"use_system_contacts"];
+	/*BOOL use_system = [[LinphoneManager instance] lpConfigBoolForKey:@"use_system_contacts"];
 	if (use_system && !self.sysViewController) { // use system contacts
 		ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
 		picker.peoplePickerDelegate = self;
@@ -156,7 +156,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 		self.sysViewController = picker;
 		self.searchBar.hidden = TRUE;
 
-	} else if (!use_system && !self.tableController) {
+	} else if (!use_system && !self.tableController) {*/
+        
+        //NSLog(@"RingMail: Show Contact List");
 
 		self.tableController = [[ContactsTableViewController alloc] init];
 		self.tableView = [[UITableView alloc] init];
@@ -174,10 +176,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 		[self.view addSubview:tableView];
 		[self update];
-	} else {
+	/*} else {
 		// if table is already created, simply refresh buttons (selection mode changed, etc.)
 		[self refreshButtons];
-	}
+	}*/
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contactsUpdated:)
+                                                 name:kRgContactsUpdated
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -198,6 +205,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -372,4 +380,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self setToolBar:nil];
 	[super viewDidUnload];
 }
+
+- (void)contactsUpdated:(NSNotification *)notif {
+	[tableController loadData];
+}
+
 @end

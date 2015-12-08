@@ -461,7 +461,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
 		NSString *labelRef = CFBridgingRelease(ABMultiValueCopyLabelAtIndex(lMap, index));
 		if (labelRef != NULL) {
-            NSLog(@"RingMail: Label Ref - %@", labelRef);
+            //NSLog(@"RingMail: Label Ref - %@", labelRef);
 			label = [FastAddressBook localizedLabel:labelRef];
 		}
 		NSString *valueRef = CFBridgingRelease(ABMultiValueCopyValueAtIndex(lMap, index));
