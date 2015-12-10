@@ -78,33 +78,44 @@ static RootViewManager *rootViewManagerInstance = nil;
 		return currentViewController;
 
 	if (newMainView != currentViewController) {
-		//PhoneMainView *previousMainView = currentViewController;
-		//UIInterfaceOrientation nextViewOrientation = newMainView.interfaceOrientation;
-		//UIInterfaceOrientation previousOrientation = currentViewController.interfaceOrientation;
+		PhoneMainView *previousMainView = currentViewController;
+		UIInterfaceOrientation nextViewOrientation = newMainView.interfaceOrientation;
+		UIInterfaceOrientation previousOrientation = currentViewController.interfaceOrientation;
 
 		LOGI(@"Changing rootViewController: %@ -> %@", currentViewController.name, newMainView.name);
 		currentViewController = newMainView;
 		LinphoneAppDelegate *delegate = (LinphoneAppDelegate *)[UIApplication sharedApplication].delegate;
 
-		[UIView transitionWithView:delegate.window
-			duration:0.3
-			options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionAllowAnimatedContent
-			animations:^{
-			  delegate.window.rootViewController = newMainView;
-			  // when going to landscape-enabled view, we have to get the current portrait frame and orientation,
-			  // because it could still have landscape-based size
-            // TODO: RingMail only supports one orientation to start with
-			  /*if (nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController) {
-				  newMainView.view.frame = previousMainView.view.frame;
-				  [newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
-				  [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.3];
-				  [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.3];
-				  [newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
-			  }*/
-
+		if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
+			[UIView transitionWithView:delegate.window
+				duration:0.3
+				options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionAllowAnimatedContent
+				animations:^{
+				  delegate.window.rootViewController = newMainView;
+				  // when going to landscape-enabled view, we have to get the current portrait frame and orientation,
+				  // because it could still have landscape-based size
+				  if (nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController) {
+					  newMainView.view.frame = previousMainView.view.frame;
+					  [newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
+					  [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.3];
+					  [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.3];
+					  [newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
+				  }
+				}
+				completion:^(BOOL finished){
+				}];
+		} else {
+			delegate.window.rootViewController = newMainView;
+			// when going to landscape-enabled view, we have to get the current portrait frame and orientation,
+			// because it could still have landscape-based size
+			if (nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController) {
+				newMainView.view.frame = previousMainView.view.frame;
+				[newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
+				[newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.];
+				[newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.];
+				[newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
 			}
-			completion:^(BOOL finished){
-			}];
+		}
 	}
 	return currentViewController;
 }
@@ -183,6 +194,10 @@ static RootViewManager *rootViewManagerInstance = nil;
 											 selector:@selector(textReceived:)
 												 name:kLinphoneTextReceived
 											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(onGlobalStateChanged:)
+												 name:kLinphoneGlobalStateUpdate
+											   object:nil];
 	[[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(batteryLevelChanged:)
@@ -222,32 +237,35 @@ static RootViewManager *rootViewManagerInstance = nil;
 	}
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
-	return UIInterfaceOrientationMaskPortrait;
-    
-	/*if ([LinphoneManager runningOnIpad] || [mainViewController currentViewSupportsLandscape])
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+#else
+- (NSUInteger)supportedInterfaceOrientations
+#endif
+{
+	if ([LinphoneManager runningOnIpad] || [mainViewController currentViewSupportsLandscape])
 		return UIInterfaceOrientationMaskAll;
 	else {
 		return UIInterfaceOrientationMaskPortrait;
-	}*/
+	}
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 								duration:(NSTimeInterval)duration {
-	//[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	//[mainViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	//[self orientationUpdate:toInterfaceOrientation];
+	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[mainViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[self orientationUpdate:toInterfaceOrientation];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 										 duration:(NSTimeInterval)duration {
-	//[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	//[mainViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[mainViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-	//[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	//[mainViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	[mainViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 - (UIInterfaceOrientation)interfaceOrientation {
@@ -264,7 +282,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (void)textReceived:(NSNotification *)notif {
 	LinphoneAddress *from = [[notif.userInfo objectForKey:@"from_address"] pointerValue];
 	NSString *callID = [notif.userInfo objectForKey:@"call-id"];
-	if (from != nil) { // new message
+	if (from != nil) {
 		[self playMessageSoundForCallID:callID];
 	}
 	[self updateApplicationBadgeNumber];
@@ -284,6 +302,24 @@ static RootViewManager *rootViewManagerInstance = nil;
 							 cancelButtonTitle:NSLocalizedString(@"Continue", nil)
 							 otherButtonTitles:nil, nil];
 		[error show];
+	}
+}
+
+- (void)onGlobalStateChanged:(NSNotification *)notif {
+	LinphoneGlobalState state = (LinphoneGlobalState)[[[notif userInfo] valueForKey:@"state"] integerValue];
+	static BOOL already_shown = FALSE;
+	if (state == LinphoneGlobalOn && !already_shown && [LinphoneManager instance].wasRemoteProvisioned) {
+		LinphoneProxyConfig *conf = NULL;
+		linphone_core_get_default_proxy([LinphoneManager getLc], &conf);
+		if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_login_view" forSection:@"app"] && conf == NULL) {
+			already_shown = TRUE;
+			WizardViewController *controller = DYNAMIC_CAST(
+				[[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
+				WizardViewController);
+			if (controller != nil) {
+				[controller fillDefaultValues];
+			}
+		}
 	}
 }
 
@@ -615,21 +651,28 @@ static RootViewManager *rootViewManagerInstance = nil;
 									 @"SIP account configuration in the settings.",
 									 nil);
 	} else {
-        lMessage = [NSString stringWithFormat:NSLocalizedString(@"Cannot call %@", nil), [RgManager addressFromSIPUser:lUserName]];
+		lMessage = [NSString stringWithFormat:NSLocalizedString(@"Cannot call %@.", nil), lUserName];
 	}
 
-	if (linphone_call_get_reason(call) == LinphoneReasonNotFound) {
-		lMessage = [NSString stringWithFormat:@"%@ not available", [RgManager addressFromSIPUser:lUserName]];
-    } else {
-		if (message != nil) {
-			lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@\nReason was: %@", nil), lMessage, message];
-		}
+	switch (linphone_call_get_reason(call)) {
+		case LinphoneReasonNotFound:
+			lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@ is not registered.", nil), lUserName];
+			break;
+		case LinphoneReasonBusy:
+			lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@ is busy.", nil), lUserName];
+			break;
+		default:
+			if (message != nil) {
+				lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@\nReason was: %@", nil), lMessage, message];
+			}
+			break;
 	}
+
 	lTitle = NSLocalizedString(@"Call failed", nil);
 	UIAlertView *error = [[UIAlertView alloc] initWithTitle:lTitle
 													message:lMessage
 												   delegate:nil
-										  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+										  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 										  otherButtonTitles:nil];
 	[error show];
 }

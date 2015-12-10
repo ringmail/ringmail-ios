@@ -117,8 +117,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 + (BOOL)isAuthorized {
-	return !ABAddressBookGetAuthorizationStatus ||
-		   ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized;
+	return ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized;
 }
 
 - (FastAddressBook *)init {
@@ -164,8 +163,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 - (void)loadData {
-	ABAddressBookRevert(addressBook);
 	@synchronized(addressBookMap) {
+        ABAddressBookRevert(addressBook);
 		[addressBookMap removeAllObjects];
 
 		CFArrayRef lContacts = ABAddressBookCopyArrayOfAllPeople(addressBook);

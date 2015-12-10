@@ -619,7 +619,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	} else if ([key isEqualToString:@"reset_logs_button"]) {
 		linphone_core_reset_log_collection();
 	} else if ([key isEqual:@"send_logs_button"]) {
-		char *filepath = linphone_core_compress_log_collection(lc);
+		char *filepath = linphone_core_compress_log_collection();
 		if (filepath == NULL) {
 			LOGE(@"Cannot sent logs: file is NULL");
 			return;
