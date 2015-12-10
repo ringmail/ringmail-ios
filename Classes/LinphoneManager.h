@@ -195,7 +195,7 @@ typedef struct _LinphoneManagerSounds {
 
 - (void)silentPushFailed:(NSTimer*)timer;
 
-- (void)audioRouteChanged:(NSNotification *)notif;
+- (void)removeAllAccounts;
 
 @property (readonly) BOOL isTesting;
 @property (readonly, strong) FastAddressBook* fastAddressBook;

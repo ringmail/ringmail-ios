@@ -74,16 +74,15 @@ NSString *const kLinphoneNotifyReceived = @"LinphoneNotifyReceived";
 NSString *const kLinphoneFileTransferSendUpdate = @"LinphoneFileTransferSendUpdate";
 NSString *const kLinphoneFileTransferRecvUpdate = @"LinphoneFileTransferRecvUpdate";
 
-
 const int kLinphoneAudioVbrCodecDefaultBitrate = 36; /*you can override this from linphonerc or linphonerc-factory*/
 
-extern void libmsilbc_init(void);
+//extern void libmsilbc_init(void);
 extern void libmsamr_init(void);
 extern void libmsx264_init(void);
 extern void libmsopenh264_init(void);
 extern void libmssilk_init(void);
 extern void libmsbcg729_init(void);
-extern void libmswebrtc_init(void);
+//extern void libmswebrtc_init(void);
 
 #define FRONT_CAM_NAME                                                                                                 \
 	"AV Capture: com.apple.avfoundation.avcapturedevice.built-in_video:1" /*"AV Capture: Front Camera"*/
@@ -606,7 +605,7 @@ static void dump_section(const char *section, void *data) {
 	lp_config_for_each_entry((const LpConfig *)data, section, dump_entry, &d);
 }
 
-+ (void)dumpLCConfig {
++ (void)dumpLcConfig {
 	if (theLinphoneCore) {
 		LpConfig *conf = [LinphoneManager instance].configDb;
 		lp_config_for_each_section(conf, dump_section, conf);
@@ -826,6 +825,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 		@"state" : [NSNumber numberWithInt:state],
 		@"message" : [NSString stringWithUTF8String:message]
 	};
+	LOGI(@"Call %p changed to state %s: %s", call, linphone_call_state_to_string(state), message);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneCallUpdate object:self userInfo:dict];
 }
 
@@ -944,10 +944,11 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 			address = [FastAddressBook getContactDisplayName:contact];
 		} else {
 			if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
-				LinphoneAddress *linphoneAddress =
-					linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-				address = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
-				linphone_address_destroy(linphoneAddress);
+				LinphoneAddress *linphoneAddress = linphone_address_new([address UTF8String]);
+				if (linphoneAddress) {
+					address = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
+					linphone_address_destroy(linphoneAddress);
+				}
 			}
 		}
 		if (address == nil) {
@@ -1100,25 +1101,26 @@ static void linphone_iphone_is_composing_received(LinphoneCore *lc, LinphoneChat
 }
 
 static void showNetworkFlags(SCNetworkReachabilityFlags flags) {
-	LOGI(@"Network connection flags:");
+	NSMutableString *log = [[NSMutableString alloc] initWithString:@"Network connection flags: "];
 	if (flags == 0)
-		LOGI(@"no flags.");
+		[log appendString:@"no flags."];
 	if (flags & kSCNetworkReachabilityFlagsTransientConnection)
-		LOGI(@"kSCNetworkReachabilityFlagsTransientConnection");
+		[log appendString:@"kSCNetworkReachabilityFlagsTransientConnection, "];
 	if (flags & kSCNetworkReachabilityFlagsReachable)
-		LOGI(@"kSCNetworkReachabilityFlagsReachable");
+		[log appendString:@"kSCNetworkReachabilityFlagsReachable, "];
 	if (flags & kSCNetworkReachabilityFlagsConnectionRequired)
-		LOGI(@"kSCNetworkReachabilityFlagsConnectionRequired");
+		[log appendString:@"kSCNetworkReachabilityFlagsConnectionRequired, "];
 	if (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic)
-		LOGI(@"kSCNetworkReachabilityFlagsConnectionOnTraffic");
+		[log appendString:@"kSCNetworkReachabilityFlagsConnectionOnTraffic, "];
 	if (flags & kSCNetworkReachabilityFlagsConnectionOnDemand)
-		LOGI(@"kSCNetworkReachabilityFlagsConnectionOnDemand");
+		[log appendString:@"kSCNetworkReachabilityFlagsConnectionOnDemand, "];
 	if (flags & kSCNetworkReachabilityFlagsIsLocalAddress)
-		LOGI(@"kSCNetworkReachabilityFlagsIsLocalAddress");
+		[log appendString:@"kSCNetworkReachabilityFlagsIsLocalAddress, "];
 	if (flags & kSCNetworkReachabilityFlagsIsDirect)
-		LOGI(@"kSCNetworkReachabilityFlagsIsDirect");
+		[log appendString:@"kSCNetworkReachabilityFlagsIsDirect, "];
 	if (flags & kSCNetworkReachabilityFlagsIsWWAN)
-		LOGI(@"kSCNetworkReachabilityFlagsIsWWAN");
+		[log appendString:@"kSCNetworkReachabilityFlagsIsWWAN, "];
+	LOGI(@"%@", log);
 }
 
 static void networkReachabilityNotification(CFNotificationCenterRef center, void *observer, CFStringRef name,
@@ -1322,13 +1324,12 @@ static LinphoneCoreVTable linphonec_vtable = {.show = NULL,
 	// get default config from bundle
 	NSString *zrtpSecretsFileName = [LinphoneManager documentFile:@"zrtp_secrets"];
 	NSString *chatDBFileName = [LinphoneManager documentFile:kLinphoneInternalChatDBFilename];
-	const char *lRootCa =
-		[[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
+	const char *lRootCa = [[LinphoneManager bundleFile:@"rootca.pem"] UTF8String];
 
-	linphone_core_set_user_agent(theLinphoneCore,
-								 [[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]
-									 stringByAppendingString:@"Iphone"] UTF8String],
-								 LINPHONE_IOS_VERSION);
+	NSString *device = [NSString
+		stringWithFormat:@"%@_%@_iOS%@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"],
+						 [LinphoneUtils deviceName], UIDevice.currentDevice.systemVersion];
+	linphone_core_set_user_agent(theLinphoneCore, device.UTF8String, LINPHONE_IOS_VERSION);
 
 	_contactSipField = [self lpConfigStringForKey:@"contact_im_type_value" withDefault:@"SIP"];
 
@@ -1338,20 +1339,15 @@ static LinphoneCoreVTable linphonec_vtable = {.show = NULL,
 
 	linphone_core_set_root_ca(theLinphoneCore, lRootCa);
 	// Set audio assets
-	const char *lRing =
-		[[LinphoneManager bundleFile:@"ring.wav"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
+	const char *lRing = [[LinphoneManager bundleFile:@"ring.wav"] UTF8String];
 	linphone_core_set_ring(theLinphoneCore, lRing);
-	const char *lRingBack =
-		[[LinphoneManager bundleFile:@"ringback.wav"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
+	const char *lRingBack = [[LinphoneManager bundleFile:@"ringback.wav"] UTF8String];
 	linphone_core_set_ringback(theLinphoneCore, lRingBack);
-	const char *lPlay =
-		[[LinphoneManager bundleFile:@"hold.wav"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
+	const char *lPlay = [[LinphoneManager bundleFile:@"hold.wav"] UTF8String];
 	linphone_core_set_play_file(theLinphoneCore, lPlay);
 
-	linphone_core_set_zrtp_secrets_file(theLinphoneCore,
-										[zrtpSecretsFileName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-	linphone_core_set_chat_database_path(theLinphoneCore,
-										 [chatDBFileName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+	linphone_core_set_zrtp_secrets_file(theLinphoneCore, [zrtpSecretsFileName UTF8String]);
+	linphone_core_set_chat_database_path(theLinphoneCore, [chatDBFileName UTF8String]);
 
 	[self migrationLinphoneSettings];
 
@@ -1359,14 +1355,9 @@ static LinphoneCoreVTable linphonec_vtable = {.show = NULL,
 
 	NSString *path = [LinphoneManager bundleFile:@"nowebcamCIF.jpg"];
 	if (path) {
-		const char *imagePath = [path cStringUsingEncoding:[NSString defaultCStringEncoding]];
+		const char *imagePath = [path UTF8String];
 		LOGI(@"Using '%s' as source image for no webcam", imagePath);
 		linphone_core_set_static_picture(theLinphoneCore, imagePath);
-	}
-
-	NSString *urlString = [self lpConfigStringForKey:@"sharing_server_preference"];
-	if (urlString) {
-		linphone_core_set_file_transfer_server(theLinphoneCore, [urlString UTF8String]);
 	}
 
 	/*DETECT cameras*/
@@ -1392,8 +1383,7 @@ static LinphoneCoreVTable linphonec_vtable = {.show = NULL,
 		linphone_core_enable_video(theLinphoneCore, FALSE, FALSE);
 	}
 
-	LOGI(@"Linphone [%s]  started on [%s]", linphone_core_get_version(),
-		 [[UIDevice currentDevice].model cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+	LOGI(@"Linphone [%s]  started on [%s]", linphone_core_get_version(), [[UIDevice currentDevice].model UTF8String]);
 
 	// Post event
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSValue valueWithPointer:theLinphoneCore] forKey:@"core"];
@@ -1463,46 +1453,28 @@ static BOOL libStarted = FALSE;
 	connectivity = none;
 
 	ms_init(); // Need to initialize mediastreamer2 before loading the plugins
-
-	libmsilbc_init();
-#if defined(HAVE_SILK)
+	// Load plugins if available in the linphone SDK - otherwise these calls will do nothing
+	//libmsilbc_init();
 	libmssilk_init();
-#endif
-#ifdef HAVE_AMR
-	libmsamr_init(); // load amr plugin if present from the liblinphone sdk
-#endif
-#ifdef HAVE_X264
-	libmsx264_init(); // load x264 plugin if present from the liblinphone sdk
-#endif
-#ifdef HAVE_OPENH264
-	libmsopenh264_init(); // load openh264 plugin if present from the liblinphone sdk
-#endif
-
-#if HAVE_G729
-	libmsbcg729_init(); // load g729 plugin
-#endif
-
-#ifdef HAVE_WEBRTC
-	libmswebrtc_init();
-#endif
+	libmsamr_init();
+	libmsx264_init();
+	libmsopenh264_init();
+	libmsbcg729_init();
+	//libmswebrtc_init();
 
 	// Set audio assets
-	const char *lRing =
-		[[LinphoneManager bundleFile:@"ring.wav"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
+	const char *lRing = [[LinphoneManager bundleFile:@"ring.wav"] UTF8String];
 	lp_config_set_string(configDb, "sound", "local_ring", lRing);
-	const char *lRingBack =
-		[[LinphoneManager bundleFile:@"ringback.wav"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
+	const char *lRingBack = [[LinphoneManager bundleFile:@"ringback.wav"] UTF8String];
 	lp_config_set_string(configDb, "sound", "ringback_tone", lRingBack);
-	const char *lPlay =
-		[[LinphoneManager bundleFile:@"hold.wav"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
+	const char *lPlay = [[LinphoneManager bundleFile:@"hold.wav"] UTF8String];
 	lp_config_set_string(configDb, "sound", "hold_music", lPlay);
 
 	theLinphoneCore =
 		linphone_core_new_with_config(&linphonec_vtable, configDb, (__bridge void *)(self) /* user_data */);
 
 	/* set the CA file no matter what, since the remote provisioning could be hitting an HTTPS server */
-	const char *lRootCa =
-		[[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
+	const char *lRootCa = [[LinphoneManager bundleFile:@"rootca.pem"] UTF8String];
 	linphone_core_set_root_ca(theLinphoneCore, lRootCa);
 	linphone_core_set_user_certificates_path(theLinphoneCore, [[LinphoneManager cacheDirectory] UTF8String]);
 
@@ -1656,77 +1628,80 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 }
 
 - (BOOL)enterBackgroundMode {
-    if ([[self coreReady] boolValue])
-    {
-    	LinphoneProxyConfig *proxyCfg;
-    	linphone_core_get_default_proxy(theLinphoneCore, &proxyCfg);
-    	BOOL shouldEnterBgMode = FALSE;
-
-    	// handle proxy config if any
-    	if (proxyCfg) {
-    		if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
-
-    			// For registration register
-    			[self refreshRegisters];
-    		}
-
-            /* RingMail - Disabling this:
-    		if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
-
-    			// register keepalive
-    			if ([[UIApplication sharedApplication]
-    					setKeepAliveTimeout:600 *//*(NSTimeInterval)linphone_proxy_config_get_expires(proxyCfg)*//*
-    								handler:^{
-    								  LOGW(@"keepalive handler");
-    								  mLastKeepAliveDate = [NSDate date];
-    								  if (theLinphoneCore == nil) {
-    									  LOGW(@"It seems that Linphone BG mode was deactivated, just skipping");
-    									  return;
-    								  }
-    								  // kick up network cnx, just in case
-    								  [self refreshRegisters];
-    								  linphone_core_iterate(theLinphoneCore);
-    								}]) {
-
-    				LOGI(@"keepalive handler succesfully registered");
-    			} else {
-    				LOGI(@"keepalive handler cannot be registered");
-    			}
-    			shouldEnterBgMode = TRUE;
-    		}*/
-    	}
-
-    	LinphoneCall *currentCall = linphone_core_get_current_call(theLinphoneCore);
-    	const MSList *callList = linphone_core_get_calls(theLinphoneCore);
-    	if (!currentCall // no active call
-    		&& callList // at least one call in a non active state
-    		&& ms_list_find_custom((MSList *)callList, (MSCompareFunc)comp_call_state_paused, NULL)) {
-    		[self startCallPausedLongRunningTask];
-    	}
-    	if (callList) {
-    		/*if at least one call exist, enter normal bg mode */
-    		shouldEnterBgMode = TRUE;
-    	}
-    	/*stop the video preview*/
-    	if (theLinphoneCore) {
-    		linphone_core_enable_video_preview(theLinphoneCore, FALSE);
-    		linphone_core_iterate(theLinphoneCore);
-    	}
-    	linphone_core_stop_dtmf_stream(theLinphoneCore);
-
-    	LOGI(@"Entering [%s] bg mode", shouldEnterBgMode ? "normal" : "lite");
-
-    	if (!shouldEnterBgMode) {
-            LOGI(@"Keeping lc core to handle push");
-            /*destroy voip socket if any and reset connectivity mode*/
-            connectivity = none;
-            linphone_core_set_network_reachable(theLinphoneCore, FALSE);
-    	}
-    }
     if ([[self chatManager] isConnected]) // if connected
     {
         [[self chatManager] disconnect];
     }
+    if (! [[self coreReady] boolValue])
+    {
+        return NO;
+    }
+    LinphoneProxyConfig *proxyCfg;
+    linphone_core_get_default_proxy(theLinphoneCore, &proxyCfg);
+    BOOL shouldEnterBgMode = FALSE;
+
+    // handle proxy config if any
+    if (proxyCfg) {
+        if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
+
+            // For registration register
+            [self refreshRegisters];
+        }
+
+        /* RingMail - Disabling this:
+        if ([[LinphoneManager instance] lpConfigBoolForKey:@"backgroundmode_preference"]) {
+
+            // register keepalive
+            if ([[UIApplication sharedApplication]
+                    setKeepAliveTimeout:600 *//*(NSTimeInterval)linphone_proxy_config_get_expires(proxyCfg)*//*
+                                handler:^{
+                                  LOGW(@"keepalive handler");
+                                  mLastKeepAliveDate = [NSDate date];
+                                  if (theLinphoneCore == nil) {
+                                      LOGW(@"It seems that Linphone BG mode was deactivated, just skipping");
+                                      return;
+                                  }
+                                  // kick up network cnx, just in case
+                                  [self refreshRegisters];
+                                  linphone_core_iterate(theLinphoneCore);
+                                }]) {
+
+                LOGI(@"keepalive handler succesfully registered");
+            } else {
+                LOGI(@"keepalive handler cannot be registered");
+            }
+            shouldEnterBgMode = TRUE;
+        }*/
+    }
+
+    LinphoneCall *currentCall = linphone_core_get_current_call(theLinphoneCore);
+    const MSList *callList = linphone_core_get_calls(theLinphoneCore);
+    if (!currentCall // no active call
+        && callList // at least one call in a non active state
+        && ms_list_find_custom((MSList *)callList, (MSCompareFunc)comp_call_state_paused, NULL)) {
+        [self startCallPausedLongRunningTask];
+    }
+    if (callList) {
+        /*if at least one call exist, enter normal bg mode */
+        shouldEnterBgMode = TRUE;
+    }
+    /*stop the video preview*/
+    if (theLinphoneCore) {
+        linphone_core_enable_video_preview(theLinphoneCore, FALSE);
+        linphone_core_iterate(theLinphoneCore);
+    }
+    linphone_core_stop_dtmf_stream(theLinphoneCore);
+
+    LOGI(@"Entering [%s] bg mode", shouldEnterBgMode ? "normal" : "lite");
+
+    if (!shouldEnterBgMode) {
+        LOGI(@"Keeping lc core to handle push");
+        /*destroy voip socket if any and reset connectivity mode*/
+        connectivity = none;
+        linphone_core_set_network_reachable(theLinphoneCore, FALSE);
+        return NO;
+    }
+
     return YES;
 }
 
@@ -1887,7 +1862,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	OSStatus lStatus = AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &lNewRouteSize, &lNewRoute);
 	if (!lStatus && lNewRouteSize > 0) {
 		NSString *route = (__bridge NSString *)lNewRoute;
-		LOGI(@"Current audio route is [%s]", [route cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+		LOGI(@"Current audio route is [%s]", [route UTF8String]);
 
 		speakerEnabled = [route isEqualToString:@"Speaker"] || [route isEqualToString:@"SpeakerAndMicrophone"];
 		if (![LinphoneManager runningOnIpad] && [route isEqualToString:@"HeadsetBT"] && !speakerEnabled) {
@@ -1957,6 +1932,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 }
 
 - (void)call:(NSString *)address displayName:(NSString *)displayName transfer:(BOOL)transfer {
+	// First verify that network is available, abort otherwise.
 	if (!linphone_core_is_network_reachable(theLinphoneCore)) {
 		UIAlertView *error = [[UIAlertView alloc]
 				initWithTitle:NSLocalizedString(@"Network Error", nil)
@@ -1965,99 +1941,83 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 							  @"There is no network connection available, enable WIFI or WWAN prior to place a call",
 							  nil)
 					 delegate:nil
-			cancelButtonTitle:NSLocalizedString(@"Continue", nil)
+			cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 			otherButtonTitles:nil];
 		[error show];
 		return;
 	}
 
+	// Then check that no GSM calls are in progress, abort otherwise.
 	CTCallCenter *callCenter = [[CTCallCenter alloc] init];
 	if ([callCenter currentCalls] != nil) {
 		LOGE(@"GSM call in progress, cancelling outgoing SIP call request");
-		UIAlertView *error = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot make call", nil)
-														message:NSLocalizedString(@"Please terminate GSM call", nil)
-													   delegate:nil
-											  cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-											  otherButtonTitles:nil];
+		UIAlertView *error =
+			[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot make call", nil)
+									   message:NSLocalizedString(@"Please terminate GSM call first.", nil)
+									  delegate:nil
+							 cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+							 otherButtonTitles:nil];
 		[error show];
 		return;
 	}
 
-	LinphoneProxyConfig *proxyCfg;
-	// get default proxy
-	linphone_core_get_default_proxy(theLinphoneCore, &proxyCfg);
-	LinphoneCallParams *lcallParams = linphone_core_create_default_call_parameters(theLinphoneCore);
-	if ([self lpConfigBoolForKey:@"edge_opt_preference"]) {
-		bool low_bandwidth = self.network == network_2g;
-		if (low_bandwidth) {
-			LOGI(@"Low bandwidth mode");
-		}
-		linphone_call_params_enable_low_bandwidth(lcallParams, low_bandwidth);
-	}
-	LinphoneCall *call = NULL;
-
-	BOOL addressIsASCII = [address canBeConvertedToEncoding:[NSString defaultCStringEncoding]];
-
-	if ([address length] == 0)
-		return; // just return
-	if (!addressIsASCII) {
-		UIAlertView *error =
-			[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Invalid SIP address", nil)
-									   message:NSLocalizedString(@"The address should only contain ASCII data", nil)
-									  delegate:nil
-							 cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-							 otherButtonTitles:nil];
-		[error show];
-	}
-	LinphoneAddress *linphoneAddress =
-		linphone_core_interpret_url(theLinphoneCore, [address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-
-	if (linphoneAddress) {
-
-		if (displayName != nil) {
-			linphone_address_set_display_name(linphoneAddress,
-											  [displayName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-		}
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"override_domain_with_default_one"])
-			linphone_address_set_domain(
-				linphoneAddress, [[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"]
-									 cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-		if (transfer) {
-			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore),
-										[address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-		} else {
-			call = linphone_core_invite_address_with_params(theLinphoneCore, linphoneAddress, lcallParams);
-		}
-		linphone_address_destroy(linphoneAddress);
-
-	} else {
-
+	LinphoneAddress *addr = NULL;
+	// Continue by checking that the provided address is a valid SIP address, abort otherwise.
+	if ([address length] == 0) {
+		// no address provided... nothing to do
+	} else if ((addr = linphone_core_interpret_url(theLinphoneCore, address.UTF8String)) == NULL) {
 		UIAlertView *error = [[UIAlertView alloc]
 				initWithTitle:NSLocalizedString(@"Invalid SIP address", nil)
 					  message:NSLocalizedString(@"Either configure a SIP proxy server from settings prior to place a "
 												@"call or use a valid SIP address (I.E sip:john@example.net)",
 												nil)
 					 delegate:nil
-			cancelButtonTitle:NSLocalizedString(@"Continue", nil)
+			cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 			otherButtonTitles:nil];
 		[error show];
-	}
+	} else {
+		// Finally we can make the call
+		LinphoneProxyConfig *proxyCfg;
+		linphone_core_get_default_proxy(theLinphoneCore, &proxyCfg);
+		LinphoneCallParams *lcallParams = linphone_core_create_call_params(theLinphoneCore, NULL);
+		if ([self lpConfigBoolForKey:@"edge_opt_preference"] && (self.network == network_2g)) {
+			LOGI(@"Enabling low bandwidth mode");
+			linphone_call_params_enable_low_bandwidth(lcallParams, YES);
+		}
 
-	if (call) {
-		// The LinphoneCallAppData object should be set on call creation with callback
-		// - (void)onCall:StateChanged:withMessage:. If not, we are in big trouble and expect it to crash
-		// We are NOT responsible for creating the AppData.
-		LinphoneCallAppData *data = (__bridge LinphoneCallAppData *)linphone_call_get_user_data(call);
-		if (data == nil)
-			LOGE(@"New call instanciated but app data was not set. Expect it to crash.");
-		/* will be used later to notify user if video was not activated because of the linphone core*/
-		else
-			data->videoRequested = linphone_call_params_video_enabled(lcallParams);
+		if (displayName != nil) {
+			linphone_address_set_display_name(addr, displayName.UTF8String);
+		}
+		if ([[LinphoneManager instance] lpConfigBoolForKey:@"override_domain_with_default_one"]) {
+			linphone_address_set_domain(
+				addr, [[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"] UTF8String]);
+		}
+
+		if (transfer) {
+			char *caddr = linphone_address_as_string(addr);
+			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore), caddr);
+			ms_free(caddr);
+		} else {
+			LinphoneCall *call = linphone_core_invite_address_with_params(theLinphoneCore, addr, lcallParams);
+			if (call) {
+				// The LinphoneCallAppData object should be set on call creation with callback
+				// - (void)onCall:StateChanged:withMessage:. If not, we are in big trouble and expect it to crash
+				// We are NOT responsible for creating the AppData.
+				LinphoneCallAppData *data = (__bridge LinphoneCallAppData *)linphone_call_get_user_data(call);
+				if (data == nil) {
+					LOGE(@"New call instanciated but app data was not set. Expect it to crash.");
+					/* will be used later to notify user if video was not activated because of the linphone core*/
+				} else {
+					data->videoRequested = linphone_call_params_video_enabled(lcallParams);
+				}
+			}
+		}
+		linphone_address_destroy(addr);
+		linphone_call_params_destroy(lcallParams);
 	}
-	linphone_call_params_destroy(lcallParams);
 }
 
-#pragma mark - Push Notification Configuration Functions
+#pragma mark - Property Functions
 
 - (void)setPushNotificationToken:(NSData *)apushNotificationToken {
 	if (apushNotificationToken == pushNotificationToken) {
@@ -2180,9 +2140,9 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 
 - (void)setLogsEnabled:(BOOL)enabled {
 	if ([LinphoneManager isRunningTests]) {
-		NSLog(@"Running tests, forcing logs to Warning level");
+		NSLog(@"Running tests, forcing logs to MESSAGE level");
 		linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
-		linphone_core_set_log_level(ORTP_WARNING);
+		linphone_core_set_log_level(ORTP_MESSAGE);
 	} else {
 		if (enabled) {
 			NSLog(@"Enabling debug logs");
@@ -2387,6 +2347,11 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 - (void)inappReady:(NSNotification *)notif {
 	// Query our in-app server to retrieve InApp purchases
 	[_iapManager retrievePurchases];
+}
+
+- (void)removeAllAccounts {
+	linphone_core_clear_proxy_config([LinphoneManager getLc]);
+	linphone_core_clear_all_auth_info([LinphoneManager getLc]);
 }
 
 @end
