@@ -107,31 +107,34 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	// Update on show
 	LinphoneManager *mgr = [LinphoneManager instance];
-	LinphoneCore *lc = [LinphoneManager getLc];
-	LinphoneCall *call = linphone_core_get_current_call(lc);
-	LinphoneCallState state = (call != NULL) ? linphone_call_get_state(call) : 0;
-	[self callUpdate:call state:state];
+    if ([[mgr coreReady] boolValue])
+    {
+    	LinphoneCore *lc = [LinphoneManager getLc];
+    	LinphoneCall *call = linphone_core_get_current_call(lc);
+    	LinphoneCallState state = (call != NULL) ? linphone_call_get_state(call) : 0;
+    	[self callUpdate:call state:state];
 
-	if ([LinphoneManager runningOnIpad]) {
-		BOOL videoEnabled = linphone_core_video_enabled(lc);
-		BOOL previewPref = [mgr lpConfigBoolForKey:@"preview_preference"];
+    	if ([LinphoneManager runningOnIpad]) {
+    		BOOL videoEnabled = linphone_core_video_enabled(lc);
+    		BOOL previewPref = [mgr lpConfigBoolForKey:@"preview_preference"];
 
-		if (videoEnabled && previewPref) {
-			linphone_core_set_native_preview_window_id(lc, (__bridge void *)(videoPreview));
+    		if (videoEnabled && previewPref) {
+    			linphone_core_set_native_preview_window_id(lc, (__bridge void *)(videoPreview));
 
-			if (!linphone_core_video_preview_enabled(lc)) {
-				linphone_core_enable_video_preview(lc, TRUE);
-			}
+    			if (!linphone_core_video_preview_enabled(lc)) {
+    				linphone_core_enable_video_preview(lc, TRUE);
+    			}
 
-			[backgroundView setHidden:FALSE];
-			[videoCameraSwitch setHidden:FALSE];
-		} else {
-			linphone_core_set_native_preview_window_id(lc, NULL);
-			linphone_core_enable_video_preview(lc, FALSE);
-			[backgroundView setHidden:TRUE];
-			[videoCameraSwitch setHidden:TRUE];
-		}
-	}
+    			[backgroundView setHidden:FALSE];
+    			[videoCameraSwitch setHidden:FALSE];
+    		} else {
+    			linphone_core_set_native_preview_window_id(lc, NULL);
+    			linphone_core_enable_video_preview(lc, FALSE);
+    			[backgroundView setHidden:TRUE];
+    			[videoCameraSwitch setHidden:TRUE];
+    		}
+    	}
+    }
 
 	[addressField setText:@""];
 

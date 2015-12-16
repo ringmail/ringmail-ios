@@ -219,7 +219,7 @@ typedef struct _LinphoneManagerSounds {
 @property (readonly) BOOL wasRemoteProvisioned;
 @property (readonly) LpConfig *configDb;
 @property (readonly) InAppProductsManager *iapManager;
-@property(strong, nonatomic) NSMutableArray *fileTransferDelegates;
+@property (strong, nonatomic) NSMutableArray *fileTransferDelegates;
 @property (nonatomic, strong) RgChatManager *chatManager;
 @property (nonatomic, strong) RgContactManager *contactManager;
 @property (nonatomic, strong) NSString *chatTag;

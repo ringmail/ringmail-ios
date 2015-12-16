@@ -327,6 +327,9 @@ static LevelDB* theConfigDatabase = nil;
 {
     NSLog(@"RingMail Login Complete: %@", cred);
     //NSLog(@"RingMail Update Credentials: %@", cred);
+    //[[LinphoneManager instance] startLinphoneCore];
+    
+/*
     LinphoneCoreSettingsStore* settings = [[LinphoneCoreSettingsStore alloc] init];
     [settings transformLinphoneCoreToKeys];
     //NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
@@ -368,17 +371,19 @@ static LevelDB* theConfigDatabase = nil;
     }
     
     NSString *newSipUser = [cred objectForKey:@"sip_login"];
-    NSString *oldSipUser = [settings objectForKey:@"username_preference"];
+    //NSString *oldSipUser = [settings objectForKey:@"username_preference"];
     NSString *newSipPass = [cred objectForKey:@"sip_password"];
-    NSString *oldSipPass = [settings objectForKey:@"password_preference"];
-    if ((! [oldSipUser isEqualToString:newSipUser]) || (! [oldSipPass isEqualToString:newSipPass]))
-    {
+    //NSString *oldSipPass = [settings objectForKey:@"password_preference"];
+    //if ((! [oldSipUser isEqualToString:newSipUser]) || (! [oldSipPass isEqualToString:newSipPass]))
+    //{
         [settings setObject:newSipUser forKey:@"username_preference"];
         [settings setObject:newSipPass forKey:@"password_preference"];
         [settings setObject:[RgManager ringmailHostSIP] forKey:@"domain_preference"];
-    }
-    //NSLog(@"RingMail - New Settings: %@", [settings getSettings]);
+    //}
+    NSLog(@"RingMail - New Settings: %@", [settings getSettings]);
     [settings synchronize];
+ 
+ */
     
     LevelDB* cfg = [RgManager configDatabase];
     [cfg setObject:@"1" forKey:@"ringmail_verify_email"];

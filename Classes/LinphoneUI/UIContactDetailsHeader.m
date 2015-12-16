@@ -37,6 +37,8 @@
 @synthesize tableView;
 @synthesize contactDetailsDelegate;
 @synthesize popoverController;
+@synthesize rgImage;
+@synthesize rgInvite;
 
 #pragma mark - Lifecycle Functions
 
@@ -107,6 +109,20 @@
 		LOGW(@"Cannot update contact details header: null contact");
 		return;
 	}
+    
+    NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
+    BOOL hasRingMail = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
+    NSLog(@"RingMail: Contact ID: %@ - has rg:%d", contactID, hasRingMail);
+    if (hasRingMail)
+    {
+        [rgImage setHidden:NO];
+        [rgInvite setHidden:YES];
+    }
+    else
+    {
+        [rgImage setHidden:YES];
+        [rgInvite setHidden:NO];
+    }
 
 	// Avatar image
 	{
@@ -370,6 +386,11 @@
 		[self performSelector:@selector(updateModification) withObject:nil afterDelay:0.1];
 	}
 	return TRUE;
+}
+
+
+- (IBAction)onInvite:(id)event {
+    [[[LinphoneManager instance] contactManager] inviteToRingMail:contact];
 }
 
 @end

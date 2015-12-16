@@ -94,13 +94,20 @@
 	[callQualityImage setHidden:true];
 	[callSecurityImage setHidden:true];
 
-	// Update to default state
-	LinphoneProxyConfig *config = NULL;
-	linphone_core_get_default_proxy([LinphoneManager getLc], &config);
-	messagesUnreadCount =
-		lp_config_get_int(linphone_core_get_config([LinphoneManager getLc]), "app", "voice_mail_messages_count", 0);
+    if ([[[LinphoneManager instance] coreReady] boolValue])
+    {
+    	// Update to default state
+    	LinphoneProxyConfig *config = NULL;
+    	linphone_core_get_default_proxy([LinphoneManager getLc], &config);
+    	messagesUnreadCount =
+    		lp_config_get_int(linphone_core_get_config([LinphoneManager getLc]), "app", "voice_mail_messages_count", 0);
+       	[self proxyConfigUpdate:config];
+    }
+    else
+    {
+        messagesUnreadCount = 0;
+    }
 
-	[self proxyConfigUpdate:config];
 	[self updateVoicemail];
 }
 

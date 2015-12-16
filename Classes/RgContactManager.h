@@ -16,7 +16,7 @@
 #import "FMDatabaseQueue.h"
 #import "FMResultSet.h"
 
-@interface RgContactManager : NSObject {
+@interface RgContactManager : NSObject <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate> {
     @private
     ABAddressBookRef addressBook;
     NSDateFormatter *dateFormatter;
@@ -28,9 +28,11 @@
 - (NSArray*)getContactList:(BOOL)reload;
 - (NSDictionary *)getAddressBookStats:(NSArray*)contactList;
 - (NSArray*)getContactData:(NSArray*)contactList;
+- (void)inviteToRingMail:(ABRecordRef)contact;
 - (void)sendContactData;
 - (void)sendContactData:(NSArray*)contactList;
 - (void)dbUpdateEnabled:(NSArray *)rgUsers;
 - (NSDictionary*)dbGetRgContacts;
+- (BOOL)dbHasRingMail:(NSString*)contactID;
 
 @end
