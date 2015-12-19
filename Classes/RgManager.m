@@ -329,7 +329,6 @@ static LevelDB* theConfigDatabase = nil;
     //NSLog(@"RingMail Update Credentials: %@", cred);
     //[[LinphoneManager instance] startLinphoneCore];
     
-/*
     LinphoneCoreSettingsStore* settings = [[LinphoneCoreSettingsStore alloc] init];
     [settings transformLinphoneCoreToKeys];
     //NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
@@ -383,8 +382,6 @@ static LevelDB* theConfigDatabase = nil;
     NSLog(@"RingMail - New Settings: %@", [settings getSettings]);
     [settings synchronize];
  
- */
-    
     LevelDB* cfg = [RgManager configDatabase];
     [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
     [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
