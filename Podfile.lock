@@ -41,8 +41,10 @@ PODS:
   - NYXImagesKit (2.3)
   - Objective-LevelDB (2.1.4):
     - leveldb-library (~> 1.18)
+  - OpenCV (3.0.0)
   - RegexKitLite (4.0)
   - SVWebViewController (HEAD based on 1.0)
+  - TesseractOCRiOS (4.0.0)
   - XMPPFramework (3.6.6):
     - XMPPFramework/Authentication (= 3.6.6)
     - XMPPFramework/BandwidthMonitor (= 3.6.6)
@@ -195,8 +197,10 @@ DEPENDENCIES:
   - NSHash (~> 1.0.2)
   - NYXImagesKit
   - Objective-LevelDB
+  - OpenCV
   - RegexKitLite
   - SVWebViewController (HEAD)
+  - TesseractOCRiOS (~> 4.0.0)
   - XMPPFramework
 
 SPEC CHECKSUMS:
@@ -212,8 +216,10 @@ SPEC CHECKSUMS:
   NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   Objective-LevelDB: 016f27f24c9976527938a40f043b585e82c27cfc
+  OpenCV: be07c02f0d8f125f1d40d261e66a66cb66ece3b3
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
+  TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
   XMPPFramework: b06c210b0b71c08aa41a646bffd2021fa43bb43b
 
 COCOAPODS: 0.39.0

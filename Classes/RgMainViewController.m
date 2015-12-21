@@ -20,6 +20,7 @@
 #import <AVFoundation/AVAudioSession.h>
 #import <AudioToolbox/AudioToolbox.h>
 
+#import "RgScanViewController.h"
 #import "RgMainViewController.h"
 #import "IncallViewController.h"
 #import "DTAlertView.h"
@@ -436,6 +437,14 @@ static UICompositeViewDescription *compositeDescription = nil;
         callButton.hidden = NO;
         goButton.hidden = YES;
 	}
+}
+
+- (IBAction)onScan:(id)sender {
+    RgScanViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgScanViewController compositeViewDescription] push:TRUE], RgScanViewController);
+    if (controller != nil)
+    {
+        [controller beginScan];
+    }
 }
 
 @end

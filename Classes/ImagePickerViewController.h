@@ -35,5 +35,9 @@
 @property(nonatomic,copy)      NSArray                              *mediaTypes;
 @property(nonatomic)           BOOL                                  allowsEditing;
 @property(nonatomic, readonly) UIPopoverController *popoverController;
+@property(nonatomic, strong)   UIView *overlayView;
+
+- (CGSize)getCaptureNavSize;
+- (CGSize)getCaptureViewSize;
 
 @end

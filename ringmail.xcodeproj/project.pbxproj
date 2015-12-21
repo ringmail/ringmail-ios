@@ -139,6 +139,12 @@
 		70E542F513E147EB002BA2C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F413E147EB002BA2C0 /* QuartzCore.framework */; };
 		C401E5DC1B95E9ED006C915A /* RgChatModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E5DB1B95E9ED006C915A /* RgChatModelData.m */; };
 		C401E5E61B960B35006C915A /* RgChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E5E51B960B35006C915A /* RgChatManager.m */; };
+		C402BEEF1C2616A60076B60C /* RgScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C402BEEE1C2616A60076B60C /* RgScanViewController.m */; };
+		C402BEF21C2616B20076B60C /* RgScanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C402BEF01C2616B20076B60C /* RgScanViewController.xib */; };
+		C402BEF51C261D240076B60C /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = C402BEF41C261D240076B60C /* UIImage+OpenCV.mm */; };
+		C402BEFF1C261ED70076B60C /* ImageProcessingImplementation.mm in Sources */ = {isa = PBXBuildFile; fileRef = C402BEFC1C261ED70076B60C /* ImageProcessingImplementation.mm */; };
+		C402BF001C261ED70076B60C /* ImageProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C402BEFD1C261ED70076B60C /* ImageProcessor.cpp */; };
+		C402BF031C2623E10076B60C /* UIImage+operation.m in Sources */ = {isa = PBXBuildFile; fileRef = C402BF021C2623E10076B60C /* UIImage+operation.m */; };
 		C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B95261C10E0A900253BB7 /* RgContactManager.m */; };
 		C41EF3111B8BCFD40085E75B /* RgMainController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */; };
 		C41EF3121B8BCFD40085E75B /* RgMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */; };
@@ -1043,6 +1049,18 @@
 		C401E5DB1B95E9ED006C915A /* RgChatModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatModelData.m; sourceTree = "<group>"; };
 		C401E5E41B960B35006C915A /* RgChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgChatManager.h; sourceTree = "<group>"; };
 		C401E5E51B960B35006C915A /* RgChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatManager.m; sourceTree = "<group>"; };
+		C402BEED1C26169A0076B60C /* RgScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgScanViewController.h; sourceTree = "<group>"; };
+		C402BEEE1C2616A60076B60C /* RgScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgScanViewController.m; sourceTree = "<group>"; };
+		C402BEF11C2616B20076B60C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RgScanViewController.xib; sourceTree = "<group>"; };
+		C402BEF31C261D240076B60C /* UIImage+OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+OpenCV.h"; sourceTree = "<group>"; };
+		C402BEF41C261D240076B60C /* UIImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+OpenCV.mm"; sourceTree = "<group>"; };
+		C402BEFA1C261ED60076B60C /* ImageProcessingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessingProtocol.h; sourceTree = "<group>"; };
+		C402BEFB1C261ED70076B60C /* ImageProcessingImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessingImplementation.h; sourceTree = "<group>"; };
+		C402BEFC1C261ED70076B60C /* ImageProcessingImplementation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageProcessingImplementation.mm; sourceTree = "<group>"; };
+		C402BEFD1C261ED70076B60C /* ImageProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageProcessor.cpp; sourceTree = "<group>"; };
+		C402BEFE1C261ED70076B60C /* ImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessor.h; sourceTree = "<group>"; };
+		C402BF011C2623E10076B60C /* UIImage+operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+operation.h"; sourceTree = "<group>"; };
+		C402BF021C2623E10076B60C /* UIImage+operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+operation.m"; sourceTree = "<group>"; };
 		C41B95251C10E0A900253BB7 /* RgContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgContactManager.h; sourceTree = "<group>"; };
 		C41B95261C10E0A900253BB7 /* RgContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgContactManager.m; sourceTree = "<group>"; };
 		C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RgMainController~ipad.xib"; sourceTree = "<group>"; };
@@ -1937,6 +1955,18 @@
 				C4BC49461BF9681700826264 /* RgChatQuestionInputCell.h */,
 				C4BC49471BF9726000826264 /* RgChatQuestionInputCell.m */,
 				C4BC49441BF9628800826264 /* RgChatQuestionInputCell.xib */,
+				C402BEED1C26169A0076B60C /* RgScanViewController.h */,
+				C402BEEE1C2616A60076B60C /* RgScanViewController.m */,
+				C402BEF01C2616B20076B60C /* RgScanViewController.xib */,
+				C402BEF31C261D240076B60C /* UIImage+OpenCV.h */,
+				C402BEF41C261D240076B60C /* UIImage+OpenCV.mm */,
+				C402BF011C2623E10076B60C /* UIImage+operation.h */,
+				C402BF021C2623E10076B60C /* UIImage+operation.m */,
+				C402BEFA1C261ED60076B60C /* ImageProcessingProtocol.h */,
+				C402BEFB1C261ED70076B60C /* ImageProcessingImplementation.h */,
+				C402BEFC1C261ED70076B60C /* ImageProcessingImplementation.mm */,
+				C402BEFD1C261ED70076B60C /* ImageProcessor.cpp */,
+				C402BEFE1C261ED70076B60C /* ImageProcessor.h */,
 				C46997B71BC1B82E007B3658 /* AudioSessionManager.h */,
 				C46997B81BC1B82E007B3658 /* AudioSessionManager.m */,
 				22E0A81D111C44E100B04932 /* AboutViewController.h */,
@@ -3455,6 +3485,7 @@
 				D38187CD15FE346700C3EDCA /* HistoryDetailsViewController.xib in Resources */,
 				D3F9A9DB15AEEB940045320F /* history_notification.png in Resources */,
 				D3E84F1E15B00F4100420DAC /* cancel_default.png in Resources */,
+				C402BEF21C2616B20076B60C /* RgScanViewController.xib in Resources */,
 				D3E84F2015B00F4100420DAC /* cancel_over.png in Resources */,
 				D3E84F2615B00F4100420DAC /* dialer_alt_back_default.png in Resources */,
 				D3E84F2815B00F4100420DAC /* dialer_alt_back_over.png in Resources */,
@@ -3861,6 +3892,7 @@
 				631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */,
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
 				2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */,
+				C402BEF51C261D240076B60C /* UIImage+OpenCV.mm in Sources */,
 				2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */,
 				630CF5571AF7CE1500539F7A /* UITextField+DoneButton.m in Sources */,
 				2214EBF312F86360002A5394 /* UIMicroButton.m in Sources */,
@@ -3901,6 +3933,7 @@
 				C4BC49481BF9726000826264 /* RgChatQuestionInputCell.m in Sources */,
 				63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */,
 				C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */,
+				C402BEEF1C2616A60076B60C /* RgScanViewController.m in Sources */,
 				D3EA53FD159850E80037DC6B /* LinphoneManager.m in Sources */,
 				63B81A0E1B57DA33009604A6 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				D3EA540D1598528B0037DC6B /* ChatTableViewController.m in Sources */,
@@ -3952,6 +3985,8 @@
 				D3807FFA15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
 				631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */,
 				C4D0BC6B1BB4F0A400D1728A /* NSString+MD5.m in Sources */,
+				C402BEFF1C261ED70076B60C /* ImageProcessingImplementation.mm in Sources */,
+				C402BF001C261ED70076B60C /* ImageProcessor.cpp in Sources */,
 				C401E5DC1B95E9ED006C915A /* RgChatModelData.m in Sources */,
 				D3807FFC15C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
 				D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */,
@@ -3965,6 +4000,7 @@
 				D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */,
 				D3ED401B1602172200BF332B /* HPTextViewInternal.m in Sources */,
 				D37EE162160377D7003608A6 /* DTActionSheet.m in Sources */,
+				C402BF031C2623E10076B60C /* UIImage+operation.m in Sources */,
 				D35E91F4160CA10B0023116B /* UILinphoneTextField.m in Sources */,
 				D35E91F8160CA4FF0023116B /* UILinphoneButton.m in Sources */,
 				D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */,
@@ -4120,6 +4156,14 @@
 				F0AF07021A24BA770086C9C1 /* ar */,
 			);
 			name = UIChatCell.xib;
+			sourceTree = "<group>";
+		};
+		C402BEF01C2616B20076B60C /* RgScanViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C402BEF11C2616B20076B60C /* Base */,
+			);
+			name = RgScanViewController.xib;
 			sourceTree = "<group>";
 		};
 		C4BC492A1BF9474000826264 /* RgChatQuestionSelect.xib */ = {
@@ -4432,7 +4476,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4497,6 +4540,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: DYL, LLC (3V7D3ULU9N)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -4534,7 +4578,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -4597,6 +4640,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -4633,7 +4677,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -4696,6 +4739,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: DYL, LLC (3V7D3ULU9N)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -4733,7 +4777,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -4795,6 +4838,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

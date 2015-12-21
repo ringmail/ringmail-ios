@@ -28,6 +28,7 @@
 @synthesize mediaTypes;
 @synthesize allowsEditing;
 @synthesize popoverController;
+@synthesize overlayView;
 
 #pragma mark - Lifecycle Functions
 
@@ -38,6 +39,7 @@
 		if ([LinphoneManager runningOnIpad]) {
 			popoverController = [[UIPopoverController alloc] initWithContentViewController:pickerController];
 		}
+
 	}
 	return self;
 }
@@ -74,6 +76,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	} else {
 		[popoverController setDelegate:self];
 	}
+
 	[pickerController setDelegate:self];
 }
 
@@ -123,6 +126,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 	pickerController.mediaTypes = amediaTypes;
 }
 
+- (UIView*)overlayView {
+    return pickerController.cameraOverlayView;
+}
+
+- (void)setOverlayView:(UIView *)overlay
+{
+    pickerController.cameraOverlayView = overlay;
+}
+
 #pragma mark -
 
 - (void)dismiss {
@@ -162,6 +174,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[[UIApplication sharedApplication]
 			setStatusBarStyle:UIStatusBarStyleLightContent]; // Fix UIImagePickerController status bar style change
 	}
+}
+
+#pragma mark - RingMail
+
+-(CGSize)getCaptureViewSize
+{
+    return pickerController.view.bounds.size;
+}
+
+-(CGSize)getCaptureNavSize
+{
+    return pickerController.navigationBar.bounds.size;
 }
 
 @end

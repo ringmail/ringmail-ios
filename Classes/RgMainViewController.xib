@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgMainViewController">
@@ -19,16 +19,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo1.png" id="2cT-rw-viR">
-                    <rect key="frame" x="40" y="46" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_input1.png" id="Z13-ol-6Ow">
-                    <rect key="frame" x="37" y="166" width="246" height="39"/>
+                    <rect key="frame" x="8" y="8" width="304" height="39"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
-                    <rect key="frame" x="55" y="173" width="210" height="26"/>
+                    <rect key="frame" x="55" y="15" width="210" height="26"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <accessibility key="accessibilityConfiguration" label="Enter a address"/>
@@ -41,11 +37,12 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="224" userLabel="goButton" customClass="UICallButton">
-                    <rect key="frame" x="60" y="229" width="200" height="40"/>
+                    <rect key="frame" x="252" y="49" width="60" height="28"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                    <state key="normal" title="Go" backgroundImage="ringmail_button2.png">
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
+                    <state key="normal" title="Go">
+                        <color key="titleColor" red="0.023529411760000001" green="0.1450980392" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="disabled" image="call_disabled.png"/>
@@ -54,11 +51,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="kRY-QU-HcA" userLabel="messageButton" customClass="UIMessageButton">
-                    <rect key="frame" x="60" y="291" width="200" height="40"/>
+                    <rect key="frame" x="195" y="49" width="60" height="28"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                    <state key="normal" title="Send Message" backgroundImage="ringmail_button2.png">
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
+                    <state key="normal" title="Chat">
+                        <color key="titleColor" red="0.023529411760000001" green="0.1450980392" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="disabled" image="call_disabled.png"/>
@@ -67,16 +65,31 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="EWA-nB-tDT" userLabel="callButton" customClass="UICallButton">
-                    <rect key="frame" x="60" y="229" width="200" height="40"/>
+                    <rect key="frame" x="252" y="49" width="60" height="28"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                    <state key="normal" title="Call" backgroundImage="ringmail_button2.png">
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
+                    <state key="normal" title="Call">
+                        <color key="titleColor" red="0.023529411760000001" green="0.1450980392" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="disabled" image="call_disabled.png"/>
                     <connections>
                         <outlet property="addressField" destination="4" id="tLL-tB-jPU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Zpr-Mg-asO" userLabel="scanButton">
+                    <rect key="frame" x="8" y="44" width="60" height="37"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Call"/>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
+                    <state key="normal" title="Scan">
+                        <color key="titleColor" red="0.023529411760000001" green="0.1450980392" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="disabled" image="call_disabled.png"/>
+                    <connections>
+                        <action selector="onScan:" destination="-1" eventType="touchUpInside" id="i0Q-uv-UiZ"/>
                     </connections>
                 </button>
             </subviews>
@@ -85,16 +98,18 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="341" y="331"/>
         </view>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="04a-KJ-8N0">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+        </collectionViewCell>
     </objects>
     <resources>
         <image name="call_disabled.png" width="214" height="138"/>
-        <image name="ringmail_button2.png" width="178" height="38"/>
         <image name="ringmail_input1.png" width="1068" height="145"/>
-        <image name="ringmail_logo1.png" width="377" height="185"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
