@@ -10,7 +10,7 @@
 @implementation RgChatModelData
 
 @synthesize chatRoom;
-@synthesize chatError;
+@synthesize lastSent;
 
 - (instancetype)init
 {
@@ -32,6 +32,7 @@
         self.messageData = [NSMutableArray array];
         self.messageUUIDs = [NSMutableArray array];
         self.messageRef = [NSMutableDictionary dictionary];
+        self.lastSent = nil;
         
         /**
          *  Create message bubble images objects.
@@ -85,6 +86,11 @@
             if (ct > 0)
             {
                 NSLog(@"Add messageRef: %@", uuid);
+                if (self.lastSent != nil && [self.lastSent intValue] == -1)
+                {
+                    self.lastSent = [NSNumber numberWithUnsignedLong:[self.messages count]];
+                }
+                
                 [self.messageRef setObject:[NSNumber numberWithInteger:[self.messages count]] forKey:uuid];
                 [self.messages addObject:msgs[0]];
                 [self.messageData addObject:msgData[0]];
@@ -163,11 +169,20 @@
         {
             sender = kRgSelf;
             senderName = kRgSelfName;
+            if (! uuid)
+            {
+                lastSent = [NSNumber numberWithUnsignedLong:[msgs count]];
+            }
+            else
+            {
+                lastSent = [NSNumber numberWithInt:-1];
+            }
         }
         else
         {
             sender = self.chatRoom;
             senderName = displayName;
+            lastSent = nil; // No need for status if they reply
         }
         [msgUUIDs addObject:[msgdata objectForKey:@"uuid"]];
         NSString *type = [msgdata objectForKey:@"type"];
@@ -213,14 +228,6 @@
         }
     }
     
-    // TODO: replace with something better
-    if (chatError != nil && ![chatError isEqualToString:@""])
-    {
-        [msgs addObject:[[JSQMessage alloc] initWithSenderId:@"RingMail"
-                                           senderDisplayName:@"RingMail"
-                                                        date:[NSDate date] // TODO: correct error date
-                                                        text:[NSString stringWithFormat:@"Error: %@", chatError]]];
-    }
     return @{
          @"messages":msgs,
          @"data":msgData,

@@ -82,7 +82,10 @@
 - (void)updateMessages:(NSString*)uuid
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.chatData updateMessage:uuid];
+        if (uuid)
+        {
+            [self.chatData updateMessage:uuid];
+        }
         [self.collectionView reloadData];
     });
 }
@@ -198,7 +201,6 @@
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
         NSString *uuid = [mgr sendMessageTo:_chatRoom body:text];
         [self.chatData loadMessages:uuid];
-        [self.chatData setChatError:@""];
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
         [self finishSendingMessageAnimated:YES];
     }
@@ -391,8 +393,29 @@
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[NSAttributedString alloc] initWithString:@"Result"];
-    //return nil;
+    if (self.chatData.lastSent != nil)
+    {
+        if (indexPath.item == [self.chatData.lastSent longValue])
+        {
+            RgChatManager* mgr = [[LinphoneManager instance] chatManager];
+            NSString *uuid = [self.chatData.messageUUIDs objectAtIndex:indexPath.item];
+            NSString *status = [mgr dbGetMessageStatusByUUID:uuid];
+            if ([status isEqualToString:@"sending"])
+            {
+                status = @"Sending";
+            }
+            else if ([status isEqualToString:@"sent"])
+            {
+                status = @"Sent";
+            }
+            else if ([status isEqualToString:@"received"])
+            {
+                status = @"Received";
+            }
+            return [[NSAttributedString alloc] initWithString:status];
+        }
+    }
+    return nil;
 }
 
 #pragma mark - UICollectionView DataSource
@@ -427,10 +450,12 @@
     
     if (!msg.isMediaMessage) {
         
-        // Default
-        if ([msg.senderId isEqualToString:self.senderId])
+        if ([msg.senderId isEqualToString:self.senderId]) // Outbound
         {
             cell.textView.textColor = [UIColor blackColor];
+            [cell.cellBottomLabel setTextInsets:UIEdgeInsetsMake(0, 0, 0, 10.0f)];
+            cell.cellBottomLabel.font = [UIFont systemFontOfSize:12.0f];
+            cell.cellBottomLabel.textColor = [UIColor grayColor];
         }
         else
         {
@@ -520,6 +545,13 @@
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.chatData.lastSent != nil)
+    {
+        if (indexPath.item == [self.chatData.lastSent longValue])
+        {
+            return 20.0f;
+        }
+    }
     return 0.0f;
 }
 

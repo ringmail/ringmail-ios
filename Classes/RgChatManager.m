@@ -430,6 +430,14 @@
     {
         NSString* uuid = [[xmppMessage attributeForName:@"id"] stringValue];
         [self dbUpdateMessageStatus:@"sent" forUUID:uuid];
+        NSString *to = [[xmppMessage attributeForName:@"to"] stringValue];
+        NSString *chatTo = [RgManager addressFromXMPP:to];
+        NSDictionary *dict = @{
+                               @"tag": chatTo,
+                               @"uuid": uuid,
+                               @"status": @"sent",
+                               };
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
     }
 }
 
@@ -537,6 +545,14 @@
             {
                 NSString* uuid = [[received attributeForName:@"id"] stringValue];
                 [self dbUpdateMessageStatus:@"received" forUUID:uuid];
+                NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
+                NSString *chatFrom = [RgManager addressFromXMPP:from];
+                NSDictionary *dict = @{
+                                       @"tag": chatFrom,
+                                       @"uuid": uuid,
+                                       @"status": @"received",
+                                       };
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
             }
         }
     }
@@ -894,6 +910,22 @@
         if ([rs next])
         {
             result = [rs dataForColumnIndex:0];
+        }
+        [rs close];
+    }];
+    [dbq close];
+    return result;
+}
+
+- (NSString *)dbGetMessageStatusByUUID:(NSString*)uuid
+{
+    FMDatabaseQueue *dbq = [self database];
+    __block NSString* result = nil;
+    [dbq inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT msg_status FROM chat WHERE msg_uuid = ?", uuid];
+        if ([rs next])
+        {
+            result = [rs stringForColumnIndex:0];
         }
         [rs close];
     }];
