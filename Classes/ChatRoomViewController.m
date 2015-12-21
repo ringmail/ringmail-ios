@@ -316,7 +316,14 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
     NSString *room = [[notif userInfo] objectForKey:@"tag"];
     if ([room isEqualToString:chatViewController.chatRoom])
     {
-        [chatViewController updateMessages:[[notif userInfo] objectForKey:@"uuid"]];
+        if ([[notif userInfo] objectForKey:@"status"])
+        {
+            [chatViewController updateMessages:nil]; // just refresh the current screen
+        }
+        else
+        {
+            [chatViewController updateMessages:[[notif userInfo] objectForKey:@"uuid"]];
+        }
     }
 }
 
