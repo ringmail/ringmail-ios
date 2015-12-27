@@ -16,6 +16,7 @@ extern NSString *const kRgTextReceived;
 extern NSString *const kRgTextSent;
 extern NSString *const kRgTextUpdate;
 extern NSString *const kRgContactsUpdated;
+extern NSString *const kRgSetAddress;
 
 extern NSString *const kRgSelf;
 extern NSString *const kRgSelfName;

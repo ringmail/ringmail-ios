@@ -159,6 +159,7 @@
 		C41EF33C1B8CF1200085E75B /* ringmail_icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */; };
 		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
 		C422AD321B99F1A900D1F1CD /* RgNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = C422AD311B99F1A900D1F1CD /* RgNetwork.m */; };
+		C42509621C27E30C00BEC5DE /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = C425095A1C27D62B00BEC5DE /* tessdata */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
 		C44E7E091BCF0D8700129E71 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44E7E081BCF0D8700129E71 /* PushKit.framework */; };
 		C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C46997AC1BC19168007B3658 /* incall_buttons_background.png */; };
@@ -815,7 +816,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
-			dstSubfolderSpec = 11;
+			dstSubfolderSpec = 7;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1078,6 +1079,7 @@
 		C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_120.png; path = Resources/ringmail_icon_120.png; sourceTree = "<group>"; };
 		C422AD301B99F1A900D1F1CD /* RgNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgNetwork.h; sourceTree = "<group>"; };
 		C422AD311B99F1A900D1F1CD /* RgNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgNetwork.m; sourceTree = "<group>"; };
+		C425095A1C27D62B00BEC5DE /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
 		C44E7E081BCF0D8700129E71 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
@@ -2207,6 +2209,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C425095A1C27D62B00BEC5DE /* tessdata */,
 				C41EF3241B8CEF4C0085E75B /* Images.xcassets */,
 				D3C714B2159DB84400705B8E /* hold.wav */,
 				F0B89C2318DC90850050B60E /* images */,
@@ -3239,6 +3242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C42509621C27E30C00BEC5DE /* tessdata in Resources */,
 				22F254811073D99800AC9B3F /* ringback.wav in Resources */,
 				2237D4091084D7A9001383EE /* ring.wav in Resources */,
 				636316D11A1DEBCB0009B839 /* AboutViewController.xib in Resources */,

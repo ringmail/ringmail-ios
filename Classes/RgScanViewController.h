@@ -18,18 +18,21 @@
  */ 
 
 #import <UIKit/UIKit.h>
+#import <TesseractOCR/TesseractOCR.h>
 
+#import "RegexKitLite/RegexKitLite.h"
 #import "UICompositeViewController.h"
 #import "ImageViewController.h"
-#import "ImagePickerViewController.h"
+#import "CRMediaPickerController.h"
 
-@interface RgScanViewController : UIViewController<UICompositeViewDelegate, ImagePickerDelegate> {
+@interface RgScanViewController : UIViewController<UICompositeViewDelegate, CRMediaPickerControllerDelegate> {
 	
 }
 
 @property (nonatomic, strong) IBOutlet UIImageScrollView *scrollView;
-@property (nonatomic, strong) UIImage  *image;
 @property (nonatomic, strong) IBOutlet UIButton *backButton;
+@property (nonatomic, strong) UIImage  *image;
+@property (nonatomic, strong) CRMediaPickerController *mediaPickerController;
 
 - (IBAction)onBackClick:(id)sender;
 - (void)beginScan;

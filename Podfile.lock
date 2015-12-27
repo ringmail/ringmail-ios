@@ -26,6 +26,7 @@ PODS:
   - CocoaLumberjack/Core (1.9.2)
   - CocoaLumberjack/Extensions (1.9.2):
     - CocoaLumberjack/Core
+  - CRMediaPickerController (0.0.1)
   - DXTableViewModel (0.1.0)
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
@@ -190,6 +191,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - CRMediaPickerController
   - DXTableViewModel (~> 0.1.0)
   - FMDB
   - JSQMessagesViewController (HEAD)
@@ -207,6 +209,7 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
+  CRMediaPickerController: 65e1f968dea26a7759bb1fb4a1518f5b8cd6fba9
   DXTableViewModel: 27583f277f94e3ad5ffb0575cd84c39918319aa6
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5

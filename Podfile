@@ -17,5 +17,6 @@ target 'RingMail' do
   pod 'NSHash', '~> 1.0.2'
   pod 'TesseractOCRiOS', '~> 4.0.0'
   pod 'OpenCV'
+  pod 'CRMediaPickerController'
 end
 

@@ -18,6 +18,7 @@ NSString *const kRgTextReceived = @"RgTextReceived";
 NSString *const kRgTextSent = @"RgTextSent";
 NSString *const kRgTextUpdate = @"RgTextUpdate";
 NSString *const kRgContactsUpdated = @"RgContactsUpdated";
+NSString *const kRgSetAddress = @"RgSetAddress";
 
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";

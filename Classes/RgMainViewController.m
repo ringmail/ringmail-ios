@@ -99,7 +99,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(coreUpdateEvent:)
 												 name:kLinphoneCoreUpdate
 											   object:nil];
-
+    
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
 	// xcode would result in the callbutton being disabled all the time.
@@ -137,8 +137,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     	}
     }
 
-	[addressField setText:@""];
-
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_6_0 // attributed string only available since iOS6
 	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
 		// fix placeholder bar color in iOS7
@@ -158,11 +156,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
+    
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
+	[addressField setText:@""];
 	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
 
 	if ([LinphoneManager runningOnIpad]) {
@@ -171,10 +171,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[videoCameraSwitch setHidden:FALSE];
 		}
 	}
+    
+  	[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(setAddressEvent:)
+                                             name:kRgSetAddress
+                                           object:nil];
 }
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSetAddress object:nil];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -221,6 +227,25 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[videoCameraSwitch setHidden:TRUE];
 		}
 	}
+}
+
+- (void)setAddressEvent:(NSNotification *)notif
+{
+    NSString *newAddress = [notif.userInfo objectForKey:@"address"];
+    NSLog(@"RingMail - Set Address Event: %@", newAddress);
+    [addressField setText:newAddress];
+    if ([[newAddress substringToIndex:1] isEqualToString:@"#"])
+    {
+        messageButton.hidden = YES;
+        callButton.hidden = YES;
+        goButton.hidden = NO;
+    }
+    else
+    {
+        messageButton.hidden = NO;
+        callButton.hidden = NO;
+        goButton.hidden = YES;
+    }
 }
 
 #pragma mark - Debug Functions
@@ -315,6 +340,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark -
 
 - (void)callUpdate:(LinphoneCall *)call state:(LinphoneCallState)state {
+    //NSLog(@"RingMail: %s", __PRETTY_FUNCTION__);
+    
 	LinphoneCore *lc = [LinphoneManager getLc];
 	if (linphone_core_get_calls_nb(lc) > 0) {
 		if (transferMode) {
@@ -324,12 +351,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[addCallButton setHidden:false];
 			[transferButton setHidden:true];
 		}
-		[callButton setHidden:true];
+		//[callButton setHidden:true];
 		[backButton setHidden:false];
 		[addContactButton setHidden:true];
 	} else {
 		[addCallButton setHidden:true];
-		[callButton setHidden:false];
+		//[callButton setHidden:false];
 		[backButton setHidden:true];
 		[addContactButton setHidden:false];
 		[transferButton setHidden:true];
