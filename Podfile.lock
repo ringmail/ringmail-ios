@@ -42,6 +42,7 @@ PODS:
   - NYXImagesKit (2.3)
   - Objective-LevelDB (2.1.4):
     - leveldb-library (~> 1.18)
+  - ObjectiveSugar (1.1.0)
   - OpenCV (3.0.0)
   - RegexKitLite (4.0)
   - SVWebViewController (HEAD based on 1.0)
@@ -199,6 +200,7 @@ DEPENDENCIES:
   - NSHash (~> 1.0.2)
   - NYXImagesKit
   - Objective-LevelDB
+  - ObjectiveSugar
   - OpenCV
   - RegexKitLite
   - SVWebViewController (HEAD)
@@ -219,6 +221,7 @@ SPEC CHECKSUMS:
   NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   Objective-LevelDB: 016f27f24c9976527938a40f043b585e82c27cfc
+  ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OpenCV: be07c02f0d8f125f1d40d261e66a66cb66ece3b3
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901

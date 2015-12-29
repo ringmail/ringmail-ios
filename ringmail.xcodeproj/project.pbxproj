@@ -162,6 +162,10 @@
 		C42509621C27E30C00BEC5DE /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = C425095A1C27D62B00BEC5DE /* tessdata */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
 		C44E7E091BCF0D8700129E71 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44E7E081BCF0D8700129E71 /* PushKit.framework */; };
+		C44F5DFA1C307587008E4F38 /* RgMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F5DF91C307587008E4F38 /* RgMainTableViewController.m */; };
+		C44F5E021C307B56008E4F38 /* RgMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C44F5E011C307B56008E4F38 /* RgMainCell.xib */; };
+		C44F5E051C307B92008E4F38 /* RgMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F5E041C307B92008E4F38 /* RgMainCell.m */; };
+		C44F5E091C31E341008E4F38 /* NoteSQL.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F5E081C31E341008E4F38 /* NoteSQL.m */; };
 		C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C46997AC1BC19168007B3658 /* incall_buttons_background.png */; };
 		C46997B61BC1A7FB007B3658 /* libvo-amrwbenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */; };
 		C46997B91BC1B82E007B3658 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46997B81BC1B82E007B3658 /* AudioSessionManager.m */; };
@@ -1083,6 +1087,13 @@
 		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
 		C44E7E081BCF0D8700129E71 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
+		C44F5DF91C307587008E4F38 /* RgMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMainTableViewController.m; sourceTree = "<group>"; };
+		C44F5E001C307593008E4F38 /* RgMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMainTableViewController.h; sourceTree = "<group>"; };
+		C44F5E011C307B56008E4F38 /* RgMainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgMainCell.xib; sourceTree = "<group>"; };
+		C44F5E041C307B92008E4F38 /* RgMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMainCell.m; sourceTree = "<group>"; };
+		C44F5E061C307BA9008E4F38 /* RgMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RgMainCell.h; path = LinphoneUI/RgMainCell.h; sourceTree = "<group>"; };
+		C44F5E071C31E341008E4F38 /* NoteSQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteSQL.h; sourceTree = "<group>"; };
+		C44F5E081C31E341008E4F38 /* NoteSQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteSQL.m; sourceTree = "<group>"; };
 		C46997AC1BC19168007B3658 /* incall_buttons_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incall_buttons_background.png; path = Resources/incall_buttons_background.png; sourceTree = "<group>"; };
 		C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libvo-amrwbenc.a"; path = "liblinphone-sdk/apple-darwin/lib/libvo-amrwbenc.a"; sourceTree = "<group>"; };
 		C46997B71BC1B82E007B3658 /* AudioSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSessionManager.h; sourceTree = "<group>"; };
@@ -1931,6 +1942,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C44F5E031C307B5E008E4F38 /* RgElements */,
 				C4D999501B96910A003CC323 /* RgManager.h */,
 				C4D999511B96910A003CC323 /* RgManager.m */,
 				C422AD301B99F1A900D1F1CD /* RgNetwork.h */,
@@ -1941,6 +1953,8 @@
 				C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */,
 				C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */,
 				C41EF3101B8BCFD40085E75B /* RgMainViewController.xib */,
+				C44F5E001C307593008E4F38 /* RgMainTableViewController.h */,
+				C44F5DF91C307587008E4F38 /* RgMainTableViewController.m */,
 				C401E5E41B960B35006C915A /* RgChatManager.h */,
 				C401E5E51B960B35006C915A /* RgChatManager.m */,
 				C431598A1B95354C001A795E /* RgMessagesViewController.h */,
@@ -2408,6 +2422,18 @@
 			);
 			name = TPKeyboardAvoiding;
 			path = Utils/TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
+		C44F5E031C307B5E008E4F38 /* RgElements */ = {
+			isa = PBXGroup;
+			children = (
+				C44F5E061C307BA9008E4F38 /* RgMainCell.h */,
+				C44F5E041C307B92008E4F38 /* RgMainCell.m */,
+				C44F5E011C307B56008E4F38 /* RgMainCell.xib */,
+				C44F5E071C31E341008E4F38 /* NoteSQL.h */,
+				C44F5E081C31E341008E4F38 /* NoteSQL.m */,
+			);
+			name = RgElements;
 			sourceTree = "<group>";
 		};
 		D326483415887D4400930C67 /* Utils */ = {
@@ -3785,6 +3811,7 @@
 				15AF3C8C16F37A5500FC52EC /* route_speaker_on_default.png in Resources */,
 				15AF3C9816F37A5D00FC52EC /* routes_default.png in Resources */,
 				15AF3C9A16F37A5D00FC52EC /* routes_disabled.png in Resources */,
+				C44F5E021C307B56008E4F38 /* RgMainCell.xib in Resources */,
 				15AF3C9C16F37A5D00FC52EC /* routes_over.png in Resources */,
 				15AF3C9E16F37A5D00FC52EC /* routes_selected.png in Resources */,
 				1599105316F746B2007BF52B /* route_bluetooth_off_default_landscape.png in Resources */,
@@ -3942,6 +3969,7 @@
 				63B81A0E1B57DA33009604A6 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				D3EA540D1598528B0037DC6B /* ChatTableViewController.m in Sources */,
 				D3EA5411159853750037DC6B /* UIChatCell.m in Sources */,
+				C44F5E051C307B92008E4F38 /* RgMainCell.m in Sources */,
 				D3F26BF115986B73005F9CAB /* IncomingCallViewController.m in Sources */,
 				D31B4B21159876C0002E6C72 /* UICompositeViewController.m in Sources */,
 				D31AAF5E159B3919002C6B02 /* InCallTableViewController.m in Sources */,
@@ -3957,6 +3985,7 @@
 				D3A8BB7015A6C7D500F96BE5 /* UIChatRoomCell.m in Sources */,
 				D3128FE115AABC7E00A2147A /* ContactDetailsViewController.m in Sources */,
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,
+				C44F5E091C31E341008E4F38 /* NoteSQL.m in Sources */,
 				C41EF3121B8BCFD40085E75B /* RgMainViewController.m in Sources */,
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
 				636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */,
@@ -3975,6 +4004,7 @@
 				C4BC49361BF9477B00826264 /* RgChatQuestionSelect.m in Sources */,
 				C4D999521B96910A003CC323 /* RgManager.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
+				C44F5DFA1C307587008E4F38 /* RgMainTableViewController.m in Sources */,
 				C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,

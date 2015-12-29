@@ -47,6 +47,7 @@
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
+@synthesize tableController;
 
 #pragma mark - Lifecycle Functions
 
@@ -99,6 +100,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(coreUpdateEvent:)
 												 name:kLinphoneCoreUpdate
 											   object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textReceivedEvent:)
+                                                 name:kRgTextReceived
+                                               object:nil];
     
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
@@ -246,6 +252,10 @@ static UICompositeViewDescription *compositeDescription = nil;
         callButton.hidden = NO;
         goButton.hidden = YES;
     }
+}
+
+- (void)textReceivedEvent:(NSNotification *)notif {
+    [tableController loadData];
 }
 
 #pragma mark - Debug Functions

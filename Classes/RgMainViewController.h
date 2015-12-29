@@ -20,6 +20,7 @@
 #import <UIKit/UIKit.h>
 
 #import "UICompositeViewController.h"
+#import "RgMainTableViewController.h"
 
 #import "UIEraseButton.h"
 #import "UICamSwitch.h"
@@ -50,6 +51,7 @@
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
+@property (nonatomic, strong) IBOutlet RgMainTableViewController* tableController;
 
 - (IBAction)onAddContactClick: (id) event;
 - (IBAction)onBackClick: (id) event;

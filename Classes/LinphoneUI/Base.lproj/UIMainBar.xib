@@ -41,7 +41,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Recents" backgroundImage="history_default.png">
+                    <state key="normal" title="Favorites" backgroundImage="history_default.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -118,37 +118,14 @@
                         <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="chat">
-                    <rect key="frame" x="192" y="0.0" width="64" height="77"/>
-                    <accessibility key="accessibilityConfiguration" label="Chat"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="64" id="eh4-r3-oxy"/>
-                        <constraint firstAttribute="height" constant="77" id="gId-1A-3gt"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Messages" backgroundImage="chat_default.png">
-                        <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" backgroundImage="chat_selected.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted" backgroundImage="chat_over.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onChatClick:" destination="-1" eventType="touchUpInside" id="26"/>
-                    </connections>
-                </button>
                 <view autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37" userLabel="chatNotificationView">
-                    <rect key="frame" x="235" y="4" width="21" height="21"/>
+                    <rect key="frame" x="171" y="4" width="21" height="21"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="chatNotificationImage">
                             <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="38" userLabel="chatNotificationLabel">
-                            <rect key="frame" x="3" y="2" width="16" height="17"/>
+                            <rect key="frame" x="2" y="2" width="16" height="17"/>
                             <accessibility key="accessibilityConfiguration" label="Missed message(s)">
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
@@ -173,7 +150,30 @@
                         <constraint firstItem="39" firstAttribute="width" secondItem="37" secondAttribute="width" id="yxe-m3-Pcu"/>
                     </constraints>
                 </view>
-                <view autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32" userLabel="historyNotificationView">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="chat">
+                    <rect key="frame" x="192" y="0.0" width="64" height="77"/>
+                    <accessibility key="accessibilityConfiguration" label="Chat"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="eh4-r3-oxy"/>
+                        <constraint firstAttribute="height" constant="77" id="gId-1A-3gt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Hashtags" backgroundImage="chat_default.png">
+                        <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="chat_selected.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="chat_over.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onChatClick:" destination="-1" eventType="touchUpInside" id="26"/>
+                    </connections>
+                </button>
+                <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32" userLabel="historyNotificationView">
                     <rect key="frame" x="43" y="4" width="21" height="21"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="33" userLabel="historyNotificationImage">
@@ -230,16 +230,16 @@
                 <constraint firstItem="if3-GT-4eC" firstAttribute="leading" secondItem="9" secondAttribute="trailing" id="Npd-ac-VuD"/>
                 <constraint firstItem="7" firstAttribute="leading" secondItem="8" secondAttribute="trailing" id="P0e-Vb-oo3"/>
                 <constraint firstItem="5" firstAttribute="leading" secondItem="7" secondAttribute="trailing" id="Q0Q-KR-hwu"/>
-                <constraint firstItem="5" firstAttribute="top" secondItem="37" secondAttribute="top" constant="-4" id="QTf-I4-aYm"/>
                 <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" id="RSs-eA-XI3"/>
                 <constraint firstItem="8" firstAttribute="leading" secondItem="6" secondAttribute="trailing" id="Tim-pC-QPd"/>
                 <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" id="UNn-fP-Bhi"/>
+                <constraint firstItem="37" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" id="ZOe-np-tHk"/>
                 <constraint firstAttribute="bottom" secondItem="8" secondAttribute="bottom" id="ZXj-CV-9DA"/>
+                <constraint firstItem="37" firstAttribute="top" secondItem="7" secondAttribute="top" constant="4" id="a6w-GD-ouH"/>
                 <constraint firstItem="6" firstAttribute="leading" secondItem="f0B-Rk-Uez" secondAttribute="trailing" id="buH-90-U2H"/>
                 <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" id="bz1-ui-hrk"/>
                 <constraint firstItem="6" firstAttribute="top" secondItem="32" secondAttribute="top" constant="-4" id="dEI-FQ-VES"/>
                 <constraint firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="jmU-VM-s9L"/>
-                <constraint firstItem="5" firstAttribute="trailing" secondItem="37" secondAttribute="trailing" id="kGi-dF-bTb"/>
                 <constraint firstItem="9" firstAttribute="leading" secondItem="5" secondAttribute="trailing" id="tw3-7Q-WKv"/>
                 <constraint firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="umW-rl-qXm"/>
                 <constraint firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="wni-ky-koR"/>

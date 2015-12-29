@@ -11,6 +11,7 @@
                 <outlet property="callButton" destination="EWA-nB-tDT" id="kPZ-Su-cE1"/>
                 <outlet property="goButton" destination="224" id="UFY-ed-DUQ"/>
                 <outlet property="messageButton" destination="kRY-QU-HcA" id="UN6-ri-DPc"/>
+                <outlet property="tableController" destination="Bm0-AN-WJM" id="Yaw-rb-5y9"/>
                 <outlet property="view" destination="171" id="176"/>
             </connections>
         </placeholder>
@@ -92,12 +93,30 @@
                         <action selector="onScan:" destination="-1" eventType="touchUpInside" id="i0Q-uv-UiZ"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="BFf-Bm-jV8" userLabel="tableView">
+                    <rect key="frame" x="0.0" y="85" width="320" height="289"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                    <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                    <color key="separatorColor" red="0.7254902124" green="0.76862746479999999" blue="0.79607844350000001" alpha="1" colorSpace="deviceRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="Bm0-AN-WJM" id="qwB-NE-sYo"/>
+                        <outlet property="delegate" destination="Bm0-AN-WJM" id="cak-pL-dG6"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="341" y="331"/>
         </view>
+        <tableViewController title="tableController" id="Bm0-AN-WJM" userLabel="tableController" customClass="RgMainTableViewController">
+            <connections>
+                <outlet property="view" destination="BFf-Bm-jV8" id="Aym-71-qcK"/>
+            </connections>
+            <point key="canvasLocation" x="341" y="857"/>
+        </tableViewController>
     </objects>
     <resources>
         <image name="call_disabled.png" width="214" height="138"/>

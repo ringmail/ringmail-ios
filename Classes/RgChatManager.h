@@ -58,4 +58,7 @@
 - (NSData *)dbGetMessageData:(NSNumber*)msgId;
 - (void)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid;
 
+- (void)dbInsertCall:(NSDictionary*)callData;
+- (void)dbUpdateCall:(NSDictionary*)callData;
+
 @end

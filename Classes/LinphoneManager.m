@@ -667,19 +667,21 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 
 	const LinphoneAddress *addr = linphone_call_get_remote_address(call);
 	NSString *address = nil;
+    NSString *rgAddress = nil;
 	if (addr != NULL) {
 		// contact name
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
             address = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
+            rgAddress = address;
 
-            NSLog(@"***** ADDRESS LOOKUP %@", address);
+            /*NSLog(@"***** ADDRESS LOOKUP %@", address);
 			ABRecordRef contact = [fastAddressBook getContact:address];
 			if (contact)
             {
 				address = [FastAddressBook getContactDisplayName:contact];
 			}
-			ms_free(lAddress);
+			ms_free(lAddress);*/
 		}
 	}
 	if (address == nil) {
@@ -703,7 +705,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 			return;
 		}
 
-		if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+		/*if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
 
 			LinphoneCallLog *callLog = linphone_call_get_call_log(call);
 			NSString *callId = [NSString stringWithUTF8String:linphone_call_log_get_call_id(callLog)];
@@ -751,7 +753,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	// we keep the speaker auto-enabled state in this static so that we don't
@@ -819,6 +821,39 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 		/*only register CT call center CB for connected call*/
 		[self setupGSMInteraction];
 	}
+    
+    if (rgAddress != nil)
+    {
+        // Update RingMail database
+    	LinphoneCallLog *callLog = linphone_call_get_call_log(call);
+    	NSString *sip = @"";
+        const char* callid = linphone_call_log_get_call_id(callLog);
+        if (callid)
+        {
+            sip = [NSString stringWithCString:callid encoding:NSUTF8StringEncoding];
+            LOGI(@"RingMail Call State:[%p] %s", call, linphone_call_state_to_string(state));
+            if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingProgress)
+            {
+                // New call
+                BOOL inbound = (LinphoneCallIncomingReceived) ? YES : NO;
+                [[self chatManager] dbInsertCall:@{
+                                               @"sip": sip,
+                                               @"address": rgAddress,
+                                               @"state": [NSNumber numberWithInt:state],
+                                               @"inbound": [NSNumber numberWithBool:inbound],
+                                           }];
+            }
+            else
+            {
+                // Update call
+                [[self chatManager] dbUpdateCall:@{
+                       @"sip": sip,
+                       @"state": [NSNumber numberWithInt:state],
+                   }];
+            }
+        }
+    }
+    
 	// Post event
 	NSDictionary *dict = @{
 		@"call" : [NSValue valueWithPointer:call],

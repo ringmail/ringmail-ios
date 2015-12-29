@@ -226,7 +226,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 }
 
 - (void)settingsUpdate:(NSNotification *)notif {
-	if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == false) {
+	/*if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == false) {
 		[self stopBounceAnimation:kBounceAnimation target:chatNotificationView];
 		chatNotificationView.layer.transform = CATransform3DIdentity;
 		[self stopBounceAnimation:kBounceAnimation target:historyNotificationView];
@@ -239,7 +239,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 			[historyNotificationView.layer animationForKey:kBounceAnimation] == nil) {
 			[self startBounceAnimation:kBounceAnimation target:historyNotificationView];
 		}
-	}
+	}*/
 }
 
 - (void)textReceived:(NSNotification *)notif {

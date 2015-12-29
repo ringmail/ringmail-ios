@@ -18,5 +18,6 @@ target 'RingMail' do
   pod 'TesseractOCRiOS', '~> 4.0.0'
   pod 'OpenCV'
   pod 'CRMediaPickerController'
+  pod 'ObjectiveSugar'
 end
 
