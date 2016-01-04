@@ -19,6 +19,7 @@
     if (self)
     {
         self.database = db;
+        self.primaryKey = @"rowid";
     }
     return self;
 }
@@ -70,8 +71,90 @@
     return result;
 }
 
-- (void)set:(NSDictionary*)params
+- (NSObject*)set:(NSDictionary*)params
 {
+    NSString *table = [params objectForKey:@"table"];
+    NSString *sql = [NSString string];
+    NSMutableArray *paramList = [NSMutableArray array];
+    id insert = [params objectForKey:@"insert"];
+    id update = [params objectForKey:@"update"];
+    id delete = [params objectForKey:@"delete"];
+    if (insert)
+    {
+        return [self create:table data:insert];
+    }
+    else if (delete)
+    {
+        sql = [sql stringByAppendingString:[NSString stringWithFormat:@"DELETE FROM %@ ", table]];
+        if ([delete isKindOfClass:[NSDictionary class]])
+        {
+            NSMutableArray *allKeys = [[delete allKeys] mutableCopy];
+            [allKeys sortUsingSelector:@selector(caseInsensitiveCompare:)];
+            NSString *whr = [[allKeys map:^(NSString* key) {
+                [paramList push:[delete objectForKey:key]];
+                return [NSString stringWithFormat:@"%@ = ?", key];
+            }] join:@" AND "];
+            sql = [sql stringByAppendingString:[NSString stringWithFormat:@" WHERE (%@)", whr]];
+        }
+        else if ([delete isKindOfClass:[NSString class]])
+        {
+            sql = [sql stringByAppendingString:[NSString stringWithFormat:@" WHERE %@", delete]];
+        }
+        NSLog(@"Note SQL: %@", sql);
+        BOOL ok = [database executeUpdate:sql withArgumentsInArray:paramList];
+        if (! ok)
+        {
+            NSLog(@"Note SQL Error");
+            return [NSNumber numberWithBool:NO];
+        }
+        else
+        {
+            return [NSNumber numberWithBool:YES];
+        }
+    }
+    else if (update)
+    {
+        sql = [sql stringByAppendingString:[NSString stringWithFormat:@"UPDATE %@ ", table]];
+        id update = [params objectForKey:@"update"];
+        NSMutableArray *updateKeys = [[update allKeys] mutableCopy];
+        [updateKeys sortUsingSelector:@selector(caseInsensitiveCompare:)];
+        NSString *upd = [[updateKeys map:^(NSString* key) {
+            [paramList push:[update objectForKey:key]];
+            return [NSString stringWithFormat:@"%@ = ?", key];
+        }] join:@", "];
+        sql = [sql stringByAppendingString:[NSString stringWithFormat:@"SET %@ ", upd]];
+        id where = [params objectForKey:@"where"];
+        if (where)
+        {
+            // TODO: make recursive and fancy like Perl version
+            if ([where isKindOfClass:[NSDictionary class]])
+            {
+                NSMutableArray *allKeys = [[where allKeys] mutableCopy];
+                [allKeys sortUsingSelector:@selector(caseInsensitiveCompare:)];
+                NSString *whr = [[allKeys map:^(NSString* key) {
+                    [paramList push:[where objectForKey:key]];
+                    return [NSString stringWithFormat:@"%@ = ?", key];
+                }] join:@" AND "];
+                sql = [sql stringByAppendingString:[NSString stringWithFormat:@" WHERE (%@)", whr]];
+            }
+            else if ([where isKindOfClass:[NSString class]])
+            {
+                sql = [sql stringByAppendingString:[NSString stringWithFormat:@" WHERE %@", where]];
+            }
+        }
+        NSLog(@"Note SQL: %@", sql);
+        BOOL ok = [database executeUpdate:sql withArgumentsInArray:paramList];
+        if (! ok)
+        {
+            NSLog(@"Note SQL Error");
+            return [NSNumber numberWithBool:NO];
+        }
+        else
+        {
+            return [NSNumber numberWithBool:YES];
+        }
+    }
+    return nil;
 }
 
 - (NoteRow*)create:(NSString*)table data:(NSDictionary*)params
@@ -98,6 +181,23 @@
 {
     NoteRow* obj = [[NoteRow alloc] initWithDatabase:self.database table:table id:inp];
     return obj;
+}
+
+- (NoteRow*)row:(NSString*)table where:(NSDictionary*)params
+{
+    NSArray *rowQuery = [self get:@{
+                                    @"select":@[self.primaryKey],
+                                    @"table":table,
+                                    @"where":params,
+                                    }];
+    NSNumber* recid;
+    if ([rowQuery count] > 0)
+    {
+        recid = [[rowQuery objectAtIndex:0] objectForKey:self.primaryKey];
+        NoteRow* obj = [[NoteRow alloc] initWithDatabase:self.database table:table id:recid];
+        return obj;
+    }
+    return nil;
 }
 
 @end

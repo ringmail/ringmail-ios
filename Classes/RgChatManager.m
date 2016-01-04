@@ -793,7 +793,17 @@
 {
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"UPDATE chat SET msg_status = ? WHERE msg_uuid = ?", status, uuid];
+        NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+        [ndb set:@{
+                   @"table":@"chat",
+                   @"update":@{
+                           @"msg_status": status,
+                           },
+                   @"where":@{
+                           @"msg_uuid":uuid,
+                           },
+                   }];
+        //[db executeUpdate:@"UPDATE chat SET msg_status = ? WHERE msg_uuid = ?", status, uuid];
     }];
     [dbq close];
 }

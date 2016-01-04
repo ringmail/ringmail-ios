@@ -28,10 +28,11 @@
 @interface NoteDatabase : NSObject
 
 @property (nonatomic, strong) FMDatabase* database;
+@property (nonatomic, strong) NSString* primaryKey;
 
 - (id)initWithDatabase:(FMDatabase*)db;
 - (NSArray*)get:(NSDictionary*)params;
-- (void)set:(NSDictionary*)params;
+- (NSObject*)set:(NSDictionary*)params;
 - (NoteRow*)create:(NSString*)table data:(NSDictionary*)params;
 - (NoteRow*)row:(NSString*)table id:(NSNumber*)inp;
 
