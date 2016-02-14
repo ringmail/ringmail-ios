@@ -125,7 +125,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)recognizeScan:(UIImage*)input {
-    G8Tesseract *tesseract = [[G8Tesseract alloc] initWithLanguage:@"eng" configDictionary:@{} configFileNames:@[] absoluteDataPath:[[NSBundle mainBundle] resourcePath] engineMode:G8OCREngineModeTesseractOnly copyFilesFromResources:NO];
+    /*G8Tesseract *tesseract = [[G8Tesseract alloc] initWithLanguage:@"eng" configDictionary:@{} configFileNames:@[] absoluteDataPath:[[NSBundle mainBundle] resourcePath] engineMode:G8OCREngineModeTesseractOnly copyFilesFromResources:NO];
     
     //tesseract.charWhitelist = @"#_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ";
     tesseract.pageSegmentationMode = G8PageSegmentationModeSingleLine;
@@ -153,6 +153,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [[PhoneMainView instance] popCurrentView];
         }
     }
+     */
 }
 
 #pragma mark - Action Functions

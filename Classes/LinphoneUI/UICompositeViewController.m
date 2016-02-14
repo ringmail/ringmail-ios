@@ -517,46 +517,54 @@
 
 	// Resize StateBar
 	CGRect stateBarFrame = stateBarView.frame;
-	int origin = IPHONE_STATUSBAR_HEIGHT;
-	if (currentViewDescription.fullscreen)
-		origin = 0;
+    int statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+	//if (currentViewDescription.fullscreen)
+		//origin = 0;
 
-	if (self.stateBarViewController != nil && currentViewDescription.stateBarEnabled) {
+	/*if (self.stateBarViewController != nil && currentViewDescription.stateBarEnabled) {
 		contentFrame.origin.y = origin + stateBarFrame.size.height;
 		stateBarFrame.origin.y = origin;
 	} else {
 		contentFrame.origin.y = origin;
 		stateBarFrame.origin.y = origin - stateBarFrame.size.height;
-	}
+	}*/
 
 	// Resize TabBar
 	CGRect tabFrame = tabBarView.frame;
 	if (self.tabBarViewController != nil && currentViewDescription.tabBarEnabled) {
-		tabFrame.origin.y = viewFrame.size.height;
-		tabFrame.origin.x = viewFrame.size.width;
-		tabFrame.size.height = self.tabBarViewController.view.frame.size.height;
-		// tabFrame.size.width = self.tabBarViewController.view.frame.size.width;
-		tabFrame.origin.y -= tabFrame.size.height;
-		tabFrame.origin.x -= tabFrame.size.width;
-		contentFrame.size.height = tabFrame.origin.y - contentFrame.origin.y;
+        tabFrame.origin.y = statusBarHeight;
+        //tabFrame.origin.x = 0;
+		tabFrame.size.width = viewFrame.size.width;
+		//tabFrame.size.height = self.tabBarViewController.view.frame.size.height;
+        tabFrame.size.height = 50;
+		//tabFrame.origin.x = viewFrame.size.width;
+		//tabFrame.size.width = self.tabBarViewController.view.frame.size.width;
+		//tabFrame.origin.y -= tabFrame.size.height;
+		//tabFrame.origin.x -= tabFrame.size.width;
+        //contentFrame.origin.y = tabFrame.size.height;
+        contentFrame.origin.y = [UIApplication sharedApplication].statusBarFrame.size.height + tabFrame.size.height;
+        contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
+    
+        NSLog(@"Resize Main Screen: %f", contentFrame.origin.y);
 
 		// for some views, we need the content to overlap, in which case
 		// we insert in the tab XIB a mask with tag -1 and with y = the amount of
 		// points that the content should overlap.
-		for (UIView *view in self.tabBarViewController.view.subviews) {
+		/*for (UIView *view in self.tabBarViewController.view.subviews) {
 			if (view.tag == -1) {
 				contentFrame.size.height += view.frame.origin.y;
 				break;
 			}
-		}
+		}*/
 	} else {
-		contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
-		tabFrame.origin.y = viewFrame.size.height;
+        contentFrame.origin.y = statusBarHeight;
+        contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
+		//tabFrame.origin.y = viewFrame.size.height;
 	}
 
 	if (currentViewDescription.fullscreen) {
-		contentFrame.origin.y = origin;
-		contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
+        contentFrame.origin.y = 0;
+        contentFrame.size.height = viewFrame.size.height;
 	}
 
 	// Set frames

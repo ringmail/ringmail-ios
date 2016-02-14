@@ -22,164 +22,85 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="3">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="mask">
-                    <rect key="frame" x="0.0" y="16" width="320" height="61"/>
-                    <color key="backgroundColor" red="0.0" green="1" blue="0.090924573910000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="61" id="SfG-nT-bfE"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="history">
-                    <rect key="frame" x="0.0" y="0.0" width="64" height="77"/>
-                    <accessibility key="accessibilityConfiguration" label="History"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="77" id="9fJ-Bx-Z87"/>
-                        <constraint firstAttribute="width" constant="64" id="dSE-Nc-AQX"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Favorites" backgroundImage="history_default.png">
-                        <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" backgroundImage="history_selected.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted" backgroundImage="history_over.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="22"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="contacts">
-                    <rect key="frame" x="64" y="0.0" width="64" height="77"/>
-                    <accessibility key="accessibilityConfiguration" label="Contacts"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="64" id="7qG-OX-ocj"/>
-                        <constraint firstAttribute="height" constant="77" id="AaL-yt-Hnd"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Directory" backgroundImage="contacts_default.png">
-                        <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" backgroundImage="contacts_selected.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted" backgroundImage="contacts_over.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onContactsClick:" destination="-1" eventType="touchUpInside" id="23"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9" userLabel="settings">
-                    <rect key="frame" x="256" y="0.0" width="64" height="77"/>
-                    <accessibility key="accessibilityConfiguration" label="Settings"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="64" id="50o-3P-EEl"/>
-                        <constraint firstAttribute="height" constant="77" id="cUb-Ax-J5i"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Settings" backgroundImage="settings_default.png">
-                        <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" backgroundImage="settings_selected.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted" backgroundImage="settings_over.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onSettingsClick:" destination="-1" eventType="touchUpInside" id="25"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="dialer">
-                    <rect key="frame" x="128" y="0.0" width="64" height="77"/>
-                    <accessibility key="accessibilityConfiguration" label="Dialer"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="64" id="Kyv-1i-fVw"/>
-                        <constraint firstAttribute="height" constant="77" id="hR6-kA-HxY"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="dialer_default.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="dialer_selected.png"/>
-                    <state key="highlighted" image="dialer_over.png"/>
-                    <connections>
-                        <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
-                    </connections>
-                </button>
-                <view autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37" userLabel="chatNotificationView">
-                    <rect key="frame" x="171" y="4" width="21" height="21"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="chatNotificationImage">
-                            <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
-                        </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="38" userLabel="chatNotificationLabel">
-                            <rect key="frame" x="2" y="2" width="16" height="17"/>
-                            <accessibility key="accessibilityConfiguration" label="Missed message(s)">
-                                <accessibilityTraits key="traits" none="YES"/>
-                            </accessibility>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="17" id="0L7-q4-XAQ"/>
-                                <constraint firstAttribute="width" constant="16" id="jXP-Y5-d8a"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="centerY" secondItem="38" secondAttribute="centerY" id="AqH-xS-ee0"/>
-                        <constraint firstAttribute="width" constant="21" id="CKe-U0-pTJ"/>
-                        <constraint firstAttribute="centerX" secondItem="39" secondAttribute="centerX" id="DJZ-vG-EZ9"/>
-                        <constraint firstAttribute="centerX" secondItem="38" secondAttribute="centerX" id="PyV-QG-q3f"/>
-                        <constraint firstItem="39" firstAttribute="height" secondItem="37" secondAttribute="height" id="Uzu-M2-lWM"/>
-                        <constraint firstAttribute="height" constant="21" id="bSp-VO-Ar7"/>
-                        <constraint firstAttribute="centerY" secondItem="39" secondAttribute="centerY" id="cYa-kU-nJs"/>
-                        <constraint firstItem="39" firstAttribute="width" secondItem="37" secondAttribute="width" id="yxe-m3-Pcu"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="chat">
-                    <rect key="frame" x="192" y="0.0" width="64" height="77"/>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="chat">
+                    <rect key="frame" x="160" y="0.0" width="40" height="50"/>
                     <accessibility key="accessibilityConfiguration" label="Chat"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="64" id="eh4-r3-oxy"/>
-                        <constraint firstAttribute="height" constant="77" id="gId-1A-3gt"/>
+                        <constraint firstAttribute="width" constant="40" id="eh4-r3-oxy"/>
+                        <constraint firstAttribute="height" constant="50" id="gId-1A-3gt"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Hashtags" backgroundImage="chat_default.png">
+                    <state key="normal" image="ringmail_top_hashtags_default.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="chat_selected.png">
+                    <state key="selected" image="ringmail_top_hashtags_selected.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="chat_over.png">
+                    <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onChatClick:" destination="-1" eventType="touchUpInside" id="26"/>
                     </connections>
                 </button>
-                <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32" userLabel="historyNotificationView">
-                    <rect key="frame" x="43" y="4" width="21" height="21"/>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="contacts">
+                    <rect key="frame" x="200" y="0.0" width="40" height="50"/>
+                    <accessibility key="accessibilityConfiguration" label="Contacts"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="7qG-OX-ocj"/>
+                        <constraint firstAttribute="height" constant="50" id="AaL-yt-Hnd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" image="ringmail_top_contacts_default.png">
+                        <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="ringmail_top_contacts_selected.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onContactsClick:" destination="-1" eventType="touchUpInside" id="23"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="history">
+                    <rect key="frame" x="240" y="0.0" width="40" height="50"/>
+                    <accessibility key="accessibilityConfiguration" label="History"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="9fJ-Bx-Z87"/>
+                        <constraint firstAttribute="width" constant="40" id="dSE-Nc-AQX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" image="ringmail_top_favs_default.png">
+                        <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="ringmail_top_favs_selected.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" image="ringmail_top_favs_default.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="22"/>
+                    </connections>
+                </button>
+                <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32" userLabel="historyNotificationView">
+                    <rect key="frame" x="259" y="4" width="21" height="21"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="33" userLabel="historyNotificationImage">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="33" userLabel="historyNotificationImage">
                             <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="34" userLabel="historyNotificationLabel">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="34" userLabel="historyNotificationLabel">
                             <rect key="frame" x="3" y="2" width="16" height="17"/>
                             <accessibility key="accessibilityConfiguration" label="Missed call(s)">
                                 <accessibilityTraits key="traits" none="YES"/>
@@ -205,69 +126,100 @@
                         <constraint firstAttribute="width" constant="21" id="tMw-Sg-MKB"/>
                     </constraints>
                 </view>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="dialer_padding_left.png" translatesAutoresizingMaskIntoConstraints="NO" id="f0B-Rk-Uez">
-                    <rect key="frame" x="-47" y="-8" width="47" height="85"/>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9" userLabel="settings">
+                    <rect key="frame" x="280" y="0.0" width="40" height="50"/>
+                    <accessibility key="accessibilityConfiguration" label="Settings"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="85" id="Ce2-oh-cXP"/>
-                        <constraint firstAttribute="width" constant="47" id="hvC-cr-MbF"/>
+                        <constraint firstAttribute="width" constant="40" id="50o-3P-EEl"/>
+                        <constraint firstAttribute="height" constant="50" id="cUb-Ax-J5i"/>
                     </constraints>
-                </imageView>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="dialer_padding_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="if3-GT-4eC">
-                    <rect key="frame" x="320" y="-8" width="47" height="85"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" image="ringmail_top_settings_default.png">
+                        <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="ringmail_top_settings_selected.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" image="ringmail_top_settings_default.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onSettingsClick:" destination="-1" eventType="touchUpInside" id="25"/>
+                    </connections>
+                </button>
+                <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37" userLabel="chatNotificationView">
+                    <rect key="frame" x="149" y="4" width="21" height="21"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="chatNotificationImage">
+                            <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="38" userLabel="chatNotificationLabel">
+                            <rect key="frame" x="2" y="2" width="16" height="17"/>
+                            <accessibility key="accessibilityConfiguration" label="Missed message(s)">
+                                <accessibilityTraits key="traits" none="YES"/>
+                            </accessibility>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="0L7-q4-XAQ"/>
+                                <constraint firstAttribute="width" constant="16" id="jXP-Y5-d8a"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="47" id="Ez5-zh-daE"/>
-                        <constraint firstAttribute="height" constant="85" id="liI-Np-MjS"/>
+                        <constraint firstAttribute="centerY" secondItem="38" secondAttribute="centerY" id="AqH-xS-ee0"/>
+                        <constraint firstAttribute="width" constant="21" id="CKe-U0-pTJ"/>
+                        <constraint firstAttribute="centerX" secondItem="39" secondAttribute="centerX" id="DJZ-vG-EZ9"/>
+                        <constraint firstAttribute="centerX" secondItem="38" secondAttribute="centerX" id="PyV-QG-q3f"/>
+                        <constraint firstItem="39" firstAttribute="height" secondItem="37" secondAttribute="height" id="Uzu-M2-lWM"/>
+                        <constraint firstAttribute="height" constant="21" id="bSp-VO-Ar7"/>
+                        <constraint firstAttribute="centerY" secondItem="39" secondAttribute="centerY" id="cYa-kU-nJs"/>
+                        <constraint firstItem="39" firstAttribute="width" secondItem="37" secondAttribute="width" id="yxe-m3-Pcu"/>
                     </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ringmail_top_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="pkJ-2Y-4Pr">
+                    <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="dialer">
+                    <rect key="frame" x="120" y="0.0" width="40" height="50"/>
+                    <accessibility key="accessibilityConfiguration" label="Dialer"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="Kyv-1i-fVw"/>
+                        <constraint firstAttribute="height" constant="50" id="hR6-kA-HxY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" image="ringmail_top_home_default.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="ringmail_top_home_selected.png"/>
+                    <state key="highlighted" image="ringmail_top_home_selected.png"/>
+                    <connections>
+                        <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="1" blue="0.19194547549999999" alpha="0.0" colorSpace="calibratedRGB"/>
-            <constraints>
-                <constraint firstItem="4" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="23R-LR-WSH"/>
-                <constraint firstAttribute="bottom" secondItem="f0B-Rk-Uez" secondAttribute="bottom" id="5jk-rI-3ek"/>
-                <constraint firstAttribute="bottom" secondItem="if3-GT-4eC" secondAttribute="bottom" id="BMD-5G-aiP"/>
-                <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" id="Cv7-RZ-ocZ"/>
-                <constraint firstItem="32" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" id="KAR-Oc-g9D"/>
-                <constraint firstItem="if3-GT-4eC" firstAttribute="leading" secondItem="9" secondAttribute="trailing" id="Npd-ac-VuD"/>
-                <constraint firstItem="7" firstAttribute="leading" secondItem="8" secondAttribute="trailing" id="P0e-Vb-oo3"/>
-                <constraint firstItem="5" firstAttribute="leading" secondItem="7" secondAttribute="trailing" id="Q0Q-KR-hwu"/>
-                <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" id="RSs-eA-XI3"/>
-                <constraint firstItem="8" firstAttribute="leading" secondItem="6" secondAttribute="trailing" id="Tim-pC-QPd"/>
-                <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" id="UNn-fP-Bhi"/>
-                <constraint firstItem="37" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" id="ZOe-np-tHk"/>
-                <constraint firstAttribute="bottom" secondItem="8" secondAttribute="bottom" id="ZXj-CV-9DA"/>
-                <constraint firstItem="37" firstAttribute="top" secondItem="7" secondAttribute="top" constant="4" id="a6w-GD-ouH"/>
-                <constraint firstItem="6" firstAttribute="leading" secondItem="f0B-Rk-Uez" secondAttribute="trailing" id="buH-90-U2H"/>
-                <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" id="bz1-ui-hrk"/>
-                <constraint firstItem="6" firstAttribute="top" secondItem="32" secondAttribute="top" constant="-4" id="dEI-FQ-VES"/>
-                <constraint firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="jmU-VM-s9L"/>
-                <constraint firstItem="9" firstAttribute="leading" secondItem="5" secondAttribute="trailing" id="tw3-7Q-WKv"/>
-                <constraint firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="umW-rl-qXm"/>
-                <constraint firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="wni-ky-koR"/>
-                <constraint firstAttribute="bottom" secondItem="9" secondAttribute="bottom" id="znG-Zq-s5I"/>
-            </constraints>
+            <color key="backgroundColor" red="0.20000000000000001" green="0.21176470588235294" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="898" y="356.5"/>
         </view>
     </objects>
     <resources>
-        <image name="chat_default.png" width="128" height="154"/>
-        <image name="chat_over.png" width="128" height="154"/>
-        <image name="chat_selected.png" width="128" height="154"/>
-        <image name="contacts_default.png" width="128" height="154"/>
-        <image name="contacts_over.png" width="128" height="154"/>
-        <image name="contacts_selected.png" width="128" height="154"/>
-        <image name="dialer_default.png" width="128" height="154"/>
-        <image name="dialer_over.png" width="128" height="154"/>
-        <image name="dialer_padding_left.png" width="94" height="170"/>
-        <image name="dialer_padding_right.png" width="94" height="170"/>
-        <image name="dialer_selected.png" width="128" height="154"/>
-        <image name="history_default.png" width="128" height="154"/>
         <image name="history_notification.png" width="43" height="43"/>
-        <image name="history_over.png" width="128" height="154"/>
-        <image name="history_selected.png" width="128" height="154"/>
-        <image name="settings_default.png" width="128" height="154"/>
-        <image name="settings_over.png" width="128" height="154"/>
-        <image name="settings_selected.png" width="128" height="154"/>
+        <image name="ringmail_top_contacts_default.png" width="80" height="100"/>
+        <image name="ringmail_top_contacts_selected.png" width="80" height="100"/>
+        <image name="ringmail_top_favs_default.png" width="80" height="100"/>
+        <image name="ringmail_top_favs_selected.png" width="80" height="100"/>
+        <image name="ringmail_top_hashtags_default.png" width="80" height="100"/>
+        <image name="ringmail_top_hashtags_selected.png" width="80" height="100"/>
+        <image name="ringmail_top_home_default.png" width="80" height="100"/>
+        <image name="ringmail_top_home_selected.png" width="80" height="100"/>
+        <image name="ringmail_top_logo.png" width="180" height="100"/>
+        <image name="ringmail_top_settings_default.png" width="80" height="100"/>
+        <image name="ringmail_top_settings_selected.png" width="80" height="100"/>
     </resources>
 </document>

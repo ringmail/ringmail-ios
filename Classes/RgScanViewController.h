@@ -18,7 +18,7 @@
  */ 
 
 #import <UIKit/UIKit.h>
-#import <TesseractOCR/TesseractOCR.h>
+//#import <TesseractOCR/TesseractOCR.h>
 
 #import "RegexKitLite/RegexKitLite.h"
 #import "UICompositeViewController.h"
