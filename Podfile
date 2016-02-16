@@ -20,5 +20,6 @@ target 'RingMail' do
   pod 'CRMediaPickerController'
   pod 'ObjectiveSugar'
   pod 'ComponentKit', '~> 0.14'
+  pod 'UIImage-Categories', :git => 'https://github.com/nixonnixon/UIImage-Categories.git'
 end
 

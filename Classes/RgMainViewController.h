@@ -21,6 +21,7 @@
 
 #import "UICompositeViewController.h"
 #import "RgMainTableViewController.h"
+#import "MainCollectionViewController.h"
 
 #import "UIEraseButton.h"
 #import "UICamSwitch.h"
@@ -51,7 +52,10 @@
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
-@property (nonatomic, strong) IBOutlet RgMainTableViewController* tableController;
+//@property (nonatomic, strong) IBOutlet RgMainTableViewController* tableController;
+//@property (nonatomic, strong) IBOutlet MainCollectionViewController* mainController;
+@property (nonatomic, strong) IBOutlet UIView* mainView;
+@property (nonatomic, strong) IBOutlet UIViewController* mainViewController;
 
 - (IBAction)onAddContactClick: (id) event;
 - (IBAction)onBackClick: (id) event;

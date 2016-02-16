@@ -47,6 +47,7 @@ PODS:
   - OpenCV (3.0.0)
   - RegexKitLite (4.0)
   - SVWebViewController (HEAD based on 1.0)
+  - UIImage-Categories (1.0.0)
   - XMPPFramework (3.6.6):
     - XMPPFramework/Authentication (= 3.6.6)
     - XMPPFramework/BandwidthMonitor (= 3.6.6)
@@ -205,7 +206,17 @@ DEPENDENCIES:
   - OpenCV
   - RegexKitLite
   - SVWebViewController (HEAD)
+  - UIImage-Categories (from `https://github.com/nixonnixon/UIImage-Categories.git`)
   - XMPPFramework
+
+EXTERNAL SOURCES:
+  UIImage-Categories:
+    :git: https://github.com/nixonnixon/UIImage-Categories.git
+
+CHECKOUT OPTIONS:
+  UIImage-Categories:
+    :commit: 7d98f1c9c8a3217584fd797771dae199cb8eeb65
+    :git: https://github.com/nixonnixon/UIImage-Categories.git
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -226,6 +237,7 @@ SPEC CHECKSUMS:
   OpenCV: be07c02f0d8f125f1d40d261e66a66cb66ece3b3
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
+  UIImage-Categories: b9d2ff50c2250ea007f150c2427ff230b5a4789b
   XMPPFramework: b06c210b0b71c08aa41a646bffd2021fa43bb43b
 
 COCOAPODS: 0.39.0

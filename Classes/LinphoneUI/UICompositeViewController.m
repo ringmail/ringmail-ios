@@ -545,8 +545,6 @@
         contentFrame.origin.y = [UIApplication sharedApplication].statusBarFrame.size.height + tabFrame.size.height;
         contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
     
-        NSLog(@"Resize Main Screen: %f", contentFrame.origin.y);
-
 		// for some views, we need the content to overlap, in which case
 		// we insert in the tab XIB a mask with tag -1 and with y = the amount of
 		// points that the content should overlap.

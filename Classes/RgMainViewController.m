@@ -47,7 +47,9 @@
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
-@synthesize tableController;
+//@synthesize mainController;
+@synthesize mainView;
+@synthesize mainViewController;
 
 #pragma mark - Lifecycle Functions
 
@@ -167,7 +169,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    [flowLayout setMinimumInteritemSpacing:0];
+    [flowLayout setMinimumLineSpacing:0];
+    
+    MainCollectionViewController *mainController = [[MainCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
+    
+    CGRect r = mainView.frame;
+    r.origin.y = 0;
+    [mainController.view setFrame:r];
+    [mainView addSubview:mainController.view];
+    [self addChildViewController:mainController];
+    [mainController didMoveToParentViewController:self];
+    
 	[addressField setText:@""];
 	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
 
@@ -255,7 +271,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)textReceivedEvent:(NSNotification *)notif {
-    [tableController loadData];
+    //[mainController loadData];
 }
 
 #pragma mark - Debug Functions

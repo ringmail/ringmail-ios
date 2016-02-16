@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgMainViewController">
@@ -10,8 +10,8 @@
                 <outlet property="addressField" destination="4" id="205"/>
                 <outlet property="callButton" destination="EWA-nB-tDT" id="kPZ-Su-cE1"/>
                 <outlet property="goButton" destination="224" id="UFY-ed-DUQ"/>
+                <outlet property="mainView" destination="WIg-uW-eVV" id="eRx-5b-D7O"/>
                 <outlet property="messageButton" destination="kRY-QU-HcA" id="UN6-ri-DPc"/>
-                <outlet property="tableController" destination="Bm0-AN-WJM" id="Yaw-rb-5y9"/>
                 <outlet property="view" destination="171" id="176"/>
             </connections>
         </placeholder>
@@ -20,24 +20,32 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_input1.png" id="Z13-ol-6Ow">
-                    <rect key="frame" x="8" y="8" width="304" height="39"/>
+                <view contentMode="scaleToFill" id="uYS-gf-oKR" userLabel="Input">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
-                    <rect key="frame" x="55" y="15" width="210" height="26"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <accessibility key="accessibilityConfiguration" label="Enter a address"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
-                    <connections>
-                        <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="208"/>
-                        <outlet property="delegate" destination="-1" id="190"/>
-                    </connections>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="224" userLabel="goButton" customClass="UICallButton">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_search.png" id="2wn-ER-DYo">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
+                            <rect key="frame" x="55" y="12" width="210" height="26"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <accessibility key="accessibilityConfiguration" label="Enter a address"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                            <connections>
+                                <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="208"/>
+                                <outlet property="delegate" destination="-1" id="190"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="224" userLabel="goButton" customClass="UICallButton">
                     <rect key="frame" x="252" y="49" width="60" height="28"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
@@ -51,7 +59,7 @@
                         <outlet property="addressField" destination="4" id="235"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="kRY-QU-HcA" userLabel="messageButton" customClass="UIMessageButton">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="kRY-QU-HcA" userLabel="messageButton" customClass="UIMessageButton">
                     <rect key="frame" x="195" y="49" width="60" height="28"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
@@ -65,7 +73,7 @@
                         <outlet property="addressField" destination="4" id="shi-Uq-Vf1"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="EWA-nB-tDT" userLabel="callButton" customClass="UICallButton">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="EWA-nB-tDT" userLabel="callButton" customClass="UICallButton">
                     <rect key="frame" x="252" y="49" width="60" height="28"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
@@ -79,7 +87,7 @@
                         <outlet property="addressField" destination="4" id="tLL-tB-jPU"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Zpr-Mg-asO" userLabel="scanButton">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Zpr-Mg-asO" userLabel="scanButton">
                     <rect key="frame" x="8" y="44" width="60" height="37"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
@@ -93,33 +101,19 @@
                         <action selector="onScan:" destination="-1" eventType="touchUpInside" id="i0Q-uv-UiZ"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="BFf-Bm-jV8" userLabel="tableView">
-                    <rect key="frame" x="0.0" y="85" width="320" height="289"/>
+                <view contentMode="scaleToFill" id="WIg-uW-eVV">
+                    <rect key="frame" x="0.0" y="50" width="320" height="324"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
-                    <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
-                    <color key="separatorColor" red="0.7254902124" green="0.76862746479999999" blue="0.79607844350000001" alpha="1" colorSpace="deviceRGB"/>
-                    <connections>
-                        <outlet property="dataSource" destination="Bm0-AN-WJM" id="qwB-NE-sYo"/>
-                        <outlet property="delegate" destination="Bm0-AN-WJM" id="cak-pL-dG6"/>
-                    </connections>
-                </tableView>
+                    <color key="backgroundColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
+                </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="341" y="331"/>
         </view>
-        <tableViewController title="tableController" id="Bm0-AN-WJM" userLabel="tableController" customClass="RgMainTableViewController">
-            <connections>
-                <outlet property="view" destination="BFf-Bm-jV8" id="Aym-71-qcK"/>
-            </connections>
-            <point key="canvasLocation" x="341" y="857"/>
-        </tableViewController>
     </objects>
     <resources>
         <image name="call_disabled.png" width="214" height="138"/>
-        <image name="ringmail_input1.png" width="1068" height="145"/>
+        <image name="ringmail_search.png" width="100" height="100"/>
     </resources>
 </document>

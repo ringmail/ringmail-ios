@@ -27,6 +27,7 @@
 #import "SVWebViewController.h"
 #import "SVModalWebViewController.h"
 #import "RgWebViewDelegate.h"
+#import "UIColor+Hex.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 
@@ -483,26 +484,26 @@ static RootViewManager *rootViewManagerInstance = nil;
 + (CATransition *)getTransition:(UICompositeViewDescription *)old new:(UICompositeViewDescription *) new {
 	bool left = false;
 
-	if ([old equal:[ChatViewController compositeViewDescription]]) {
-		if ([new equal:[ContactsViewController compositeViewDescription]] ||
-			[new equal:[RgMainViewController compositeViewDescription]] ||
-			[new equal:[HistoryViewController compositeViewDescription]]) {
+   if ([old equal:[RgMainViewController compositeViewDescription]]) {
+		if ([new equal:[ChatViewController compositeViewDescription]] ||
+            [new equal:[ContactsViewController compositeViewDescription]] ||
+            [new equal:[HistoryViewController compositeViewDescription]] ||
+            [new equal:[SettingsViewController compositeViewDescription]]) {
 			left = true;
 		}
-	} else if ([old equal:[SettingsViewController compositeViewDescription]]) {
-		if ([new equal:[RgMainViewController compositeViewDescription]] ||
-			[new equal:[ContactsViewController compositeViewDescription]] ||
+	}  else if ([old equal:[ChatViewController compositeViewDescription]]) {
+		if ([new equal:[ContactsViewController compositeViewDescription]] ||
 			[new equal:[HistoryViewController compositeViewDescription]] ||
-			[new equal:[ChatViewController compositeViewDescription]]) {
-			left = true;
-		}
-	} else if ([old equal:[RgMainViewController compositeViewDescription]]) {
-		if ([new equal:[ContactsViewController compositeViewDescription]] ||
-			[new equal:[HistoryViewController compositeViewDescription]]) {
+			[new equal:[SettingsViewController compositeViewDescription]]) {
 			left = true;
 		}
 	} else if ([old equal:[ContactsViewController compositeViewDescription]]) {
-		if ([new equal:[HistoryViewController compositeViewDescription]]) {
+		if ([new equal:[HistoryViewController compositeViewDescription]] ||
+            [new equal:[SettingsViewController compositeViewDescription]]) {
+			left = true;
+		}
+	} else if ([old equal:[HistoryViewController compositeViewDescription]]) {
+		if ([new equal:[SettingsViewController compositeViewDescription]]) {
 			left = true;
 		}
 	}
@@ -530,6 +531,10 @@ static RootViewManager *rootViewManagerInstance = nil;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 	// In iOS7, the app has a black background on dialer, incoming and incall, so we have to adjust the
 	// status bar style for each transition to/from these views
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    statusBarBG.backgroundColor = [UIColor colorWithHex:@"#33362f" alpha:1.0f];
+
+    /*
 	BOOL toLightStatus = (to_view != NULL) && ![to_view darkBackground];
 	if (!toLightStatus) {
 		// black bg: white text on black background
@@ -548,6 +553,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 						   statusBarBG.backgroundColor = [UIColor colorWithWhite:0.935 alpha:1];
 						 }];
 	}
+    */
 #endif
 }
 
