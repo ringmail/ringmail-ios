@@ -49,6 +49,7 @@
                              @"button_call":[UIImage imageNamed:@"ringmail_card_call.png"],
                              @"button_chat":[UIImage imageNamed:@"ringmail_card_chat.png"],
                              @"button_video":[UIImage imageNamed:@"ringmail_card_video.png"],
+                             @"image_quote":[UIImage imageNamed:@"ringmail_card_quote.png"],
                              };
     
     self.collectionView.backgroundColor = [UIColor colorWithHex:@"#33362f" alpha:1.0f];

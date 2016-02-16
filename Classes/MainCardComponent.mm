@@ -15,6 +15,7 @@
 
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
+#import "UIColor+Hex.h"
 
 @implementation MainCardComponent
 
@@ -103,16 +104,71 @@
                           }]
                       ]},
                     {lineComponent()},
-                    {[CKLabelComponent
-                      newWithLabelAttributes:{
-                          .string = text,
-                          .font = [UIFont fontWithName:@"AmericanTypewriter" size:20],
-                      }
-                      viewAttributes:{
-                          {@selector(setBackgroundColor:), [UIColor clearColor]},
-                          {@selector(setUserInteractionEnabled:), @NO},
-                      }
-                      size:{}]}
+                    {
+                        [CKStackLayoutComponent newWithView:{} size:{} style:{
+                            .direction = CKStackLayoutDirectionHorizontal,
+                            .alignItems = CKStackLayoutAlignItemsStretch
+                        }
+                       children:{
+                           {
+                               .flexGrow = YES,
+                               .component = [CKStackLayoutComponent newWithView:{} size:{} style:{
+                                   .direction = CKStackLayoutDirectionVertical,
+                                   .alignItems = CKStackLayoutAlignItemsStretch
+                               }
+                               children:{
+                                   {[CKInsetComponent
+                                     newWithInsets:{.left = 20, .right = 0, .top = 15, .bottom = 0}
+                                     component:
+                                     [CKLabelComponent
+                                      newWithLabelAttributes:{
+                                          .string = @"Monday, February 1: 1:20 PM",
+                                          .font = [UIFont fontWithName:@"SinhalaSangamMN" size:12],
+                                          .color = [UIColor colorWithHex:@"#70726d"],
+                                      }
+                                      viewAttributes:{
+                                          {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                          {@selector(setUserInteractionEnabled:), @NO},
+                                      }
+                                      size:{}]
+                                     ]},
+                                   {[CKInsetComponent
+                                     newWithInsets:{.left = 20, .right = 0, .top = 12, .bottom = 15}
+                                     component:
+                                     [CKLabelComponent
+                                      newWithLabelAttributes:{
+                                          .string = text,
+                                          .font = [UIFont fontWithName:@"SinhalaSangamMN" size:14],
+                                      }
+                                      viewAttributes:{
+                                          {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                          {@selector(setUserInteractionEnabled:), @NO},
+                                      }
+                                      size:{}]
+                                     ]}
+                               }]
+                           }, {
+                               [CKStackLayoutComponent newWithView:{} size:{} style:{
+                                   .direction = CKStackLayoutDirectionVertical,
+                                   .alignItems = CKStackLayoutAlignItemsStretch
+                               }
+                               children:{
+                                   {[CKInsetComponent
+                                     newWithInsets:{.left = 0, .right = 10, .top = 10, .bottom = 0}
+                                     component:
+                                       [CKImageComponent newWithImage:[context imageNamed:@"image_quote"] size:{
+                                           .height = 27,
+                                           .width = 27,
+                                       }]
+                                     ]},
+                                   {
+                                        .flexGrow = YES,
+                                       .component = [CKComponent newWithView:{} size:{}],
+                                   }
+                               }]
+                           }
+                       }]
+                    }
                 }]
              background:
                 [CKComponent

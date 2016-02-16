@@ -194,6 +194,7 @@
 		C4AA1A291C72D3CB003F86FD /* ringmail_card_video.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AA1A261C72D3CB003F86FD /* ringmail_card_video.png */; };
 		C4AA1A2A1C72D3CB003F86FD /* ringmail_card_call.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AA1A271C72D3CB003F86FD /* ringmail_card_call.png */; };
 		C4AA1A2B1C72D3CB003F86FD /* ringmail_card_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AA1A281C72D3CB003F86FD /* ringmail_card_chat.png */; };
+		C4AA1A391C72EE3B003F86FD /* ringmail_card_quote.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AA1A381C72EE3B003F86FD /* ringmail_card_quote.png */; };
 		C4B9B9D61BB9BEDF00677220 /* RgWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */; };
 		C4BC492C1BF9474000826264 /* RgChatQuestionSelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4BC492A1BF9474000826264 /* RgChatQuestionSelect.xib */; };
 		C4BC49361BF9477B00826264 /* RgChatQuestionSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC49351BF9477B00826264 /* RgChatQuestionSelect.m */; };
@@ -1158,6 +1159,7 @@
 		C4AA1A261C72D3CB003F86FD /* ringmail_card_video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_card_video.png; path = Resources/ringmail_card_video.png; sourceTree = "<group>"; };
 		C4AA1A271C72D3CB003F86FD /* ringmail_card_call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_card_call.png; path = Resources/ringmail_card_call.png; sourceTree = "<group>"; };
 		C4AA1A281C72D3CB003F86FD /* ringmail_card_chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_card_chat.png; path = Resources/ringmail_card_chat.png; sourceTree = "<group>"; };
+		C4AA1A381C72EE3B003F86FD /* ringmail_card_quote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_card_quote.png; path = Resources/ringmail_card_quote.png; sourceTree = "<group>"; };
 		C4B9B9D41BB9BEDF00677220 /* RgWebViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgWebViewDelegate.h; sourceTree = "<group>"; };
 		C4B9B9D51BB9BEDF00677220 /* RgWebViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgWebViewDelegate.m; sourceTree = "<group>"; };
 		C4BC492B1BF9474000826264 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RgChatQuestionSelect.xib; sourceTree = "<group>"; };
@@ -2716,6 +2718,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C4AA1A381C72EE3B003F86FD /* ringmail_card_quote.png */,
 				C4AA1A261C72D3CB003F86FD /* ringmail_card_video.png */,
 				C4AA1A271C72D3CB003F86FD /* ringmail_card_call.png */,
 				C4AA1A281C72D3CB003F86FD /* ringmail_card_chat.png */,
@@ -3502,6 +3505,7 @@
 				D3432A71158A45AF001C6B0B /* led_inprogress.png in Resources */,
 				D3432A73158A45AF001C6B0B /* led_disconnected.png in Resources */,
 				D37295DB158B3C9600D2C0C7 /* video_off_disabled.png in Resources */,
+				C4AA1A391C72EE3B003F86FD /* ringmail_card_quote.png in Resources */,
 				D36C43D1158F2F370048BA40 /* cell_call.png in Resources */,
 				D36C43D3158F2F370048BA40 /* cell_conference.png in Resources */,
 				D36C43D5158F2F370048BA40 /* header_conference.png in Resources */,
