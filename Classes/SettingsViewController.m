@@ -355,10 +355,15 @@
 	labelTitleView.backgroundColor = [UIColor clearColor];
 	labelTitleView.textColor = [UIColor colorWithRed:0x41 / 255.0f green:0x48 / 255.0f blue:0x4f / 255.0f alpha:1.0];
 	labelTitleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
-	labelTitleView.font = [UIFont boldSystemFontOfSize:20];
+	labelTitleView.font = [UIFont boldSystemFontOfSize:18];
 	labelTitleView.shadowOffset = CGSizeMake(0, 1);
 	labelTitleView.textAlignment = NSTextAlignmentCenter;
-	labelTitleView.text = viewController.title;
+	//labelTitleView.text = viewController.title;
+    NSString *ringLogin = [[LinphoneManager instance] ringLogin];
+#ifdef DEBUG
+    ringLogin = [ringLogin stringByAppendingString:@" [TESTING]"];
+#endif
+    labelTitleView.text = ringLogin;
 	[labelTitleView sizeToFit];
 	viewController.navigationItem.titleView = labelTitleView;
 	[super pushViewController:viewController animated:animated];

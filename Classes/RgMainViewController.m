@@ -148,10 +148,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_6_0 // attributed string only available since iOS6
 	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
 		// fix placeholder bar color in iOS7
-		UIColor *color = [UIColor grayColor];
-		NSAttributedString *placeHolderString =
-			[[NSAttributedString alloc] initWithString:NSLocalizedString(@"Enter an address", @"Enter an address")
-											attributes:@{NSForegroundColorAttributeName : color}];
+		UIColor *color = [UIColor whiteColor];
+        //NSLocalizedString(@"Enter an address", @"Enter an address")
+        NSString *intro = @"Enter #Hashtag or Email Address";
+		NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
+											attributes:@{NSForegroundColorAttributeName: color}];
 		addressField.attributedPlaceholder = placeHolderString;
 	}
 #endif

@@ -23,6 +23,12 @@
 {
     UIImage *cardImage = [context imageNamed:@"Card1"];
     cardImage = [cardImage thumbnailImage:40 transparentBorder:0 cornerRadius:20 interpolationQuality:kCGInterpolationHigh];
+    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"KannadaSangamMN" size:14] forKey:NSFontAttributeName];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." attributes:attrsDictionary];
+    
+    // Cheat and get a width constraint for the card text box
+    CGFloat textWidth = [[UIScreen mainScreen] bounds].size.width - 100;
+    
     return [super newWithComponent:
         [CKInsetComponent
         // Left and right inset of 30pts; centered vertically:
@@ -30,7 +36,16 @@
         component:
             [CKBackgroundLayoutComponent
             newWithComponent:
-                [CKStackLayoutComponent newWithView:{} size:{} style:{
+                [CKStackLayoutComponent newWithView:{
+                    [UIView class],
+                    {
+                        {@selector(setBackgroundColor:), [UIColor whiteColor]},
+                        {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOpacity:)),0.8f},
+                        {CKComponentViewAttribute::LayerAttribute(@selector(setShadowRadius:)),@3},
+                        {CKComponentViewAttribute::LayerAttribute(@selector(setShadowColor:)),(id)[[UIColor colorWithHex:@"#0077c3"] CGColor]},
+                        {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOffset:)),[NSValue valueWithCGSize:CGSizeMake(2, 2)]}
+                    }
+                } size:{} style:{
                     .direction = CKStackLayoutDirectionVertical,
                     .alignItems = CKStackLayoutAlignItemsStretch
                 }
@@ -55,8 +70,8 @@
                                    component:
                                       [CKLabelComponent
                                       newWithLabelAttributes:{
-                                          .string = text,
-                                          .font = [UIFont fontWithName:@"SinhalaSangamMN" size:16],
+                                          .string = @"chatty-cathy@dyl.com",
+                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:16],
                                       }
                                       viewAttributes:{
                                           {@selector(setBackgroundColor:), [UIColor clearColor]},
@@ -123,7 +138,7 @@
                                      [CKLabelComponent
                                       newWithLabelAttributes:{
                                           .string = @"Monday, February 1: 1:20 PM",
-                                          .font = [UIFont fontWithName:@"SinhalaSangamMN" size:12],
+                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:12],
                                           .color = [UIColor colorWithHex:@"#70726d"],
                                       }
                                       viewAttributes:{
@@ -135,16 +150,17 @@
                                    {[CKInsetComponent
                                      newWithInsets:{.left = 20, .right = 0, .top = 12, .bottom = 15}
                                      component:
-                                     [CKLabelComponent
-                                      newWithLabelAttributes:{
-                                          .string = text,
-                                          .font = [UIFont fontWithName:@"SinhalaSangamMN" size:14],
+                                     [CKTextComponent
+                                      newWithTextAttributes:{
+                                          .attributedString = attrString,
+                                          .lineBreakMode = NSLineBreakByWordWrapping,
                                       }
                                       viewAttributes:{
                                           {@selector(setBackgroundColor:), [UIColor clearColor]},
                                           {@selector(setUserInteractionEnabled:), @NO},
                                       }
-                                      size:{}]
+                                      accessibilityContext:{}
+                                      size:{.width = textWidth}]
                                      ]}
                                }]
                            }, {

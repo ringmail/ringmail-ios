@@ -31,7 +31,7 @@ static CKComponent *headerComponent(NSString *header, CardContext *context)
         [CKLabelComponent
          newWithLabelAttributes:{
              .string = header,
-             .font = [UIFont fontWithName:@"SinhalaSangamMN" size:12],
+             .font = [UIFont fontWithName:@"KannadaSangamMN" size:12],
              .alignment = NSTextAlignmentCenter,
              //.color = [UIColor colorWithHex:@"#70726d"],
              .color = [UIColor whiteColor],

@@ -392,7 +392,9 @@
 		tabBar:(NSNumber *)tabBar
 	  stateBar:(NSNumber *)stateBar
 	fullscreen:(NSNumber *)fullscreen {
-
+    
+    NSLog(@"CVC Input: tabbar:%@ fullscreen:%@", tabBar, fullscreen);
+    
 	UIViewController *oldContentViewController = self.contentViewController;
 	UIViewController *oldStateBarViewController = self.stateBarViewController;
 	UIViewController *oldTabBarViewController = self.tabBarViewController;
@@ -402,6 +404,8 @@
 	if (description != nil) {
 		oldViewDescription = currentViewDescription;
 		currentViewDescription = [description copy];
+        
+        NSLog(@"CVC Old: tabbar:%d fullscreen:%d", oldViewDescription.tabBarEnabled, oldViewDescription.fullscreen);
 
 		// Animate only with a previous screen
 		if (oldViewDescription != nil && viewTransition != nil) {
@@ -528,6 +532,8 @@
 		contentFrame.origin.y = origin;
 		stateBarFrame.origin.y = origin - stateBarFrame.size.height;
 	}*/
+    
+    NSLog(@"Update CVC tabbar:%d fullscreen:%d", currentViewDescription.tabBarEnabled, currentViewDescription.fullscreen);
 
 	// Resize TabBar
 	CGRect tabFrame = tabBarView.frame;
@@ -554,15 +560,19 @@
 				break;
 			}
 		}*/
-	} else {
-        contentFrame.origin.y = statusBarHeight;
-        contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
-		//tabFrame.origin.y = viewFrame.size.height;
 	}
-
-	if (currentViewDescription.fullscreen) {
+    else
+    {
+        int origin = IPHONE_STATUSBAR_HEIGHT;
+        contentFrame.origin.y = origin;
+       	contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
+    }
+    if (currentViewDescription.fullscreen) {
+        contentFrame.origin.x = 0;
         contentFrame.origin.y = 0;
         contentFrame.size.height = viewFrame.size.height;
+        contentFrame.size.width = viewFrame.size.width;
+		//tabFrame.origin.y = viewFrame.size.height;
 	}
 
 	// Set frames

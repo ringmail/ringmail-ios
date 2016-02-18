@@ -123,7 +123,7 @@
     }
     
     if (scrolledToBottomWithBuffer(scrollView.contentOffset, scrollView.contentSize, scrollView.contentInset, scrollView.bounds)) {
-        [self _enqueuePage:[_cardModelController fetchNewCardsPageWithCount:8]];
+        [self _enqueuePage:[_cardModelController fetchNewCardsPageWithCount:10]];
     }
 }
 
