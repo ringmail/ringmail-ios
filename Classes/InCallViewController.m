@@ -79,10 +79,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"InCallViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
-																 //tabBar:@"UICallBar"
-														  //tabBarEnabled:true
-																 tabBar:nil
-														  tabBarEnabled:false
+																 tabBar:@"UICallBar"
+														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:true
 														   portraitMode:true];

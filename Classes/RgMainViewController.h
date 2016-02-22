@@ -55,7 +55,7 @@
 //@property (nonatomic, strong) IBOutlet RgMainTableViewController* tableController;
 //@property (nonatomic, strong) IBOutlet MainCollectionViewController* mainController;
 @property (nonatomic, strong) IBOutlet UIView* mainView;
-@property (nonatomic, strong) IBOutlet UIViewController* mainViewController;
+@property (nonatomic, retain) MainCollectionViewController* mainViewController;
 
 - (IBAction)onAddContactClick: (id) event;
 - (IBAction)onBackClick: (id) event;

@@ -15,53 +15,70 @@
 
 #import "Card.h"
 #import "CardsPage.h"
+#import "LinphoneManager.h"
 
 @implementation CardModelController
 {
   NSInteger _numberOfObjects;
 }
 
+@synthesize mainList;
+@synthesize mainCount;
+
 - (instancetype)init
 {
-  if (self = [super init]) {
-    _numberOfObjects = 0;
-  }
-  return self;
+    if (self = [super init]) {
+        mainCount = [NSNumber numberWithInteger:0];
+        mainList = nil;
+    }
+    return self;
+}
+
+- (NSArray *)readMainList
+{
+    return [[[LinphoneManager instance] chatManager] dbGetMainList];
 }
 
 - (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count
 {
-  NSAssert(count >= 1, @"Count should be a positive integer");
-  NSArray *cards = generateCards(_numberOfObjects, count);
-  CardsPage *cardsPage = [[CardsPage alloc] initWithCards:cards
-                                                     position:_numberOfObjects];
-  _numberOfObjects += count;
-  return cardsPage;
-}
-
-#pragma mark - Random Card Generation
-
-static NSArray *generateCards(NSInteger start, NSInteger count)
-{
-    NSMutableArray *_cards = [NSMutableArray new];
-    if (start == 0)
+    NSAssert(count >= 1, @"Count should be a positive integer");
+    if (mainList == nil)
     {
-        for (NSUInteger i = 0; i < count; i++)
+        mainList = [self readMainList];
+    }
+    NSMutableArray *_cards = [NSMutableArray new];
+    NSInteger added = 0;
+    for (NSUInteger i = 0; i < count; i++)
+    {
+        if ([mainCount intValue] == 0 && i == 0)
         {
-            NSNumber *headerCell = [NSNumber numberWithBool:0];
-            NSDictionary *cardInfo = @{@"text":@"Card Text"};
-            if (i == 0)
-            {
-                headerCell = [NSNumber numberWithBool:1];
-                cardInfo = @{@"text":@"Recent Activity"};
-            }
-            Card *card = [[Card alloc] initWithText:cardInfo[@"text"]
+            NSNumber *headerCell = [NSNumber numberWithBool:1];
+            Card *card = [[Card alloc] initWithData:@{@"text": @"Recent Activity"}
                                              header:headerCell];
             [_cards addObject:card];
-            //i = count;
+            added++;
+        }
+        else
+        {
+            NSInteger mainIndex = [mainCount intValue] + i - 1;
+            if ([mainList count] > mainIndex)
+            {
+                NSDictionary *itemData = mainList[mainIndex];
+                if (itemData != nil)
+                {
+                    // Todo: translate to name
+                    Card *card = [[Card alloc] initWithData:itemData
+                                            header:[NSNumber numberWithBool:0]];
+                    [_cards addObject:card];
+                    added++;
+                }
+            }
         }
     }
-    return _cards;
+    CardsPage *cardsPage = [[CardsPage alloc] initWithCards:_cards
+                                                     position:[mainCount integerValue]];
+    mainCount = [NSNumber numberWithInteger:added];
+    return cardsPage;
 }
 
 @end

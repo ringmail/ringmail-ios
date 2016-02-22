@@ -25,7 +25,7 @@
 static CKComponent *cardComponent(Card *card, CardContext *context)
 {
   return [MainCardComponent
-          newWithText:card.text
+          newWithData:card.data
           context:context];
 }
 

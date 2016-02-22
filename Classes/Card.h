@@ -13,10 +13,12 @@
 
 @interface Card : NSObject
 
-@property (nonatomic, readonly, copy) NSString *text;
 @property (nonatomic, readonly, copy) NSNumber *header;
+@property (nonatomic, readonly, copy) NSDictionary *data;
 
-- (instancetype)initWithText:(NSString *)text
+- (instancetype)initWithData:(NSDictionary *)data
                       header:(NSNumber *)header;
+
+- (NSNumber*)sessionId;
 
 @end

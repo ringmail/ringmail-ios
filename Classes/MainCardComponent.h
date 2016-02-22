@@ -19,6 +19,6 @@
  */
 @interface MainCardComponent : CKCompositeComponent
 
-+ (instancetype)newWithText:(NSString *)text context:(CardContext *)context;
++ (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context;
 
 @end

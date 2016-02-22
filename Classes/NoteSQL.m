@@ -60,7 +60,7 @@
             sql = [sql stringByAppendingString:[NSString stringWithFormat:@" WHERE %@", where]];
         }
     }
-    NSLog(@"Note SQL: %@", sql);
+    //NSLog(@"Note SQL: %@", sql);
     NSMutableArray* result = [NSMutableArray array];
     FMResultSet* rs = [database executeQuery:sql withArgumentsInArray:paramList];
     while ([rs next])
@@ -100,7 +100,7 @@
         {
             sql = [sql stringByAppendingString:[NSString stringWithFormat:@" WHERE %@", delete]];
         }
-        NSLog(@"Note SQL: %@", sql);
+        //NSLog(@"Note SQL: %@", sql);
         BOOL ok = [database executeUpdate:sql withArgumentsInArray:paramList];
         if (! ok)
         {
@@ -142,7 +142,7 @@
                 sql = [sql stringByAppendingString:[NSString stringWithFormat:@" WHERE %@", where]];
             }
         }
-        NSLog(@"Note SQL: %@", sql);
+        //NSLog(@"Note SQL: %@", sql);
         BOOL ok = [database executeUpdate:sql withArgumentsInArray:paramList];
         if (! ok)
         {
@@ -253,3 +253,33 @@
 
 @end
 
+@implementation NSDate (Strftime)
+
+- (NSString*)strftime:(NSString*)format
+{
+    NSDate *date = [NSDate date];
+    time_t time = [date timeIntervalSince1970];
+    struct tm timeStruct;
+    gmtime_r(&time, &timeStruct);
+    char buffer[80];
+    strftime(buffer, 80, [format cString], &timeStruct);
+    NSString *dateStr = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
+    return dateStr;
+}
+
+- (NSString*)strftime
+{
+    return [self strftime:@"%F %TZ"];
+}
+
++ (NSDate *)parse:(NSString *)input
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ssZ"];
+    NSDate *result = [dateFormatter dateFromString:input];
+    return result;
+}
+
+@end

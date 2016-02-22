@@ -33,7 +33,7 @@ static NSString *const oscarWilde = @"Oscar Wilde";
     
     if ([card.header boolValue])
     {
-        InteractiveCardComponent *c = [super newWithComponent:[HeaderComponent newWithHeader:card.text context:context]];
+        InteractiveCardComponent *c = [super newWithComponent:[HeaderComponent newWithHeader:[card.data objectForKey:@"text"] context:context]];
         return c;
     }
 

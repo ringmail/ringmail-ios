@@ -13,14 +13,24 @@
 
 @implementation Card
 
-- (instancetype)initWithText:(NSString *)text
+- (instancetype)initWithData:(NSDictionary *)data
                       header:(NSNumber *)header
 {
   if (self = [super init]) {
-    _text = [text copy];
+    _data = [data copy];
     _header = [header copy];
   }
   return self;
+}
+
+- (NSNumber*)sessionId
+{
+    if ([_header boolValue])
+    {
+        return nil;
+    }
+    NSNumber *result = [_data objectForKey:@"id"];
+    return result;
 }
 
 @end

@@ -19,12 +19,57 @@
 
 @implementation MainCardComponent
 
-+ (instancetype)newWithText:(NSString *)text context:(CardContext *)context
++ (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     UIImage *cardImage = [context imageNamed:@"Card1"];
     cardImage = [cardImage thumbnailImage:40 transparentBorder:0 cornerRadius:20 interpolationQuality:kCGInterpolationHigh];
     NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"KannadaSangamMN" size:14] forKey:NSFontAttributeName];
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." attributes:attrsDictionary];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[data objectForKey:@"last_message"] attributes:attrsDictionary];
+    
+    NSNumber *timeCall = [data objectForKey:@"call_time"];
+    NSNumber *timeChat = [data objectForKey:@"last_time"];
+    NSNumber *timeLatest = nil;
+    if (timeCall != nil && ! [timeCall isEqual:[NSNull null]])
+    {
+        if (timeChat != nil && ! [timeChat isEqual:[NSNull null]])
+        {
+            if (timeChat > timeCall)
+            {
+                timeLatest = timeChat;
+            }
+            else
+            {
+                timeLatest = timeCall;
+            }
+        }
+        else
+        {
+            timeLatest = timeCall;
+        }
+    }
+    else if (timeChat != nil && ! [timeChat isEqual:[NSNull null]])
+    {
+        timeLatest = timeChat;
+    }
+    NSString *latest = @"";
+    if ([timeLatest boolValue])
+    {
+        //NSDate *dateLatest = [NSDate dateWithTimeIntervalSince1970:[timeLatest doubleValue]];
+        NSDate *dateLatest;
+        dateLatest = [data objectForKey:@"timestamp"]; // replace with session timestamp
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *locale = [NSLocale currentLocale];
+        [dateFormatter setLocale:locale];
+        [dateFormatter setDoesRelativeDateFormatting:YES];
+        
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        latest = [dateFormatter stringFromDate:dateLatest];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+        latest = [latest stringByAppendingString:@": "];
+        latest = [latest stringByAppendingString:[dateFormatter stringFromDate:dateLatest]];
+    }
     
     // Cheat and get a width constraint for the card text box
     CGFloat textWidth = [[UIScreen mainScreen] bounds].size.width - 100;
@@ -70,7 +115,7 @@
                                    component:
                                       [CKLabelComponent
                                       newWithLabelAttributes:{
-                                          .string = @"chatty-cathy@dyl.com",
+                                          .string = [data objectForKey:@"session_tag"],
                                           .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:16],
                                       }
                                       viewAttributes:{
@@ -137,7 +182,7 @@
                                      component:
                                      [CKLabelComponent
                                       newWithLabelAttributes:{
-                                          .string = @"Monday, February 1: 1:20 PM",
+                                          .string = latest,
                                           .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:12],
                                           .color = [UIColor colorWithHex:@"#70726d"],
                                       }

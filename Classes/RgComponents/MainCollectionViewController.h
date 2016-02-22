@@ -14,6 +14,8 @@
 
 @interface MainCollectionViewController : UICollectionViewController
 
+- (void)updateCollection;
+
 @end
 
 #endif /* MainCollectionViewController_h */

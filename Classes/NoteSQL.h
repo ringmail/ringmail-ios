@@ -38,5 +38,15 @@
 
 @end
 
+@interface NSDate (Strftime)
+
+- (NSString*)strftime:(NSString*)format;
+
+- (NSString*)strftime;
+
++ (NSDate *)parse:(NSString *)input;
+
+@end
+
 
 

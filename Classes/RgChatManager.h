@@ -51,12 +51,16 @@
 - (NSArray *)dbGetMessages:(NSString *)from;
 - (NSArray *)dbGetMessages:(NSString *)from uuid:(NSString*)uuid;
 - (NSString *)dbGetMessageStatusByUUID:(NSString*)uuid;
-- (void)dbInsertMessage:(NSString *)from type:(NSString *)type data:(NSObject*)data uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl;
+- (void)dbInsertMessage:(NSString *)from type:(NSString *)type data:(NSDictionary*)params uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl;
 - (NSNumber *)dbGetSessionUnread;
 - (void)dbDeleteSessionID:(NSString *)from;
 - (NSString *)dbGetSessionByMD5:(NSString*)lookup;
 - (NSData *)dbGetMessageData:(NSNumber*)msgId;
 - (void)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid;
+
+// Component data sources
+- (NSArray *)dbGetMainList;
+- (NSArray *)dbGetMainList:(NSNumber *)session;
 
 - (void)dbInsertCall:(NSDictionary*)callData;
 - (void)dbUpdateCall:(NSDictionary*)callData;

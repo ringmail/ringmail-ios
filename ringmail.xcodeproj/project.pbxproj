@@ -2511,8 +2511,6 @@
 				C44F5E061C307BA9008E4F38 /* RgMainCell.h */,
 				C44F5E041C307B92008E4F38 /* RgMainCell.m */,
 				C44F5E011C307B56008E4F38 /* RgMainCell.xib */,
-				C44F5E071C31E341008E4F38 /* NoteSQL.h */,
-				C44F5E081C31E341008E4F38 /* NoteSQL.m */,
 			);
 			name = RgElements;
 			sourceTree = "<group>";
@@ -2535,6 +2533,8 @@
 		D326483415887D4400930C67 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C44F5E071C31E341008E4F38 /* NoteSQL.h */,
+				C44F5E081C31E341008E4F38 /* NoteSQL.m */,
 				D37E3ECA1619C27A0087659A /* CAAnimationBlocks */,
 				D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */,
 				D380801115C29984005BE9BC /* ColorSpaceUtilities.h */,

@@ -63,11 +63,6 @@
                         <outlet property="delegate" destination="162" id="169"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" id="2sL-u0-SfT" userLabel="callBarView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="160" userLabel="videoCameraSwitch" customClass="UICamSwitch">
                     <rect key="frame" x="0.0" y="35" width="85" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -92,7 +87,6 @@
                 <outlet property="view" destination="106" id="166"/>
             </connections>
         </tableViewController>
-        <viewController id="WjI-SU-fer" userLabel="callBar" customClass="UICallBar"/>
     </objects>
     <resources>
         <image name="switch_camera_default.png" width="151" height="51"/>

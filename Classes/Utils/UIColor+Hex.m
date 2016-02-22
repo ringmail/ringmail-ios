@@ -1,12 +1,12 @@
 //
-//  UIColor+CreateMethods.m
+//  UIColor+Hex.m
 //
 //  Created by Tomasz Rybakiewicz on 1/13/12.
 //
 
 #import "UIColor+Hex.h"
 
-@implementation UIColor (CreateMethods)
+@implementation UIColor (Hex)
 
 + (UIColor*)colorWith8BitRed:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue alpha:(CGFloat)alpha {
     return [UIColor colorWithRed:(red/255.0) green:(green/255.0) blue:(blue/255.0) alpha:alpha];

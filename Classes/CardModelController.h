@@ -19,11 +19,16 @@
  */
 @interface CardModelController : NSObject
 
+@property (nonatomic, retain) NSArray *mainList;
+@property (nonatomic, retain) NSNumber *mainCount;
+
 /**
  Gets more quotes to add to the list.
  @param count The number of Card models to fetch.
  @return A page of quotes containing the end insertion position and the list of quotes to insert.
  */
 - (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count;
+
+- (NSArray *)readMainList;
 
 @end

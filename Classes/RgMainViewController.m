@@ -184,6 +184,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [mainView addSubview:mainController.view];
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
+    mainViewController = mainController;
     
 	[addressField setText:@""];
 	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
@@ -272,6 +273,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)textReceivedEvent:(NSNotification *)notif {
+    [mainViewController updateCollection];
     //[mainController loadData];
 }
 
