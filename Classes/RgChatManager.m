@@ -17,6 +17,7 @@
 @implementation RgChatManager
 
 @synthesize chatPassword;
+@synthesize databaseQueue;
 
 - (id)init
 {
@@ -25,6 +26,7 @@
         NSString *queueLabel = [NSString stringWithFormat:@"%@.work.%@", [self class], self];
         self.workQueue = dispatch_queue_create([queueLabel UTF8String], 0);
         self.chatPassword = @"";
+        self.databaseQueue = nil;
         [self setupDatabase];
         [self setupStream];
     }
@@ -678,15 +680,26 @@
 
 - (FMDatabaseQueue *)database
 {
-    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-#ifdef DEBUG
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_dev"];
-#else
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail"];
-#endif
-    dbPath = [dbPath stringByAppendingString:@"_v1.2.2.db"];
-    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
-    return queue;
+    if (databaseQueue == nil)
+    {
+        NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    #ifdef DEBUG
+        NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_dev"];
+        BOOL remove = NO;
+    #else
+        NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail"];
+        BOOL remove = NO;
+    #endif
+        dbPath = [dbPath stringByAppendingString:@"_v1.2.2.db"];
+        if (remove)
+        {
+            NSFileManager *manager = [NSFileManager defaultManager];
+            NSError *error = nil;
+            [manager removeItemAtPath:dbPath error:&error];
+        }
+        self.databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
+    }
+    return self.databaseQueue;
 }
 
 - (void)setupDatabase

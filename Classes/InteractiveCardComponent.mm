@@ -37,11 +37,12 @@ static NSString *const oscarWilde = @"Oscar Wilde";
         return c;
     }
 
-  CKComponent *overlay = nil;
+//  CKComponent *overlay = nil;
 
   InteractiveCardComponent *c =
   [super newWithComponent:
-   [CKStackLayoutComponent
+   [CardComponent newWithCard:card context:context]
+   /*[CKStackLayoutComponent
     newWithView:{
       [UIView class],
       {CKComponentTapGestureAttribute(@selector(didTap))}
@@ -55,10 +56,11 @@ static NSString *const oscarWilde = @"Oscar Wilde";
         newWithComponent:[CardComponent newWithCard:card context:context]
         overlay:overlay]},
       //{hairlineComponent()}
-    }]];
-  if (c) {
-    c->_overlay = overlay;
-  }
+    }]*/
+   ];
+//  if (c) {
+//    c->_overlay = overlay;
+//  }
   return c;
 }
 

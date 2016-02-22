@@ -37,6 +37,7 @@
 @property (nonatomic, strong) XMPPMessageDeliveryReceipts *xmppDeliveryReceipts;
 @property (nonatomic, strong) XMPPJID *JID;
 @property (atomic, strong) NSString* chatPassword;
+@property (nonatomic, retain) FMDatabaseQueue *databaseQueue;
 
 - (BOOL)isConnected;
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
