@@ -48,13 +48,12 @@ static NSInteger const pageSize = 10;
     // thread. The preloaded images are then cached on the component context for use inside components.
     NSDictionary *images = @{
                              @"Card1":[UIImage imageNamed:@"avatar_unknown_small.png"],
-                             @"button_call":[UIImage imageNamed:@"ringmail_card_call.png"],
-                             @"button_chat":[UIImage imageNamed:@"ringmail_card_chat.png"],
-                             @"button_video":[UIImage imageNamed:@"ringmail_card_video.png"],
-                             @"image_quote":[UIImage imageNamed:@"ringmail_card_quote.png"],
+                             @"button_call":[UIImage imageNamed:@"phone.png"],
+                             @"button_chat":[UIImage imageNamed:@"quote.png"],
+                             @"button_video":[UIImage imageNamed:@"camera.png"],
                              };
     
-    self.collectionView.backgroundColor = [UIColor colorWithHex:@"#33362f" alpha:1.0f];
+    self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:1.0f];
     self.collectionView.delegate = self;
     
     CardContext *context = [[CardContext alloc] initWithImages:images];

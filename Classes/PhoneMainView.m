@@ -531,8 +531,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 	// In iOS7, the app has a black background on dialer, incoming and incall, so we have to adjust the
 	// status bar style for each transition to/from these views
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    statusBarBG.backgroundColor = [UIColor colorWithHex:@"#33362f" alpha:1.0f];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    statusBarBG.backgroundColor = [UIColor colorWithHex:@"#F4F4F4" alpha:1.0f];
 
     /*
 	BOOL toLightStatus = (to_view != NULL) && ![to_view darkBackground];

@@ -33,8 +33,7 @@ static CKComponent *headerComponent(NSString *header, CardContext *context)
              .string = header,
              .font = [UIFont fontWithName:@"KannadaSangamMN" size:12],
              .alignment = NSTextAlignmentCenter,
-             //.color = [UIColor colorWithHex:@"#70726d"],
-             .color = [UIColor whiteColor],
+             .color = [UIColor colorWithHex:@"#33362f"],
          }
          viewAttributes:{
              {@selector(setBackgroundColor:), [UIColor clearColor]},

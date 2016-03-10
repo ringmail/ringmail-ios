@@ -117,6 +117,7 @@
                                       newWithLabelAttributes:{
                                           .string = [data objectForKey:@"session_tag"],
                                           .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:16],
+                                          .color = [UIColor colorWithHex:@"#33362f"],
                                       }
                                       viewAttributes:{
                                           {@selector(setBackgroundColor:), [UIColor clearColor]},
@@ -136,20 +137,20 @@
                                            newWithInsets:{.left = 0, .right = 0, .top = INFINITY, .bottom = INFINITY}
                                            component:
                                               [CKImageComponent newWithImage:[context imageNamed:@"button_video"] size:{
-                                                  .height = 27,
-                                                  .width = 27,
+                                                  .height = 30,
+                                                  .width = 30,
                                               }]
                                            ]
                                       }, {
                                           [CKInsetComponent
-                                           newWithInsets:{.left = 10, .right = 0, .top = INFINITY, .bottom = INFINITY}
+                                           newWithInsets:{.left = 15, .right = 2, .top = INFINITY, .bottom = INFINITY}
                                            component:
                                               [CKImageComponent newWithImage:[context imageNamed:@"button_call"] size:{
-                                                  .height = 27,
-                                                  .width = 27,
+                                                  .height = 30,
+                                                  .width = 30,
                                               }]
                                            ]
-                                      }, {
+                                      }, /*{
                                           [CKInsetComponent
                                            newWithInsets:{.left = 10, .right = 5, .top = INFINITY, .bottom = INFINITY}
                                            component:
@@ -158,7 +159,7 @@
                                                   .width = 27,
                                               }]
                                            ]
-                                      },
+                                      },*/
                                   }]
                               }
                           }]
@@ -215,11 +216,11 @@
                                }
                                children:{
                                    {[CKInsetComponent
-                                     newWithInsets:{.left = 0, .right = 10, .top = 10, .bottom = 0}
+                                     newWithInsets:{.left = 0, .right = 7, .top = 7, .bottom = 0}
                                      component:
-                                       [CKImageComponent newWithImage:[context imageNamed:@"image_quote"] size:{
-                                           .height = 27,
-                                           .width = 27,
+                                       [CKImageComponent newWithImage:[context imageNamed:@"button_chat"] size:{
+                                           .height = 30,
+                                           .width = 30,
                                        }]
                                      ]},
                                    {
@@ -253,7 +254,7 @@ static CKComponent *lineComponent()
             newWithView:{
                 [UIView class],
                 {
-                    {@selector(setBackgroundColor:), [UIColor blackColor]},
+                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#33362f"]},
                 }
             }
             size:{.height = 1 / [UIScreen mainScreen].scale}];

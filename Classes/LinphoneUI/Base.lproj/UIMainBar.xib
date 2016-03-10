@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -25,6 +25,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ringmail_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="pkJ-2Y-4Pr">
+                    <rect key="frame" x="0.0" y="0.0" width="124" height="50"/>
+                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="dialer">
                     <rect key="frame" x="120" y="0.0" width="40" height="50"/>
                     <accessibility key="accessibilityConfiguration" label="Dialer"/>
@@ -33,10 +36,10 @@
                         <constraint firstAttribute="height" constant="50" id="hR6-kA-HxY"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="ringmail_top_home_default.png">
+                    <state key="normal" image="menu-home.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="ringmail_top_home_selected.png"/>
+                    <state key="selected" image="menu-home_active.png"/>
                     <state key="highlighted" image="ringmail_top_home_selected.png"/>
                     <connections>
                         <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
@@ -51,11 +54,11 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" image="ringmail_top_hashtags_default.png">
+                    <state key="normal" image="menu-hash.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="ringmail_top_hashtags_selected.png">
+                    <state key="selected" image="menu-hash_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted">
@@ -74,11 +77,11 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" image="ringmail_top_contacts_default.png">
+                    <state key="normal" image="menu-contact.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="ringmail_top_contacts_selected.png">
+                    <state key="selected" image="menu-contact_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted">
@@ -97,11 +100,11 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" image="ringmail_top_favs_default.png">
+                    <state key="normal" image="menu-star.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="ringmail_top_favs_selected.png">
+                    <state key="selected" image="menu-star_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted" image="ringmail_top_favs_default.png">
@@ -152,11 +155,11 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" image="ringmail_top_settings_default.png">
+                    <state key="normal" image="menu-more.png">
                         <color key="titleColor" red="0.42745098039215684" green="0.52549019607843139" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="ringmail_top_settings_selected.png">
+                    <state key="selected" image="menu-more_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted" image="ringmail_top_settings_default.png">
@@ -198,11 +201,8 @@
                         <constraint firstItem="39" firstAttribute="width" secondItem="37" secondAttribute="width" id="yxe-m3-Pcu"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ringmail_top_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="pkJ-2Y-4Pr">
-                    <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
-                </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.20000000000000001" green="0.21176470588235294" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="5" firstAttribute="leading" secondItem="7" secondAttribute="trailing" id="2Ks-oa-Ibc"/>
                 <constraint firstItem="6" firstAttribute="leading" secondItem="8" secondAttribute="trailing" id="7n4-BY-8KA"/>
@@ -212,21 +212,24 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="898" y="356.5"/>
+            <point key="canvasLocation" x="799" y="353"/>
         </view>
     </objects>
     <resources>
         <image name="history_notification.png" width="43" height="43"/>
-        <image name="ringmail_top_contacts_default.png" width="80" height="100"/>
-        <image name="ringmail_top_contacts_selected.png" width="80" height="100"/>
+        <image name="menu-contact.png" width="40" height="50"/>
+        <image name="menu-contact_active.png" width="40" height="50"/>
+        <image name="menu-hash.png" width="40" height="50"/>
+        <image name="menu-hash_active.png" width="40" height="50"/>
+        <image name="menu-home.png" width="40" height="50"/>
+        <image name="menu-home_active.png" width="40" height="50"/>
+        <image name="menu-more.png" width="40" height="50"/>
+        <image name="menu-more_active.png" width="40" height="50"/>
+        <image name="menu-star.png" width="40" height="50"/>
+        <image name="menu-star_active.png" width="40" height="50"/>
+        <image name="ringmail_logo.png" width="124" height="50"/>
         <image name="ringmail_top_favs_default.png" width="80" height="100"/>
-        <image name="ringmail_top_favs_selected.png" width="80" height="100"/>
-        <image name="ringmail_top_hashtags_default.png" width="80" height="100"/>
-        <image name="ringmail_top_hashtags_selected.png" width="80" height="100"/>
-        <image name="ringmail_top_home_default.png" width="80" height="100"/>
         <image name="ringmail_top_home_selected.png" width="80" height="100"/>
-        <image name="ringmail_top_logo.png" width="180" height="100"/>
         <image name="ringmail_top_settings_default.png" width="80" height="100"/>
-        <image name="ringmail_top_settings_selected.png" width="80" height="100"/>
     </resources>
 </document>
