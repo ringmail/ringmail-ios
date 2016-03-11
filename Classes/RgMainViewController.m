@@ -27,6 +27,7 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
+#import "UIColor+Hex.h"
 
 #include "linphone/linphonecore.h"
 
@@ -108,6 +109,21 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kRgTextReceived
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textUpdatedEvent:)
+                                                 name:kRgTextUpdate
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mainRefreshEvent:)
+                                                 name:kRgMainRefresh
+                                               object:nil];
+    
+  	[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(setAddressEvent:)
+                                             name:kRgSetAddress
+                                           object:nil];
+    
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
 	// xcode would result in the callbutton being disabled all the time.
@@ -147,9 +163,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	/*if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
 		// fix placeholder bar color in iOS7
-		UIColor *color = [UIColor whiteColor];
+        UIColor *color = [UIColor whiteColor];
+        // Tint #02c7da
         //NSLocalizedString(@"Enter an address", @"Enter an address")
-        NSString *intro = @"Enter #Hashtag or Email Address";
+        NSString *intro = @" Enter #Hashtag or Email Address";
 		NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
 											attributes:@{NSForegroundColorAttributeName: color}];
 		addressField.attributedPlaceholder = placeHolderString;
@@ -161,9 +178,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	// Remove observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
-
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
-    
 }
 
 - (void)viewDidLoad {
@@ -193,16 +208,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[videoCameraSwitch setHidden:FALSE];
 		}
 	}
-    
-  	[[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(setAddressEvent:)
-                                             name:kRgSetAddress
-                                           object:nil];
 }
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSetAddress object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextReceived object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextUpdate object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -272,7 +285,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)textReceivedEvent:(NSNotification *)notif {
     [mainViewController updateCollection];
-    //[mainController loadData];
+}
+
+- (void)textUpdatedEvent:(NSNotification *)notif {
+    [mainViewController updateCollection];
+}
+
+- (void)mainRefreshEvent:(NSNotification *)notif {
+    [mainViewController updateCollection];
 }
 
 #pragma mark - Debug Functions
@@ -487,8 +507,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[eraseButton setEnabled:FALSE];
 		[addCallButton setEnabled:FALSE];
 		[transferButton setEnabled:FALSE];
-        messageButton.hidden = NO;
-        callButton.hidden = NO;
+        messageButton.hidden = YES;
+        callButton.hidden = YES;
         goButton.hidden = YES;
 	}
 }

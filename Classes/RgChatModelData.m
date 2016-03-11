@@ -25,7 +25,13 @@
          *  If you are not using avatars, ignore this.
          */
         
-        //self.avatars = @{ };
+        JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"JSQ"
+              backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
+                    textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
+                         font:[UIFont systemFontOfSize:14.0f]
+                     diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        
+        self.avatars = @{ @"avatar":jsqImage };
         //self.users = @{ };
         
         self.messages = [NSMutableArray array];
@@ -40,7 +46,8 @@
          *  Be sure to create your bubble images one time and reuse them for good performance.
          *
          */
-        JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+        //JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+        JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage imageNamed:@"bubble_ringmail"] capInsets:UIEdgeInsetsZero];
         self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
         self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
         

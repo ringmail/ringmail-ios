@@ -19,6 +19,8 @@
  */
 @interface MainCardComponent : CKCompositeComponent
 
+@property (nonatomic, retain) NSDictionary *cardData;
+
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context;
 
 @end

@@ -1035,6 +1035,7 @@
     FMDatabaseQueue *dbq = [self database];
     NSNumber* session = [self dbGetSessionID:from];
     __block NSMutableArray *result = [NSMutableArray array];
+    __block BOOL notify = NO;
     [dbq inDatabase:^(FMDatabase *db) {
         FMResultSet *rs;
         if (uuid)
@@ -1057,9 +1058,22 @@
             }];
         }
         [rs close];
-        [db executeUpdate:@"UPDATE session SET unread = 0 WHERE session_tag = ?", from];
+        FMResultSet *urs = [db executeQuery:@"SELECT unread FROM session WHERE session_tag = ?", from];
+        if ([urs next])
+        {
+             if ([urs longForColumnIndex:0] > 0)
+             {
+                 [db executeUpdate:@"UPDATE session SET unread = 0 WHERE session_tag = ?", from];
+                 notify = YES;
+             }
+        }
+        [urs close];
     }];
     [dbq close];
+    if (notify)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+    }
     result = [NSMutableArray arrayWithArray:[[result reverseObjectEnumerator] allObjects]];
     return result;
 }
