@@ -54,7 +54,7 @@ static NSInteger const pageSize = 10;
                              @"image_quote":[UIImage imageNamed:@"ringmail_card_quote.png"],
                              };
     
-    self.collectionView.backgroundColor = [UIColor colorWithHex:@"#33362f" alpha:1.0f];
+    self.collectionView.backgroundColor = [UIColor colorWithHex:@"#e4e5e9" alpha:1.0f];
     self.collectionView.delegate = self;
     
     CardContext *context = [[CardContext alloc] initWithImages:images];

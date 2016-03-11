@@ -20,7 +20,13 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - CocoaAsyncSocket (7.4.2)
+  - CocoaAsyncSocket (7.4.3):
+    - CocoaAsyncSocket/All (= 7.4.3)
+  - CocoaAsyncSocket/All (7.4.3):
+    - CocoaAsyncSocket/GCD
+    - CocoaAsyncSocket/RunLoop
+  - CocoaAsyncSocket/GCD (7.4.3)
+  - CocoaAsyncSocket/RunLoop (7.4.3)
   - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions (= 1.9.2)
   - CocoaLumberjack/Core (1.9.2)
@@ -29,20 +35,18 @@ PODS:
   - ComponentKit (0.14)
   - CRMediaPickerController (0.0.1)
   - DXTableViewModel (0.1.0)
-  - FMDB (2.5):
-    - FMDB/standard (= 2.5)
-  - FMDB/common (2.5)
-  - FMDB/standard (2.5):
-    - FMDB/common
+  - FMDB (2.6):
+    - FMDB/standard (= 2.6)
+  - FMDB/standard (2.6)
   - JSQMessagesViewController (HEAD based on 7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - leveldb-library (1.18.1)
-  - libPhoneNumber-iOS (0.8.10)
+  - leveldb-library (1.18.2)
+  - libPhoneNumber-iOS (0.8.11)
   - NSHash (1.0.2)
   - NYXImagesKit (2.3)
-  - Objective-LevelDB (2.1.4):
-    - leveldb-library (~> 1.18)
+  - Objective-LevelDB (2.1.5):
+    - leveldb-library (~> 1.18.2)
   - ObjectiveSugar (1.1.0)
   - OpenCV (3.0.0)
   - RegexKitLite (4.0)
@@ -220,19 +224,19 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
+  CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
   ComponentKit: 11d9177b5e9940c456e7486d8f5a25c26d9ca5f2
   CRMediaPickerController: 65e1f968dea26a7759bb1fb4a1518f5b8cd6fba9
   DXTableViewModel: 27583f277f94e3ad5ffb0575cd84c39918319aa6
-  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  leveldb-library: 4b0b6d3bdf102d072d6cf6e046615a6f88ea4bf1
-  libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d
+  leveldb-library: ef0453697c0fda3a9e550e5650e52976e6724548
+  libPhoneNumber-iOS: ded33fab2c51ee847979556aa504c9e70f32d703
   NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
-  Objective-LevelDB: 016f27f24c9976527938a40f043b585e82c27cfc
+  Objective-LevelDB: fa075efd9d0be645aee51847cc3ee70cdadb80ce
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OpenCV: be07c02f0d8f125f1d40d261e66a66cb66ece3b3
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661

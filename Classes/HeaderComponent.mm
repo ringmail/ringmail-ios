@@ -26,15 +26,15 @@ static CKComponent *headerComponent(NSString *header, CardContext *context)
 {
     return [CKInsetComponent
     // Left and right inset of 30pts; centered vertically:
-    newWithInsets:{.top = 10, .bottom = 10}
+    newWithInsets:{.top = 10, .bottom = 6}
     component:
         [CKLabelComponent
          newWithLabelAttributes:{
              .string = header,
-             .font = [UIFont fontWithName:@"KannadaSangamMN" size:12],
+             .font = [UIFont fontWithName:@"KannadaSangamMN" size:14],
              .alignment = NSTextAlignmentCenter,
-             //.color = [UIColor colorWithHex:@"#70726d"],
-             .color = [UIColor whiteColor],
+             .color = [UIColor colorWithHex:@"#33362f"],
+             //.color = [UIColor whiteColor],
          }
          viewAttributes:{
              {@selector(setBackgroundColor:), [UIColor clearColor]},

@@ -10,6 +10,7 @@
  */
 
 #import "MainCardComponent.h"
+#import "Card.h"
 
 #import "CardContext.h"
 
@@ -18,6 +19,8 @@
 #import "UIColor+Hex.h"
 
 @implementation MainCardComponent
+
+@synthesize cardData;
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
@@ -65,6 +68,7 @@
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
         [dateFormatter setDateStyle:NSDateFormatterLongStyle];
         latest = [dateFormatter stringFromDate:dateLatest];
+        
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         [dateFormatter setDateStyle:NSDateFormatterNoStyle];
         latest = [latest stringByAppendingString:@": "];
@@ -74,23 +78,40 @@
     // Cheat and get a width constraint for the card text box
     CGFloat textWidth = [[UIScreen mainScreen] bounds].size.width - 100;
     
-    return [super newWithComponent:
+    CKComponentViewConfiguration vcfg;
+    if ([[data objectForKey:@"unread"] integerValue] > 0)
+    {
+        vcfg = {
+            [UIView class],
+            {
+                {@selector(setBackgroundColor:), [UIColor whiteColor]},
+                {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOpacity:)),0.8f},
+                {CKComponentViewAttribute::LayerAttribute(@selector(setShadowRadius:)),@3},
+                {CKComponentViewAttribute::LayerAttribute(@selector(setShadowColor:)),(id)[[UIColor colorWithHex:@"#0077c3"] CGColor]},
+                {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOffset:)),[NSValue valueWithCGSize:CGSizeMake(2, 2)]}
+            }
+        };
+    }
+    else
+    {
+        vcfg = {
+            [UIView class],
+            {
+                {@selector(setBackgroundColor:), [UIColor whiteColor]},
+                {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#d4d5d7"] CGColor]},
+                {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
+            }
+        };
+    }
+    
+    MainCardComponent *c = [super newWithComponent:
         [CKInsetComponent
         // Left and right inset of 30pts; centered vertically:
         newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
         component:
             [CKBackgroundLayoutComponent
             newWithComponent:
-                [CKStackLayoutComponent newWithView:{
-                    [UIView class],
-                    {
-                        {@selector(setBackgroundColor:), [UIColor whiteColor]},
-                        {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOpacity:)),0.8f},
-                        {CKComponentViewAttribute::LayerAttribute(@selector(setShadowRadius:)),@3},
-                        {CKComponentViewAttribute::LayerAttribute(@selector(setShadowColor:)),(id)[[UIColor colorWithHex:@"#0077c3"] CGColor]},
-                        {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOffset:)),[NSValue valueWithCGSize:CGSizeMake(2, 2)]}
-                    }
-                } size:{} style:{
+                [CKStackLayoutComponent newWithView:vcfg size:{} style:{
                     .direction = CKStackLayoutDirectionVertical,
                     .alignItems = CKStackLayoutAlignItemsStretch
                 }
@@ -115,7 +136,7 @@
                                    component:
                                       [CKLabelComponent
                                       newWithLabelAttributes:{
-                                          .string = [data objectForKey:@"session_tag"],
+                                          .string = [data objectForKey:@"label"],
                                           .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:16],
                                       }
                                       viewAttributes:{
@@ -131,7 +152,7 @@
                                       .alignItems = CKStackLayoutAlignItemsStretch
                                   }
                                   children:{
-                                      {
+                                      /*{
                                           [CKInsetComponent
                                            newWithInsets:{.left = 0, .right = 0, .top = INFINITY, .bottom = INFINITY}
                                            component:
@@ -140,23 +161,21 @@
                                                   .width = 27,
                                               }]
                                            ]
-                                      }, {
+                                      },*/ {
                                           [CKInsetComponent
                                            newWithInsets:{.left = 10, .right = 0, .top = INFINITY, .bottom = INFINITY}
                                            component:
-                                              [CKImageComponent newWithImage:[context imageNamed:@"button_call"] size:{
-                                                  .height = 27,
-                                                  .width = 27,
-                                              }]
-                                           ]
+                                               [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                                  {UIControlStateNormal,[context imageNamed:@"button_call"]},
+                                              } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionCall:) size:{.height = 27, .width = 27} attributes:{} accessibilityConfiguration:{}]
+                                               ]
                                       }, {
                                           [CKInsetComponent
                                            newWithInsets:{.left = 10, .right = 5, .top = INFINITY, .bottom = INFINITY}
                                            component:
-                                              [CKImageComponent newWithImage:[context imageNamed:@"button_chat"] size:{
-                                                  .height = 27,
-                                                  .width = 27,
-                                              }]
+                                           [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                              {UIControlStateNormal,[context imageNamed:@"button_chat"]},
+                                            } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height = 27, .width = 27} attributes:{} accessibilityConfiguration:{}]
                                            ]
                                       },
                                   }]
@@ -217,11 +236,11 @@
                                    {[CKInsetComponent
                                      newWithInsets:{.left = 0, .right = 10, .top = 10, .bottom = 0}
                                      component:
-                                       [CKImageComponent newWithImage:[context imageNamed:@"image_quote"] size:{
-                                           .height = 27,
-                                           .width = 27,
-                                       }]
-                                     ]},
+                                         [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                           {UIControlStateNormal,[context imageNamed:@"image_quote"]},
+                                       } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height = 27, .width = 27} attributes:{} accessibilityConfiguration:{}]
+                                         ]
+                                     },
                                    {
                                         .flexGrow = YES,
                                        .component = [CKComponent newWithView:{} size:{}],
@@ -245,6 +264,8 @@
              ]
         ]
     ];
+    [c setCardData:data];
+    return c;
 }
 
 static CKComponent *lineComponent()
@@ -253,10 +274,22 @@ static CKComponent *lineComponent()
             newWithView:{
                 [UIView class],
                 {
-                    {@selector(setBackgroundColor:), [UIColor blackColor]},
+                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#d4d5d7"]},
                 }
             }
             size:{.height = 1 / [UIScreen mainScreen].scale}];
+}
+
+- (void)actionChat:(CKButtonComponent *)sender
+{
+    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
+    [card showMessages];
+}
+
+- (void)actionCall:(CKButtonComponent *)sender
+{
+    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
+    [card startCall];
 }
 
 @end

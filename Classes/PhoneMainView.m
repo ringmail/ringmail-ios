@@ -533,6 +533,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	// status bar style for each transition to/from these views
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     statusBarBG.backgroundColor = [UIColor colorWithHex:@"#33362f" alpha:1.0f];
+    //statusBarBG.backgroundColor = [UIColor blackColor];
 
     /*
 	BOOL toLightStatus = (to_view != NULL) && ![to_view darkBackground];

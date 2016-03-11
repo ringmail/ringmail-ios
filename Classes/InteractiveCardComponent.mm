@@ -28,62 +28,22 @@ static NSString *const oscarWilde = @"Oscar Wilde";
 + (instancetype)newWithCard:(Card *)card
                      context:(CardContext *)context
 {
-  CKComponentScope scope(self);
-  //const BOOL revealAnswer = [scope.state() boolValue];
+    CKComponentScope scope(self);
+    //const BOOL revealAnswer = [scope.state() boolValue];
     
     if ([card.header boolValue])
     {
         InteractiveCardComponent *c = [super newWithComponent:[HeaderComponent newWithHeader:[card.data objectForKey:@"text"] context:context]];
         return c;
     }
-
-//  CKComponent *overlay = nil;
-
-  InteractiveCardComponent *c =
-  [super newWithComponent:
-   [CardComponent newWithCard:card context:context]
-   /*[CKStackLayoutComponent
-    newWithView:{
-      [UIView class],
-      {CKComponentTapGestureAttribute(@selector(didTap))}
-    }
-    size:{}
-    style:{
-      .alignItems = CKStackLayoutAlignItemsStretch
-    }
-    children:{
-      {[CKOverlayLayoutComponent
-        newWithComponent:[CardComponent newWithCard:card context:context]
-        overlay:overlay]},
-      //{hairlineComponent()}
-    }]*/
-   ];
-//  if (c) {
-//    c->_overlay = overlay;
-//  }
-  return c;
-}
-
-static CKComponent *hairlineComponent()
-{
-  return [CKComponent
-          newWithView:{
-            [UIView class],
-            {{@selector(setBackgroundColor:), [UIColor lightGrayColor]}}
-          }
-          size:{.height = 1/[UIScreen mainScreen].scale}];
+    
+    InteractiveCardComponent *c = [super newWithComponent:[CardComponent newWithCard:card context:context]];
+    return c;
 }
 
 + (id)initialState
 {
   return @NO;
-}
-
-- (void)didTap
-{
-  [self updateState:^(NSNumber *oldState){
-    return [oldState boolValue] ? @NO : @YES;
-  } mode:CKUpdateModeSynchronous];
 }
 
 - (std::vector<CKComponentAnimation>)animationsFromPreviousComponent:(InteractiveCardComponent *)previousComponent

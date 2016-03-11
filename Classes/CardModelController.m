@@ -77,7 +77,7 @@
     }
     CardsPage *cardsPage = [[CardsPage alloc] initWithCards:_cards
                                                      position:[mainCount integerValue]];
-    mainCount = [NSNumber numberWithInteger:added];
+    mainCount = [NSNumber numberWithInteger:[mainCount integerValue] + added];
     return cardsPage;
 }
 

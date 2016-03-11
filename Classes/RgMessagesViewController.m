@@ -4,6 +4,7 @@
 #import "DTActionSheet.h"
 #import "NYXImagesKit/NYXImagesKit.h"
 #import "RgChatQuestionSelect.h"
+#import "JSQMessagesCollectionViewFlowLayout.h"
 
 @implementation RgMessagesViewController
 
@@ -35,8 +36,10 @@
     self.senderDisplayName = kRgSelfName;
     self.chatData = [[RgChatModelData alloc] initWithChatRoom:self.chatRoom];
     
-    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    //self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+    //self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(20.0f, 20.0f);
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(20.0f, 20.0f);
     self.showLoadEarlierMessagesHeader = NO;
 }
 
@@ -316,7 +319,7 @@
 
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    //return nil;
     /**
      *  Return `nil` here if you do not want avatars.
      *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
@@ -349,6 +352,7 @@
         }
     }*/
     //return [self.chatData.avatars objectForKey:message.senderId];
+    return [self.chatData.avatars objectForKey:@"avatar"];
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath

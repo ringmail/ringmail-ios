@@ -28,6 +28,9 @@
 #import "Utils.h"
 #import "UIChatRoomCell.h"
 
+#import "UIImage+RoundedCorner.h"
+#import "UIImage+Resize.h"
+
 @implementation ChatRoomViewController
 
 @synthesize editButton;
@@ -176,6 +179,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         if (image == nil) {
             image = [UIImage imageNamed:@"avatar_unknown_small.png"];
         }
+        
+        image = [image thumbnailImage:42 transparentBorder:0 cornerRadius:21 interpolationQuality:kCGInterpolationHigh];
+        
         [avatarImage setImage:image];
     }
 }

@@ -20,5 +20,7 @@
                       header:(NSNumber *)header;
 
 - (NSNumber*)sessionId;
+- (void)showMessages;
+- (void)startCall;
 
 @end

@@ -321,6 +321,8 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 
 		[self migrateFromUserPrefs];
         
+		fastAddressBook = [[FastAddressBook alloc] init];
+        
         /* RingMail */
         self.chatTag = @"";
         self.chatManager = nil;
@@ -1368,9 +1370,8 @@ static LinphoneCoreVTable linphonec_vtable = {.show = NULL,
 
 	_contactSipField = [self lpConfigStringForKey:@"contact_im_type_value" withDefault:@"SIP"];
 
-	if (fastAddressBook == nil) {
-		fastAddressBook = [[FastAddressBook alloc] init];
-	}
+	//if (fastAddressBook == nil) {
+	//}
 
 	linphone_core_set_root_ca(theLinphoneCore, lRootCa);
 	// Set audio assets
