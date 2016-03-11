@@ -143,7 +143,7 @@
                                            ]
                                       }, {
                                           [CKInsetComponent
-                                           newWithInsets:{.left = 15, .right = 2, .top = INFINITY, .bottom = INFINITY}
+                                           newWithInsets:{.left = 15, .right = 7, .top = INFINITY, .bottom = INFINITY}
                                            component:
                                               [CKImageComponent newWithImage:[context imageNamed:@"button_call"] size:{
                                                   .height = 30,
@@ -216,7 +216,7 @@
                                }
                                children:{
                                    {[CKInsetComponent
-                                     newWithInsets:{.left = 0, .right = 7, .top = 7, .bottom = 0}
+                                     newWithInsets:{.left = 0, .right = 12, .top = 7, .bottom = 0}
                                      component:
                                        [CKImageComponent newWithImage:[context imageNamed:@"button_chat"] size:{
                                            .height = 30,
