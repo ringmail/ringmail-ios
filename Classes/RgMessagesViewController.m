@@ -37,9 +37,12 @@
     self.chatData = [[RgChatModelData alloc] initWithChatRoom:self.chatRoom];
     
     //self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-    //self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
-    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(20.0f, 20.0f);
-    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(20.0f, 20.0f);
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(28.0f, 28.0f);
+    //self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(20.0f, 20.0f);
+    
+    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    self.collectionView.collectionViewLayout.messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(2.0f, 4.0f, 0.0f, 6.0f);
     self.showLoadEarlierMessagesHeader = NO;
 }
 
@@ -456,15 +459,15 @@
         
         if ([msg.senderId isEqualToString:self.senderId]) // Outbound
         {
-            cell.textView.textColor = [UIColor blackColor];
             [cell.cellBottomLabel setTextInsets:UIEdgeInsetsMake(0, 0, 0, 10.0f)];
             cell.cellBottomLabel.font = [UIFont systemFontOfSize:12.0f];
             cell.cellBottomLabel.textColor = [UIColor grayColor];
         }
-        else
+        /*else
         {
             cell.textView.textColor = [UIColor whiteColor];
-        }
+        }*/
+        cell.textView.textColor = [UIColor blackColor];
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
         
@@ -498,7 +501,7 @@
             }
         }
     }
-    
+ 
     return cell;
 }
 

@@ -26,7 +26,7 @@
 {
     UIImage *cardImage = [context imageNamed:@"Card1"];
     cardImage = [cardImage thumbnailImage:40 transparentBorder:0 cornerRadius:20 interpolationQuality:kCGInterpolationHigh];
-    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"KannadaSangamMN" size:14] forKey:NSFontAttributeName];
+    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"HelveticaNeue" size:16] forKey:NSFontAttributeName];
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[data objectForKey:@"last_message"] attributes:attrsDictionary];
     
     NSNumber *timeCall = [data objectForKey:@"call_time"];
@@ -166,27 +166,11 @@
                                           [CKInsetComponent
                                            newWithInsets:{.left = 15, .right = 7, .top = INFINITY, .bottom = INFINITY}
                                            component:
-                                              [CKImageComponent newWithImage:[context imageNamed:@"button_call"] size:{
-                                                  .height = 30,
-                                                  .width = 30,
-                                              }]
+                                              [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                                      {UIControlStateNormal,[context imageNamed:@"button_call"]},
+                                                  } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionCall:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
                                            ]
-                                      }, /*{
-=======
-                                               [CKButtonComponent newWithTitles:{} titleColors:{} images:{
-                                                  {UIControlStateNormal,[context imageNamed:@"button_call"]},
-                                              } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionCall:) size:{.height = 27, .width = 27} attributes:{} accessibilityConfiguration:{}]
-                                               ]
-                                      }, {
->>>>>>> e249ea52b1df0e945267b2d85f109197d2c50725
-                                          [CKInsetComponent
-                                           newWithInsets:{.left = 10, .right = 5, .top = INFINITY, .bottom = INFINITY}
-                                           component:
-                                           [CKButtonComponent newWithTitles:{} titleColors:{} images:{
-                                              {UIControlStateNormal,[context imageNamed:@"button_chat"]},
-                                            } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height = 27, .width = 27} attributes:{} accessibilityConfiguration:{}]
-                                           ]
-                                      },*/
+                                      },
                                   }]
                               }
                           }]
@@ -211,7 +195,7 @@
                                      [CKLabelComponent
                                       newWithLabelAttributes:{
                                           .string = latest,
-                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:12],
+                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:14],
                                           .color = [UIColor colorWithHex:@"#70726d"],
                                       }
                                       viewAttributes:{
@@ -245,10 +229,9 @@
                                    {[CKInsetComponent
                                      newWithInsets:{.left = 0, .right = 12, .top = 7, .bottom = 0}
                                      component:
-                                       [CKImageComponent newWithImage:[context imageNamed:@"button_chat"] size:{
-                                           .height = 30,
-                                           .width = 30,
-                                       }]
+                                            [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                              {UIControlStateNormal,[context imageNamed:@"button_chat"]},
+                                            } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
                                      ]},
                                    {
                                         .flexGrow = YES,

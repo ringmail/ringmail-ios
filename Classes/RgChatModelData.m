@@ -1,4 +1,5 @@
 #import "RgChatModelData.h"
+#import "RgChatBubbleFactory.h"
 
 
 /**
@@ -46,10 +47,10 @@
          *  Be sure to create your bubble images one time and reuse them for good performance.
          *
          */
-        //JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-        JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage imageNamed:@"bubble_ringmail"] capInsets:UIEdgeInsetsZero];
-        self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-        self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
+        RgChatBubbleFactory *bubbleFactoryIn = [[RgChatBubbleFactory alloc] initWithBubbleImage:[UIImage imageNamed:@"bubble_ringmail_blue"] capInsets:UIEdgeInsetsZero];
+        RgChatBubbleFactory *bubbleFactoryOut = [[RgChatBubbleFactory alloc] initWithBubbleImage:[UIImage imageNamed:@"bubble_ringmail"] capInsets:UIEdgeInsetsZero];
+        self.outgoingBubbleImageData = [bubbleFactoryOut outgoingMessagesBubbleImageWithColor:[UIColor clearColor]];
+        self.incomingBubbleImageData = [bubbleFactoryIn incomingMessagesBubbleImageWithColor:[UIColor clearColor]];
         
         JSQMessagesBubbleImageFactory *bubbleFactory2 = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleRegularStrokedImage] capInsets:UIEdgeInsetsZero];
         self.outgoingBubbleOutlineImageData = [bubbleFactory2 outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -57,8 +58,8 @@
         
         self.outgoingBubblePingImageData = [bubbleFactory2 outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
         self.incomingBubblePingImageData = [bubbleFactory2 incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
-        self.outgoingBubblePingReplyImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
-        self.incomingBubblePingReplyImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+        self.outgoingBubblePingReplyImageData = [bubbleFactory2 outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+        self.incomingBubblePingReplyImageData = [bubbleFactory2 incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
     }
     
     return self;
