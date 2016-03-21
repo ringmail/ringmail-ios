@@ -177,7 +177,10 @@
                       ]},
                     {lineComponent()},
                     {
-                        [CKStackLayoutComponent newWithView:{} size:{} style:{
+                        [CKStackLayoutComponent newWithView:{
+                            [UIView class],
+                            {CKComponentTapGestureAttribute(@selector(actionChat:))}
+                        } size:{} style:{
                             .direction = CKStackLayoutDirectionHorizontal,
                             .alignItems = CKStackLayoutAlignItemsStretch
                         }
@@ -195,7 +198,7 @@
                                      [CKLabelComponent
                                       newWithLabelAttributes:{
                                           .string = latest,
-                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:14],
+                                          .font = [UIFont fontWithName:@"Helvetica-Neue" size:14],
                                           .color = [UIColor colorWithHex:@"#70726d"],
                                       }
                                       viewAttributes:{
@@ -229,9 +232,10 @@
                                    {[CKInsetComponent
                                      newWithInsets:{.left = 0, .right = 12, .top = 7, .bottom = 0}
                                      component:
-                                            [CKButtonComponent newWithTitles:{} titleColors:{} images:{
-                                              {UIControlStateNormal,[context imageNamed:@"button_chat"]},
-                                            } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
+                                         [CKImageComponent newWithImage:[context imageNamed:@"button_chat"] size:{
+                                           .height = 30,
+                                           .width = 30,
+                                       }]
                                      ]},
                                    {
                                         .flexGrow = YES,

@@ -161,16 +161,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     	}
     }
 
-	/*if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-		// fix placeholder bar color in iOS7
-        UIColor *color = [UIColor whiteColor];
-        // Tint #02c7da
-        //NSLocalizedString(@"Enter an address", @"Enter an address")
-        NSString *intro = @" Enter #Hashtag or Email Address";
-		NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-											attributes:@{NSForegroundColorAttributeName: color}];
-		addressField.attributedPlaceholder = placeHolderString;
-	}*/
+	// fix placeholder bar color in >= iOS7
+    NSString *intro = @" Enter #Hashtag or Email Address";
+	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
+										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
+	addressField.attributedPlaceholder = placeHolderString;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

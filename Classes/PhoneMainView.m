@@ -87,10 +87,10 @@ static RootViewManager *rootViewManagerInstance = nil;
 		currentViewController = newMainView;
 		LinphoneAppDelegate *delegate = (LinphoneAppDelegate *)[UIApplication sharedApplication].delegate;
 
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
+		if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) { // Disable animations for RingMail
 			[UIView transitionWithView:delegate.window
 				duration:0.3
-				options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionAllowAnimatedContent
+				options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowAnimatedContent
 				animations:^{
 				  delegate.window.rootViewController = newMainView;
 				  // when going to landscape-enabled view, we have to get the current portrait frame and orientation,
@@ -98,8 +98,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 				  if (nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController) {
 					  newMainView.view.frame = previousMainView.view.frame;
 					  [newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
-					  [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.3];
-					  [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.3];
+					  [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.25];
+					  [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.25];
 					  [newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
 				  }
 				}
@@ -585,13 +585,15 @@ static RootViewManager *rootViewManagerInstance = nil;
 	PhoneMainView *vc = [[RootViewManager instance] setViewControllerForDescription:view];
 
 	if (force || ![view equal:vc.currentView] || vc != self) {
-		if (transition == nil)
+        // RingMail: No animated transitions :(->
+		/*if (transition == nil)
 			transition = [PhoneMainView getTransition:vc.currentView new:view];
 		if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
 			[vc.mainViewController setViewTransition:transition];
 		} else {
 			[vc.mainViewController setViewTransition:nil];
-		}
+		}*/
+        [vc.mainViewController setViewTransition:nil];
 		[vc updateStatusBar:view];
 		[vc.mainViewController changeView:view];
 		vc->currentView = view;
