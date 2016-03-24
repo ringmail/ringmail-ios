@@ -1,4 +1,4 @@
-/* RgMainViewController.h
+/* RgHashtagDirectoryViewController.h
  *
  * Copyright (C) 2009  Belledonne Comunications, Grenoble, France
  *
@@ -21,7 +21,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "RgScanViewController.h"
-#import "RgMainViewController.h"
+#import "RgHashtagDirectoryViewController.h"
 #import "IncallViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
@@ -31,7 +31,7 @@
 
 #include "linphone/linphonecore.h"
 
-@implementation RgMainViewController
+@implementation RgHashtagDirectoryViewController
 
 @synthesize transferMode;
 
@@ -51,12 +51,11 @@
 //@synthesize mainController;
 @synthesize mainView;
 @synthesize mainViewController;
-@synthesize needsRefresh;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
-	self = [super initWithNibName:@"RgMainViewController" bundle:[NSBundle mainBundle]];
+	self = [super initWithNibName:@"RgHashtagDirectoryViewController" bundle:[NSBundle mainBundle]];
 	if (self) {
 		self->transferMode = FALSE;
 	}
@@ -76,7 +75,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
 		compositeDescription = [[UICompositeViewDescription alloc] init:@"Dialer"
-																content:@"RgMainViewController"
+																content:@"RgHashtagDirectoryViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
 																 tabBar:@"UIMainBar"
@@ -167,14 +166,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
 										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
 	addressField.attributedPlaceholder = placeHolderString;
-    
-    if ([self needsRefresh])
-    {
-        [mainViewController updateCollection];
-        [self setNeedsRefresh:NO];
-    }
-    
-    self.visible = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -183,8 +174,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// Remove observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
-    
-    self.visible = NO;
 }
 
 - (void)viewDidLoad {
@@ -204,7 +193,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
-    [self setNeedsRefresh:[NSNumber numberWithBool:NO]];
     
 	[addressField setText:@""];
 	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
@@ -291,22 +279,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)textReceivedEvent:(NSNotification *)notif {
-    if (self.visible)
-    {
-        [mainViewController updateCollection];
-    }
-    else
-    {
-        [self setNeedsRefresh:YES];
-    }
+    [mainViewController updateCollection];
 }
 
 - (void)textUpdatedEvent:(NSNotification *)notif {
-    [self setNeedsRefresh:YES];
+    [mainViewController updateCollection];
 }
 
 - (void)mainRefreshEvent:(NSNotification *)notif {
-    [self setNeedsRefresh:YES];
+    [mainViewController updateCollection];
 }
 
 #pragma mark - Debug Functions

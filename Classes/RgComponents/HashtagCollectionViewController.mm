@@ -1,5 +1,5 @@
 //
-//  MainCollectionViewController.m
+//  HashtagCollectionViewController.m
 //  ringmail
 //
 //  Created by Mike Frager on 2/14/16.
@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <ComponentKit/ComponentKit.h>
 #import "UIColor+Hex.h"
-#import "MainCollectionViewController.h"
+#import "HashtagCollectionViewController.h"
 #import "InteractiveCardComponent.h"
 #import "CardModelController.h"
 #import "Card.h"
 #import "CardContext.h"
 #import "CardsPage.h"
 
-@interface MainCollectionViewController () <CKComponentProvider, UICollectionViewDelegateFlowLayout>
+@interface HashtagCollectionViewController () <CKComponentProvider, UICollectionViewDelegateFlowLayout>
 @end
 
-@implementation MainCollectionViewController
+@implementation HashtagCollectionViewController
 {
     CKCollectionViewDataSource *_dataSource;
     CardModelController *_cardModelController;
@@ -85,7 +85,6 @@ static NSInteger const pageSize = 10;
 
 #pragma mark - Update collection
 
-// TODO: Make this work right
 - (void)updateCollection
 {
     NSArray *current = [_cardModelController mainList];
@@ -134,21 +133,6 @@ static NSInteger const pageSize = 10;
                                                      header:[NSNumber numberWithBool:0]];
                     items.update([NSIndexPath indexPathForRow:i inSection:0], card);
                 }
-                else
-                {
-                    NSNumber *curUnread = [current[j] objectForKey:@"unread"];
-                    NSNumber *newUnread = [newlist[j] objectForKey:@"unread"];
-                    if (curUnread != nil && newUnread != nil)
-                    {
-                        if ([curUnread integerValue] != [newUnread integerValue])
-                        {
-                            // Regenerate card
-                            Card *card = [[Card alloc] initWithData:newlist[j]
-                                                             header:[NSNumber numberWithBool:0]];
-                            items.update([NSIndexPath indexPathForRow:i inSection:0], card);
-                        }
-                    }
-                }
             }
         }
         else if (hasnew)
@@ -166,7 +150,6 @@ static NSInteger const pageSize = 10;
             [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] - 1]];
         }
     }
-    [_cardModelController setMainList:newlist];
     dispatch_async(dispatch_get_main_queue(), ^{
         [_dataSource enqueueChangeset:{{}, items}
                       constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];

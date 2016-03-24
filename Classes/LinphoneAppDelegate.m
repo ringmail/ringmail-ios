@@ -286,7 +286,8 @@
 
 					if ([loc_key isEqualToString:@"IM_MSG"]) {
 
-						[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+                        // TODO: Replace this
+						//[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
 
 					} else if ([loc_key isEqualToString:@"IC_MSG"]) {
 

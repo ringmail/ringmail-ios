@@ -1,4 +1,4 @@
-/* RgMainViewController.h
+/* RgHashtagDirectoryViewController.h
  *
  * Copyright (C) 2009  Belledonne Comunications, Grenoble, France
  *
@@ -29,7 +29,7 @@
 #import "UITransferButton.h"
 #import "UIDigitButton.h"
 
-@interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, MFMailComposeViewControllerDelegate> {
+@interface RgHashtagDirectoryViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, MFMailComposeViewControllerDelegate> {
 }
 
 - (void)setAddress:(NSString*)address;
@@ -55,9 +55,6 @@
 //@property (nonatomic, strong) IBOutlet MainCollectionViewController* mainController;
 @property (nonatomic, strong) IBOutlet UIView* mainView;
 @property (nonatomic, retain) MainCollectionViewController* mainViewController;
-@property (nonatomic, assign) BOOL needsRefresh;
-@property (nonatomic, assign) BOOL visible;
-
 
 - (IBAction)onAddContactClick: (id) event;
 - (IBAction)onBackClick: (id) event;

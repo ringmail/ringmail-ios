@@ -180,7 +180,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             image = [UIImage imageNamed:@"avatar_unknown_small.png"];
         }
         
-        image = [image thumbnailImage:42 transparentBorder:0 cornerRadius:21 interpolationQuality:kCGInterpolationHigh];
+        image = [image thumbnailImage:84 transparentBorder:0 cornerRadius:42 interpolationQuality:kCGInterpolationHigh];
         
         [avatarImage setImage:image];
     }
