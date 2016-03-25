@@ -18,6 +18,7 @@
 #import "CardsPage.h"
 #import "LinphoneManager.h"
 
+
 @implementation HashtagModelController
 {
   NSInteger _numberOfObjects;
@@ -25,12 +26,14 @@
 
 @synthesize mainList;
 @synthesize mainCount;
+@synthesize mainPath;
 
 - (instancetype)init
 {
     if (self = [super init]) {
         mainCount = [NSNumber numberWithInteger:0];
         mainList = nil;
+        mainPath = RG_HASHTAG_DIRECTORY;
     }
     return self;
 }
@@ -38,26 +41,42 @@
 - (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count
 {
     NSAssert(count >= 1, @"Count should be a positive integer");
+    NSString* title;
     if (mainList == nil)
     {
         // Initialize
         mainList = [NSMutableArray array];
-        [mainList push:@{
-                         @"type": @"hashtag_category",
-                         @"name": @"Lifestyle",
-                         }];
-        [mainList push:@{
-                         @"type": @"hashtag_category",
-                         @"name": @"Technology",
-                         }];
-        [mainList push:@{
-                         @"type": @"hashtag_category",
-                         @"name": @"Stocks",
-                         }];
-        [mainList push:@{
-                         @"type": @"hashtag_category",
-                         @"name": @"News",
-                         }];
+        if ([mainPath isEqualToString:RG_HASHTAG_DIRECTORY])
+        {
+            title = @"Hashtags";
+            [mainList push:@{
+                             @"type": @"hashtag_category",
+                             @"name": @"Lifestyle",
+                             }];
+            [mainList push:@{
+                             @"type": @"hashtag_category",
+                             @"name": @"Technology",
+                             }];
+            [mainList push:@{
+                             @"type": @"hashtag_category",
+                             @"name": @"Stocks",
+                             }];
+            [mainList push:@{
+                             @"type": @"hashtag_category",
+                             @"name": @"News",
+                             }];
+        }
+        else
+        {
+            title = [mainPath copy];
+            for (NSUInteger i = 0; i < 25; i++)
+            {
+                [mainList push:@{
+                    @"type": @"hashtag_category",
+                    @"name": [NSString stringWithFormat:@"Tag: %lu", i]
+                }];
+            }
+        }
     }
     NSMutableArray *_cards = [NSMutableArray new];
     NSInteger added = 0;
@@ -66,7 +85,7 @@
         if ([mainCount intValue] == 0 && i == 0)
         {
             NSNumber *headerCell = [NSNumber numberWithBool:1];
-            Card *card = [[Card alloc] initWithData:@{@"text": @"Hashtags"}
+            Card *card = [[Card alloc] initWithData:@{@"text": title}
                                              header:headerCell];
             [_cards addObject:card];
             added++;

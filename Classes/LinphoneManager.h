@@ -41,6 +41,7 @@
 #import "AudioSessionManager.h"
 
 extern NSString *const LINPHONERC_APPLICATION_KEY;
+extern NSString *const RG_HASHTAG_DIRECTORY;
 
 extern NSString *const kLinphoneCoreUpdate;
 extern NSString *const kLinphoneDisplayStatusUpdate;

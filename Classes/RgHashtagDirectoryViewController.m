@@ -33,31 +33,22 @@
 
 @implementation RgHashtagDirectoryViewController
 
-@synthesize transferMode;
-
 @synthesize addressField;
 @synthesize addContactButton;
 @synthesize backButton;
-@synthesize addCallButton;
-@synthesize transferButton;
 @synthesize callButton;
 @synthesize goButton;
 @synthesize messageButton;
-@synthesize eraseButton;
-
-@synthesize backgroundView;
-@synthesize videoPreview;
-@synthesize videoCameraSwitch;
-//@synthesize mainController;
 @synthesize mainView;
 @synthesize mainViewController;
+@synthesize path;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
 	self = [super initWithNibName:@"RgHashtagDirectoryViewController" bundle:[NSBundle mainBundle]];
 	if (self) {
-		self->transferMode = FALSE;
+        path = RG_HASHTAG_DIRECTORY;
 	}
 	return self;
 }
@@ -74,7 +65,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"Dialer"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"HashtagDirectory"
 																content:@"RgHashtagDirectoryViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
@@ -93,102 +84,39 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
-	// Set observer
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(callUpdateEvent:)
-												 name:kLinphoneCallUpdate
-											   object:nil];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(coreUpdateEvent:)
-												 name:kLinphoneCoreUpdate
-											   object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textReceivedEvent:)
-                                                 name:kRgTextReceived
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textUpdatedEvent:)
-                                                 name:kRgTextUpdate
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(mainRefreshEvent:)
-                                                 name:kRgMainRefresh
-                                               object:nil];
-    
-  	[[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(setAddressEvent:)
-                                             name:kRgSetAddress
-                                           object:nil];
-    
-	// technically not needed, but older versions of linphone had this button
-	// disabled by default. In this case, updating by pushing a new version with
-	// xcode would result in the callbutton being disabled all the time.
-	// We force it enabled anyway now.
-	[callButton setEnabled:TRUE];
-
-	// Update on show
-	LinphoneManager *mgr = [LinphoneManager instance];
-    if ([[mgr coreReady] boolValue])
-    {
-    	LinphoneCore *lc = [LinphoneManager getLc];
-    	LinphoneCall *call = linphone_core_get_current_call(lc);
-    	LinphoneCallState state = (call != NULL) ? linphone_call_get_state(call) : 0;
-    	[self callUpdate:call state:state];
-
-    	if ([LinphoneManager runningOnIpad]) {
-    		BOOL videoEnabled = linphone_core_video_enabled(lc);
-    		BOOL previewPref = [mgr lpConfigBoolForKey:@"preview_preference"];
-
-    		if (videoEnabled && previewPref) {
-    			linphone_core_set_native_preview_window_id(lc, (__bridge void *)(videoPreview));
-
-    			if (!linphone_core_video_preview_enabled(lc)) {
-    				linphone_core_enable_video_preview(lc, TRUE);
-    			}
-
-    			[backgroundView setHidden:FALSE];
-    			[videoCameraSwitch setHidden:FALSE];
-    		} else {
-    			linphone_core_set_native_preview_window_id(lc, NULL);
-    			linphone_core_enable_video_preview(lc, FALSE);
-    			[backgroundView setHidden:TRUE];
-    			[videoCameraSwitch setHidden:TRUE];
-    		}
-    	}
-    }
-
 	// fix placeholder bar color in >= iOS7
-    NSString *intro = @" Enter #Hashtag or Email Address";
+    NSString *intro = @" Enter #Hashtag";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
 										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
 	addressField.attributedPlaceholder = placeHolderString;
+    
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 
-	// Remove observer
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePathEvent:)
+                                                 name:@"RgHashtagDirectoryUpdatePath"
+                                               object:nil];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
     
-    MainCollectionViewController *mainController = [[MainCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
+    HashtagCollectionViewController *mainController = [[HashtagCollectionViewController alloc] initWithCollectionViewLayout:flowLayout path:path];
     
     CGRect r = mainView.frame;
     r.origin.y = 0;
     [mainController.view setFrame:r];
+    self.componentView = mainController.view;
     [mainView addSubview:mainController.view];
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
@@ -196,67 +124,42 @@ static UICompositeViewDescription *compositeDescription = nil;
     
 	[addressField setText:@""];
 	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
-
-	if ([LinphoneManager runningOnIpad]) {
-		if ([LinphoneManager instance].frontCamId != nil) {
-			// only show camera switch button if we have more than 1 camera
-			[videoCameraSwitch setHidden:FALSE];
-		}
-	}
 }
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSetAddress object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextReceived object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-										 duration:(NSTimeInterval)duration {
-	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	CGRect frame = [videoPreview frame];
-	switch (toInterfaceOrientation) {
-	case UIInterfaceOrientationPortrait:
-		[videoPreview setTransform:CGAffineTransformMakeRotation(0)];
-		break;
-	case UIInterfaceOrientationPortraitUpsideDown:
-		[videoPreview setTransform:CGAffineTransformMakeRotation(M_PI)];
-		break;
-	case UIInterfaceOrientationLandscapeLeft:
-		[videoPreview setTransform:CGAffineTransformMakeRotation(M_PI / 2)];
-		break;
-	case UIInterfaceOrientationLandscapeRight:
-		[videoPreview setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
-		break;
-	default:
-		break;
-	}
-	[videoPreview setFrame:frame];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgHashtagDirectoryUpdatePath" object:nil];
 }
 
 #pragma mark - Event Functions
 
-- (void)callUpdateEvent:(NSNotification *)notif {
-	LinphoneCall *call = [[notif.userInfo objectForKey:@"call"] pointerValue];
-	LinphoneCallState state = [[notif.userInfo objectForKey:@"state"] intValue];
-	[self callUpdate:call state:state];
+- (void)updatePathEvent:(NSNotification *)notif
+{
+    [self updatePath:[notif.userInfo objectForKey:@"path"]];
 }
 
-- (void)coreUpdateEvent:(NSNotification *)notif {
-	if ([LinphoneManager runningOnIpad]) {
-		LinphoneCore *lc = [LinphoneManager getLc];
-		if (linphone_core_video_enabled(lc) && linphone_core_video_preview_enabled(lc)) {
-			linphone_core_set_native_preview_window_id(lc, (__bridge void *)(videoPreview));
-			[backgroundView setHidden:FALSE];
-			[videoCameraSwitch setHidden:FALSE];
-		} else {
-			linphone_core_set_native_preview_window_id(lc, NULL);
-			[backgroundView setHidden:TRUE];
-			[videoCameraSwitch setHidden:TRUE];
-		}
-	}
+- (void)updatePath:(NSString*)newPath
+{
+    [mainViewController removeFromParentViewController];
+    [self.componentView removeFromSuperview];
+    
+    path = newPath;
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    [flowLayout setMinimumInteritemSpacing:0];
+    [flowLayout setMinimumLineSpacing:0];
+    
+    HashtagCollectionViewController *mainController = [[HashtagCollectionViewController alloc] initWithCollectionViewLayout:flowLayout path:path];
+    
+    CGRect r = mainView.frame;
+    r.origin.y = 0;
+    [mainController.view setFrame:r];
+    self.componentView = mainController.view;
+    [mainView addSubview:mainController.view];
+    [self addChildViewController:mainController];
+    [mainController didMoveToParentViewController:self];
+    mainViewController = mainController;
 }
 
 - (void)setAddressEvent:(NSNotification *)notif
@@ -278,155 +181,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (void)textReceivedEvent:(NSNotification *)notif {
-    [mainViewController updateCollection];
-}
-
-- (void)textUpdatedEvent:(NSNotification *)notif {
-    [mainViewController updateCollection];
-}
-
-- (void)mainRefreshEvent:(NSNotification *)notif {
-    [mainViewController updateCollection];
-}
-
-#pragma mark - Debug Functions
-- (void)presentMailViewWithTitle:(NSString *)subject forRecipients:(NSArray *)recipients attachLogs:(BOOL)attachLogs {
-	if ([MFMailComposeViewController canSendMail]) {
-		MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
-		if (controller) {
-			controller.mailComposeDelegate = self;
-			[controller setSubject:subject];
-			[controller setToRecipients:recipients];
-
-			if (attachLogs) {
-				char *filepath = linphone_core_compress_log_collection();
-				if (filepath == NULL) {
-					LOGE(@"Cannot sent logs: file is NULL");
-					return;
-				}
-
-				NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-				NSString *filename = [appName stringByAppendingString:@".gz"];
-				NSString *mimeType = @"text/plain";
-
-				if ([filename hasSuffix:@".gz"]) {
-					mimeType = @"application/gzip";
-					filename = [appName stringByAppendingString:@".gz"];
-				} else {
-					LOGE(@"Unknown extension type: %@, cancelling email", filename);
-					return;
-				}
-				[controller setMessageBody:NSLocalizedString(@"Application logs", nil) isHTML:NO];
-				[controller addAttachmentData:[NSData dataWithContentsOfFile:[NSString stringWithUTF8String:filepath]]
-									 mimeType:mimeType
-									 fileName:filename];
-
-				ms_free(filepath);
-			}
-			self.modalPresentationStyle = UIModalPresentationPageSheet;
-			[self.view.window.rootViewController presentViewController:controller
-															  animated:TRUE
-															completion:^{
-															}];
-		}
-
-	} else {
-		UIAlertView *alert =
-			[[UIAlertView alloc] initWithTitle:subject
-									   message:NSLocalizedString(@"Error: no mail account configured", nil)
-									  delegate:nil
-							 cancelButtonTitle:NSLocalizedString(@"OK", nil)
-							 otherButtonTitles:nil];
-		[alert show];
-	}
-}
-
-- (BOOL)displayDebugPopup:(NSString *)address {
-	LinphoneManager *mgr = [LinphoneManager instance];
-	NSString *debugAddress = [mgr lpConfigStringForKey:@"debug_popup_magic" withDefault:@""];
-	if (![debugAddress isEqualToString:@""] && [address isEqualToString:debugAddress]) {
-
-		DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:NSLocalizedString(@"Debug", nil)
-															message:NSLocalizedString(@"Choose an action", nil)];
-
-		[alertView addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
-
-		[alertView
-			addButtonWithTitle:NSLocalizedString(@"Send logs", nil)
-						 block:^{
-						   NSString *appName =
-							   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-						   NSString *logsAddress =
-							   [mgr lpConfigStringForKey:@"debug_popup_email" withDefault:@"linphone-ios@linphone.org"];
-						   [self presentMailViewWithTitle:appName forRecipients:@[ logsAddress ] attachLogs:true];
-						 }];
-
-		BOOL debugEnabled = [[LinphoneManager instance] lpConfigBoolForKey:@"debugenable_preference"];
-		NSString *actionLog =
-			(debugEnabled ? NSLocalizedString(@"Disable logs", nil) : NSLocalizedString(@"Enable logs", nil));
-		[alertView addButtonWithTitle:actionLog
-								block:^{
-								  // enable / disable
-								  BOOL enableDebug = ![mgr lpConfigBoolForKey:@"debugenable_preference"];
-								  [mgr lpConfigSetBool:enableDebug forKey:@"debugenable_preference"];
-								  [mgr setLogsEnabled:enableDebug];
-								}];
-
-		[alertView show];
-		return true;
-	}
-	return false;
-}
-
-#pragma mark -
-
-- (void)callUpdate:(LinphoneCall *)call state:(LinphoneCallState)state {
-    //NSLog(@"RingMail: %s", __PRETTY_FUNCTION__);
-    
-	LinphoneCore *lc = [LinphoneManager getLc];
-	if (linphone_core_get_calls_nb(lc) > 0) {
-		if (transferMode) {
-			[addCallButton setHidden:true];
-			[transferButton setHidden:false];
-		} else {
-			[addCallButton setHidden:false];
-			[transferButton setHidden:true];
-		}
-		//[callButton setHidden:true];
-		[backButton setHidden:false];
-		[addContactButton setHidden:true];
-	} else {
-		[addCallButton setHidden:true];
-		//[callButton setHidden:false];
-		[backButton setHidden:true];
-		[addContactButton setHidden:false];
-		[transferButton setHidden:true];
-	}
-}
-
 - (void)setAddress:(NSString *)address {
 	[addressField setText:address];
-}
-
-- (void)setTransferMode:(BOOL)atransferMode {
-	transferMode = atransferMode;
-	LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
-	LinphoneCallState state = (call != NULL) ? linphone_call_get_state(call) : 0;
-	[self callUpdate:call state:state];
-}
-
-- (void)call:(NSString *)address {
-	NSString *displayName = nil;
-	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-	if (contact) {
-		displayName = [FastAddressBook getContactDisplayName:contact];
-	}
-	[self call:address displayName:displayName];
-}
-
-- (void)call:(NSString *)address displayName:(NSString *)displayName {
-	[[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
 }
 
 #pragma mark - UITextFieldDelegate Functions
@@ -458,32 +214,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Action Functions
 
-- (IBAction)onAddContactClick:(id)event {
-	[ContactSelection setSelectionMode:ContactSelectionModeEdit];
-	[ContactSelection setAddAddress:[addressField text]];
-	[ContactSelection setSipFilter:nil];
-	[ContactSelection setNameOrEmailFilter:nil];
-	[ContactSelection enableEmailFilter:FALSE];
-	ContactsViewController *controller = DYNAMIC_CAST(
-		[[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE],
-		ContactsViewController);
-	if (controller != nil) {
-	}
-}
-
-- (IBAction)onBackClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
-}
-
 - (IBAction)onAddressChange:(id)sender {
-	if ([self displayDebugPopup:self.addressField.text]) {
-		self.addressField.text = @"";
-	}
 	if ([[addressField text] length] > 0) {
 		[addContactButton setEnabled:TRUE];
-		[eraseButton setEnabled:TRUE];
-		[addCallButton setEnabled:TRUE];
-		[transferButton setEnabled:TRUE];
         NSString* addr = [addressField text];
         if ([[addr substringToIndex:1] isEqualToString:@"#"])
         {
@@ -499,21 +232,10 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
 	} else {
 		[addContactButton setEnabled:FALSE];
-		[eraseButton setEnabled:FALSE];
-		[addCallButton setEnabled:FALSE];
-		[transferButton setEnabled:FALSE];
         messageButton.hidden = YES;
         callButton.hidden = YES;
         goButton.hidden = YES;
 	}
-}
-
-- (IBAction)onScan:(id)sender {
-    RgScanViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgScanViewController compositeViewDescription] push:TRUE], RgScanViewController);
-    if (controller != nil)
-    {
-        [controller beginScan];
-    }
 }
 
 @end

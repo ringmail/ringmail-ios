@@ -270,7 +270,7 @@ static CKComponent *lineComponent()
             newWithView:{
                 [UIView class],
                 {
-                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#33362f"]},
+                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#d4d5d7"]},
                 }
             }
             size:{.height = 1 / [UIScreen mainScreen].scale}];

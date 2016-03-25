@@ -55,6 +55,8 @@ static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 static LinphoneCore *theLinphoneCore = nil;
 static LinphoneManager *theLinphoneManager = nil;
 
+NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/directory";
+
 NSString *const LINPHONERC_APPLICATION_KEY = @"app";
 
 NSString *const kLinphoneCoreUpdate = @"LinphoneCoreUpdate";

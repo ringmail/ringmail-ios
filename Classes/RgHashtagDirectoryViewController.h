@@ -20,44 +20,25 @@
 #import <UIKit/UIKit.h>
 
 #import "UICompositeViewController.h"
-#import "MainCollectionViewController.h"
+#import "HashtagCollectionViewController.h"
 
-#import "UIEraseButton.h"
-#import "UICamSwitch.h"
 #import "UICallButton.h"
 #import "UIMessageButton.h"
-#import "UITransferButton.h"
-#import "UIDigitButton.h"
 
-@interface RgHashtagDirectoryViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, MFMailComposeViewControllerDelegate> {
+@interface RgHashtagDirectoryViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate> {
 }
 
 - (void)setAddress:(NSString*)address;
-- (void)call:(NSString*)address displayName:(NSString *)displayName;
-- (void)call:(NSString*)address;
-
-@property (nonatomic, assign) BOOL transferMode;
 
 @property (nonatomic, strong) IBOutlet UITextField* addressField;
 @property (nonatomic, strong) IBOutlet UIButton* addContactButton;
 @property (nonatomic, strong) IBOutlet UICallButton* callButton;
 @property (nonatomic, strong) IBOutlet UICallButton* goButton;
 @property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;
-@property (nonatomic, strong) IBOutlet UICallButton* addCallButton;
-@property (nonatomic, strong) IBOutlet UITransferButton* transferButton;
 @property (nonatomic, strong) IBOutlet UIButton* backButton;
-@property (nonatomic, strong) IBOutlet UIEraseButton* eraseButton;
-
-@property (nonatomic, strong) IBOutlet UIView* backgroundView;
-@property (nonatomic, strong) IBOutlet UIView* videoPreview;
-@property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
-//@property (nonatomic, strong) IBOutlet RgMainTableViewController* tableController;
-//@property (nonatomic, strong) IBOutlet MainCollectionViewController* mainController;
 @property (nonatomic, strong) IBOutlet UIView* mainView;
-@property (nonatomic, retain) MainCollectionViewController* mainViewController;
-
-- (IBAction)onAddContactClick: (id) event;
-- (IBAction)onBackClick: (id) event;
-- (IBAction)onAddressChange: (id)sender;
+@property (nonatomic, retain) HashtagCollectionViewController* mainViewController;
+@property (nonatomic, retain) NSString* path;
+@property (nonatomic, weak) UIView *componentView;
 
 @end

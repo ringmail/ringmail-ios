@@ -36,7 +36,31 @@
 
 - (NSArray *)readMainList
 {
-    return [[[LinphoneManager instance] chatManager] dbGetMainList];
+    NSArray *list = [[[LinphoneManager instance] chatManager] dbGetMainList];
+    NSMutableArray *list2 = [NSMutableArray array];
+    for (NSDictionary* r in list)
+    {
+        NSString *address = [r objectForKey:@"session_tag"];
+        NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:r];
+        [newdata setObject:[self displayName:address] forKey:@"label"];
+        [list2 addObject:newdata];
+    }
+    return list2;
+}
+
+- (NSString*)displayName:(NSString*)address
+{
+    NSString *displayName;
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+    if (contact)
+    {
+        displayName = [FastAddressBook getContactDisplayName:contact];
+    }
+    else
+    {
+        displayName = address;
+    }
+    return displayName;
 }
 
 - (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count

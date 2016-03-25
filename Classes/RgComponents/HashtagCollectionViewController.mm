@@ -11,7 +11,7 @@
 #import "UIColor+Hex.h"
 #import "HashtagCollectionViewController.h"
 #import "InteractiveCardComponent.h"
-#import "CardModelController.h"
+#import "HashtagModelController.h"
 #import "Card.h"
 #import "CardContext.h"
 #import "CardsPage.h"
@@ -22,17 +22,18 @@
 @implementation HashtagCollectionViewController
 {
     CKCollectionViewDataSource *_dataSource;
-    CardModelController *_cardModelController;
+    HashtagModelController *_cardModelController;
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
 }
 
 static NSInteger const pageSize = 10;
 
-- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout path:(NSString*)path
 {
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
-        _cardModelController = [[CardModelController alloc] init];
+        _cardModelController = [[HashtagModelController alloc] init];
+        [_cardModelController setMainPath:path];
         //self.title = @"Wilde Guess";
         //self.navigationItem.prompt = @"Tap to reveal which cards are from Oscar Wilde";
     }
@@ -85,10 +86,16 @@ static NSInteger const pageSize = 10;
 
 #pragma mark - Update collection
 
+- (void)updatePath
+{
+    
+}
+
 - (void)updateCollection
 {
     NSArray *current = [_cardModelController mainList];
-    NSArray *newlist = [_cardModelController readMainList];
+    //NSArray *newlist = [_cardModelController readMainList];
+    NSArray *newlist = [NSArray array];
     
     NSInteger curcount = [current count];
     NSInteger newcount = [newlist count];
@@ -118,27 +125,13 @@ static NSInteger const pageSize = 10;
             NSString* newId = [newlist[j] objectForKey:@"id"];
             if (! [curId isEqualToString:newId]) // item changed
             {
-                Card *card = [[Card alloc] initWithData:newlist[j]
-                                                 header:[NSNumber numberWithBool:0]];
+                Card *card = [[Card alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
                 items.update([NSIndexPath indexPathForRow:i inSection:0], card);
-            }
-            else
-            {
-                NSDate* curDate = [current[j] objectForKey:@"timestamp"];
-                NSDate* newDate = [newlist[j] objectForKey:@"timestamp"];
-                if ([curDate compare:newDate] != NSOrderedSame)
-                {
-                    // Regenerate card
-                    Card *card = [[Card alloc] initWithData:newlist[j]
-                                                     header:[NSNumber numberWithBool:0]];
-                    items.update([NSIndexPath indexPathForRow:i inSection:0], card);
-                }
             }
         }
         else if (hasnew)
         {
-            Card *card = [[Card alloc] initWithData:newlist[j]
-                                             header:[NSNumber numberWithBool:0]];
+            Card *card = [[Card alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
             items.insert([NSIndexPath indexPathForRow:i inSection:0], card);
             [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] + 1]];
             

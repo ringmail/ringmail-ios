@@ -21,6 +21,7 @@
 
 @property (nonatomic, retain) NSMutableArray *mainList;
 @property (nonatomic, retain) NSNumber *mainCount;
+@property (nonatomic, retain) NSString *mainPath;
 
 /**
  Gets more page items

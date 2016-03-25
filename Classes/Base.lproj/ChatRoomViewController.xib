@@ -45,7 +45,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="9" userLabel="backButton">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" label="Back"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="0.0" minY="18" maxX="0.0" maxY="0.0"/>
@@ -99,6 +99,6 @@
     </objects>
     <resources>
         <image name="avatar_unknown_small.png" width="131" height="131"/>
-        <image name="ringmail_chat_back.png" width="88" height="100"/>
+        <image name="ringmail_chat_back.png" width="40" height="50"/>
     </resources>
 </document>

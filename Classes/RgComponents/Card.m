@@ -19,17 +19,7 @@
                       header:(NSNumber *)header
 {
   if (self = [super init]) {
-    if ([header boolValue] == 0)
-    {
-          NSString *address = [data objectForKey:@"session_tag"];
-          NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:data];
-          [newdata setObject:[self displayName:address] forKey:@"label"];
-          _data = newdata;
-    }
-    else
-    {
-        _data = [data copy];
-    }
+    _data = [data copy];
     _header = [header copy];
   }
   return self;
@@ -67,21 +57,6 @@
         NSLog(@"New Address: %@", address);
     }
     [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
-}
-
-- (NSString*)displayName:(NSString*)address
-{
-    NSString *displayName;
-    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    if (contact)
-    {
-        displayName = [FastAddressBook getContactDisplayName:contact];
-    }
-    else
-    {
-        displayName = address;
-    }
-    return displayName;
 }
 
 @end

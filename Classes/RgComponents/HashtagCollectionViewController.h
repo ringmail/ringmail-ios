@@ -14,6 +14,7 @@
 
 @interface HashtagCollectionViewController : UICollectionViewController
 
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout path:(NSString*)path;
 - (void)updateCollection;
 
 @end

@@ -31,7 +31,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 @synthesize contactsButton;
 @synthesize dialerButton;
 @synthesize settingsButton;
-@synthesize chatButton;
+@synthesize hashtagButton;
 @synthesize historyNotificationView;
 @synthesize historyNotificationLabel;
 @synthesize chatNotificationView;
@@ -101,7 +101,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 												 name:UIApplicationWillEnterForegroundNotification
 											   object:nil];
 
-	{
+	/*{
 		UIButton *historyButtonLandscape = (UIButton *)[landscapeView viewWithTag:[historyButton tag]];
 		// Set selected+over background: IB lack !
 		[historyButton setBackgroundImage:[UIImage imageNamed:@"history_selected.png"]
@@ -156,25 +156,25 @@ static NSString *const kDisappearAnimation = @"disappear";
 	}
 
 	{
-		UIButton *chatButtonLandscape = (UIButton *)[landscapeView viewWithTag:[chatButton tag]];
+		UIButton *hashtagButtonLandscape = (UIButton *)[landscapeView viewWithTag:[hashtagButton tag]];
 		// Set selected+over background: IB lack !
-		[chatButton setBackgroundImage:[UIImage imageNamed:@"chat_selected.png"]
+		[hashtagButton setBackgroundImage:[UIImage imageNamed:@"chat_selected.png"]
 							  forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
 		// Set selected+over background: IB lack !
-		[chatButtonLandscape setBackgroundImage:[UIImage imageNamed:@"chat_selected_landscape.png"]
+		[hashtagButtonLandscape setBackgroundImage:[UIImage imageNamed:@"chat_selected_landscape.png"]
 									   forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
-		[LinphoneUtils buttonFixStatesForTabs:chatButton];
-		[LinphoneUtils buttonFixStatesForTabs:chatButtonLandscape];
+		[LinphoneUtils buttonFixStatesForTabs:hashtagButton];
+		[LinphoneUtils buttonFixStatesForTabs:hashtagButtonLandscape];
 	}
 	if ([LinphoneManager langageDirectionIsRTL]) {
 		[self flipImageForButton:historyButton];
 		[self flipImageForButton:settingsButton];
 		[self flipImageForButton:dialerButton];
-		[self flipImageForButton:chatButton];
+		[self flipImageForButton:hashtagButton];
 		[self flipImageForButton:contactsButton];
-	}
+	}*/
 
 	[super viewDidLoad]; // Have to be after due to TPMultiLayoutViewController
 }
@@ -390,10 +390,10 @@ static NSString *const kDisappearAnimation = @"disappear";
 	} else {
 		settingsButton.selected = FALSE;
 	}
-	if ([view equal:[ChatViewController compositeViewDescription]]) {
-		chatButton.selected = TRUE;
+	if ([view equal:[RgHashtagDirectoryViewController compositeViewDescription]]) {
+		hashtagButton.selected = TRUE;
 	} else {
-		chatButton.selected = FALSE;
+		hashtagButton.selected = FALSE;
 	}
 }
 
@@ -420,8 +420,8 @@ static NSString *const kDisappearAnimation = @"disappear";
 	[[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
 }
 
-- (IBAction)onChatClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+- (IBAction)onHashtagClick:(id)event {
+	[[PhoneMainView instance] changeCurrentView:[RgHashtagDirectoryViewController compositeViewDescription]];
 }
 
 #pragma mark - TPMultiLayoutViewController Functions

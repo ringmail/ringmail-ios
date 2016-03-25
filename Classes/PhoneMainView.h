@@ -30,6 +30,7 @@
 #import "ChatRoomViewController.h"
 #import "ChatViewController.h"
 #import "RgMainViewController.h"
+#import "RgHashtagDirectoryViewController.h"
 #import "ContactsViewController.h"
 #import "ContactDetailsViewController.h"
 #import "ContactDetailsLabelViewController.h"
