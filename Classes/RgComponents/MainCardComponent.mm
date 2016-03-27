@@ -18,13 +18,15 @@
 #import "UIImage+Resize.h"
 #import "UIColor+Hex.h"
 
+#import <AddressBook/AddressBook.h>
+
 @implementation MainCardComponent
 
 @synthesize cardData;
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
-    UIImage *cardImage = [context imageNamed:@"Card1"];
+    UIImage *cardImage = [context imageNamed:[data objectForKey:@"session_tag"]];
     cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
     NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"HelveticaNeue" size:16] forKey:NSFontAttributeName];
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[data objectForKey:@"last_message"] attributes:attrsDictionary];
@@ -134,17 +136,21 @@
                                   .component = [CKInsetComponent
                                    newWithInsets:{.left = 7, .right = 5, .top = INFINITY, .bottom = INFINITY}
                                    component:
-                                      [CKLabelComponent
-                                      newWithLabelAttributes:{
-                                          .string = [data objectForKey:@"label"],
-                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:16],
-                                          .color = [UIColor colorWithHex:@"#33362f"],
-                                      }
-                                      viewAttributes:{
-                                          {@selector(setBackgroundColor:), [UIColor clearColor]},
-                                          {@selector(setUserInteractionEnabled:), @NO},
-                                      }
-                                      size:{}]
+                                        [CKInsetComponent
+                                         newWithInsets:{.left = 0, .right = 0, .top = 4, .bottom = 0}
+                                         component:
+                                              [CKLabelComponent
+                                              newWithLabelAttributes:{
+                                                  .string = [data objectForKey:@"label"],
+                                                  .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18],
+                                                  .color = [UIColor colorWithHex:@"#33362f"],
+                                              }
+                                              viewAttributes:{
+                                                  {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                                  {@selector(setUserInteractionEnabled:), @NO},
+                                              }
+                                              size:{}]
+                                         ]
                                    ]
                               }, {
                                   .alignSelf = CKStackLayoutAlignSelfEnd,
@@ -198,7 +204,7 @@
                                      [CKLabelComponent
                                       newWithLabelAttributes:{
                                           .string = latest,
-                                          .font = [UIFont fontWithName:@"Helvetica-Neue" size:14],
+                                          .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:14],
                                           .color = [UIColor colorWithHex:@"#70726d"],
                                       }
                                       viewAttributes:{

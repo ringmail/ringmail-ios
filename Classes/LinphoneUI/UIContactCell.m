@@ -79,10 +79,13 @@
 	NSString *lOrganization = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonOrganizationProperty));
 	NSString *lLocalizedOrganization = [FastAddressBook localizedLabel:lOrganization];
 
-	[firstNameLabel setText:(NSString *)(lLocalizedFirstName)];
-	[lastNameLabel setText:(NSString *)(lLocalizedLastName)];
+	[firstNameLabel setText:lLocalizedFirstName];
+	[lastNameLabel setText:lLocalizedLastName];
 
-	if (lLocalizedFirstName == nil && lLocalizedLastName == nil) {
+	if (
+        (lLocalizedFirstName == nil && lLocalizedLastName == nil) ||
+        ([lLocalizedFirstName isEqualToString:@""] && [lLocalizedLastName isEqualToString:@""])
+    ) {
 		[firstNameLabel setText:(NSString *)(lLocalizedOrganization)];
 	}
 }

@@ -20,6 +20,7 @@
 #import "ContactsViewController.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
+#import "UIColor+Hex.h"
 
 #import <AddressBook/ABPerson.h>
 
@@ -90,6 +91,7 @@ static NSString *sNameOrEmailFilter;
 @synthesize backButton;
 @synthesize addButton;
 @synthesize toolBar;
+@synthesize searchField;
 
 typedef enum _HistoryView { History_All, History_Linphone, History_Search, History_MAX } HistoryView;
 
@@ -129,62 +131,45 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// let the toolBar be visible
 	subViewFrame.origin.y += self.toolBar.frame.size.height;
 	subViewFrame.size.height -= self.toolBar.frame.size.height;
-	[UIView animateWithDuration:0.2
+    self.tableView.frame = subViewFrame;
+	/*[UIView animateWithDuration:0.2
 					 animations:^{
-					   self.tableView.frame = subViewFrame;
-					 }];
+					   
+					 }];*/
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
-	// cannot change search bar icon nor text font from the interface builder...
-	// [_searchBar setImage:[UIImage imageNamed:@"contact_search.png" ] forSearchBarIcon:UISearchBarIconSearch
-	// state:UIControlStateNormal];
-	// UITextField *searchText = [_searchBar valueForKey:@"_searchField"];
-	// [searchText setFont:[UIFont fontWithName:@"CustomFont" size:12]];
-	_searchBar.showsCancelButton = (_searchBar.text.length > 0);
-
-	/*BOOL use_system = [[LinphoneManager instance] lpConfigBoolForKey:@"use_system_contacts"];
-	if (use_system && !self.sysViewController) { // use system contacts
-		ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-		picker.peoplePickerDelegate = self;
-		picker.view.frame = self.view.frame;
-
-		[self.view addSubview:picker.view];
-
-		self.sysViewController = picker;
-		self.searchBar.hidden = TRUE;
-
-	} else if (!use_system && !self.tableController) {*/
-        
-        //NSLog(@"RingMail: Show Contact List");
-
-		self.tableController = [[ContactsTableViewController alloc] init];
-		self.tableView = [[UITableView alloc] init];
-
-		self.tableController.view = self.tableView;
-
-		[self relayoutTableView];
-
-		self.tableView.dataSource = self.tableController;
-		self.tableView.delegate = self.tableController;
-
-		self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth |
-										  UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin |
-										  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-
-		[self.view addSubview:tableView];
-		[self update];
-	/*} else {
-		// if table is already created, simply refresh buttons (selection mode changed, etc.)
-		[self refreshButtons];
-	}*/
+    self.tableController = [[ContactsTableViewController alloc] init];
+    self.tableView = [[UITableView alloc] init];
+    
+    self.tableController.view = self.tableView;
+    
+    [self relayoutTableView];
+    
+    self.tableView.dataSource = self.tableController;
+    self.tableView.delegate = self.tableController;
+    
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth |
+    UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin |
+    UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    
+    self.tableView.sectionIndexColor = [UIColor colorWithHex:@"#0077c2"];
+    self.tableView.sectionIndexBackgroundColor = [UIColor colorWithHex:@"#F4F4F4"];
+    
+    [self.view addSubview:tableView];
+    [self update];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(contactsUpdated:)
                                                  name:kRgContactsUpdated
                                                object:nil];
+    
+    NSString *intro = @" Search Contacts";
+    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
+                                                                            attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
+    searchField.attributedPlaceholder = placeHolderString;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -232,6 +217,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	[tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
 	[tableController.tableView setBackgroundView:nil];					 // Can't do it in Xib: issue with ios4
+    
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [tapBackground setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tapBackground];
 }
 
 #pragma mark -
@@ -260,11 +250,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 	switch ([ContactSelection getSelectionMode]) {
 	case ContactSelectionModePhone:
 	case ContactSelectionModeMessage:
-		[addButton setHidden:TRUE];
+		//[addButton setHidden:TRUE];
 		[backButton setHidden:FALSE];
 		break;
 	default:
-		[addButton setHidden:FALSE];
+		//[addButton setHidden:FALSE];
 		[backButton setHidden:TRUE];
 		break;
 	}
@@ -354,7 +344,39 @@ static UICompositeViewDescription *compositeDescription = nil;
 	return false;
 }
 
-#pragma mark - searchBar delegate
+
+#pragma mark - UITextFieldDelegate Functions
+
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
+    //[textField performSelector:@selector() withObject:nil afterDelay:0];
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == searchField) {
+        [searchField resignFirstResponder];
+    }
+    return YES;
+}
+
+#pragma mark - Text Field Functions
+
+- (IBAction)dismissKeyboard:(id)sender
+{
+    [self.view endEditing:YES];
+}
+
+- (IBAction)onSearchChange:(id)sender
+{
+    NSString *searchText = [searchField text];
+    NSLog(@"Search: %@", searchText);
+    [ContactSelection setNameOrEmailFilter:searchText];
+    [tableController loadData];
+}
+
+#pragma mark - searchField delegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 	// display searchtext in UPPERCASE

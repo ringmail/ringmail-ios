@@ -9,6 +9,7 @@
 @implementation RgMessagesViewController
 
 @synthesize chatRoom = _chatRoom;
+@synthesize chatData;
 @synthesize popoverController;
 @synthesize imageCache;
 
@@ -32,9 +33,9 @@
     
     self.title = @"RingMail Messages";
     
+    //self.chatData = [[RgChatModelData alloc] initWithChatRoom:self.chatRoom];
     self.senderId = kRgSelf;
     self.senderDisplayName = kRgSelfName;
-    self.chatData = [[RgChatModelData alloc] initWithChatRoom:self.chatRoom];
     
     //self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
@@ -322,40 +323,36 @@
 
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //return nil;
-    /**
-     *  Return `nil` here if you do not want avatars.
-     *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
-     *
-     *  self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-     *  self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
-     *
-     *  It is possible to have only outgoing avatars or only incoming avatars, too.
-     */
-    
-    /**
-     *  Return your previously created avatar image data objects.
-     *
-     *  Note: these the avatars will be sized according to these values:
-     *
-     *  self.collectionView.collectionViewLayout.incomingAvatarViewSize
-     *  self.collectionView.collectionViewLayout.outgoingAvatarViewSize
-     *
-     *  Override the defaults in `viewDidLoad`
-     */
-    //JSQMessage *message = [self.chatData.messages objectAtIndex:indexPath.item];
-    /*if ([message.senderId isEqualToString:self.senderId]) {
-        if (![NSUserDefaults outgoingAvatarSetting]) {
+    NSDictionary* messageInfo = [self.chatData.messageInfo objectAtIndex:indexPath.item];
+    if ([[messageInfo objectForKey:@"direction"] isEqualToString:@"inbound"])
+    {
+        //[self.chatData.messageData objectAtIndex:indexPath.item];
+        BOOL show = NO;
+        if (indexPath.item == 0)
+        {
+            show = YES;
+        }
+        else
+        {
+            NSDictionary* prevInfo = [self.chatData.messageInfo objectAtIndex:(indexPath.item - 1)];
+            if ([[prevInfo objectForKey:@"direction"] isEqualToString:@"outbound"])
+            {
+                show = YES;
+            }
+        }
+        if (show)
+        {
+            return [self.chatData getAvatar:@"avatar"];
+        }
+        else
+        {
             return nil;
         }
     }
-    else {
-        if (![NSUserDefaults incomingAvatarSetting]) {
-            return nil;
-        }
-    }*/
-    //return [self.chatData.avatars objectForKey:message.senderId];
-    return [self.chatData.avatars objectForKey:@"avatar"];
+    else
+    {
+        return nil;
+    }
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -418,6 +415,10 @@
             else if ([status isEqualToString:@"received"])
             {
                 status = @"Received";
+            }
+            else
+            {
+                status = @"Error";
             }
             return [[NSAttributedString alloc] initWithString:status];
         }

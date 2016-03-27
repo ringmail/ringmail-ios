@@ -26,6 +26,10 @@
 #import "Utils.h"
 #import "RgContactManager.h"
 
+#import "UIImage+RoundedCorner.h"
+#import "UIImage+Resize.h"
+#import "UIColor+Hex.h"
+
 @implementation ContactsTableViewController
 
 static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
@@ -251,7 +255,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	UIImage *image = nil;
 	id data = [avatarMap objectForKey:[NSNumber numberWithInt:ABRecordGetRecordID(contact)]];
 	if (data == nil) {
-		image = [FastAddressBook getContactImage:contact thumbnail:true];
+		image = [FastAddressBook getContactImage:contact thumbnail:false];
+        image = [image thumbnailImage:64 transparentBorder:0 cornerRadius:32 interpolationQuality:kCGInterpolationHigh];
 		if (image != nil) {
 			[avatarMap setObject:image forKey:[NSNumber numberWithInt:ABRecordGetRecordID(contact)]];
 		} else {
@@ -262,6 +267,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	}
 	if (image == nil) {
 		image = [UIImage imageNamed:@"avatar_unknown_small.png"];
+        image = [image thumbnailImage:64 transparentBorder:0 cornerRadius:32 interpolationQuality:kCGInterpolationHigh];
+        // future: cache the default image
 	}
 	[[cell avatarImage] setImage:image];
 
@@ -270,6 +277,10 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     {
         //NSLog(@"Found Contact: %@", recordId);
         [[cell rgImage] setHidden:NO];
+    }
+    else
+    {
+        [[cell rgImage] setHidden:YES];
     }
     
 	[cell setContact:contact];
@@ -306,6 +317,13 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 		return UITableViewCellEditingStyleDelete;
 	}
 	return UITableViewCellEditingStyleNone;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:[UIColor colorWithHex:@"#33362f"]];
+    header.contentView.backgroundColor = [UIColor colorWithHex:@"#F4F4F4"];
 }
 
 @end

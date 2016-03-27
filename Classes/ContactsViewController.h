@@ -75,7 +75,7 @@ typedef enum _ContactSelectionMode {
 
 @end
 
-@interface ContactsViewController : UIViewController<UICompositeViewDelegate,ABPeoplePickerNavigationControllerDelegate,UISearchBarDelegate> {
+@interface ContactsViewController : UIViewController<UICompositeViewDelegate,ABPeoplePickerNavigationControllerDelegate,UITextFieldDelegate> {
     BOOL use_systemView;
 }
 
@@ -87,11 +87,13 @@ typedef enum _ContactSelectionMode {
 @property (nonatomic, strong) IBOutlet UIButton* linphoneButton;
 @property (nonatomic, strong) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) IBOutlet UIButton *addButton;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UITextField *searchField;
 
 - (IBAction)onAllClick:(id)event;
 - (IBAction)onLinphoneClick:(id)event;
 - (IBAction)onAddContactClick:(id)event;
 - (IBAction)onBackClick:(id)event;
+- (IBAction)onSearchChange: (id)sender;
+- (IBAction)dismissKeyboard:(id)sender;
 
 @end

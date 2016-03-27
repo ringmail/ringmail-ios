@@ -29,8 +29,9 @@
 @property (strong, nonatomic) NSMutableArray *messages;
 @property (strong, nonatomic) NSMutableArray *messageData;
 @property (strong, nonatomic) NSMutableArray *messageUUIDs;
+@property (strong, nonatomic) NSMutableArray *messageInfo;
 @property (strong, nonatomic) NSMutableDictionary *messageRef;
-@property (strong, nonatomic) NSDictionary *avatars;
+@property (strong, nonatomic) NSMutableDictionary *avatars;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleOutlineImageData;
@@ -47,6 +48,6 @@
 - (void)loadMessages;
 - (void)loadMessages:(NSString*)uuid;
 - (void)updateMessage:(NSString*)uuid;
-
+- (JSQMessagesAvatarImage*)getAvatar:(NSString*)avatar;
 
 @end

@@ -27,6 +27,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "Utils.h"
 #import "UIChatRoomCell.h"
+#import "RgChatModelData.h"
 
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
@@ -116,12 +117,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[editButton setOff];
     
     RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
-    [self update];
-    [mc setChatRoom:[[LinphoneManager instance] chatTag]];
+    NSString *room = [[LinphoneManager instance] chatTag];
+    
+    RgChatModelData* cdata = [[RgChatModelData alloc] initWithChatRoom:room];
+    [mc setChatData:cdata];
+    [mc setChatRoom:room]; // loads the data
     [self setChatViewController:mc];
-    [chatView addSubview:[mc view]];
+    [self update];
+    
     [mc view].autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [mc view].frame = chatView.superview.bounds;
+    [chatView addSubview:[mc view]];
     //[[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self];
 }
 
@@ -180,8 +186,11 @@ static UICompositeViewDescription *compositeDescription = nil;
             image = [UIImage imageNamed:@"avatar_unknown_small.png"];
         }
         
-        image = [image thumbnailImage:84 transparentBorder:0 cornerRadius:42 interpolationQuality:kCGInterpolationHigh];
+        //UIImage *smallImage = [image thumbnailImage:56 transparentBorder:0 cornerRadius:28 interpolationQuality:kCGInterpolationHigh];
+        JSQMessagesAvatarImage *smallAvatar = [JSQMessagesAvatarImageFactory avatarImageWithImage:image diameter:28];
+        [chatViewController.chatData.avatars setObject:smallAvatar forKey:@"avatar"];
         
+        image = [image thumbnailImage:84 transparentBorder:0 cornerRadius:42 interpolationQuality:kCGInterpolationHigh];
         [avatarImage setImage:image];
     }
 }

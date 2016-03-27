@@ -163,7 +163,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 
 	// fix placeholder bar color in >= iOS7
-    NSString *intro = @" Enter #Hashtag or Email Address";
+    NSString *intro = @" Enter #Hashtag or Email";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
 										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
 	addressField.attributedPlaceholder = placeHolderString;
@@ -197,6 +197,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     MainCollectionViewController *mainController = [[MainCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
     
+    [[mainController collectionView] setBounces:YES];
+    [[mainController collectionView] setAlwaysBounceVertical:YES];
+    
     CGRect r = mainView.frame;
     r.origin.y = 0;
     [mainController.view setFrame:r];
@@ -208,6 +211,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     
 	[addressField setText:@""];
 	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
 
 	if ([LinphoneManager runningOnIpad]) {
 		if ([LinphoneManager instance].frontCamId != nil) {
@@ -462,6 +468,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[addressField resignFirstResponder];
 	}
 	return YES;
+}
+
+#pragma mark - Text Field Functions
+
+-(void) dismissKeyboard:(id)sender
+{
+    //[addressField resignFirstResponder];
+    [self.view endEditing:YES];
 }
 
 #pragma mark - MFComposeMailDelegate

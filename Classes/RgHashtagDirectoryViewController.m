@@ -85,7 +85,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillAppear:animated];
 
 	// fix placeholder bar color in >= iOS7
-    NSString *intro = @" Enter #Hashtag";
+    NSString *intro = @"";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
 										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
 	addressField.attributedPlaceholder = placeHolderString;
@@ -112,6 +112,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [flowLayout setMinimumLineSpacing:0];
     
     HashtagCollectionViewController *mainController = [[HashtagCollectionViewController alloc] initWithCollectionViewLayout:flowLayout path:path];
+    
+    [[mainController collectionView] setBounces:YES];
+    [[mainController collectionView] setAlwaysBounceVertical:YES];
     
     CGRect r = mainView.frame;
     r.origin.y = 0;
@@ -151,6 +154,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [flowLayout setMinimumLineSpacing:0];
     
     HashtagCollectionViewController *mainController = [[HashtagCollectionViewController alloc] initWithCollectionViewLayout:flowLayout path:path];
+    
+    [[mainController collectionView] setBounces:YES];
+    [[mainController collectionView] setAlwaysBounceVertical:YES];
     
     CGRect r = mainView.frame;
     r.origin.y = 0;

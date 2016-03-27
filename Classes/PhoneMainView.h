@@ -20,6 +20,8 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
+#import "UIColor+Hex.h"
+
 #import "LinphoneManager.h"
 #import "UICompositeViewController.h"
 

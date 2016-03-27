@@ -26,18 +26,19 @@
          *  If you are not using avatars, ignore this.
          */
         
-        JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"JSQ"
+        JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"IN"
               backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
                     textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                          font:[UIFont systemFontOfSize:14.0f]
                      diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        self.avatars = @{ @"avatar":jsqImage };
+        self.avatars = [NSMutableDictionary dictionaryWithDictionary:@{ @"avatar":jsqImage }];
         //self.users = @{ };
         
         self.messages = [NSMutableArray array];
         self.messageData = [NSMutableArray array];
         self.messageUUIDs = [NSMutableArray array];
+        self.messageInfo = [NSMutableArray array];
         self.messageRef = [NSMutableDictionary dictionary];
         self.lastSent = nil;
         
@@ -75,6 +76,12 @@
     return self;
 }
 
+- (JSQMessagesAvatarImage*)getAvatar:(NSString *)avatar
+{
+    JSQMessagesAvatarImage* image = [self.avatars objectForKey:avatar];
+    return image;
+}
+
 - (void)loadMessages
 {
     [self loadMessages:nil];
@@ -87,6 +94,7 @@
         NSDictionary* msgRec = [self buildMessages:uuid];
         NSMutableArray* msgs = [msgRec objectForKey:@"messages"];
         NSMutableArray* msgData = [msgRec objectForKey:@"data"];
+        NSMutableArray* msgInfo = [msgRec objectForKey:@"info"];
         NSMutableArray* msgUUIDs = [msgRec objectForKey:@"uuids"];
         if (uuid)
         {
@@ -102,6 +110,7 @@
                 [self.messageRef setObject:[NSNumber numberWithInteger:[self.messages count]] forKey:uuid];
                 [self.messages addObject:msgs[0]];
                 [self.messageData addObject:msgData[0]];
+                [self.messageInfo addObject:msgInfo[0]];
                 [self.messageUUIDs addObject:msgUUIDs[0]];
             }
         }
@@ -116,6 +125,7 @@
             }
             self.messages = msgs;
             self.messageData = msgData;
+            self.messageInfo = msgInfo;
             self.messageUUIDs = msgUUIDs;
         }
     }
@@ -131,6 +141,7 @@
         NSDictionary* msgRec = [self buildMessages:uuid];
         NSMutableArray* msgs = [msgRec objectForKey:@"messages"];
         NSMutableArray* msgData = [msgRec objectForKey:@"data"];
+        NSMutableArray* msgInfo = [msgRec objectForKey:@"info"];
         NSMutableArray* msgUUIDs = [msgRec objectForKey:@"uuids"];
         NSInteger ct = [msgs count];
         if (ct > 0)
@@ -139,6 +150,7 @@
             int i = [itemIdx intValue];
             self.messages[i] = msgs[0];
             self.messageData[i] = msgData[0];
+            self.messageInfo[i] = msgInfo[0];
             self.messageUUIDs[i] = msgUUIDs[0];
             return;
         }
@@ -150,6 +162,7 @@
 {
     NSMutableArray* msgs = [NSMutableArray array];
     NSMutableArray* msgData = [NSMutableArray array];
+    NSMutableArray* msgInfo = [NSMutableArray array];
     NSMutableArray* msgUUIDs = [NSMutableArray array];
     //NSLog(@"**** RELOAD MESSAGES ****");
     RgChatManager* mgr = [[LinphoneManager instance] chatManager];
@@ -171,6 +184,7 @@
     //NSLog(@"RingMail: Messages: %@", input);
     for (NSDictionary* msgdata in input)
     {
+        [msgInfo addObject:msgdata];
         NSString* sender;
         NSString* senderName;
         if ([(NSString*)[msgdata objectForKey:@"direction"] isEqualToString:@"outbound"])
@@ -239,6 +253,7 @@
     return @{
          @"messages":msgs,
          @"data":msgData,
+         @"info":msgInfo,
          @"uuids":msgUUIDs,
     };
 }

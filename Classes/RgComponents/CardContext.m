@@ -10,13 +10,16 @@
  */
 
 #import "CardContext.h"
+#import "LinphoneManager.h"
+#import "FastAddressBook.h"
+#import <AddressBook/AddressBook.h>
 
 @implementation CardContext
 {
-  NSDictionary *_images;
+  NSMutableDictionary *_images;
 }
 
-- (instancetype)initWithImages:(NSDictionary *)addImages
+- (instancetype)initWithImages:(NSMutableDictionary *)addImages
 {
   if (self = [super init]) {
       _images = addImages;
@@ -34,10 +37,20 @@
 
 - (UIImage *)imageNamed:(NSString *)imageName
 {
-  return _images[imageName];
+    UIImage* img = _images[imageName];
+    if (img != nil)
+    {
+        return _images[imageName];
+    }
+    else
+    {
+        img = [self getContactImage:imageName];
+        [_images setObject:img forKey:imageName];
+        return img;
+    }
 }
 
-static NSDictionary *loadImageNames(NSSet *imageNames)
+static NSMutableDictionary *loadImageNames(NSSet *imageNames)
 {
   NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
   for (NSString *imageName in imageNames) {
@@ -48,5 +61,20 @@ static NSDictionary *loadImageNames(NSSet *imageNames)
   }
   return imageDictionary;
 }
+
+
+- (UIImage*)getContactImage:(NSString*)name
+{
+    UIImage *image = nil;
+    ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:name];
+    if (acontact != nil) {
+        image = [FastAddressBook getContactImage:acontact thumbnail:true];
+    }
+    if (image == nil) {
+        image = [UIImage imageNamed:@"avatar_unknown_small.png"];
+    }
+    return image;
+}
+
 
 @end

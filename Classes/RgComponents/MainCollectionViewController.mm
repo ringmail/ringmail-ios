@@ -46,12 +46,12 @@ static NSInteger const pageSize = 10;
     // Preload images for the component context that need to be used in component preparation. Components preparation
     // happens on background threads but +[UIImage imageNamed:] is not thread safe and needs to be called on the main
     // thread. The preloaded images are then cached on the component context for use inside components.
-    NSDictionary *images = @{
+    NSMutableDictionary *images = [NSMutableDictionary dictionaryWithDictionary:@{
                              @"Card1":[UIImage imageNamed:@"avatar_unknown_small.png"],
                              @"button_call":[UIImage imageNamed:@"phone.png"],
                              @"button_chat":[UIImage imageNamed:@"quote.png"],
                              @"button_video":[UIImage imageNamed:@"camera.png"],
-                             };
+                             }];
     
     self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:1.0f];
     self.collectionView.delegate = self;
@@ -75,12 +75,17 @@ static NSInteger const pageSize = 10;
     NSInteger position = cardsPage.position;
     
     // Convert the array of cards to a valid changeset
+    BOOL hasitems = NO;
     CKArrayControllerInputItems items;
     for (NSInteger i = 0; i < [cards count]; i++) {
         items.insert([NSIndexPath indexPathForRow:position + i inSection:0], cards[i]);
+        hasitems = YES;
     }
-    [_dataSource enqueueChangeset:{{}, items}
-                  constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+    if (hasitems)
+    {
+        [_dataSource enqueueChangeset:{{}, items}
+                      constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+    }
 }
 
 #pragma mark - Update collection
