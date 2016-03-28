@@ -75,13 +75,18 @@ static NSInteger const pageSize = 10;
     NSArray *cards = cardsPage.cards;
     NSInteger position = cardsPage.position;
     
+    BOOL hasitems = NO;
     // Convert the array of cards to a valid changeset
     CKArrayControllerInputItems items;
     for (NSInteger i = 0; i < [cards count]; i++) {
         items.insert([NSIndexPath indexPathForRow:position + i inSection:0], cards[i]);
+        hasitems = YES;
     }
-    [_dataSource enqueueChangeset:{{}, items}
-                  constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+    if (hasitems)
+    {
+        [_dataSource enqueueChangeset:{{}, items}
+                      constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+    }
 }
 
 #pragma mark - Update collection

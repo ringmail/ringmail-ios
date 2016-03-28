@@ -19,6 +19,7 @@
 
 #import "ChatRoomViewController.h"
 #import "PhoneMainView.h"
+#import "LinphoneManager.h"
 #import "DTActionSheet.h"
 #import "UILinphone.h"
 #import "DTAlertView.h"
@@ -342,16 +343,37 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
     }
 }
 
+
+
 #pragma mark - Action Functions
 
 - (IBAction)onBackClick:(id)event {
-	//[self.tableController setChatRoom:NULL];
 	[[PhoneMainView instance] popCurrentView];
 }
 
 - (IBAction)onEditClick:(id)event {
 	//[tableController setEditing:![tableController isEditing] animated:TRUE];
 	//[messageField resignFirstResponder];
+}
+
+- (IBAction)onCallClick:(id)sender {
+    NSString *address = [chatViewController chatRoom];
+    NSString *displayName = nil;
+    if ([address length] > 0) {
+        if ([RgManager checkRingMailAddress:address])
+        {
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+            if (contact) {
+                displayName = [FastAddressBook getContactDisplayName:contact];
+            }
+            if ([address rangeOfString:@"@"].location != NSNotFound)
+            {
+                displayName = [NSString stringWithString:address];
+                address = [RgManager addressToSIP:address];
+            }
+            [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+        }
+    }
 }
 
 #pragma mark ChatRoomDelegate

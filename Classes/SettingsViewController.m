@@ -291,7 +291,8 @@
 #pragma mark - Lifecycle Functions
 
 - (void)initUINavigationBarEx {
-	[self setTintColor:[LINPHONE_MAIN_COLOR adjustHue:5.0f / 180.0f saturation:0.0f brightness:0.0f alpha:0.0f]];
+	//[self setTintColor:[LINPHONE_MAIN_COLOR adjustHue:5.0f / 180.0f saturation:0.0f brightness:0.0f alpha:0.0f]];
+    [self setBackgroundColor:[UIColor colorWithHex:@"#F4F4F4"]];
 }
 
 - (id)init {
@@ -318,10 +319,10 @@
 	return self;
 }
 
-- (void)drawRect:(CGRect)rect {
+/*- (void)drawRect:(CGRect)rect {
 	UIImage *img = [UIImage imageNamed:@"toolsbar_background.png"];
 	[img drawInRect:rect];
-}
+}*/
 
 @end
 
@@ -358,12 +359,18 @@
 	labelTitleView.font = [UIFont boldSystemFontOfSize:18];
 	labelTitleView.shadowOffset = CGSizeMake(0, 1);
 	labelTitleView.textAlignment = NSTextAlignmentCenter;
-	//labelTitleView.text = viewController.title;
-    NSString *ringLogin = [[LinphoneManager instance] ringLogin];
+    if ([viewController.title isEqualToString:@"Settings"])
+    {
+        NSString *ringLogin = [[LinphoneManager instance] ringLogin];
 #ifdef DEBUG
-    ringLogin = [ringLogin stringByAppendingString:@" [TESTING]"];
+        ringLogin = [ringLogin stringByAppendingString:@" [TESTING]"];
 #endif
-    labelTitleView.text = ringLogin;
+        labelTitleView.text = ringLogin;
+    }
+    else
+    {
+        labelTitleView.text = viewController.title;
+    }
 	[labelTitleView sizeToFit];
 	viewController.navigationItem.titleView = labelTitleView;
 	[super pushViewController:viewController animated:animated];

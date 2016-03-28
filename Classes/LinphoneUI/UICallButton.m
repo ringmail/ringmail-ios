@@ -74,7 +74,6 @@
             {
                 displayName = [NSString stringWithString:address];
                 address = [RgManager addressToSIP:address];
-                NSLog(@"New Address: %@", address);
             }
     		[[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
         }
