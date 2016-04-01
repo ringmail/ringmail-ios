@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIMainBar">
@@ -40,7 +40,8 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="menu-home_active.png"/>
-                    <state key="highlighted" image="ringmail_top_home_selected.png"/>
+                    <state key="highlighted" image="menu-home_active.png"/>
+                    <state key="focused" image="menu-home_active.png"/>
                     <connections>
                         <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
                     </connections>
@@ -61,7 +62,7 @@
                     <state key="selected" image="menu-hash_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted">
+                    <state key="highlighted" image="menu-hash_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -84,7 +85,7 @@
                     <state key="selected" image="menu-contact_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted">
+                    <state key="highlighted" image="menu-contact_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -107,7 +108,7 @@
                     <state key="selected" image="menu-star_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" image="ringmail_top_favs_default.png">
+                    <state key="highlighted" image="menu-star_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -162,7 +163,7 @@
                     <state key="selected" image="menu-more_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" image="ringmail_top_settings_default.png">
+                    <state key="highlighted" image="menu-more_active.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -228,8 +229,5 @@
         <image name="menu-star.png" width="40" height="50"/>
         <image name="menu-star_active.png" width="40" height="50"/>
         <image name="ringmail_logo.png" width="124" height="50"/>
-        <image name="ringmail_top_favs_default.png" width="80" height="100"/>
-        <image name="ringmail_top_home_selected.png" width="80" height="100"/>
-        <image name="ringmail_top_settings_default.png" width="80" height="100"/>
     </resources>
 </document>

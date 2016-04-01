@@ -15,6 +15,7 @@
 @interface MainCollectionViewController : UICollectionViewController
 
 - (void)updateCollection;
+- (void)removeCard:(NSNumber*)index;
 
 @end
 

@@ -10,6 +10,7 @@
  */
 
 #import "MainCardComponent.h"
+#import "MainCardComponentController.h"
 #import "Card.h"
 
 #import "CardContext.h"
@@ -18,14 +19,13 @@
 #import "UIImage+Resize.h"
 #import "UIColor+Hex.h"
 
-#import <AddressBook/AddressBook.h>
-
 @implementation MainCardComponent
 
 @synthesize cardData;
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
+    CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
     UIImage *cardImage = [context imageNamed:[data objectForKey:@"session_tag"]];
     cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
     NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"HelveticaNeue" size:16] forKey:NSFontAttributeName];
@@ -90,7 +90,7 @@
                 {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOpacity:)),0.8f},
                 {CKComponentViewAttribute::LayerAttribute(@selector(setShadowRadius:)),@3},
                 {CKComponentViewAttribute::LayerAttribute(@selector(setShadowColor:)),(id)[[UIColor colorWithHex:@"#0077c3"] CGColor]},
-                {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOffset:)),[NSValue valueWithCGSize:CGSizeMake(2, 2)]}
+                {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOffset:)),[NSValue valueWithCGSize:CGSizeMake(2, 2)]},
             }
         };
     }
@@ -102,11 +102,19 @@
                 {@selector(setBackgroundColor:), [UIColor whiteColor]},
                 {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#d4d5d7"] CGColor]},
                 {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
+                
             }
         };
     }
     
-    MainCardComponent *c = [super newWithComponent:
+    MainCardComponent *c = [super newWithView:{
+        [UIView class],
+        {
+            //{CKComponentTapGestureAttribute(NSSelectorFromString(@"didSwipe:gesture:"))},
+            {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeLeftRecognizer, NSSelectorFromString(@"didSwipeLeft:gesture:"), {})},
+            {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeRightRecognizer, NSSelectorFromString(@"didSwipeRight:gesture:"), {})},
+        }
+    } component:
         [CKInsetComponent
         // Left and right inset of 30pts; centered vertically:
         newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
@@ -292,6 +300,16 @@ static CKComponent *lineComponent()
 {
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     [card startCall];
+}
+
+static void setupSwipeLeftRecognizer(UIGestureRecognizer* recognizer) {
+    UISwipeGestureRecognizer* sw = (UISwipeGestureRecognizer*)recognizer;
+    [sw setDirection:UISwipeGestureRecognizerDirectionLeft];
+}
+
+static void setupSwipeRightRecognizer(UIGestureRecognizer* recognizer) {
+    UISwipeGestureRecognizer* sw = (UISwipeGestureRecognizer*)recognizer;
+    [sw setDirection:UISwipeGestureRecognizerDirectionRight];
 }
 
 @end

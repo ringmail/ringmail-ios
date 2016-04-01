@@ -38,11 +38,13 @@
 {
     NSArray *list = [[[LinphoneManager instance] chatManager] dbGetMainList];
     NSMutableArray *list2 = [NSMutableArray array];
+    int item = 0;
     for (NSDictionary* r in list)
     {
         NSString *address = [r objectForKey:@"session_tag"];
         NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:r];
         [newdata setObject:[self displayName:address] forKey:@"label"];
+        [newdata setObject:[NSNumber numberWithInt:item++] forKey:@"index"];
         [list2 addObject:newdata];
     }
     return list2;

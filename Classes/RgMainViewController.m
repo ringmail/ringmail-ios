@@ -125,6 +125,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              name:kRgSetAddress
                                            object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(removeCard:)
+                                                 name:@"RgMainCardRemove"
+                                               object:nil];
+    
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
 	// xcode would result in the callbutton being disabled all the time.
@@ -183,6 +188,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// Remove observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];
     
     self.visible = NO;
 }
@@ -313,6 +319,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)mainRefreshEvent:(NSNotification *)notif {
     [self setNeedsRefresh:YES];
+}
+
+- (void)removeCard:(NSNotification *)notif{
+    [mainViewController removeCard:notif.userInfo[@"index"]];
 }
 
 #pragma mark - Debug Functions

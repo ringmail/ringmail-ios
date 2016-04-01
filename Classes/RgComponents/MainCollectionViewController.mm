@@ -178,6 +178,16 @@ static NSInteger const pageSize = 10;
     });
 }
 
+- (void)removeCard:(NSNumber*)index
+{
+    __block CKArrayControllerInputItems items;
+    items.remove([NSIndexPath indexPathForRow:[index intValue] inSection:0]);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_dataSource enqueueChangeset:{{}, items}
+                      constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+    });
+}
+
 #pragma mark - UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
