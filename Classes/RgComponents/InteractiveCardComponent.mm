@@ -18,8 +18,6 @@
 #import "CardComponent.h"
 #import "HeaderComponent.h"
 
-static NSString *const oscarWilde = @"Oscar Wilde";
-
 @implementation InteractiveCardComponent
 {
   CKComponent *_overlay;

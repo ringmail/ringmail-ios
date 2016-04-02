@@ -229,7 +229,9 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		[self setCString:preset ? preset : "default" forKey:@"video_preset_preference"];
 		MSVideoSize vsize = linphone_core_get_preferred_video_size(lc);
 		int index;
-		if ((vsize.width == MS_VIDEO_SIZE_720P_W) && (vsize.height == MS_VIDEO_SIZE_720P_H)) {
+		if (
+			(vsize.width == MS_VIDEO_SIZE_720P_W) && (vsize.height == MS_VIDEO_SIZE_720P_H)
+		) {
 			index = 0;
 		} else if ((vsize.width == MS_VIDEO_SIZE_VGA_W) && (vsize.height == MS_VIDEO_SIZE_VGA_H)) {
 			index = 1;
@@ -661,6 +663,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		MSVideoSize vsize;
 		switch ([self integerForKey:@"video_preferred_size_preference"]) {
 		case 0:
+			//MS_VIDEO_SIZE_ASSIGN(vsize, 1080P);
 			MS_VIDEO_SIZE_ASSIGN(vsize, 720P);
 			// 128 = margin for audio, the BW includes both video and audio
 			bw = 1024 + 128;

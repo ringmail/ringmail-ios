@@ -9,18 +9,16 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
+#import <ComponentKit/ComponentKit.h>
 
-@interface Card : NSObject
+@class RgCall;
+@class RgCallContext;
 
-@property (nonatomic, readonly, copy) NSNumber *header;
-@property (nonatomic, readonly, copy) NSDictionary *data;
+/**
+ A QuoteComponent formats a quote based on the quote style.
+ */
+@interface RgCallComponent : CKCompositeComponent
 
-- (instancetype)initWithData:(NSDictionary *)data
-                      header:(NSNumber *)header;
-
-- (NSNumber*)sessionId;
-- (void)showMessages;
-- (void)startCall:(BOOL)video;
++ (instancetype)newWithCall:(RgCall *)call context:(RgCallContext *)context;
 
 @end

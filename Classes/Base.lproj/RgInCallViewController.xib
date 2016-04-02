@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeueLTStd-Cn.otf">
+            <string>HelveticaNeueLTStd-Cn</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgInCallViewController">
+            <connections>
+                <outlet property="addressLabel" destination="aZm-w5-eC5" id="X3o-kP-tw6"/>
+                <outlet property="avatarImage" destination="bfV-j2-2fI" id="jMg-s2-KNg"/>
+                <outlet property="callViewController" destination="0hY-va-cZu" id="GOg-S7-M9M"/>
+                <outlet property="videoCameraSwitch" destination="160" id="161"/>
+                <outlet property="videoGroup" destination="126" id="129"/>
+                <outlet property="videoPreview" destination="127" id="130"/>
+                <outlet property="videoView" destination="132" id="133"/>
+                <outlet property="videoWaitingForFirstImage" destination="144" id="145"/>
+                <outlet property="view" destination="9" id="23"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="9">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="ral-Oc-8i7" userLabel="callView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.88627450980392153" green="0.89411764705882346" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" id="126" userLabel="video">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="173" userLabel="background">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="132" userLabel="display">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" notEnabled="YES"/>
+                            </accessibility>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" id="hCc-qz-KLP" userLabel="headerView">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_unknown_small.png" id="bfV-j2-2fI" userLabel="avatarImage">
+                                    <rect key="frame" x="7" y="7" width="70" height="70"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <accessibility key="accessibilityConfiguration" label="Contact avatar">
+                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                        <bool key="isElement" value="YES"/>
+                                    </accessibility>
+                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Contact1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="aZm-w5-eC5" userLabel="addressLabel">
+                                    <rect key="frame" x="86" y="26" width="210" height="36"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <accessibility key="accessibilityConfiguration" label="Contact name">
+                                        <accessibilityTraits key="traits" none="YES"/>
+                                    </accessibility>
+                                    <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.21176470589999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="144" userLabel="waitIndicator">
+                            <rect key="frame" x="141" y="212" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
+                        <view contentMode="scaleAspectFit" id="127" userLabel="preview">
+                            <rect key="frame" x="216" y="8" width="96" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="o2y-3G-PMp" userLabel="hangupView">
+                            <rect key="frame" x="0.0" y="375" width="320" height="85"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" red="0.8862745098" green="0.89411764709999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <button contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8CR-Fh-jhA" userLabel="hangupButton" customClass="UIHangUpButton">
+                            <rect key="frame" x="10" y="385" width="300" height="50"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <state key="normal" image="ringmail_endcall.png"/>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="160" userLabel="videoCameraSwitch" customClass="UICamSwitch">
+                            <rect key="frame" x="4" y="90" width="85" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Switch camera"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" backgroundImage="switch_camera_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="switch_camera_over.png"/>
+                            <connections>
+                                <outlet property="preview" destination="127" id="172"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+        <viewController id="0hY-va-cZu" userLabel="CallViewController" customClass="RgCallViewController">
+            <connections>
+                <outlet property="view" destination="ral-Oc-8i7" id="Enl-mn-c64"/>
+            </connections>
+        </viewController>
+    </objects>
+    <resources>
+        <image name="avatar_unknown_small.png" width="131" height="131"/>
+        <image name="ringmail_endcall.png" width="300" height="50"/>
+        <image name="switch_camera_default.png" width="151" height="51"/>
+        <image name="switch_camera_over.png" width="151" height="51"/>
+    </resources>
+</document>

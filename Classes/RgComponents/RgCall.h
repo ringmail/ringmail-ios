@@ -11,16 +11,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Card : NSObject
+@interface RgCall : NSObject
 
-@property (nonatomic, readonly, copy) NSNumber *header;
 @property (nonatomic, readonly, copy) NSDictionary *data;
 
-- (instancetype)initWithData:(NSDictionary *)data
-                      header:(NSNumber *)header;
-
-- (NSNumber*)sessionId;
-- (void)showMessages;
-- (void)startCall:(BOOL)video;
+- (instancetype)initWithData:(NSDictionary *)data;
++ (void)requestHangup;
++ (void)toggleSpeaker;
++ (void)toggleMute;
 
 @end

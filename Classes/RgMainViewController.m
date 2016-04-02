@@ -22,7 +22,7 @@
 
 #import "RgScanViewController.h"
 #import "RgMainViewController.h"
-#import "IncallViewController.h"
+#import "RgInCallViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
@@ -515,7 +515,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onBackClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
+	[[PhoneMainView instance] changeCurrentView:[RgInCallViewController compositeViewDescription]];
 }
 
 - (IBAction)onAddressChange:(id)sender {

@@ -136,6 +136,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize chatMd5;
 @synthesize ringLogin;
 @synthesize coreReady;
+@synthesize callDurationTimer;
 
 struct codec_name_pref_table {
 	const char *name;
@@ -1969,7 +1970,13 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	linphone_core_accept_call_with_params(theLinphoneCore, call, lcallParams);
 }
 
-- (void)call:(NSString *)address displayName:(NSString *)displayName transfer:(BOOL)transfer {
+- (void)call:(NSString *)address displayName:(NSString *)displayName transfer:(BOOL)transfer
+{
+	[self call:address displayName:displayName transfer:transfer video:NO];
+}
+
+- (void)call:(NSString *)address displayName:(NSString *)displayName transfer:(BOOL)transfer video:(BOOL)video
+{
 	// First verify that network is available, abort otherwise.
 	if (!linphone_core_is_network_reachable(theLinphoneCore)) {
 		UIAlertView *error = [[UIAlertView alloc]
@@ -2022,6 +2029,16 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 			LOGI(@"Enabling low bandwidth mode");
 			linphone_call_params_enable_low_bandwidth(lcallParams, YES);
 		}
+		
+		// RingMail: Video
+		if (video)
+		{
+			linphone_call_params_enable_video(lcallParams, YES);
+		}
+		else
+		{
+			linphone_call_params_enable_video(lcallParams, NO);
+		}
 
 		if (displayName != nil) {
 			linphone_address_set_display_name(addr, displayName.UTF8String);
@@ -2043,10 +2060,11 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 				// We are NOT responsible for creating the AppData.
 				LinphoneCallAppData *data = (__bridge LinphoneCallAppData *)linphone_call_get_user_data(call);
 				if (data == nil) {
-					LOGE(@"New call instanciated but app data was not set. Expect it to crash.");
+					LOGE(@"New call instantiated but app data was not set. Expect it to crash.");
 					/* will be used later to notify user if video was not activated because of the linphone core*/
 				} else {
 					data->videoRequested = linphone_call_params_video_enabled(lcallParams);
+					NSLog(@"RingMail - Video: %d", data->videoRequested);
 				}
 			}
 		}

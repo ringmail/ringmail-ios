@@ -42,7 +42,7 @@
     [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 }
 
-- (void)startCall
+- (void)startCall:(BOOL)video
 {
     NSString *address = [_data objectForKey:@"session_tag"];
     NSString *displayName;
@@ -56,7 +56,7 @@
         address = [RgManager addressToSIP:address];
         NSLog(@"New Address: %@", address);
     }
-    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE video:video];
 }
 
 @end

@@ -167,16 +167,15 @@
                                       .alignItems = CKStackLayoutAlignItemsStretch
                                   }
                                   children:{
-                                      /*{
+                                      {
                                           [CKInsetComponent
                                            newWithInsets:{.left = 0, .right = 0, .top = INFINITY, .bottom = INFINITY}
                                            component:
-                                              [CKImageComponent newWithImage:[context imageNamed:@"button_video"] size:{
-                                                  .height = 30,
-                                                  .width = 30,
-                                              }]
+                                              [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                                      {UIControlStateNormal,[context imageNamed:@"button_video"]},
+                                                  } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionVideo:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
                                            ]
-                                      },*/ {
+                                      }, {
                                           [CKInsetComponent
                                            newWithInsets:{.left = 15, .right = 7, .top = INFINITY, .bottom = INFINITY}
                                            component:
@@ -299,7 +298,13 @@ static CKComponent *lineComponent()
 - (void)actionCall:(CKButtonComponent *)sender
 {
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
-    [card startCall];
+    [card startCall:NO];
+}
+
+- (void)actionVideo:(CKButtonComponent *)sender
+{
+    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
+    [card startCall:YES];
 }
 
 static void setupSwipeLeftRecognizer(UIGestureRecognizer* recognizer) {

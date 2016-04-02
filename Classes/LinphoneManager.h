@@ -168,7 +168,7 @@ typedef struct _LinphoneManagerSounds {
 
 - (void)acceptCall:(LinphoneCall *)call;
 - (void)call:(NSString *)address displayName:(NSString*)displayName transfer:(BOOL)transfer;
-
+- (void)call:(NSString *)address displayName:(NSString *)displayName transfer:(BOOL)transfer video:(BOOL)video;
 
 +(id)getMessageAppDataForKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg;
 +(void)setValueInMessageAppData:(id)value forKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg;
@@ -227,5 +227,6 @@ typedef struct _LinphoneManagerSounds {
 @property (nonatomic, strong) NSString *chatMd5;
 @property (nonatomic, strong) NSString *ringLogin;
 @property (atomic,strong) NSNumber *coreReady;
+@property (nonatomic, strong) NSTimer *callDurationTimer;
 
 @end
