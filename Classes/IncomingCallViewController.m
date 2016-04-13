@@ -25,15 +25,19 @@
 
 @implementation IncomingCallViewController
 
-@synthesize addressLabel;
-@synthesize avatarImage;
 @synthesize call;
 @synthesize delegate;
+@synthesize callData;
+@synthesize callViewController;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
-	return [super initWithNibName:@"IncomingCallViewController" bundle:[NSBundle mainBundle]];
+	self = [super initWithNibName:@"IncomingCallViewController" bundle:[NSBundle mainBundle]];
+	if (self != nil) {
+		self->callData = [NSMutableDictionary dictionary];
+	}
+	return self;
 }
 
 - (void)dealloc {
@@ -49,12 +53,25 @@
 											 selector:@selector(callUpdateEvent:)
 												 name:kLinphoneCallUpdate
 											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(callAnswerEvent:)
+												 name:@"RgIncomingAnswer"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(callRejectEvent:)
+												 name:@"RgIncomingReject"
+											   object:nil];
+	
+	
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgIncomingAnswer" object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgIncomingReject" object:nil];
 }
 
 #pragma mark - UICompositeViewDelegate Functions
@@ -85,6 +102,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self callUpdate:acall state:astate];
 }
 
+- (void)callAnswerEvent:(NSNotification *)notif
+{
+	[self dismiss];
+	[delegate incomingCallAccepted:call];
+}
+
+- (void)callRejectEvent:(NSNotification *)notif
+{
+	[self dismiss];
+	[delegate incomingCallDeclined:call];
+}
+
 #pragma mark -
 
 - (void)callUpdate:(LinphoneCall *)acall state:(LinphoneCallState)astate {
@@ -102,39 +131,28 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)update {
 	[self view]; // Force view load
-
-	[avatarImage setImage:[UIImage imageNamed:@"avatar_unknown.png"]];
-
-	NSString *address = nil;
+	
 	const LinphoneAddress *addr = linphone_call_get_remote_address(call);
-	if (addr != NULL) {
-		// contact name
+	if (addr != NULL)
+	{
 		char *lAddress = linphone_address_as_string_uri_only(addr);
-		if (lAddress) {
-            address = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
+		if (lAddress)
+		{
+			NSString *address = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
 			ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-			if (contact) {
-				UIImage *tmpImage = [FastAddressBook getContactImage:contact thumbnail:false];
-				if (tmpImage != nil) {
-					dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL),
-								   ^(void) {
-									 UIImage *tmpImage2 = [UIImage decodedImageWithImage:tmpImage];
-									 dispatch_async(dispatch_get_main_queue(), ^{
-									   avatarImage.image = tmpImage2;
-									 });
-								   });
-				}
-				address = [FastAddressBook getContactDisplayName:contact];
+			NSString *name = [address copy];
+			if (contact)
+			{
+				name = [FastAddressBook getContactDisplayName:contact];
 			}
+			callData = [NSMutableDictionary dictionaryWithDictionary:@{
+				@"address": address,
+				@"label": name,
+			}];
+			[callViewController updateCall:callData];
 			ms_free(lAddress);
 		}
 	}
-
-	// Set Address
-	if (address == nil) {
-		address = @"Unknown";
-	}
-	[addressLabel setText:address];
 }
 
 #pragma mark - Property Functions
@@ -143,18 +161,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	call = acall;
 	[self update];
 	[self callUpdate:call state:linphone_call_get_state(call)];
-}
-
-#pragma mark - Action Functions
-
-- (IBAction)onAcceptClick:(id)event {
-	[self dismiss];
-	[delegate incomingCallAccepted:call];
-}
-
-- (IBAction)onDeclineClick:(id)event {
-	[self dismiss];
-	[delegate incomingCallDeclined:call];
 }
 
 #pragma mark - TPMultiLayoutViewController Functions

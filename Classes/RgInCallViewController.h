@@ -25,6 +25,7 @@
 #import "UICompositeViewController.h"
 #import "InCallTableViewController.h"
 #import "RgCallViewController.h"
+#import "RgCallDuration.h"
 
 @class VideoViewController;
 

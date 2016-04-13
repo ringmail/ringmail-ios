@@ -10,14 +10,18 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "RgCallDuration.h"
 
 @interface RgCall : NSObject
 
 @property (nonatomic, readonly, copy) NSDictionary *data;
+@property (nonatomic, strong) RgCallDuration *durationLabel;
 
 - (instancetype)initWithData:(NSDictionary *)data;
 + (void)requestHangup;
 + (void)toggleSpeaker;
 + (void)toggleMute;
++ (void)incomingAnswer;
++ (void)incomingReject;
 
 @end

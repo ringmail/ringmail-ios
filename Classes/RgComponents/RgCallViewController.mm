@@ -15,6 +15,8 @@
 @interface RgCallViewController () <CKComponentProvider, CKComponentHostingViewDelegate>
 @end
 
+static RgCallDuration* globalDuration = nil;
+
 @implementation RgCallViewController
 {
     CKComponentDataSource *_componentDataSource;
@@ -33,6 +35,16 @@
 	if (_hostView == nil)
 	{
 		[self addCallView];
+	}
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	RgCallDuration* durationLabel = [RgCallViewController getDurationLabel];
+	if (durationLabel != nil)
+	{
+		[durationLabel stopTimer];
 	}
 }
 
@@ -55,6 +67,11 @@
 {
 	if (_hostView != nil)
 	{
+		RgCallDuration* durationLabel = [RgCallViewController getDurationLabel];
+		if (durationLabel != nil)
+		{
+			[durationLabel stopTimer];
+		}
 		[_hostView removeFromSuperview];
 		_hostView = nil;
 		_sizeRangeProvider = nil;
@@ -63,10 +80,7 @@
 
 + (id)initialState
 {
-  return [NSMutableDictionary dictionaryWithDictionary:@{
-	  @"mute": [NSNumber numberWithBool: NO],
-	  @"speaker": [NSNumber numberWithBool: NO],
-  }];
+  return [NSMutableDictionary dictionaryWithDictionary:@{}];
 }
 
 #pragma mark - CKComponentProvider
@@ -78,7 +92,6 @@
 #pragma mark - CKComponentHostingViewDelegate <NSObject>
 - (void)componentHostingViewDidInvalidateSize:(CKComponentHostingView *)hostingView {
     NSLog(@"componentHostingViewDidInvalidateSize");
-    
 }
 
 #pragma mark - Update call
@@ -92,6 +105,11 @@
 		[dt setObject:[NSNumber numberWithFloat:ht] forKey:@"height"];
 		RgCall *call = [[RgCall alloc] initWithData:dt];
 		[_hostView updateModel:call mode:CKUpdateModeSynchronous];
+		RgCallDuration* durationLabel = [RgCallViewController getDurationLabel];
+		if (durationLabel != nil)
+		{
+			[durationLabel startTimer];
+		}
 	}
 }
 
@@ -100,5 +118,18 @@
     CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
     return MIN(statusBarSize.width, statusBarSize.height);
 }
+
+
++ (void)setDurationLabel:(RgCallDuration*)label
+{
+	globalDuration = label;
+	[globalDuration startTimer];
+}
+
++ (RgCallDuration*)getDurationLabel
+{
+	return globalDuration;
+}
+
 
 @end

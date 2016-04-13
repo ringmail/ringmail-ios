@@ -21,6 +21,7 @@
 
 #import "UICompositeViewController.h"
 #import "TPMultiLayoutViewController.h"
+#import "RgIncomingCallViewController.h"
 #include "linphone/linphonecore.h"
 
 @protocol IncomingCallViewDelegate <NSObject>
@@ -34,12 +35,10 @@
 @interface IncomingCallViewController : TPMultiLayoutViewController <UICompositeViewDelegate> {
 }
 
-@property (nonatomic, strong) IBOutlet UILabel* addressLabel;
-@property (nonatomic, strong) IBOutlet UIImageView* avatarImage;
 @property (nonatomic, assign) LinphoneCall* call;
 @property (nonatomic, strong) id<IncomingCallViewDelegate> delegate;
 
-- (IBAction)onAcceptClick:(id) event;
-- (IBAction)onDeclineClick:(id) event;
+@property (nonatomic, strong) IBOutlet RgIncomingCallViewController* callViewController;
+@property (nonatomic, strong) NSMutableDictionary* callData;
 
 @end

@@ -110,9 +110,8 @@
     MainCardComponent *c = [super newWithView:{
         [UIView class],
         {
-            //{CKComponentTapGestureAttribute(NSSelectorFromString(@"didSwipe:gesture:"))},
-            {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeLeftRecognizer, NSSelectorFromString(@"didSwipeLeft:gesture:"), {})},
-            {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeRightRecognizer, NSSelectorFromString(@"didSwipeRight:gesture:"), {})},
+            //{CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeLeftRecognizer, NSSelectorFromString(@"didSwipeLeft:gesture:"), {})},
+            //{CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeRightRecognizer, NSSelectorFromString(@"didSwipeRight:gesture:"), {})},
         }
     } component:
         [CKInsetComponent
@@ -177,7 +176,7 @@
                                            ]
                                       }, {
                                           [CKInsetComponent
-                                           newWithInsets:{.left = 15, .right = 7, .top = INFINITY, .bottom = INFINITY}
+                                           newWithInsets:{.left = 12, .right = 7, .top = INFINITY, .bottom = INFINITY}
                                            component:
                                               [CKButtonComponent newWithTitles:{} titleColors:{} images:{
                                                       {UIControlStateNormal,[context imageNamed:@"button_call"]},

@@ -122,15 +122,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// Remove observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgCallRefresh" object:nil];
-	
-	LinphoneManager *mgr = [LinphoneManager instance];
-	NSTimer *updateTime = [mgr callDurationTimer];
-	if (updateTime != nil)
-	{
-		[updateTime invalidate];
-		NSLog(@"RingMail: Invalidate Duration Timer");
-		[mgr setCallDurationTimer:nil];
-	}
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -405,10 +397,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 			}
 		}
 	}
-	[videoGroup setHidden:NO];
-	[callViewController removeCallView];
-	videoShown = true;
 
+	videoShown = true;
 	[videoZoomHandler resetZoom];
 
 	if (animation) {
@@ -416,11 +406,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[UIView setAnimationDuration:1.0];
 	}
 
+	[videoGroup setHidden:NO];
 	[videoGroup setAlpha:1.0];
 
 	if (animation) {
 		[UIView commitAnimations];
 	}
+	
+	[callViewController removeCallView];
 
 	if (linphone_core_self_view_enabled([LinphoneManager getLc])) {
 		[videoPreview setHidden:FALSE];

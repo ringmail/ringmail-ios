@@ -18,17 +18,28 @@
 	{
 		[self setFont:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:14]];
 		[self setTextAlignment:NSTextAlignmentCenter];
-		[self setText:[self getCallDuration]];
-		LinphoneManager *mgr = [LinphoneManager instance];
-		NSTimer *updateTime = [mgr callDurationTimer];
-		if (updateTime != nil)
-		{
-			[updateTime invalidate];
-			NSLog(@"RingMail: Invalidate Duration Timer");
-		}
-		[mgr setCallDurationTimer:[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerRefresh) userInfo:nil repeats:YES]];
+		[self setText:@"00:00:00"];
 	}
 	return self;
+}
+
+- (void)startTimer
+{
+	if (durationTimer == nil)
+	{
+		durationTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerRefresh) userInfo:nil repeats:YES];
+	}
+	[self setText:[self getCallDuration]];
+}
+
+- (void)stopTimer
+{
+	if (durationTimer != nil)
+	{
+		[durationTimer invalidate];
+		durationTimer = nil;
+		NSLog(@"RingMail: Invalidate Duration Timer");
+	}
 }
 
 - (void)timerRefresh

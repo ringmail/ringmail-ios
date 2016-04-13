@@ -9,5 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface RgCallDuration : UILabel
+{
+	NSTimer* durationTimer;
+}
+
+- (void)startTimer;
+- (void)stopTimer;
 
 @end

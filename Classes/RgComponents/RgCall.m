@@ -15,6 +15,8 @@
 
 @implementation RgCall
 
+@synthesize durationLabel;
+
 - (instancetype)initWithData:(NSDictionary *)data
 {
   if (self = [super init]) {
@@ -59,6 +61,16 @@
 		linphone_core_mute_mic([LinphoneManager getLc], true);
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"RgCallRefresh" object:nil];
+}
+
++ (void)incomingAnswer
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"RgIncomingAnswer" object:nil];
+}
+
++ (void)incomingReject
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"RgIncomingReject" object:nil];
 }
 
 @end

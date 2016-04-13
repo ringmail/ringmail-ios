@@ -227,6 +227,5 @@ typedef struct _LinphoneManagerSounds {
 @property (nonatomic, strong) NSString *chatMd5;
 @property (nonatomic, strong) NSString *ringLogin;
 @property (atomic,strong) NSNumber *coreReady;
-@property (nonatomic, strong) NSTimer *callDurationTimer;
 
 @end

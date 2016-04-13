@@ -12,11 +12,15 @@
 #import <UIKit/UIKit.h>
 #import "RgCall.h"
 #import "RgCallContext.h"
+#import "RgCallDuration.h"
 
 @interface RgCallViewController : UIViewController
 
 @property (nonatomic, strong) NSDictionary *callData;
-@property (nonatomic, strong) RgCall *call;
+@property (nonatomic, strong) RgCallDuration *durationLabel;
+
++ (void)setDurationLabel:(RgCallDuration*)label;
++ (RgCallDuration*)getDurationLabel;
 
 - (void)updateCall:(NSDictionary*)data;
 - (void)addCallView;

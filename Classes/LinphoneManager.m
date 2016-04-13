@@ -136,7 +136,6 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize chatMd5;
 @synthesize ringLogin;
 @synthesize coreReady;
-@synthesize callDurationTimer;
 
 struct codec_name_pref_table {
 	const char *name;
