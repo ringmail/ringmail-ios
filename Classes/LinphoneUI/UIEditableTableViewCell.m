@@ -35,7 +35,8 @@
 		[tf setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
 		self.detailTextField = tf;
 
-		UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:[UIFont systemFontSize]];
+		UIFont *font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18];
+		[self.textLabel setFont:font];
 		[self.detailTextLabel setFont:font];
 		[self.detailTextField setFont:font];
 		[self.contentView addSubview:detailTextField];
@@ -59,7 +60,7 @@
 
 	CGRect detailEditFrame;
 	detailEditFrame.origin.x = 15;
-	detailEditFrame.origin.y = 0;
+	detailEditFrame.origin.y = 2;
 	detailEditFrame.size.height = 44;
 
 	if ([[self.textLabel text] length] != 0) {
@@ -72,7 +73,7 @@
 
 		// place separator between left text and detailed text
 		CGRect separatorFrame = [self.verticalSep frame];
-		separatorFrame.origin.x = leftLabelFrame.size.width + leftLabelFrame.origin.x + 5;
+		separatorFrame.origin.x = leftLabelFrame.size.width + leftLabelFrame.origin.x + 8;
 		[self.verticalSep setFrame:separatorFrame];
 		[self.verticalSep setHidden:FALSE];
 	}
@@ -81,6 +82,15 @@
 	CGRect superframe = [[self.detailTextField superview] frame];
 	detailEditFrame.size.width = superframe.size.width - detailEditFrame.origin.x;
 	[self.detailTextField setFrame:detailEditFrame];
+	
+	// RingMail
+	CGRect labelFrame = [self.textLabel frame];
+	labelFrame.origin.y += 2;
+	[self.textLabel setFrame:labelFrame];
+	
+	CGRect textFrame = [self.detailTextLabel frame];
+	textFrame.origin.y += 2;
+	[self.detailTextLabel setFrame:textFrame];
 }
 
 #pragma mark - UITableViewCell Functions

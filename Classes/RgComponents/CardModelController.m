@@ -39,30 +39,27 @@
     NSArray *list = [[[LinphoneManager instance] chatManager] dbGetMainList];
     NSMutableArray *list2 = [NSMutableArray array];
     int item = 0;
+	UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
     for (NSDictionary* r in list)
     {
         NSString *address = [r objectForKey:@"session_tag"];
         NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:r];
-        [newdata setObject:[self displayName:address] forKey:@"label"];
+		ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+		if (contact)
+		{
+			UIImage *customImage = [FastAddressBook getContactImage:contact thumbnail:true];
+            [newdata setObject:[FastAddressBook getContactDisplayName:contact] forKey:@"label"];
+            [newdata setObject:((customImage != nil) ? customImage : defaultImage) forKey:@"image"];
+		}
+		else
+		{
+            [newdata setObject:address forKey:@"label"];
+            [newdata setObject:defaultImage forKey:@"image"];
+		}
         [newdata setObject:[NSNumber numberWithInt:item++] forKey:@"index"];
         [list2 addObject:newdata];
     }
     return list2;
-}
-
-- (NSString*)displayName:(NSString*)address
-{
-    NSString *displayName;
-    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    if (contact)
-    {
-        displayName = [FastAddressBook getContactDisplayName:contact];
-    }
-    else
-    {
-        displayName = address;
-    }
-    return displayName;
 }
 
 - (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count

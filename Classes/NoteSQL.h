@@ -48,5 +48,30 @@
 
 @end
 
-
+        /*FMResultSet *r1 = [db executeQuery:@"SELECT * FROM session;"];
+        while ([r1 next])
+        {
+            NSLog(@"%@", [r1 resultDictionary]);
+        }
+        [r1 close];*/
+        
+        /*FMResultSet *r2 = [db executeQuery:@"SELECT * FROM calls;"];
+        while ([r2 next])
+        {
+            NSLog(@"%@", [r2 resultDictionary]);
+        }
+        [r2 close];*/
+        
+        /*NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+        NSArray *res1 = [ndb get:@{
+           @"table":@"calls",
+           @"select":@[@"oid",@"call_sip",@"session_id",@"call_state"],
+        }];
+        NSLog(@"Note DB Query: %@", res1);
+        for (id i in res1)
+        {
+            NoteRow* r = [ndb row:@"calls" id:[i objectForKey:@"rowid"]];
+            NSDictionary* rd = [r data];
+            NSLog(@"Note DB Row: %@", rd);
+        }*/
 

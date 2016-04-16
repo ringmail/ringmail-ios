@@ -712,13 +712,16 @@
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON session (session_tag);",
                                 @"CREATE INDEX IF NOT EXISTS session_md5_1 ON session (session_md5);",
                                 @"CREATE INDEX IF NOT EXISTS ts_last_event_1 ON session (ts_last_event);",
-                                //@"DROP TABLE chat;",
+								
                                 @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER, msg_uuid TEXT NOT NULL, msg_status TEXT NOT NULL DEFAULT '', msg_data BLOB DEFAULT NULL, msg_type TEXT DEFAULT 'text/plain', msg_url TEXT DEFAULT NULL);",
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
                                 @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON chat (msg_uuid);",
-                                //@"DROP TABLE call;",
+								
                                 @"CREATE TABLE IF NOT EXISTS calls (call_duration TEXT NULL DEFAULT NULL, call_inbound INT NOT NULL DEFAULT 0, call_sip text NOT NULL, call_state INT NOT NULL DEFAULT 0, call_time text NOT NULL, session_id INT NOT NULL DEFAULT 0);",
-                                @"CREATE INDEX IF NOT EXISTS call_sip_1 ON calls (call_sip)",
+                                @"CREATE INDEX IF NOT EXISTS call_sip_1 ON calls (call_sip);",
+								
+								@"CREATE TABLE IF NOT EXISTS favorites (id INTEGER PRIMARY KEY NOT NULL, contact_id bigint NOT NULL);",
+								@"CREATE UNIQUE INDEX IF NOT EXISTS contact_id_1 ON favorites (contact_id);",
                           nil];
         for (NSString *sql in setup)
         {
@@ -741,6 +744,7 @@
                                 @"DROP TABLE session;",
                                 @"DROP TABLE chat;",
                                 @"DROP TABLE calls;",
+								@"DROP TABLE favorites",
                           nil];
         for (NSString *sql in setup)
         {
@@ -916,33 +920,6 @@
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        /*FMResultSet *r1 = [db executeQuery:@"SELECT * FROM session;"];
-        while ([r1 next])
-        {
-            NSLog(@"%@", [r1 resultDictionary]);
-        }
-        [r1 close];*/
-        
-        /*FMResultSet *r2 = [db executeQuery:@"SELECT * FROM calls;"];
-        while ([r2 next])
-        {
-            NSLog(@"%@", [r2 resultDictionary]);
-        }
-        [r2 close];*/
-        
-        /*NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
-        NSArray *res1 = [ndb get:@{
-           @"table":@"calls",
-           @"select":@[@"oid",@"call_sip",@"session_id",@"call_state"],
-        }];
-        NSLog(@"Note DB Query: %@", res1);
-        for (id i in res1)
-        {
-            NoteRow* r = [ndb row:@"calls" id:[i objectForKey:@"rowid"]];
-            NSDictionary* rd = [r data];
-            NSLog(@"Note DB Row: %@", rd);
-        }*/
-        
         FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread, (SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_message, (SELECT STRFTIME('%s', msg_time) FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_time, (SELECT call_sip FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_id, (SELECT STRFTIME('%s', call_time) FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_time FROM session ORDER BY rowid DESC"];
         while ([rs next])
         {
@@ -1191,6 +1168,44 @@
             [callData objectForKey:@"state"],
             [callData objectForKey:@"sip"]
         ];
+    }];
+    [dbq close];
+}
+
+- (void)dbAddFavorite:(NSNumber *)contact
+{
+    __block NSNumber* input = [contact copy];
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		NSArray *ctq = [ndb get:@{
+			@"table":@"favorites",
+			@"select":@[@"count(contact_id) as contacts"],
+			@"where": @{@"contact_id": input},
+        }];
+		if ([[ctq[0] objectForKey:@"contacts"] intValue] == 0)
+		{
+			[ndb set:@{
+                   @"table":@"favorites",
+                   @"insert": @{
+                           @"contact_id": input,
+                },
+			}];
+		}
+    }];
+    [dbq close];
+}
+
+- (void)dbDeleteFavorite:(NSNumber *)contact
+{
+    __block NSNumber* input = [contact copy];
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		[ndb set:@{
+			@"table":@"favorites",
+			@"delete": @{@"contact_id": input},
+        }];
     }];
     [dbq close];
 }

@@ -26,7 +26,8 @@
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
-    UIImage *cardImage = [context imageNamed:[data objectForKey:@"session_tag"]];
+    //UIImage *cardImage = [context imageNamed:[data objectForKey:@"session_tag"]];
+    UIImage *cardImage = [data objectForKey:@"image"];
     cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
     NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"HelveticaNeue" size:16] forKey:NSFontAttributeName];
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[data objectForKey:@"last_message"] attributes:attrsDictionary];

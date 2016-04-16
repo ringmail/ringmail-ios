@@ -65,7 +65,7 @@
     FMResultSet* rs = [database executeQuery:sql withArgumentsInArray:paramList];
     while ([rs next])
     {
-        [result push:[rs resultDictionary]];
+        [result push:[rs resultDictionary]]; // Each array element is a dictionary (hash)
     }
     [rs close];
     return result;

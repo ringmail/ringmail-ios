@@ -206,11 +206,11 @@
 	// setup placeholder
 	ABPropertyID property = [[propertyList objectAtIndex:[indexPath row]] intValue];
 	if (property == kABPersonFirstNameProperty) {
-		[cell.detailTextField setPlaceholder:NSLocalizedString(@"First name", nil)];
+		[cell.detailTextField setPlaceholder:NSLocalizedString(@"First Name", nil)];
 	} else if (property == kABPersonLastNameProperty) {
-		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Last name", nil)];
+		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Last Name", nil)];
 	} else if (property == kABPersonOrganizationProperty) {
-		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Company name", nil)];
+		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Company", nil)];
 	}
 
 	[cell.detailTextField setKeyboardType:UIKeyboardTypeDefault];
