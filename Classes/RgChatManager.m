@@ -10,6 +10,7 @@
 #import "NSString+MD5.h"
 #import "NSXMLElement+XMPP.h"
 #import "NoteSQL.h"
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 #define THIS_FILE   @"RgChatManager"
 #define THIS_METHOD NSStringFromSelector(_cmd)
@@ -564,7 +565,7 @@
         }
         else if ([xmppMessage isTo:self.JID])
         {
-            NSXMLElement *delivered = [xmppMessage elementForName:@"delivered" xmlns:@"urn:xmpp:receipts"];
+            NSXMLElement *delivered = [xmppMessage elementForName:@"received" xmlns:@"urn:xmpp:receipts"];
             if (delivered != nil)
             {
                 NSString* uuid = [[delivered attributeForName:@"id"] stringValue];
@@ -690,7 +691,7 @@
         NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail"];
         BOOL remove = NO;
     #endif
-        dbPath = [dbPath stringByAppendingString:@"_v1.2.2.db"];
+        dbPath = [dbPath stringByAppendingString:@"_v1.2.3.db"];
         if (remove)
         {
             NSFileManager *manager = [NSFileManager defaultManager];
@@ -717,8 +718,20 @@
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
                                 @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON chat (msg_uuid);",
 								
-                                @"CREATE TABLE IF NOT EXISTS calls (call_duration TEXT NULL DEFAULT NULL, call_inbound INT NOT NULL DEFAULT 0, call_sip text NOT NULL, call_state INT NOT NULL DEFAULT 0, call_time text NOT NULL, session_id INT NOT NULL DEFAULT 0);",
+								@"CREATE TABLE calls ("
+                                  "id INTEGER PRIMARY KEY NOT NULL,"
+                                  "call_duration bigint DEFAULT 0,"
+                                  "call_inbound tinyint(1) NOT NULL DEFAULT '0',"
+                                  "call_sip text NOT NULL,"
+                                  "call_state text NOT NULL,"
+                                  "call_status text,"
+                                  "call_time text NOT NULL,"
+                                  "call_uuid text,"
+                                  "session_id bigint NOT NULL DEFAULT 0"
+                                ");",
                                 @"CREATE INDEX IF NOT EXISTS call_sip_1 ON calls (call_sip);",
+                                @"CREATE INDEX IF NOT EXISTS call_uuid_1 ON calls (call_uuid);",
+                                @"CREATE INDEX IF NOT EXISTS session_id_1 ON calls (session_id);",
 								
 								@"CREATE TABLE IF NOT EXISTS favorites (id INTEGER PRIMARY KEY NOT NULL, contact_id bigint NOT NULL);",
 								@"CREATE UNIQUE INDEX IF NOT EXISTS contact_id_1 ON favorites (contact_id);",
@@ -780,7 +793,7 @@
                                @"session_tag": from,
                                @"session_md5": [from md5HexDigest],
                                @"unread": @0,
-                               @"ts_last_event": @"0000-00-00 00:00:00",
+                               @"ts_last_event": [[NSDate date] strftime],
                            },
                        }];
             result = [NSNumber numberWithLongLong:[db lastInsertRowId]];
@@ -890,29 +903,46 @@
 
 - (void)dbUpdateMessageStatus:(NSString*)status forUUID:(NSString*)uuid
 {
+	__block NSNumber* session = nil;
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
-        [ndb set:@{
-           @"table":@"chat",
-           @"update":@{
-                   @"msg_status": status,
-           },
-           @"where":@{
-                   @"msg_uuid":uuid,
-                   },
-           }];
+		NoteRow *chatRow = [ndb row:@"chat" where:@{@"msg_uuid": uuid}];
+		if (chatRow != nil)
+		{
+			[chatRow update:@{
+				@"msg_status": status,
+			}];
+			session = (NSNumber*)[chatRow data:@"session_id"];
+		}
     }];
     [dbq close];
+	if (session != nil)
+	{
+		[self dbUpdateSessionTimestamp:session timestamp:[NSDate date]];
+	}
 }
 
 - (void)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid
 {
+	__block NSNumber* session = nil;
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"UPDATE chat SET msg_data = ? WHERE msg_uuid = ?", data, uuid];
+		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		NoteRow *chatRow = [ndb row:@"chat" where:@{@"msg_uuid": uuid}];
+		if (chatRow != nil)
+		{
+			[chatRow update:@{
+				@"msg_data": data,
+			}];
+			session = (NSNumber*)[chatRow data:@"session_id"];
+		}
     }];
     [dbq close];
+	if (session != nil)
+	{
+		[self dbUpdateSessionTimestamp:session timestamp:[NSDate date]];
+	}
 }
 
 - (NSArray *)dbGetSessions
@@ -956,16 +986,24 @@
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
         NSString *sql = @"";
-        sql = [sql stringByAppendingString:@"SELECT rowid, session_tag, unread, STRFTIME('%s', ts_last_event), "];
+        sql = [sql stringByAppendingString:@"SELECT rowid, session_tag, unread, STRFTIME('%s', ts_last_event) AS timestamp, "];
         sql = [sql stringByAppendingString:@"(SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_message, "];
         sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', msg_time) FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_time, "];
+	    sql = [sql stringByAppendingString:@"(SELECT msg_inbound FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as msg_inbound, "];
         sql = [sql stringByAppendingString:@"(SELECT call_sip FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_id, "];
-        sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', call_time) FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_time "];
+        sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', call_time) FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_time, "];
+        sql = [sql stringByAppendingString:@"(SELECT call_inbound FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_inbound, "];
+		sql = [sql stringByAppendingString:@"(SELECT call_duration FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_duration, "];
+		sql = [sql stringByAppendingString:@"(SELECT call_status FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_status "];
         sql = [sql stringByAppendingString:@"FROM session "];
         if (session)
         {
             sql = [sql stringByAppendingString:[NSString stringWithFormat:@"WHERE rowid = ? "]];
         }
+		else
+		{
+            sql = [sql stringByAppendingString:[NSString stringWithFormat:@"WHERE EXISTS (SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain') OR EXISTS (SELECT * FROM calls WHERE calls.session_id=session.rowid) "]];
+		}
         sql = [sql stringByAppendingString:@"ORDER BY ts_last_event DESC, rowid DESC"];
         FMResultSet *rs;
         if (session)
@@ -978,26 +1016,18 @@
         }
         while ([rs next])
         {
-            //NSLog(@"RingMail Chat Result Set: %@", [rs resultDictionary]);
-            NSString* last = [rs stringForColumnIndex:4];
+			NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:[rs resultDictionary]];
+            NSString* last = [item objectForKey:@"last_message"];
             if (last == nil)
             {
                 last = @"";
             }
-            [result addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                               [rs stringForColumnIndex:0], @"id",
-                               [rs stringForColumnIndex:1], @"session_tag",
-                               [rs objectForColumnIndex:2], @"unread",
-                               [NSDate dateWithTimeIntervalSince1970:[rs longForColumnIndex:3]], @"timestamp",
-                               last, @"last_message",
-                               [rs objectForColumnIndex:5], @"last_time",
-                               [rs objectForColumnIndex:6], @"call_id",
-                               [rs objectForColumnIndex:7], @"call_time",
-                               nil]];
+			[item setObject:last forKey:@"last_message"];
+            [result addObject:item];
         }
         [rs close];
     }];
-    NSLog(@"RingMail dbGetMainList: %@", result);
+    //NSLog(@"RingMail dbGetMainList: %@", result);
     [dbq close];
     return result;
 }
@@ -1149,27 +1179,52 @@
 {
     FMDatabaseQueue *dbq = [self database];
     NSNumber* session = [self dbGetSessionID:[callData objectForKey:@"address"]];
-       [dbq inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"INSERT INTO calls (session_id, call_sip, call_state, call_inbound, call_time) VALUES (?, ?, ?, ?, datetime('now'));",
-            session,
-            [callData objectForKey:@"sip"],
-            [callData objectForKey:@"state"],
-            [callData objectForKey:@"inbound"]
-        ];
+    [dbq inDatabase:^(FMDatabase *db) {
+        NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+        [ndb set:@{
+            @"table":@"calls",
+            @"insert": @{
+                @"session_id":session,
+                @"call_sip":[callData objectForKey:@"sip"],
+                @"call_state":[callData objectForKey:@"state"],
+                @"call_inbound":[callData objectForKey:@"inbound"],
+                @"call_time":[[NSDate date] strftime],
+                @"call_status":@"created",
+            }
+        }];
     }];
     [dbq close];
+	[self dbUpdateSessionTimestamp:session timestamp:[NSDate date]];
 }
 
 - (void)dbUpdateCall:(NSDictionary*)callData
 {
+	__block NSNumber* session = nil;
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"UPDATE calls SET call_state = ? WHERE call_sip = ?",
-            [callData objectForKey:@"state"],
-            [callData objectForKey:@"sip"]
-        ];
+		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		NoteRow *callRow = [ndb row:@"calls" where:@{@"call_sip": [callData objectForKey:@"sip"]}];
+		if (callRow != nil)
+		{
+			session = (NSNumber*)[callRow data:@"session_id"];
+			NSMutableDictionary *updated = [NSMutableDictionary dictionary];
+			for (NSString *k in @[@"state", @"status", @"duration"])
+			{
+				NSObject *val = [callData objectForKey:k];
+				if (val != nil)
+				{
+					NSString *nk = [NSString stringWithFormat:@"call_%@", k];
+					[updated setObject:val forKey:nk];
+				}
+			}
+			[callRow update:updated];
+		}
     }];
     [dbq close];
+	if (session != nil)
+	{
+		[self dbUpdateSessionTimestamp:session timestamp:[NSDate date]];
+	}
 }
 
 - (void)dbAddFavorite:(NSNumber *)contact

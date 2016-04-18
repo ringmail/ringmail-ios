@@ -412,9 +412,9 @@
             {
                 status = @"Sent";
             }
-            else if ([status isEqualToString:@"received"])
+            else if ([status isEqualToString:@"delivered"])
             {
-                status = @"Received";
+                status = @"Delivered";
             }
             else
             {

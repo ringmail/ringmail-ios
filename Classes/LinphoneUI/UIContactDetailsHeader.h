@@ -40,14 +40,18 @@
 @property (nonatomic, strong) IBOutlet id<ContactDetailsDelegate> contactDetailsDelegate;
 @property (nonatomic, strong) IBOutlet UIImageView *rgImage;
 @property (nonatomic, strong) IBOutlet UIButton *rgInvite;
+@property (nonatomic, strong) IBOutlet UIButton *callButton;
+@property (nonatomic, strong) IBOutlet UIButton *chatButton;
+@property (nonatomic, strong) IBOutlet UIButton *videoButton;
 
 @property (strong, nonatomic) ImagePickerViewController* popoverController;
+@property (nonatomic) BOOL rgMember;
 
 @property(nonatomic,getter=isEditing) BOOL editing;
 
 - (IBAction)onAvatarClick:(id)event;
 
-+ (CGFloat)height:(BOOL)editing;
++ (CGFloat)height:(BOOL)editing member:(BOOL)member;
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated;
 - (void)setEditing:(BOOL)editing;

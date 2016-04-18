@@ -26,57 +26,70 @@
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
-    //UIImage *cardImage = [context imageNamed:[data objectForKey:@"session_tag"]];
+	NSLog(@"Component Data: %@", data);
     UIImage *cardImage = [data objectForKey:@"image"];
     cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
-    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"HelveticaNeue" size:16] forKey:NSFontAttributeName];
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[data objectForKey:@"last_message"] attributes:attrsDictionary];
+
+    NSString *latest;
+    NSDate *dateLatest = [data objectForKey:@"timestamp"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *locale = [NSLocale currentLocale];
+    [dateFormatter setLocale:locale];
+    [dateFormatter setDoesRelativeDateFormatting:YES];
     
-    NSNumber *timeCall = [data objectForKey:@"call_time"];
-    NSNumber *timeChat = [data objectForKey:@"last_time"];
-    NSNumber *timeLatest = nil;
-    if (timeCall != nil && ! [timeCall isEqual:[NSNull null]])
-    {
-        if (timeChat != nil && ! [timeChat isEqual:[NSNull null]])
-        {
-            if (timeChat > timeCall)
-            {
-                timeLatest = timeChat;
-            }
-            else
-            {
-                timeLatest = timeCall;
-            }
-        }
-        else
-        {
-            timeLatest = timeCall;
-        }
-    }
-    else if (timeChat != nil && ! [timeChat isEqual:[NSNull null]])
-    {
-        timeLatest = timeChat;
-    }
-    NSString *latest = @"";
-    if ([timeLatest boolValue])
-    {
-        //NSDate *dateLatest = [NSDate dateWithTimeIntervalSince1970:[timeLatest doubleValue]];
-        NSDate *dateLatest;
-        dateLatest = [data objectForKey:@"timestamp"]; // replace with session timestamp
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        NSLocale *locale = [NSLocale currentLocale];
-        [dateFormatter setLocale:locale];
-        [dateFormatter setDoesRelativeDateFormatting:YES];
-        
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-        latest = [dateFormatter stringFromDate:dateLatest];
-        
-        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        [dateFormatter setDateStyle:NSDateFormatterNoStyle];
-        latest = [latest stringByAppendingString:@": "];
-        latest = [latest stringByAppendingString:[dateFormatter stringFromDate:dateLatest]];
-    }
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    latest = [dateFormatter stringFromDate:dateLatest];
+    
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+    latest = [latest stringByAppendingString:@": "];
+    latest = [latest stringByAppendingString:[dateFormatter stringFromDate:dateLatest]];
+	
+	NSString *msg;
+	BOOL append_duration = NO;
+	if ([[data objectForKey:@"last_event"] isEqualToString:@"chat"])
+	{
+		msg = [data objectForKey:@"last_message"];
+		if ([[data objectForKey:@"msg_inbound"] boolValue])
+		{
+			latest = [NSString stringWithFormat:@"Received %@", latest];
+		}
+		else
+		{
+			latest = [NSString stringWithFormat:@"Sent %@", latest];
+		}
+	}
+	else
+	{
+		if ([[data objectForKey:@"call_inbound"] boolValue])
+		{
+			if ([[data objectForKey:@"call_status"] isEqualToString:@"missed"])
+			{
+				msg = @"Missed Call";
+			}
+			else
+			{
+				msg = @"Call ";
+				append_duration = YES;
+			}
+			latest = [NSString stringWithFormat:@"Inbound %@", latest];
+		}
+		else
+		{
+			msg = @"Call ";
+			append_duration = YES;
+			latest = [NSString stringWithFormat:@"Outbound %@", latest];
+		}
+	}
+	if (append_duration && [[data objectForKey:@"call_status"] isEqualToString:@"success"])
+	{
+		msg = [msg stringByAppendingString:[data objectForKey:@"call_duration"]];
+	}
+    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"HelveticaNeue" size:16] forKey:NSFontAttributeName];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
+
+		
     
     // Cheat and get a width constraint for the card text box
     CGFloat textWidth = [[UIScreen mainScreen] bounds].size.width - 100;

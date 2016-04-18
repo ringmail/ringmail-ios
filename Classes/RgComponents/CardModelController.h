@@ -10,6 +10,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "RegexKitLite/RegexKitLite.h"
 
 @class CKCollectionViewDataSource;
 @class CardsPage;

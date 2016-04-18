@@ -106,12 +106,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 											   object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textReceivedEvent:)
+                                             selector:@selector(mainRefreshEvent:)
                                                  name:kRgTextReceived
                                                object:nil];
     
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mainRefreshEvent:)
+                                                 name:kLinphoneCallUpdate
+                                               object:nil];
+	
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textUpdatedEvent:)
+                                             selector:@selector(mainRefreshEvent:)
                                                  name:kRgTextUpdate
                                                object:nil];
     
@@ -119,7 +124,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(mainRefreshEvent:)
                                                  name:kRgMainRefresh
                                                object:nil];
-    
+	
+	
   	[[NSNotificationCenter defaultCenter] addObserver:self
                                          selector:@selector(setAddressEvent:)
                                              name:kRgSetAddress
@@ -235,6 +241,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextReceived object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -302,7 +309,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (void)textReceivedEvent:(NSNotification *)notif {
+- (void)mainRefreshEvent:(NSNotification *)notif {
     if (self.visible)
     {
         [mainViewController updateCollection];
@@ -311,14 +318,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     {
         [self setNeedsRefresh:YES];
     }
-}
-
-- (void)textUpdatedEvent:(NSNotification *)notif {
-    [self setNeedsRefresh:YES];
-}
-
-- (void)mainRefreshEvent:(NSNotification *)notif {
-    [self setNeedsRefresh:YES];
 }
 
 - (void)removeCard:(NSNotification *)notif{

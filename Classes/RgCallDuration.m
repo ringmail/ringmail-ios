@@ -53,7 +53,7 @@
 	{
 		LinphoneCall *call = [RgInCallViewController retrieveCallAtIndex:0];
 		int duration = linphone_call_get_duration(call);
-		return [NSString stringWithFormat:@"%02i:%02i:%02i", (duration / 3600), ((duration / 60) % 60), (duration % 60), nil];
+		return [NSString stringWithFormat:@"%02i:%02i:%02i", (duration / 3600), ((duration / 60) % 60), (duration % 60)];
 	}
 	return @"00:00:00";
 }

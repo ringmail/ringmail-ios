@@ -21,6 +21,7 @@
 
 - (id)initWithDatabase:(FMDatabase*)db table:(NSString*)table id:(NSNumber*)inp;
 - (NSDictionary*)data;
+- (NSObject *)data:(NSString*)col;
 - (void)update:(NSDictionary*)params;
 
 @end
@@ -35,6 +36,8 @@
 - (NSObject*)set:(NSDictionary*)params;
 - (NoteRow*)create:(NSString*)table data:(NSDictionary*)params;
 - (NoteRow*)row:(NSString*)table id:(NSNumber*)inp;
+- (NoteRow*)row:(NSString*)table where:(NSDictionary*)params;
+
 
 @end
 

@@ -839,7 +839,8 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
             if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingProgress)
             {
                 // New call
-                BOOL inbound = (LinphoneCallIncomingReceived) ? YES : NO;
+                BOOL inbound = (state == LinphoneCallIncomingReceived) ? YES : NO;
+				NSLog(@"RingMail Inbound: %@", [NSNumber numberWithBool:inbound]);
                 [[self chatManager] dbInsertCall:@{
                                                @"sip": sip,
                                                @"address": rgAddress,
@@ -850,10 +851,36 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
             else
             {
                 // Update call
-                [[self chatManager] dbUpdateCall:@{
-                       @"sip": sip,
-                       @"state": [NSNumber numberWithInt:state],
-                   }];
+				NSMutableDictionary *updates = [NSMutableDictionary dictionaryWithDictionary:@{
+                    @"sip": sip,
+                    @"state": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],
+				}];
+				if (state == LinphoneCallEnd || state == LinphoneCallError)
+				{
+					LinphoneCallLog *log = linphone_call_get_call_log(call);
+					NSString *status;
+					int sts = linphone_call_log_get_status(log);
+    				if (sts == LinphoneCallSuccess)
+    				{
+    					status = @"success";
+    					NSNumber *duration = [NSNumber numberWithInt:linphone_call_log_get_duration(log)];
+    					[updates setObject:duration forKey:@"duration"];
+        			}
+    				else if (sts == LinphoneCallMissed)
+    				{
+    					status = @"missed";
+    				}
+    				else if (sts == LinphoneCallAborted)
+    				{
+    					status = @"aborted";
+    				}
+    				else if (sts == LinphoneCallDeclined)
+    				{
+    					status = @"declined";
+    				}
+					[updates setObject:status forKey:@"status"];
+				}
+    			[[self chatManager] dbUpdateCall:updates];
             }
         }
     }

@@ -24,6 +24,8 @@
 #import "UILinphone.h"
 #import "PhoneMainView.h"
 #import "DTActionSheet.h"
+#import "UIImage+RoundedCorner.h"
+#import "UIImage+Resize.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
@@ -39,6 +41,10 @@
 @synthesize popoverController;
 @synthesize rgImage;
 @synthesize rgInvite;
+@synthesize rgMember;
+@synthesize callButton;
+@synthesize chatButton;
+@synthesize videoButton;
 
 #pragma mark - Lifecycle Functions
 
@@ -47,6 +53,7 @@
 													[NSNumber numberWithInt:kABPersonLastNameProperty],
 													[NSNumber numberWithInt:kABPersonOrganizationProperty], nil];
 	editing = FALSE;
+	rgMember = FALSE;
 }
 
 - (id)init {
@@ -111,16 +118,22 @@
 	}
     
     NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
-    BOOL hasRingMail = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
-    NSLog(@"RingMail: Contact ID: %@ - has rg:%d", contactID, hasRingMail);
-    if (hasRingMail)
+    rgMember = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
+    NSLog(@"RingMail: Contact ID: %@ - has rg:%d", contactID, rgMember);
+    if (rgMember)
     {
         [rgImage setHidden:NO];
+        [chatButton setHidden:NO];
+        [callButton setHidden:NO];
+        [videoButton setHidden:NO];
         [rgInvite setHidden:YES];
     }
     else
     {
         [rgImage setHidden:YES];
+        [chatButton setHidden:YES];
+        [callButton setHidden:YES];
+        [videoButton setHidden:YES];
         [rgInvite setHidden:NO];
     }
 
@@ -130,6 +143,9 @@
 		if (image == nil) {
 			image = [UIImage imageNamed:@"avatar_unknown_small.png"];
 		}
+		
+		image = [image thumbnailImage:130 transparentBorder:0 cornerRadius:65 interpolationQuality:kCGInterpolationHigh];
+		
 		[avatarImage setImage:image];
 	}
 
@@ -139,11 +155,22 @@
 	[tableView reloadData];
 }
 
-+ (CGFloat)height:(BOOL)editing {
-	if (editing) {
-		return 170.0f;
-	} else {
-		return 80.0f;
++ (CGFloat)height:(BOOL)editing member:(BOOL)member
+{
+	if (editing)
+	{
+		return 160.0f;
+	}
+	else
+	{
+		if (member)
+		{
+			return 104.0f;
+		}
+		else
+		{
+			return 114.0f;
+		}
 	}
 }
 

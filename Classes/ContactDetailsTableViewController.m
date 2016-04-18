@@ -74,6 +74,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 						[NSString stringWithString:(NSString *)kABPersonPhoneMobileLabel],
                         nil];
 	editingIndexPath = nil;
+	self.member = NO;
 }
 
 - (id)init {
@@ -405,7 +406,10 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		CFRelease(contact);
 	}
 	contact = acontact;
+	NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
+    self.member = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
 	[self loadData];
+	[headerController setRgMember:self.member];
 	[headerController setContact:contact];
 }
 
@@ -702,7 +706,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == ContactSections_None) {
-		return [UIContactDetailsHeader height:[headerController isEditing]];
+		return [UIContactDetailsHeader height:[headerController isEditing] member:self.member];
 	} else {
 		// Hide section if nothing in it
 		if ([[self getSectionData:section] count] > 0)

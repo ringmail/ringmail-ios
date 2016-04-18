@@ -45,6 +45,7 @@ typedef enum _ContactSections {
 @property (nonatomic, strong) IBOutlet id<ContactDetailsDelegate> contactDetailsDelegate;
 @property (nonatomic, strong) IBOutlet UIContactDetailsHeader *headerController;
 @property (nonatomic, strong) IBOutlet UIContactDetailsFooter *footerController;
+@property (nonatomic) BOOL member; // RingMail member
 
 - (BOOL)isValid;
 - (void)addPhoneField:(NSString*)number;

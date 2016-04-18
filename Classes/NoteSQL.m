@@ -185,15 +185,16 @@
 
 - (NoteRow*)row:(NSString*)table where:(NSDictionary*)params
 {
+	NSString *pk = [NSString stringWithFormat:@"%@ AS id", self.primaryKey];
     NSArray *rowQuery = [self get:@{
-                                    @"select":@[self.primaryKey],
+                                    @"select":@[pk],
                                     @"table":table,
                                     @"where":params,
                                     }];
     NSNumber* recid;
     if ([rowQuery count] > 0)
     {
-        recid = [[rowQuery objectAtIndex:0] objectForKey:self.primaryKey];
+        recid = [[rowQuery objectAtIndex:0] objectForKey:@"id"];
         NoteRow* obj = [[NoteRow alloc] initWithDatabase:self.database table:table id:recid];
         return obj;
     }
@@ -240,11 +241,29 @@
     return nil;
 }
 
+- (NSObject *)data:(NSString*)col
+{
+    NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:self.database];
+    NSArray* res = [ndb get:@{
+                      @"table":self.table,
+                      @"select":@[col],
+                      @"where":@{
+                          self.primaryKey: self.rowid,
+                      },
+                  }];
+    if ([res count] > 0)
+    {
+		return [[res objectAtIndex:0] objectForKey:col];
+    }
+    return nil;
+}
+
 - (void)update:(NSDictionary*)params
 {
     NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:self.database];
     [ndb set:@{
        @"update":params,
+       @"table":self.table,
        @"where":@{
            self.primaryKey: self.rowid
        },
