@@ -28,6 +28,7 @@
 - (NSArray*)getContactList:(BOOL)reload;
 - (NSDictionary *)getAddressBookStats:(NSArray*)contactList;
 - (NSArray*)getContactData:(NSArray*)contactList;
+- (NSString*)getRingMailAddress:(ABRecordRef)lPerson;
 - (void)inviteToRingMail:(ABRecordRef)contact;
 - (void)sendContactData;
 - (void)sendContactData:(NSArray*)contactList;

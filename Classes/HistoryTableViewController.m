@@ -176,7 +176,7 @@
 			DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
 						 RgMainViewController);
 		if (controller != nil) {
-			[controller call:address displayName:displayName];
+			//[controller call:address displayName:displayName];
 		}
 	}
 }

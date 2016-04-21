@@ -52,6 +52,10 @@
 @property(nonatomic,getter=isEditing) BOOL editing;
 
 - (IBAction)onAvatarClick:(id)event;
+- (IBAction)onActionChat:(id)event;
+- (IBAction)onActionCall:(id)event;
+- (IBAction)onActionVideo:(id)event;
+- (IBAction)onActionFavorite:(id)event;
 
 + (CGFloat)height:(BOOL)editing member:(BOOL)member;
 

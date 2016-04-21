@@ -12,6 +12,7 @@
 #import "Card.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
+#import "RgManager.h"
 
 @implementation Card
 
@@ -45,18 +46,7 @@
 - (void)startCall:(BOOL)video
 {
     NSString *address = [_data objectForKey:@"session_tag"];
-    NSString *displayName;
-    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    if (contact) {
-        displayName = [FastAddressBook getContactDisplayName:contact];
-    }
-    if ([address rangeOfString:@"@"].location != NSNotFound)
-    {
-        displayName = [NSString stringWithString:address];
-        address = [RgManager addressToSIP:address];
-        NSLog(@"New Address: %@", address);
-    }
-    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE video:video];
+    [RgManager startCall:address contact:NULL];
 }
 
 @end

@@ -178,6 +178,54 @@
     //return result;
 }
 
+- (NSString*)getRingMailAddress:(ABRecordRef)lPerson
+{
+    ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+    NSString *res = nil;
+    if (emailMap) {
+        for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
+            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
+            if (val)
+            {
+                val = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                if ([self dbIsEnabled:val])
+                {
+                    res = val;
+                    break;
+                }
+            }
+        }
+        CFRelease(emailMap);
+    }
+    if (res != nil)
+    {
+        return res;
+    }
+    ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
+    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+    if (phoneMap) {
+        for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
+            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneMap, i));
+            if (val)
+            {
+                NSError *anError = nil;
+                NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
+                if (anError == nil && [phoneUtil isValidNumber:myNumber])
+                {
+                    val = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+                    if ([self dbIsEnabled:val])
+                    {
+                        res = val;
+                        break;
+                    }
+                }
+            }
+        }
+        CFRelease(phoneMap);
+    }
+    return res;
+}
+
 - (void)inviteToRingMail:(ABRecordRef)contact
 {
     DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Invite To RingMail", nil)];
@@ -296,12 +344,18 @@
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])
         {
-            NSArray *rgMatches = [res objectForKey:@"rg_contacts"];
+            NSArray *rgContacts = [res objectForKey:@"rg_contacts"];
+            if (rgContacts)
+            {
+                NSLog(@"RingMail: Updated Contacts: %@", rgContacts);
+                [self dbUpdateEnabled:rgContacts];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
+            }
+            NSArray *rgMatches = [res objectForKey:@"rg_matches"];
             if (rgMatches)
             {
                 NSLog(@"RingMail: Updated Matches: %@", rgMatches);
-                [self dbUpdateEnabled:rgMatches];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
+                [self dbUpdateMatches:rgMatches];
             }
         }
         else
@@ -340,7 +394,7 @@
               "item_hash text NOT NULL"
             ");",
 
-            "CREATE UNIQUE INDEX IF NOT EXISTS item_hash_1 ON contact_match (item_hash);",
+            @"CREATE UNIQUE INDEX IF NOT EXISTS item_hash_1 ON contact_match (item_hash);",
         nil];
         for (NSString *sql in setup)
         {

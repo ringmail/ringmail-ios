@@ -75,20 +75,31 @@ static LevelDB* theConfigDatabase = nil;
     return [res stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-+ (void)startCall:(NSString*)address
++ (void)startCall:(NSString*)address contact:(ABRecordRef)contact
+{
+    [self startCall:address contact:contact video:NO];
+}
+
++ (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video
 {
     NSString* displayName = [address copy];
-    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    if (contact) {
+    if (contact == NULL)
+    {
+        contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+    }
+    if (contact != NULL)
+    {
         displayName = [FastAddressBook getContactDisplayName:contact];
+    }
+    else
+    {
+        displayName = [NSString stringWithString:address];
     }
     if ([address rangeOfString:@"@"].location != NSNotFound)
     {
-        displayName = [NSString stringWithString:address];
         address = [RgManager addressToSIP:address];
-        //NSLog(@"New Address: %@", address);
     }
-    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE video:video];
 }
 
 + (void)startMessage:(NSString*)address
@@ -239,7 +250,7 @@ static LevelDB* theConfigDatabase = nil;
     if ([RgManager checkRingMailAddress:ringuri])
     {
         NSLog(@"RingMail: URI - Valid For Call: %@", ringuri);
-        [RgManager startCall:[RgManager filterRingMailAddress:ringuri]];
+        [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL];
     }
 }
 

@@ -334,6 +334,49 @@
 	}
 }
 
+- (IBAction)onActionChat:(id)event {
+   	if (contact == NULL)
+    {
+        LOGW(@"Cannot access contact: null contact");
+        return;
+    }
+    NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+    if (rgAddress != nil)
+    {
+        [[LinphoneManager instance] setChatTag:rgAddress];
+        [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+    }
+}
+
+- (IBAction)onActionCall:(id)event {
+    if (contact == NULL)
+    {
+        LOGW(@"Cannot access contact: null contact");
+        return;
+    }
+    NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+    if (rgAddress != nil)
+    {
+        [RgManager startCall:rgAddress contact:contact];
+    }
+}
+
+- (IBAction)onActionVideo:(id)event {
+    if (contact == NULL)
+    {
+        LOGW(@"Cannot access contact: null contact");
+        return;
+    }
+    NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+    if (rgAddress != nil)
+    {
+        [RgManager startCall:rgAddress contact:contact video:YES];
+    }
+}
+
+- (IBAction)onActionFavorite:(id)event {
+}
+
 #pragma mark - ContactDetailsImagePickerDelegate Functions
 
 - (void)imagePickerDelegateImage:(UIImage *)image info:(NSDictionary *)info {

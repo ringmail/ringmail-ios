@@ -358,20 +358,11 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
 
 - (IBAction)onCallClick:(id)sender {
     NSString *address = [chatViewController chatRoom];
-    NSString *displayName = nil;
-    if ([address length] > 0) {
+    if ([address length] > 0)
+    {
         if ([RgManager checkRingMailAddress:address])
         {
-            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-            if (contact) {
-                displayName = [FastAddressBook getContactDisplayName:contact];
-            }
-            if ([address rangeOfString:@"@"].location != NSNotFound)
-            {
-                displayName = [NSString stringWithString:address];
-                address = [RgManager addressToSIP:address];
-            }
-            [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+            [RgManager startCall:address contact:NULL];
         }
     }
 }
