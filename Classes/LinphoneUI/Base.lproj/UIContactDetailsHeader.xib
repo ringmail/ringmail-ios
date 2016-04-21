@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -20,6 +20,7 @@
                 <outlet property="callButton" destination="BWx-aW-PFf" id="OqS-jV-daJ"/>
                 <outlet property="chatButton" destination="F6z-Sd-uf3" id="dsx-Hl-7wg"/>
                 <outlet property="editView" destination="13" id="16"/>
+                <outlet property="favoriteButton" destination="sAs-m8-olx" id="AbH-cE-F4j"/>
                 <outlet property="normalView" destination="12" id="17"/>
                 <outlet property="rgImage" destination="eFd-sV-9EG" id="RhW-Jw-7bk"/>
                 <outlet property="rgInvite" destination="iEM-vL-GAO" id="9Sy-8x-eOH"/>
@@ -101,8 +102,7 @@
                                 <constraint firstAttribute="height" constant="45" id="LTZ-iG-z8v"/>
                                 <constraint firstAttribute="width" constant="45" id="Re7-i1-SoL"/>
                             </constraints>
-                            <state key="normal" title="Button" image="ringmail_favorite.png"/>
-                            <state key="highlighted" image="ringmail_favorite-pressed.png"/>
+                            <state key="normal" image="ringmail_favorite.png"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFT-px-iZV" userLabel="VideoButton">
                             <rect key="frame" x="45" y="155" width="45" height="45"/>
@@ -148,7 +148,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="881" y="626"/>
+            <point key="canvasLocation" x="753" y="571"/>
         </view>
     </objects>
     <resources>
@@ -157,7 +157,6 @@
         <image name="phone.png" width="30" height="30"/>
         <image name="quote.png" width="30" height="30"/>
         <image name="ringmail_contact_small.png" width="64" height="64"/>
-        <image name="ringmail_favorite-pressed.png" width="45" height="45"/>
         <image name="ringmail_favorite.png" width="45" height="45"/>
     </resources>
 </document>

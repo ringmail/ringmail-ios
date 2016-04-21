@@ -44,6 +44,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *callButton;
 @property (nonatomic, strong) IBOutlet UIButton *chatButton;
 @property (nonatomic, strong) IBOutlet UIButton *videoButton;
+@property (nonatomic, strong) IBOutlet UIButton *favoriteButton;
 
 @property (strong, nonatomic) ImagePickerViewController* popoverController;
 @property (nonatomic) BOOL rgMember;

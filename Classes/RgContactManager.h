@@ -34,5 +34,6 @@
 - (void)dbUpdateEnabled:(NSArray *)rgUsers;
 - (NSDictionary*)dbGetRgContacts;
 - (BOOL)dbHasRingMail:(NSString*)contactID;
+- (void)dropTables;
 
 @end

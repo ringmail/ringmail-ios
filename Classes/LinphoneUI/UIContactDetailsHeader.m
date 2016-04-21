@@ -46,6 +46,7 @@
 @synthesize callButton;
 @synthesize chatButton;
 @synthesize videoButton;
+@synthesize favoriteButton;
 
 #pragma mark - Lifecycle Functions
 
@@ -124,6 +125,7 @@
     if (rgMember)
     {
         //[rgImage setHidden:NO];
+        [favoriteButton setHidden:NO];
         [chatButton setHidden:NO];
         [callButton setHidden:NO];
         [videoButton setHidden:NO];
@@ -132,6 +134,7 @@
     else
     {
         //[rgImage setHidden:YES];
+        [favoriteButton setHidden:YES];
         [chatButton setHidden:YES];
         [callButton setHidden:YES];
         [videoButton setHidden:YES];

@@ -331,10 +331,17 @@
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
-                          //@"DROP TABLE contacts;",
-                          @"CREATE TABLE IF NOT EXISTS contacts (apple_id INT NOT NULL, ringmail_enabled BOOL DEFAULT 0, contact_data TEXT);",
-                          @"CREATE UNIQUE INDEX IF NOT EXISTS apple_id_1 ON contacts (apple_id);",
-                          nil];
+            //@"DROP TABLE contacts;",
+            @"CREATE TABLE IF NOT EXISTS contacts (apple_id INT NOT NULL, ringmail_enabled BOOL DEFAULT 0, contact_data TEXT);",
+            @"CREATE UNIQUE INDEX IF NOT EXISTS apple_id_1 ON contacts (apple_id);",
+
+            @"CREATE TABLE IF NOT EXISTS contact_match ("
+              "id INTEGER PRIMARY KEY NOT NULL,"
+              "item_hash text NOT NULL"
+            ");",
+
+            "CREATE UNIQUE INDEX IF NOT EXISTS item_hash_1 ON contact_match (item_hash);",
+        nil];
         for (NSString *sql in setup)
         {
             [db executeStatements:sql];
@@ -364,6 +371,62 @@
         }
     }];
     [dbq close];
+}
+
+- (void)dbUpdateMatches:(NSArray*)rgMatches
+{
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        // Get current ringmail users
+        NSMutableDictionary *cur = [NSMutableDictionary dictionary];
+        FMResultSet *rs = [db executeQuery:@"SELECT item_hash FROM contact_match"];
+        while ([rs next])
+        {
+            NSString *match = [rs objectForColumnIndex:0];
+            [cur setObject:@(1) forKey:match];
+        }
+        [rs close];
+        
+        for (NSString *newMatch in rgMatches)
+        {
+			if ([cur objectForKey:newMatch] != nil) // Found
+			{
+				[cur removeObjectForKey:newMatch];
+			}
+			else
+			{
+                [db executeUpdate:@"INSERT INTO contact_match (item_hash) VALUES (?)", newMatch];
+			}
+        }
+        
+        // Purge contacts that are no longer RingMail users :(
+        [cur enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            //NSLog(@"RingMail: Contact Deactivate: %@", key);
+            [db executeUpdate:@"DELETE FROM contact_match WHERE item_hash=?", key];
+        }];
+    }];
+    [dbq close];
+}
+
+- (BOOL)dbIsEnabled:(NSString*)item
+{
+    FMDatabaseQueue *dbq = [self database];
+    __block NSString *data = [[NSString stringWithFormat:@"r!ng:%@", item] SHA256];
+    __block BOOL matched = NO;
+    [dbq inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT count(item_hash) FROM contact_match WHERE item_hash = ?", data];
+        if ([rs next])
+        {
+			NSNumber *count = [rs objectForColumnIndex:0];
+			if ([count intValue] > 0)
+			{
+				matched = YES;
+			}
+		}
+		[rs close];
+    }];
+    [dbq close];
+	return matched;
 }
 
 - (void)dbUpdateEnabled:(NSArray *)rgUsers

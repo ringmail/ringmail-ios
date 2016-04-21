@@ -565,6 +565,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[RgNetwork instance] signOut];
         [[[LinphoneManager instance] chatManager] disconnect];
         [[[LinphoneManager instance] chatManager] dropTables];
+		[[[LinphoneManager instance] contactManager] dropTables];
         [RgManager configReset];
 		[controller startWizard];
 	}
