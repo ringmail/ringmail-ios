@@ -32,6 +32,7 @@
 @implementation UIContactDetailsHeader
 
 @synthesize avatarImage;
+@synthesize avatarEditImage;
 @synthesize addressLabel;
 @synthesize contact;
 @synthesize normalView;
@@ -122,7 +123,7 @@
     NSLog(@"RingMail: Contact ID: %@ - has rg:%d", contactID, rgMember);
     if (rgMember)
     {
-        [rgImage setHidden:NO];
+        //[rgImage setHidden:NO];
         [chatButton setHidden:NO];
         [callButton setHidden:NO];
         [videoButton setHidden:NO];
@@ -130,7 +131,7 @@
     }
     else
     {
-        [rgImage setHidden:YES];
+        //[rgImage setHidden:YES];
         [chatButton setHidden:YES];
         [callButton setHidden:YES];
         [videoButton setHidden:YES];
@@ -144,9 +145,9 @@
 			image = [UIImage imageNamed:@"avatar_unknown_small.png"];
 		}
 		
-		image = [image thumbnailImage:130 transparentBorder:0 cornerRadius:65 interpolationQuality:kCGInterpolationHigh];
-		
-		[avatarImage setImage:image];
+		[avatarImage setImage:[image thumbnailImage:200 transparentBorder:0 cornerRadius:100 interpolationQuality:kCGInterpolationHigh]];
+
+        [avatarEditImage setImage:[image thumbnailImage:160 transparentBorder:0 cornerRadius:80 interpolationQuality:kCGInterpolationHigh]];
 	}
 
 	// Contact label
@@ -163,14 +164,15 @@
 	}
 	else
 	{
-		if (member)
+        return 200.0f;
+		/*if (member)
 		{
-			return 104.0f;
+			return 200.0f;
 		}
 		else
 		{
-			return 114.0f;
-		}
+			return 160.0f;
+		}*/
 	}
 }
 

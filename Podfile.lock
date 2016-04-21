@@ -35,9 +35,9 @@ PODS:
   - ComponentKit (0.14)
   - CRMediaPickerController (0.0.1)
   - DXTableViewModel (0.1.0)
-  - FMDB (2.6):
-    - FMDB/standard (= 2.6)
-  - FMDB/standard (2.6)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
   - JSQMessagesViewController (HEAD based on 7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -229,7 +229,7 @@ SPEC CHECKSUMS:
   ComponentKit: 11d9177b5e9940c456e7486d8f5a25c26d9ca5f2
   CRMediaPickerController: 65e1f968dea26a7759bb1fb4a1518f5b8cd6fba9
   DXTableViewModel: 27583f277f94e3ad5ffb0575cd84c39918319aa6
-  FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   leveldb-library: ef0453697c0fda3a9e550e5650e52976e6724548

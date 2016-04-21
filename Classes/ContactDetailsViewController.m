@@ -201,14 +201,14 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	[super viewDidLoad];
 
 	// Set selected+over background: IB lack !
-	[editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_over.png"]
+	[editButton setImage:[UIImage imageNamed:@"ringmail_edit-save-pressed.png"]
 						  forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
 	// Set selected+disabled background: IB lack !
-	[editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_disabled.png"]
-						  forState:(UIControlStateDisabled | UIControlStateSelected)];
+	//[editButton setImage:[UIImage imageNamed:@"contact_ok_disabled.png"]
+	//					  forState:(UIControlStateDisabled | UIControlStateSelected)];
 
-	[LinphoneUtils buttonFixStates:editButton];
+	//[LinphoneUtils buttonFixStates:editButton];
 
 	[tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
 	[tableController.tableView setBackgroundView:nil];					 // Can't do it in Xib: issue with ios4

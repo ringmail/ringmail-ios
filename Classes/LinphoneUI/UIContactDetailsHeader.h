@@ -33,6 +33,7 @@
     
 @property (nonatomic, strong) IBOutlet UILabel *addressLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImage;
+@property (nonatomic, strong) IBOutlet UIImageView *avatarEditImage;
 
 @property (nonatomic, strong) IBOutlet UIView *normalView;
 @property (nonatomic, strong) IBOutlet UIView *editView;
