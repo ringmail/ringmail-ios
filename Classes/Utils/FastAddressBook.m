@@ -79,6 +79,10 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	}
 }
 
+- (ABRecordRef)getContactById:(NSNumber *)appleId {
+    return ABAddressBookGetPersonWithRecordID(addressBook, [appleId intValue]);
+}
+
 + (BOOL)isSipURI:(NSString *)address {
 	return [address hasPrefix:@"sip:"] || [address hasPrefix:@"sips:"];
 }

@@ -62,8 +62,12 @@
 // Component data sources
 - (NSArray *)dbGetMainList;
 - (NSArray *)dbGetMainList:(NSNumber *)session;
+- (NSArray *)dbGetMainList:(NSNumber *)session favorites:(NSNumber *)fav;
 
 - (void)dbInsertCall:(NSDictionary*)callData;
 - (void)dbUpdateCall:(NSDictionary*)callData;
+
+- (void)dbAddFavorite:(NSString *)addr;
+- (void)dbDeleteFavorite:(NSString *)addr;
 
 @end

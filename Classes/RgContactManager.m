@@ -226,6 +226,84 @@
     return res;
 }
 
+- (NSString*)getRingMailAddress:(ABRecordRef)lPerson current:(NSString*)cur
+{
+    ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+    BOOL found = NO;
+    NSString *res = nil;
+    if (emailMap) {
+        for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
+            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
+            if (val)
+            {
+                val = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                if ([self dbIsEnabled:val])
+                {
+                    if ([val isEqualToString:cur])
+                    {
+                        found = YES;
+                        break;
+                    }
+                    else if (res == nil)
+                    {
+                        res = val;
+                    }
+                }
+            }
+        }
+        CFRelease(emailMap);
+    }
+    if (found)
+    {
+        return cur;
+    }
+    else if (res != nil)
+    {
+        return res;
+    }
+    ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
+    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+    if (phoneMap) {
+        for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
+            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneMap, i));
+            if (val)
+            {
+                NSError *anError = nil;
+                NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
+                if (anError == nil && [phoneUtil isValidNumber:myNumber])
+                {
+                    val = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+                    if ([self dbIsEnabled:val])
+                    {
+                        if ([val isEqualToString:cur])
+                        {
+                            found = YES;
+                            break;
+                        }
+                        else if (res == nil)
+                        {
+                            res = val;
+                        }
+                    }
+                }
+            }
+        }
+        CFRelease(phoneMap);
+    }
+    if (found)
+    {
+        return cur;
+    }
+    else if (res != nil)
+    {
+        return res;
+    }
+    else
+    {
+        return @"";
+    }
+}
+
 - (void)inviteToRingMail:(ABRecordRef)contact
 {
     DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Invite To RingMail", nil)];
@@ -344,18 +422,18 @@
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])
         {
-            NSArray *rgContacts = [res objectForKey:@"rg_contacts"];
-            if (rgContacts)
-            {
-                NSLog(@"RingMail: Updated Contacts: %@", rgContacts);
-                [self dbUpdateEnabled:rgContacts];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
-            }
             NSArray *rgMatches = [res objectForKey:@"rg_matches"];
             if (rgMatches)
             {
-                NSLog(@"RingMail: Updated Matches: %@", rgMatches);
+                //NSLog(@"RingMail: Updated Matches: %@", rgMatches);
                 [self dbUpdateMatches:rgMatches];
+            }
+            NSArray *rgContacts = [res objectForKey:@"rg_contacts"];
+            if (rgContacts)
+            {
+                //NSLog(@"RingMail: Updated Contacts: %@", rgContacts);
+                [self dbUpdateEnabled:rgContacts];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
             }
         }
         else
@@ -489,17 +567,18 @@
     [dbq inDatabase:^(FMDatabase *db) {
         // Get current ringmail users
         NSMutableDictionary *cur = [NSMutableDictionary dictionary];
-        FMResultSet *rs = [db executeQuery:@"SELECT apple_id FROM contacts WHERE ringmail_enabled = 1"];
+        NSMutableDictionary *addrs = [NSMutableDictionary dictionary];
+        FMResultSet *rs = [db executeQuery:@"SELECT apple_id, contact_data FROM contacts WHERE ringmail_enabled = 1"];
         while ([rs next])
         {
             NSNumber *contactID = [rs objectForColumnIndex:0];
-            [cur setObject:@"" forKey:[contactID stringValue]];
+            [cur setObject:contactID forKey:[contactID stringValue]];
+            [addrs setObject:[rs objectForColumnIndex:1] forKey:[contactID stringValue]];
         }
         [rs close];
         
         for (NSString *contactID in rgUsers)
         {
-            [cur removeObjectForKey:contactID];
             FMResultSet *rs = [db executeQuery:@"SELECT count(oid) FROM contacts WHERE apple_id=?", contactID];
             if ([rs next])
             {
@@ -515,6 +594,15 @@
                 }
             }
             [rs close];
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContactById:[cur objectForKey:contactID]];
+            NSString *firstAddr = [self getRingMailAddress:contact current:[addrs objectForKey:contactID]];
+            NSLog(@"RingMail Set Contact %@ -> %@", contactID, firstAddr);
+            if (! [firstAddr isEqualToString:[addrs objectForKey:contactID]])
+            {
+                NSLog(@"RingMail Update Contact %@ -> %@", contactID, firstAddr);
+                [db executeUpdate:@"UPDATE contacts SET contact_data=? WHERE apple_id=?", firstAddr, contactID];
+            }
+            [cur removeObjectForKey:contactID];
         }
         
         // Purge contacts that are no longer RingMail users :(

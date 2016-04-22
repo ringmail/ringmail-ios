@@ -30,6 +30,7 @@
 + (NSString*)getContactDisplayName:(ABRecordRef)contact;
 + (UIImage*)getContactImage:(ABRecordRef)contact thumbnail:(BOOL)thumbnail;
 - (ABRecordRef)getContact:(NSString*)address;
+- (ABRecordRef)getContactById:(NSNumber *)appleId;
 - (void)reload;
 - (void)saveAddressBook;
 + (BOOL)isAuthorized;

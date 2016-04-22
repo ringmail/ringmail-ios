@@ -691,7 +691,7 @@
         NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail"];
         BOOL remove = NO;
     #endif
-        dbPath = [dbPath stringByAppendingString:@"_v1.2.3.db"];
+        dbPath = [dbPath stringByAppendingString:@"_v1.2.4.db"];
         if (remove)
         {
             NSFileManager *manager = [NSFileManager defaultManager];
@@ -709,7 +709,16 @@
     [dbq inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
                                 //@"DROP TABLE session;",
-                                @"CREATE TABLE IF NOT EXISTS session (session_tag TEXT NOT NULL, unread INT NOT NULL DEFAULT 0, session_md5 TEXT NOT NULL, ts_last_event datetime NOT NULL);",
+                                @"CREATE TABLE IF NOT EXISTS session ("
+                                    "id INTEGER PRIMARY KEY NOT NULL,"
+                                    "favorite tinyint(1) NOT NULL DEFAULT '0',"
+                                    "hide bigint NOT NULL DEFAULT 0,"
+                                    "session_md5 text NOT NULL,"
+                                    "session_tag text NOT NULL,"
+                                    "ts_last_event datetime NOT NULL,"
+                                    "unread bigint NOT NULL DEFAULT 0"
+                                ");",
+                          
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON session (session_tag);",
                                 @"CREATE INDEX IF NOT EXISTS session_md5_1 ON session (session_md5);",
                                 @"CREATE INDEX IF NOT EXISTS ts_last_event_1 ON session (ts_last_event);",
@@ -977,10 +986,15 @@
 
 - (NSArray *)dbGetMainList
 {
-    return [self dbGetMainList:nil];
+    return [self dbGetMainList:nil favorites:nil];
 }
 
 - (NSArray *)dbGetMainList:(NSNumber *)session
+{
+    return [self dbGetMainList:session favorites:nil];
+}
+
+- (NSArray *)dbGetMainList:(NSNumber *)session favorites:(NSNumber*)fav
 {
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
@@ -999,6 +1013,10 @@
         if (session)
         {
             sql = [sql stringByAppendingString:[NSString stringWithFormat:@"WHERE rowid = ? "]];
+        }
+        else if (fav)
+        {
+            sql = [sql stringByAppendingString:[NSString stringWithFormat:@"WHERE favorite = 1 "]];
         }
 		else
 		{
@@ -1227,39 +1245,35 @@
 	}
 }
 
-- (void)dbAddFavorite:(NSNumber *)contact
+- (void)dbAddFavorite:(NSString *)addr
 {
-    __block NSNumber* input = [contact copy];
-    FMDatabaseQueue *dbq = [self database];
-    [dbq inDatabase:^(FMDatabase *db) {
-        NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
-		NSArray *ctq = [ndb get:@{
-			@"table":@"favorites",
-			@"select":@[@"count(contact_id) as contacts"],
-			@"where": @{@"contact_id": input},
-        }];
-		if ([[ctq[0] objectForKey:@"contacts"] intValue] == 0)
-		{
-			[ndb set:@{
-                   @"table":@"favorites",
-                   @"insert": @{
-                           @"contact_id": input,
-                },
-			}];
-		}
-    }];
-    [dbq close];
-}
-
-- (void)dbDeleteFavorite:(NSNumber *)contact
-{
-    __block NSNumber* input = [contact copy];
+    __block NSNumber* session = [self dbGetSessionID:addr];
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
 		[ndb set:@{
-			@"table":@"favorites",
-			@"delete": @{@"contact_id": input},
+			@"table":@"session",
+            @"update":@{
+                @"favorite": [NSNumber numberWithBool:YES],
+            },
+			@"where": @{@"rowid": session},
+        }];
+    }];
+    [dbq close];
+}
+
+- (void)dbDeleteFavorite:(NSString *)addr
+{
+    __block NSNumber* session = [self dbGetSessionID:addr];
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+       		[ndb set:@{
+			@"table":@"session",
+            @"update":@{
+                @"favorite": [NSNumber numberWithBool:NO],
+            },
+			@"where": @{@"rowid": session},
         }];
     }];
     [dbq close];
