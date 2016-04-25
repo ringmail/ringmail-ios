@@ -33,6 +33,7 @@
 #import "ChatViewController.h"
 #import "RgMainViewController.h"
 #import "RgHashtagDirectoryViewController.h"
+#import "RgFavoriteViewController.h"
 #import "ContactsViewController.h"
 #import "ContactDetailsViewController.h"
 #import "ContactDetailsLabelViewController.h"
@@ -46,7 +47,6 @@
 
 #import "RgWebViewDelegate.h"
 #import "RgInCallViewController.h"
-
 
 @class PhoneMainView;
 

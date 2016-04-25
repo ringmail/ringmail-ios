@@ -45,25 +45,14 @@
                         <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="10"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="8" userLabel="editButton" customClass="UIToggleButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8" userLabel="editButton" customClass="UIToggleButton">
                     <rect key="frame" x="270" y="0.0" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Edit"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="18" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" image="ringmail_edit.png">
-                        <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled">
-                        <color key="titleColor" red="0.80784314869999996" green="0.8156862855" blue="0.82352942230000004" alpha="1" colorSpace="deviceRGB"/>
-                    </state>
-                    <state key="selected" image="ringmail_edit-save.png">
-                        <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
-                    </state>
-                    <state key="highlighted" image="ringmail_edit-pressed.png">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                    </state>
+                    <state key="normal" image="ringmail_edit.png"/>
+                    <state key="selected" image="ringmail_edit-save.png"/>
+                    <state key="highlighted" image="ringmail_edit-pressed.png"/>
                     <connections>
                         <action selector="onEditClick:" destination="-1" eventType="touchUpInside" id="30"/>
                     </connections>

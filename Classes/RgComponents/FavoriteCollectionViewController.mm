@@ -1,5 +1,5 @@
 //
-//  HashtagCollectionViewController.m
+//  FavoriteCollectionViewController.m
 //  ringmail
 //
 //  Created by Mike Frager on 2/14/16.
@@ -9,31 +9,30 @@
 #import <Foundation/Foundation.h>
 #import <ComponentKit/ComponentKit.h>
 #import "UIColor+Hex.h"
-#import "HashtagCollectionViewController.h"
+#import "FavoriteCollectionViewController.h"
 #import "InteractiveCardComponent.h"
-#import "HashtagModelController.h"
+#import "FavoriteModelController.h"
 #import "Card.h"
 #import "CardContext.h"
 #import "CardsPage.h"
 
-@interface HashtagCollectionViewController () <CKComponentProvider, UICollectionViewDelegateFlowLayout>
+@interface FavoriteCollectionViewController () <CKComponentProvider, UICollectionViewDelegateFlowLayout>
 @end
 
-@implementation HashtagCollectionViewController
+@implementation FavoriteCollectionViewController
 {
     CKCollectionViewDataSource *_dataSource;
-    HashtagModelController *_cardModelController;
+    FavoriteModelController *_cardModelController;
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
 }
 
 static NSInteger const pageSize = 10;
 
-- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout path:(NSString*)path
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
 {
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
-        _cardModelController = [[HashtagModelController alloc] init];
-        [_cardModelController setMainPath:path];
+        _cardModelController = [[FavoriteModelController alloc] init];
         //self.title = @"Wilde Guess";
         //self.navigationItem.prompt = @"Tap to reveal which cards are from Oscar Wilde";
     }
@@ -47,12 +46,11 @@ static NSInteger const pageSize = 10;
     // Preload images for the component context that need to be used in component preparation. Components preparation
     // happens on background threads but +[UIImage imageNamed:] is not thread safe and needs to be called on the main
     // thread. The preloaded images are then cached on the component context for use inside components.
-    NSDictionary *images = @{
-                             @"Card1":[UIImage imageNamed:@"avatar_unknown_small.png"],
-                             @"button_call":[UIImage imageNamed:@"phone.png"],
-                             @"button_chat":[UIImage imageNamed:@"quote.png"],
-                             @"button_video":[UIImage imageNamed:@"camera.png"],
-                             };
+    NSMutableDictionary *images = [NSMutableDictionary dictionaryWithDictionary:@{
+         @"button_call":[UIImage imageNamed:@"phone.png"],
+         @"button_chat":[UIImage imageNamed:@"quote.png"],
+         @"button_video":[UIImage imageNamed:@"camera.png"],
+    }];
     
     self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:1.0f];
     self.collectionView.delegate = self;
@@ -75,8 +73,8 @@ static NSInteger const pageSize = 10;
     NSArray *cards = cardsPage.cards;
     NSInteger position = cardsPage.position;
     
-    BOOL hasitems = NO;
     // Convert the array of cards to a valid changeset
+    BOOL hasitems = NO;
     CKArrayControllerInputItems items;
     for (NSInteger i = 0; i < [cards count]; i++) {
         items.insert([NSIndexPath indexPathForRow:position + i inSection:0], cards[i]);
@@ -91,16 +89,10 @@ static NSInteger const pageSize = 10;
 
 #pragma mark - Update collection
 
-- (void)updatePath
-{
-    
-}
-
 - (void)updateCollection
 {
     NSArray *current = [_cardModelController mainList];
-    //NSArray *newlist = [_cardModelController readMainList];
-    NSArray *newlist = [NSArray array];
+    NSArray *newlist = [_cardModelController readMainList];
     
     NSInteger curcount = [current count];
     NSInteger newcount = [newlist count];
@@ -130,13 +122,42 @@ static NSInteger const pageSize = 10;
             NSString* newId = [newlist[j] objectForKey:@"id"];
             if (! [curId isEqualToString:newId]) // item changed
             {
-                Card *card = [[Card alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
+                Card *card = [[Card alloc] initWithData:newlist[j]
+                                                 header:[NSNumber numberWithBool:0]];
                 items.update([NSIndexPath indexPathForRow:i inSection:0], card);
+            }
+            else
+            {
+                NSDate* curDate = [current[j] objectForKey:@"timestamp"];
+                NSDate* newDate = [newlist[j] objectForKey:@"timestamp"];
+                if ([curDate compare:newDate] != NSOrderedSame)
+                {
+                    // Regenerate card
+                    Card *card = [[Card alloc] initWithData:newlist[j]
+                                                     header:[NSNumber numberWithBool:0]];
+                    items.update([NSIndexPath indexPathForRow:i inSection:0], card);
+                }
+                else
+                {
+                    NSNumber *curUnread = [current[j] objectForKey:@"unread"];
+                    NSNumber *newUnread = [newlist[j] objectForKey:@"unread"];
+                    if (curUnread != nil && newUnread != nil)
+                    {
+                        if ([curUnread integerValue] != [newUnread integerValue])
+                        {
+                            // Regenerate card
+                            Card *card = [[Card alloc] initWithData:newlist[j]
+                                                             header:[NSNumber numberWithBool:0]];
+                            items.update([NSIndexPath indexPathForRow:i inSection:0], card);
+                        }
+                    }
+                }
             }
         }
         else if (hasnew)
         {
-            Card *card = [[Card alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
+            Card *card = [[Card alloc] initWithData:newlist[j]
+                                             header:[NSNumber numberWithBool:0]];
             items.insert([NSIndexPath indexPathForRow:i inSection:0], card);
             [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] + 1]];
             
@@ -148,6 +169,7 @@ static NSInteger const pageSize = 10;
             [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] - 1]];
         }
     }
+    [_cardModelController setMainList:newlist];
     dispatch_async(dispatch_get_main_queue(), ^{
         [_dataSource enqueueChangeset:{{}, items}
                       constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];

@@ -596,10 +596,10 @@
             [rs close];
             ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContactById:[cur objectForKey:contactID]];
             NSString *firstAddr = [self getRingMailAddress:contact current:[addrs objectForKey:contactID]];
-            NSLog(@"RingMail Set Contact %@ -> %@", contactID, firstAddr);
+            //NSLog(@"RingMail Set Contact %@ -> %@", contactID, firstAddr);
             if (! [firstAddr isEqualToString:[addrs objectForKey:contactID]])
             {
-                NSLog(@"RingMail Update Contact %@ -> %@", contactID, firstAddr);
+                //NSLog(@"RingMail Update Contact %@ -> %@", contactID, firstAddr);
                 [db executeUpdate:@"UPDATE contacts SET contact_data=? WHERE apple_id=?", firstAddr, contactID];
             }
             [cur removeObjectForKey:contactID];
@@ -650,6 +650,22 @@
     }];
     [dbq close];
     return res;
+}
+
+- (NSString*)dbGetPrimaryAddress:(NSString*)contactID
+{
+    FMDatabaseQueue *dbq = [self database];
+    __block NSString* addr = @"";
+    [dbq inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT contact_data FROM contacts WHERE apple_id = ?", contactID];
+        while ([rs next])
+        {
+            addr = [rs objectForColumnIndex:0];
+        }
+        [rs close];
+    }];
+    [dbq close];
+    return addr;
 }
 
 @end

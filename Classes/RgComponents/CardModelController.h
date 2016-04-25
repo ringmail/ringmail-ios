@@ -30,6 +30,7 @@
  */
 - (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count;
 
+- (NSArray *)buildCards:(NSArray*)list;
 - (NSArray *)readMainList;
 
 @end

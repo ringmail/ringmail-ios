@@ -125,6 +125,23 @@
     if (rgMember)
     {
         //[rgImage setHidden:NO];
+        
+        BOOL fav = NO;
+        NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
+        if (! [rgAddress isEqualToString:@""])
+        {
+            fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:rgAddress];
+        }
+        
+        if (fav)
+        {
+            [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite.png"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite-pressed.png"] forState:UIControlStateNormal];
+        }
+        
         [favoriteButton setHidden:NO];
         [chatButton setHidden:NO];
         [callButton setHidden:NO];
@@ -375,6 +392,36 @@
 }
 
 - (IBAction)onActionFavorite:(id)event {
+	if (contact == NULL) {
+		LOGW(@"Cannot update favorite: null contact");
+		return;
+	}
+    
+    NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
+    BOOL member = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
+    if (member)
+    {
+        //[rgImage setHidden:NO];
+        
+        BOOL fav = NO;
+        NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
+        if (! [rgAddress isEqualToString:@""])
+        {
+            fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:rgAddress];
+        }
+        
+        if (fav)
+        {
+            [[[LinphoneManager instance] chatManager] dbDeleteFavorite:rgAddress];
+            [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite-pressed.png"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [[[LinphoneManager instance] chatManager] dbAddFavorite:rgAddress];
+            [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite.png"] forState:UIControlStateNormal];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+    }
 }
 
 #pragma mark - ContactDetailsImagePickerDelegate Functions

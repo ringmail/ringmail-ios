@@ -20,6 +20,7 @@ NSString *const kRgTextUpdate = @"RgTextUpdate";
 NSString *const kRgContactsUpdated = @"RgContactsUpdated";
 NSString *const kRgSetAddress = @"RgSetAddress";
 NSString *const kRgMainRefresh = @"RgMainRefresh";
+NSString *const kRgFavoriteRefresh = @"RgFavoriteRefresh";
 
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";

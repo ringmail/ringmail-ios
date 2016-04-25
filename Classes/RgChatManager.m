@@ -991,10 +991,10 @@
 
 - (NSArray *)dbGetMainList:(NSNumber *)session
 {
-    return [self dbGetMainList:session favorites:nil];
+    return [self dbGetMainList:session favorites:NO];
 }
 
-- (NSArray *)dbGetMainList:(NSNumber *)session favorites:(NSNumber*)fav
+- (NSArray *)dbGetMainList:(NSNumber *)session favorites:(BOOL)fav
 {
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
@@ -1278,5 +1278,30 @@
     }];
     [dbq close];
 }
+
+- (BOOL)dbIsFavorite:(NSString *)addr
+{
+    __block NSNumber* session = [self dbGetSessionID:addr];
+    __block BOOL res = NO;
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		NSArray* q = [ndb get:@{
+			@"table":@"session",
+            @"select":@[
+                @"favorite",
+            ],
+			@"where": @{@"rowid": session},
+        }];
+        if ([q count] > 0)
+        {
+            res = [[[q objectAtIndex:0] objectForKey:@"favorite"] boolValue];
+        }
+    }];
+    [dbq close];
+    return res;
+}
+
+
 
 @end

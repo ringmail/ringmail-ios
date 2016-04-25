@@ -326,7 +326,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 #pragma mark - Action Functions
 
 - (IBAction)onHistoryClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[HistoryViewController compositeViewDescription]];
+	[[PhoneMainView instance] changeCurrentView:[RgFavoriteViewController compositeViewDescription]];
 }
 
 - (IBAction)onContactsClick:(id)event {

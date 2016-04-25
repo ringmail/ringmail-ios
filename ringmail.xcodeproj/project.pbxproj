@@ -343,6 +343,10 @@
 		C4DA56481BBB020900E36352 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C4A193631B300974404 /* ImageIO.framework */; };
 		C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */ = {isa = PBXBuildFile; fileRef = C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */; };
 		C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E985C91BAF98E200939A55 /* UIMessageButton.m */; };
+		C4FE4C6F1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */; };
+		C4FE4C701CCD9CA4006A6C94 /* FavoriteModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */; };
+		C4FE4C791CCDA03F006A6C94 /* RgFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C771CCDA03F006A6C94 /* RgFavoriteViewController.m */; };
+		C4FE4C7A1CCDA03F006A6C94 /* RgFavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4FE4C781CCDA03F006A6C94 /* RgFavoriteViewController.xib */; };
 		C4FE7FF91CA8CEED0099D048 /* MainCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FE7FF81CA8C3C10099D048 /* MainCardComponentController.mm */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
@@ -1457,6 +1461,13 @@
 		C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_linphone_ringmail.rc; path = Resources/wizard_linphone_ringmail.rc; sourceTree = "<group>"; };
 		C4E985C11BAF98D500939A55 /* UIMessageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMessageButton.h; sourceTree = "<group>"; };
 		C4E985C91BAF98E200939A55 /* UIMessageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMessageButton.m; sourceTree = "<group>"; };
+		C4FE4C6B1CCD9CA4006A6C94 /* FavoriteCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteCollectionViewController.h; path = RgComponents/FavoriteCollectionViewController.h; sourceTree = "<group>"; };
+		C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FavoriteCollectionViewController.mm; path = RgComponents/FavoriteCollectionViewController.mm; sourceTree = "<group>"; };
+		C4FE4C6D1CCD9CA4006A6C94 /* FavoriteModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteModelController.h; path = RgComponents/FavoriteModelController.h; sourceTree = "<group>"; };
+		C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteModelController.m; path = RgComponents/FavoriteModelController.m; sourceTree = "<group>"; };
+		C4FE4C761CCDA03F006A6C94 /* RgFavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgFavoriteViewController.h; sourceTree = "<group>"; };
+		C4FE4C771CCDA03F006A6C94 /* RgFavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgFavoriteViewController.m; sourceTree = "<group>"; };
+		C4FE4C781CCDA03F006A6C94 /* RgFavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgFavoriteViewController.xib; sourceTree = "<group>"; };
 		C4FE7FF81CA8C3C10099D048 /* MainCardComponentController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MainCardComponentController.mm; path = RgComponents/MainCardComponentController.mm; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
@@ -2285,6 +2296,9 @@
 				C42B71F21CA22AF90020A57F /* RgHashtagDirectoryViewController.h */,
 				C42B71F31CA22AF90020A57F /* RgHashtagDirectoryViewController.m */,
 				C42B71F41CA22AF90020A57F /* RgHashtagDirectoryViewController.xib */,
+				C4FE4C761CCDA03F006A6C94 /* RgFavoriteViewController.h */,
+				C4FE4C771CCDA03F006A6C94 /* RgFavoriteViewController.m */,
+				C4FE4C781CCDA03F006A6C94 /* RgFavoriteViewController.xib */,
 				C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */,
 				C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */,
 				C4AA1A211C71314E003F86FD /* RgMainViewController.xib */,
@@ -2787,6 +2801,10 @@
 				C42B720E1CA22EDB0020A57F /* MainCardComponent.mm */,
 				C41D67EA1CA8C33A00D7BA72 /* MainCardComponentController.h */,
 				C4FE7FF81CA8C3C10099D048 /* MainCardComponentController.mm */,
+				C4FE4C6D1CCD9CA4006A6C94 /* FavoriteModelController.h */,
+				C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */,
+				C4FE4C6B1CCD9CA4006A6C94 /* FavoriteCollectionViewController.h */,
+				C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */,
 				C42B721A1CA235110020A57F /* HashtagCategoryCardComponent.h */,
 				C42B721B1CA235410020A57F /* HashtagCategoryCardComponent.mm */,
 				C42B72171CA2313D0020A57F /* HashtagModelController.h */,
@@ -4180,6 +4198,7 @@
 				D3A74EC415C69392001500B9 /* background_top~ipad.png in Resources */,
 				D3A74EC615C69392001500B9 /* backspace_default~ipad.png in Resources */,
 				D3A74EC815C69392001500B9 /* backspace_disabled~ipad.png in Resources */,
+				C4FE4C7A1CCDA03F006A6C94 /* RgFavoriteViewController.xib in Resources */,
 				D3A74ECA15C69392001500B9 /* backspace_over~ipad.png in Resources */,
 				D3A74ECC15C69392001500B9 /* call_default~ipad.png in Resources */,
 				F0B89C2C18DC973E0050B60E /* wizard_linphone_existing.rc in Resources */,
@@ -4632,6 +4651,7 @@
 				C42B721C1CA235410020A57F /* HashtagCategoryCardComponent.mm in Sources */,
 				63B81A0E1B57DA33009604A6 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				D3EA5411159853750037DC6B /* UIChatCell.m in Sources */,
+				C4FE4C701CCD9CA4006A6C94 /* FavoriteModelController.m in Sources */,
 				D3F26BF115986B73005F9CAB /* IncomingCallViewController.m in Sources */,
 				D31B4B21159876C0002E6C72 /* UICompositeViewController.m in Sources */,
 				D31AAF5E159B3919002C6B02 /* InCallTableViewController.m in Sources */,
@@ -4671,6 +4691,7 @@
 				C42C0D521CAECA1500AD5A91 /* RgInCallViewController.m in Sources */,
 				C4D999521B96910A003CC323 /* RgManager.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
+				C4FE4C791CCDA03F006A6C94 /* RgFavoriteViewController.m in Sources */,
 				C42C0D5D1CAED86800AD5A91 /* RgCallContext.m in Sources */,
 				C42B720F1CA22EDB0020A57F /* Card.m in Sources */,
 				C42C0D601CAEDA4100AD5A91 /* RgCall.m in Sources */,
@@ -4679,6 +4700,7 @@
 				C496070A1CA3845F00C988B6 /* ChatTableViewController.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
+				C4FE4C6F1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
 				D3807FEC15C2894A005BE9BC /* IASKSpecifierValuesViewController.m in Sources */,
 				D3807FEE15C2894A005BE9BC /* IASKSettingsReader.m in Sources */,

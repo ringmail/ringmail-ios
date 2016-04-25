@@ -26,7 +26,7 @@
 
 - (NSArray*)getContactList;
 - (NSArray*)getContactList:(BOOL)reload;
-- (NSDictionary *)getAddressBookStats:(NSArray*)contactList;
+- (NSDictionary*)getAddressBookStats:(NSArray*)contactList;
 - (NSArray*)getContactData:(NSArray*)contactList;
 - (NSString*)getRingMailAddress:(ABRecordRef)lPerson;
 - (void)inviteToRingMail:(ABRecordRef)contact;
@@ -35,6 +35,7 @@
 - (void)dbUpdateEnabled:(NSArray *)rgUsers;
 - (NSDictionary*)dbGetRgContacts;
 - (BOOL)dbHasRingMail:(NSString*)contactID;
+- (NSString*)dbGetPrimaryAddress:(NSString*)contactID;
 - (void)dropTables;
 
 @end

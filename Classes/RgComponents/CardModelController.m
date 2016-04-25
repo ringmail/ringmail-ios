@@ -36,7 +36,12 @@
 
 - (NSArray *)readMainList
 {
-    NSArray *list = [[[LinphoneManager instance] chatManager] dbGetMainList];
+    NSArray* list = [[[LinphoneManager instance] chatManager] dbGetMainList];
+    return [self buildCards:list];
+}
+
+- (NSArray *)buildCards:(NSArray*)list
+{
     NSMutableArray *list2 = [NSMutableArray array];
     int item = 0;
 	UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
