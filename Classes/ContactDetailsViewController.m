@@ -179,7 +179,17 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 
 - (void)newContact:(NSString *)address {
 	[self selectContact:ABPersonCreate() andReload:NO];
-	[self addCurrentContactContactField:address];
+	//[self addCurrentContactContactField:address];
+	if ([address rangeOfString:@"@"].length > 0)
+    {
+		[tableController addEmailField:address];
+	}
+    else if (linphone_proxy_config_is_phone_number(NULL, [address UTF8String]))
+    {
+		[tableController addPhoneField:address];
+	}
+	[self enableEdit:FALSE];
+	[[tableController tableView] reloadData];
 }
 
 - (void)editContact:(ABRecordRef)acontact {

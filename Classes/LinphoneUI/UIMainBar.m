@@ -296,7 +296,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 
 - (void)updateView:(UICompositeViewDescription *)view {
 	// Update buttons
-	if ([view equal:[HistoryViewController compositeViewDescription]]) {
+	if ([view equal:[RgFavoriteViewController compositeViewDescription]]) {
 		historyButton.selected = TRUE;
 	} else {
 		historyButton.selected = FALSE;

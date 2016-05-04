@@ -5207,9 +5207,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -5252,7 +5251,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ringmail;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "67660177-7711-41b0-b5d7-b85ea3b06e0d";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5310,8 +5309,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -5352,7 +5351,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ringmail;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "67660177-7711-41b0-b5d7-b85ea3b06e0d";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5409,8 +5408,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -5451,7 +5450,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ringmail;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "67660177-7711-41b0-b5d7-b85ea3b06e0d";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5509,8 +5508,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -5550,7 +5549,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ringmail;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "67660177-7711-41b0-b5d7-b85ea3b06e0d";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (

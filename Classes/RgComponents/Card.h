@@ -22,5 +22,6 @@
 - (NSNumber*)sessionId;
 - (void)showMessages;
 - (void)startCall:(BOOL)video;
+- (void)gotoContact;
 
 @end

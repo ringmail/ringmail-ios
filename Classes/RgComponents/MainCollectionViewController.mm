@@ -33,6 +33,7 @@ static NSInteger const pageSize = 10;
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
         _cardModelController = [[CardModelController alloc] init];
+		[_cardModelController setHeader:@"Recent Activity"];
         //self.title = @"Wilde Guess";
         //self.navigationItem.prompt = @"Tap to reveal which cards are from Oscar Wilde";
     }
@@ -120,9 +121,9 @@ static NSInteger const pageSize = 10;
         }
         if (hascur && hasnew)
         {
-            NSString* curId = [current[j] objectForKey:@"id"];
-            NSString* newId = [newlist[j] objectForKey:@"id"];
-            if (! [curId isEqualToString:newId]) // item changed
+            NSNumber* curId = [current[j] objectForKey:@"id"];
+            NSNumber* newId = [newlist[j] objectForKey:@"id"];
+            if (! [curId isEqualToNumber:newId]) // item changed
             {
                 Card *card = [[Card alloc] initWithData:newlist[j]
                                                  header:[NSNumber numberWithBool:0]];

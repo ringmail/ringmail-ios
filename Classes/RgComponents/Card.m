@@ -49,4 +49,32 @@
     [RgManager startCall:address contact:NULL];
 }
 
+- (void)gotoContact
+{
+	NSLog(@"Goto Contact: %@", _data[@"session_tag"]);
+	NSString *addr = _data[@"session_tag"];
+    if ([[addr substringToIndex:1] isEqualToString:@"#"])
+    {
+		NSLog(@"Hashtag: %@", _data[@"session_tag"]);
+	}
+	else
+	{
+    	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:addr];
+    	ContactDetailsViewController *controller = DYNAMIC_CAST(
+    		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
+    		ContactDetailsViewController);
+      	if (controller != nil) {
+        	if (contact)
+        	{
+        		// Go to Contact details view
+           		[controller setContact:contact];
+        	}
+        	else
+        	{
+           		[controller newContact:addr];
+			}
+    	}
+	}
+}
+
 @end

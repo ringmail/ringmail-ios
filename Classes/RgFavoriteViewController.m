@@ -56,7 +56,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"Dialer"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"Favorites"
 																content:@"RgFavoriteViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
@@ -149,7 +149,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgFavoriteRefresh object:nil];
 }
-
 
 #pragma mark - Event Functions
 

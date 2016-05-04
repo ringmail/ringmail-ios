@@ -883,6 +883,10 @@
     {
         NSLog(@"RingMail Error: Invalid message type: '%@'", type);
     }
+	if (msgData == nil)
+	{
+		msgData = [NSData data];
+	}
     NSDate *timestamp = [params objectForKey:@"timestamp"];
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {

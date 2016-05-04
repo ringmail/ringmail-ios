@@ -24,12 +24,14 @@
 
 @synthesize mainList;
 @synthesize mainCount;
+@synthesize header;
 
 - (instancetype)init
 {
     if (self = [super init]) {
         mainCount = [NSNumber numberWithInteger:0];
         mainList = nil;
+		header = nil;
     }
     return self;
 }
@@ -125,17 +127,17 @@
     NSInteger added = 0;
     for (NSUInteger i = 0; i < count; i++)
     {
-        if ([mainCount intValue] == 0 && i == 0)
+        if (header && [mainCount intValue] == 0 && i == 0)
         {
             NSNumber *headerCell = [NSNumber numberWithBool:1];
-            Card *card = [[Card alloc] initWithData:@{@"text": @"Recent Activity"}
+            Card *card = [[Card alloc] initWithData:@{@"text": header}
                                              header:headerCell];
             [_cards addObject:card];
             added++;
         }
         else
         {
-            NSInteger mainIndex = [mainCount intValue] + i - 1;
+            NSInteger mainIndex = [mainCount intValue] + i - ((header) ? 1 : 0);
             if ([mainList count] > mainIndex)
             {
                 NSDictionary *itemData = mainList[mainIndex];

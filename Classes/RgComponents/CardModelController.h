@@ -22,6 +22,7 @@
 
 @property (nonatomic, retain) NSArray *mainList;
 @property (nonatomic, retain) NSNumber *mainCount;
+@property (nonatomic, retain) NSString *header;
 
 /**
  Gets more quotes to add to the list.
