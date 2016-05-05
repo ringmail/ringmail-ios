@@ -38,11 +38,11 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
-  - JSQMessagesViewController (HEAD based on 7.2.0):
+  - JSQMessagesViewController (7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - leveldb-library (1.18.2)
-  - libPhoneNumber-iOS (0.8.11)
+  - libPhoneNumber-iOS (0.8.12)
   - NSHash (1.0.2)
   - NYXImagesKit (2.3)
   - Objective-LevelDB (2.1.5):
@@ -201,7 +201,8 @@ DEPENDENCIES:
   - CRMediaPickerController
   - DXTableViewModel (~> 0.1.0)
   - FMDB
-  - JSQMessagesViewController (HEAD)
+  - JSQMessagesViewController (from `git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git`,
+    branch `ringmail`)
   - libPhoneNumber-iOS (~> 0.8)
   - NSHash (~> 1.0.2)
   - NYXImagesKit
@@ -214,10 +215,16 @@ DEPENDENCIES:
   - XMPPFramework
 
 EXTERNAL SOURCES:
+  JSQMessagesViewController:
+    :branch: ringmail
+    :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
   UIImage-Categories:
     :git: https://github.com/nixonnixon/UIImage-Categories.git
 
 CHECKOUT OPTIONS:
+  JSQMessagesViewController:
+    :commit: 08356e2f7edabf995840291f3b94844c94f376ba
+    :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
   UIImage-Categories:
     :commit: 7d98f1c9c8a3217584fd797771dae199cb8eeb65
     :git: https://github.com/nixonnixon/UIImage-Categories.git
@@ -233,7 +240,7 @@ SPEC CHECKSUMS:
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   leveldb-library: ef0453697c0fda3a9e550e5650e52976e6724548
-  libPhoneNumber-iOS: ded33fab2c51ee847979556aa504c9e70f32d703
+  libPhoneNumber-iOS: 3f1889b70403cf7848c0e4136780a0d0aef9016d
   NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   Objective-LevelDB: fa075efd9d0be645aee51847cc3ee70cdadb80ce

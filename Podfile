@@ -6,7 +6,8 @@ use_frameworks!
 xcodeproj '/Users/mfrager/Projects/RingMail/iOS/linphone-iphone/ringmail'
 
 target 'RingMail' do
-  pod 'JSQMessagesViewController', :head
+#  pod 'JSQMessagesViewController', :head
+  pod 'JSQMessagesViewController', :git => 'git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git', :branch => 'ringmail'
   pod 'SVWebViewController', :head
   pod 'XMPPFramework'
 #  pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git'

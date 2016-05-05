@@ -43,7 +43,8 @@
     //self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(20.0f, 20.0f);
     
     self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"HelveticaNeue" size:16];
-    self.collectionView.collectionViewLayout.messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(2.0f, 4.0f, 0.0f, 6.0f);
+    self.collectionView.collectionViewLayout.messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(2.0f, 4.0f, 0.0f, 2.0f);
+    
     self.showLoadEarlierMessagesHeader = NO;
 }
 
