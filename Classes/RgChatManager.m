@@ -990,7 +990,7 @@
 
 - (NSArray *)dbGetMainList
 {
-    return [self dbGetMainList:nil favorites:nil];
+    return [self dbGetMainList:nil favorites:NO];
 }
 
 - (NSArray *)dbGetMainList:(NSNumber *)session
@@ -1241,6 +1241,10 @@
 			}
 			[callRow update:updated];
 		}
+        if ([callData[@"status"] isEqualToString:@"missed"])
+        {
+            [db executeUpdate:@"UPDATE session SET unread = unread + 1 WHERE rowid = ?", session];
+        }
     }];
     [dbq close];
 	if (session != nil)

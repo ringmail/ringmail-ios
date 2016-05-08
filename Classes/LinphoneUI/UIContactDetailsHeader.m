@@ -374,7 +374,7 @@
     NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
     if (rgAddress != nil)
     {
-        [RgManager startCall:rgAddress contact:contact];
+        [RgManager startCall:rgAddress contact:contact video:NO];
     }
 }
 

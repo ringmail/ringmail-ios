@@ -362,7 +362,7 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
     {
         if ([RgManager checkRingMailAddress:address])
         {
-            [RgManager startCall:address contact:NULL];
+            [RgManager startCall:address contact:NULL video:NO];
         }
     }
 }

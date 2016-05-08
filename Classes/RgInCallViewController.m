@@ -222,11 +222,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 				{
 					name = [FastAddressBook getContactDisplayName:contact];
 				}
+                NSNumber *video = [NSNumber numberWithBool:NO];
+                LinphoneCallAppData *data = (__bridge LinphoneCallAppData *)linphone_call_get_user_data(call);
+                if (data)
+                {
+					if (data->videoRequested)
+                    {
+                        video = [NSNumber numberWithBool:YES];
+                    }
+				}
 				callData = [NSMutableDictionary dictionaryWithDictionary:@{
 					@"address": address,
 					@"label": name,
 					@"speaker": [NSNumber numberWithBool:[[LinphoneManager instance] speakerEnabled]],
 					@"mute": [NSNumber numberWithBool:linphone_core_is_mic_muted(lc)],
+                    @"video": video,
 				}];
 				[callViewController updateCall:callData];
 				ms_free(lAddress);
@@ -253,10 +263,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 	case LinphoneCallStreamsRunning: {
 		// check video
 		if (linphone_call_params_video_enabled(linphone_call_get_current_params(call))) {
-			NSLog(@"RingMail - Video Enabled: 1");
+			//NSLog(@"RingMail - Video Enabled: 1");
 			[self displayVideoCall:animated];
 		} else {
-			NSLog(@"RingMail - Video Enabled: 0");
+			//NSLog(@"RingMail - Video Enabled: 0");
 			[self displayTableCall:animated];
 			const LinphoneCallParams *param = linphone_call_get_current_params(call);
 			const LinphoneCallAppData *callAppData =

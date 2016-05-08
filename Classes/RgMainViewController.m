@@ -219,7 +219,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
-    [self setNeedsRefresh:[NSNumber numberWithBool:NO]];
+    [self setNeedsRefresh:NO];
     
 	[addressField setText:@""];
 	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size

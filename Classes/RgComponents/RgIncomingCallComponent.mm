@@ -62,6 +62,18 @@
 							]
 						]
 					},
+                    {[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY, .right = 16} component:
+                        [CKLabelComponent newWithLabelAttributes:{
+							.string = ([call.data[@"video"] boolValue]) ? @"Video" : @"Call",
+							.font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20],
+							.alignment = NSTextAlignmentRight,
+						}
+						viewAttributes:{
+							{@selector(setBackgroundColor:), [UIColor clearColor]},
+							{@selector(setUserInteractionEnabled:), @NO},
+						}
+						size:{}]
+					]},
 				}]},
 				// Call Details
 				{[CKComponent newWithView:{} size:{.height = 50}]},

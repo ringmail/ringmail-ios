@@ -76,11 +76,6 @@ static LevelDB* theConfigDatabase = nil;
     return [res stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-+ (void)startCall:(NSString*)address contact:(ABRecordRef)contact
-{
-    [self startCall:address contact:contact video:NO];
-}
-
 + (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video
 {
     NSString* displayName = [address copy];
@@ -235,9 +230,10 @@ static LevelDB* theConfigDatabase = nil;
     NSMutableString *ringuri = [uri mutableCopy];
     [ringuri replaceOccurrencesOfRegex:@"^ring:(//)?" withString:@""];
     NSLog(@"RingMail: URI - %@ (from: %@)", ringuri, uri);
-    if ([ringuri isMatchedByRegex:@"^message/"])
+    BOOL video = NO;
+    if ([ringuri isMatchedByRegex:@"^(message|chat)/"])
     {
-        [ringuri replaceOccurrencesOfRegex:@"^message/" withString:@""];
+        [ringuri replaceOccurrencesOfRegex:@"^(message|chat)/" withString:@""];
         if ([RgManager checkRingMailAddress:ringuri])
         {
             [RgManager startMessage:[RgManager filterRingMailAddress:ringuri]];
@@ -248,10 +244,15 @@ static LevelDB* theConfigDatabase = nil;
     {
         [ringuri replaceOccurrencesOfRegex:@"^call/" withString:@""];
     }
+    else if ([ringuri isMatchedByRegex:@"^video/"])
+    {
+        [ringuri replaceOccurrencesOfRegex:@"^video/" withString:@""];
+        video = YES;
+    }
     if ([RgManager checkRingMailAddress:ringuri])
     {
         NSLog(@"RingMail: URI - Valid For Call: %@", ringuri);
-        [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL];
+        [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL video:video];
     }
 }
 

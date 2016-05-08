@@ -40,7 +40,6 @@ extern NSString *const kRgSelfName;
 + (BOOL)checkEmailAddress:(NSString *)checkString;
 + (BOOL)checkRingMailAddress:(NSString *)checkString;
 + (NSString*)filterRingMailAddress:(NSString*)address;
-+ (void)startCall:(NSString*)address contact:(ABRecordRef)contact;
 + (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video;
 + (void)startMessage:(NSString*)address;
 + (void)startMessageMD5;

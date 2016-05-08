@@ -2060,10 +2060,12 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		if (video)
 		{
 			linphone_call_params_enable_video(lcallParams, YES);
+            NSLog(@"RingMail - Requested Video: Yes");
 		}
 		else
 		{
 			linphone_call_params_enable_video(lcallParams, NO);
+            NSLog(@"RingMail - Requested Video: No");
 		}
 
 		if (displayName != nil) {

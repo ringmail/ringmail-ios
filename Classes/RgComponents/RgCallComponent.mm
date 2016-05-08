@@ -68,7 +68,16 @@ static RgCallDuration* globalDuration = nil;
 						]
 					},
 					{[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY, .right = 16} component:
-						[CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_incall-contact"]]
+                        [CKLabelComponent newWithLabelAttributes:{
+							.string = ([call.data[@"video"] boolValue]) ? @"Video" : @"Call",
+							.font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20],
+							.alignment = NSTextAlignmentRight,
+						}
+						viewAttributes:{
+							{@selector(setBackgroundColor:), [UIColor clearColor]},
+							{@selector(setUserInteractionEnabled:), @NO},
+						}
+						size:{}]
 					]},
 				}]},
 				// Call Details

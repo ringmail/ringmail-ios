@@ -73,7 +73,7 @@
             {
                 [mainList push:@{
                     @"type": @"hashtag_category",
-                    @"name": [NSString stringWithFormat:@"Tag: %lu", i]
+                    @"name": [NSString stringWithFormat:@"Tag: %lu", (unsigned long)i]
                 }];
             }
         }

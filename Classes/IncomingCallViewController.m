@@ -145,9 +145,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 			{
 				name = [FastAddressBook getContactDisplayName:contact];
 			}
+            NSNumber *video = [NSNumber numberWithBool:NO];
+            const LinphoneCallParams *params = linphone_call_get_remote_params(call);
+            if (linphone_call_params_video_enabled(params))
+            {
+                video = [NSNumber numberWithBool:YES];
+            }
 			callData = [NSMutableDictionary dictionaryWithDictionary:@{
 				@"address": address,
 				@"label": name,
+                @"video": video,
 			}];
 			[callViewController updateCall:callData];
 			ms_free(lAddress);

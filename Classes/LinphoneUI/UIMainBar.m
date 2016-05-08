@@ -32,15 +32,14 @@ static NSString *const kDisappearAnimation = @"disappear";
 @synthesize dialerButton;
 @synthesize settingsButton;
 @synthesize hashtagButton;
-@synthesize historyNotificationView;
-@synthesize historyNotificationLabel;
 @synthesize chatNotificationView;
 @synthesize chatNotificationLabel;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
-	return [super initWithNibName:@"UIMainBar" bundle:[NSBundle mainBundle]];
+	self = [super initWithNibName:@"UIMainBar" bundle:[NSBundle mainBundle]];
+    return self;
 }
 
 - (void)dealloc {
@@ -78,6 +77,8 @@ static NSString *const kDisappearAnimation = @"disappear";
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneTextReceived object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneSettingsUpdate object:nil];
+    
+    //missedCalls = [NSNumber numberWithInt:0];
 }
 
 - (void)flipImageForButton:(UIButton *)button {
@@ -117,13 +118,11 @@ static NSString *const kDisappearAnimation = @"disappear";
 								duration:(NSTimeInterval)duration {
 	// Force the animations
 	[[self.view layer] removeAllAnimations];
-	[historyNotificationView.layer setTransform:CATransform3DIdentity];
 	[chatNotificationView.layer setTransform:CATransform3DIdentity];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[chatNotificationView setHidden:TRUE];
-	[historyNotificationView setHidden:TRUE];
 	[self update:FALSE];
 }
 
@@ -132,17 +131,16 @@ static NSString *const kDisappearAnimation = @"disappear";
 - (void)applicationWillEnterForeground:(NSNotification *)notif {
 	// Force the animations
 	[[self.view layer] removeAllAnimations];
-	[historyNotificationView.layer setTransform:CATransform3DIdentity];
 	[chatNotificationView.layer setTransform:CATransform3DIdentity];
 	[chatNotificationView setHidden:TRUE];
-	[historyNotificationView setHidden:TRUE];
 	[self update:FALSE];
 }
 
 - (void)callUpdate:(NSNotification *)notif {
 	// LinphoneCall *call = [[notif.userInfo objectForKey: @"call"] pointerValue];
 	// LinphoneCallState state = [[notif.userInfo objectForKey: @"state"] intValue];
-	[self updateMissedCall:linphone_core_get_missed_calls_count([LinphoneManager getLc]) appear:TRUE];
+    //missedCalls = [NSNumber numberWithInt:[missedCalls intValue] + linphone_core_get_missed_calls_count([LinphoneManager getLc])];
+	[self updateUnreadMessage:TRUE];
 }
 
 - (void)changeViewEvent:(NSNotification *)notif {
@@ -178,77 +176,26 @@ static NSString *const kDisappearAnimation = @"disappear";
 
 - (void)update:(BOOL)appear {
 	[self updateView:[[PhoneMainView instance] firstView]];
-    if ([[[LinphoneManager instance] coreReady] boolValue])
+    /*if ([[[LinphoneManager instance] coreReady] boolValue])
     {
-        [self updateMissedCall:linphone_core_get_missed_calls_count([LinphoneManager getLc]) appear:appear];
-    }
+        missedCalls = [NSNumber numberWithInt:[missedCalls intValue] + linphone_core_get_missed_calls_count([LinphoneManager getLc])];
+    }*/
 	[self updateUnreadMessage:appear];
 }
 
 - (void)updateUnreadMessage:(BOOL)appear {
     NSNumber* unread = [[[LinphoneManager instance] chatManager] dbGetSessionUnread];
-	long unreadMessage = [unread integerValue];
+	int unreadMessage = [unread intValue];
 	if (unreadMessage > 0) {
-		if ([chatNotificationView isHidden]) {
+		if ([chatNotificationView isHidden])
+        {
 			[chatNotificationView setHidden:FALSE];
-			if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
-				if (appear) {
-					[self appearAnimation:kAppearAnimation
-								   target:chatNotificationView
-							   completion:^(BOOL finished) {
-								 [chatNotificationView.layer removeAnimationForKey:kAppearAnimation];
-							   }];
-				}
-			}
 		}
 		[chatNotificationLabel setText:[unread stringValue]];
 	} else {
-		if (![chatNotificationView isHidden]) {
-			if (appear) {
-				[self disappearAnimation:kDisappearAnimation
-								  target:chatNotificationView
-							  completion:^(BOOL finished) {
-								[chatNotificationView setHidden:TRUE];
-								[chatNotificationView.layer removeAnimationForKey:kDisappearAnimation];
-							  }];
-			} else {
-				[chatNotificationView setHidden:TRUE];
-			}
-		}
-	}
-}
-
-- (void)updateMissedCall:(int)missedCall appear:(BOOL)appear {
-	if (missedCall > 0) {
-		if ([historyNotificationView isHidden]) {
-			[historyNotificationView setHidden:FALSE];
-			if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
-				if (appear) {
-					[self appearAnimation:kAppearAnimation
-								   target:historyNotificationView
-							   completion:^(BOOL finished) {
-								 [self startBounceAnimation:kBounceAnimation target:historyNotificationView];
-								 [historyNotificationView.layer removeAnimationForKey:kAppearAnimation];
-							   }];
-				} else {
-					[self startBounceAnimation:kBounceAnimation target:historyNotificationView];
-				}
-			}
-		}
-		[historyNotificationLabel setText:[NSString stringWithFormat:@"%i", missedCall]];
-	} else {
-		if (![historyNotificationView isHidden]) {
-			[self stopBounceAnimation:kBounceAnimation target:historyNotificationView];
-			if (appear) {
-				[self disappearAnimation:kDisappearAnimation
-								  target:historyNotificationView
-							  completion:^(BOOL finished) {
-								[historyNotificationView setHidden:TRUE];
-								[historyNotificationView.layer removeAnimationForKey:kDisappearAnimation];
-							  }];
-			} else {
-				[historyNotificationView setHidden:TRUE];
-			}
+		if (![chatNotificationView isHidden])
+        {
+			[chatNotificationView setHidden:TRUE];
 		}
 	}
 }

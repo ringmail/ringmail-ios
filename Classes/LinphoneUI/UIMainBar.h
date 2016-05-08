@@ -28,8 +28,6 @@
 @property (nonatomic, strong) IBOutlet UIButton* dialerButton;
 @property (nonatomic, strong) IBOutlet UIButton* settingsButton;
 @property (nonatomic, strong) IBOutlet UIButton* hashtagButton;
-@property (nonatomic, strong) IBOutlet UIView *historyNotificationView;
-@property (nonatomic, strong) IBOutlet UILabel *historyNotificationLabel;
 @property (nonatomic, strong) IBOutlet UIView *chatNotificationView;
 @property (nonatomic, strong) IBOutlet UILabel *chatNotificationLabel;
 

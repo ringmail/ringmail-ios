@@ -46,7 +46,7 @@
 - (void)startCall:(BOOL)video
 {
     NSString *address = [_data objectForKey:@"session_tag"];
-    [RgManager startCall:address contact:NULL];
+    [RgManager startCall:address contact:NULL video:video];
 }
 
 - (void)gotoContact

@@ -111,7 +111,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
-    [self setNeedsRefresh:[NSNumber numberWithBool:NO]];
+    [self setNeedsRefresh:NO];
     
 	// Set observer
 	[[NSNotificationCenter defaultCenter] addObserver:self

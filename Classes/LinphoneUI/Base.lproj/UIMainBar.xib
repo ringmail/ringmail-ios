@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -13,8 +13,6 @@
                 <outlet property="dialerButton" destination="7" id="12"/>
                 <outlet property="hashtagButton" destination="5" id="lDT-P2-haw"/>
                 <outlet property="historyButton" destination="6" id="13"/>
-                <outlet property="historyNotificationLabel" destination="34" id="35"/>
-                <outlet property="historyNotificationView" destination="32" id="36"/>
                 <outlet property="portraitView" destination="3" id="43"/>
                 <outlet property="settingsButton" destination="9" id="29"/>
                 <outlet property="view" destination="3" id="14"/>
@@ -115,38 +113,6 @@
                         <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="22"/>
                     </connections>
                 </button>
-                <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32" userLabel="historyNotificationView">
-                    <rect key="frame" x="259" y="4" width="21" height="21"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="33" userLabel="historyNotificationImage">
-                            <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
-                        </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="34" userLabel="historyNotificationLabel">
-                            <rect key="frame" x="3" y="2" width="16" height="17"/>
-                            <accessibility key="accessibilityConfiguration" label="Missed call(s)">
-                                <accessibilityTraits key="traits" none="YES"/>
-                            </accessibility>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="17" id="POi-z8-SlR"/>
-                                <constraint firstAttribute="width" constant="16" id="dgV-A5-wuu"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="4T8-IM-ass"/>
-                        <constraint firstAttribute="centerY" secondItem="33" secondAttribute="centerY" id="LTt-9K-g3a"/>
-                        <constraint firstAttribute="centerX" secondItem="34" secondAttribute="centerX" id="Lih-Vg-mnM"/>
-                        <constraint firstAttribute="centerX" secondItem="33" secondAttribute="centerX" id="Px6-nJ-aI7"/>
-                        <constraint firstAttribute="centerY" secondItem="34" secondAttribute="centerY" id="aCW-40-4oh"/>
-                        <constraint firstItem="33" firstAttribute="height" secondItem="32" secondAttribute="height" id="jJA-x1-0xU"/>
-                        <constraint firstItem="33" firstAttribute="width" secondItem="32" secondAttribute="width" id="shb-FE-cRF"/>
-                        <constraint firstAttribute="width" constant="21" id="tMw-Sg-MKB"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9" userLabel="settings">
                     <rect key="frame" x="280" y="0.0" width="40" height="50"/>
                     <accessibility key="accessibilityConfiguration" label="Settings"/>
@@ -209,6 +175,7 @@
                 <constraint firstItem="6" firstAttribute="leading" secondItem="8" secondAttribute="trailing" id="7n4-BY-8KA"/>
                 <constraint firstItem="8" firstAttribute="leading" secondItem="5" secondAttribute="trailing" id="E0v-Ed-r23"/>
                 <constraint firstAttribute="trailing" secondItem="9" secondAttribute="trailing" id="MMe-gM-RNX"/>
+                <constraint firstItem="37" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="5" id="aY5-pG-EhD"/>
                 <constraint firstItem="9" firstAttribute="leading" secondItem="6" secondAttribute="trailing" id="vkq-Tf-W80"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
