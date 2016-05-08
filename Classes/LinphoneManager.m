@@ -1534,7 +1534,7 @@ static BOOL libStarted = FALSE;
 	lp_config_set_string(configDb, "sound", "ringback_tone", lRingBack);
 	const char *lPlay = [[LinphoneManager bundleFile:@"hold.wav"] UTF8String];
 	lp_config_set_string(configDb, "sound", "hold_music", lPlay);
-
+    
 	theLinphoneCore =
 		linphone_core_new_with_config(&linphonec_vtable, configDb, (__bridge void *)(self) /* user_data */);
 
@@ -1856,7 +1856,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		src = srcIpad;
 	}
 	NSString *dst = [LinphoneManager documentFile:@"linphonerc"];
-	[LinphoneManager copyFile:src destination:dst override:FALSE];
+	[LinphoneManager copyFile:src destination:dst override:NO];
 }
 
 - (void)overrideDefaultSettings {
@@ -2125,7 +2125,10 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 }
 
 - (void)configurePushTokenForProxyConfig:(LinphoneProxyConfig *)proxyCfg {
-	NSData *tokenData = pushNotificationToken;
+    return;
+    
+    // No longer needed - Kamailio leaks the contact anyway
+	/*NSData *tokenData = pushNotificationToken;
 	if (tokenData != nil) {
         NSString *params = [RgManager pushToken:tokenData];
 		linphone_proxy_config_set_contact_uri_parameters(proxyCfg, [params UTF8String]);
@@ -2134,7 +2137,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		// no push token:
 		linphone_proxy_config_set_contact_uri_parameters(proxyCfg, NULL);
 		linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
-	}
+	}*/
 }
 
 #pragma mark - Misc Functions

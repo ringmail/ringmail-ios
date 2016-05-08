@@ -460,6 +460,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[settingsStore transformLinphoneCoreToKeys];
 	settingsController.hiddenKeys = [self findHiddenKeys];
 	[settingsController.tableView reloadData];
+    
+    NSLog(@"RingMail - Edit Settings: %@", [settingsStore getSettings]);
 
 	// Set observer
 	[[NSNotificationCenter defaultCenter] addObserver:self

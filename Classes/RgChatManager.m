@@ -727,7 +727,7 @@
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
                                 @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON chat (msg_uuid);",
 								
-								@"CREATE TABLE calls ("
+								@"CREATE TABLE IF NOT EXISTS calls ("
                                   "id INTEGER PRIMARY KEY NOT NULL,"
                                   "call_duration bigint DEFAULT 0,"
                                   "call_inbound tinyint(1) NOT NULL DEFAULT '0',"

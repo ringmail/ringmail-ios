@@ -346,7 +346,7 @@ static LevelDB* theConfigDatabase = nil;
     
     LinphoneCoreSettingsStore* settings = [[LinphoneCoreSettingsStore alloc] init];
     [settings transformLinphoneCoreToKeys];
-    //NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
+    NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
     
     // RingMail Defaults
 #ifdef DEBUG
@@ -360,7 +360,7 @@ static LevelDB* theConfigDatabase = nil;
     [settings setObject:@"tls" forKey:@"transport_preference"];
     [settings setObject:@"5061" forKey:@"port_preference"];
     [settings setObject:@"None" forKey:@"media_encryption_preference"];
-    [settings setObject:[NSNumber numberWithBool:0] forKey:@"opus_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"opus_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"amr_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"pcmu_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"g722_preference"];
@@ -377,8 +377,9 @@ static LevelDB* theConfigDatabase = nil;
     [settings setObject:@"9078" forKey:@"video_port_preference"];
 	[settings setObject:[NSNumber numberWithBool:1] forKey:@"accept_video_preference"];
     [settings setObject:@"custom" forKey:@"video_preset_preference"];
-    [settings setObject:[NSNumber numberWithInt:0] forKey:@"video_preferred_fps_preference"];
     [settings setObject:[NSNumber numberWithInt:0] forKey:@"video_preferred_size_preference"];
+    [settings setObject:[NSNumber numberWithInt:0] forKey:@"video_preferred_size_preference"];
+    [settings setObject:[NSNumber numberWithInt:1152] forKey:@"download_bandwidth_preference"];
     
     for (NSString *i in @[@"aaceld_16k", @"aaceld_22k", @"aaceld_32k", @"aaceld_44k", @"aaceld_48k", @"avpf", @"gsm", @"ilbc", @"pcma", @"silk_16k", @"silk_24k", @"speex_16k", @"speex_8k", @"h264", @"mp4v-es"])
     {

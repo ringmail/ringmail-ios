@@ -185,39 +185,43 @@
                     {[CKInsetComponent
                       newWithInsets:{.left = 5, .right = 5, .top = 5, .bottom = 5}
                       component:
-                          [CKStackLayoutComponent newWithView:{
-                            [UIView class],
-                            {CKComponentTapGestureAttribute(@selector(actionContact:))}
-						  } size:{.height = 40} style:{
+                          [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
                             .direction = CKStackLayoutDirectionHorizontal,
                             .alignItems = CKStackLayoutAlignItemsStretch
                           }
                           children:{
                               {
-                                  [CKImageComponent newWithImage:cardImage size:{
-                                      .height = 40,
-                                      .width = 40,
-                                  }],
+                                  [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                      {UIControlStateNormal,cardImage},
+                                      } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionContact:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}],
                               }, {
                                   .flexGrow = YES,
                                   .component = [CKInsetComponent
                                    newWithInsets:{.left = 7, .right = 5, .top = INFINITY, .bottom = INFINITY}
                                    component:
-                                        [CKInsetComponent
-                                         newWithInsets:{.left = 0, .right = 0, .top = 4, .bottom = 0}
-                                         component:
-                                              [CKLabelComponent
-                                              newWithLabelAttributes:{
-                                                  .string = [data objectForKey:@"label"],
-                                                  .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18],
-                                                  .color = [UIColor colorWithHex:@"#33362f"],
-                                              }
-                                              viewAttributes:{
-                                                  {@selector(setBackgroundColor:), [UIColor clearColor]},
-                                                  {@selector(setUserInteractionEnabled:), @NO},
-                                              }
-                                              size:{}]
-                                         ]
+                                         [CKStackLayoutComponent newWithView:{
+                                            [UIView class],
+                                            {CKComponentTapGestureAttribute(@selector(actionContact:))}
+                                         } size:{} style:{}
+                                            children:{
+                                              {
+                                                 [CKInsetComponent
+                                                     newWithInsets:{.left = 0, .right = 0, .top = 4, .bottom = 0}
+                                                     component:
+                                                          [CKLabelComponent
+                                                          newWithLabelAttributes:{
+                                                              .string = [data objectForKey:@"label"],
+                                                              .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18],
+                                                              .color = [UIColor colorWithHex:@"#33362f"],
+                                                          }
+                                                          viewAttributes:{
+                                                              {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                                              {@selector(setUserInteractionEnabled:), @NO},
+                                                          }
+                                                          size:{}]
+                                                ]
+                                            }
+                                         }]
                                    ]
                               }, {
                                   .alignSelf = CKStackLayoutAlignSelfEnd,

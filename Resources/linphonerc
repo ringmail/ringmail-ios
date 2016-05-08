@@ -35,7 +35,7 @@ display=1
 capture=1
 show_local=0
 enabled=1
-size=qvga
+size=720p
 automatically_initiate=0
 automatically_accept=0
 
