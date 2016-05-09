@@ -365,23 +365,24 @@ static LevelDB* theConfigDatabase = nil;
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"pcmu_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"g722_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"g729_preference"];
-    [settings setObject:[NSNumber numberWithBool:1] forKey:@"vp8_preference"];
+    [settings setObject:[NSNumber numberWithBool:0] forKey:@"vp8_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"h264_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"ice_preference"];
     [settings setObject:@"stun1.l.google.com:19302" forKey:@"stun_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"adaptive_rate_control_preference"];
     [settings setObject:@"Simple" forKey:@"adaptive_rate_algorithm_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"autoanswer_notif_preference"];
-    [settings setObject:[NSNumber numberWithInt:64] forKey:@"audio_codec_bitrate_limit_preference"];
+    [settings setObject:[NSNumber numberWithInt:32] forKey:@"audio_codec_bitrate_limit_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"voiceproc_preference"];
     [settings setObject:@"8576" forKey:@"audio_port_preference"];
     [settings setObject:@"9078" forKey:@"video_port_preference"];
 	[settings setObject:[NSNumber numberWithBool:1] forKey:@"accept_video_preference"];
     [settings setObject:@"custom" forKey:@"video_preset_preference"];
-    [settings setObject:[NSNumber numberWithInt:0] forKey:@"video_preferred_size_preference"];
-    [settings setObject:[NSNumber numberWithInt:0] forKey:@"video_preferred_size_preference"];
-    [settings setObject:[NSNumber numberWithInt:1152] forKey:@"download_bandwidth_preference"];
+    [settings setObject:[NSNumber numberWithInt:1] forKey:@"video_preferred_size_preference"];
+    [settings setObject:[NSNumber numberWithInt:0] forKey:@"video_preferred_fps_preference"];
+    [settings setObject:[NSNumber numberWithInt:660] forKey:@"download_bandwidth_preference"];
     
-    for (NSString *i in @[@"aaceld_16k", @"aaceld_22k", @"aaceld_32k", @"aaceld_44k", @"aaceld_48k", @"avpf", @"gsm", @"ilbc", @"pcma", @"silk_16k", @"silk_24k", @"speex_16k", @"speex_8k", @"h264", @"mp4v-es"])
+    for (NSString *i in @[@"aaceld_16k", @"aaceld_22k", @"aaceld_32k", @"aaceld_44k", @"aaceld_48k", @"avpf", @"gsm", @"ilbc", @"pcma", @"silk_16k", @"silk_24k", @"speex_16k", @"speex_8k", @"mp4v-es"])
     {
         [settings setObject:[NSNumber numberWithBool:0] forKey:[NSString stringWithFormat:@"%@_preference", i]];
     }

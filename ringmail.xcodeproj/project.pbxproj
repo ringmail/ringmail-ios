@@ -312,6 +312,17 @@
 		C484AC531C991DD500AE2E5D /* bubble_ringmail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C484AC501C991DD500AE2E5D /* bubble_ringmail@2x.png */; };
 		C484AC571C991DF700AE2E5D /* bubble_ringmail_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = C484AC551C991DF700AE2E5D /* bubble_ringmail_blue.png */; };
 		C484AC581C991DF700AE2E5D /* bubble_ringmail_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C484AC561C991DF700AE2E5D /* bubble_ringmail_blue@2x.png */; };
+		C48A1EED1CDFF9C000E095F8 /* libbctoolbox-tester.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1EE61CDFF9C000E095F8 /* libbctoolbox-tester.a */; };
+		C48A1EEE1CDFF9C000E095F8 /* libbctoolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1EE71CDFF9C000E095F8 /* libbctoolbox.a */; };
+		C48A1EEF1CDFF9C000E095F8 /* libebml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1EE81CDFF9C000E095F8 /* libebml2.a */; };
+		C48A1EF01CDFF9C000E095F8 /* libmatroska2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1EE91CDFF9C000E095F8 /* libmatroska2.a */; };
+		C48A1EF11CDFF9C000E095F8 /* libmbedcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1EEA1CDFF9C000E095F8 /* libmbedcrypto.a */; };
+		C48A1EF21CDFF9C000E095F8 /* libmbedtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1EEB1CDFF9C000E095F8 /* libmbedtls.a */; };
+		C48A1EF31CDFF9C000E095F8 /* libmbedx509.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1EEC1CDFF9C000E095F8 /* libmbedx509.a */; };
+		C48A1EFF1CDFFA1900E095F8 /* libcunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B7E18C0D9C900C4D7FE /* libcunit.a */; };
+		C48A1F011CDFFA1900E095F8 /* libcorec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F001CDFFA1900E095F8 /* libcorec.a */; };
+		C48A1F031CDFFADA00E095F8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */; };
+		C48A1F041CDFFBC100E095F8 /* libmswebrtc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EA4C941B50189D00922857 /* libmswebrtc.a */; };
 		C49548F61C826E400097E413 /* bubble_ringmail.png in Resources */ = {isa = PBXBuildFile; fileRef = C49548F31C826E400097E413 /* bubble_ringmail.png */; };
 		C49548F71C826E400097E413 /* bubble_ringmail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C49548F41C826E400097E413 /* bubble_ringmail@2x.png */; };
 		C49548FF1C8685310097E413 /* ringmail_chat_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C49548FE1C8685310097E413 /* ringmail_chat_back.png */; };
@@ -946,6 +957,20 @@
 			remoteGlobalIDString = 9CC9673B1AD4B1B600576D13;
 			remoteInfo = KIFFramework;
 		};
+		C48A1EFB1CDFF9C100E095F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 630589F21B4E816900EFAE36 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAB89FFC1CAC546900C6DFC1;
+			remoteInfo = KIFFrameworkConsumer;
+		};
+		C48A1EFD1CDFF9C100E095F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 630589F21B4E816900EFAE36 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAB8A0141CAC546A00C6DFC1;
+			remoteInfo = KIFFrameworkConsumerTests;
+		};
 		D3554ED015CA79AA00478841 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */;
@@ -1422,6 +1447,15 @@
 		C484AC501C991DD500AE2E5D /* bubble_ringmail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble_ringmail@2x.png"; path = "Resources/bubble_ringmail@2x.png"; sourceTree = "<group>"; };
 		C484AC551C991DF700AE2E5D /* bubble_ringmail_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bubble_ringmail_blue.png; path = Resources/bubble_ringmail_blue.png; sourceTree = "<group>"; };
 		C484AC561C991DF700AE2E5D /* bubble_ringmail_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble_ringmail_blue@2x.png"; path = "Resources/bubble_ringmail_blue@2x.png"; sourceTree = "<group>"; };
+		C48A1EE61CDFF9C000E095F8 /* libbctoolbox-tester.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbctoolbox-tester.a"; path = "liblinphone-sdk/apple-darwin/lib/libbctoolbox-tester.a"; sourceTree = "<group>"; };
+		C48A1EE71CDFF9C000E095F8 /* libbctoolbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbctoolbox.a; path = "liblinphone-sdk/apple-darwin/lib/libbctoolbox.a"; sourceTree = "<group>"; };
+		C48A1EE81CDFF9C000E095F8 /* libebml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libebml2.a; path = "liblinphone-sdk/apple-darwin/lib/libebml2.a"; sourceTree = "<group>"; };
+		C48A1EE91CDFF9C000E095F8 /* libmatroska2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmatroska2.a; path = "liblinphone-sdk/apple-darwin/lib/libmatroska2.a"; sourceTree = "<group>"; };
+		C48A1EEA1CDFF9C000E095F8 /* libmbedcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmbedcrypto.a; path = "liblinphone-sdk/apple-darwin/lib/libmbedcrypto.a"; sourceTree = "<group>"; };
+		C48A1EEB1CDFF9C000E095F8 /* libmbedtls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmbedtls.a; path = "liblinphone-sdk/apple-darwin/lib/libmbedtls.a"; sourceTree = "<group>"; };
+		C48A1EEC1CDFF9C000E095F8 /* libmbedx509.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmbedx509.a; path = "liblinphone-sdk/apple-darwin/lib/libmbedx509.a"; sourceTree = "<group>"; };
+		C48A1F001CDFFA1900E095F8 /* libcorec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcorec.a; path = "liblinphone-sdk/apple-darwin/lib/libcorec.a"; sourceTree = "<group>"; };
+		C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		C49548F31C826E400097E413 /* bubble_ringmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bubble_ringmail.png; path = Resources/bubble_ringmail.png; sourceTree = "<group>"; };
 		C49548F41C826E400097E413 /* bubble_ringmail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble_ringmail@2x.png"; path = "Resources/bubble_ringmail@2x.png"; sourceTree = "<group>"; };
 		C49548FE1C8685310097E413 /* ringmail_chat_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_chat_back.png; path = Resources/ringmail_chat_back.png; sourceTree = "<group>"; };
@@ -2216,16 +2250,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48A1F041CDFFBC100E095F8 /* libmswebrtc.a in Frameworks */,
+				C48A1F031CDFFADA00E095F8 /* VideoToolbox.framework in Frameworks */,
+				63D7216C1B73973D00D70E65 /* libx264.a in Frameworks */,
+				22509042196BD902007863F6 /* libopenh264.a in Frameworks */,
+				C48A1F011CDFFA1900E095F8 /* libcorec.a in Frameworks */,
+				C48A1EFF1CDFFA1900E095F8 /* libcunit.a in Frameworks */,
+				C48A1EED1CDFF9C000E095F8 /* libbctoolbox-tester.a in Frameworks */,
+				C48A1EEE1CDFF9C000E095F8 /* libbctoolbox.a in Frameworks */,
+				C48A1EEF1CDFF9C000E095F8 /* libebml2.a in Frameworks */,
+				C48A1EF01CDFF9C000E095F8 /* libmatroska2.a in Frameworks */,
+				C48A1EF11CDFF9C000E095F8 /* libmbedcrypto.a in Frameworks */,
+				C48A1EF21CDFF9C000E095F8 /* libmbedtls.a in Frameworks */,
+				C48A1EF31CDFF9C000E095F8 /* libmbedx509.a in Frameworks */,
 				C46997B61BC1A7FB007B3658 /* libvo-amrwbenc.a in Frameworks */,
 				63D7216D1B73975900D70E65 /* libmsx264.a in Frameworks */,
 				63D7215D1B7394D200D70E65 /* libtunnel.a in Frameworks */,
-				63D7216C1B73973D00D70E65 /* libx264.a in Frameworks */,
 				152F22361B15E889008C0621 /* libxml2.dylib in Frameworks */,
 				152F22341B15E83B008C0621 /* libilbcrfc3951.a in Frameworks */,
 				F0B026F31AA710AF00FF49F7 /* libiconv.dylib in Frameworks */,
 				F05BAA621A5D594E00411815 /* libz.dylib in Frameworks */,
 				1560821F18EEF26100765332 /* libmsopenh264.a in Frameworks */,
-				22509042196BD902007863F6 /* libopenh264.a in Frameworks */,
 				22AF73C21754C0D100BE8398 /* libopus.a in Frameworks */,
 				57B0E360173C010400A476B8 /* libpolarssl.a in Frameworks */,
 				223CA7E616D9255800EF1BEC /* libantlr3c.a in Frameworks */,
@@ -2609,6 +2654,15 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */,
+				C48A1F001CDFFA1900E095F8 /* libcorec.a */,
+				C48A1EE61CDFF9C000E095F8 /* libbctoolbox-tester.a */,
+				C48A1EE71CDFF9C000E095F8 /* libbctoolbox.a */,
+				C48A1EE81CDFF9C000E095F8 /* libebml2.a */,
+				C48A1EE91CDFF9C000E095F8 /* libmatroska2.a */,
+				C48A1EEA1CDFF9C000E095F8 /* libmbedcrypto.a */,
+				C48A1EEB1CDFF9C000E095F8 /* libmbedtls.a */,
+				C48A1EEC1CDFF9C000E095F8 /* libmbedx509.a */,
 				C44E7E081BCF0D8700129E71 /* PushKit.framework */,
 				C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */,
 				63EA4C941B50189D00922857 /* libmswebrtc.a */,
@@ -2711,6 +2765,8 @@
 				63058A011B4E816A00EFAE36 /* Test Host.app */,
 				63058A031B4E816A00EFAE36 /* KIF Tests - XCTest.xctest */,
 				63058A071B4E816A00EFAE36 /* KIF.framework */,
+				C48A1EFC1CDFF9C100E095F8 /* KIFFrameworkConsumer.app */,
+				C48A1EFE1CDFF9C100E095F8 /* KIFFrameworkConsumerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3780,6 +3836,20 @@
 			fileType = wrapper.framework;
 			path = KIF.framework;
 			remoteRef = 63058A061B4E816A00EFAE36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C48A1EFC1CDFF9C100E095F8 /* KIFFrameworkConsumer.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = KIFFrameworkConsumer.app;
+			remoteRef = C48A1EFB1CDFF9C100E095F8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C48A1EFE1CDFF9C100E095F8 /* KIFFrameworkConsumerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KIFFrameworkConsumerTests.xctest;
+			remoteRef = C48A1EFD1CDFF9C100E095F8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D3554ED115CA79AA00478841 /* libXMLRPC.a */ = {

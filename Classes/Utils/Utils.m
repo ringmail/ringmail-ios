@@ -24,52 +24,52 @@
 
 @implementation LinphoneLogger
 
+#define FILE_SIZE 17
+#define DOMAIN_SIZE 3
+
 + (void)log:(OrtpLogLevel)severity file:(const char *)file line:(int)line format:(NSString *)format, ... {
 	va_list args;
 	va_start(args, format);
 	NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
 	const char *utf8str = [str cStringUsingEncoding:NSString.defaultCStringEncoding];
-	int filesize = 20;
 	const char *filename = strchr(file, '/') ? strrchr(file, '/') + 1 : file;
-	if (severity <= ORTP_DEBUG) {
-		// lol: ortp_debug(XXX) can be disabled at compile time, but ortp_log(ORTP_DEBUG, xxx) will always be valid even
-		//      not in debug build...
-		ortp_debug("%*s:%3d - %s", filesize, filename + MAX((int)strlen(filename) - filesize, 0), line, utf8str);
-	} else {
-		ortp_log(severity, "%*s:%3d - %s", filesize, filename + MAX((int)strlen(filename) - filesize, 0), line,
-				 utf8str);
-	}
+	ortp_log(severity, "(%*s:%-4d) %s", FILE_SIZE, filename + MAX((int)strlen(filename) - FILE_SIZE, 0), line, utf8str);
 	va_end(args);
 }
 
 #pragma mark - Logs Functions callbacks
 
-void linphone_iphone_log_handler(int lev, const char *fmt, va_list args) {
+void linphone_iphone_log_handler(const char *domain, OrtpLogLevel lev, const char *fmt, va_list args) {
 	NSString *format = [[NSString alloc] initWithUTF8String:fmt];
 	NSString *formatedString = [[NSString alloc] initWithFormat:format arguments:args];
-	char levelC = 'I';
-	switch ((OrtpLogLevel)lev) {
-	case ORTP_FATAL:
-		levelC = 'F';
-		break;
-	case ORTP_ERROR:
-		levelC = 'E';
-		break;
-	case ORTP_WARNING:
-		levelC = 'W';
-		break;
-	case ORTP_MESSAGE:
-		levelC = 'I';
-		break;
-	case ORTP_TRACE:
-	case ORTP_DEBUG:
-		levelC = 'D';
-		break;
-	case ORTP_LOGLEV_END:
-		return;
+	NSString *lvl = @"";
+	switch (lev) {
+		case ORTP_FATAL:
+			lvl = @"F";
+			break;
+		case ORTP_ERROR:
+			lvl = @"E";
+			break;
+		case ORTP_WARNING:
+			lvl = @"W";
+			break;
+		case ORTP_MESSAGE:
+			lvl = @"I";
+			break;
+		case ORTP_DEBUG:
+		case ORTP_TRACE:
+			lvl = @"D";
+			break;
+		case ORTP_LOGLEV_END:
+			return;
 	}
-	// since \r are interpreted like \n, avoid double new lines when logging packets
-	NSLog(@"%c %@", levelC, [formatedString stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"]);
+	if (!domain)
+		domain = "liblinphone";
+	// since \r are interpreted like \n, avoid double new lines when logging network packets (belle-sip)
+	// output format is like: I/ios/some logs. We truncate domain to **exactly** DOMAIN_SIZE characters to have
+	// fixed-length aligned logs
+	NSLog(@"%@/%*.*s/%@", lvl, DOMAIN_SIZE, DOMAIN_SIZE, domain,
+		  [formatedString stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"]);
 }
 
 @end

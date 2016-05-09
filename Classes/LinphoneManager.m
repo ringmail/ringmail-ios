@@ -78,13 +78,12 @@ NSString *const kLinphoneFileTransferRecvUpdate = @"LinphoneFileTransferRecvUpda
 
 const int kLinphoneAudioVbrCodecDefaultBitrate = 36; /*you can override this from linphonerc or linphonerc-factory*/
 
-//extern void libmsilbc_init(void);
-extern void libmsamr_init(void);
-extern void libmsx264_init(void);
-extern void libmsopenh264_init(void);
-extern void libmssilk_init(void);
-extern void libmsbcg729_init(void);
-//extern void libmswebrtc_init(void);
+extern void libmsamr_init(MSFactory *factory);
+extern void libmsx264_init(MSFactory *factory);
+extern void libmsopenh264_init(MSFactory *factory);
+extern void libmssilk_init(MSFactory *factory);
+extern void libmsbcg729_init(MSFactory *factory);
+extern void libmswebrtc_init(MSFactory *factory);
 
 #define FRONT_CAM_NAME                                                                                                 \
 	"AV Capture: com.apple.avfoundation.avcapturedevice.built-in_video:1" /*"AV Capture: Front Camera"*/
@@ -618,10 +617,10 @@ static void dump_section(const char *section, void *data) {
 
 #pragma mark - Logs Functions handlers
 static void linphone_iphone_log_user_info(struct _LinphoneCore *lc, const char *message) {
-	linphone_iphone_log_handler(ORTP_MESSAGE, message, NULL);
+	linphone_iphone_log_handler(NULL, ORTP_MESSAGE, message, NULL);
 }
 static void linphone_iphone_log_user_warning(struct _LinphoneCore *lc, const char *message) {
-	linphone_iphone_log_handler(ORTP_WARNING, message, NULL);
+	linphone_iphone_log_handler(NULL, ORTP_WARNING, message, NULL);
 }
 
 #pragma mark - Display Status Functions
@@ -1517,16 +1516,6 @@ static BOOL libStarted = FALSE;
 	LOGI(@"Create linphonecore");
 	connectivity = none;
 
-	ms_init(); // Need to initialize mediastreamer2 before loading the plugins
-	// Load plugins if available in the linphone SDK - otherwise these calls will do nothing
-	//libmsilbc_init();
-	libmssilk_init();
-	libmsamr_init();
-	libmsx264_init();
-	libmsopenh264_init();
-	libmsbcg729_init();
-	//libmswebrtc_init();
-
 	// Set audio assets
 	const char *lRing = [[LinphoneManager bundleFile:@"ring.wav"] UTF8String];
 	lp_config_set_string(configDb, "sound", "local_ring", lRing);
@@ -1537,6 +1526,21 @@ static BOOL libStarted = FALSE;
     
 	theLinphoneCore =
 		linphone_core_new_with_config(&linphonec_vtable, configDb, (__bridge void *)(self) /* user_data */);
+    
+    MSFactory *f = linphone_core_get_ms_factory(theLinphoneCore);
+    libmssilk_init(f);
+    libmsamr_init(f);
+    //libmsx264_init(f);
+    //libmsopenh264_init(f);
+    libmsbcg729_init(f);
+    libmswebrtc_init(f);
+    linphone_core_reload_ms_plugins(theLinphoneCore, NULL);
+
+#if !TARGET_IPHONE_SIMULATOR
+    ms_factory_enable_filter_from_name(f, "MSH264Dec", NO);
+    //ms_factory_enable_filter_from_name(f, "MSOpenH264Enc", NO);
+    //ms_factory_enable_filter_from_name(f, "MSOpenH264Dec", NO);
+#endif
 
 	/* set the CA file no matter what, since the remote provisioning could be hitting an HTTPS server */
 	const char *lRootCa = [[LinphoneManager bundleFile:@"rootca.pem"] UTF8String];
@@ -1586,7 +1590,7 @@ static BOOL libStarted = FALSE;
 		LOGI(@"Destroy linphonecore");
 		linphone_core_destroy(theLinphoneCore);
 		theLinphoneCore = nil;
-		ms_exit(); // Uninitialize mediastreamer2
+		//ms_exit(); // Uninitialize mediastreamer2
 
 		// Post event
 		NSDictionary *dict =
