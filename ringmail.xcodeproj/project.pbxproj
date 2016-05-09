@@ -323,6 +323,7 @@
 		C48A1F011CDFFA1900E095F8 /* libcorec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F001CDFFA1900E095F8 /* libcorec.a */; };
 		C48A1F031CDFFADA00E095F8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */; };
 		C48A1F041CDFFBC100E095F8 /* libmswebrtc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EA4C941B50189D00922857 /* libmswebrtc.a */; };
+		C48A1F061CE127C600E095F8 /* ringmail_wizard_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A1F051CE127C600E095F8 /* ringmail_wizard_background.png */; };
 		C49548F61C826E400097E413 /* bubble_ringmail.png in Resources */ = {isa = PBXBuildFile; fileRef = C49548F31C826E400097E413 /* bubble_ringmail.png */; };
 		C49548F71C826E400097E413 /* bubble_ringmail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C49548F41C826E400097E413 /* bubble_ringmail@2x.png */; };
 		C49548FF1C8685310097E413 /* ringmail_chat_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C49548FE1C8685310097E413 /* ringmail_chat_back.png */; };
@@ -1456,6 +1457,7 @@
 		C48A1EEC1CDFF9C000E095F8 /* libmbedx509.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmbedx509.a; path = "liblinphone-sdk/apple-darwin/lib/libmbedx509.a"; sourceTree = "<group>"; };
 		C48A1F001CDFFA1900E095F8 /* libcorec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcorec.a; path = "liblinphone-sdk/apple-darwin/lib/libcorec.a"; sourceTree = "<group>"; };
 		C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		C48A1F051CE127C600E095F8 /* ringmail_wizard_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_wizard_background.png; path = Resources/ringmail_wizard_background.png; sourceTree = "<group>"; };
 		C49548F31C826E400097E413 /* bubble_ringmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bubble_ringmail.png; path = Resources/bubble_ringmail.png; sourceTree = "<group>"; };
 		C49548F41C826E400097E413 /* bubble_ringmail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble_ringmail@2x.png"; path = "Resources/bubble_ringmail@2x.png"; sourceTree = "<group>"; };
 		C49548FE1C8685310097E413 /* ringmail_chat_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_chat_back.png; path = Resources/ringmail_chat_back.png; sourceTree = "<group>"; };
@@ -3081,6 +3083,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C48A1F051CE127C600E095F8 /* ringmail_wizard_background.png */,
 				C459A4441CC870B600CFFF30 /* ringmail_favorite.png */,
 				C459A4451CC870B600CFFF30 /* ringmail_favorite@2x.png */,
 				C459A4461CC870B600CFFF30 /* ringmail_favorite@3x.png */,
@@ -4359,6 +4362,7 @@
 				D3A74F4615C69392001500B9 /* statebar_background_landscape~ipad.png in Resources */,
 				F0642EF119DAC891009DB336 /* MainStoryboard.storyboard in Resources */,
 				C42C0DBD1CAEE9D100AD5A91 /* ringmail_incall-contact@3x.png in Resources */,
+				C48A1F061CE127C600E095F8 /* ringmail_wizard_background.png in Resources */,
 				D3A74F4815C69392001500B9 /* statebar_background~ipad.png in Resources */,
 				D3A74F4A15C69392001500B9 /* transfer_call_default~ipad.png in Resources */,
 				D3A74F4C15C69392001500B9 /* transfer_call_over~ipad.png in Resources */,
