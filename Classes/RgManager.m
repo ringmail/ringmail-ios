@@ -11,6 +11,7 @@
 #import "NSStringAdditions.h"
 #import "RgManager.h"
 #import "RgNetwork.h"
+#import "RgChatManager.h"
 
 /* RingMail */
 
@@ -21,6 +22,7 @@ NSString *const kRgContactsUpdated = @"RgContactsUpdated";
 NSString *const kRgSetAddress = @"RgSetAddress";
 NSString *const kRgMainRefresh = @"RgMainRefresh";
 NSString *const kRgFavoriteRefresh = @"RgFavoriteRefresh";
+NSString *const kRgAttemptVerify = @"kRgAttemptVerify";
 
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
@@ -227,44 +229,99 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)processRingURI:(NSString*)uri
 {
-    NSMutableString *ringuri = [uri mutableCopy];
+    __block NSMutableString *ringuri = [uri mutableCopy];
     [ringuri replaceOccurrencesOfRegex:@"^ring:(//)?" withString:@""];
     NSLog(@"RingMail: URI - %@ (from: %@)", ringuri, uri);
-    BOOL video = NO;
-    if ([ringuri isMatchedByRegex:@"^(message|chat)/"])
+    
+    if ([RgManager configReadyAndVerified])
     {
-        [ringuri replaceOccurrencesOfRegex:@"^(message|chat)/" withString:@""];
+        __block BOOL video = NO;
+        if ([ringuri isMatchedByRegex:@"^(message|chat)/"])
+        {
+            [ringuri replaceOccurrencesOfRegex:@"^(message|chat)/" withString:@""];
+            if ([RgManager configReadyAndVerified])
+            {
+                if ([RgManager checkRingMailAddress:ringuri])
+                {
+                    [RgManager startMessage:[RgManager filterRingMailAddress:ringuri]];
+                }
+            }
+            return;
+        }
+        else if ([ringuri isMatchedByRegex:@"^call/"])
+        {
+            [ringuri replaceOccurrencesOfRegex:@"^call/" withString:@""];
+        }
+        else if ([ringuri isMatchedByRegex:@"^video/"])
+        {
+            [ringuri replaceOccurrencesOfRegex:@"^video/" withString:@""];
+            video = YES;
+        }
         if ([RgManager checkRingMailAddress:ringuri])
         {
-            [RgManager startMessage:[RgManager filterRingMailAddress:ringuri]];
+            //NSLog(@"RingMail: URI - Valid For Call: %@", ringuri);
+            BOOL coreReady = [[[LinphoneManager instance] coreReady] boolValue];
+            BOOL startCall = NO;
+            NSLog(@"RingMail: Core Ready - %d", coreReady);
+            
+            if (coreReady)
+            {
+                LinphoneProxyConfig *cfg = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
+                BOOL isReg = linphone_proxy_config_is_registered(cfg);
+                NSLog(@"RingMail: Is Registered - %d", isReg);
+                if (isReg)
+                {
+                    startCall = YES;
+                }
+            }
+            if (startCall)
+            {
+                NSLog(@"RingMail: Start Call Now");
+                [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL video:video];
+            }
+            else
+            {
+                NSLog(@"RingMail: Queue Call");
+                LinphoneManager *mgr = [LinphoneManager instance];
+                [[mgr opQueue] setSuspended:YES];
+                [[mgr opQueue] cancelAllOperations]; // reset queue
+                [[mgr opQueue] addOperationWithBlock:^{
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                        [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL video:video];
+                    }];
+                }];
+            }
         }
-        return;
     }
-    else if ([ringuri isMatchedByRegex:@"^call/"])
+    else if ([ringuri isMatchedByRegex:@"^verify$"])
     {
-        [ringuri replaceOccurrencesOfRegex:@"^call/" withString:@""];
+        LevelDB *cfg = [RgManager configDatabase];
+        cfg[@"ringmail_check_email"] = @1;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgAttemptVerify object:self userInfo:nil];
     }
-    else if ([ringuri isMatchedByRegex:@"^video/"])
+    else
     {
-        [ringuri replaceOccurrencesOfRegex:@"^video/" withString:@""];
-        video = YES;
+        // TODO: defer URI until after login
     }
-    if ([RgManager checkRingMailAddress:ringuri])
-    {
-        NSLog(@"RingMail: URI - Valid For Call: %@", ringuri);
-        [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL video:video];
-    }
+}
+
++ (NSString *)configDatabaseName
+{
+    NSString *name;
+#ifdef DEBUG
+    name = @"ringmail_config_dev";
+#else
+    name = @"ringmail_config";
+#endif
+    name = [name stringByAppendingString:@"_v1.1.1.ldb"];
+    return name;
 }
 
 + (LevelDB*)configDatabase
 {
     if (theConfigDatabase == nil)
     {
-#ifdef DEBUG
-        theConfigDatabase = [LevelDB databaseInLibraryWithName:@"ringmail_config_dev.ldb"];
-#else
-        theConfigDatabase = [LevelDB databaseInLibraryWithName:@"ringmail_config.ldb"];
-#endif
+        theConfigDatabase = [LevelDB databaseInLibraryWithName:[RgManager configDatabaseName]];
     }
     if (! [theConfigDatabase objectForKey:@"ringmail_device_uuid"])
     {
@@ -280,6 +337,31 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)configReset
 {
+    // Remove config database
+    LevelDB *cfg = [RgManager configDatabase];
+    NSString *deviceUUID = [cfg objectForKey:@"ringmail_device_uuid"];
+    [RgManager closeConfigDatabase];
+    NSString *cfgPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[RgManager configDatabaseName]];
+    if ([[NSFileManager defaultManager] removeItemAtPath:cfgPath error:NULL])
+    {
+        NSLog(@"RingMail: Config File Removed: %@", cfgPath);
+    }
+    [RgManager configDatabase]; // Create a new blank one
+    // Restore original device UUID
+    [cfg setObject:deviceUUID forKey:@"ringmail_device_uuid"];
+    
+    // Remove sqlite database
+    NSString *dbPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[RgChatManager databasePath]];
+    if ([[NSFileManager defaultManager] removeItemAtPath:dbPath error:NULL])
+    {
+        NSLog(@"RingMail: SQLite Database Removed: %@", dbPath);
+    }
+    LinphoneManager* mgr = [LinphoneManager instance];
+    [[mgr chatManager] setupDatabase]; // Set it back up again for next time
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+    
+    /*
     // Clear out the whole database
     LevelDB* cfg = [RgManager configDatabase];
     [cfg enumerateKeysAndObjectsUsingBlock:^(LevelDBKey *key, id value, BOOL *stop) {
@@ -288,6 +370,7 @@ static LevelDB* theConfigDatabase = nil;
         // Do something clever
         [cfg removeObjectForKey:keyString];
     }];
+    */
 }
 
 + (BOOL)configReady
@@ -304,7 +387,7 @@ static LevelDB* theConfigDatabase = nil;
     return NO;
 }
 
-+ (BOOL)configVerified
++ (BOOL)configEmailVerified
 {
     LevelDB* cfg = [RgManager configDatabase];
     NSString* verify = [cfg objectForKey:@"ringmail_verify_email"];
@@ -315,9 +398,20 @@ static LevelDB* theConfigDatabase = nil;
     return NO;
 }
 
++ (BOOL)configPhoneVerified
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString* verify = [cfg objectForKey:@"ringmail_verify_phone"];
+    if (verify != nil && [verify isEqualToString:@"1"])
+    {
+        return YES;
+    }
+    return NO;
+}
+
 + (BOOL)configReadyAndVerified
 {
-    return ([RgManager configReady] && [RgManager configVerified]) ? YES : NO;
+    return ([RgManager configReady] && [RgManager configEmailVerified] && [RgManager configPhoneVerified]) ? YES : NO;
 }
 
 + (NSDictionary *)getCredentials
@@ -401,7 +495,6 @@ static LevelDB* theConfigDatabase = nil;
     [settings synchronize];
  
     LevelDB* cfg = [RgManager configDatabase];
-    [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
     [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
     [RgManager chatEnsureConnection];
     [[RgNetwork instance] registerPushToken];

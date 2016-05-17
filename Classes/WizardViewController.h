@@ -22,6 +22,9 @@
 #import "UILinphoneTextField.h"
 #import "LinphoneUI/UILinphoneButton.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "RegexKitLite/RegexKitLite.h"
+#import "NBPhoneNumberUtil.h"
+#import "NBPhoneNumber.h"
 
 @interface WizardViewController : TPMultiLayoutViewController
 <UITextFieldDelegate,
@@ -42,6 +45,7 @@
 @property (nonatomic, strong) IBOutlet UIView *createAccountView;
 @property (nonatomic, strong) IBOutlet UIView *connectAccountView;
 @property (nonatomic, strong) IBOutlet UIView *validateAccountView;
+@property (nonatomic, strong) IBOutlet UIView *validatePhoneView;
 
 @property (nonatomic, strong) IBOutlet UIView *waitView;
 
@@ -61,6 +65,7 @@
 @property (nonatomic, strong) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 
 @property (nonatomic, strong) IBOutlet UILabel *verifyEmailLabel;
+@property (nonatomic, strong) IBOutlet UILabel *verifyPhoneLabel;
 
 - (void)reset;
 - (void)startWizard;
@@ -70,8 +75,10 @@
 
 - (IBAction)onCreateAccountClick:(id)sender;
 - (IBAction)onConnectLinphoneAccountClick:(id)sender;
-- (IBAction)onCheckValidationClick:(id)sender;
-
+- (IBAction)onCheckEmailClick:(id)sender;
+- (IBAction)onCheckPhoneClick:(id)sender;
+- (IBAction)onResendVerifyClick:(id)sender;
+- (IBAction)onResendPhoneClick:(id)sender;
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
 

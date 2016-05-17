@@ -135,6 +135,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize chatMd5;
 @synthesize ringLogin;
 @synthesize coreReady;
+@synthesize opQueue;
 
 struct codec_name_pref_table {
 	const char *name;
@@ -330,6 +331,8 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
         self.contactManager = [[RgContactManager alloc] init];
         self.ringLogin = @"";
         self.coreReady = [NSNumber numberWithBool:0];
+        self.opQueue = [[NSOperationQueue alloc] init];
+        [self.opQueue setUnderlyingQueue:dispatch_queue_create("com.ringmail.uri", NULL)];
 	}
 	return self;
 }
@@ -974,6 +977,16 @@ static void linphone_iphone_configuring_status_changed(LinphoneCore *lc, Linphon
 		dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:state], @"state", [NSValue valueWithPointer:cfg], @"cfg",
 									 [NSString stringWithUTF8String:message], @"message", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneRegistrationUpdate object:self userInfo:dict];
+    
+    if (state == LinphoneRegistrationOk)
+    {
+        NSLog(@"RingMail - Queued Operations: %lu", [opQueue operationCount]);
+        if ([opQueue operationCount] > 0)
+        {
+            NSLog(@"RingMail - Resuming Queued Operations");
+            [opQueue setSuspended:NO];
+        }
+    }
 }
 
 static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyConfig *cfg,

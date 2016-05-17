@@ -27,9 +27,13 @@
 #import "RgNetwork.h"
 
 typedef enum _ViewElement {
-	ViewElement_Username = 100,
-	ViewElement_Password = 101,
-	ViewElement_Password2 = 102,
+	ViewElement_FirstName = 100,
+	ViewElement_LastName = 101,
+	ViewElement_Username = 102, // Really "email"
+	ViewElement_Phone = 103,
+	ViewElement_Password = 104,
+	//ViewElement_Password2 = 102,
+    ViewElement_Code = 105,
 	ViewElement_Label = 200,
 	ViewElement_Error = 201,
 	ViewElement_Username_Error = 404
@@ -43,6 +47,7 @@ typedef enum _ViewElement {
 @synthesize createAccountView;
 @synthesize connectAccountView;
 @synthesize validateAccountView;
+@synthesize validatePhoneView;
 @synthesize waitView;
 
 @synthesize backButton;
@@ -55,6 +60,7 @@ typedef enum _ViewElement {
 @synthesize viewTapGestureRecognizer;
 
 @synthesize verifyEmailLabel;
+@synthesize verifyPhoneLabel;
 
 #pragma mark - Lifecycle Functions
 
@@ -102,10 +108,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(registrationUpdateEvent:)
 												 name:kLinphoneRegistrationUpdate
 											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(attemptVerify:)
+												 name:kRgAttemptVerify
+											   object:nil];
+	/*[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(configuringUpdate:)
 												 name:kLinphoneConfiguringStateUpdate
-											   object:nil];
+											   object:nil];*/
     // RingMail: Disabling this for now because of crash on launch
     /*[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(checkValidation:)
@@ -183,7 +193,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self resetTextFields];
     if ([RgManager configReady])
     {
-        [self changeView:validateAccountView back:FALSE animation:FALSE];
+        if ([RgManager configEmailVerified])
+        {
+            [self changeView:validatePhoneView back:FALSE animation:FALSE];
+        }
+        else
+        {
+            [self changeView:validateAccountView back:FALSE animation:FALSE];
+            LevelDB* cfg = [RgManager configDatabase];
+            if (cfg[@"ringmail_check_email"] != nil) // attempt check
+            {
+                [cfg removeObjectForKey:@"ringmail_check_email"];
+                [self verifyEmail];
+            }
+        }
     }
     else
     {
@@ -191,7 +214,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 	[waitView setHidden:TRUE];
 }
-
 
 - (void)reset {
 	[self clearProxyConfig];
@@ -243,37 +265,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[historyViews removeAllObjects];
 }
 
-- (void)checkValidation:(NSNotification *)notif {
-    // Check once if validated, if so, this screen can be skipped
-    if ([RgManager configReady] && ! [RgManager configVerified])
-    {
-        [RgManager verifyLogin:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSDictionary* res = responseObject;
-            NSLog(@"RingMail: Check Validation: %@", res);
-            NSString *ok = [res objectForKey:@"result"];
-            if ([ok isEqualToString:@"ok"])
-            {
-                [[LinphoneManager instance] startLinphoneCore];
-                [self reset];
-                [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
-                [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
-                              domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
-                [RgManager updateCredentials:res];
-            }
-        }];
-    }
-}
 
 - (void)changeView:(UIView *)view back:(BOOL)back animation:(BOOL)animation {
 
 	// Change toolbar buttons following view
     
-	if (view == validateAccountView) {
+	if (
+        view == validateAccountView ||
+        view == validatePhoneView ||
+        view == choiceView
+    ) {
 		[backButton setEnabled:FALSE];
-        [backButton setHidden:TRUE];
-        
-	} else if (view == choiceView) {
-        [backButton setEnabled:FALSE];
         [backButton setHidden:TRUE];
 	} else {
 		[backButton setEnabled:TRUE];
@@ -283,8 +285,29 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (view == validateAccountView)
     {
         LevelDB* cfg = [RgManager configDatabase];
-        NSLog(@"RingMail: Change View - validate: %@", [cfg objectForKey:@"ringmail_login"]);
         [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
+    }
+    else if (view == validatePhoneView)
+    {
+        LevelDB* cfg = [RgManager configDatabase];
+        [verifyPhoneLabel setText:[cfg objectForKey:@"ringmail_phone"]];
+        
+        if (cfg[@"ringmain_check_phone"] == nil) // Send code once
+        {
+            [[RgNetwork instance] resendVerify:@{@"phone": [cfg objectForKey:@"ringmail_phone"]} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary* res = responseObject;
+                NSString *ok = [res objectForKey:@"result"];
+                if (ok != nil && [ok isEqualToString:@"ok"])
+                {
+                    cfg[@"ringmail_check_phone"] = @1;
+                }
+                else
+                {
+                    NSString* error = [res objectForKey:@"error"];
+                    NSLog(@"RingMail: Error - API resend verify: %@", error);
+                }
+            }];
+        }
     }
 
 	// Animation
@@ -460,7 +483,40 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - UITextFieldDelegate Functions
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[textField resignFirstResponder];
+    [textField resignFirstResponder];
+    
+    UITextField *next = nil;
+    if (currentView == createAccountView)
+    {
+        if (textField.tag == ViewElement_FirstName)
+        {
+            next = [WizardViewController findTextField:ViewElement_LastName view:contentView];
+        }
+        else if (textField.tag == ViewElement_LastName)
+        {
+            next = [WizardViewController findTextField:ViewElement_Username view:contentView];
+        }
+        else if (textField.tag == ViewElement_Username)
+        {
+            next = [WizardViewController findTextField:ViewElement_Phone view:contentView];
+        }
+        else if (textField.tag == ViewElement_Phone)
+        {
+            next = [WizardViewController findTextField:ViewElement_Password view:contentView];
+        }
+    }
+    else if (currentView == connectAccountView)
+    {
+        if (textField.tag == ViewElement_Username)
+        {
+            next = [WizardViewController findTextField:ViewElement_Password view:contentView];
+        }
+    }
+    if (next)
+    {
+        [next becomeFirstResponder];
+    }
+    
 	return YES;
 }
 
@@ -468,7 +524,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	activeTextField = textField;
 }
 
-- (BOOL)textField:(UITextField *)textField
+/*- (BOOL)textField:(UITextField *)textField
 	shouldChangeCharactersInRange:(NSRange)range
 				replacementString:(NSString *)string {
 	// only validate the username when creating a new account
@@ -505,7 +561,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		}
 	}
 	return YES;
-}
+}*/
 
 - (void)hideError:(NSTimer *)timer {
 	UILabel *error_label = [WizardViewController findLabel:ViewElement_Username_Error view:contentView];
@@ -556,7 +612,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onResendVerifyClick:(id)sender {
     LevelDB* cfg = [RgManager configDatabase];
     [[RgNetwork instance] resendVerify:@{@"email": [cfg objectForKey:@"ringmail_login"]} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [waitView setHidden:true];
         NSDictionary* res = responseObject;
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])
@@ -576,29 +631,121 @@ static UICompositeViewDescription *compositeDescription = nil;
     }];
 }
 
-- (IBAction)onCheckValidationClick:(id)sender {
+- (IBAction)onCheckEmailClick:(id)sender {
+    [self verifyEmail];
+}
+
+- (void)verifyEmail
+{
+    [waitView setHidden:FALSE];
     [RgManager verifyLogin:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [waitView setHidden:TRUE];
+        BOOL verified = NO;
         NSDictionary* res = responseObject;
         NSString *ok = [res objectForKey:@"result"];
-        if ([ok isEqualToString:@"ok"])
+        if (ok != nil && [ok isEqualToString:@"ok"])
         {
-            [[LinphoneManager instance] startLinphoneCore];
-            [self reset];
-            [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
-            [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
-                          domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
-            [RgManager updateCredentials:res];
+            LevelDB* cfg = [RgManager configDatabase];
+            [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
+            [cfg setObject:res forKey:@"ringmail_credentials"];
+            verified = YES;
+        }
+        else if ([RgManager configEmailVerified])
+        {
+            verified = YES;
+        }
+        if (verified)
+        {
+            if ([RgManager configPhoneVerified])
+            {
+                [self connectToRingMail];
+            }
+            else
+            {
+                // Go To Next View
+                [self changeView:validatePhoneView back:false animation:TRUE];
+            }
+        }
+    }];
+}
+
+- (IBAction)onResendPhoneClick:(id)sender {
+    LevelDB* cfg = [RgManager configDatabase];
+    [[RgNetwork instance] resendVerify:@{@"phone": [cfg objectForKey:@"ringmail_phone"]} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary* res = responseObject;
+        NSString *ok = [res objectForKey:@"result"];
+        if (ok != nil && [ok isEqualToString:@"ok"])
+        {
+            cfg[@"ringmail_check_phone"] = @1;
         }
         else
         {
-            UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Email Not Verified"
-                           message:@"Please verify your email address to continue"
-                          delegate:nil
-                 cancelButtonTitle:@"OK"
-                 otherButtonTitles:nil, nil];
-            [errorView show];
+            NSString* error = [res objectForKey:@"error"];
+            NSLog(@"RingMail: Error - API resend verify: %@", error);
         }
     }];
+}
+
+- (IBAction)onCheckPhoneClick:(id)sender {
+	NSString *code = [WizardViewController findTextField:ViewElement_Code view:contentView].text;
+    if ([code isMatchedByRegex:@"^\\d{4}$"])
+    {
+        [waitView setHidden:FALSE];
+        [[RgNetwork instance] verifyPhone:code callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [waitView setHidden:TRUE];
+            BOOL verified = NO;
+            NSDictionary* res = responseObject;
+            NSString *ok = [res objectForKey:@"result"];
+            if (ok != nil && [ok isEqualToString:@"ok"])
+            {
+                LevelDB* cfg = [RgManager configDatabase];
+                [cfg setObject:@"1" forKey:@"ringmail_verify_phone"];
+                verified = YES;
+            }
+            else if ([RgManager configReadyAndVerified])
+            {
+                verified = YES;
+            }
+            if (verified)
+            {
+                [self connectToRingMail];
+            }
+            else
+            {
+                UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Phone Number Not Verified"
+                               message:@"Please enter the correct code for your phone number to continue."
+                              delegate:nil
+                     cancelButtonTitle:@"OK"
+                     otherButtonTitles:nil, nil];
+                [errorView show];
+            }
+        }];
+    }
+    else
+    {
+        UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Invalid Code"
+                       message:@"Please enter the correct code for your phone number to continue."
+                      delegate:nil
+             cancelButtonTitle:@"OK"
+             otherButtonTitles:nil, nil];
+        [errorView show];
+    }
+}
+
+- (void)connectToRingMail
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSDictionary *res = cfg[@"ringmail_credentials"];
+    if (res != nil)
+    {
+        [cfg removeObjectForKey:@"ringmail_credentials"];
+        [[LinphoneManager instance] startLinphoneCore];
+        [self reset];
+        [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
+        [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
+                      domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
+        [RgManager updateCredentials:res];
+    }
 }
 
 - (BOOL)verificationWithUsername:(NSString *)username
@@ -691,34 +838,49 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (BOOL)verificationRegisterWithUsername:(NSString *)username
-								password:(NSString *)password
-							   password2:(NSString *)password2 {
+- (BOOL)verifyRegister:(NSMutableDictionary *)data {
 	NSMutableString *errors = [NSMutableString string];
 	NSInteger username_length = [[LinphoneManager instance] lpConfigIntForKey:@"username_length" forSection:@"wizard"];
 	NSInteger password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" forSection:@"wizard"];
+    NSString *username = data[@"email"];
+    NSString *password = data[@"password"];
+    
+    if ([data[@"first_name"] length] < 1 || [data[@"last_name"] length] < 1)
+    {
+		[errors appendString:@"Please enter your name.\n"];
+    }
 
-	if ([username length] < username_length) {
-		[errors
-			appendString:[NSString stringWithFormat:NSLocalizedString(@"The email is too short (minimum %d characters).\n", nil), username_length]];
+	if ([username length] < username_length)
+    {
+		[errors appendString:@"The email is too short.\n"];
 	}
+    else
+    {
+    	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
+    	if (![emailTest evaluateWithObject:username]) {
+    		[errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
+    	}
+    }
+    
+    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+    NSError *anError = nil;
+    NBPhoneNumber *myNumber = [phoneUtil parse:data[@"phone"] defaultRegion:@"US" error:&anError];
+    if (anError == nil && [phoneUtil isValidNumber:myNumber])
+    {
+        data[@"phone"] = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+    }
+    else
+    {
+		[errors appendString:@"The phone number is invalid.\n"];
+    }
 
 	if ([password length] < password_length) {
-		[errors
-			appendString:[NSString stringWithFormat:NSLocalizedString(
-														@"The password is too short (minimum %d characters).\n", nil),
-													password_length]];
+		[errors appendString:@"The password is too short.\n"];
 	}
 
-	if (![password2 isEqualToString:password]) {
+	/*if (![password2 isEqualToString:password]) {
 		[errors appendString:NSLocalizedString(@"The passwords are different.\n", nil)];
-	}
-
-	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
-	if (![emailTest evaluateWithObject:username]) {
-		[errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
-	}
-
+	}*/
 	if ([errors length]) {
 		UIAlertView *errorView =
 			[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)", nil)
@@ -729,30 +891,51 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[errorView show];
 		return FALSE;
 	}
-
-	return TRUE;
+   	return TRUE;
 }
 
 - (IBAction)onRegisterClick:(id)sender {
-	UITextField *username_tf = [WizardViewController findTextField:ViewElement_Username view:contentView];
-	NSString *username = username_tf.text;
+	NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
+	NSString *firstname = [WizardViewController findTextField:ViewElement_FirstName view:contentView].text;
+	NSString *lastname = [WizardViewController findTextField:ViewElement_LastName view:contentView].text;
+	NSString *phone = [WizardViewController findTextField:ViewElement_Phone view:contentView].text;
 	NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-	NSString *password2 = [WizardViewController findTextField:ViewElement_Password2 view:contentView].text;
+	//NSString *password2 = [WizardViewController findTextField:ViewElement_Password2 view:contentView].text;
 
-	if ([self verificationRegisterWithUsername:username password:password password2:password2]) {
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithDictionary:@{
+        @"first_name": firstname,
+        @"last_name": lastname,
+        @"email": username,
+        @"phone": phone,
+        @"password": password,
+    }];
+	if ([self verifyRegister:params])
+    {
 		username = [username lowercaseString];
-		[username_tf setText:username];
-        NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:username, @"email", password, @"password", nil];
         [[RgNetwork instance] registerUser:params callback:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
-            if (! [ok isEqualToString:@"ok"])
+            if (ok != nil && [ok isEqualToString:@"ok"])
+            {
+                // RingMail account created
+                LevelDB* cfg = [RgManager configDatabase];
+                [cfg setObject:params[@"email"] forKey:@"ringmail_login"];
+                [cfg setObject:params[@"password"] forKey:@"ringmail_password"];
+                [cfg setObject:params[@"first_name"] forKey:@"ringmail_first_name"];
+                [cfg setObject:params[@"last_name"] forKey:@"ringmail_last_name"];
+                [cfg setObject:params[@"phone"] forKey:@"ringmail_phone"];
+                [cfg setObject:@"" forKey:@"ringmail_chat_password"];
+                [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
+                [cfg setObject:@"0" forKey:@"ringmail_verify_phone"];
+                [self changeView:validateAccountView back:FALSE animation:TRUE];
+            }
+            else
             {
                 NSString *err = [res objectForKey:@"error"];
                 if ([err isEqualToString:@"duplicate"])
                 {
                     UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue", nil)
-                                               message:NSLocalizedString(@"Email already exists", nil)
+                                               message:[NSString stringWithFormat:@"Duplicate %@", res[@"duplicate"]]
                                               delegate:nil
                                      cancelButtonTitle:NSLocalizedString(@"Continue", nil)
                                      otherButtonTitles:nil, nil];
@@ -768,16 +951,6 @@ static UICompositeViewDescription *compositeDescription = nil;
                                               otherButtonTitles:nil, nil];
                     [errorView show];
                 }
-            }
-            else
-            {
-                // RingMail account created
-                LevelDB* cfg = [RgManager configDatabase];
-                [cfg setObject:username forKey:@"ringmail_login"];
-                [cfg setObject:password forKey:@"ringmail_password"];
-                [cfg setObject:@"" forKey:@"ringmail_chat_password"];
-                [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
-                [self changeView:validateAccountView back:FALSE animation:TRUE];
             }
         }];
 	}
@@ -812,7 +985,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-- (void)configuringUpdate:(NSNotification *)notif {
+/*- (void)configuringUpdate:(NSNotification *)notif {
 	LinphoneConfiguringState status = (LinphoneConfiguringState)[[notif.userInfo valueForKey:@"state"] integerValue];
 
 	[waitView setHidden:true];
@@ -841,13 +1014,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 	default:
 		break;
 	}
-}
+}*/
 
 #pragma mark - Event Functions
 
 - (void)registrationUpdateEvent:(NSNotification *)notif {
 	NSString *message = [notif.userInfo objectForKey:@"message"];
 	[self registrationUpdate:[[notif.userInfo objectForKey:@"state"] intValue] message:message];
+}
+
+- (void)attemptVerify:(NSNotification *)notif {
+	[self verifyEmail];
 }
 
 #pragma mark - TPMultiLayoutViewController Functions

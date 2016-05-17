@@ -566,8 +566,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         linphone_core_clear_call_logs([LinphoneManager getLc]);
         [[RgNetwork instance] signOut];
         [[[LinphoneManager instance] chatManager] disconnect];
-        [[[LinphoneManager instance] chatManager] dropTables];
-		[[[LinphoneManager instance] contactManager] dropTables];
         [RgManager configReset];
 		[controller startWizard];
 	}

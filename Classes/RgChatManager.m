@@ -679,25 +679,24 @@
 
 #pragma mark Chat database manager
 
++ (NSString*)databasePath
+{
+    NSString *dbPath;
+#ifdef DEBUG
+    dbPath = @"ringmail_dev";
+#else
+    dbPath = @"ringmail";
+#endif
+    dbPath = [dbPath stringByAppendingString:@"_v1.2.4.db"];
+    return dbPath;
+}
+
 - (FMDatabaseQueue *)database
 {
     if (databaseQueue == nil)
     {
-        NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    #ifdef DEBUG
-        NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_dev"];
-        BOOL remove = NO;
-    #else
-        NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail"];
-        BOOL remove = NO;
-    #endif
-        dbPath = [dbPath stringByAppendingString:@"_v1.2.4.db"];
-        if (remove)
-        {
-            NSFileManager *manager = [NSFileManager defaultManager];
-            NSError *error = nil;
-            [manager removeItemAtPath:dbPath error:&error];
-        }
+        NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
+        NSString *dbPath = [docsPath stringByAppendingPathComponent:[RgChatManager databasePath]];
         self.databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     }
     return self.databaseQueue;

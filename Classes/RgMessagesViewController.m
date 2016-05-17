@@ -135,17 +135,17 @@
         }
     };
     DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Select Option", nil)];
-    [sheet addButtonWithTitle:NSLocalizedString(@"Ping", nil)
+    /*[sheet addButtonWithTitle:NSLocalizedString(@"Ping", nil)
                         block:^() {
                             NSLog(@"RingMail: Send a ping");
                             NSString *uuid = [[[LinphoneManager instance] chatManager] sendPingTo:_chatRoom reply:nil];
                             [self.chatData loadMessages:uuid];
                             [JSQSystemSoundPlayer jsq_playMessageSentSound];
                             [self finishSendingMessageAnimated:YES];
-                        }];
-    [sheet addButtonWithTitle:NSLocalizedString(@"Question", nil) block:^() {
+                        }];*/
+    /*[sheet addButtonWithTitle:NSLocalizedString(@"Question", nil) block:^() {
         [[PhoneMainView instance] changeCurrentView:[RgChatQuestionSelect compositeViewDescription] push:TRUE];
-    }];
+    }];*/
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [sheet addButtonWithTitle:NSLocalizedString(@"Camera", nil)
                             block:^() {

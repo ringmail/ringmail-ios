@@ -39,6 +39,8 @@
 @property (atomic, strong) NSString* chatPassword;
 @property (nonatomic, retain) FMDatabaseQueue *databaseQueue;
 
++ (NSString*)databasePath;
+- (void)setupDatabase;
 - (BOOL)isConnected;
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
 - (void)disconnect;

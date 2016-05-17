@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
+#import <ObjectiveSugar/ObjectiveSugar.h>
 #import "RegexKitLite/RegexKitLite.h"
 #import "LevelDB.h"
 #import "RgNetwork.h"
@@ -20,6 +21,7 @@ extern NSString *const kRgContactsUpdated;
 extern NSString *const kRgSetAddress;
 extern NSString *const kRgMainRefresh;
 extern NSString *const kRgFavoriteRefresh;
+extern NSString *const kRgAttemptVerify;
 
 extern NSString *const kRgSelf;
 extern NSString *const kRgSelfName;
@@ -50,7 +52,8 @@ extern NSString *const kRgSelfName;
 
 + (void)configReset;
 + (BOOL)configReady;
-+ (BOOL)configVerified;
++ (BOOL)configEmailVerified;
++ (BOOL)configPhoneVerified;
 + (BOOL)configReadyAndVerified;
 
 + (void)updateCredentials:(NSDictionary*)cred;
