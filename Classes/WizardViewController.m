@@ -796,12 +796,16 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [waitView setHidden:true];
                 NSDictionary* res = responseObject;
                 NSString *ok = [res objectForKey:@"result"];
-                if ([ok isEqualToString:@"ok"])
+                if (ok != nil && [ok isEqualToString:@"ok"])
                 {
                     // Store login and password
                     LevelDB* cfg = [RgManager configDatabase];
                     [cfg setObject:username forKey:@"ringmail_login"];
                     [cfg setObject:password forKey:@"ringmail_password"];
+                    [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
+                    [cfg setObject:@"1" forKey:@"ringmail_verify_phone"];
+                    [cfg setObject:[res objectForKey:@"phone"] forKey:@"ringmail_phone"];
+                    NSLog(@"RingMail Logged In - Config: %@", cfg);
                     [[LinphoneManager instance] setRingLogin:username];
                     [[LinphoneManager instance] startLinphoneCore];
                     [self reset];
