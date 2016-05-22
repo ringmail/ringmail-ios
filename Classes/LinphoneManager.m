@@ -2076,11 +2076,13 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		// RingMail: Video
 		if (video)
 		{
+            [self setSpeakerEnabled:YES];
 			linphone_call_params_enable_video(lcallParams, YES);
             NSLog(@"RingMail - Requested Video: Yes");
 		}
 		else
 		{
+            [self setSpeakerEnabled:NO];
 			linphone_call_params_enable_video(lcallParams, NO);
             NSLog(@"RingMail - Requested Video: No");
 		}
