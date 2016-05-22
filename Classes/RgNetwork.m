@@ -264,4 +264,23 @@ static RgNetwork* theRgNetwork = nil;
     }
 }
 
+- (void)lookupHashtag:(NSDictionary*)params callback:(RgNetworkCallback)callback
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+		parameters[@"login"] = rgLogin;
+		parameters[@"password"] = rgPass;
+		parameters[@"hashtag"] = params[@"hashtag"];
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/lookup_hashtag", self.networkHost];
+        [manager POST:postUrl parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"RingMail API Error: %@", error);
+        }];
+    }
+}
+
 @end

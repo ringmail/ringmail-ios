@@ -12,6 +12,8 @@
 #import "RegexKitLite/RegexKitLite.h"
 #import "LevelDB.h"
 #import "RgNetwork.h"
+#import "NBPhoneNumberUtil.h"
+#import "NBPhoneNumber.h"
 
 /* RingMail */
 extern NSString *const kRgTextReceived;
@@ -22,6 +24,7 @@ extern NSString *const kRgSetAddress;
 extern NSString *const kRgMainRefresh;
 extern NSString *const kRgFavoriteRefresh;
 extern NSString *const kRgAttemptVerify;
+extern NSString *const kRgLaunchBrowser;
 
 extern NSString *const kRgSelf;
 extern NSString *const kRgSelfName;
@@ -36,6 +39,7 @@ extern NSString *const kRgSelfName;
 + (NSString*)addressFromSIPUser:(NSString*)addr;
 + (NSString*)addressToXMPP:(NSString*)addr;
 + (NSString*)addressFromXMPP:(NSString*)addr;
++ (NSString*)formatPhoneNumber:(NSString*)addr;
 + (NSString*)pushToken:(NSData*)tokenData;
 + (void)setupPushToken;
 + (void)processRingURI:(NSString*)uri;

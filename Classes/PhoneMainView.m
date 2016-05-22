@@ -184,6 +184,10 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 	// Set observers
 	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(launchBrowser:)
+												 name:kRgLaunchBrowser
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(callUpdate:)
 												 name:kLinphoneCallUpdate
 											   object:nil];
@@ -210,6 +214,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	[super viewWillDisappear:animated];
 
 	// Remove observers
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgLaunchBrowser object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneRegistrationUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneTextReceived object:nil];
@@ -360,6 +365,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		break;
 	}
 	case LinphoneCallError: {
+		// Note: These are triggered via HTTP API now, not via SIP
         if (linphone_call_get_reason(call) == LinphoneReasonMovedPermanently) // Not an error, just a URL
         {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
@@ -395,6 +401,23 @@ static RootViewManager *rootViewManagerInstance = nil;
 		break;
 	}
 	[self updateApplicationBadgeNumber];
+}
+
+- (void) launchBrowser:(NSNotification *)notif
+{
+	__block NSString *address = [notif.userInfo objectForKey:@"address"];
+	if (address != nil && [address length] > 0)
+	{
+    	[[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+    		// Assume HTTP(S) urls for now, check for ring:// later
+    		NSLog(@"RingMail: Launch browser to URL: %@", address);
+    		UIViewController* cur = (UIViewController *)[PhoneMainView instance];
+    		SVModalWebViewController *webViewModal = [[SVModalWebViewController alloc] initWithAddress:address];
+    		[webDelegate setWebView:webViewModal.webViewController];
+    		[webViewModal setWebViewDelegate:webDelegate];
+    		[cur presentViewController:webViewModal animated:NO completion:NULL];
+    	}];
+	}
 }
 
 #pragma mark -

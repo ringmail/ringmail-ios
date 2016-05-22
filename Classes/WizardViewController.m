@@ -290,7 +290,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     else if (view == validatePhoneView)
     {
         LevelDB* cfg = [RgManager configDatabase];
-        [verifyPhoneLabel setText:[cfg objectForKey:@"ringmail_phone"]];
+		NSString *ph = [cfg objectForKey:@"ringmail_phone"];
+		ph = [RgManager formatPhoneNumber:ph];
+        [verifyPhoneLabel setText:ph];
         
         if (cfg[@"ringmain_check_phone"] == nil) // Send code once
         {

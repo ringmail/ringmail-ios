@@ -23,6 +23,7 @@ NSString *const kRgSetAddress = @"RgSetAddress";
 NSString *const kRgMainRefresh = @"RgMainRefresh";
 NSString *const kRgFavoriteRefresh = @"RgFavoriteRefresh";
 NSString *const kRgAttemptVerify = @"kRgAttemptVerify";
+NSString *const kRgLaunchBrowser = @"kRgLaunchBrowser";
 
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
@@ -76,6 +77,35 @@ static LevelDB* theConfigDatabase = nil;
 {
     NSString *res = [addr stringByMatching:@"^(.*?)\\@" capture:1];
     return [res stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
++ (NSString*)formatPhoneNumber:(NSString*)addr
+{
+	addr = [addr stringByReplacingOccurrencesOfRegex:@"\\D" withString:@""];
+	if ([addr length] == 0)
+	{
+		return @"";
+	}
+	NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+	NSError *anError = nil;
+	NBPhoneNumber *myNumber = [phoneUtil parse:addr defaultRegion:@"US" error:&anError];
+	NSString *res = addr;
+	if (anError == nil)
+	{
+		if ([phoneUtil isValidNumber:myNumber])
+		{
+			res = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatNATIONAL error:&anError];
+		}
+		else
+		{
+			NSLog(@"Invalid Phone Number: '%@'", addr);
+		}
+	}
+	else
+	{
+		NSLog(@"NBPhoneNumberUtil Error '%@'", [anError localizedDescription]);
+	}
+	return res;
 }
 
 + (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video

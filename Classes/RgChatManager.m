@@ -787,7 +787,7 @@
     FMDatabaseQueue *dbq = [self database];
     __block NSNumber* result;
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE session_tag = ?", from];
+        FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE session_tag = ? COLLATE NOCASE", from];
         if ([rs next])
         {
             result = [NSNumber numberWithLong:[rs longForColumnIndex:0]];

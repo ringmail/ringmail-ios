@@ -61,12 +61,39 @@
 #pragma mark -
 
 - (void)touchUp:(id)sender {
-	NSString *address = [addressField text];
+	__block NSString *address = [addressField text];
+	address = [address stringByReplacingOccurrencesOfRegex:@"^\\s+" withString:@""];
+	address = [address stringByReplacingOccurrencesOfRegex:@"\\s+$" withString:@""];
 	if ([address length] > 0)
     {
         if ([RgManager checkRingMailAddress:address])
         {
-            [RgManager startCall:address contact:NULL video:NO];
+			if ([[address substringToIndex:1] isEqualToString:@"#"])
+			{
+				[[RgNetwork instance] lookupHashtag:@{
+					@"hashtag": address,
+				} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+					NSDictionary* res = responseObject;
+					NSString *ok = [res objectForKey:@"result"];
+					if ([ok isEqualToString:@"ok"])
+					{
+		                [[[LinphoneManager instance] chatManager] dbInsertCall:@{
+                            @"sip": @"",
+                            @"address": address,
+                            @"state": [NSNumber numberWithInt:0],
+                            @"inbound": [NSNumber numberWithBool:NO],
+					    }];
+    					[[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
+    						@"address": [res objectForKey:@"target"],
+    					}];
+    					[[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+					}
+				}];
+			}
+			else
+			{
+				[RgManager startCall:address contact:NULL video:NO];
+			}
         }
 	}
 }
