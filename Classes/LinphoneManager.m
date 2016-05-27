@@ -980,7 +980,7 @@ static void linphone_iphone_configuring_status_changed(LinphoneCore *lc, Linphon
     
     if (state == LinphoneRegistrationOk)
     {
-        NSLog(@"RingMail - Queued Operations: %lu", [opQueue operationCount]);
+        //NSLog(@"RingMail - Queued Operations: %lu", [opQueue operationCount]);
         if ([opQueue operationCount] > 0)
         {
             NSLog(@"RingMail - Resuming Queued Operations");

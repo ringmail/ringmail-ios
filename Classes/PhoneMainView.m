@@ -291,7 +291,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 	if (from != nil) {
 		[self playMessageSoundForCallID:callID];
 	}
-	[self updateApplicationBadgeNumber];
 }
 
 - (void)registrationUpdate:(NSNotification *)notif {
@@ -400,7 +399,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 	default:
 		break;
 	}
-	[self updateApplicationBadgeNumber];
 }
 
 - (void) launchBrowser:(NSNotification *)notif
@@ -452,10 +450,10 @@ static RootViewManager *rootViewManagerInstance = nil;
 }
 
 - (void)startUp {
-    [self updateApplicationBadgeNumber]; // Update Badge at startup
     if ([RgManager configReadyAndVerified])
     {
         NSLog(@"RingMail: Startup - Config Ready and Verified");
+		[self updateApplicationBadgeNumber]; // Update Badge at startup
         [[LinphoneManager instance] startLinphoneCore];
         [RgManager initialLogin];
         [self changeCurrentView:[RgMainViewController compositeViewDescription]];
@@ -475,7 +473,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (void)updateApplicationBadgeNumber {
 	int count = 0;
 	//count += linphone_core_get_missed_calls_count([LinphoneManager getLc]);
-	count += [[[[LinphoneManager instance] chatManager] dbGetSessionUnread] integerValue];
+	//count += [[[[LinphoneManager instance] chatManager] dbGetSessionUnread] integerValue];
 	//count += linphone_core_get_calls_nb([LinphoneManager getLc]);
 	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
 }

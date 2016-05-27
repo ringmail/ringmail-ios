@@ -18,7 +18,7 @@
 
 @interface RgContactManager : NSObject <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate> {
     @private
-    ABAddressBookRef addressBook;
+    //ABAddressBookRef addressBook;
     NSDateFormatter *dateFormatter;
     NSLocale *enUSPOSIXLocale;
     NSArray *contacts;

@@ -88,8 +88,6 @@
 		// blank
 	}
 	
-
-	
 	if (append_duration && [[data objectForKey:@"call_status"] isEqualToString:@"success"])
 	{
 		msg = [msg stringByAppendingString:[data objectForKey:@"call_duration"]];

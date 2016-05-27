@@ -49,6 +49,7 @@ extern NSString *const kRgSelfName;
 + (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video;
 + (void)startMessage:(NSString*)address;
 + (void)startMessageMD5;
++ (void)startHashtag:(NSString*)address;
 
 + (LevelDB*)configDatabase;
 + (void)closeConfigDatabase;

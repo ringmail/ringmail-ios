@@ -11,42 +11,42 @@
 
 #import "MainCardComponent.h"
 #import "MainCardComponentController.h"
-#import "CKComponentInternal.h"
+//#import "CKComponentInternal.h"
 
 @implementation MainCardComponentController
 
-- (void)didSwipeLeft:(CKComponent *)component gesture:(UISwipeGestureRecognizer *)gesture
-{
-    NSLog(@"swipe left");
-    
-    /*UIView* view = [component viewForAnimation];
-    CGRect fr = view.frame;
-    fr.origin.x = -50;
-    [view setFrame:fr];*/
-    
-    MainCardComponent* mc = (MainCardComponent*)component;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgMainCardRemove" object:self userInfo:@{@"index": [[mc cardData] objectForKey:@"index"]}];
-
-    //frame.origin.x += [gesture translationInView:gesture.view.superview].x;
-    //gesture.view.frame = frame;
-    //[gesture setTranslation:CGPointZero inView:gesture.view.superview];
-    
-}
-
-- (void)didSwipeRight:(CKComponent *)component gesture:(UISwipeGestureRecognizer *)gesture
-{
-    NSLog(@"swipe right");
-    
-    UIView* view = [component viewForAnimation];
-    CGRect fr = view.frame;
-    fr.origin.x = 0;
-    [view setFrame:fr];
-    
-    //frame.origin.x += [gesture translationInView:gesture.view.superview].x;
-    //gesture.view.frame = frame;
-    //[gesture setTranslation:CGPointZero inView:gesture.view.superview];
-    
-}
+//- (void)didSwipeLeft:(CKComponent *)component gesture:(UISwipeGestureRecognizer *)gesture
+//{
+//    NSLog(@"swipe left");
+//    
+//    /*UIView* view = [component viewForAnimation];
+//    CGRect fr = view.frame;
+//    fr.origin.x = -50;
+//    [view setFrame:fr];*/
+//    
+//    MainCardComponent* mc = (MainCardComponent*)component;
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgMainCardRemove" object:self userInfo:@{@"index": [[mc cardData] objectForKey:@"index"]}];
+//
+//    //frame.origin.x += [gesture translationInView:gesture.view.superview].x;
+//    //gesture.view.frame = frame;
+//    //[gesture setTranslation:CGPointZero inView:gesture.view.superview];
+//    
+//}
+//
+//- (void)didSwipeRight:(CKComponent *)component gesture:(UISwipeGestureRecognizer *)gesture
+//{
+//    NSLog(@"swipe right");
+//    
+//    UIView* view = [component viewForAnimation];
+//    CGRect fr = view.frame;
+//    fr.origin.x = 0;
+//    [view setFrame:fr];
+//    
+//    //frame.origin.x += [gesture translationInView:gesture.view.superview].x;
+//    //gesture.view.frame = frame;
+//    //[gesture setTranslation:CGPointZero inView:gesture.view.superview];
+//    
+//}
 
 @end
 

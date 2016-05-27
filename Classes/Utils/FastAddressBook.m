@@ -259,4 +259,135 @@ void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void 
 	return @"";
 }
 
+#pragma mark - RingMail
+
+- (NSArray *)getContactsArray
+{
+	@synchronized(addressBookMap) {
+        ABAddressBookRevert(addressBook);
+		return (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
+	}
+}
+
+- (NSArray *)getEmailArray:(ABRecordRef)lPerson
+{
+	@synchronized(addressBookMap) {
+		NSMutableArray *res = [NSMutableArray array];
+	    ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+        if (emailMap)
+		{
+            for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i)
+			{
+                NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
+                if (val)
+                {
+					[res addObject:val];
+                }
+            }
+            CFRelease(emailMap);
+        }
+		return res;
+	}
+}
+
+- (NSArray *)getPhoneArray:(ABRecordRef)lPerson
+{
+	@synchronized(addressBookMap) {
+		NSMutableArray *res = [NSMutableArray array];
+	    ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
+        if (phoneMap)
+		{
+            for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i)
+			{
+                NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneMap, i));
+                if (val)
+                {
+					[res addObject:val];
+                }
+            }
+            CFRelease(phoneMap);
+        }
+		return res;
+	}
+}
+
+- (NSDate *)getModDate:(ABRecordRef)person
+{
+	@synchronized(addressBookMap) {
+		return CFBridgingRelease(ABRecordCopyValue(person, kABPersonModificationDateProperty));
+	}
+}
+
+- (NSMutableDictionary *)contactItem:(ABRecordRef)lPerson
+{
+    @synchronized(addressBookMap) {
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        [dateFormatter setLocale:enUSPOSIXLocale];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+        [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+        ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+        NSMutableArray *emailArray = [NSMutableArray array];
+        if (emailMap) {
+            for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
+                NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
+                if (val)
+                {
+                    val = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    val = [[NSString stringWithFormat:@"r!ng:%@", val] SHA256];
+                    [emailArray addObject:val];
+                }
+            }
+            CFRelease(emailMap);
+        }
+        ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
+        NSMutableArray *phoneArray = [NSMutableArray array];
+        NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+        if (phoneMap) {
+            for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
+                NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneMap, i));
+                if (val)
+                {
+                    NSError *anError = nil;
+                    NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
+                    if (anError == nil && [phoneUtil isValidNumber:myNumber])
+                    {
+                        val = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+                        val = [[NSString stringWithFormat:@"r!ng:%@", val] SHA256];
+                        [phoneArray addObject:val];
+                    }
+                }
+            }
+            CFRelease(phoneMap);
+        }
+        NSDate *modDate = CFBridgingRelease(ABRecordCopyValue((ABRecordRef)lPerson, kABPersonModificationDateProperty));
+        NSString *modDateGMT = [dateFormatter stringFromDate:modDate];
+        NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
+        NSString *recordStr = [NSString stringWithFormat:@"%@", recordId];
+        NSDictionary *contactBase = @{ @"em": emailArray, @"ph": phoneArray, @"ts": modDateGMT, @"id": recordStr };
+        NSMutableDictionary *contact = [NSMutableDictionary dictionaryWithDictionary:contactBase];
+        
+        NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonFirstNameProperty));
+    	NSString *lLocalizedFirstName = [FastAddressBook localizedLabel:lFirstName];
+    	NSString *lLastName = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonLastNameProperty));
+    	NSString *lLocalizedLastName = [FastAddressBook localizedLabel:lLastName];
+    	NSString *lOrganization = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonOrganizationProperty));
+    	NSString *lLocalizedlOrganization = [FastAddressBook localizedLabel:lOrganization];
+        
+        if (lLocalizedFirstName != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedFirstName forKey:@"fn"];
+        }
+        if (lLocalizedLastName != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedLastName forKey:@"ln"];
+        }
+        if (lLocalizedlOrganization != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedlOrganization forKey:@"co"];
+        }
+        return contact;
+    }
+}
+
 @end

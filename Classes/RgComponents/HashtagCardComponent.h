@@ -9,20 +9,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
+#import <ComponentKit/ComponentKit.h>
 
-@interface Card : NSObject
+@class CardContext;
 
-@property (nonatomic, readonly, copy) NSNumber *header;
-@property (nonatomic, readonly, copy) NSDictionary *data;
+/**
+ A warm card component is a fixed-ratio component that centers the card within its height. It has a nice warm
+ background on which it places the card.
+ */
+@interface HashtagCardComponent : CKCompositeComponent
 
-- (instancetype)initWithData:(NSDictionary *)data
-                      header:(NSNumber *)header;
+@property (nonatomic, retain) NSDictionary *cardData;
 
-- (NSNumber*)sessionId;
-- (void)showMessages;
-- (void)startCall:(BOOL)video;
-- (void)gotoContact;
-- (void)gotoHashtag;
++ (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context;
 
 @end

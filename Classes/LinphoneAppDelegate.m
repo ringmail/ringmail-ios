@@ -88,6 +88,8 @@
 	}
 	LinphoneManager *instance = [LinphoneManager instance];
 
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+
     if ([[instance coreReady] boolValue])
     {
     	[instance becomeActive];
@@ -241,6 +243,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+	LOGI(@"%@ - url = %ld", NSStringFromSelector(_cmd), [url absoluteString]);
 	NSString *scheme = [[url scheme] lowercaseString];
 	if ([scheme isEqualToString:@"ring"])
     {

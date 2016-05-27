@@ -14,6 +14,7 @@
 #import "Card.h"
 #import "CardContext.h"
 #import "MainCardComponent.h"
+#import "HashtagCardComponent.h"
 #import "HashtagCategoryCardComponent.h"
 
 @implementation CardComponent
@@ -31,7 +32,9 @@ static CKComponent *cardComponent(Card *card, CardContext *context)
     {
         if ([type isEqualToString:@"hashtag"])
         {
-        
+            return [HashtagCardComponent
+                      newWithData:card.data
+                      context:context];
         }
         else if ([type isEqualToString:@"hashtag_category"])
         {

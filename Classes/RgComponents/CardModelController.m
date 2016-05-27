@@ -50,66 +50,76 @@
     for (NSDictionary* r in list)
     {
         NSString *address = [r objectForKey:@"session_tag"];
+
         NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:r];
 		
 		// Index
         [newdata setObject:[NSNumber numberWithInt:item++] forKey:@"index"];
 		
-		// Avatar image
-		ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-		if (contact)
+		if ([[address substringToIndex:1] isEqualToString:@"#"])
 		{
-			UIImage *customImage = [FastAddressBook getContactImage:contact thumbnail:true];
-            [newdata setObject:[FastAddressBook getContactDisplayName:contact] forKey:@"label"];
-            [newdata setObject:((customImage != nil) ? customImage : defaultImage) forKey:@"image"];
-		}
-		else
-		{
+            [newdata setObject:@"hashtag" forKey:@"type"];
             [newdata setObject:address forKey:@"label"];
             [newdata setObject:defaultImage forKey:@"image"];
 		}
-		
-		// Timestamp & Last Event
-		BOOL last_was_chat = YES;
-		NSNumber *timeCall = [r objectForKey:@"call_time"];
-		NSNumber *timeChat = [r objectForKey:@"last_time"];
-		NSNumber *timeLatest = [NSNumber numberWithInt:0];
-		if (timeCall != nil && ! [timeCall isEqual:[NSNull null]])
+		else
 		{
-			if (timeChat != nil && ! [timeChat isEqual:[NSNull null]])
-			{
-				if ([timeChat intValue] > [timeCall intValue])
-				{
-					timeLatest = timeChat;
-				}
-				else
-				{
-					last_was_chat = NO;
-					timeLatest = timeCall;
-				}
-			}
-			else
-			{
-				last_was_chat = NO;
-				timeLatest = timeCall;
-			}
-		}
-		else if (timeChat != nil && ! [timeChat isEqual:[NSNull null]])
-		{
-			timeLatest = timeChat;
-		}
-		[newdata setObject:[NSDate dateWithTimeIntervalSince1970:[timeLatest doubleValue]] forKey:@"timestamp"];
-		NSString *lastEvent = (last_was_chat) ? @"chat" : @"call";
-		[newdata setObject:lastEvent forKey:@"last_event"];
-		if (! last_was_chat)
-		{
-			if ([[r objectForKey:@"call_status"] isEqualToString:@"success"])
-			{
-				int duration = [[r objectForKey:@"call_duration"] intValue];
-				NSString *dur = [NSString stringWithFormat:@"%02i:%02i:%02i", (duration / 3600), ((duration / 60) % 60), (duration % 60)];
-				dur = [dur stringByReplacingOccurrencesOfRegex:@"^00:" withString:@""];
-				[newdata setObject:dur forKey:@"call_duration"];
-			}
+    		// Avatar image
+    		ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+    		if (contact)
+    		{
+    			UIImage *customImage = [FastAddressBook getContactImage:contact thumbnail:true];
+                [newdata setObject:[FastAddressBook getContactDisplayName:contact] forKey:@"label"];
+                [newdata setObject:((customImage != nil) ? customImage : defaultImage) forKey:@"image"];
+    		}
+    		else
+    		{
+                [newdata setObject:address forKey:@"label"];
+                [newdata setObject:defaultImage forKey:@"image"];
+    		}
+    		
+    		// Timestamp & Last Event
+    		BOOL last_was_chat = YES;
+    		NSNumber *timeCall = [r objectForKey:@"call_time"];
+    		NSNumber *timeChat = [r objectForKey:@"last_time"];
+    		NSNumber *timeLatest = [NSNumber numberWithInt:0];
+    		if (timeCall != nil && ! [timeCall isEqual:[NSNull null]])
+    		{
+    			if (timeChat != nil && ! [timeChat isEqual:[NSNull null]])
+    			{
+    				if ([timeChat intValue] > [timeCall intValue])
+    				{
+    					timeLatest = timeChat;
+    				}
+    				else
+    				{
+    					last_was_chat = NO;
+    					timeLatest = timeCall;
+    				}
+    			}
+    			else
+    			{
+    				last_was_chat = NO;
+    				timeLatest = timeCall;
+    			}
+    		}
+    		else if (timeChat != nil && ! [timeChat isEqual:[NSNull null]])
+    		{
+    			timeLatest = timeChat;
+    		}
+    		[newdata setObject:[NSDate dateWithTimeIntervalSince1970:[timeLatest doubleValue]] forKey:@"timestamp"];
+    		NSString *lastEvent = (last_was_chat) ? @"chat" : @"call";
+    		[newdata setObject:lastEvent forKey:@"last_event"];
+    		if (! last_was_chat)
+    		{
+    			if ([[r objectForKey:@"call_status"] isEqualToString:@"success"])
+    			{
+    				int duration = [[r objectForKey:@"call_duration"] intValue];
+    				NSString *dur = [NSString stringWithFormat:@"%02i:%02i:%02i", (duration / 3600), ((duration / 60) % 60), (duration % 60)];
+    				dur = [dur stringByReplacingOccurrencesOfRegex:@"^00:" withString:@""];
+    				[newdata setObject:dur forKey:@"call_duration"];
+    			}
+    		}
 		}
         [list2 addObject:newdata];
     }

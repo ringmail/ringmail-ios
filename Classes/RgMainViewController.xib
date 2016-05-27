@@ -80,7 +80,7 @@
                             <color key="tintColor" red="0.20000000000000001" green="0.21176470588235294" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Enter a address"/>
                             <color key="textColor" red="0.20000000000000001" green="0.21176470588235294" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="18"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                             <connections>
                                 <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="208"/>

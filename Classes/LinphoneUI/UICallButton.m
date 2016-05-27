@@ -70,25 +70,7 @@
         {
 			if ([[address substringToIndex:1] isEqualToString:@"#"])
 			{
-				[[RgNetwork instance] lookupHashtag:@{
-					@"hashtag": address,
-				} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
-					NSDictionary* res = responseObject;
-					NSString *ok = [res objectForKey:@"result"];
-					if ([ok isEqualToString:@"ok"])
-					{
-		                [[[LinphoneManager instance] chatManager] dbInsertCall:@{
-                            @"sip": @"",
-                            @"address": address,
-                            @"state": [NSNumber numberWithInt:0],
-                            @"inbound": [NSNumber numberWithBool:NO],
-					    }];
-    					[[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
-    						@"address": [res objectForKey:@"target"],
-    					}];
-    					[[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
-					}
-				}];
+				[RgManager startHashtag:address];
 			}
 			else
 			{

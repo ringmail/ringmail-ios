@@ -25,7 +25,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        addressBook = ABAddressBookCreateWithOptions(nil, nil);
+        //addressBook = ABAddressBookCreateWithOptions(nil, nil);
         contacts = nil;
         dateFormatter = [[NSDateFormatter alloc] init];
         enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
@@ -38,10 +38,10 @@
     return self;
 }
 
-- (void)dealloc {
-    //ABAddressBookUnregisterExternalChangeCallback(addressBook, sync_address_book, (__bridge void *)(self));
-    CFRelease(addressBook);
-}
+//- (void)dealloc {
+//    //ABAddressBookUnregisterExternalChangeCallback(addressBook, sync_address_book, (__bridge void *)(self));
+//    CFRelease(addressBook);
+//}
 
 #pragma mark - Manage Contact Syncing
 
@@ -54,14 +54,16 @@
 {
     if (reload || contacts == nil)
     {
-        ABAddressBookRevert(addressBook);
-        contacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
+//        ABAddressBookRevert(addressBook);
+//        contacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
+		contacts = [[[LinphoneManager instance] fastAddressBook] getContactsArray];
     }
     return contacts;
 }
 
 - (NSDictionary *)getAddressBookStats:(NSArray*)contactList
 {
+	FastAddressBook *fab = [[LinphoneManager instance] fastAddressBook];
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
     NSString *lastMod = nil;
     NSDate *maxDate = nil;
@@ -69,7 +71,7 @@
     for (id person in contacts)
     {
         counter++;
-        NSDate *modDate = CFBridgingRelease(ABRecordCopyValue((__bridge ABRecordRef)person, kABPersonModificationDateProperty));
+        NSDate *modDate = [fab getModDate:(__bridge ABRecordRef)person];
         if (maxDate)
         {
             if ([(NSDate*)maxDate compare:modDate] == NSOrderedAscending)
@@ -101,68 +103,8 @@
 
 - (NSMutableDictionary *)contactItem:(ABRecordRef)lPerson
 {
-    
-    ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
-    NSMutableArray *emailArray = [NSMutableArray array];
-    if (emailMap) {
-        for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
-            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
-            if (val)
-            {
-                val = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                val = [[NSString stringWithFormat:@"r!ng:%@", val] SHA256];
-                [emailArray addObject:val];
-            }
-        }
-        CFRelease(emailMap);
-    }
-    ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
-    NSMutableArray *phoneArray = [NSMutableArray array];
-    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
-    if (phoneMap) {
-        for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
-            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneMap, i));
-            if (val)
-            {
-                NSError *anError = nil;
-                NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
-                if (anError == nil && [phoneUtil isValidNumber:myNumber])
-                {
-                    val = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
-                    val = [[NSString stringWithFormat:@"r!ng:%@", val] SHA256];
-                    [phoneArray addObject:val];
-                }
-            }
-        }
-        CFRelease(phoneMap);
-    }
-    NSDate *modDate = CFBridgingRelease(ABRecordCopyValue((ABRecordRef)lPerson, kABPersonModificationDateProperty));
-    NSString *modDateGMT = [dateFormatter stringFromDate:modDate];
-    NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
-    NSString *recordStr = [NSString stringWithFormat:@"%@", recordId];
-    NSDictionary *contactBase = @{ @"em": emailArray, @"ph": phoneArray, @"ts": modDateGMT, @"id": recordStr };
-    NSMutableDictionary *contact = [NSMutableDictionary dictionaryWithDictionary:contactBase];
-    
-    NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonFirstNameProperty));
-	NSString *lLocalizedFirstName = [FastAddressBook localizedLabel:lFirstName];
-	NSString *lLastName = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonLastNameProperty));
-	NSString *lLocalizedLastName = [FastAddressBook localizedLabel:lLastName];
-	NSString *lOrganization = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonOrganizationProperty));
-	NSString *lLocalizedlOrganization = [FastAddressBook localizedLabel:lOrganization];
-    
-    if (lLocalizedFirstName != nil)
-    {
-        [contact setObject:(NSString*)lLocalizedFirstName forKey:@"fn"];
-    }
-    if (lLocalizedLastName != nil)
-    {
-        [contact setObject:(NSString*)lLocalizedLastName forKey:@"ln"];
-    }
-    if (lLocalizedlOrganization != nil)
-    {
-        [contact setObject:(NSString*)lLocalizedlOrganization forKey:@"co"];
-    }
-    return contact;
+    FastAddressBook *fab = [[LinphoneManager instance] fastAddressBook];
+	return [fab contactItem:lPerson];
 }
 
 - (NSMutableArray *)getContactData:(NSArray*)contactList
@@ -180,78 +122,62 @@
 
 - (NSString*)getRingMailAddress:(ABRecordRef)lPerson
 {
-    ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+	FastAddressBook *fab = [[LinphoneManager instance] fastAddressBook];
+	NSArray *emailList = [fab getEmailArray:lPerson];
     NSString *res = nil;
-    if (emailMap) {
-        for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
-            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
-            if (val)
-            {
-                val = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if ([self dbIsEnabled:val])
-                {
-                    res = val;
-                    break;
-                }
-            }
+	for (NSString *val in emailList)
+	{
+        NSString *nval = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([self dbIsEnabled:nval])
+        {
+            res = nval;
+            break;
         }
-        CFRelease(emailMap);
     }
     if (res != nil)
     {
         return res;
     }
-    ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
+	NSArray *phoneList = [fab getPhoneArray:lPerson];
     NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
-    if (phoneMap) {
-        for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
-            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneMap, i));
-            if (val)
+	for (NSString *val in phoneList)
+	{
+        NSError *anError = nil;
+        NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
+        if (anError == nil && [phoneUtil isValidNumber:myNumber])
+        {
+            NSString *nval = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+            if ([self dbIsEnabled:nval])
             {
-                NSError *anError = nil;
-                NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
-                if (anError == nil && [phoneUtil isValidNumber:myNumber])
-                {
-                    val = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
-                    if ([self dbIsEnabled:val])
-                    {
-                        res = val;
-                        break;
-                    }
-                }
+                res = nval;
+                break;
             }
         }
-        CFRelease(phoneMap);
     }
     return res;
 }
 
 - (NSString*)getRingMailAddress:(ABRecordRef)lPerson current:(NSString*)cur
 {
-    ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+	FastAddressBook *fab = [[LinphoneManager instance] fastAddressBook];
     BOOL found = NO;
     NSString *res = nil;
-    if (emailMap) {
-        for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
-            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
-            if (val)
+	NSArray *emailList = [fab getEmailArray:lPerson];
+	for (NSString *val in emailList)
+	{
+        NSString *nval = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([self dbIsEnabled:nval])
+        {
+            if ([nval isEqualToString:cur])
             {
-                val = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if ([self dbIsEnabled:val])
-                {
-                    if ([val isEqualToString:cur])
-                    {
-                        found = YES;
-                        break;
-                    }
-                    else if (res == nil)
-                    {
-                        res = val;
-                    }
-                }
+                found = YES;
+                break;
+            }
+            else if (res == nil)
+            {
+                res = nval;
             }
         }
-        CFRelease(emailMap);
     }
     if (found)
     {
@@ -261,34 +187,28 @@
     {
         return res;
     }
-    ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
+	NSArray *phoneList = [fab getPhoneArray:lPerson];
     NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
-    if (phoneMap) {
-        for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
-            NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneMap, i));
-            if (val)
+	for (NSString *val in phoneList)
+	{
+        NSError *anError = nil;
+        NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
+        if (anError == nil && [phoneUtil isValidNumber:myNumber])
+        {
+            NSString *nval = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+            if ([self dbIsEnabled:nval])
             {
-                NSError *anError = nil;
-                NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
-                if (anError == nil && [phoneUtil isValidNumber:myNumber])
+                if ([nval isEqualToString:cur])
                 {
-                    val = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
-                    if ([self dbIsEnabled:val])
-                    {
-                        if ([val isEqualToString:cur])
-                        {
-                            found = YES;
-                            break;
-                        }
-                        else if (res == nil)
-                        {
-                            res = val;
-                        }
-                    }
+                    found = YES;
+                    break;
+                }
+                else if (res == nil)
+                {
+                    res = nval;
                 }
             }
         }
-        CFRelease(phoneMap);
     }
     if (found)
     {

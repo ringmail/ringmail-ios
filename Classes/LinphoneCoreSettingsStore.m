@@ -582,6 +582,7 @@ extern void linphone_iphone_log_handler(const char *domain, OrtpLogLevel lev, co
 }
 
 - (BOOL)synchronize {
+    NSLog(@"RingMail - Synchronize Settings");
     /*NSLog(@"RingMail Login: %@", [self objectForKey:@"ringmail_login"]);
     NSLog(@"RingMail Password: %@", [self objectForKey:@"ringmail_password"]);
     

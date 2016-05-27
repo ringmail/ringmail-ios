@@ -19,6 +19,9 @@
 
 #import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
+#import <NSHash/NSString+NSHash.h>
+#import "NBPhoneNumberUtil.h"
+#import "NBPhoneNumber.h"
 
 @interface FastAddressBook :  NSObject {
     NSMutableDictionary* addressBookMap;  
@@ -38,6 +41,11 @@
 + (NSString*)normalizePhoneNumber:(NSString*)number;
 //+ (NSString*)normalizeSipURI:(NSString*)address;
 
+- (NSArray *)getContactsArray;
+- (NSArray *)getEmailArray:(ABRecordRef)contact;
+- (NSArray *)getPhoneArray:(ABRecordRef)contact;
+- (NSDate *)getModDate:(ABRecordRef)person;
+- (NSMutableDictionary *)contactItem:(ABRecordRef)lPerson;
 
 // TOOLS
 

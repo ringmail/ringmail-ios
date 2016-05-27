@@ -77,4 +77,10 @@
 	}
 }
 
+- (void)gotoHashtag
+{
+    NSString *address = [_data objectForKey:@"session_tag"];
+    [RgManager startHashtag:address];
+}
+
 @end

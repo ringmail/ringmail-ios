@@ -162,6 +162,29 @@ static LevelDB* theConfigDatabase = nil;
     }];
 }
 
++ (void)startHashtag:(NSString*)address
+{
+	[[RgNetwork instance] lookupHashtag:@{
+		@"hashtag": address,
+	} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+		NSDictionary* res = responseObject;
+		NSString *ok = [res objectForKey:@"result"];
+		if ([ok isEqualToString:@"ok"])
+		{
+            [[[LinphoneManager instance] chatManager] dbInsertCall:@{
+                @"sip": @"",
+                @"address": address,
+                @"state": [NSNumber numberWithInt:0],
+                @"inbound": [NSNumber numberWithBool:NO],
+		    }];
+			[[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
+				@"address": [res objectForKey:@"target"],
+			}];
+			[[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+		}
+	}];
+}
+
 + (NSString*)pushToken:(NSData*)tokenData
 {
     const unsigned char *tokenBuffer = [tokenData bytes];
@@ -260,7 +283,7 @@ static LevelDB* theConfigDatabase = nil;
 + (void)processRingURI:(NSString*)uri
 {
     __block NSMutableString *ringuri = [uri mutableCopy];
-    [ringuri replaceOccurrencesOfRegex:@"^ring:(//)?" withString:@""];
+    [ringuri replaceOccurrencesOfRegex:@"^ring:(//)?" withString:@"" options:RKLCaseless range:(NSRange){0, [ringuri length]} error:NULL];
     NSLog(@"RingMail: URI - %@ (from: %@)", ringuri, uri);
     
     if ([RgManager configReadyAndVerified])
@@ -269,12 +292,9 @@ static LevelDB* theConfigDatabase = nil;
         if ([ringuri isMatchedByRegex:@"^(message|chat)/"])
         {
             [ringuri replaceOccurrencesOfRegex:@"^(message|chat)/" withString:@""];
-            if ([RgManager configReadyAndVerified])
+			if ([RgManager checkRingMailAddress:ringuri])
             {
-                if ([RgManager checkRingMailAddress:ringuri])
-                {
-                    [RgManager startMessage:[RgManager filterRingMailAddress:ringuri]];
-                }
+                [RgManager startMessage:[RgManager filterRingMailAddress:ringuri]];
             }
             return;
         }
@@ -287,9 +307,17 @@ static LevelDB* theConfigDatabase = nil;
             [ringuri replaceOccurrencesOfRegex:@"^video/" withString:@""];
             video = YES;
         }
+		else if ([[ringuri substringToIndex:1] isEqualToString:@"#"])
+		{
+			if ([RgManager checkRingMailAddress:ringuri])
+			{
+				[RgManager startHashtag:ringuri];
+			}
+			return;
+		}
         if ([RgManager checkRingMailAddress:ringuri])
         {
-            //NSLog(@"RingMail: URI - Valid For Call: %@", ringuri);
+            NSLog(@"RingMail: URI - Valid: %@", ringuri);
             BOOL coreReady = [[[LinphoneManager instance] coreReady] boolValue];
             BOOL startCall = NO;
             NSLog(@"RingMail: Core Ready - %d", coreReady);
@@ -489,7 +517,7 @@ static LevelDB* theConfigDatabase = nil;
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"pcmu_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"g722_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"g729_preference"];
-    [settings setObject:[NSNumber numberWithBool:0] forKey:@"vp8_preference"];
+    [settings setObject:[NSNumber numberWithBool:1] forKey:@"vp8_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"h264_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"ice_preference"];
     [settings setObject:@"stun1.l.google.com:19302" forKey:@"stun_preference"];

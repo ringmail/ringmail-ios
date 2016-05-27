@@ -542,9 +542,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 #endif // HAVE_SSL
 
 	// Add "build from source" if MPEG4 or H264 disabled
-	if ([[specifier key] isEqualToString:@"h264_preference"] && ![LinphoneManager isCodecSupported:"h264"]) {
-		return [SettingsViewController disableCodecSpecifier:specifier];
-	}
+	
+	// RingMail: Codec H264 IS supported
+	
+	//if ([[specifier key] isEqualToString:@"h264_preference"] && ![LinphoneManager isCodecSupported:"h264"]) {
+	//	return [SettingsViewController disableCodecSpecifier:specifier];
+	//}
 	if ([[specifier key] isEqualToString:@"mp4v-es_preference"] && ![LinphoneManager isCodecSupported:"mp4v-es"]) {
 		return [SettingsViewController disableCodecSpecifier:specifier];
 	}
