@@ -21,6 +21,7 @@
 + (void)requestHangup;
 + (void)toggleSpeaker;
 + (void)toggleMute;
++ (void)toggleNumberPad;
 + (void)incomingAnswer;
 + (void)incomingReject;
 

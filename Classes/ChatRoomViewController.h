@@ -49,6 +49,8 @@
 - (IBAction)onBackClick:(id)event;
 - (IBAction)onEditClick:(id)event;
 - (IBAction)onCallClick:(id)sender;
+- (IBAction)onVideoClick:(id)sender;
+- (IBAction)onContactClick:(id)sender;
 
 - (void)setChatRoom:(LinphoneChatRoom*)room;
 

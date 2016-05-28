@@ -56,7 +56,7 @@
 		// Index
         [newdata setObject:[NSNumber numberWithInt:item++] forKey:@"index"];
 		
-		if ([[address substringToIndex:1] isEqualToString:@"#"])
+		if ([address length] > 0 && [[address substringToIndex:1] isEqualToString:@"#"])
 		{
             [newdata setObject:@"hashtag" forKey:@"type"];
             [newdata setObject:address forKey:@"label"];

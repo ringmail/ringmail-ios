@@ -359,6 +359,19 @@
 		C4DA56481BBB020900E36352 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C4A193631B300974404 /* ImageIO.framework */; };
 		C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */ = {isa = PBXBuildFile; fileRef = C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */; };
 		C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E985C91BAF98E200939A55 /* UIMessageButton.m */; };
+		C4FD784C1CF932950066BDB1 /* UIColor+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD784B1CF932950066BDB1 /* UIColor+Name.m */; };
+		C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */; };
+		C4FD785C1CF93EF20066BDB1 /* RgCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */; };
+		C4FD785E1CF9429C0066BDB1 /* pattern_wov.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD785D1CF9429C0066BDB1 /* pattern_wov.png */; };
+		C4FD78641CF9477C0066BDB1 /* pattern_upfeathers.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD785F1CF9477C0066BDB1 /* pattern_upfeathers.png */; };
+		C4FD78651CF9477C0066BDB1 /* pattern_swirl_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD78601CF9477C0066BDB1 /* pattern_swirl_pattern.png */; };
+		C4FD78661CF9477C0066BDB1 /* pattern_squared_metal@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD78611CF9477C0066BDB1 /* pattern_squared_metal@2X.png */; };
+		C4FD78671CF9477C0066BDB1 /* pattern_squared_metal.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD78621CF9477C0066BDB1 /* pattern_squared_metal.png */; };
+		C4FD786B1CF94A290066BDB1 /* pattern_dimension@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD78691CF94A290066BDB1 /* pattern_dimension@2X.png */; };
+		C4FD786C1CF94A290066BDB1 /* pattern_dimension.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD786A1CF94A290066BDB1 /* pattern_dimension.png */; };
+		C4FD78701CF94EEE0066BDB1 /* ringmail_forward@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD786D1CF94EEE0066BDB1 /* ringmail_forward@3x.png */; };
+		C4FD78711CF94EEE0066BDB1 /* ringmail_forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD786E1CF94EEE0066BDB1 /* ringmail_forward@2x.png */; };
+		C4FD78721CF94EEE0066BDB1 /* ringmail_forward.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD786F1CF94EEE0066BDB1 /* ringmail_forward.png */; };
 		C4FE4C6F1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */; };
 		C4FE4C701CCD9CA4006A6C94 /* FavoriteModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */; };
 		C4FE4C791CCDA03F006A6C94 /* RgFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C771CCDA03F006A6C94 /* RgFavoriteViewController.m */; };
@@ -1287,7 +1300,6 @@
 		C422AD311B99F1A900D1F1CD /* RgNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgNetwork.m; sourceTree = "<group>"; };
 		C425095A1C27D62B00BEC5DE /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		C42786141C70263300DD946D /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "Utils/UIColor+Hex.m"; sourceTree = "<group>"; };
-		C427861B1C70267100DD946D /* UIColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		C42B71F21CA22AF90020A57F /* RgHashtagDirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgHashtagDirectoryViewController.h; sourceTree = "<group>"; };
 		C42B71F31CA22AF90020A57F /* RgHashtagDirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgHashtagDirectoryViewController.m; sourceTree = "<group>"; };
 		C42B71F41CA22AF90020A57F /* RgHashtagDirectoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgHashtagDirectoryViewController.xib; sourceTree = "<group>"; };
@@ -1506,6 +1518,23 @@
 		C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_linphone_ringmail.rc; path = Resources/wizard_linphone_ringmail.rc; sourceTree = "<group>"; };
 		C4E985C11BAF98D500939A55 /* UIMessageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMessageButton.h; sourceTree = "<group>"; };
 		C4E985C91BAF98E200939A55 /* UIMessageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMessageButton.m; sourceTree = "<group>"; };
+		C4FD784B1CF932950066BDB1 /* UIColor+Name.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Name.m"; path = "Utils/UIColor+Name.m"; sourceTree = "<group>"; };
+		C4FD78551CF935C60066BDB1 /* UIColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "Utils/UIColor+Hex.h"; sourceTree = "<group>"; };
+		C4FD78561CF935CF0066BDB1 /* UIColor+Name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIColor+Name.h"; path = "Utils/UIColor+Name.h"; sourceTree = "<group>"; };
+		C4FD78571CF939330066BDB1 /* NSObject+NSPerformSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+NSPerformSelector.h"; path = "Utils/NSObject+NSPerformSelector.h"; sourceTree = "<group>"; };
+		C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+NSPerformSelector.m"; path = "Utils/NSObject+NSPerformSelector.m"; sourceTree = "<group>"; };
+		C4FD785A1CF93EF20066BDB1 /* RgCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgCustomView.h; sourceTree = "<group>"; };
+		C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgCustomView.m; sourceTree = "<group>"; };
+		C4FD785D1CF9429C0066BDB1 /* pattern_wov.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pattern_wov.png; path = Resources/pattern_wov.png; sourceTree = "<group>"; };
+		C4FD785F1CF9477C0066BDB1 /* pattern_upfeathers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pattern_upfeathers.png; path = Resources/pattern_upfeathers.png; sourceTree = "<group>"; };
+		C4FD78601CF9477C0066BDB1 /* pattern_swirl_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pattern_swirl_pattern.png; path = Resources/pattern_swirl_pattern.png; sourceTree = "<group>"; };
+		C4FD78611CF9477C0066BDB1 /* pattern_squared_metal@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pattern_squared_metal@2X.png"; path = "Resources/pattern_squared_metal@2X.png"; sourceTree = "<group>"; };
+		C4FD78621CF9477C0066BDB1 /* pattern_squared_metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pattern_squared_metal.png; path = Resources/pattern_squared_metal.png; sourceTree = "<group>"; };
+		C4FD78691CF94A290066BDB1 /* pattern_dimension@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pattern_dimension@2X.png"; path = "Resources/pattern_dimension@2X.png"; sourceTree = "<group>"; };
+		C4FD786A1CF94A290066BDB1 /* pattern_dimension.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pattern_dimension.png; path = Resources/pattern_dimension.png; sourceTree = "<group>"; };
+		C4FD786D1CF94EEE0066BDB1 /* ringmail_forward@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_forward@3x.png"; path = "Resources/ringmail_forward@3x.png"; sourceTree = "<group>"; };
+		C4FD786E1CF94EEE0066BDB1 /* ringmail_forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_forward@2x.png"; path = "Resources/ringmail_forward@2x.png"; sourceTree = "<group>"; };
+		C4FD786F1CF94EEE0066BDB1 /* ringmail_forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_forward.png; path = Resources/ringmail_forward.png; sourceTree = "<group>"; };
 		C4FE4C6B1CCD9CA4006A6C94 /* FavoriteCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteCollectionViewController.h; path = RgComponents/FavoriteCollectionViewController.h; sourceTree = "<group>"; };
 		C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FavoriteCollectionViewController.mm; path = RgComponents/FavoriteCollectionViewController.mm; sourceTree = "<group>"; };
 		C4FE4C6D1CCD9CA4006A6C94 /* FavoriteModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteModelController.h; path = RgComponents/FavoriteModelController.h; sourceTree = "<group>"; };
@@ -2358,6 +2387,8 @@
 				C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */,
 				C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */,
 				C4AA1A211C71314E003F86FD /* RgMainViewController.xib */,
+				C4FD785A1CF93EF20066BDB1 /* RgCustomView.h */,
+				C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */,
 				C42C0DD31CAF2D9600AD5A91 /* RgCallDuration.h */,
 				C42C0DD41CAF2D9600AD5A91 /* RgCallDuration.m */,
 				C42C0D501CAECA1500AD5A91 /* RgInCallViewController.h */,
@@ -2932,7 +2963,11 @@
 				D35860D515B549B500513429 /* Utils.m */,
 				D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */,
 				C42786141C70263300DD946D /* UIColor+Hex.m */,
-				C427861B1C70267100DD946D /* UIColor+Hex.h */,
+				C4FD78551CF935C60066BDB1 /* UIColor+Hex.h */,
+				C4FD784B1CF932950066BDB1 /* UIColor+Name.m */,
+				C4FD78561CF935CF0066BDB1 /* UIColor+Name.h */,
+				C4FD78571CF939330066BDB1 /* NSObject+NSPerformSelector.h */,
+				C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -3094,6 +3129,16 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C4FD786D1CF94EEE0066BDB1 /* ringmail_forward@3x.png */,
+				C4FD786E1CF94EEE0066BDB1 /* ringmail_forward@2x.png */,
+				C4FD786F1CF94EEE0066BDB1 /* ringmail_forward.png */,
+				C4FD78691CF94A290066BDB1 /* pattern_dimension@2X.png */,
+				C4FD786A1CF94A290066BDB1 /* pattern_dimension.png */,
+				C4FD785F1CF9477C0066BDB1 /* pattern_upfeathers.png */,
+				C4FD78601CF9477C0066BDB1 /* pattern_swirl_pattern.png */,
+				C4FD78611CF9477C0066BDB1 /* pattern_squared_metal@2X.png */,
+				C4FD78621CF9477C0066BDB1 /* pattern_squared_metal.png */,
+				C4FD785D1CF9429C0066BDB1 /* pattern_wov.png */,
 				C476A7041CF24DFE00CA3772 /* ringpage@3x.png */,
 				C476A7051CF24DFE00CA3772 /* ringpage@2x.png */,
 				C476A7061CF24DFE00CA3772 /* ringpage.png */,
@@ -3923,6 +3968,7 @@
 				D3F83F0C158205A100336684 /* micro_off_default.png in Resources */,
 				D3F83F0E158205A100336684 /* micro_off_over.png in Resources */,
 				C42C0DD11CAEE9D100AD5A91 /* ringmail_mic@2x.png in Resources */,
+				C4FD78711CF94EEE0066BDB1 /* ringmail_forward@2x.png in Resources */,
 				D3F83F10158205A100336684 /* micro_on_default.png in Resources */,
 				C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */,
 				D3F83F12158205A100336684 /* micro_on_over.png in Resources */,
@@ -3983,6 +4029,7 @@
 				D3ED3E411585FB4A006C0DE4 /* background.png in Resources */,
 				D3ED3E451585FB8C006C0DE4 /* dialer_address_background.png in Resources */,
 				D3ED3E521585FFFD006C0DE4 /* statebar_background.png in Resources */,
+				C4FD78721CF94EEE0066BDB1 /* ringmail_forward.png in Resources */,
 				C42C0DEC1CB16FF100AD5A91 /* ringmail_incoming_answer@3x.png in Resources */,
 				C459A4151CC8633000CFFF30 /* ringmail_contact_back-pressed.png in Resources */,
 				F070E6381A2622EC00E17AFD /* incall_padding_right.png in Resources */,
@@ -4084,6 +4131,7 @@
 				D3EA5405159852080037DC6B /* chat_edit_over.png in Resources */,
 				D3EA5407159852080037DC6B /* chat_add_default.png in Resources */,
 				D3EA5409159852080037DC6B /* chat_add_over.png in Resources */,
+				C4FD78701CF94EEE0066BDB1 /* ringmail_forward@3x.png in Resources */,
 				639CEB091A1DF4FA004DE38F /* UIChatCell.xib in Resources */,
 				D3EA5418159858A80037DC6B /* list_delete_default.png in Resources */,
 				F070E6351A2622EC00E17AFD /* incall_padding_left_landscape.png in Resources */,
@@ -4201,6 +4249,7 @@
 				D38187F415FE354700C3EDCA /* UIContactDetailsFooter.xib in Resources */,
 				D32D5AA715ADE5D9008593F3 /* button_alert_background_default.png in Resources */,
 				D32D5AA915ADE5D9008593F3 /* button_alert_background_over.png in Resources */,
+				C4FD78671CF9477C0066BDB1 /* pattern_squared_metal.png in Resources */,
 				C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */,
 				C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */,
 				C9C8254715AE204D00D493FA /* transfer_call_default.png in Resources */,
@@ -4239,6 +4288,7 @@
 				D3C31A4215BD8DED008ED271 /* micro_off_default_landscape.png in Resources */,
 				D3C31A4415BD8DED008ED271 /* micro_off_disabled_landscape.png in Resources */,
 				D3C31A4615BD8DED008ED271 /* micro_off_over_landscape.png in Resources */,
+				C4FD78641CF9477C0066BDB1 /* pattern_upfeathers.png in Resources */,
 				D3C31A4815BD8DED008ED271 /* micro_on_default_landscape.png in Resources */,
 				D3C31A4A15BD8DED008ED271 /* micro_on_disabled_landscape.png in Resources */,
 				D3C31A4C15BD8DED008ED271 /* micro_on_over_landscape.png in Resources */,
@@ -4292,6 +4342,7 @@
 				F0B89C2C18DC973E0050B60E /* wizard_linphone_existing.rc in Resources */,
 				D3A74ECE15C69392001500B9 /* call_disabled~ipad.png in Resources */,
 				D3A74ED015C69392001500B9 /* call_over~ipad.png in Resources */,
+				C4FD786B1CF94A290066BDB1 /* pattern_dimension@2X.png in Resources */,
 				C41D67DE1CA722A100D7BA72 /* ringmail_plus@3x.png in Resources */,
 				D3A74ED215C69392001500B9 /* chat_default_landscape~ipad.png in Resources */,
 				D3A74ED415C69392001500B9 /* chat_default~ipad.png in Resources */,
@@ -4514,6 +4565,7 @@
 				D3D51255160B35CB00946DF8 /* chat_message_background.9.png in Resources */,
 				C42C0DBC1CAEE9D100AD5A91 /* ringmail_incall-contact@2x.png in Resources */,
 				D3D51257160B35CB00946DF8 /* chat_message_background.9@2x.png in Resources */,
+				C4FD785E1CF9429C0066BDB1 /* pattern_wov.png in Resources */,
 				D3D5126C160B3A8E00946DF8 /* WizardViews.xib in Resources */,
 				D3D51270160B3AD400946DF8 /* WizardViewController~ipad.xib in Resources */,
 				D3328646160B5BC300E6435D /* dialer_alt_disabled_landscape.png in Resources */,
@@ -4540,6 +4592,8 @@
 				D3D52A7D1614495300DEB00A /* accept_default_landscape~ipad.png in Resources */,
 				D3D52A7F1614495300DEB00A /* accept_default~ipad.png in Resources */,
 				D3D52A811614495300DEB00A /* accept_over_landscape~ipad.png in Resources */,
+				C4FD78651CF9477C0066BDB1 /* pattern_swirl_pattern.png in Resources */,
+				C4FD78661CF9477C0066BDB1 /* pattern_squared_metal@2X.png in Resources */,
 				C49744321C7C0A7400AD43A1 /* ringmail_input_chat.png in Resources */,
 				D3D52A831614495300DEB00A /* accept_over~ipad.png in Resources */,
 				F070E6361A2622EC00E17AFD /* incall_padding_left.png in Resources */,
@@ -4566,6 +4620,7 @@
 				15AF3C8816F37A5500FC52EC /* route_speaker_off_over.png in Resources */,
 				15AF3C8C16F37A5500FC52EC /* route_speaker_on_default.png in Resources */,
 				15AF3C9816F37A5D00FC52EC /* routes_default.png in Resources */,
+				C4FD786C1CF94A290066BDB1 /* pattern_dimension.png in Resources */,
 				15AF3C9A16F37A5D00FC52EC /* routes_disabled.png in Resources */,
 				C42B71F61CA22AF90020A57F /* RgHashtagDirectoryViewController.xib in Resources */,
 				15AF3C9C16F37A5D00FC52EC /* routes_over.png in Resources */,
@@ -4732,6 +4787,7 @@
 				63B81A101B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C42C0D661CAEDAA800AD5A91 /* RgCallComponent.mm in Sources */,
 				F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */,
+				C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */,
 				63B81A0D1B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				D37DC6C11594AE1800B2A5EB /* LinphoneCoreSettingsStore.m in Sources */,
 				C4BC49481BF9726000826264 /* RgChatQuestionInputCell.m in Sources */,
@@ -4788,6 +4844,7 @@
 				C42B720F1CA22EDB0020A57F /* Card.m in Sources */,
 				C42C0D601CAEDA4100AD5A91 /* RgCall.m in Sources */,
 				C496070B1CA3845F00C988B6 /* ChatViewController.m in Sources */,
+				C4FD784C1CF932950066BDB1 /* UIColor+Name.m in Sources */,
 				C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */,
 				C496070A1CA3845F00C988B6 /* ChatTableViewController.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
@@ -4801,6 +4858,7 @@
 				D3807FF415C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */,
 				D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */,
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
+				C4FD785C1CF93EF20066BDB1 /* RgCustomView.m in Sources */,
 				C42B71FE1CA22DD50020A57F /* HashtagCollectionViewController.mm in Sources */,
 				C42B72121CA22EDB0020A57F /* CardModelController.m in Sources */,
 				D3807FFA15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */,

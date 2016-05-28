@@ -55,6 +55,21 @@
 @synthesize callData;
 @synthesize callViewController;
 
+@synthesize padView;
+@synthesize padActive;
+@synthesize oneButton;
+@synthesize twoButton;
+@synthesize threeButton;
+@synthesize fourButton;
+@synthesize fiveButton;
+@synthesize sixButton;
+@synthesize sevenButton;
+@synthesize eightButton;
+@synthesize nineButton;
+@synthesize starButton;
+@synthesize zeroButton;
+@synthesize sharpButton;
+
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -63,6 +78,7 @@
 		self->singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showControls:)];
 		self->videoZoomHandler = [[VideoZoomHandler alloc] init];
 		self->callData = [NSMutableDictionary dictionary];
+		self->padActive = [NSNumber numberWithBool:NO];
 	}
 	return self;
 }
@@ -121,7 +137,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	// Remove observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgCallRefresh" object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgToggleNumberPad object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgCallRefresh object:nil];
 
 }
 
@@ -133,8 +150,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 												 name:kLinphoneCallUpdate
 											   object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(toggleNumberPad:)
+												 name:kRgToggleNumberPad
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(callRefreshEvent:)
-												 name:@"RgCallRefresh"
+												 name:kRgCallRefresh
 											   object:nil];
 
 	// Update on show
@@ -148,6 +169,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	// Enable tap
 	[singleFingerTap setEnabled:TRUE];
+	
+	[padView setHidden:YES];
+	padActive = @NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -177,6 +201,31 @@ static UICompositeViewDescription *compositeDescription = nil;
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideVideoPreview:)];
 	tap.numberOfTapsRequired = 1;
 	[self.videoPreview addGestureRecognizer:tap];
+	
+	[zeroButton setDigit:'0'];
+	[zeroButton setDtmf:true];
+	[oneButton setDigit:'1'];
+	[oneButton setDtmf:true];
+	[twoButton setDigit:'2'];
+	[twoButton setDtmf:true];
+	[threeButton setDigit:'3'];
+	[threeButton setDtmf:true];
+	[fourButton setDigit:'4'];
+	[fourButton setDtmf:true];
+	[fiveButton setDigit:'5'];
+	[fiveButton setDtmf:true];
+	[sixButton setDigit:'6'];
+	[sixButton setDtmf:true];
+	[sevenButton setDigit:'7'];
+	[sevenButton setDtmf:true];
+	[eightButton setDigit:'8'];
+	[eightButton setDtmf:true];
+	[nineButton setDigit:'9'];
+	[nineButton setDtmf:true];
+	[starButton setDigit:'*'];
+	[starButton setDtmf:true];
+	[sharpButton setDigit:'#'];
+	[sharpButton setDtmf:true];
 }
 
 - (void)viewDidUnload {
@@ -236,6 +285,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 					@"label": name,
 					@"speaker": [NSNumber numberWithBool:[[LinphoneManager instance] speakerEnabled]],
 					@"mute": [NSNumber numberWithBool:linphone_core_is_mic_muted(lc)],
+					@"dialpad": padActive,
                     @"video": video,
 				}];
 				[callViewController updateCall:callData];
@@ -510,16 +560,44 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 
 #pragma mark - Event Functions
 
-- (void)callUpdateEvent:(NSNotification *)notif {
+- (void)callUpdateEvent:(NSNotification *)notif
+{
 	LinphoneCall *call = [[notif.userInfo objectForKey:@"call"] pointerValue];
 	LinphoneCallState state = [[notif.userInfo objectForKey:@"state"] intValue];
 	[self callUpdate:call state:state animated:TRUE];
 }
 
-- (void)callRefreshEvent:(NSNotification *)notif {
+- (void)callRefreshEvent:(NSNotification *)notif
+{
 	[callData setObject:[NSNumber numberWithBool:[[LinphoneManager instance] speakerEnabled]] forKey:@"speaker"];
 	[callData setObject:[NSNumber numberWithBool:linphone_core_is_mic_muted([LinphoneManager getLc])] forKey:@"mute"];
+	[callData setObject:padActive forKey:@"dialpad"];
 	[callViewController updateCall:callData];
+}
+
+- (void)toggleNumberPad:(NSNotification *)notif
+{
+	if ([padView isHidden])
+	{
+		padActive = @YES;
+		[padView setAlpha:0.0f];
+		[padView setHidden:NO];
+		[UIView animateWithDuration:0.5f animations:^{
+			[padView setAlpha:1.0f];
+		} completion:^(BOOL finished) {
+		}];
+
+    }
+	else
+	{
+		padActive = @NO;
+		[UIView animateWithDuration:0.5f animations:^{
+			[padView setAlpha:0.0f];
+		} completion:^(BOOL finished) {
+			[padView setHidden:YES];
+		}];
+	}
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRgCallRefresh object:nil];
 }
 
 - (void)callRefreshTimer
@@ -532,6 +610,7 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		[callViewController updateCall:callData];
 	}
 }
+
 
 #pragma mark - ActionSheet Functions
 

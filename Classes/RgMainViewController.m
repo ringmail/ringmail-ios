@@ -295,7 +295,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *newAddress = [notif.userInfo objectForKey:@"address"];
     NSLog(@"RingMail - Set Address Event: %@", newAddress);
     [addressField setText:newAddress];
-    if ([[newAddress substringToIndex:1] isEqualToString:@"#"])
+    if ([newAddress length] > 0 && [[newAddress substringToIndex:1] isEqualToString:@"#"])
     {
         messageButton.hidden = YES;
         callButton.hidden = YES;

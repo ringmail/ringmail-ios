@@ -26,6 +26,7 @@
 #import "InCallTableViewController.h"
 #import "RgCallViewController.h"
 #import "RgCallDuration.h"
+#import "UIDigitButton.h"
 
 @class VideoViewController;
 
@@ -51,8 +52,22 @@
 @property (nonatomic, strong) IBOutlet RgCallViewController* callViewController;
 @property (nonatomic, strong) NSMutableDictionary* callData;
 
+@property (nonatomic, strong) IBOutlet UIView* padView;
+@property (nonatomic, retain) NSNumber* padActive;
+@property (nonatomic, strong) IBOutlet UIDigitButton* oneButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* twoButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* threeButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* fourButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* fiveButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* sixButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* sevenButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* eightButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* nineButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* starButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* zeroButton;
+@property (nonatomic, strong) IBOutlet UIDigitButton* sharpButton;
+
 + (int)callCount:(LinphoneCore *)lc;
 + (LinphoneCall *)retrieveCallAtIndex:(NSInteger)index;
-
 
 @end

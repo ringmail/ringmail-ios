@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -85,8 +85,16 @@
                                         <action selector="onCallClick:" destination="-1" eventType="touchUpInside" id="WdJ-Qd-zIN"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DsR-zJ-oQ9" userLabel="videoButton">
+                                    <rect key="frame" x="200" y="10" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="camera.png"/>
+                                    <connections>
+                                        <action selector="onVideoClick:" destination="-1" eventType="touchUpInside" id="JtA-2B-wwe"/>
+                                    </connections>
+                                </button>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Contact1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="40" userLabel="addressLabel">
-                                    <rect key="frame" x="50" y="10" width="214" height="36"/>
+                                    <rect key="frame" x="50" y="10" width="142" height="36"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="Contact name">
                                         <accessibilityTraits key="traits" none="YES"/>
@@ -114,6 +122,7 @@
     </objects>
     <resources>
         <image name="avatar_unknown_small.png" width="131" height="131"/>
+        <image name="camera.png" width="30" height="30"/>
         <image name="phone.png" width="30" height="30"/>
         <image name="ringmail_chat_back.png" width="40" height="50"/>
     </resources>

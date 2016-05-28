@@ -881,6 +881,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
     					status = @"declined";
     				}
 					[updates setObject:status forKey:@"status"];
+					LOGI(@"RingMail Call Ended With Status: %@", status);
 				}
     			[[self chatManager] dbUpdateCall:updates];
             }
@@ -2074,10 +2075,12 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		}
 		
 		// RingMail: Video
+		NSString *media = @"audio";
 		if (video)
 		{
             [self setSpeakerEnabled:YES];
 			linphone_call_params_enable_video(lcallParams, YES);
+			media = @"video";
             NSLog(@"RingMail - Requested Video: Yes");
 		}
 		else
@@ -2086,7 +2089,20 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 			linphone_call_params_enable_video(lcallParams, NO);
             NSLog(@"RingMail - Requested Video: No");
 		}
-
+		linphone_call_params_add_custom_header(lcallParams, "X-RingMail-Media", [media cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+		
+		// RingMail: Connectivity header
+		NSString *net = @"none";
+		if (self.connectivity == wifi)
+		{
+			net = @"wifi";
+		}
+		else if (self.connectivity == wwan)
+		{
+			net = @"wwan";
+		}
+		linphone_call_params_add_custom_header(lcallParams, "X-RingMail-Network", [net cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+		
 		if (displayName != nil) {
 			linphone_address_set_display_name(addr, displayName.UTF8String);
 		}

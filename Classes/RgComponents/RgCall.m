@@ -47,7 +47,7 @@
 	{
 		[[LinphoneManager instance] setSpeakerEnabled:YES];
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"RgCallRefresh" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRgCallRefresh object:nil];
 }
 
 + (void)toggleMute
@@ -60,7 +60,12 @@
 	{
 		linphone_core_mute_mic([LinphoneManager getLc], true);
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"RgCallRefresh" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRgCallRefresh object:nil];
+}
+
++ (void)toggleNumberPad
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRgToggleNumberPad object:nil];
 }
 
 + (void)incomingAnswer

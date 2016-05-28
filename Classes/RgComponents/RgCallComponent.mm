@@ -18,6 +18,7 @@ static RgCallDuration* globalDuration = nil;
 
 + (instancetype)newWithCall:(RgCall *)call context:(RgCallContext *)context
 {
+	NSLog(@"Call Data: %@", [call data]);
 	CKComponentScope scope(self);
 	if (! [call.data objectForKey:@"address"])
 	{
@@ -90,7 +91,11 @@ static RgCallDuration* globalDuration = nil;
 				children:{
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 					{[CKInsetComponent newWithInsets:{.right = 6, .top = INFINITY, .bottom = INFINITY} component:
-						[CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_incall-dialpad"]]
+						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+							{UIControlStateNormal,[UIImage imageNamed:
+								[[call.data objectForKey:@"dialpad"] boolValue] ? @"ringmail_incall-dialpad.png" : @"ringmail_incall-dialpad-pressed.png"
+							]},
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onToggleNumberPad:) size:{} attributes:{} accessibilityConfiguration:{}]
 					]},
 				}]},
 				{[CKStackLayoutComponent newWithView:{} size:{
@@ -205,6 +210,11 @@ static RgCallDuration* globalDuration = nil;
 - (void)onMutePressed:(CKButtonComponent *)sender
 {
 	[RgCall toggleMute];
+}
+
+- (void)onToggleNumberPad:(CKButtonComponent *)sender
+{
+	[RgCall toggleNumberPad];
 }
 
 static UIView *buildDuration(void)

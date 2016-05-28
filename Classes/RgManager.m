@@ -24,6 +24,8 @@ NSString *const kRgMainRefresh = @"RgMainRefresh";
 NSString *const kRgFavoriteRefresh = @"RgFavoriteRefresh";
 NSString *const kRgAttemptVerify = @"kRgAttemptVerify";
 NSString *const kRgLaunchBrowser = @"kRgLaunchBrowser";
+NSString *const kRgToggleNumberPad = @"kRgToggleNumberPad";
+NSString *const kRgCallRefresh = @"kRgCallRefresh";
 
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
@@ -307,7 +309,7 @@ static LevelDB* theConfigDatabase = nil;
             [ringuri replaceOccurrencesOfRegex:@"^video/" withString:@""];
             video = YES;
         }
-		else if ([[ringuri substringToIndex:1] isEqualToString:@"#"])
+		else if ([ringuri length] > 0 && [[ringuri substringToIndex:1] isEqualToString:@"#"])
 		{
 			if ([RgManager checkRingMailAddress:ringuri])
 			{

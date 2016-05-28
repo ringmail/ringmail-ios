@@ -91,6 +91,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 						  forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
 	[LinphoneUtils buttonFixStates:editButton];
+	
+	UITapGestureRecognizer *tapContact = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onContactClick:)];
+    tapContact.numberOfTapsRequired = 1;
+    [addressLabel addGestureRecognizer:tapContact];
+    addressLabel.userInteractionEnabled = YES;
+	
+	UITapGestureRecognizer *tapContactImg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onContactClick:)];
+    tapContactImg.numberOfTapsRequired = 1;
+    [avatarImage addGestureRecognizer:tapContactImg];
+    avatarImage.userInteractionEnabled = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -365,6 +375,36 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
             [RgManager startCall:address contact:NULL video:NO];
         }
     }
+}
+
+- (IBAction)onVideoClick:(id)sender {
+    NSString *address = [chatViewController chatRoom];
+    if ([address length] > 0)
+    {
+        if ([RgManager checkRingMailAddress:address])
+        {
+            [RgManager startCall:address contact:NULL video:YES];
+        }
+    }
+}
+
+- (IBAction)onContactClick:(id)sender {
+    NSString *addr = [chatViewController chatRoom];
+	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:addr];
+	ContactDetailsViewController *controller = DYNAMIC_CAST(
+		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
+		ContactDetailsViewController);
+  	if (controller != nil) {
+    	if (contact)
+    	{
+    		// Go to Contact details view
+       		[controller setContact:contact];
+    	}
+    	else
+    	{
+       		[controller newContact:addr];
+		}
+	}
 }
 
 #pragma mark ChatRoomDelegate

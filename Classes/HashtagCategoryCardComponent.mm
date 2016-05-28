@@ -16,7 +16,10 @@
 
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
+#import "UIColor+Name.h"
 #import "UIColor+Hex.h"
+
+#import "RgCustomView.h"
 
 @implementation HashtagCategoryCardComponent
 
@@ -57,11 +60,6 @@
                           }
                           children:{
                               {
-                                  [CKImageComponent newWithImage:cardImage size:{
-                                      .height = 40,
-                                      .width = 40,
-                                  }],
-                              }, {
                                   .flexGrow = YES,
                                   .component = [CKInsetComponent
                                    newWithInsets:{.left = 7, .right = 5, .top = INFINITY, .bottom = INFINITY}
@@ -69,7 +67,7 @@
                                       [CKLabelComponent
                                       newWithLabelAttributes:{
                                           .string = [data objectForKey:@"name"],
-                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:16],
+                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:20],
                                           .color = [UIColor colorWithHex:@"#33362f"],
                                       }
                                       viewAttributes:{
@@ -89,9 +87,9 @@
                                           [CKInsetComponent
                                            newWithInsets:{.left = 15, .right = 7, .top = INFINITY, .bottom = INFINITY}
                                            component:
-                                               [CKImageComponent newWithImage:[context imageNamed:@"button_call"] size:{
-                                                  .height = 30,
-                                                  .width = 30,
+                                               [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_forward.png"] size:{
+                                                  .height = 16,
+                                                  .width = 9,
                                               }]
                                            ]
                                       },
@@ -99,6 +97,18 @@
                               }
                           }]
                       ]},
+					{lineComponent()},
+					{[CKComponent newWithView:{
+						{[RgCustomView class]},
+						{
+							{@selector(setupView:), @{
+								@"pattern": data[@"pattern"],
+								@"color": data[@"color"],
+							}},
+						}
+					} size:{
+						.height = 15
+					}]}
                 }]
              background:
                 [CKComponent
@@ -124,7 +134,7 @@ static CKComponent *lineComponent()
             newWithView:{
                 [UIView class],
                 {
-                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#33362f"]},
+                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#d4d5d7"]},
                 }
             }
             size:{.height = 1 / [UIScreen mainScreen].scale}];

@@ -32,6 +32,9 @@ PODS:
   - CocoaLumberjack/Core (1.9.2)
   - CocoaLumberjack/Extensions (1.9.2):
     - CocoaLumberjack/Core
+  - Colours (5.13.0):
+    - Colours/ObjC (= 5.13.0)
+  - Colours/ObjC (5.13.0)
   - ComponentKit (0.14)
   - CRMediaPickerController (0.0.1)
   - DXTableViewModel (0.1.0)
@@ -197,6 +200,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - Colours
   - ComponentKit (~> 0.14)
   - CRMediaPickerController
   - DXTableViewModel (~> 0.1.0)
@@ -233,6 +237,7 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
+  Colours: f24220c38f13deac88612667e9b4a7fb96b871d4
   ComponentKit: 11d9177b5e9940c456e7486d8f5a25c26d9ca5f2
   CRMediaPickerController: 65e1f968dea26a7759bb1fb4a1518f5b8cd6fba9
   DXTableViewModel: 27583f277f94e3ad5ffb0575cd84c39918319aa6

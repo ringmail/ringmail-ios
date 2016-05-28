@@ -25,6 +25,8 @@ extern NSString *const kRgMainRefresh;
 extern NSString *const kRgFavoriteRefresh;
 extern NSString *const kRgAttemptVerify;
 extern NSString *const kRgLaunchBrowser;
+extern NSString *const kRgToggleNumberPad;
+extern NSString *const kRgCallRefresh;
 
 extern NSString *const kRgSelf;
 extern NSString *const kRgSelfName;

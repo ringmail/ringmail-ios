@@ -52,18 +52,32 @@
             [mainList push:@{
                              @"type": @"hashtag_category",
                              @"name": @"Lifestyle",
+							 @"pattern": @"wov",
+							 @"color": @"grapefruit",
                              }];
             [mainList push:@{
                              @"type": @"hashtag_category",
                              @"name": @"Technology",
+							 @"pattern": @"squared_metal",
+							 @"color": @"denim",
                              }];
             [mainList push:@{
                              @"type": @"hashtag_category",
                              @"name": @"Stocks",
+							 @"pattern": @"swirl_pattern",
+							 @"color": @"grass",
                              }];
             [mainList push:@{
                              @"type": @"hashtag_category",
                              @"name": @"News",
+							 @"pattern": @"upfeathers",
+							 @"color": @"turquoise",
+                             }];
+            [mainList push:@{
+                             @"type": @"hashtag_category",
+                             @"name": @"Shopping",
+							 @"pattern": @"dimension",
+							 @"color": @"banana",
                              }];
         }
         else
@@ -73,7 +87,9 @@
             {
                 [mainList push:@{
                     @"type": @"hashtag_category",
-                    @"name": [NSString stringWithFormat:@"Tag: %lu", (unsigned long)i]
+                    @"name": [NSString stringWithFormat:@"Tag: %lu", (unsigned long)i],
+					@"pattern": @"swirl_pattern",
+					@"color": @"grape",
                 }];
             }
         }

@@ -53,7 +53,7 @@
 {
 	NSLog(@"Goto Contact: %@", _data[@"session_tag"]);
 	NSString *addr = _data[@"session_tag"];
-    if ([[addr substringToIndex:1] isEqualToString:@"#"])
+    if ([addr length] > 0 && [[addr substringToIndex:1] isEqualToString:@"#"])
     {
 		NSLog(@"Hashtag: %@", _data[@"session_tag"]);
 	}
