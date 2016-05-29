@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const RG_HASHTAG_DIRECTORY;
+
 @class CKCollectionViewDataSource;
 @class CardsPage;
 

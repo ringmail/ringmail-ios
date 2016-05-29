@@ -1,14 +1,3 @@
-/* This file provided by Facebook is for non-commercial testing and evaluation
- * purposes only.  Facebook reserves all rights not expressly granted.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 #import "HashtagModelController.h"
 
 #import <UIKit/UIColor.h>
@@ -16,8 +5,8 @@
 
 #import "Card.h"
 #import "CardsPage.h"
-#import "LinphoneManager.h"
 
+NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/directory";
 
 @implementation HashtagModelController
 {
@@ -48,7 +37,7 @@
         mainList = [NSMutableArray array];
         if ([mainPath isEqualToString:RG_HASHTAG_DIRECTORY])
         {
-            title = @"Hashtags";
+            title = @"Hashtag Categories";
             [mainList push:@{
                              @"type": @"hashtag_category",
                              @"name": @"Lifestyle",
@@ -82,14 +71,20 @@
         }
         else
         {
-            title = [mainPath copy];
+            title = @"Hashtag Categories";
+            [mainList push:@{
+                @"type": @"hashtag_category_header",
+                @"name": mainPath,
+				@"pattern": @"swirl_pattern",
+				@"color": @"grape",
+            }];
             for (NSUInteger i = 0; i < 25; i++)
             {
                 [mainList push:@{
-                    @"type": @"hashtag_category",
-                    @"name": [NSString stringWithFormat:@"Tag: %lu", (unsigned long)i],
-					@"pattern": @"swirl_pattern",
-					@"color": @"grape",
+                    @"type": @"hashtag",
+                    @"label": [NSString stringWithFormat:@"#tag%lu", (unsigned long)i],
+                    @"session_tag": [NSString stringWithFormat:@"#tag%lu", (unsigned long)i],
+					@"image": [UIImage imageNamed:@"avatar_unknown_small.png"],
                 }];
             }
         }

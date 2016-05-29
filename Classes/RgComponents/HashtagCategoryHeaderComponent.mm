@@ -1,15 +1,5 @@
-/* This file provided by Facebook is for non-commercial testing and evaluation
- * purposes only.  Facebook reserves all rights not expressly granted.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
-#import "HashtagCategoryCardComponent.h"
+#import "HashtagCategoryHeaderComponent.h"
+#import "HashtagModelController.h"
 #import "Card.h"
 
 #import "CardContext.h"
@@ -21,7 +11,7 @@
 
 #import "RgCustomView.h"
 
-@implementation HashtagCategoryCardComponent
+@implementation HashtagCategoryHeaderComponent
 
 @synthesize cardData;
 
@@ -33,13 +23,12 @@
     CKComponentViewConfiguration vcfg = {
         [UIView class],
         {
-            CKComponentTapGestureAttribute(@selector(actionSelect:)),
             {@selector(setBackgroundColor:), [UIColor whiteColor]},
             {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#d4d5d7"] CGColor]},
             {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
         }
     };
-    HashtagCategoryCardComponent *c = [super newWithComponent:
+    HashtagCategoryHeaderComponent *c = [super newWithComponent:
         [CKInsetComponent
         // Left and right inset of 30pts; centered vertically:
         newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
@@ -59,6 +48,32 @@
                             .alignItems = CKStackLayoutAlignItemsStretch
                           }
                           children:{
+							  {
+                                  .alignSelf = CKStackLayoutAlignSelfEnd,
+                                  .component = [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
+                                      .direction = CKStackLayoutDirectionHorizontal,
+                                      .alignItems = CKStackLayoutAlignItemsStretch
+                                  }
+                                  children:{
+									{[CKStackLayoutComponent newWithView:{
+                                        [UIView class],
+                                        {CKComponentTapGestureAttribute(@selector(actionBack:))}
+									} size:{.height = 40} style:{
+                                          .direction = CKStackLayoutDirectionHorizontal,
+                                          .alignItems = CKStackLayoutAlignItemsStretch
+                                      }
+                                      children:{
+                                          {[CKInsetComponent
+                                               newWithInsets:{.left = 10, .right = 10, .top = INFINITY, .bottom = INFINITY}
+                                               component:
+                                                   [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_contact_back.png"] size:{
+                                                      .height = 16,
+                                                      .width = 9,
+                                               }]
+                                          ]},
+								 	 }]}
+                                  }]
+                              },
                               {
                                   .flexGrow = YES,
                                   .component = [CKInsetComponent
@@ -67,7 +82,7 @@
                                       [CKLabelComponent
                                       newWithLabelAttributes:{
                                           .string = [data objectForKey:@"name"],
-                                          .font = [UIFont fontWithName:@"Futura-CondensedMedium" size:20],
+                                          .font = [UIFont fontWithName:@"HelveticaNeue" size:18],
                                           .color = [UIColor colorWithHex:@"#33362f"],
                                       }
                                       viewAttributes:{
@@ -76,25 +91,7 @@
                                       }
                                       size:{}]
                                    ]
-                              }, {
-                                  .alignSelf = CKStackLayoutAlignSelfEnd,
-                                  .component = [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
-                                      .direction = CKStackLayoutDirectionHorizontal,
-                                      .alignItems = CKStackLayoutAlignItemsStretch
-                                  }
-                                  children:{
-                                      {
-                                          [CKInsetComponent
-                                           newWithInsets:{.left = 15, .right = 7, .top = INFINITY, .bottom = INFINITY}
-                                           component:
-                                               [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_forward.png"] size:{
-                                                  .height = 16,
-                                                  .width = 9,
-                                              }]
-                                           ]
-                                      },
-                                  }]
-                              }
+                              },
                           }]
                       ]},
 					{lineComponent()},
@@ -140,13 +137,13 @@ static CKComponent *lineComponent()
             size:{.height = 1 / [UIScreen mainScreen].scale}];
 }
 
-- (void)actionSelect:(CKButtonComponent *)sender
+- (void)actionBack:(CKButtonComponent *)sender
 {
     //Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     //[card showMessages];
     NSLog(@"Selected: %@", [[self cardData] objectForKey:@"name"]);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{
-        @"path":[[self cardData] objectForKey:@"name"]
+        @"path":RG_HASHTAG_DIRECTORY,
     }];
 }
 

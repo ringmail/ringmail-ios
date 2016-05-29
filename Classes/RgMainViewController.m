@@ -176,7 +176,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// fix placeholder bar color in >= iOS7
     NSString *intro = @" Enter #Hashtag or Email";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
+										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"]}];
 	addressField.attributedPlaceholder = placeHolderString;
     
     if ([self needsRefresh])

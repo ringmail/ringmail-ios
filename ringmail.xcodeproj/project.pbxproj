@@ -184,7 +184,6 @@
 		C42B72151CA22EDB0020A57F /* InteractiveCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B720C1CA22EDB0020A57F /* InteractiveCardComponent.mm */; };
 		C42B72161CA22EDB0020A57F /* MainCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B720E1CA22EDB0020A57F /* MainCardComponent.mm */; };
 		C42B72191CA2313D0020A57F /* HashtagModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72181CA2313D0020A57F /* HashtagModelController.m */; };
-		C42B721C1CA235410020A57F /* HashtagCategoryCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B721B1CA235410020A57F /* HashtagCategoryCardComponent.mm */; };
 		C42C0D4A1CAEC9DE00AD5A91 /* RgInCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42C0D481CAEC9DE00AD5A91 /* RgInCallViewController.xib */; };
 		C42C0D521CAECA1500AD5A91 /* RgInCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42C0D511CAECA1500AD5A91 /* RgInCallViewController.m */; };
 		C42C0D541CAED35B00AD5A91 /* RgCallViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42C0D531CAED35B00AD5A91 /* RgCallViewController.mm */; };
@@ -372,6 +371,8 @@
 		C4FD78701CF94EEE0066BDB1 /* ringmail_forward@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD786D1CF94EEE0066BDB1 /* ringmail_forward@3x.png */; };
 		C4FD78711CF94EEE0066BDB1 /* ringmail_forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD786E1CF94EEE0066BDB1 /* ringmail_forward@2x.png */; };
 		C4FD78721CF94EEE0066BDB1 /* ringmail_forward.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD786F1CF94EEE0066BDB1 /* ringmail_forward.png */; };
+		C4FD78751CFB70520066BDB1 /* HashtagCategoryCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */; };
+		C4FD78781CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78771CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm */; };
 		C4FE4C6F1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */; };
 		C4FE4C701CCD9CA4006A6C94 /* FavoriteModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */; };
 		C4FE4C791CCDA03F006A6C94 /* RgFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C771CCDA03F006A6C94 /* RgFavoriteViewController.m */; };
@@ -1323,8 +1324,6 @@
 		C42B720E1CA22EDB0020A57F /* MainCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MainCardComponent.mm; path = RgComponents/MainCardComponent.mm; sourceTree = "<group>"; };
 		C42B72171CA2313D0020A57F /* HashtagModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagModelController.h; path = RgComponents/HashtagModelController.h; sourceTree = "<group>"; };
 		C42B72181CA2313D0020A57F /* HashtagModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HashtagModelController.m; path = RgComponents/HashtagModelController.m; sourceTree = "<group>"; };
-		C42B721A1CA235110020A57F /* HashtagCategoryCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCategoryCardComponent.h; path = RgComponents/HashtagCategoryCardComponent.h; sourceTree = "<group>"; };
-		C42B721B1CA235410020A57F /* HashtagCategoryCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HashtagCategoryCardComponent.mm; sourceTree = "<group>"; };
 		C42C0D491CAEC9DE00AD5A91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RgInCallViewController.xib; sourceTree = "<group>"; };
 		C42C0D501CAECA1500AD5A91 /* RgInCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgInCallViewController.h; sourceTree = "<group>"; };
 		C42C0D511CAECA1500AD5A91 /* RgInCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgInCallViewController.m; sourceTree = "<group>"; };
@@ -1535,6 +1534,10 @@
 		C4FD786D1CF94EEE0066BDB1 /* ringmail_forward@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_forward@3x.png"; path = "Resources/ringmail_forward@3x.png"; sourceTree = "<group>"; };
 		C4FD786E1CF94EEE0066BDB1 /* ringmail_forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_forward@2x.png"; path = "Resources/ringmail_forward@2x.png"; sourceTree = "<group>"; };
 		C4FD786F1CF94EEE0066BDB1 /* ringmail_forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_forward.png; path = Resources/ringmail_forward.png; sourceTree = "<group>"; };
+		C4FD78731CFB70520066BDB1 /* HashtagCategoryCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCategoryCardComponent.h; path = RgComponents/HashtagCategoryCardComponent.h; sourceTree = "<group>"; };
+		C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HashtagCategoryCardComponent.mm; path = RgComponents/HashtagCategoryCardComponent.mm; sourceTree = "<group>"; };
+		C4FD78761CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCategoryHeaderComponent.h; path = RgComponents/HashtagCategoryHeaderComponent.h; sourceTree = "<group>"; };
+		C4FD78771CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HashtagCategoryHeaderComponent.mm; path = RgComponents/HashtagCategoryHeaderComponent.mm; sourceTree = "<group>"; };
 		C4FE4C6B1CCD9CA4006A6C94 /* FavoriteCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteCollectionViewController.h; path = RgComponents/FavoriteCollectionViewController.h; sourceTree = "<group>"; };
 		C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FavoriteCollectionViewController.mm; path = RgComponents/FavoriteCollectionViewController.mm; sourceTree = "<group>"; };
 		C4FE4C6D1CCD9CA4006A6C94 /* FavoriteModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteModelController.h; path = RgComponents/FavoriteModelController.h; sourceTree = "<group>"; };
@@ -2905,8 +2908,10 @@
 				C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */,
 				C4FE4C6B1CCD9CA4006A6C94 /* FavoriteCollectionViewController.h */,
 				C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */,
-				C42B721A1CA235110020A57F /* HashtagCategoryCardComponent.h */,
-				C42B721B1CA235410020A57F /* HashtagCategoryCardComponent.mm */,
+				C4FD78731CFB70520066BDB1 /* HashtagCategoryCardComponent.h */,
+				C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */,
+				C4FD78761CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.h */,
+				C4FD78771CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm */,
 				C42B72171CA2313D0020A57F /* HashtagModelController.h */,
 				C42B72181CA2313D0020A57F /* HashtagModelController.m */,
 				C450DBBD1C70FFC80053592E /* MainCollectionViewController.h */,
@@ -4750,6 +4755,7 @@
 				2218A92512FBE1340088A667 /* FirstLoginViewController.m in Sources */,
 				C42B71F51CA22AF90020A57F /* RgHashtagDirectoryViewController.m in Sources */,
 				22C755601317E59C007BC101 /* UIBluetoothButton.m in Sources */,
+				C4FD78751CFB70520066BDB1 /* HashtagCategoryCardComponent.mm in Sources */,
 				22BB1A69132FF16A005CD7AA /* UIEraseButton.m in Sources */,
 				22AA8B0113D83F6300B30535 /* UICamSwitch.m in Sources */,
 				C42C0DDA1CB1691E00AD5A91 /* RgIncomingCallComponent.mm in Sources */,
@@ -4788,6 +4794,7 @@
 				C42C0D661CAEDAA800AD5A91 /* RgCallComponent.mm in Sources */,
 				F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */,
 				C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */,
+				C4FD78781CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm in Sources */,
 				63B81A0D1B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				D37DC6C11594AE1800B2A5EB /* LinphoneCoreSettingsStore.m in Sources */,
 				C4BC49481BF9726000826264 /* RgChatQuestionInputCell.m in Sources */,
@@ -4796,7 +4803,6 @@
 				C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */,
 				C402BEEF1C2616A60076B60C /* RgScanViewController.m in Sources */,
 				D3EA53FD159850E80037DC6B /* LinphoneManager.m in Sources */,
-				C42B721C1CA235410020A57F /* HashtagCategoryCardComponent.mm in Sources */,
 				63B81A0E1B57DA33009604A6 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				D3EA5411159853750037DC6B /* UIChatCell.m in Sources */,
 				C4FE4C701CCD9CA4006A6C94 /* FavoriteModelController.m in Sources */,

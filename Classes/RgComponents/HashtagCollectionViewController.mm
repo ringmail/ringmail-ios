@@ -91,11 +91,6 @@ static NSInteger const pageSize = 10;
 
 #pragma mark - Update collection
 
-- (void)updatePath
-{
-    
-}
-
 - (void)updateCollection
 {
     NSArray *current = [_cardModelController mainList];

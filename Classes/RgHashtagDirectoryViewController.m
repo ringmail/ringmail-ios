@@ -22,6 +22,7 @@
 
 #import "RgScanViewController.h"
 #import "RgHashtagDirectoryViewController.h"
+#import "HashtagModelController.h"
 #import "IncallViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
