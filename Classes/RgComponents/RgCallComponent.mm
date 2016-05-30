@@ -157,7 +157,7 @@ static RgCallDuration* globalDuration = nil;
 							{UIControlStateNormal,[UIImage imageNamed:(
 								[[call.data objectForKey:@"mute"] boolValue]
 							) ? @"ringmail_mic-x.png" : @"ringmail_mic.png"]},
-						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onMutePressed:) size:{} attributes:{} accessibilityConfiguration:{}]
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onMutePressed:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
 					]},
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 					{[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
@@ -165,7 +165,7 @@ static RgCallDuration* globalDuration = nil;
 							{UIControlStateNormal,[UIImage imageNamed:(
 								[[call.data objectForKey:@"speaker"] boolValue]
 							) ? @"ringmail_speaker.png" : @"ringmail_speaker-x.png"]},
-						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onSpeakerPressed:) size:{} attributes:{} accessibilityConfiguration:{}]
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onSpeakerPressed:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
 					]},
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 				}]},
