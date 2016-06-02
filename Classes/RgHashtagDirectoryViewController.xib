@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgMainViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgHashtagDirectoryViewController">
             <connections>
                 <outlet property="addressField" destination="4" id="205"/>
-                <outlet property="callButton" destination="EWA-nB-tDT" id="kPZ-Su-cE1"/>
-                <outlet property="goButton" destination="224" id="UFY-ed-DUQ"/>
                 <outlet property="mainView" destination="WIg-uW-eVV" id="eRx-5b-D7O"/>
-                <outlet property="messageButton" destination="kRY-QU-HcA" id="UN6-ri-DPc"/>
                 <outlet property="view" destination="171" id="176"/>
+                <outlet property="waitView" destination="ZfE-U7-AXi" id="1Lc-D8-AVX"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -28,46 +26,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="kRY-QU-HcA" userLabel="messageButton" customClass="UIMessageButton">
-                            <rect key="frame" x="272" y="12" width="27" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Call"/>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                            <state key="normal" title="Chat">
-                                <color key="titleColor" red="0.3294117647" green="0.80000000000000004" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="shi-Uq-Vf1"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="EWA-nB-tDT" userLabel="callButton" customClass="UICallButton">
-                            <rect key="frame" x="234" y="12" width="27" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Call"/>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                            <state key="normal" title="Call">
-                                <color key="titleColor" red="0.32941176470588235" green="0.80000000000000004" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="tLL-tB-jPU"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="224" userLabel="goButton" customClass="UICallButton">
-                            <rect key="frame" x="279" y="12" width="40" height="28"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Call"/>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                            <state key="normal" title="Go">
-                                <color key="titleColor" red="0.3294117647" green="0.80000000000000004" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" image="call_disabled.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="235"/>
-                            </connections>
-                        </button>
                         <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Enter #Hashtag or Email Address" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
                             <rect key="frame" x="57" y="12" width="210" height="26"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -86,24 +44,21 @@
                     <color key="backgroundColor" red="0.88627450980392153" green="0.89411764705882346" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Zpr-Mg-asO" userLabel="scanButton">
-                    <rect key="frame" x="8" y="44" width="60" height="37"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Call"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
-                    <state key="normal" title="Scan">
-                        <color key="titleColor" red="0.023529411760000001" green="0.1450980392" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="call_disabled.png"/>
-                    <connections>
-                        <action selector="onScan:" destination="-1" eventType="touchUpInside" id="i0Q-uv-UiZ"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" id="WIg-uW-eVV">
                     <rect key="frame" x="0.0" y="50" width="320" height="324"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view hidden="YES" tag="6" contentMode="scaleToFill" id="ZfE-U7-AXi" userLabel="waitView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" tag="7" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="neI-cU-NTD" userLabel="activityIndicatorView">
+                            <rect key="frame" x="142" y="168" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <nil key="simulatedStatusBarMetrics"/>
@@ -112,7 +67,6 @@
         </view>
     </objects>
     <resources>
-        <image name="call_disabled.png" width="214" height="138"/>
         <image name="search.png" width="50" height="50"/>
     </resources>
 </document>

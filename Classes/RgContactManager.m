@@ -496,11 +496,12 @@
             [addrs setObject:[rs objectForColumnIndex:1] forKey:[contactID stringValue]];
         }
         [rs close];
-        
+        //NSLog(@"RingMail: Contact Matches: %@ From: %@", addrs, rgUsers);
+		
         for (NSString *contactID in rgUsers)
         {
             FMResultSet *rs = [db executeQuery:@"SELECT count(oid) FROM contacts WHERE apple_id=?", contactID];
-            if ([rs next])
+            if ([rs next]) // found
             {
                 NSNumber *count = [rs objectForColumnIndex:0];
                 //NSLog(@"RingMail: Contact Activate: %@ -> %@", contactID, count);

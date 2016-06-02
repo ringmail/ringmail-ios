@@ -63,5 +63,6 @@
 - (void)setEditing:(BOOL)editing;
 - (BOOL)isEditing;
 - (BOOL)isValid;
+- (void)update;
 
 @end

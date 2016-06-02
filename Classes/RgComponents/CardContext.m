@@ -10,9 +10,6 @@
  */
 
 #import "CardContext.h"
-#import "LinphoneManager.h"
-#import "FastAddressBook.h"
-#import <AddressBook/AddressBook.h>
 
 @implementation CardContext
 {
@@ -37,17 +34,7 @@
 
 - (UIImage *)imageNamed:(NSString *)imageName
 {
-    UIImage* img = _images[imageName];
-    if (img != nil)
-    {
-        return _images[imageName];
-    }
-    else
-    {
-        img = [self getContactImage:imageName];
-        [_images setObject:img forKey:imageName];
-        return img;
-    }
+    return _images[imageName];
 }
 
 static NSMutableDictionary *loadImageNames(NSSet *imageNames)
@@ -61,20 +48,5 @@ static NSMutableDictionary *loadImageNames(NSSet *imageNames)
   }
   return imageDictionary;
 }
-
-
-- (UIImage*)getContactImage:(NSString*)name
-{
-    UIImage *image = nil;
-    ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:name];
-    if (acontact != nil) {
-        image = [FastAddressBook getContactImage:acontact thumbnail:true];
-    }
-    if (image == nil) {
-        image = [UIImage imageNamed:@"avatar_unknown_small.png"];
-    }
-    return image;
-}
-
 
 @end

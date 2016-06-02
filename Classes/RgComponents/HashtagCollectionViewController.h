@@ -10,12 +10,14 @@
 #define HashtagCollectionViewController_h
 
 #import <UIKit/UIKit.h>
-#import "CardModelController.h"
+#import "CardsPage.h"
 
 @interface HashtagCollectionViewController : UICollectionViewController
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout path:(NSString*)path;
-- (void)updateCollection;
+- (void)enqueuePage:(CardsPage *)cardsPage;
+
+@property (nonatomic, weak) id <CardPageLoading> waitDelegate;
 
 @end
 

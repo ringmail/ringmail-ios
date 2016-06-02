@@ -24,8 +24,9 @@
 
 #import "UICallButton.h"
 #import "UIMessageButton.h"
+#import "CardsPage.h"
 
-@interface RgHashtagDirectoryViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate> {
+@interface RgHashtagDirectoryViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, CardPageLoading> {
 }
 
 - (void)setAddress:(NSString*)address;
@@ -37,6 +38,7 @@
 @property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;
 @property (nonatomic, strong) IBOutlet UIButton* backButton;
 @property (nonatomic, strong) IBOutlet UIView* mainView;
+@property (nonatomic, strong) IBOutlet UIView *waitView;
 @property (nonatomic, retain) HashtagCollectionViewController* mainViewController;
 @property (nonatomic, retain) NSString* path;
 @property (nonatomic, weak) UIView *componentView;

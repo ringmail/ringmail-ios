@@ -143,7 +143,7 @@ static CKComponent *lineComponent()
     //[card showMessages];
     NSLog(@"Selected: %@", [[self cardData] objectForKey:@"name"]);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{
-        @"path":RG_HASHTAG_DIRECTORY,
+        @"path": @"root",
     }];
 }
 

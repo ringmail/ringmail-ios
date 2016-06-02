@@ -10,6 +10,7 @@
 #import "AFNetworking/AFNetworking.h"
 
 typedef void (^RgNetworkCallback)(AFHTTPRequestOperation *operation, id responseObject);
+typedef void (^RgNetworkError)(AFHTTPRequestOperation *operation, NSError *error);
 
 @interface RgNetwork : NSObject
 
@@ -30,5 +31,6 @@ typedef void (^RgNetworkCallback)(AFHTTPRequestOperation *operation, id response
 - (void)downloadImage:(NSString*)url callback:(RgNetworkCallback)callback;
 - (void)updateContacts:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 - (void)lookupHashtag:(NSDictionary*)params callback:(RgNetworkCallback)callback;
+- (void)hashtagDirectory:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail;
 
 @end

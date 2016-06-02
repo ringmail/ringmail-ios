@@ -48,6 +48,18 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	CFRelease(addressBook);
 }
 
+#pragma mark - Event Functions
+
+- (void)contactsUpdated:(NSNotification *)notif {
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSLog(@"RingMail - Update Contact Details");
+    	UIContactDetailsHeader *headerController = [tableController headerController];
+    	NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
+		[headerController setRgMember:[[[LinphoneManager instance] contactManager] dbHasRingMail:contactID]];
+		[headerController update];
+	});
+}
+
 #pragma mark -
 
 - (void)resetData {
@@ -232,6 +244,17 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	} else {
 		[editButton setHidden:TRUE];
 	}
+	
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contactsUpdated:)
+                                                 name:kRgContactsUpdated
+                                            object:nil];
+	
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UICompositeViewDelegate Functions

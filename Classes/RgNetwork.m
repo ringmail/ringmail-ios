@@ -211,7 +211,7 @@ static RgNetwork* theRgNetwork = nil;
         [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
-            if (! [ok isEqualToString:@"ok"])
+            if (! (ok != nil && [ok isEqualToString:@"ok"]))
             {
                 NSLog(@"RingMail API Error: %@", @"Sign Out Failed");
             }
@@ -280,6 +280,23 @@ static RgNetwork* theRgNetwork = nil;
         [manager POST:postUrl parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"RingMail API Error: %@", error);
         }];
+    }
+}
+
+- (void)hashtagDirectory:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+		parameters[@"login"] = rgLogin;
+		parameters[@"password"] = rgPass;
+		parameters[@"path"] = params[@"path"];
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/hashtag_directory", self.networkHost];
+        [manager POST:postUrl parameters:parameters success:okay failure:fail];
     }
 }
 

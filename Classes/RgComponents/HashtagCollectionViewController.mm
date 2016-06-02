@@ -26,6 +26,8 @@
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
 }
 
+@synthesize waitDelegate;
+
 static NSInteger const pageSize = 10;
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout path:(NSString*)path
@@ -34,8 +36,6 @@ static NSInteger const pageSize = 10;
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
         _cardModelController = [[HashtagModelController alloc] init];
         [_cardModelController setMainPath:path];
-        //self.title = @"Wilde Guess";
-        //self.navigationItem.prompt = @"Tap to reveal which cards are from Oscar Wilde";
     }
     return self;
 }
@@ -47,13 +47,8 @@ static NSInteger const pageSize = 10;
     // Preload images for the component context that need to be used in component preparation. Components preparation
     // happens on background threads but +[UIImage imageNamed:] is not thread safe and needs to be called on the main
     // thread. The preloaded images are then cached on the component context for use inside components.
-    NSDictionary *images = @{
-                             @"Card1":[UIImage imageNamed:@"avatar_unknown_small.png"],
-                             @"button_call":[UIImage imageNamed:@"phone.png"],
-                             @"button_chat":[UIImage imageNamed:@"quote.png"],
-                             @"button_video":[UIImage imageNamed:@"camera.png"],
-                             };
-    
+    NSDictionary *images = @{};
+	
     self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:1.0f];
     self.collectionView.delegate = self;
     
@@ -67,10 +62,11 @@ static NSInteger const pageSize = 10;
     CKArrayControllerSections sections;
     sections.insert(0);
     [_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
-    [self _enqueuePage:[_cardModelController fetchNewCardsPageWithCount:pageSize]];
+	[_cardModelController fetchPageWithCount:pageSize caller:self];
+    //[self enqueuePage:[_cardModelController fetchNewCardsPageWithCount:pageSize]];
 }
 
-- (void)_enqueuePage:(CardsPage *)cardsPage
+- (void)enqueuePage:(CardsPage *)cardsPage
 {
     NSArray *cards = cardsPage.cards;
     NSInteger position = cardsPage.position;
@@ -87,66 +83,6 @@ static NSInteger const pageSize = 10;
         [_dataSource enqueueChangeset:{{}, items}
                       constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
     }
-}
-
-#pragma mark - Update collection
-
-- (void)updateCollection
-{
-    NSArray *current = [_cardModelController mainList];
-    //NSArray *newlist = [_cardModelController readMainList];
-    NSArray *newlist = [NSArray array];
-    
-    NSInteger curcount = [current count];
-    NSInteger newcount = [newlist count];
-    // Generate changeset
-    NSInteger viewcount = [[_cardModelController mainCount] integerValue];
-    if (viewcount < pageSize)
-    {
-        viewcount = pageSize;
-    }
-    __block CKArrayControllerInputItems items;
-    for (NSInteger i = 1; i < viewcount; i++)
-    {
-        NSInteger j = i - 1;
-        BOOL hascur = NO;
-        BOOL hasnew = NO;
-        if (j < curcount)
-        {
-            hascur = YES;
-        }
-        if (j < newcount)
-        {
-            hasnew = YES;
-        }
-        if (hascur && hasnew)
-        {
-            NSString* curId = [current[j] objectForKey:@"id"];
-            NSString* newId = [newlist[j] objectForKey:@"id"];
-            if (! [curId isEqualToString:newId]) // item changed
-            {
-                Card *card = [[Card alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
-                items.update([NSIndexPath indexPathForRow:i inSection:0], card);
-            }
-        }
-        else if (hasnew)
-        {
-            Card *card = [[Card alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
-            items.insert([NSIndexPath indexPathForRow:i inSection:0], card);
-            [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] + 1]];
-            
-        }
-        else if (hascur)
-        {
-            // need to remove
-            items.remove([NSIndexPath indexPathForRow:i inSection:0]);
-            [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] - 1]];
-        }
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_dataSource enqueueChangeset:{{}, items}
-                      constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
-    });
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -190,7 +126,7 @@ static NSInteger const pageSize = 10;
     }
     
     if (scrolledToBottomWithBuffer(scrollView.contentOffset, scrollView.contentSize, scrollView.contentInset, scrollView.bounds)) {
-        [self _enqueuePage:[_cardModelController fetchNewCardsPageWithCount:pageSize]];
+        //[self enqueuePage:[_cardModelController fetchNewCardsPageWithCount:pageSize]];
     }
 }
 

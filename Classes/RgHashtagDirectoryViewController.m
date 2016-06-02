@@ -43,13 +43,14 @@
 @synthesize mainView;
 @synthesize mainViewController;
 @synthesize path;
+@synthesize waitView;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
 	self = [super initWithNibName:@"RgHashtagDirectoryViewController" bundle:[NSBundle mainBundle]];
 	if (self) {
-        path = RG_HASHTAG_DIRECTORY;
+        path = @"root";
 	}
 	return self;
 }
@@ -91,7 +92,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
 	addressField.attributedPlaceholder = placeHolderString;
     
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -190,6 +190,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)setAddress:(NSString *)address {
 	[addressField setText:address];
+}
+
+#pragma mark - CardPageLoading Functions
+
+- (void)showWaiting
+{
+	[waitView setHidden:NO];
+}
+
+- (void)hideWaiting
+{
+	[waitView setHidden:YES];
 }
 
 #pragma mark - UITextFieldDelegate Functions
