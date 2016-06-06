@@ -378,6 +378,8 @@
         NSString *chatMd5 = [userInfo objectForKey:@"tag"];
         [lm setChatMd5:chatMd5];
         [RgManager startMessageMD5];
+		completionHandler(UIBackgroundFetchResultNewData);
+		return;
     }
 
 	// save the completion handler for later execution.
@@ -441,7 +443,7 @@
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         if (notification)
         {
-            notification.soundName = @"ring.caf";
+            notification.soundName = @"call_in.caf";
             notification.category = @"incoming_call";
             notification.repeatInterval = 0;
             notification.alertBody = [NSString stringWithFormat:@"Incoming Call\n%@", [payload.dictionaryPayload objectForKey:@"from"]];

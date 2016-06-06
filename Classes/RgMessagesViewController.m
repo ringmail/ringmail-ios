@@ -68,10 +68,12 @@
 - (void)receiveMessage:(NSString*)uuid
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+		NSLog(@"RingMail: receiveMessage");
         [self.chatData loadMessages:uuid];
         //[self.collectionView reloadData];
         //[self scrollToBottomAnimated:YES];
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+        //[[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:@"chat_in_view" fileExtension:kJSQSystemSoundTypeWAV];
         [self finishReceivingMessageAnimated:YES];
     });
 }
@@ -83,6 +85,7 @@
         //[self.collectionView reloadData];
         //[self scrollToBottomAnimated:YES];
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
+        //[[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:@"chat_in_view" fileExtension:kJSQSystemSoundTypeWAV];
         [self finishSendingMessageAnimated:YES];
     });
 }
@@ -209,7 +212,8 @@
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
         NSString *uuid = [mgr sendMessageTo:_chatRoom body:text];
         [self.chatData loadMessages:uuid];
-        [JSQSystemSoundPlayer jsq_playMessageSentSound];
+        //[JSQSystemSoundPlayer jsq_playMessageSentSound];
+        [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:@"chat_send" fileExtension:kJSQSystemSoundTypeWAV];
         [self finishSendingMessageAnimated:YES];
     }
 }
