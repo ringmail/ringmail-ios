@@ -20,6 +20,8 @@
 #import "FastAddressBook.h"
 #import "LinphoneManager.h"
 #import "RgContactManager.h"
+#import "NBPhoneNumberUtil.h"
+#import "NBPhoneNumber.h"
 
 @implementation FastAddressBook
 
@@ -99,25 +101,24 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	return number;*/
 }
 
-+ (NSString *)normalizePhoneNumber:(NSString *)address {
-	NSMutableString *lNormalizedAddress = [NSMutableString stringWithString:address];
-	[lNormalizedAddress replaceOccurrencesOfString:@" "
-										withString:@""
-										   options:0
-											 range:NSMakeRange(0, [lNormalizedAddress length])];
-	[lNormalizedAddress replaceOccurrencesOfString:@"("
-										withString:@""
-										   options:0
-											 range:NSMakeRange(0, [lNormalizedAddress length])];
-	[lNormalizedAddress replaceOccurrencesOfString:@")"
-										withString:@""
-										   options:0
-											 range:NSMakeRange(0, [lNormalizedAddress length])];
-	[lNormalizedAddress replaceOccurrencesOfString:@"-"
-										withString:@""
-										   options:0
-											 range:NSMakeRange(0, [lNormalizedAddress length])];
-	return [FastAddressBook appendCountryCodeIfPossible:lNormalizedAddress];
++ (NSString *)normalizePhoneNumber:(NSString *)addr {
+	addr = [addr stringByReplacingOccurrencesOfRegex:@"\\D" withString:@""];
+	if ([addr length] == 0)
+	{
+		return @"";
+	}
+	NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+	NSError *anError = nil;
+	NBPhoneNumber *myNumber = [phoneUtil parse:addr defaultRegion:@"US" error:&anError];
+	NSString *res = addr;
+	if (anError == nil)
+	{
+		if ([phoneUtil isValidNumber:myNumber])
+		{
+			res = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+		}
+	}
+	return res;
 }
 
 + (BOOL)isAuthorized {
