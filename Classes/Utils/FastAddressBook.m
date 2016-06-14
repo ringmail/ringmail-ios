@@ -82,7 +82,9 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 - (ABRecordRef)getContactById:(NSNumber *)appleId {
-    return ABAddressBookGetPersonWithRecordID(addressBook, [appleId intValue]);
+	@synchronized(addressBookMap) {
+		return ABAddressBookGetPersonWithRecordID(addressBook, [appleId intValue]);
+	}
 }
 
 + (BOOL)isSipURI:(NSString *)address {
@@ -389,6 +391,14 @@ void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void 
         }
         return contact;
     }
+}
+
+- (NSNumber *)getContactId:(ABRecordRef)lPerson
+{
+    @synchronized(addressBookMap) {
+		NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
+		return recordId;
+	}
 }
 
 @end

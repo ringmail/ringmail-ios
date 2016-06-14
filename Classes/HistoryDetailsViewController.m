@@ -330,7 +330,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 			displayName = [NSString stringWithUTF8String:lUserName];
 	}
 
-	RgMainViewController *controller =
+	// Dead code makes no calls
+	/*RgMainViewController *controller =
 		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
 					 RgMainViewController);
 	if (controller != nil) {
@@ -340,12 +341,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 		} else {
 			[controller call:address];
 		}
-	}
+	}*/
 	ms_free(lAddress);
 }
 
 - (IBAction)onMessageClick:(id)event {
-	LinphoneAddress *addr;
+	// Dead code
+	/*LinphoneAddress *addr;
 	addr = linphone_call_log_get_remote_address(callLog);
 
 	char *lAddress = linphone_address_as_string_uri_only(addr);
@@ -358,7 +360,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     	// Go to ChatRoom view
     [[LinphoneManager instance] setChatTag:chatRoom];
-    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];*/
 }
 
 @end

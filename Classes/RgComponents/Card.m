@@ -38,15 +38,20 @@
 
 - (void)showMessages
 {
-    NSString *address = [_data objectForKey:@"session_tag"];
-    [[LinphoneManager instance] setChatTag:address];
+    [[LinphoneManager instance] setChatSession:_data[@"id"]];
     [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 }
 
 - (void)startCall:(BOOL)video
 {
-    NSString *address = [_data objectForKey:@"session_tag"];
-    [RgManager startCall:address contact:NULL video:video];
+    NSNumber *session = [_data objectForKey:@"id"];
+	NSDictionary *sdata = [[[LinphoneManager instance] chatManager] dbGetSessionData:session];
+	ABRecordRef contact = NULL;
+	if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
+	{
+		contact = [[[LinphoneManager instance] fastAddressBook] getContactById:sdata[@"contact_id"]];
+	}
+    [RgManager startCall:sdata[@"session_tag"] contact:contact video:video];
 }
 
 - (void)gotoContact
@@ -59,7 +64,13 @@
 	}
 	else
 	{
-    	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:addr];
+        NSNumber *session = [_data objectForKey:@"id"];
+    	NSDictionary *sdata = [[[LinphoneManager instance] chatManager] dbGetSessionData:session];
+    	ABRecordRef contact = NULL;
+    	if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
+    	{
+    		contact = [[[LinphoneManager instance] fastAddressBook] getContactById:sdata[@"contact_id"]];
+    	}
     	ContactDetailsViewController *controller = DYNAMIC_CAST(
     		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
     		ContactDetailsViewController);

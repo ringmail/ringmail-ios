@@ -33,8 +33,8 @@
 }
 
 - (void)setAddress:(NSString*)address;
-- (void)call:(NSString*)address displayName:(NSString *)displayName;
-- (void)call:(NSString*)address;
+//- (void)call:(NSString*)address displayName:(NSString *)displayName;
+//- (void)call:(NSString*)address;
 
 @property (nonatomic, assign) BOOL transferMode;
 

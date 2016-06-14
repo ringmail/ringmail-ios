@@ -19,6 +19,7 @@
 
 #import "UIMessageButton.h"
 #import "LinphoneManager.h"
+#import "RgManager.h"
 
 #import "PhoneMainView.h"
 
@@ -62,9 +63,21 @@
 
 - (void)touchUp:(id)sender {
 	NSString *address = [addressField text];
-	if ([address length] > 0) {
-        [[LinphoneManager instance] setChatTag:address];
-        [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+	if ([address length] > 0)
+	{
+		if ([RgManager checkRingMailAddress:address])
+		{
+    		LinphoneManager *lm = [LinphoneManager instance];
+            ABRecordRef contact = [[lm fastAddressBook] getContact:address];
+        	NSNumber *contactNum = nil;
+        	if (contact != NULL)
+        	{
+        		contactNum = [[lm fastAddressBook] getContactId:contact];
+        	}
+			NSNumber *session = [[lm chatManager] dbGetSessionID:address contact:contactNum];
+            [[LinphoneManager instance] setChatSession:session];
+            [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+		}
 	}
 }
 

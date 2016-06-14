@@ -29,12 +29,13 @@
 }
 
 - (void)onLongTouch {
-	if ([self voiceMailEnabled]) {
+	// Dead code
+	/*if ([self voiceMailEnabled]) {
 		LinphoneManager *lm = [LinphoneManager instance];
 		[lm call:[lm lpConfigStringForKey:@"voice_mail_uri"]
 			displayName:NSLocalizedString(@"Voice mail", nil)
 			   transfer:FALSE];
-	}
+	}*/
 }
 
 - (BOOL)voiceMailEnabled {

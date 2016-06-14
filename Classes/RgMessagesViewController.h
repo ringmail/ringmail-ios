@@ -8,7 +8,7 @@
 @interface RgMessagesViewController : JSQMessagesViewController <ImagePickerDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) RgChatModelData *chatData;
-@property (strong, nonatomic) NSString *chatRoom;
+@property (strong, nonatomic) NSNumber *chatSession;
 @property (strong, nonatomic) ImagePickerViewController* popoverController;
 @property (strong, nonatomic) NSMutableDictionary* imageCache;
 @property (strong, nonatomic) NSDictionary* questionData;

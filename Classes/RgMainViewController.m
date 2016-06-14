@@ -450,18 +450,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self callUpdate:call state:state];
 }
 
-- (void)call:(NSString *)address {
+/*- (void)call:(NSString *)address {
 	NSString *displayName = nil;
 	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
 	if (contact) {
 		displayName = [FastAddressBook getContactDisplayName:contact];
 	}
 	[self call:address displayName:displayName];
-}
+}*/
 
-- (void)call:(NSString *)address displayName:(NSString *)displayName {
+/*- (void)call:(NSString *)address displayName:(NSString *)displayName {
 	[[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
-}
+}*/
 
 #pragma mark - UITextFieldDelegate Functions
 

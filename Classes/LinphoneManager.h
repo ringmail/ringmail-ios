@@ -166,8 +166,8 @@ typedef struct _LinphoneManagerSounds {
 + (NSString*)cacheDirectory;
 
 - (void)acceptCall:(LinphoneCall *)call;
-- (void)call:(NSString *)address displayName:(NSString*)displayName transfer:(BOOL)transfer;
-- (void)call:(NSString *)address displayName:(NSString *)displayName transfer:(BOOL)transfer video:(BOOL)video;
+- (void)call:(NSString *)address contact:(NSNumber*)contact displayName:(NSString*)displayName transfer:(BOOL)transfer;
+- (void)call:(NSString *)address contact:(NSNumber*)contact displayName:(NSString *)displayName transfer:(BOOL)transfer video:(BOOL)video;
 
 +(id)getMessageAppDataForKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg;
 +(void)setValueInMessageAppData:(id)value forKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg;
@@ -222,7 +222,7 @@ typedef struct _LinphoneManagerSounds {
 @property (strong, nonatomic) NSMutableArray *fileTransferDelegates;
 @property (nonatomic, strong) RgChatManager *chatManager;
 @property (nonatomic, strong) RgContactManager *contactManager;
-@property (nonatomic, strong) NSString *chatTag;
+@property (nonatomic, strong) NSNumber *chatSession;
 @property (nonatomic, strong) NSString *chatMd5;
 @property (nonatomic, strong) NSString *ringLogin;
 @property (nonatomic, strong) NSOperationQueue *opQueue;

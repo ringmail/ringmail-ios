@@ -240,12 +240,12 @@
 
 #pragma mark Chat actions
 
-- (NSString*)sendMessageTo:(NSString*)to body:(NSString*)body
+- (NSString*)sendMessageTo:(NSString*)to body:(NSString*)body contact:(NSNumber*)contact
 {
-    return [self sendMessageTo:to body:body reply:nil];
+    return [self sendMessageTo:to body:body reply:nil contact:contact];
 }
 
-- (NSString*)sendMessageTo:(NSString*)to body:(NSString*)text reply:(NSString*)reply
+- (NSString*)sendMessageTo:(NSString*)to body:(NSString*)text reply:(NSString*)reply contact:(NSNumber*)contact
 {
     NSDate *now = [NSDate date];
     NSString *msgTo = [RgManager addressToXMPP:to];
@@ -265,13 +265,14 @@
     NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
     [messageData setObject:text forKey:@"body"];
     [messageData setObject:now forKey:@"timestamp"];
-    
-    [self dbInsertMessage:to type:@"text/plain" data:messageData uuid:messageID inbound:NO url:nil];
+	
+	NSNumber *session = [self dbGetSessionID:to contact:contact];
+    [self dbInsertMessage:session type:@"text/plain" data:messageData uuid:messageID inbound:NO url:nil];
     [[self xmppStream] sendElement:message];
     return messageID;
 }
 
-- (void)sendMessageTo:(NSString*)to image:(UIImage*)image
+- (void)sendMessageTo:(NSString*)to image:(UIImage*)image contact:(NSNumber*)contact
 {
     NSDate *now = [NSDate date];
     NSString *msgTo = [RgManager addressToXMPP:to];
@@ -293,7 +294,8 @@
     [messageData setObject:imageData forKey:@"image"];
     [messageData setObject:now forKey:@"timestamp"];
     
-    [self dbInsertMessage:to type:@"image/png" data:messageData uuid:messageID inbound:NO url:nil];
+	NSNumber *session = [self dbGetSessionID:to contact:contact];
+    [self dbInsertMessage:session type:@"image/png" data:messageData uuid:messageID inbound:NO url:nil];
     //NSLog(@"RingMail: Insert Image Message");
     [[RgNetwork instance] uploadImage:imageData uuid:imageID callback:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* res = responseObject;
@@ -311,7 +313,7 @@
     }];
 }
 
-- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply
+/*- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply
 {
     NSDate *now = [NSDate date];
     NSString *msgTo = [RgManager addressToXMPP:to];
@@ -348,9 +350,9 @@
     [message addJSONContainerWithObject:pingData];
     [[self xmppStream] sendElement:message];
     return messageID;
-}
+}*/
 
-- (NSString *)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers
+/*- (NSString *)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers
 {
     NSDate *now = [NSDate date];
     NSDictionary *questionInfo = @{
@@ -381,7 +383,7 @@
     
     [[self xmppStream] sendElement:message];
     return messageID;
-}
+}*/
 
 #pragma mark XMPPStream Delegate
 
@@ -449,15 +451,16 @@
     if ([xmppMessage isMessageWithBody] && ![xmppMessage isErrorMessage])
     {
         NSString* uuid = [[xmppMessage attributeForName:@"id"] stringValue];
-        [self dbUpdateMessageStatus:@"sent" forUUID:uuid];
-        NSString *to = [[xmppMessage attributeForName:@"to"] stringValue];
-        NSString *chatTo = [RgManager addressFromXMPP:to];
-        NSDictionary *dict = @{
-                               @"tag": chatTo,
-                               @"uuid": uuid,
-                               @"status": @"sent",
-                               };
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
+        NSNumber *session = [self dbUpdateMessageStatus:@"sent" forUUID:uuid];
+		if (session)
+		{
+            NSDictionary *dict = @{
+                                   @"session": session,
+                                   @"uuid": uuid,
+                                   @"status": @"sent",
+                                   };
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
+		}
     }
 }
 
@@ -479,20 +482,21 @@
             [messageData setObject:body forKey:@"body"];
             
             __block NSString *chatFrom = [RgManager addressFromXMPP:from];
-            
+			__block NSNumber *session = [self dbGetSessionID:chatFrom contact:nil];
+			
             NSXMLElement *attach = [xmppMessage elementForName:@"attachment"];
             NSXMLElement *jsonHolder = [xmppMessage JSONContainer];
             //NSLog(@"RingMail: Chat Attach: %@", attach);
             if (attach != nil)
             {
                 NSString *imageUrl = [[attach attributeForName:@"url"] stringValue];
-                [self dbInsertMessage:chatFrom type:@"image/png" data:messageData uuid:uuid inbound:YES url:imageUrl];
+                [self dbInsertMessage:session type:@"image/png" data:messageData uuid:uuid inbound:YES url:imageUrl];
                 [[RgNetwork instance] downloadImage:imageUrl callback:^(AFHTTPRequestOperation *operation, id responseObject) {
                     //NSLog(@"RingMail: Chat Download Complete: %@", responseObject);
                     NSData* imageData = responseObject;
                     [self dbUpdateMessageData:imageData forUUID:uuid];
                     NSDictionary *dict = @{
-                       @"tag": chatFrom,
+                       @"session": session,
                        @"uuid": uuid,
                     };
                     [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
@@ -518,12 +522,12 @@
                 if (! update)
                 {
                     [messageData setObject:jsonData forKey:@"data"];
-                    [self dbInsertMessage:chatFrom type:@"application/json" data:messageData uuid:[[xmppMessage attributeForName:@"id"] stringValue] inbound:YES url:nil];
+                    [self dbInsertMessage:session type:@"application/json" data:messageData uuid:[[xmppMessage attributeForName:@"id"] stringValue] inbound:YES url:nil];
                 }
             }
             else
             {
-                [self dbInsertMessage:chatFrom type:@"text/plain" data:messageData uuid:[[xmppMessage attributeForName:@"id"] stringValue] inbound:YES url:nil];
+                [self dbInsertMessage:session type:@"text/plain" data:messageData uuid:[[xmppMessage attributeForName:@"id"] stringValue] inbound:YES url:nil];
             }
             
             [RgManager startMessageMD5]; // check if a push for a new chat arrived first
@@ -548,7 +552,7 @@
             }*/
             
             NSDictionary *dict = @{
-                @"tag": chatFrom,
+                @"session": session,
                 @"uuid": uuid,
             };
             
@@ -572,8 +576,9 @@
                 [self dbUpdateMessageStatus:@"delivered" forUUID:uuid];
                 NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
                 NSString *chatFrom = [RgManager addressFromXMPP:from];
+				NSNumber *session = [self dbGetSessionID:chatFrom contact:nil];
                 NSDictionary *dict = @{
-                                       @"tag": chatFrom,
+                                       @"session": session,
                                        @"uuid": uuid,
                                        @"status": @"delivered",
                                        };
@@ -594,11 +599,12 @@
                 NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
                 NSString *chatFrom = [RgManager addressFromXMPP:from];
                 
-                // Delete the chatroom
-                [self dbDeleteSessionID:chatFrom];
+                // TODO: Delete the chatroom
+				NSNumber *session = [self dbGetSessionID:chatFrom contact:nil];
+                //[self dbDeleteSessionID:session];
                 
                 NSDictionary *dict = @{
-                                       @"tag": chatFrom,
+                                       @"session": session,
                                        @"error": @"Address not registered",
                 };
                 [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextReceived object:self userInfo:dict];
@@ -687,7 +693,7 @@
 #else
     dbPath = @"ringmail";
 #endif
-    dbPath = [dbPath stringByAppendingString:@"_v1.2.4.db"];
+    dbPath = [dbPath stringByAppendingString:@"_v1.2.5.db"];
     return dbPath;
 }
 
@@ -710,14 +716,17 @@
                                 //@"DROP TABLE session;",
                                 @"CREATE TABLE IF NOT EXISTS session ("
                                     "id INTEGER PRIMARY KEY NOT NULL,"
+                                    "contact_id bigint,"
                                     "favorite tinyint(1) NOT NULL DEFAULT '0',"
                                     "hide bigint NOT NULL DEFAULT 0,"
+                                    "label varchar(255) DEFAULT NULL,"
                                     "session_md5 text NOT NULL,"
                                     "session_tag text NOT NULL,"
                                     "ts_last_event datetime NOT NULL,"
                                     "unread bigint NOT NULL DEFAULT 0"
                                 ");",
                           
+                                @"CREATE UNIQUE INDEX IF NOT EXISTS contact_id_1 ON session (contact_id);",
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON session (session_tag);",
                                 @"CREATE INDEX IF NOT EXISTS session_md5_1 ON session (session_md5);",
                                 @"CREATE INDEX IF NOT EXISTS ts_last_event_1 ON session (ts_last_event);",
@@ -781,32 +790,65 @@
     NSLog(@"SQL Database Ready");
 }
 
-- (NSNumber *)dbGetSessionID:(NSString *)from
+- (NSDictionary*)dbGetSessionData:(NSNumber*)rowid
+{
+	FMDatabaseQueue *dbq = [self database];
+    __block NSDictionary* result = nil;
+    [dbq inDatabase:^(FMDatabase *db) {
+        NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		NSArray *res = [ndb get:@{
+			@"table":  @"session",
+			@"where": @{
+				@"rowid": rowid,
+			},
+		}];
+		result = res[0];
+    }];
+    [dbq close];
+    return result;
+}
+
+- (NSNumber *)dbGetSessionID:(NSString *)from contact:(NSNumber*)contact
 {
     //NSLog(@"RingMail: Chat - Session ID:(%@)", from);
     FMDatabaseQueue *dbq = [self database];
     __block NSNumber* result;
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE session_tag = ? COLLATE NOCASE", from];
-        if ([rs next])
-        {
-            result = [NSNumber numberWithLong:[rs longForColumnIndex:0]];
-        }
-        else
-        {
-            NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
-            [ndb set:@{
-                       @"table": @"session",
-                       @"insert": @{
-                               @"session_tag": from,
-                               @"session_md5": [from md5HexDigest],
-                               @"unread": @0,
-                               @"ts_last_event": [[NSDate date] strftime],
-                           },
-                       }];
-            result = [NSNumber numberWithLongLong:[db lastInsertRowId]];
-        }
-        [rs close];
+		BOOL contact_found = NO;
+		if (contact != nil)
+		{
+    		FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE contact_id = ?", contact];
+            if ([rs next])
+            {
+                result = [NSNumber numberWithLong:[rs longForColumnIndex:0]];
+				contact_found = YES;
+            }
+			[rs close];
+		}
+		if (! contact_found)
+		{
+            FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE session_tag = ? COLLATE NOCASE", from];
+            if ([rs next])
+            {
+                result = [NSNumber numberWithLong:[rs longForColumnIndex:0]];
+            }
+            else
+            {
+                NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+                [ndb set:@{
+                           @"table": @"session",
+                           @"insert": @{
+                                   @"session_tag": from,
+                                   @"contact_id": contact,
+                                   @"session_md5": [from md5HexDigest],
+                                   @"unread": @0,
+                                   @"ts_last_event": [[NSDate date] strftime],
+                               },
+                           }];
+                result = [NSNumber numberWithLongLong:[db lastInsertRowId]];
+            }
+			[rs close];
+		}
     }];
     [dbq close];
     return result;
@@ -842,22 +884,20 @@
     [dbq close];
 }
 
-- (void)dbDeleteSessionID:(NSString *)from
+- (void)dbDeleteSessionID:(NSNumber *)session
 {
     //NSLog(@"RingMail: Chat Delete - Session ID:(%@)", from);
     FMDatabaseQueue *dbq = [self database];
-    NSNumber* session = [self dbGetSessionID:from];
     [dbq inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"DELETE FROM chat WHERE session_id = ?;", session];
         [db executeUpdate:@"DELETE FROM calls WHERE session_id = ?;", session];
-        [db executeUpdate:@"DELETE FROM session WHERE session_tag = ?;", from];
+        [db executeUpdate:@"DELETE FROM session WHERE rowid = ?;", session];
     }];
     [dbq close];
 }
 
-- (void)dbInsertMessage:(NSString *)from type:(NSString *)type data:(NSDictionary*)params uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl
+- (void)dbInsertMessage:(NSNumber *)session type:(NSString *)type data:(NSDictionary*)params uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl
 {
-    __block NSNumber* session = [self dbGetSessionID:from];
     __block NSString* status = (inbound) ? @"" : @"sending";
     __block NSString* body = @"";
     __block NSData* msgData = [NSData data];
@@ -906,14 +946,14 @@
         }];
         if (inbound)
         {
-            [db executeUpdate:@"UPDATE session SET unread = unread + 1 WHERE session_tag = ?", from];
+            [db executeUpdate:@"UPDATE session SET unread = unread + 1 WHERE rowid = ?", session];
         }
     }];
     [dbq close];
     [self dbUpdateSessionTimestamp:session timestamp:timestamp];
 }
 
-- (void)dbUpdateMessageStatus:(NSString*)status forUUID:(NSString*)uuid
+- (NSNumber*)dbUpdateMessageStatus:(NSString*)status forUUID:(NSString*)uuid
 {
 	__block NSNumber* session = nil;
     FMDatabaseQueue *dbq = [self database];
@@ -933,9 +973,10 @@
 	{
 		[self dbUpdateSessionTimestamp:session timestamp:[NSDate date]];
 	}
+	return session;
 }
 
-- (void)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid
+- (NSNumber*)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid
 {
 	__block NSNumber* session = nil;
     FMDatabaseQueue *dbq = [self database];
@@ -955,6 +996,7 @@
 	{
 		[self dbUpdateSessionTimestamp:session timestamp:[NSDate date]];
 	}
+	return session;
 }
 
 - (NSArray *)dbGetSessions
@@ -1053,15 +1095,14 @@
     return result;
 }
 
-- (NSArray *)dbGetMessages:(NSString *)from
+- (NSArray *)dbGetMessages:(NSNumber *)session
 {
-    return [self dbGetMessages:(NSString *)from uuid:nil];
+    return [self dbGetMessages:(NSNumber *)session uuid:nil];
 }
 
-- (NSArray *)dbGetMessages:(NSString *)from uuid:(NSString*)uuid;
+- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid;
 {
     FMDatabaseQueue *dbq = [self database];
-    NSNumber* session = [self dbGetSessionID:from];
     __block NSMutableArray *result = [NSMutableArray array];
     __block BOOL notify = NO;
     [dbq inDatabase:^(FMDatabase *db) {
@@ -1086,12 +1127,12 @@
             }];
         }
         [rs close];
-        FMResultSet *urs = [db executeQuery:@"SELECT unread FROM session WHERE session_tag = ?", from];
+        FMResultSet *urs = [db executeQuery:@"SELECT unread FROM session WHERE rowid = ?", session];
         if ([urs next])
         {
              if ([urs longForColumnIndex:0] > 0)
              {
-                 [db executeUpdate:@"UPDATE session SET unread = 0 WHERE session_tag = ?", from];
+                 [db executeUpdate:@"UPDATE session SET unread = 0 WHERE rowid = ?", session];
                  notify = YES;
              }
         }
@@ -1174,21 +1215,21 @@
     return result;
 }
 
-- (NSString *)dbGetSessionByMD5:(NSString*)lookup
+- (NSNumber *)dbGetSessionByMD5:(NSString*)lookup
 {
     NSLog(@"RingMail: Chat - Session MD5:(%@)", lookup);
     if (! [lookup isMatchedByRegex:@"^[A-Fa-f0-9]{6,32}$"])
     {
-        return @"";
+        return [NSNumber numberWithInt:0];
     }
     lookup = [lookup stringByAppendingString:@"%"];
     FMDatabaseQueue *dbq = [self database];
-    __block NSString* result = @"";
+    __block NSNumber* result = [NSNumber numberWithInt:0];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT session_tag FROM session WHERE session_md5 LIKE ?", lookup];
+        FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE session_md5 LIKE ?", lookup];
         if ([rs next])
         {
-            result = [rs stringForColumnIndex:0];
+            result = [rs objectForColumnIndex:0];
         }
         [rs close];
     }];
@@ -1196,10 +1237,9 @@
     return result;
 }
 
-- (void)dbInsertCall:(NSDictionary*)callData
+- (void)dbInsertCall:(NSDictionary*)callData session:(NSNumber*)session
 {
     FMDatabaseQueue *dbq = [self database];
-    NSNumber* session = [self dbGetSessionID:[callData objectForKey:@"address"]];
     [dbq inDatabase:^(FMDatabase *db) {
         NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
         [ndb set:@{
@@ -1252,9 +1292,8 @@
 	}
 }
 
-- (void)dbAddFavorite:(NSString *)addr
+- (void)dbAddFavorite:(NSNumber *)session
 {
-    __block NSNumber* session = [self dbGetSessionID:addr];
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
@@ -1269,9 +1308,8 @@
     [dbq close];
 }
 
-- (void)dbDeleteFavorite:(NSString *)addr
+- (void)dbDeleteFavorite:(NSNumber *)session
 {
-    __block NSNumber* session = [self dbGetSessionID:addr];
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
@@ -1286,9 +1324,8 @@
     [dbq close];
 }
 
-- (BOOL)dbIsFavorite:(NSString *)addr
+- (BOOL)dbIsFavorite:(NSNumber *)session
 {
-    __block NSNumber* session = [self dbGetSessionID:addr];
     __block BOOL res = NO;
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {

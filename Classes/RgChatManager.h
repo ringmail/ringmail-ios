@@ -45,32 +45,34 @@
 - (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
 - (void)disconnect;
 - (void)dropTables;
-- (NSString *)sendMessageTo:(NSString*)msgTo body:(NSString*)body;
-- (NSString *)sendMessageTo:(NSString*)msgTo body:(NSString*)body reply:(NSString*)reply;
-- (void)sendMessageTo:(NSString*)to image:(UIImage*)image;
-- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply;
-- (NSString *)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers;
+- (NSString *)sendMessageTo:(NSString*)msgTo body:(NSString*)body contact:(NSNumber*)contact;
+- (NSString *)sendMessageTo:(NSString*)msgTo body:(NSString*)body reply:(NSString*)reply contact:(NSNumber*)contact;
+- (void)sendMessageTo:(NSString*)to image:(UIImage*)image contact:(NSNumber*)contact;
+//- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply contact:(NSNumber*)contact;
+//- (NSString *)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers contact:(NSNumber*)contact;
+- (NSNumber *)dbGetSessionID:(NSString *)from contact:(NSNumber*)contact;
+- (NSDictionary*)dbGetSessionData:(NSNumber*)rowid;
 - (NSArray *)dbGetSessions;
-- (NSArray *)dbGetMessages:(NSString *)from;
-- (NSArray *)dbGetMessages:(NSString *)from uuid:(NSString*)uuid;
+- (NSArray *)dbGetMessages:(NSNumber *)session;
+- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid;
 - (NSString *)dbGetMessageStatusByUUID:(NSString*)uuid;
-- (void)dbInsertMessage:(NSString *)from type:(NSString *)type data:(NSDictionary*)params uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl;
+- (void)dbInsertMessage:(NSNumber *)session type:(NSString *)type data:(NSDictionary*)params uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl;
 - (NSNumber *)dbGetSessionUnread;
-- (void)dbDeleteSessionID:(NSString *)from;
-- (NSString *)dbGetSessionByMD5:(NSString*)lookup;
+- (void)dbDeleteSessionID:(NSNumber *)session;
+- (NSNumber *)dbGetSessionByMD5:(NSString*)lookup;
 - (NSData *)dbGetMessageData:(NSNumber*)msgId;
-- (void)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid;
+- (NSNumber*)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid;
 
 // Component data sources
 - (NSArray *)dbGetMainList;
 - (NSArray *)dbGetMainList:(NSNumber *)session;
 - (NSArray *)dbGetMainList:(NSNumber *)session favorites:(BOOL)fav;
 
-- (void)dbInsertCall:(NSDictionary*)callData;
+- (void)dbInsertCall:(NSDictionary*)callData session:(NSNumber*)session;
 - (void)dbUpdateCall:(NSDictionary*)callData;
 
-- (void)dbAddFavorite:(NSString *)addr;
-- (void)dbDeleteFavorite:(NSString *)addr;
-- (BOOL)dbIsFavorite:(NSString *)addr;
+- (void)dbAddFavorite:(NSNumber *)session;
+- (void)dbDeleteFavorite:(NSNumber *)session;
+- (BOOL)dbIsFavorite:(NSNumber *)session;
 
 @end

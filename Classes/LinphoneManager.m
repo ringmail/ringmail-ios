@@ -129,7 +129,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize configDb;
 @synthesize chatManager;
 @synthesize contactManager;
-@synthesize chatTag;
+@synthesize chatSession;
 @synthesize chatMd5;
 @synthesize ringLogin;
 @synthesize coreReady;
@@ -324,7 +324,7 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 		fastAddressBook = [[FastAddressBook alloc] init];
         
         /* RingMail */
-        self.chatTag = @"";
+        self.chatSession = [NSNumber numberWithInt:0];
         self.chatManager = nil;
         self.contactManager = [[RgContactManager alloc] init];
         self.ringLogin = @"";
@@ -841,12 +841,15 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
                 // New call
                 BOOL inbound = (state == LinphoneCallIncomingReceived) ? YES : NO;
 				NSLog(@"RingMail Inbound: %@", [NSNumber numberWithBool:inbound]);
-                [[self chatManager] dbInsertCall:@{
-                                               @"sip": sip,
-                                               @"address": rgAddress,
-                                               @"state": [NSNumber numberWithInt:state],
-                                               @"inbound": [NSNumber numberWithBool:inbound],
-                                           }];
+				RgChatManager *cmgr = [self chatManager];
+				NSNumber *contactNum = [data->userInfos objectForKey:@"contact"];
+				NSNumber *session = [cmgr dbGetSessionID:rgAddress contact:contactNum];
+                [cmgr dbInsertCall:@{
+                       @"sip": sip,
+                       @"address": rgAddress,
+                       @"state": [NSNumber numberWithInt:state],
+                       @"inbound": [NSNumber numberWithBool:inbound],
+                } session:session];
             }
             else
             {
@@ -2012,12 +2015,12 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	linphone_core_accept_call_with_params(theLinphoneCore, call, lcallParams);
 }
 
-- (void)call:(NSString *)address displayName:(NSString *)displayName transfer:(BOOL)transfer
+- (void)call:(NSString *)address contact:(NSNumber*)contact displayName:(NSString *)displayName transfer:(BOOL)transfer
 {
-	[self call:address displayName:displayName transfer:transfer video:NO];
+	[self call:address contact:contact displayName:displayName transfer:transfer video:NO];
 }
 
-- (void)call:(NSString *)address displayName:(NSString *)displayName transfer:(BOOL)transfer video:(BOOL)video
+- (void)call:(NSString *)address contact:(NSNumber*)contact displayName:(NSString *)displayName transfer:(BOOL)transfer video:(BOOL)video
 {
 	// First verify that network is available, abort otherwise.
 	if (!linphone_core_is_network_reachable(theLinphoneCore)) {
@@ -2108,7 +2111,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 			linphone_address_set_domain(
 				addr, [[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"] UTF8String]);
 		}
-
+		
 		if (transfer) {
 			char *caddr = linphone_address_as_string(addr);
 			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore), caddr);
@@ -2125,6 +2128,10 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 					/* will be used later to notify user if video was not activated because of the linphone core*/
 				} else {
 					data->videoRequested = linphone_call_params_video_enabled(lcallParams);
+					if (contact != nil)
+					{
+						[data->userInfos setObject:contact forKey:@"contact"];
+					}
 					NSLog(@"RingMail - Video: %d", data->videoRequested);
 				}
 			}

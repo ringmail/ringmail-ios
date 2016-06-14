@@ -41,10 +41,10 @@
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubblePingReplyImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubblePingReplyImageData;
 @property (strong, nonatomic) NSDictionary *users;
-@property (strong, nonatomic) NSString *chatRoom;
+@property (strong, nonatomic) NSNumber *chatSession;
 @property (strong, nonatomic) NSNumber* lastSent;
 
-- (id)initWithChatRoom:(NSString *)room;
+- (id)initWithChatRoom:(NSNumber *)session;
 - (void)loadMessages;
 - (void)loadMessages:(NSString*)uuid;
 - (void)updateMessage:(NSString*)uuid;

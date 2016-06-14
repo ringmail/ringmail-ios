@@ -330,7 +330,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 								property:(ABPropertyID)property
 							  identifier:(ABMultiValueIdentifier)identifier {
 
-	CFTypeRef multiValue = ABRecordCopyValue(person, property);
+	/*CFTypeRef multiValue = ABRecordCopyValue(person, property);
 	CFIndex valueIdx = ABMultiValueGetIndexForIdentifier(multiValue, identifier);
 	NSString *phoneNumber = (NSString *)CFBridgingRelease(ABMultiValueCopyValueAtIndex(multiValue, valueIdx));
 	// Go to dialer view
@@ -340,7 +340,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	if (controller != nil) {
 		[controller call:phoneNumber displayName:(NSString *)CFBridgingRelease(ABRecordCopyCompositeName(person))];
 	}
-	CFRelease(multiValue);
+	CFRelease(multiValue);*/
 	return false;
 }
 

@@ -91,12 +91,13 @@
 #pragma mark - UITableViewDelegate Functions
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[tableView deselectRowAtIndexPath:indexPath animated:NO];
+	// Dead code
+	/*[tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSString *chatRoom = [[self.chatList objectAtIndex:[indexPath row]] objectAtIndex:0];
 
 	// Go to ChatRoom view
     [[LinphoneManager instance] setChatTag:chatRoom];
-    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];*/
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView

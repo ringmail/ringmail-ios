@@ -86,8 +86,8 @@
             if ([answers count] > 1) // Minimum 2 items
             {
                 NSLog(@"RingMail: Send Question: %@\nAnswers: %@", theQuestion, answers);
-                NSString *chatRoom = [[LinphoneManager instance] chatTag];
-                [[[LinphoneManager instance] chatManager] sendQuestionTo:chatRoom question:theQuestion answers:answers];
+                //NSString *chatRoom = [[LinphoneManager instance] chatTag];
+                //[[[LinphoneManager instance] chatManager] sendQuestionTo:chatRoom question:theQuestion answers:answers];
                 lastCell.textField.text = @"";
                 inputCell.textField.text = @"";
                 NSMutableArray *rowList = [NSMutableArray arrayWithArray:[answerSection rows]];

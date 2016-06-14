@@ -110,15 +110,29 @@ static LevelDB* theConfigDatabase = nil;
 	return res;
 }
 
++ (NSNumber *)getSessionFromAddress:(NSString*)address
+{
+	LinphoneManager *lm = [LinphoneManager instance];
+    ABRecordRef contact = [[lm fastAddressBook] getContact:address];
+	NSNumber *contactNum = nil;
+	if (contact != NULL)
+	{
+		contactNum = [[lm fastAddressBook] getContactId:contact];
+	}
+	return [[lm chatManager] dbGetSessionID:address contact:contactNum];
+}
+
 + (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video
 {
     NSString* displayName = [address copy];
+	NSNumber* contactNum = nil;
     if (contact == NULL)
     {
         contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
     }
     if (contact != NULL)
     {
+		contactNum = [[[LinphoneManager instance] fastAddressBook] getContactId:contact];
         displayName = [FastAddressBook getContactDisplayName:contact];
     }
     else
@@ -129,12 +143,23 @@ static LevelDB* theConfigDatabase = nil;
     {
         address = [RgManager addressToSIP:address];
     }
-    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE video:video];
+    [[LinphoneManager instance] call:address contact:(NSNumber*)contactNum displayName:displayName transfer:FALSE video:video];
 }
 
-+ (void)startMessage:(NSString*)address
++ (void)startMessage:(NSString*)address contact:(ABRecordRef)contact
 {
-    [[LinphoneManager instance] setChatTag:address];
+	LinphoneManager *lm = [LinphoneManager instance];
+	NSNumber *contactNum = nil;
+	if (contact == NULL)
+    {
+        contact = [[lm fastAddressBook] getContact:address];
+    }
+	if (contact != NULL)
+	{
+		contactNum = [[lm fastAddressBook] getContactId:contact];
+	}
+	NSNumber *session = [[lm chatManager] dbGetSessionID:address contact:contactNum];
+    [lm setChatSession:session];
     [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 }
 
@@ -145,19 +170,20 @@ static LevelDB* theConfigDatabase = nil;
         NSString* md5 = [lm chatMd5];
         if (md5 != nil && ! [md5 isEqualToString:@""])
         {
-            NSString *chat = [[lm chatManager] dbGetSessionByMD5:md5];
-            if (![chat isEqualToString:@""])
+            NSNumber *chat = [[lm chatManager] dbGetSessionByMD5:md5];
+            if ([chat intValue] != 0)
             {
                 [lm setChatMd5:@""];
                 UICompositeViewDescription* curView = [[PhoneMainView instance] topView];
                 if ((curView == nil) || (!
                     ( // If not in the same chat room already
                         [curView equal:[ChatRoomViewController compositeViewDescription]] &&
-                        [lm chatTag] != nil &&
-                        [chat isEqualToString:[lm chatTag]]
+                        [lm chatSession] != nil &&
+                        [chat isEqualToNumber:[lm chatSession]]
                      )
                 )) {
-                    [RgManager startMessage:chat];
+					[lm setChatSession:chat];
+					[[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
                 }
             }
         }
@@ -173,12 +199,14 @@ static LevelDB* theConfigDatabase = nil;
 		NSString *ok = [res objectForKey:@"result"];
 		if ([ok isEqualToString:@"ok"])
 		{
-            [[[LinphoneManager instance] chatManager] dbInsertCall:@{
+			RgChatManager *cmgr = [[LinphoneManager instance] chatManager];
+			NSNumber *session = [cmgr dbGetSessionID:address contact:nil];
+            [cmgr dbInsertCall:@{
                 @"sip": @"",
                 @"address": address,
                 @"state": [NSNumber numberWithInt:0],
                 @"inbound": [NSNumber numberWithBool:NO],
-		    }];
+		    } session:session];
 			[[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
 				@"address": [res objectForKey:@"target"],
 			}];
@@ -296,7 +324,8 @@ static LevelDB* theConfigDatabase = nil;
             [ringuri replaceOccurrencesOfRegex:@"^(message|chat)/" withString:@""];
 			if ([RgManager checkRingMailAddress:ringuri])
             {
-                [RgManager startMessage:[RgManager filterRingMailAddress:ringuri]];
+				ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:ringuri];
+                [RgManager startMessage:[RgManager filterRingMailAddress:ringuri] contact:contact];
             }
             return;
         }
@@ -347,7 +376,8 @@ static LevelDB* theConfigDatabase = nil;
                 [[mgr opQueue] cancelAllOperations]; // reset queue
                 [[mgr opQueue] addOperationWithBlock:^{
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                        [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL video:video];
+						ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:ringuri];
+                        [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:contact video:video];
                     }];
                 }];
             }

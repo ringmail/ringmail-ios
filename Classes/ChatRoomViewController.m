@@ -128,11 +128,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[editButton setOff];
     
     RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
-    NSString *room = [[LinphoneManager instance] chatTag];
+    NSNumber *room = [[LinphoneManager instance] chatSession];
     
     RgChatModelData* cdata = [[RgChatModelData alloc] initWithChatRoom:room];
     [mc setChatData:cdata];
-    [mc setChatRoom:room]; // loads the data
+    [mc setChatSession:room]; // loads the data
     [self setChatViewController:mc];
     [self update];
     
@@ -176,19 +176,22 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)update {
-    NSString *chatTag = [[LinphoneManager instance] chatTag];
-    NSLog(@"RingMail Chat Update: %@", chatTag);
-    if (! [chatTag isEqualToString:@""])
+	LinphoneManager *lm = [LinphoneManager instance];
+    NSNumber *session = [lm chatSession];
+    NSLog(@"RingMail Chat Update: %@", session);
+    if ([session intValue] != 0)
     {
-        NSString *displayName = chatTag;
         UIImage *image = nil;
-
-        ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:displayName];
-        if (acontact != nil) {
-            displayName = [FastAddressBook getContactDisplayName:acontact];
-            image = [FastAddressBook getContactImage:acontact thumbnail:true];
-        }
-
+		NSDictionary *sdata = [[lm chatManager] dbGetSessionData:session];
+        NSString *displayName = sdata[@"session_tag"];
+		if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
+		{
+			ABRecordRef acontact = [[lm fastAddressBook] getContactById:sdata[@"contact_id"]];
+            if (acontact != nil) {
+                displayName = [FastAddressBook getContactDisplayName:acontact];
+                image = [FastAddressBook getContactImage:acontact thumbnail:true];
+			}
+		}
         addressLabel.text = displayName;
         addressLabel.accessibilityValue = displayName;
 
@@ -306,9 +309,9 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
 }
 
 - (void)chatReceivedEvent:(NSNotification *)notif {
-    NSString *room = [[notif userInfo] objectForKey:@"tag"];
+    NSNumber *room = [[notif userInfo] objectForKey:@"session"];
     NSLog(@"receive event: %@", room);
-    if ([room isEqualToString:chatViewController.chatRoom])
+    if ([room isEqualToNumber:chatViewController.chatSession])
     {
         if ([[notif userInfo] objectForKey:@"error"] != nil)
         {
@@ -331,16 +334,16 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
 }
 
 - (void)chatSentEvent:(NSNotification *)notif {
-    NSString *room = [[notif userInfo] objectForKey:@"tag"];
-    if ([room isEqualToString:chatViewController.chatRoom])
+    NSNumber *room = [[notif userInfo] objectForKey:@"session"];
+    if ([room isEqualToNumber:chatViewController.chatSession])
     {
         [chatViewController sentMessage];
     }
 }
 
 - (void)chatUpdateEvent:(NSNotification *)notif {
-    NSString *room = [[notif userInfo] objectForKey:@"tag"];
-    if ([room isEqualToString:chatViewController.chatRoom])
+    NSNumber *room = [[notif userInfo] objectForKey:@"session"];
+    if ([room isEqualToNumber:chatViewController.chatSession])
     {
         if ([[notif userInfo] objectForKey:@"status"])
         {
@@ -367,43 +370,57 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
 }
 
 - (IBAction)onCallClick:(id)sender {
-    NSString *address = [chatViewController chatRoom];
-    if ([address length] > 0)
+    NSNumber *session = [chatViewController chatSession];
+    if ([session intValue] != 0)
     {
-        if ([RgManager checkRingMailAddress:address])
-        {
-            [RgManager startCall:address contact:NULL video:NO];
-        }
+		NSDictionary *sdata = [[[LinphoneManager instance] chatManager] dbGetSessionData:session];
+		ABRecordRef contact = NULL;
+		if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
+		{
+			contact = [[[LinphoneManager instance] fastAddressBook] getContactById:sdata[@"contact_id"]];
+		}
+        [RgManager startCall:sdata[@"session_tag"] contact:contact video:NO];
     }
 }
 
 - (IBAction)onVideoClick:(id)sender {
-    NSString *address = [chatViewController chatRoom];
-    if ([address length] > 0)
+    NSNumber *session = [chatViewController chatSession];
+    if ([session intValue] != 0)
     {
-        if ([RgManager checkRingMailAddress:address])
-        {
-            [RgManager startCall:address contact:NULL video:YES];
-        }
-    }
+    	NSDictionary *sdata = [[[LinphoneManager instance] chatManager] dbGetSessionData:session];
+    	ABRecordRef contact = NULL;
+    	if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
+    	{
+    		contact = [[[LinphoneManager instance] fastAddressBook] getContactById:sdata[@"contact_id"]];
+    	}
+        [RgManager startCall:sdata[@"session_tag"] contact:contact video:YES];
+	}
 }
 
 - (IBAction)onContactClick:(id)sender {
-    NSString *addr = [chatViewController chatRoom];
-	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:addr];
-	ContactDetailsViewController *controller = DYNAMIC_CAST(
-		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
-		ContactDetailsViewController);
-  	if (controller != nil) {
-    	if (contact)
+    NSNumber *session = [chatViewController chatSession];
+    if ([session intValue] != 0)
+    {
+		ABRecordRef contact = NULL;
+    	NSDictionary *sdata = [[[LinphoneManager instance] chatManager] dbGetSessionData:session];
+    	if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
     	{
-    		// Go to Contact details view
-       		[controller setContact:contact];
+    		contact = [[[LinphoneManager instance] fastAddressBook] getContactById:sdata[@"contact_id"]];
     	}
-    	else
-    	{
-       		[controller newContact:addr];
-		}
+    	ContactDetailsViewController *controller = DYNAMIC_CAST(
+    		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
+    		ContactDetailsViewController);
+      	if (controller != nil) {
+        	if (contact)
+        	{
+        		// Go to Contact details view
+           		[controller setContact:contact];
+        	}
+        	else
+        	{
+           		[controller newContact:sdata[@"session_tag"]];
+    		}
+    	}
 	}
 }
 

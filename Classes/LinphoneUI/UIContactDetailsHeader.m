@@ -118,8 +118,9 @@
 		LOGW(@"Cannot update contact details header: null contact");
 		return;
 	}
-    
-    NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
+	
+	NSNumber* contactNum = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
+    NSString* contactID = [contactNum stringValue];
     rgMember = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
     NSLog(@"RingMail: Contact ID: %@ - has rg:%d", contactID, rgMember);
     if (rgMember)
@@ -130,7 +131,8 @@
         NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
         if (! [rgAddress isEqualToString:@""])
         {
-            fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:rgAddress];
+			NSNumber *session = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress contact:contactNum];
+            fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:session];
         }
         
         if (fav)
@@ -360,7 +362,10 @@
     NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
     if (rgAddress != nil)
     {
-        [[LinphoneManager instance] setChatTag:rgAddress];
+	   	LinphoneManager *lm = [LinphoneManager instance];
+    	NSNumber *contactNum = [[lm fastAddressBook] getContactId:contact];
+		NSNumber *session = [[lm chatManager] dbGetSessionID:rgAddress contact:contactNum];
+        [lm setChatSession:session];
         [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
     }
 }
@@ -397,7 +402,8 @@
 		return;
 	}
     
-    NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
+	NSNumber *contactNum = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
+    NSString *contactID = [contactNum stringValue];
     BOOL member = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
     if (member)
     {
@@ -405,19 +411,20 @@
         
         BOOL fav = NO;
         NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
+		NSNumber *session = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress contact:contactNum];
         if (! [rgAddress isEqualToString:@""])
         {
-            fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:rgAddress];
+            fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:session];
         }
         
         if (fav)
         {
-            [[[LinphoneManager instance] chatManager] dbDeleteFavorite:rgAddress];
+            [[[LinphoneManager instance] chatManager] dbDeleteFavorite:session];
             [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite-pressed.png"] forState:UIControlStateNormal];
         }
         else
         {
-            [[[LinphoneManager instance] chatManager] dbAddFavorite:rgAddress];
+            [[[LinphoneManager instance] chatManager] dbAddFavorite:session];
             [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite.png"] forState:UIControlStateNormal];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];

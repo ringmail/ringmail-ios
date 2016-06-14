@@ -1,3 +1,4 @@
+#import "Utils.h"
 #import "RgMessagesViewController.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
@@ -6,9 +7,10 @@
 #import "RgChatQuestionSelect.h"
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
+
 @implementation RgMessagesViewController
 
-@synthesize chatRoom = _chatRoom;
+@synthesize chatSession = _chatSession;
 @synthesize chatData;
 @synthesize popoverController;
 @synthesize imageCache;
@@ -21,7 +23,7 @@
 {
     if (self = [super init])
     {
-        self.chatRoom = @"";
+        self.chatSession = [NSNumber numberWithInt:0];
         self.imageCache = [NSMutableDictionary dictionary];
     }
     return self;
@@ -56,10 +58,10 @@
 
 #pragma mark - Chat room switch
 
-- (void)setChatRoom:(NSString *)chatRoom
+- (void)setChatRoom:(NSNumber *)session
 {
-    _chatRoom = chatRoom;
-    [self.chatData setChatRoom:chatRoom];
+    _chatSession = session;
+    [self.chatData setChatSession:session];
     [self.chatData loadMessages];
 }
 
@@ -186,10 +188,11 @@
     UIImage *imageSized = [image scaleToFitSize:(CGSize){300, 300}];
     
     RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-    [mgr sendMessageTo:_chatRoom image:imageSized];
+	NSDictionary *sdata = [mgr dbGetSessionData:_chatSession];
+    [mgr sendMessageTo:sdata[@"session_tag"] image:imageSized contact:NILIFNULL(sdata[@"contact_id"])];
     
     NSDictionary *dict = @{
-        @"tag":_chatRoom
+        @"tag":_chatSession
     };
     [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextSent object:self userInfo:dict];
     
@@ -210,7 +213,8 @@
     {
         //NSLog(@"RingMail - Send Message To: %@ -> %@", _chatRoom, msgTo);
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-        NSString *uuid = [mgr sendMessageTo:_chatRoom body:text];
+		NSDictionary *sdata = [mgr dbGetSessionData:_chatSession];
+        NSString *uuid = [mgr sendMessageTo:sdata[@"session_tag"] body:text contact:NILIFNULL(sdata[@"contact_id"])];
         [self.chatData loadMessages:uuid];
         //[JSQSystemSoundPlayer jsq_playMessageSentSound];
         [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:@"chat_send" fileExtension:kJSQSystemSoundTypeWAV];
@@ -610,7 +614,7 @@
                 [sheet showInView:[PhoneMainView instance].view];
             }
         }
-        else if ([jsonType isEqualToString:@"ping"])
+        /*else if ([jsonType isEqualToString:@"ping"])
         {
             if (! [message.senderId isEqualToString:self.senderId] && ! [jsonInfo objectForKey:@"answered"])
             {
@@ -627,7 +631,7 @@
                 [self.chatData loadMessages];
                 [self.collectionView reloadData];
             }
-        }
+        }*/
     }
 }
 
@@ -640,7 +644,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSArray* answers = [self.questionData objectForKey:@"answers"];
+    /*NSArray* answers = [self.questionData objectForKey:@"answers"];
     if (buttonIndex < [answers count])
     {
         NSString* answer = answers[buttonIndex];
@@ -657,7 +661,7 @@
         [self.chatData loadMessages:uuid];
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
         [self finishSendingMessageAnimated:YES];
-    }
+    }*/
 }
 
 @end

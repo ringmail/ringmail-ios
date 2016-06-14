@@ -10,7 +10,7 @@
 
 @implementation RgChatModelData
 
-@synthesize chatRoom;
+@synthesize chatSession;
 @synthesize lastSent;
 
 - (instancetype)init
@@ -66,11 +66,11 @@
     return self;
 }
 
-- (id)initWithChatRoom:(NSString *)room
+- (id)initWithChatRoom:(NSNumber *)session
 {
     if (self = [self init])
     {
-        chatRoom = room;
+        chatSession = session;
         [self loadMessages];
     }
     return self;
@@ -89,7 +89,7 @@
 
 - (void)loadMessages:(NSString*)uuid
 {
-    if (! [chatRoom isEqualToString:@""])
+    if ([chatSession intValue] != 0)
     {
         NSDictionary* msgRec = [self buildMessages:uuid];
         NSMutableArray* msgs = [msgRec objectForKey:@"messages"];
@@ -169,13 +169,14 @@
     NSArray* input;
     if (uuid)
     {
-        input = [mgr dbGetMessages:self.chatRoom uuid:uuid];
+        input = [mgr dbGetMessages:self.chatSession uuid:uuid];
     }
     else
     {
-        input = [mgr dbGetMessages:self.chatRoom];
+        input = [mgr dbGetMessages:self.chatSession];
     }
-    NSString *displayName = self.chatRoom;
+	// TODO: Fix label
+    NSString *displayName = [self.chatSession stringValue];
     
     ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:displayName];
     if (acontact != nil) {
@@ -202,7 +203,8 @@
         }
         else
         {
-            sender = self.chatRoom;
+			// TODO: Fix sender
+            sender = [self.chatSession stringValue];
             senderName = displayName;
             lastSent = nil; // No need for status if they reply
         }

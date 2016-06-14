@@ -26,6 +26,8 @@
     [inst_ isKindOfClass:[cls class]]? inst_ : nil; \
  })
 
+#define NILIFNULL(foo) (([foo isKindOfClass:[NSNull class]]) ? nil : foo)
+
 #import <ortp/ortp.h>
 
 @interface LinphoneLogger : NSObject {

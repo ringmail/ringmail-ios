@@ -58,7 +58,8 @@
 #pragma mark -
 
 - (void)touchUp:(id)sender {
-	[[LinphoneManager instance] call:[addressField text] displayName:nil transfer:TRUE];
+	// Pending
+	//[[LinphoneManager instance] call:[addressField text] displayName:nil transfer:TRUE];
 }
 
 @end
