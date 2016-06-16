@@ -7,6 +7,7 @@
 //
 
 #import "RgChatManager.h"
+#import "RgNetwork.h"
 #import "NSString+MD5.h"
 #import "NSXMLElement+XMPP.h"
 #import "NoteSQL.h"
@@ -247,11 +248,17 @@
 
 - (NSString*)sendMessageTo:(NSString*)to body:(NSString*)text reply:(NSString*)reply contact:(NSNumber*)contact
 {
-    NSDate *now = [NSDate date];
+	NSLog(@"Send Message To: %@", to);
+    __block NSDate *now = [NSDate date];
+    __block NSString *messageID = [[self xmppStream] generateUUID];
+    NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
+    [messageData setObject:text forKey:@"body"];
+    [messageData setObject:now forKey:@"timestamp"];
+  	NSNumber *session = [self dbGetSessionID:to contact:contact];
+    [self dbInsertMessage:session type:@"text/plain" data:messageData uuid:messageID inbound:NO url:nil];
     NSString *msgTo = [RgManager addressToXMPP:to];
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
     [body setStringValue:text];
-    NSString *messageID = [[self xmppStream] generateUUID];
     NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
     [message addAttributeWithName:@"id" stringValue:messageID];
     [message addAttributeWithName:@"type" stringValue:@"chat"];
@@ -262,13 +269,19 @@
        [message addAttributeWithName:@"reply" stringValue:reply];
     }
     [message addChild:body];
-    NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
-    [messageData setObject:text forKey:@"body"];
-    [messageData setObject:now forKey:@"timestamp"];
-	
-	NSNumber *session = [self dbGetSessionID:to contact:contact];
-    [self dbInsertMessage:session type:@"text/plain" data:messageData uuid:messageID inbound:NO url:nil];
     [[self xmppStream] sendElement:message];
+	/*[[RgNetwork instance] lookupConversation:@{
+		@"to": to,
+	} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+	    NSDictionary* res = responseObject;
+		NSLog(@"API Response: %@", res);
+        NSString *ok = [res objectForKey:@"result"];
+        if (ok != nil && [ok isEqualToString:@"ok"])
+		{
+			NSString *finalTo = [NSString stringWithFormat:@"%@@c.ring.ml", res[@"code"]];
+			sendBlock(finalTo);
+		}
+	}];*/
     return messageID;
 }
 
@@ -468,6 +481,8 @@
 {
     NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSLog(@"%@", xmppMessage);
+	// TODO: don't return...
+	//return;
     if (! [xmppMessage isErrorMessage])
     {
         BOOL update = NO;
@@ -567,7 +582,7 @@
             
             //NSLog(@"NEW CHAT FROM %@: %@\nLog: %@", chatFrom, body, [self dbGetMessages:chatFrom]);
         }
-        else if ([xmppMessage isTo:self.JID])
+        else if ([xmppMessage isTo:self.JID options:XMPPJIDCompareUser])
         {
             NSXMLElement *delivered = [xmppMessage elementForName:@"received" xmlns:@"urn:xmpp:receipts"];
             if (delivered != nil)
@@ -839,7 +854,7 @@
                            @"table": @"session",
                            @"insert": @{
                                    @"session_tag": from,
-                                   @"contact_id": contact,
+                                   @"contact_id": (contact != nil) ? contact : [NSNull null],
                                    @"session_md5": [from md5HexDigest],
                                    @"unread": @0,
                                    @"ts_last_event": [[NSDate date] strftime],

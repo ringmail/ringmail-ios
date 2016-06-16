@@ -11,6 +11,7 @@
 
 typedef void (^RgNetworkCallback)(AFHTTPRequestOperation *operation, id responseObject);
 typedef void (^RgNetworkError)(AFHTTPRequestOperation *operation, NSError *error);
+typedef void (^RgConversation)(NSString *to);
 
 @interface RgNetwork : NSObject
 
@@ -32,5 +33,6 @@ typedef void (^RgNetworkError)(AFHTTPRequestOperation *operation, NSError *error
 - (void)updateContacts:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 - (void)lookupHashtag:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 - (void)hashtagDirectory:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail;
+- (void)lookupConversation:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 
 @end

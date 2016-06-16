@@ -300,4 +300,23 @@ static RgNetwork* theRgNetwork = nil;
     }
 }
 
+- (void)lookupConversation:(NSDictionary*)params callback:(RgNetworkCallback)callback
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+		parameters[@"login"] = rgLogin;
+		parameters[@"password"] = rgPass;
+		parameters[@"to"] = params[@"to"];
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/conversation", self.networkHost];
+        [manager POST:postUrl parameters:parameters success:callback failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"RingMail API Error: %@", error);
+        }];
+    }
+}
+
 @end
