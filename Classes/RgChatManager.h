@@ -38,11 +38,12 @@
 @property (nonatomic, strong) XMPPJID *JID;
 @property (atomic, strong) NSString* chatPassword;
 @property (nonatomic, retain) FMDatabaseQueue *databaseQueue;
+@property (nonatomic, retain) NSString *replyTo;
 
 + (NSString*)databasePath;
 - (void)setupDatabase;
 - (BOOL)isConnected;
-- (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
+- (BOOL)connectWithJID:(NSString*)myJID password:(NSString*)myPassword;
 - (void)disconnect;
 - (void)dropTables;
 - (NSString *)sendMessageTo:(NSString*)msgTo body:(NSString*)body contact:(NSNumber*)contact;

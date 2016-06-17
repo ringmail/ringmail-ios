@@ -28,6 +28,7 @@
         NSString *queueLabel = [NSString stringWithFormat:@"%@.work.%@", [self class], self];
         self.workQueue = dispatch_queue_create([queueLabel UTF8String], 0);
         self.chatPassword = @"";
+        self.replyTo = @"";
         self.databaseQueue = nil;
         [self setupDatabase];
         [self setupStream];
@@ -194,6 +195,7 @@
 {
     NSLog(@"RingMail Chat Connect: %@", myJID);
     //  NSLog(@"RingMail Chat Password: %@", myPassword);
+	self.replyTo = [myJID stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLUserAllowedCharacterSet];
     myJID = [RgManager addressToXMPP:myJID];
     self.JID = [XMPPJID jidWithString:myJID resource:@"RingMail"];
     
@@ -264,24 +266,16 @@
     [message addAttributeWithName:@"type" stringValue:@"chat"];
     [message addAttributeWithName:@"timestamp" stringValue:[now strftime]];
     [message addAttributeWithName:@"to" stringValue:msgTo];
+	if (contact != nil)
+	{
+		[message addAttributeWithName:@"reply-to" stringValue:self.replyTo];
+	}
     if (reply)
     {
        [message addAttributeWithName:@"reply" stringValue:reply];
     }
     [message addChild:body];
     [[self xmppStream] sendElement:message];
-	/*[[RgNetwork instance] lookupConversation:@{
-		@"to": to,
-	} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
-	    NSDictionary* res = responseObject;
-		NSLog(@"API Response: %@", res);
-        NSString *ok = [res objectForKey:@"result"];
-        if (ok != nil && [ok isEqualToString:@"ok"])
-		{
-			NSString *finalTo = [NSString stringWithFormat:@"%@@c.ring.ml", res[@"code"]];
-			sendBlock(finalTo);
-		}
-	}];*/
     return messageID;
 }
 
