@@ -81,6 +81,20 @@ static LevelDB* theConfigDatabase = nil;
     return [res stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
++ (BOOL)hasContactId:(NSNumber*)contact
+{
+	LinphoneManager *mgr = [LinphoneManager instance];
+	ABRecordRef item = [[mgr fastAddressBook] getContactById:contact];
+	if (item == NULL)
+	{
+		return NO;
+	}
+	else
+	{
+		return YES;
+	}
+}
+
 + (NSString*)formatPhoneNumber:(NSString*)addr
 {
 	addr = [addr stringByReplacingOccurrencesOfRegex:@"\\D" withString:@""];
@@ -276,11 +290,10 @@ static LevelDB* theConfigDatabase = nil;
     {
         return true;
     }
-    /*else if ([numAddress length]) // has a digit
+    else if ([numAddress length] >= 10 && [numAddress length] <= 20) // has a digit
     {
-        // TODO: calling DIDs, etc...
-        return false;
-    }*/
+        return true;
+    }
     NSLog(@"RingMail: URI - Bad Address: %@", address);
     return false;
 }

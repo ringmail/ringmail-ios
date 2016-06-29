@@ -5515,7 +5515,7 @@
 					"$(OTHER_CFLAGS)",
 					"-DDEBUG=1",
 				);
-				PROVISIONING_PROFILE = "ad706e5b-d152-493e-9a6a-f4cbad1781e7";
+				PROVISIONING_PROFILE = "bbefbc2b-57db-48d9-875a-4ddd85caf998";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				STRIP_INSTALLED_PRODUCT = NO;

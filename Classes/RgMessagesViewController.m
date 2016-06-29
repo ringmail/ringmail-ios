@@ -192,7 +192,7 @@
     [mgr sendMessageTo:sdata[@"session_tag"] image:imageSized contact:NILIFNULL(sdata[@"contact_id"])];
     
     NSDictionary *dict = @{
-        @"tag":_chatSession
+        @"session":_chatSession
     };
     [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextSent object:self userInfo:dict];
     

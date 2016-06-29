@@ -44,6 +44,7 @@
 
 - (NSArray *)buildCards:(NSArray*)list
 {
+	NSLog(@"Card Data: %@", list);
     NSMutableArray *list2 = [NSMutableArray array];
     int item = 0;
 	UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
@@ -65,14 +66,19 @@
 		else
 		{
     		// Avatar image
-    		ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    		if (contact)
-    		{
-    			UIImage *customImage = [FastAddressBook getContactImage:contact thumbnail:true];
-                [newdata setObject:[FastAddressBook getContactDisplayName:contact] forKey:@"label"];
-                [newdata setObject:((customImage != nil) ? customImage : defaultImage) forKey:@"image"];
-    		}
-    		else
+			NSNumber *contactId = r[@"contact_id"];
+			ABRecordRef contact = NULL;
+			if (NILIFNULL(contactId) != nil)
+			{
+				contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactId];
+        		if (contact)
+        		{
+        			UIImage *customImage = [FastAddressBook getContactImage:contact thumbnail:true];
+                    [newdata setObject:[FastAddressBook getContactDisplayName:contact] forKey:@"label"];
+                    [newdata setObject:((customImage != nil) ? customImage : defaultImage) forKey:@"image"];
+        		}
+			}
+    		if (! contact)
     		{
                 [newdata setObject:address forKey:@"label"];
                 [newdata setObject:defaultImage forKey:@"image"];

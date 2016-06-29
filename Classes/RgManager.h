@@ -41,6 +41,7 @@ extern NSString *const kRgSelfName;
 + (NSString*)addressFromSIPUser:(NSString*)addr;
 + (NSString*)addressToXMPP:(NSString*)addr;
 + (NSString*)addressFromXMPP:(NSString*)addr;
++ (BOOL)hasContactId:(NSNumber*)contact;
 + (NSString*)formatPhoneNumber:(NSString*)addr;
 + (NSString*)pushToken:(NSData*)tokenData;
 + (void)setupPushToken;

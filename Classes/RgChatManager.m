@@ -475,8 +475,6 @@
 {
     NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSLog(@"%@", xmppMessage);
-	// TODO: don't return...
-	//return;
     if (! [xmppMessage isErrorMessage])
     {
         BOOL update = NO;
@@ -486,12 +484,25 @@
             NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
             NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
             NSDate *timestamp = [NSDate parse:[[xmppMessage attributeForName:@"timestamp"] stringValue]];
+            NSString *contactStr = [[xmppMessage attributeForName:@"contact-id"] stringValue];
+			NSNumber *contact = nil;
+			if (contactStr != nil)
+			{
+				if ([contactStr isMatchedByRegex:@"^\\d+$"])
+				{
+					contact = [NSNumber numberWithInt:[contactStr intValue]];
+					if (! [RgManager hasContactId:contact])
+					{
+						contact = nil; // invalid contact id
+					}
+				}
+			}
             NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
             [messageData setObject:timestamp forKey:@"timestamp"];
             [messageData setObject:body forKey:@"body"];
-            
+			
             __block NSString *chatFrom = [RgManager addressFromXMPP:from];
-			__block NSNumber *session = [self dbGetSessionID:chatFrom contact:nil];
+			__block NSNumber *session = [self dbGetSessionID:chatFrom contact:contact];
 			
             NSXMLElement *attach = [xmppMessage elementForName:@"attachment"];
             NSXMLElement *jsonHolder = [xmppMessage JSONContainer];
@@ -582,16 +593,16 @@
             if (delivered != nil)
             {
                 NSString* uuid = [[delivered attributeForName:@"id"] stringValue];
-                [self dbUpdateMessageStatus:@"delivered" forUUID:uuid];
-                NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
-                NSString *chatFrom = [RgManager addressFromXMPP:from];
-				NSNumber *session = [self dbGetSessionID:chatFrom contact:nil];
-                NSDictionary *dict = @{
-                                       @"session": session,
-                                       @"uuid": uuid,
-                                       @"status": @"delivered",
-                                       };
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
+                NSNumber *session = [self dbUpdateMessageStatus:@"delivered" forUUID:uuid];
+				if (session != nil)
+				{
+                    NSDictionary *dict = @{
+                                           @"session": session,
+                                           @"uuid": uuid,
+                                           @"status": @"delivered",
+                                           };
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
+				}
             }
         }
     }
@@ -1013,7 +1024,7 @@
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread, (SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_message, (SELECT STRFTIME('%s', msg_time) FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_time, (SELECT call_sip FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_id, (SELECT STRFTIME('%s', call_time) FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_time FROM session ORDER BY rowid DESC"];
+        FMResultSet *rs = [db executeQuery:@"SELECT session_tag, unread, (SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_message, (SELECT STRFTIME('%s', msg_time) FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_time, (SELECT call_sip FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_id, (SELECT STRFTIME('%s', call_time) FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_time, contact_id FROM session ORDER BY rowid DESC"];
         while ([rs next])
         {
             //NSLog(@"RingMail Chat Result Set: %@", [rs resultDictionary]);
@@ -1029,6 +1040,7 @@
                                [rs objectForColumnIndex:3], // Message timestamp
                                [rs objectForColumnIndex:4], // Call timestamp
                                [rs objectForColumnIndex:5],
+                               [rs objectForColumnIndex:6],
                                nil]];
         }
         [rs close];
@@ -1054,7 +1066,7 @@
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
         NSString *sql = @"";
-        sql = [sql stringByAppendingString:@"SELECT rowid, session_tag, unread, STRFTIME('%s', ts_last_event) AS timestamp, "];
+        sql = [sql stringByAppendingString:@"SELECT rowid, session_tag, unread, contact_id, STRFTIME('%s', ts_last_event) AS timestamp, "];
         sql = [sql stringByAppendingString:@"(SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_message, "];
         sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', msg_time) FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_time, "];
 	    sql = [sql stringByAppendingString:@"(SELECT msg_inbound FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as msg_inbound, "];
