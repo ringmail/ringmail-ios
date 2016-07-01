@@ -198,9 +198,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	[videoCameraSwitch setPreview:videoPreview];
 
-	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideVideoPreview:)];
-	tap.numberOfTapsRequired = 1;
-	[self.videoPreview addGestureRecognizer:tap];
+	//UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideVideoPreview:)];
+	//tap.numberOfTapsRequired = 1;
+	//[self.videoPreview addGestureRecognizer:tap];
 	
 	[zeroButton setDigit:'0'];
 	[zeroButton setDtmf:true];

@@ -816,6 +816,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 	if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingInit || state == LinphoneCallConnected ||
 		state == LinphoneCallStreamsRunning) {
 		if (linphone_call_params_video_enabled(linphone_call_get_current_params(call)) && !speaker_already_enabled) {
+			NSLog(@"Enable speaker for video");
 			[self setSpeakerEnabled:TRUE];
 			speaker_already_enabled = TRUE;
 		}
@@ -1974,6 +1975,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	if (enable && [self allowSpeaker]) {
         BOOL ok = [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&err];
+		NSLog(@"Enabled speaker: %d", ok);
         if (ok && !err)
         {
             speakerEnabled = TRUE;
@@ -1981,7 +1983,8 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	}
     else
     {
-       [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideNone error:&err];
+		[audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideNone error:&err];
+		NSLog(@"Disabled speaker");
     }
     // TODO: bluetooth
 	bluetoothEnabled = FALSE;
