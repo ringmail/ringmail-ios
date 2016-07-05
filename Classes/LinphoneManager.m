@@ -1974,8 +1974,12 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
     speakerEnabled = FALSE;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	if (enable && [self allowSpeaker]) {
+		if ([audioSession isInputGainSettable])
+		{
+			[audioSession setInputGain:1.0f error:&err];
+		}
         BOOL ok = [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&err];
-		NSLog(@"Enabled speaker: %d", ok);
+		NSLog(@"Enabled speaker: %d Gain: %@ Volume: %@", ok, [NSNumber numberWithFloat:[audioSession inputGain]], [NSNumber numberWithFloat:[audioSession outputVolume]]);
         if (ok && !err)
         {
             speakerEnabled = TRUE;
@@ -2082,7 +2086,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		NSString *media = @"audio";
 		if (video)
 		{
-            [self setSpeakerEnabled:YES];
+            //[self setSpeakerEnabled:YES];
 			linphone_call_params_enable_video(lcallParams, YES);
 			media = @"video";
             NSLog(@"RingMail - Requested Video: Yes");
