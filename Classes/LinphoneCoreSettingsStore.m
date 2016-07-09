@@ -281,7 +281,7 @@ extern void linphone_iphone_log_handler(const char *domain, OrtpLogLevel lev, co
 			else
 				[self setObject:[NSString stringWithFormat:@"%d", minPort] forKey:@"video_port_preference"];
 		}
-		[self setBool:[lm lpConfigBoolForKey:@"use_ipv6" withDefault:NO] forKey:@"use_ipv6"];
+		[self setBool:[lm lpConfigBoolForKey:@"use_ipv6" withDefault:YES] forKey:@"use_ipv6"];
 		LinphoneMediaEncryption menc = linphone_core_get_media_encryption(lc);
 		const char *val;
 		switch (menc) {
@@ -338,8 +338,8 @@ extern void linphone_iphone_log_handler(const char *domain, OrtpLogLevel lev, co
 		if (parsed != NULL) {
 			[self setCString:linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
 			[self setCString:linphone_address_get_username(parsed) forKey:@"primary_username_preference"];
+            linphone_address_destroy(parsed);
 		}
-		linphone_address_destroy(parsed);
 		[self setObject:[lm lpConfigStringForKey:@"sharing_server_preference"] forKey:@"sharing_server_preference"];
 	}
     

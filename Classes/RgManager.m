@@ -566,6 +566,7 @@ static LevelDB* theConfigDatabase = nil;
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"h264_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"ice_preference"];
     [settings setObject:@"stun1.l.google.com:19302" forKey:@"stun_preference"];
+    //[settings setObject:@"74.125.142.127:19302" forKey:@"stun_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"adaptive_rate_control_preference"];
     [settings setObject:@"Simple" forKey:@"adaptive_rate_algorithm_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"autoanswer_notif_preference"];
