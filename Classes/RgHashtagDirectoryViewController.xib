@@ -4,11 +4,19 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeueLTStd-Cn.otf">
+            <string>HelveticaNeueLTStd-Cn</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgHashtagDirectoryViewController">
             <connections>
-                <outlet property="addressField" destination="4" id="205"/>
+                <outlet property="addressField" destination="li4-cH-yll" id="KIu-jB-o77"/>
+                <outlet property="callButton" destination="edP-O7-WMf" id="grD-F3-v2w"/>
+                <outlet property="goButton" destination="QEQ-VT-WsT" id="FG1-I9-Eb5"/>
                 <outlet property="mainView" destination="WIg-uW-eVV" id="eRx-5b-D7O"/>
+                <outlet property="messageButton" destination="3It-BT-vcm" id="mIw-lb-i9H"/>
                 <outlet property="view" destination="171" id="176"/>
                 <outlet property="waitView" destination="ZfE-U7-AXi" id="1Lc-D8-AVX"/>
             </connections>
@@ -18,30 +26,66 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="uYS-gf-oKR" userLabel="Input">
+                <view contentMode="scaleToFill" id="pJO-1T-tNF" userLabel="Input">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search.png" id="2wn-ER-DYo">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search.png" id="4kl-gT-mth">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Enter #Hashtag or Email Address" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
-                            <rect key="frame" x="57" y="12" width="210" height="26"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="3It-BT-vcm" userLabel="messageButton" customClass="UIMessageButton">
+                            <rect key="frame" x="268" y="10" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Call"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                            <state key="normal" image="quote.png">
+                                <color key="titleColor" red="0.3294117647" green="0.80000000000000004" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <outlet property="addressField" destination="li4-cH-yll" id="QbN-RY-fwZ"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="edP-O7-WMf" userLabel="callButton" customClass="UICallButton">
+                            <rect key="frame" x="226" y="10" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Call"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                            <state key="normal" image="phone.png">
+                                <color key="titleColor" red="0.3294117647" green="0.80000000000000004" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <outlet property="addressField" destination="li4-cH-yll" id="Jd9-ze-5V4"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="QEQ-VT-WsT" userLabel="goButton" customClass="UICallButton">
+                            <rect key="frame" x="268" y="10" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Call"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                            <state key="normal" image="ringpage.png">
+                                <color key="titleColor" red="0.3294117647" green="0.80000000000000004" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" image="call_disabled.png"/>
+                            <connections>
+                                <outlet property="addressField" destination="li4-cH-yll" id="ue4-CM-Mgj"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Enter #Hashtag or Email" adjustsFontSizeToFit="NO" minimumFontSize="15" id="li4-cH-yll" userLabel="addressField" customClass="UIAddressTextField">
+                            <rect key="frame" x="58" y="15" width="174" height="27"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <color key="tintColor" red="0.20000000000000001" green="0.21176470588235294" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.52948105339999996" green="0.52946513890000002" blue="0.52947413919999997" alpha="1" colorSpace="calibratedRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Enter a address"/>
-                            <color key="textColor" red="0.20000000000000001" green="0.21176470588235294" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="16"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.21176470589999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
-                            <connections>
-                                <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="208"/>
-                                <outlet property="delegate" destination="-1" id="190"/>
-                            </connections>
                         </textField>
                     </subviews>
-                    <color key="backgroundColor" red="0.88627450980392153" green="0.89411764705882346" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.8862745098" green="0.89411764709999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="WIg-uW-eVV">
@@ -67,6 +111,10 @@
         </view>
     </objects>
     <resources>
-        <image name="search.png" width="50" height="50"/>
+        <image name="call_disabled.png" width="214" height="138"/>
+        <image name="phone.png" width="30" height="30"/>
+        <image name="quote.png" width="30" height="30"/>
+        <image name="ringpage.png" width="30" height="30"/>
+        <image name="search.png" width="51" height="51"/>
     </resources>
 </document>

@@ -167,8 +167,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                object:nil];
     
     NSString *intro = @" Search Contacts";
-    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-                                                                            attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
+    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro attributes:@{
+        NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
+        NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20]
+    }];
     searchField.attributedPlaceholder = placeHolderString;
 }
 

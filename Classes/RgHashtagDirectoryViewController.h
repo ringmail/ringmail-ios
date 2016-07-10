@@ -29,8 +29,6 @@
 @interface RgHashtagDirectoryViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, CardPageLoading> {
 }
 
-- (void)setAddress:(NSString*)address;
-
 @property (nonatomic, strong) IBOutlet UITextField* addressField;
 @property (nonatomic, strong) IBOutlet UIButton* addContactButton;
 @property (nonatomic, strong) IBOutlet UICallButton* callButton;

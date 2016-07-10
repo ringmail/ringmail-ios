@@ -86,12 +86,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
-	// fix placeholder bar color in >= iOS7
-    NSString *intro = @"";
-	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#5b5d58"]}];
+    NSString *intro = @" Call #Hashtag or Email";
+    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
+    attributes:@{
+        NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
+        NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20]
+    }];
 	addressField.attributedPlaceholder = placeHolderString;
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -125,9 +126,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
-    
-	[addressField setText:@""];
-	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
 }
 
 - (void)viewDidUnload {
@@ -186,10 +184,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         callButton.hidden = NO;
         goButton.hidden = YES;
     }
-}
-
-- (void)setAddress:(NSString *)address {
-	[addressField setText:address];
 }
 
 #pragma mark - CardPageLoading Functions

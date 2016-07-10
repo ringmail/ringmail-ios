@@ -58,9 +58,7 @@
 @property (nonatomic, assign) BOOL needsRefresh;
 @property (nonatomic, assign) BOOL visible;
 
-
 - (IBAction)onAddContactClick: (id) event;
-- (IBAction)onBackClick: (id) event;
 - (IBAction)onAddressChange: (id)sender;
 
 @end

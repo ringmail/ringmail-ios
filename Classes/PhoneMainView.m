@@ -336,7 +336,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	bool canHideInCallView = (linphone_core_get_calls([LinphoneManager getLc]) == NULL);
 
 	// Don't handle call state during incoming call view
-	if ([[self currentView] equal:[IncomingCallViewController compositeViewDescription]] &&
+	if ([[self currentView] equal:[RgInCallViewController compositeViewDescription]] &&
 		state != LinphoneCallError && state != LinphoneCallEnd) {
 		return;
 	}
@@ -404,18 +404,25 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (void) launchBrowser:(NSNotification *)notif
 {
 	__block NSString *address = [notif.userInfo objectForKey:@"address"];
-	if (address != nil && [address length] > 0)
+	if (address != nil && ![address isKindOfClass:[NSNull class]])
 	{
-    	[[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-    		// Assume HTTP(S) urls for now, check for ring:// later
-    		NSLog(@"RingMail: Launch browser to URL: %@", address);
-    		UIViewController* cur = (UIViewController *)[PhoneMainView instance];
-    		SVModalWebViewController *webViewModal = [[SVModalWebViewController alloc] initWithAddress:address];
-    		[webDelegate setWebView:webViewModal.webViewController];
-    		[webViewModal setWebViewDelegate:webDelegate];
-    		[cur presentViewController:webViewModal animated:NO completion:NULL];
-    	}];
+        if ([address length] > 0)
+        {
+        	[[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        		// Assume HTTP(S) urls for now, check for ring:// later
+        		NSLog(@"RingMail: Launch browser to URL: %@", address);
+        		UIViewController* cur = (UIViewController *)[PhoneMainView instance];
+        		SVModalWebViewController *webViewModal = [[SVModalWebViewController alloc] initWithAddress:address];
+        		[webDelegate setWebView:webViewModal.webViewController];
+        		[webViewModal setWebViewDelegate:webDelegate];
+        		[cur presentViewController:webViewModal animated:NO completion:NULL];
+        	}];
+        }
 	}
+    else
+    {
+   		NSLog(@"RingMail: No RingPage address for hashtag");
+    }
 }
 
 #pragma mark -
@@ -746,7 +753,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 		} else {
 
-			IncomingCallViewController *controller = nil;
+			RgInCallViewController *controller = nil;
 			if (![currentView.name isEqualToString:[IncomingCallViewController compositeViewDescription].name]) {
 				controller = DYNAMIC_CAST(
 					[self changeCurrentView:[IncomingCallViewController compositeViewDescription] push:TRUE],

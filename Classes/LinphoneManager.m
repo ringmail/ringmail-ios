@@ -652,7 +652,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 }
 
 - (void)onCall:(LinphoneCall *)call StateChanged:(LinphoneCallState)state withMessage:(const char *)message {
-
+    LOGI(@"===== Call State:[%p] %s", call, linphone_call_state_to_string(state));
 	// Handling wrapper
 	LinphoneCallAppData *data = (__bridge LinphoneCallAppData *)linphone_call_get_user_data(call);
 	if (!data) {
@@ -671,27 +671,17 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 
 	const LinphoneAddress *addr = linphone_call_get_remote_address(call);
 	NSString *address = nil;
-    NSString *rgAddress = nil;
 	if (addr != NULL) {
 		// contact name
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
             address = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
-            rgAddress = address;
-
-            /*NSLog(@"***** ADDRESS LOOKUP %@", address);
-			ABRecordRef contact = [fastAddressBook getContact:address];
-			if (contact)
-            {
-				address = [FastAddressBook getContactDisplayName:contact];
-			}
-			ms_free(lAddress);*/
+			ms_free(lAddress);
 		}
 	}
 	if (address == nil) {
 		address = NSLocalizedString(@"Unknown", nil);
 	}
-    NSLog(@"***** ADDRESS LOOKUP RESULT %@", address);
 
 	if (state == LinphoneCallIncomingReceived) {
 
@@ -827,7 +817,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 		[self setupGSMInteraction];
 	}
     
-    if (rgAddress != nil)
+    if (address != nil)
     {
         // Update RingMail database
     	LinphoneCallLog *callLog = linphone_call_get_call_log(call);
@@ -836,7 +826,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
         if (callid)
         {
             sip = [NSString stringWithCString:callid encoding:NSUTF8StringEncoding];
-            LOGI(@"RingMail Call State:[%p] %s", call, linphone_call_state_to_string(state));
+            //LOGI(@"RingMail Call State:[%p] %s", call, linphone_call_state_to_string(state));
             if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingProgress)
             {
                 // New call
@@ -844,10 +834,10 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 				NSLog(@"RingMail Inbound: %@", [NSNumber numberWithBool:inbound]);
 				RgChatManager *cmgr = [self chatManager];
 				NSNumber *contactNum = [data->userInfos objectForKey:@"contact"];
-				NSNumber *session = [cmgr dbGetSessionID:rgAddress contact:contactNum];
+				NSNumber *session = [cmgr dbGetSessionID:address contact:contactNum];
                 [cmgr dbInsertCall:@{
                        @"sip": sip,
-                       @"address": rgAddress,
+                       @"address": address,
                        @"state": [NSNumber numberWithInt:state],
                        @"inbound": [NSNumber numberWithBool:inbound],
                 } session:session];

@@ -174,9 +174,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 
 	// fix placeholder bar color in >= iOS7
-    NSString *intro = @" Enter #Hashtag or Email";
+    NSString *intro = @" Call #Hashtag or Email";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-										attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"]}];
+										attributes:@{
+                                            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
+                                            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20]
+                                        }];
 	addressField.attributedPlaceholder = placeHolderString;
     
     if ([self needsRefresh])
@@ -511,10 +514,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 		ContactsViewController);
 	if (controller != nil) {
 	}
-}
-
-- (IBAction)onBackClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[RgInCallViewController compositeViewDescription]];
 }
 
 - (IBAction)onAddressChange:(id)sender {
