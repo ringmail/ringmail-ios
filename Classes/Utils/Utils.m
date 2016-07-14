@@ -24,7 +24,7 @@
 
 @implementation LinphoneLogger
 
-#define FILE_SIZE 17
+#define FILE_SIZE 32
 #define DOMAIN_SIZE 3
 
 + (void)log:(OrtpLogLevel)severity file:(const char *)file line:(int)line format:(NSString *)format, ... {

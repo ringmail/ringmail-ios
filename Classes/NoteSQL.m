@@ -168,7 +168,7 @@
         return [NSString stringWithFormat:@":%@", key];
     }] join:@", "]];
     sql = [sql stringByAppendingString:@");"];
-    NSLog(@"Note SQL: %@", sql);
+    //NSLog(@"Note SQL: %@", sql);
     BOOL ok = [database executeUpdate:sql withParameterDictionary:params];
     if (ok)
     {

@@ -22,7 +22,6 @@
 
 #import "RgScanViewController.h"
 #import "RgFavoriteViewController.h"
-#import "RgInCallViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"

@@ -44,7 +44,7 @@
 
 - (NSArray *)buildCards:(NSArray*)list
 {
-	NSLog(@"Card Data: %@", list);
+	//NSLog(@"Card Data: %@", list);
     NSMutableArray *list2 = [NSMutableArray array];
     int item = 0;
 	UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];

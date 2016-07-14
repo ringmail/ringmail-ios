@@ -175,14 +175,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 	volumeView = [[MPVolumeView alloc] initWithFrame:CGRectMake(-100, -100, 16, 16)];
 	volumeView.showsRouteButton = false;
 	volumeView.userInteractionEnabled = false;
-
-	[self.view addSubview:mainViewController.view];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-
-	// Set observers
+    
+    	// Set observers
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(launchBrowser:)
 												 name:kRgLaunchBrowser
@@ -208,25 +202,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 											 selector:@selector(batteryLevelChanged:)
 												 name:UIDeviceBatteryLevelDidChangeNotification
 											   object:nil];
-}
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-
-	// Remove observers
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgLaunchBrowser object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneRegistrationUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneTextReceived object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneConfiguringStateUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:UIDeviceBatteryLevelDidChangeNotification
-												  object:nil];
-	[[UIDevice currentDevice] setBatteryMonitoringEnabled:NO];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
+	[self.view addSubview:mainViewController.view];
 }
 
 - (void)setVolumeHidden:(BOOL)hidden {
@@ -332,11 +309,12 @@ static RootViewManager *rootViewManagerInstance = nil;
 	LinphoneCall *call = [[notif.userInfo objectForKey:@"call"] pointerValue];
 	LinphoneCallState state = [[notif.userInfo objectForKey:@"state"] intValue];
 	NSString *message = [notif.userInfo objectForKey:@"message"];
+    LOGI(@"Call State:[%p] %s", call, linphone_call_state_to_string(state));
 
 	bool canHideInCallView = (linphone_core_get_calls([LinphoneManager getLc]) == NULL);
 
 	// Don't handle call state during incoming call view
-	if ([[self currentView] equal:[RgInCallViewController compositeViewDescription]] &&
+	if ([[self currentView] equal:[IncomingCallViewController compositeViewDescription]] &&
 		state != LinphoneCallError && state != LinphoneCallEnd) {
 		return;
 	}
@@ -739,6 +717,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 }
 
 - (void)displayIncomingCall:(LinphoneCall *)call {
+    NSLog(@"RingMail: Display Incoming Call");
 	LinphoneCallLog *callLog = linphone_call_get_call_log(call);
 	NSString *callId = [NSString stringWithUTF8String:linphone_call_log_get_call_id(callLog)];
 
@@ -753,7 +732,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 		} else {
 
-			RgInCallViewController *controller = nil;
+			IncomingCallViewController *controller = nil;
 			if (![currentView.name isEqualToString:[IncomingCallViewController compositeViewDescription].name]) {
 				controller = DYNAMIC_CAST(
 					[self changeCurrentView:[IncomingCallViewController compositeViewDescription] push:TRUE],
@@ -764,10 +743,10 @@ static RootViewManager *rootViewManagerInstance = nil;
 					DYNAMIC_CAST([self.mainViewController getCurrentViewController], IncomingCallViewController);
 			}
 			AudioServicesPlaySystemSound(lm.sounds.vibrate);
-			if (controller != nil) {
-				[controller setCall:call];
-				[controller setDelegate:self];
-			}
+            if (controller != nil) {
+                [controller setCall:call];
+                [controller setDelegate:self];
+            }
 		}
 	}
 }

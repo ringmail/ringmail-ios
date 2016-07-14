@@ -38,7 +38,6 @@
 
 #import "RgChatManager.h"
 #import "RgContactManager.h"
-#import "AudioSessionManager.h"
 
 extern NSString *const LINPHONERC_APPLICATION_KEY;
 

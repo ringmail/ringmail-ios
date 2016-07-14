@@ -57,7 +57,7 @@ use_system_contacts=0
 start_at_boot_preference=1
 backgroundmode_preference=1
 autoanswer_notif_preference=1
-voiceproc_preference=1
+voiceproc_preference=0
 enable_log_collect=0
 
 [default_values]

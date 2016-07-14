@@ -261,8 +261,6 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 
 - (id)init {
 	if ((self = [super init])) {
-        /* Audio session */
-        [[AudioSessionManager sharedInstance] start];
 
         /*BOOL success = NO;
         NSError *error = nil;
@@ -282,12 +280,12 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
         /* End Audio session */
         
         // iOS 6 Audio
-		/*AudioSessionInitialize(NULL, NULL, NULL, NULL);
+		AudioSessionInitialize(NULL, NULL, NULL, NULL);
 		OSStatus lStatus = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange,
 														   audioRouteChangeListenerCallback, (__bridge void *)(self));
 		if (lStatus) {
 			LOGE(@"cannot register route change handler [%ld]", lStatus);
-		}*/
+		}
 
 		NSString *path = [[NSBundle mainBundle] pathForResource:@"msg" ofType:@"wav"];
 		self.messagePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:path] error:nil];
@@ -652,7 +650,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 }
 
 - (void)onCall:(LinphoneCall *)call StateChanged:(LinphoneCallState)state withMessage:(const char *)message {
-    LOGI(@"===== Call State:[%p] %s", call, linphone_call_state_to_string(state));
+    LOGI(@"Call State:[%p] %s", call, linphone_call_state_to_string(state));
 	// Handling wrapper
 	LinphoneCallAppData *data = (__bridge LinphoneCallAppData *)linphone_call_get_user_data(call);
 	if (!data) {
@@ -831,7 +829,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
             {
                 // New call
                 BOOL inbound = (state == LinphoneCallIncomingReceived) ? YES : NO;
-				NSLog(@"RingMail Inbound: %@", [NSNumber numberWithBool:inbound]);
+				LOGI(@"Inbound: %@", [NSNumber numberWithBool:inbound]);
 				RgChatManager *cmgr = [self chatManager];
 				NSNumber *contactNum = [data->userInfos objectForKey:@"contact"];
 				NSNumber *session = [cmgr dbGetSessionID:address contact:contactNum];
@@ -1922,7 +1920,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
     }
 }
 
-/*static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
+static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 											 AudioSessionPropertyID inPropertyID, // 2
 											 UInt32 inPropertyValueSize,		  // 3
 											 const void *inPropertyValue		  // 4
@@ -1957,7 +1955,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	if (speakerEnabled != lm.speakerEnabled) { // Reforce value
 		lm.speakerEnabled = lm.speakerEnabled;
 	}
-}*/
+}
 
 - (void)setSpeakerEnabled:(BOOL)enable {
     NSError *err;

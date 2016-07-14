@@ -26,7 +26,7 @@
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
-	NSLog(@"Component Data: %@", data);
+	//NSLog(@"Component Data: %@", data);
     UIImage *cardImage = [data objectForKey:@"image"];
     cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
 

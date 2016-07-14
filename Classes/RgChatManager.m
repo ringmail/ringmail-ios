@@ -885,10 +885,10 @@
             current = [NSDate dateWithTimeIntervalSince1970:[rs doubleForColumnIndex:0]];
         }
         [rs close];
-        NSLog(@"Check Timestamp For: %@ From: %@ To %@", session, current, event);
+        //NSLog(@"Check Timestamp For: %@ From: %@ To %@", session, current, event);
         if (current == nil || [event compare:current] == NSOrderedDescending)
         {
-            NSLog(@"Update Timestamp For: %@ From: %@ To %@", session, current, event);
+            //NSLog(@"Update Timestamp For: %@ From: %@ To %@", session, current, event);
             NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
             [ndb set:@{
                        @"table": @"session",
@@ -1045,7 +1045,7 @@
         }
         [rs close];
     }];
-    NSLog(@"RingMail dbGetSession: %@", result);
+    //NSLog(@"RingMail dbGetSession: %@", result);
     [dbq close];
     return result;
 }
@@ -1238,7 +1238,7 @@
 
 - (NSNumber *)dbGetSessionByMD5:(NSString*)lookup
 {
-    NSLog(@"RingMail: Chat - Session MD5:(%@)", lookup);
+    //NSLog(@"RingMail: Chat - Session MD5:(%@)", lookup);
     if (! [lookup isMatchedByRegex:@"^[A-Fa-f0-9]{6,32}$"])
     {
         return [NSNumber numberWithInt:0];

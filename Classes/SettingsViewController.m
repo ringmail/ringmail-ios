@@ -699,7 +699,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[picker setMessageBody:NSLocalizedString(@"RingMail Logs", nil) isHTML:NO];
 		[picker addAttachmentData:attachment mimeType:type fileName:attachmentName];
 
-		[self presentViewController:picker animated:true completion:nil];
+		[self.view.window.rootViewController presentViewController:picker animated:true completion:nil];
 	} else {
 		UIAlertView *error = [[UIAlertView alloc]
 				initWithTitle:NSLocalizedString(@"Cannot send email", nil)
@@ -722,7 +722,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	} else {
 		LOGI(@"Mail completed with status: %d", result);
 	}
-	[self dismissViewControllerAnimated:true completion:nil];
+	[controller dismissViewControllerAnimated:true completion:nil];
 }
 
 @end
