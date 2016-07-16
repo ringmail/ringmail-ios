@@ -36,20 +36,28 @@ static LevelDB* theConfigDatabase = nil;
 
 + (NSString*)ringmailHost
 {
-#ifdef DEBUG
-    return @"staging.ringmail.com";
-#else
-    return @"ringmail.com";
-#endif
+    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    if ([bundleIdentifier isEqualToString:@"com.ringmail.phone"])
+    {
+        return @"ringmail.com";
+    }
+    else
+    {
+        return @"staging.ringmail.com";
+    }
 }
 
 + (NSString*)ringmailHostSIP
 {
-#ifdef DEBUG
-    return @"sip.staging.ringmail.com";
-#else
-    return @"sip.ringmail.com";
-#endif
+    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    if ([bundleIdentifier isEqualToString:@"com.ringmail.phone"])
+    {
+        return @"sip.ringmail.com";
+    }
+    else
+    {
+        return @"sip.staging.ringmail.com";
+    }
 }
 
 + (NSString*)addressToSIP:(NSString*)addr

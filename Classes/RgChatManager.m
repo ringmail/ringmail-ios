@@ -483,7 +483,6 @@
         {
             NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
             NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
-            NSDate *timestamp = [NSDate parse:[[xmppMessage attributeForName:@"timestamp"] stringValue]];
             NSString *contactStr = [[xmppMessage attributeForName:@"contact-id"] stringValue];
 			NSNumber *contact = nil;
 			if (contactStr != nil)
@@ -498,6 +497,11 @@
 				}
 			}
             NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
+            NSDate *timestamp = [NSDate parse:[[xmppMessage attributeForName:@"timestamp"] stringValue]];
+            if (timestamp == nil)
+            {
+                timestamp = [NSDate date];
+            }
             [messageData setObject:timestamp forKey:@"timestamp"];
             [messageData setObject:body forKey:@"body"];
 			

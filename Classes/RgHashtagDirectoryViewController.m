@@ -50,7 +50,7 @@
 - (id)init {
 	self = [super initWithNibName:@"RgHashtagDirectoryViewController" bundle:[NSBundle mainBundle]];
 	if (self) {
-        path = @"root";
+        path = @"0";
 	}
 	return self;
 }
@@ -137,7 +137,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)updatePathEvent:(NSNotification *)notif
 {
-    [self updatePath:[notif.userInfo objectForKey:@"path"]];
+    [self updatePath:[notif.userInfo objectForKey:@"category_id"]];
 }
 
 - (void)updatePath:(NSString*)newPath

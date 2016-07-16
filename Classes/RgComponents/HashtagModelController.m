@@ -33,7 +33,7 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 {
 	[caller.waitDelegate showWaiting];
 	[[RgNetwork instance] hashtagDirectory:@{
-		@"path": mainPath,
+		@"category_id": mainPath,
 	} success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		[caller.waitDelegate hideWaiting];
 	    NSDictionary* res = responseObject;
@@ -130,11 +130,13 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
             if ([mainList count] > mainIndex)
             {
                 NSDictionary *itemData = mainList[mainIndex];
+                NSMutableDictionary *cardData = [NSMutableDictionary dictionaryWithDictionary:itemData];
                 if (itemData != nil)
                 {
+                    UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
+                    cardData[@"image"] = defaultImage;
                     // Todo: translate to name
-                    Card *card = [[Card alloc] initWithData:itemData
-                                            header:[NSNumber numberWithBool:0]];
+                    Card *card = [[Card alloc] initWithData:cardData header:[NSNumber numberWithBool:0]];
                     [_cards addObject:card];
                     added++;
                 }

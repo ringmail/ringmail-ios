@@ -30,6 +30,7 @@
 @property (nonatomic, strong) IBOutlet UIButton* hashtagButton;
 @property (nonatomic, strong) IBOutlet UIView *chatNotificationView;
 @property (nonatomic, strong) IBOutlet UILabel *chatNotificationLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *logoView;
 
 -(IBAction) onHistoryClick: (id) event;
 -(IBAction) onContactsClick: (id) event;

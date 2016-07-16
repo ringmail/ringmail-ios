@@ -294,7 +294,7 @@ static RgNetwork* theRgNetwork = nil;
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 		parameters[@"login"] = rgLogin;
 		parameters[@"password"] = rgPass;
-		parameters[@"path"] = params[@"path"];
+		parameters[@"category_id"] = params[@"category_id"];
         NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/hashtag_directory", self.networkHost];
         [manager POST:postUrl parameters:parameters success:okay failure:fail];
     }

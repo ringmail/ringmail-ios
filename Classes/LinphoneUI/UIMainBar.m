@@ -34,11 +34,13 @@ static NSString *const kDisappearAnimation = @"disappear";
 @synthesize hashtagButton;
 @synthesize chatNotificationView;
 @synthesize chatNotificationLabel;
+@synthesize logoView;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
 	self = [super initWithNibName:@"UIMainBar" bundle:[NSBundle mainBundle]];
+
     return self;
 }
 
@@ -68,6 +70,7 @@ static NSString *const kDisappearAnimation = @"disappear";
 												 name:kLinphoneSettingsUpdate
 											   object:nil];
 	[self update:FALSE];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -102,6 +105,11 @@ static NSString *const kDisappearAnimation = @"disappear";
 												 name:UIApplicationWillEnterForegroundNotification
 											   object:nil];
 
+    if (! [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.ringmail.phone"])
+    {
+        UIImage *logo = [UIImage imageNamed:@"ringmail_dev_logo"];
+        [logoView setImage:logo];
+    }
 
 	[super viewDidLoad]; // Have to be after due to TPMultiLayoutViewController
 }

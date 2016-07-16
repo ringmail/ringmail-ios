@@ -13,6 +13,7 @@
                 <outlet property="dialerButton" destination="7" id="12"/>
                 <outlet property="hashtagButton" destination="5" id="lDT-P2-haw"/>
                 <outlet property="historyButton" destination="6" id="13"/>
+                <outlet property="logoView" destination="pkJ-2Y-4Pr" id="GhF-hx-8sn"/>
                 <outlet property="portraitView" destination="3" id="43"/>
                 <outlet property="settingsButton" destination="9" id="29"/>
                 <outlet property="view" destination="3" id="14"/>
