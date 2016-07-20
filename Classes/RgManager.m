@@ -216,7 +216,7 @@ static LevelDB* theConfigDatabase = nil;
 {
 	[[RgNetwork instance] lookupHashtag:@{
 		@"hashtag": address,
-	} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+	} callback:^(NSURLSessionTask *operation, id responseObject) {
 		NSDictionary* res = responseObject;
 		NSString *ok = [res objectForKey:@"result"];
 		if ([ok isEqualToString:@"ok"])
@@ -713,7 +713,7 @@ static LevelDB* theConfigDatabase = nil;
         {
             [RgManager chatConnect];
         }
-        [[RgNetwork instance] login:rgLogin password:rgPass callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[RgNetwork instance] login:rgLogin password:rgPass callback:^(NSURLSessionTask *operation, id responseObject) {
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
             if ([ok isEqualToString:@"ok"])

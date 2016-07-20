@@ -337,7 +337,7 @@
     //NSLog(@"RingMail: Send Contact Data: %@", ctd);
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:ctd options:0 error:nil];
     NSString *ctdjson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    [[RgNetwork instance] updateContacts:@{@"contacts": ctdjson} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RgNetwork instance] updateContacts:@{@"contacts": ctdjson} callback:^(NSURLSessionTask *operation, id responseObject) {
         NSDictionary* res = responseObject;
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])

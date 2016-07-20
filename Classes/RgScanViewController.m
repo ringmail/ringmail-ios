@@ -185,7 +185,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 
                 NSString *imageID = [[[[LinphoneManager instance] chatManager] xmppStream] generateUUID];
                 NSData *imageData = UIImagePNGRepresentation(cropped);
-                [[RgNetwork instance] uploadImage:imageData uuid:imageID callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [[RgNetwork instance] uploadImage:imageData uuid:imageID callback:^(NSURLSessionTask *operation, id responseObject) {
                     NSDictionary* res = responseObject;
                     NSString *ok = [res objectForKey:@"result"];
                     if ([ok isEqualToString:@"ok"])

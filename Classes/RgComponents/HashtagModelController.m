@@ -34,7 +34,7 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 	[caller.waitDelegate showWaiting];
 	[[RgNetwork instance] hashtagDirectory:@{
 		@"category_id": mainPath,
-	} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	} success:^(NSURLSessionTask *operation, id responseObject) {
 		[caller.waitDelegate hideWaiting];
 	    NSDictionary* res = responseObject;
 		NSLog(@"API Response: %@", res);
@@ -44,7 +44,7 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 			mainList = res[@"directory"];
 		}
 		[caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
-	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+	} failure:^(NSURLSessionTask *operation, NSError *error) {
 		[caller.waitDelegate hideWaiting];
 		NSLog(@"RingMail API Error: %@", [error localizedDescription]);
 	}];

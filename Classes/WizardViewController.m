@@ -296,7 +296,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         
         if (cfg[@"ringmain_check_phone"] == nil) // Send code once
         {
-            [[RgNetwork instance] resendVerify:@{@"phone": [cfg objectForKey:@"ringmail_phone"]} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [[RgNetwork instance] resendVerify:@{@"phone": [cfg objectForKey:@"ringmail_phone"]} callback:^(NSURLSessionTask *operation, id responseObject) {
                 NSDictionary* res = responseObject;
                 NSString *ok = [res objectForKey:@"result"];
                 if (ok != nil && [ok isEqualToString:@"ok"])
@@ -613,7 +613,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onResendVerifyClick:(id)sender {
     LevelDB* cfg = [RgManager configDatabase];
-    [[RgNetwork instance] resendVerify:@{@"email": [cfg objectForKey:@"ringmail_login"]} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RgNetwork instance] resendVerify:@{@"email": [cfg objectForKey:@"ringmail_login"]} callback:^(NSURLSessionTask *operation, id responseObject) {
         NSDictionary* res = responseObject;
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])
@@ -640,7 +640,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)verifyEmail
 {
     [waitView setHidden:FALSE];
-    [RgManager verifyLogin:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [RgManager verifyLogin:^(NSURLSessionTask *operation, id responseObject) {
         [waitView setHidden:TRUE];
         BOOL verified = NO;
         NSDictionary* res = responseObject;
@@ -673,7 +673,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onResendPhoneClick:(id)sender {
     LevelDB* cfg = [RgManager configDatabase];
-    [[RgNetwork instance] resendVerify:@{@"phone": [cfg objectForKey:@"ringmail_phone"]} callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RgNetwork instance] resendVerify:@{@"phone": [cfg objectForKey:@"ringmail_phone"]} callback:^(NSURLSessionTask *operation, id responseObject) {
         NSDictionary* res = responseObject;
         NSString *ok = [res objectForKey:@"result"];
         if (ok != nil && [ok isEqualToString:@"ok"])
@@ -693,7 +693,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if ([code isMatchedByRegex:@"^\\d{4}$"])
     {
         [waitView setHidden:FALSE];
-        [[RgNetwork instance] verifyPhone:code callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[RgNetwork instance] verifyPhone:code callback:^(NSURLSessionTask *operation, id responseObject) {
             [waitView setHidden:TRUE];
             BOOL verified = NO;
             NSDictionary* res = responseObject;
@@ -792,7 +792,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                       }];
             [alert show];
         } else {
-            [[RgNetwork instance] login:username password:password callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [[RgNetwork instance] login:username password:password callback:^(NSURLSessionTask *operation, id responseObject) {
                 [waitView setHidden:true];
                 NSDictionary* res = responseObject;
                 NSString *ok = [res objectForKey:@"result"];
@@ -918,7 +918,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	if ([self verifyRegister:params])
     {
 		username = [username lowercaseString];
-        [[RgNetwork instance] registerUser:params callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[RgNetwork instance] registerUser:params callback:^(NSURLSessionTask *operation, id responseObject) {
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
             if (ok != nil && [ok isEqualToString:@"ok"])

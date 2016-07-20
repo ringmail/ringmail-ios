@@ -570,6 +570,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[RgNetwork instance] signOut];
         [[[LinphoneManager instance] chatManager] disconnect];
         [RgManager configReset];
+        [controller reset];
 		[controller startWizard];
 	}
 }

@@ -304,7 +304,7 @@
 	NSNumber *session = [self dbGetSessionID:to contact:contact];
     [self dbInsertMessage:session type:@"image/png" data:messageData uuid:messageID inbound:NO url:nil];
     //NSLog(@"RingMail: Insert Image Message");
-    [[RgNetwork instance] uploadImage:imageData uuid:imageID callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RgNetwork instance] uploadImage:imageData uuid:imageID callback:^(NSURLSessionTask *operation, id responseObject) {
         NSDictionary* res = responseObject;
         //NSLog(@"RingMail - Chat Upload Success: %@", res);
         NSString *ok = [res objectForKey:@"result"];
@@ -515,7 +515,7 @@
             {
                 NSString *imageUrl = [[attach attributeForName:@"url"] stringValue];
                 [self dbInsertMessage:session type:@"image/png" data:messageData uuid:uuid inbound:YES url:imageUrl];
-                [[RgNetwork instance] downloadImage:imageUrl callback:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [[RgNetwork instance] downloadImage:imageUrl callback:^(NSURLSessionTask *operation, id responseObject) {
                     //NSLog(@"RingMail: Chat Download Complete: %@", responseObject);
                     NSData* imageData = responseObject;
                     [self dbUpdateMessageData:imageData forUUID:uuid];

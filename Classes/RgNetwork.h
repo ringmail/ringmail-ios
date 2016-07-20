@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking/AFNetworking.h"
 
-typedef void (^RgNetworkCallback)(AFHTTPRequestOperation *operation, id responseObject);
-typedef void (^RgNetworkError)(AFHTTPRequestOperation *operation, NSError *error);
+typedef void (^RgNetworkCallback)(NSURLSessionTask *operation, id responseObject);
+typedef void (^RgNetworkError)(NSURLSessionTask *operation, NSError *error);
 typedef void (^RgConversation)(NSString *to);
 
 @interface RgNetwork : NSObject
