@@ -412,6 +412,9 @@
         BOOL fav = NO;
         NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
 		NSNumber *session = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress contact:contactNum];
+        
+        LOGI(@"RingMail: Get Session ID: %@ | %@ -> %@", rgAddress, contactNum, session);
+        
         if (! [rgAddress isEqualToString:@""])
         {
             fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:session];

@@ -104,37 +104,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(coreUpdateEvent:)
 												 name:kLinphoneCoreUpdate
 											   object:nil];
+
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(mainRefreshEvent:)
-                                                 name:kRgTextReceived
-                                               object:nil];
-    
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(mainRefreshEvent:)
-                                                 name:kLinphoneCallUpdate
-                                               object:nil];
-	
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(mainRefreshEvent:)
-                                                 name:kRgTextUpdate
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(mainRefreshEvent:)
-                                                 name:kRgMainRefresh
-                                               object:nil];
-	
-	
-  	[[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(setAddressEvent:)
-                                             name:kRgSetAddress
-                                           object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
+    /*[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(removeCard:)
                                                  name:@"RgMainCardRemove"
-                                               object:nil];
+                                               object:nil];*/
     
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
@@ -176,14 +151,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// fix placeholder bar color in >= iOS7
     NSString *intro = @" Call #Hashtag or Email";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-										attributes:@{
-                                            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
-                                            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20]
-                                        }];
+        attributes:@{
+            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
+            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:19]
+        }];
 	addressField.attributedPlaceholder = placeHolderString;
     
     if ([self needsRefresh])
     {
+        LOGI(@"RingMail: Updating Main Card List");
         [mainViewController updateCollection];
         [self setNeedsRefresh:NO];
     }
@@ -197,7 +173,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// Remove observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];
+    /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
     
     self.visible = NO;
 }
@@ -225,7 +201,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self setNeedsRefresh:NO];
     
 	[addressField setText:@""];
-	[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
+	//[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
@@ -236,6 +212,37 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[videoCameraSwitch setHidden:FALSE];
 		}
 	}
+   	
+  	[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(setAddressEvent:)
+                                             name:kRgSetAddress
+                                           object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mainRefreshEvent:)
+                                                 name:kRgTextReceived
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mainRefreshEvent:)
+                                                 name:kRgTextUpdate
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mainRefreshEvent:)
+                                                 name:kRgMainRefresh
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mainRefreshEvent:)
+                                                 name:kRgContactRefresh
+                                               object:nil];
+    
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mainRefreshEvent:)
+                                                 name:kLinphoneCallUpdate
+                                               object:nil];
+
 }
 
 - (void)viewDidUnload {
@@ -244,6 +251,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextReceived object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgContactRefresh object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 }
 
@@ -296,7 +304,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)setAddressEvent:(NSNotification *)notif
 {
     NSString *newAddress = [notif.userInfo objectForKey:@"address"];
-    NSLog(@"RingMail - Set Address Event: %@", newAddress);
+    LOGI(@"RingMail: Set Address Event: %@", newAddress);
     [addressField setText:newAddress];
     if ([newAddress length] > 0 && [[newAddress substringToIndex:1] isEqualToString:@"#"])
     {
@@ -315,6 +323,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)mainRefreshEvent:(NSNotification *)notif {
     if (self.visible)
     {
+        LOGI(@"RingMail: Updating Main Card List");
         [mainViewController updateCollection];
     }
     else

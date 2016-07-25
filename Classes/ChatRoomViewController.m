@@ -184,14 +184,20 @@ static UICompositeViewDescription *compositeDescription = nil;
         UIImage *image = nil;
 		NSDictionary *sdata = [[lm chatManager] dbGetSessionData:session];
         NSString *displayName = sdata[@"session_tag"];
+        ABRecordRef acontact = NULL;
 		if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
 		{
-			ABRecordRef acontact = [[lm fastAddressBook] getContactById:sdata[@"contact_id"]];
-            if (acontact != nil) {
-                displayName = [FastAddressBook getContactDisplayName:acontact];
-                image = [FastAddressBook getContactImage:acontact thumbnail:true];
-			}
+			acontact = [[lm fastAddressBook] getContactById:sdata[@"contact_id"]];
 		}
+        else
+        {
+			acontact = [[lm fastAddressBook] getContact:sdata[@"session_tag"]];
+        }
+        if (acontact != NULL)
+        {
+            displayName = [FastAddressBook getContactDisplayName:acontact];
+            image = [FastAddressBook getContactImage:acontact thumbnail:true];
+        }
         addressLabel.text = displayName;
         addressLabel.accessibilityValue = displayName;
 
@@ -407,6 +413,10 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
     	{
     		contact = [[[LinphoneManager instance] fastAddressBook] getContactById:sdata[@"contact_id"]];
     	}
+        else
+        {
+    		contact = [[[LinphoneManager instance] fastAddressBook] getContact:sdata[@"session_tag"]];
+        }
     	ContactDetailsViewController *controller = DYNAMIC_CAST(
     		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
     		ContactDetailsViewController);

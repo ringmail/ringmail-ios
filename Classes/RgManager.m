@@ -26,6 +26,7 @@ NSString *const kRgAttemptVerify = @"kRgAttemptVerify";
 NSString *const kRgLaunchBrowser = @"kRgLaunchBrowser";
 NSString *const kRgToggleNumberPad = @"kRgToggleNumberPad";
 NSString *const kRgCallRefresh = @"kRgCallRefresh";
+NSString *const kRgContactRefresh = @"kRgContactRefresh";
 
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
@@ -122,12 +123,12 @@ static LevelDB* theConfigDatabase = nil;
 		}
 		else
 		{
-			NSLog(@"Invalid Phone Number: '%@'", addr);
+			LOGI(@"RingMail: Invalid Phone Number: '%@'", addr);
 		}
 	}
 	else
 	{
-		NSLog(@"NBPhoneNumberUtil Error '%@'", [anError localizedDescription]);
+		LOGI(@"RingMail: NBPhoneNumberUtil Error '%@'", [anError localizedDescription]);
 	}
 	return res;
 }
@@ -253,7 +254,7 @@ static LevelDB* theConfigDatabase = nil;
     [NSString stringWithFormat:@"pn-type=apple;app-id=%@.%@;pn-tok=%@",
      [[NSBundle mainBundle] bundleIdentifier], APPMODE_SUFFIX, tokenString];
     
-    //NSLog(@"APNS Set Proxy Token: %@", params);
+    //LOGI(@"RingMail: APNS Set Proxy Token: %@", params);
     return params;
 }
 
@@ -271,7 +272,7 @@ static LevelDB* theConfigDatabase = nil;
 
 + (BOOL)checkRingMailAddress:(NSString*)address
 {
-    //NSLog(@"RingMail: URI - Check Address: %@", address);
+    //LOGI(@"RingMail: URI - Check Address: %@", address);
     if ([address length] > 200)
     {
         return false; // Too long, you're probably trying something fishy
@@ -281,13 +282,13 @@ static LevelDB* theConfigDatabase = nil;
     [numAddress replaceOccurrencesOfRegex:@"[^0-9]" withString:@""];
     if ([address isMatchedByRegex:@"\\@"])
     {
-        //NSLog(@"RingMail: URI - Email Address: %@", address);
+        //LOGI(@"RingMail: URI - Email Address: %@", address);
         // check email
         return [RgManager checkEmailAddress:address];
     }
     else if ([address isMatchedByRegex:@"\\."])
     {
-        //NSLog(@"RingMail: URI - Domain Address: %@", address);
+        //LOGI(@"RingMail: URI - Domain Address: %@", address);
         // check domain
         if ([address isMatchedByRegex:@"([A-Za-z0-9-]+\\.)+[A-Za-z]{1,}$"])
         {
@@ -302,7 +303,7 @@ static LevelDB* theConfigDatabase = nil;
     {
         return true;
     }
-    NSLog(@"RingMail: URI - Bad Address: %@", address);
+    LOGI(@"RingMail: URI - Bad Address: %@", address);
     return false;
 }
 
@@ -335,7 +336,7 @@ static LevelDB* theConfigDatabase = nil;
 {
     __block NSMutableString *ringuri = [uri mutableCopy];
     [ringuri replaceOccurrencesOfRegex:@"^ring:(//)?" withString:@"" options:RKLCaseless range:(NSRange){0, [ringuri length]} error:NULL];
-    NSLog(@"RingMail: URI - %@ (from: %@)", ringuri, uri);
+    LOGI(@"RingMail: URI - %@ (from: %@)", ringuri, uri);
     
     if ([RgManager configReadyAndVerified])
     {
@@ -369,16 +370,16 @@ static LevelDB* theConfigDatabase = nil;
 		}
         if ([RgManager checkRingMailAddress:ringuri])
         {
-            NSLog(@"RingMail: URI - Valid: %@", ringuri);
+            LOGI(@"RingMail: URI - Valid: %@", ringuri);
             BOOL coreReady = [[[LinphoneManager instance] coreReady] boolValue];
             BOOL startCall = NO;
-            NSLog(@"RingMail: Core Ready - %d", coreReady);
+            LOGI(@"RingMail: Core Ready - %d", coreReady);
             
             if (coreReady)
             {
                 LinphoneProxyConfig *cfg = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
                 BOOL isReg = linphone_proxy_config_is_registered(cfg);
-                NSLog(@"RingMail: Is Registered - %d", isReg);
+                LOGI(@"RingMail: Is Registered - %d", isReg);
                 if (isReg)
                 {
                     startCall = YES;
@@ -386,12 +387,12 @@ static LevelDB* theConfigDatabase = nil;
             }
             if (startCall)
             {
-                NSLog(@"RingMail: Start Call Now");
+                LOGI(@"RingMail: Start Call Now");
                 [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL video:video];
             }
             else
             {
-                NSLog(@"RingMail: Queue Call");
+                LOGI(@"RingMail: Queue Call");
                 LinphoneManager *mgr = [LinphoneManager instance];
                 [[mgr opQueue] setSuspended:YES];
                 [[mgr opQueue] cancelAllOperations]; // reset queue
@@ -432,6 +433,7 @@ static LevelDB* theConfigDatabase = nil;
 {
     if (theConfigDatabase == nil)
     {
+        LOGI(@"RingMail: Create Config Database");
         theConfigDatabase = [LevelDB databaseInLibraryWithName:[RgManager configDatabaseName]];
     }
     if (! [theConfigDatabase objectForKey:@"ringmail_device_uuid"])
@@ -443,6 +445,7 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)closeConfigDatabase
 {
+    [theConfigDatabase close];
     theConfigDatabase = nil;
 }
 
@@ -455,9 +458,10 @@ static LevelDB* theConfigDatabase = nil;
     NSString *cfgPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[RgManager configDatabaseName]];
     if ([[NSFileManager defaultManager] removeItemAtPath:cfgPath error:NULL])
     {
-        NSLog(@"RingMail: Config File Removed: %@", cfgPath);
+        LOGI(@"RingMail: Config File Removed: %@", cfgPath);
     }
     [RgManager configDatabase]; // Create a new blank one
+    cfg = [RgManager configDatabase]; // Get the new one
     // Restore original device UUID
     [cfg setObject:deviceUUID forKey:@"ringmail_device_uuid"];
     
@@ -465,7 +469,7 @@ static LevelDB* theConfigDatabase = nil;
     NSString *dbPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[RgChatManager databasePath]];
     if ([[NSFileManager defaultManager] removeItemAtPath:dbPath error:NULL])
     {
-        NSLog(@"RingMail: SQLite Database Removed: %@", dbPath);
+        LOGI(@"RingMail: SQLite Database Removed: %@", dbPath);
     }
     LinphoneManager* mgr = [LinphoneManager instance];
     [[mgr chatManager] setupDatabase]; // Set it back up again for next time
@@ -545,13 +549,12 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)updateCredentials:(NSDictionary*)cred
 {
-    NSLog(@"RingMail Login Complete: %@", cred);
-    //NSLog(@"RingMail Update Credentials: %@", cred);
+    LOGI(@"RingMail: Login Complete: %@", cred);
     //[[LinphoneManager instance] startLinphoneCore];
     
     LinphoneCoreSettingsStore* settings = [[LinphoneCoreSettingsStore alloc] init];
     [settings transformLinphoneCoreToKeys];
-    NSLog(@"RingMail - Current Settings: %@", [settings getSettings]);
+    LOGI(@"RingMail: Current Settings: %@", [settings getSettings]);
     
     // RingMail Defaults
 #ifdef DEBUG
@@ -603,7 +606,7 @@ static LevelDB* theConfigDatabase = nil;
         [settings setObject:newSipPass forKey:@"password_preference"];
         [settings setObject:[RgManager ringmailHostSIP] forKey:@"domain_preference"];
     //}
-    NSLog(@"RingMail - New Settings: %@", [settings getSettings]);
+    LOGI(@"RingMail: New Settings: %@", [settings getSettings]);
     [settings synchronize];
  
     LevelDB* cfg = [RgManager configDatabase];
@@ -631,11 +634,11 @@ static LevelDB* theConfigDatabase = nil;
         NSDictionary *summary = [contactMgr getAddressBookStats:contactList];
         NSDate *internalDate = [summary objectForKey:@"date_update"];
         NSNumber *internalCount = [summary objectForKey:@"count"];
-        NSLog(@"RingMail: Server(%@:%@) Internal(%@:%@)", serverDate, serverCount, internalDate, internalCount);
+        LOGI(@"RingMail: Server(%@:%@) Internal(%@:%@)", serverDate, serverCount, internalDate, internalCount);
         if ((! ([internalDate compare:serverDate] == NSOrderedDescending)) && [serverCount isEqual:internalCount])
         {
             send = 0;
-            NSLog(@"RingMail: Server Contacts Up To Date");
+            LOGI(@"RingMail: Server Contacts Up To Date");
         }
     }
     if (send)
@@ -696,9 +699,9 @@ static LevelDB* theConfigDatabase = nil;
 + (void)initialLogin
 {
 #ifdef DEBUG
-    NSLog(@"RingMail: Initial - Login (TESTING)");
+    LOGI(@"RingMail: Initial - Login (TESTING)");
 #else
-    NSLog(@"RingMail: Initial - Login");
+    LOGI(@"RingMail: Initial - Login");
 #endif
     LinphoneManager* mgr = [LinphoneManager instance];
     LevelDB* cfg = [RgManager configDatabase];
@@ -708,7 +711,7 @@ static LevelDB* theConfigDatabase = nil;
     {
         [mgr setRingLogin:rgLogin];
         NSString *rgChatPass = [cfg objectForKey:@"ringmail_chat_password"];
-        NSLog(@"Initial Chat Pass: %@", rgChatPass);
+        LOGI(@"RingMail: Initial Chat Pass: %@", rgChatPass);
         if (rgChatPass != nil && (! [rgChatPass isEqualToString:@""])) // Check if chat password exists
         {
             [RgManager chatConnect];
@@ -736,7 +739,7 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)verifyLogin:(RgNetworkCallback)callback
 {
-    NSLog(@"RingMail: Verify - Login");
+    LOGI(@"RingMail: Verify - Login");
     LinphoneManager* mgr = [LinphoneManager instance];
     LevelDB* cfg = [RgManager configDatabase];
     NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];

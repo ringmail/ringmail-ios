@@ -47,7 +47,7 @@ PODS:
   - ObjectiveSugar (1.1.0)
   - OpenCV (3.0.0)
   - RegexKitLite (4.0)
-  - SVWebViewController (HEAD based on 1.0)
+  - SVWebViewController (1.0)
   - UIImage-Categories (1.0.0)
   - XMPPFramework (3.6.6):
     - XMPPFramework/Authentication (= 3.6.6)
@@ -208,7 +208,8 @@ DEPENDENCIES:
   - ObjectiveSugar
   - OpenCV
   - RegexKitLite
-  - SVWebViewController (HEAD)
+  - SVWebViewController (from `git@nova1.revalead.com:ringmail/svwebviewcontroller.git`,
+    tag `1.1`)
   - UIImage-Categories (from `https://github.com/nixonnixon/UIImage-Categories.git`)
   - XMPPFramework
 
@@ -216,6 +217,9 @@ EXTERNAL SOURCES:
   JSQMessagesViewController:
     :branch: ringmail
     :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
+  SVWebViewController:
+    :git: git@nova1.revalead.com:ringmail/svwebviewcontroller.git
+    :tag: '1.1'
   UIImage-Categories:
     :git: https://github.com/nixonnixon/UIImage-Categories.git
 
@@ -223,6 +227,9 @@ CHECKOUT OPTIONS:
   JSQMessagesViewController:
     :commit: 08356e2f7edabf995840291f3b94844c94f376ba
     :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
+  SVWebViewController:
+    :git: git@nova1.revalead.com:ringmail/svwebviewcontroller.git
+    :tag: '1.1'
   UIImage-Categories:
     :commit: 7d98f1c9c8a3217584fd797771dae199cb8eeb65
     :git: https://github.com/nixonnixon/UIImage-Categories.git
@@ -246,7 +253,7 @@ SPEC CHECKSUMS:
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OpenCV: be07c02f0d8f125f1d40d261e66a66cb66ece3b3
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
-  SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
+  SVWebViewController: aa2e18a41ff5f45be7aeec8e92ca5bcc50b5ebb1
   UIImage-Categories: b9d2ff50c2250ea007f150c2427ff230b5a4789b
   XMPPFramework: b06c210b0b71c08aa41a646bffd2021fa43bb43b
 

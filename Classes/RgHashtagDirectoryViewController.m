@@ -35,7 +35,6 @@
 @implementation RgHashtagDirectoryViewController
 
 @synthesize addressField;
-@synthesize addContactButton;
 @synthesize backButton;
 @synthesize callButton;
 @synthesize goButton;
@@ -88,10 +87,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     NSString *intro = @" Call #Hashtag or Email";
     NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-    attributes:@{
-        NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
-        NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20]
-    }];
+        attributes:@{
+            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
+            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:19]
+        }];
 	addressField.attributedPlaceholder = placeHolderString;
 }
 
@@ -229,7 +228,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onAddressChange:(id)sender {
 	if ([[addressField text] length] > 0) {
-		[addContactButton setEnabled:TRUE];
         NSString* addr = [addressField text];
         if ([[addr substringToIndex:1] isEqualToString:@"#"])
         {
@@ -244,7 +242,6 @@ static UICompositeViewDescription *compositeDescription = nil;
             goButton.hidden = YES;
         }
 	} else {
-		[addContactButton setEnabled:FALSE];
         messageButton.hidden = YES;
         callButton.hidden = YES;
         goButton.hidden = YES;

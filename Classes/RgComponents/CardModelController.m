@@ -70,6 +70,7 @@
 			ABRecordRef contact = NULL;
 			if (NILIFNULL(contactId) != nil)
 			{
+                // Contact ID was supplied by the server
 				contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactId];
         		if (contact)
         		{
@@ -78,6 +79,18 @@
                     [newdata setObject:((customImage != nil) ? customImage : defaultImage) forKey:@"image"];
         		}
 			}
+            else
+            {
+                // Contact ID lookup attemp
+				contact = [[[LinphoneManager instance] fastAddressBook] getContact:r[@"session_tag"]];
+        		if (contact)
+        		{
+                    LOGI(@"RingMail: Matched contact");
+        			UIImage *customImage = [FastAddressBook getContactImage:contact thumbnail:true];
+                    [newdata setObject:[FastAddressBook getContactDisplayName:contact] forKey:@"label"];
+                    [newdata setObject:((customImage != nil) ? customImage : defaultImage) forKey:@"image"];
+        		}
+            }
     		if (! contact)
     		{
                 [newdata setObject:address forKey:@"label"];
@@ -127,6 +140,7 @@
     			}
     		}
 		}
+        //LOGI(@"RingMail: List Object: %@", newdata);
         [list2 addObject:newdata];
     }
     return list2;

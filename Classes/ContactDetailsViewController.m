@@ -152,6 +152,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         [ct sendContactData:updated];
 	}
 	[[LinphoneManager instance].fastAddressBook reload];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactRefresh object:self userInfo:nil];
 }
 
 - (void)selectContact:(ABRecordRef)acontact andReload:(BOOL)reload {

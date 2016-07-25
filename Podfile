@@ -8,7 +8,7 @@ xcodeproj '/Users/mfrager/Projects/RingMail/iOS/linphone-iphone/ringmail'
 target 'RingMail' do
 #  pod 'JSQMessagesViewController', :head
   pod 'JSQMessagesViewController', :git => 'git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git', :branch => 'ringmail'
-  pod 'SVWebViewController', :head
+  pod 'SVWebViewController', :git => 'git@nova1.revalead.com:ringmail/svwebviewcontroller.git', :tag => '1.1'
   pod 'XMPPFramework'
 #  pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git'
   pod 'RegexKitLite'

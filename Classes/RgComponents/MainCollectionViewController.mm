@@ -140,6 +140,12 @@ static NSInteger const pageSize = 10;
                                                      header:[NSNumber numberWithBool:0]];
                     items.update([NSIndexPath indexPathForRow:i inSection:0], card);
                 }
+                else if (! [current[j][@"label"] isEqualToString:newlist[j][@"label"]])
+                {
+                    Card *card = [[Card alloc] initWithData:newlist[j]
+                                                     header:[NSNumber numberWithBool:0]];
+                    items.update([NSIndexPath indexPathForRow:i inSection:0], card);
+                }
                 else
                 {
                     NSNumber *curUnread = [current[j] objectForKey:@"unread"];

@@ -839,37 +839,34 @@
     __block NSNumber* result;
     [dbq inDatabase:^(FMDatabase *db) {
 		BOOL contact_found = NO;
-		if (contact != nil)
+        FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE session_tag = ? COLLATE NOCASE", from];
+        if ([rs next])
+        {
+            result = [NSNumber numberWithLong:[rs longForColumnIndex:0]];
+            contact_found = YES;
+        }
+        else
+        {
+            NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+            [ndb set:@{
+                       @"table": @"session",
+                       @"insert": @{
+                               @"session_tag": from,
+                               @"contact_id": (contact != nil) ? contact : [NSNull null],
+                               @"session_md5": [from md5HexDigest],
+                               @"unread": @0,
+                               @"ts_last_event": [[NSDate date] strftime],
+                           },
+                       }];
+            result = [NSNumber numberWithLongLong:[db lastInsertRowId]];
+        }
+        [rs close];
+		if ((! contact_found) && (contact != nil))
 		{
     		FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE contact_id = ?", contact];
             if ([rs next])
             {
                 result = [NSNumber numberWithLong:[rs longForColumnIndex:0]];
-				contact_found = YES;
-            }
-			[rs close];
-		}
-		if (! contact_found)
-		{
-            FMResultSet *rs = [db executeQuery:@"SELECT rowid FROM session WHERE session_tag = ? COLLATE NOCASE", from];
-            if ([rs next])
-            {
-                result = [NSNumber numberWithLong:[rs longForColumnIndex:0]];
-            }
-            else
-            {
-                NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
-                [ndb set:@{
-                           @"table": @"session",
-                           @"insert": @{
-                                   @"session_tag": from,
-                                   @"contact_id": (contact != nil) ? contact : [NSNull null],
-                                   @"session_md5": [from md5HexDigest],
-                                   @"unread": @0,
-                                   @"ts_last_event": [[NSDate date] strftime],
-                               },
-                           }];
-                result = [NSNumber numberWithLongLong:[db lastInsertRowId]];
             }
 			[rs close];
 		}
@@ -1105,6 +1102,7 @@
         while ([rs next])
         {
 			NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:[rs resultDictionary]];
+            NSLog(@"Item: %@", item);
             NSString* last = [item objectForKey:@"last_message"];
             if (last == nil)
             {
@@ -1115,7 +1113,7 @@
         }
         [rs close];
     }];
-    //NSLog(@"RingMail dbGetMainList: %@", result);
+    NSLog(@"dbGetMainList: %@", result);
     [dbq close];
     return result;
 }

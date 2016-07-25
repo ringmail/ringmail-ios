@@ -30,7 +30,6 @@
 }
 
 @property (nonatomic, strong) IBOutlet UITextField* addressField;
-@property (nonatomic, strong) IBOutlet UIButton* addContactButton;
 @property (nonatomic, strong) IBOutlet UICallButton* callButton;
 @property (nonatomic, strong) IBOutlet UICallButton* goButton;
 @property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;

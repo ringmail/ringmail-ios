@@ -73,7 +73,7 @@
                                 <outlet property="addressField" destination="4" id="235"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Enter #Hashtag or Email" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
                             <rect key="frame" x="58" y="15" width="174" height="27"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -121,6 +121,6 @@
         <image name="phone.png" width="30" height="30"/>
         <image name="quote.png" width="30" height="30"/>
         <image name="ringpage.png" width="30" height="30"/>
-        <image name="search.png" width="50" height="50"/>
+        <image name="search.png" width="51" height="51"/>
     </resources>
 </document>

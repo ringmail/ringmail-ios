@@ -71,6 +71,10 @@
     	{
     		contact = [[[LinphoneManager instance] fastAddressBook] getContactById:sdata[@"contact_id"]];
     	}
+        else
+        {
+            contact = [[[LinphoneManager instance] fastAddressBook] getContact:sdata[@"session_tag"]];
+        }
     	ContactDetailsViewController *controller = DYNAMIC_CAST(
     		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
     		ContactDetailsViewController);

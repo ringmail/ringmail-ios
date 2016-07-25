@@ -156,7 +156,6 @@
 		C41D67DD1CA722A100D7BA72 /* ringmail_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C41D67DA1CA722A100D7BA72 /* ringmail_plus.png */; };
 		C41D67DE1CA722A100D7BA72 /* ringmail_plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C41D67DB1CA722A100D7BA72 /* ringmail_plus@3x.png */; };
 		C41D67E61CA74DDC00D7BA72 /* HelveticaNeueLTStd-Cn.otf in Resources */ = {isa = PBXBuildFile; fileRef = C41D67E51CA74B2F00D7BA72 /* HelveticaNeueLTStd-Cn.otf */; };
-		C41EF3111B8BCFD40085E75B /* RgMainController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */; };
 		C41EF3121B8BCFD40085E75B /* RgMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */; };
 		C41EF31B1B8BD87B0085E75B /* ringmail_button1.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3181B8BD87B0085E75B /* ringmail_button1.png */; };
 		C41EF31C1B8BD87B0085E75B /* ringmail_input1.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3191B8BD87B0085E75B /* ringmail_input1.png */; };
@@ -992,7 +991,6 @@
 		C4AC2A481D3963FA003B6232 /* chat_progressbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F5F983160B1A0800D3DA1A /* chat_progressbar_background.png */; };
 		C4AC2A491D3963FA003B6232 /* ringmail_chat_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C49606FC1CA3810A00C988B6 /* ringmail_chat_back@2x.png */; };
 		C4AC2A4A1D3963FA003B6232 /* setup_back_default_landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F5F984160B1A0800D3DA1A /* setup_back_default_landscape~ipad.png */; };
-		C4AC2A4B1D3963FA003B6232 /* RgMainController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */; };
 		C4AC2A4C1D3963FA003B6232 /* setup_back_default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F5F985160B1A0800D3DA1A /* setup_back_default~ipad.png */; };
 		C4AC2A4D1D3963FA003B6232 /* setup_back_disabled_landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F5F986160B1A0900D3DA1A /* setup_back_disabled_landscape~ipad.png */; };
 		C4AC2A4E1D3963FA003B6232 /* setup_cancel_default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5124C160B213900946DF8 /* setup_cancel_default~ipad.png */; };
@@ -2280,7 +2278,6 @@
 		C41D67DB1CA722A100D7BA72 /* ringmail_plus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_plus@3x.png"; path = "Resources/ringmail_plus@3x.png"; sourceTree = "<group>"; };
 		C41D67E51CA74B2F00D7BA72 /* HelveticaNeueLTStd-Cn.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNeueLTStd-Cn.otf"; path = "Resources/HelveticaNeueLTStd-Cn.otf"; sourceTree = "<group>"; };
 		C41D67EA1CA8C33A00D7BA72 /* MainCardComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainCardComponentController.h; path = RgComponents/MainCardComponentController.h; sourceTree = "<group>"; };
-		C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RgMainController~ipad.xib"; sourceTree = "<group>"; };
 		C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMainViewController.h; sourceTree = "<group>"; };
 		C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMainViewController.m; sourceTree = "<group>"; };
 		C41EF3181B8BD87B0085E75B /* ringmail_button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_button1.png; path = Resources/ringmail_button1.png; sourceTree = "<group>"; };
@@ -3508,7 +3505,6 @@
 				C402BEED1C26169A0076B60C /* RgScanViewController.h */,
 				C402BEEE1C2616A60076B60C /* RgScanViewController.m */,
 				C402BEF01C2616B20076B60C /* RgScanViewController.xib */,
-				C41EF30D1B8BCFD40085E75B /* RgMainController~ipad.xib */,
 				C402BEF31C261D240076B60C /* UIImage+OpenCV.h */,
 				C402BEF41C261D240076B60C /* UIImage+OpenCV.mm */,
 				C402BF011C2623E10076B60C /* UIImage+operation.h */,
@@ -5720,7 +5716,6 @@
 				D3F5F987160B1A0900D3DA1A /* chat_progressbar_background.png in Resources */,
 				C49606FF1CA3810A00C988B6 /* ringmail_chat_back@2x.png in Resources */,
 				D3F5F989160B1A0900D3DA1A /* setup_back_default_landscape~ipad.png in Resources */,
-				C41EF3111B8BCFD40085E75B /* RgMainController~ipad.xib in Resources */,
 				D3F5F98B160B1A0900D3DA1A /* setup_back_default~ipad.png in Resources */,
 				D3F5F98D160B1A0900D3DA1A /* setup_back_disabled_landscape~ipad.png in Resources */,
 				D3D5124E160B213900946DF8 /* setup_cancel_default~ipad.png in Resources */,
@@ -6459,7 +6454,6 @@
 				C4AC2A481D3963FA003B6232 /* chat_progressbar_background.png in Resources */,
 				C4AC2A491D3963FA003B6232 /* ringmail_chat_back@2x.png in Resources */,
 				C4AC2A4A1D3963FA003B6232 /* setup_back_default_landscape~ipad.png in Resources */,
-				C4AC2A4B1D3963FA003B6232 /* RgMainController~ipad.xib in Resources */,
 				C4AC2A4C1D3963FA003B6232 /* setup_back_default~ipad.png in Resources */,
 				C4AC2A4D1D3963FA003B6232 /* setup_back_disabled_landscape~ipad.png in Resources */,
 				C4AC2A4E1D3963FA003B6232 /* setup_cancel_default~ipad.png in Resources */,
@@ -7553,6 +7547,7 @@
 				PRODUCT_NAME = ringmail;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
@@ -7657,6 +7652,7 @@
 				PRODUCT_NAME = ringmail;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
@@ -7715,8 +7711,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -7759,6 +7755,7 @@
 				PRODUCT_NAME = ringmail;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
@@ -7859,6 +7856,7 @@
 				PRODUCT_NAME = ringmail;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",

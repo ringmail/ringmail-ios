@@ -138,6 +138,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kRgFavoriteRefresh
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshEvent:)
+                                                 name:kRgContactRefresh
+                                               object:nil];
+    
 }
 
 - (void)viewDidUnload {
@@ -147,6 +152,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgFavoriteRefresh object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgContactRefresh object:nil];
 }
 
 #pragma mark - Event Functions
