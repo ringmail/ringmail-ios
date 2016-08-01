@@ -59,6 +59,7 @@ extern NSString *const kRgSelfName;
 + (void)closeConfigDatabase;
 + (NSDictionary *)getCredentials;
 
++ (void)reset;
 + (void)configReset;
 + (BOOL)configReady;
 + (BOOL)configEmailVerified;

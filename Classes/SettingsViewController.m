@@ -362,9 +362,11 @@
     if ([viewController.title isEqualToString:@"Settings"])
     {
         NSString *ringLogin = [[LinphoneManager instance] ringLogin];
-#ifdef DEBUG
-        ringLogin = [ringLogin stringByAppendingString:@" [TESTING]"];
-#endif
+        NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+        if (! [bundleIdentifier isEqualToString:@"com.ringmail.phone"])
+        {
+            ringLogin = [ringLogin stringByAppendingString:@" [TESTING]"];
+        }
         labelTitleView.text = ringLogin;
     }
     else
@@ -565,11 +567,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
 					 WizardViewController);
 	if (controller != nil) {
-        // clear linphone recent calls
-        linphone_core_clear_call_logs([LinphoneManager getLc]);
-        [[RgNetwork instance] signOut];
-        [[[LinphoneManager instance] chatManager] disconnect];
-        [RgManager configReset];
+        [RgManager reset];
         [controller reset];
 		[controller startWizard];
 	}

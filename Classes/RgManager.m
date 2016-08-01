@@ -557,11 +557,7 @@ static LevelDB* theConfigDatabase = nil;
     LOGI(@"RingMail: Current Settings: %@", [settings getSettings]);
     
     // RingMail Defaults
-#ifdef DEBUG
-    [settings setObject:[NSNumber numberWithBool:1] forKey:@"debugenable_preference"];
-#else
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"debugenable_preference"]; // ON for now
-#endif
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"start_at_boot_preference"];
     [settings setObject:[NSNumber numberWithBool:0] forKey:@"backgroundmode_preference"];
     [settings setObject:[NSNumber numberWithBool:1] forKey:@"enable_video_preference"];
@@ -606,10 +602,12 @@ static LevelDB* theConfigDatabase = nil;
         [settings setObject:newSipPass forKey:@"password_preference"];
         [settings setObject:[RgManager ringmailHostSIP] forKey:@"domain_preference"];
     //}
-    LOGI(@"RingMail: New Settings: %@", [settings getSettings]);
+    //LOGI(@"RingMail: New Settings: %@", [settings getSettings]);
     [settings synchronize];
  
     LevelDB* cfg = [RgManager configDatabase];
+    [[LinphoneManager instance] setRingLogin:cfg[@"ringmail_login"]];
+    LOGI(@"RingMail: ringLogin: %@", [[LinphoneManager instance] ringLogin]);
     [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
     [RgManager chatEnsureConnection];
     [[RgNetwork instance] registerPushToken];
@@ -698,11 +696,15 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)initialLogin
 {
-#ifdef DEBUG
-    LOGI(@"RingMail: Initial - Login (TESTING)");
-#else
-    LOGI(@"RingMail: Initial - Login");
-#endif
+    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    if ([bundleIdentifier isEqualToString:@"com.ringmail.phone"])
+    {
+        LOGI(@"RingMail: Initial - Login");
+    }
+    else
+    {
+        LOGI(@"RingMail: Initial - Login (TESTING)");
+    }
     LinphoneManager* mgr = [LinphoneManager instance];
     LevelDB* cfg = [RgManager configDatabase];
     NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
@@ -711,7 +713,7 @@ static LevelDB* theConfigDatabase = nil;
     {
         [mgr setRingLogin:rgLogin];
         NSString *rgChatPass = [cfg objectForKey:@"ringmail_chat_password"];
-        LOGI(@"RingMail: Initial Chat Pass: %@", rgChatPass);
+        //LOGI(@"RingMail: Initial Chat Pass: %@", rgChatPass);
         if (rgChatPass != nil && (! [rgChatPass isEqualToString:@""])) // Check if chat password exists
         {
             [RgManager chatConnect];
@@ -726,10 +728,12 @@ static LevelDB* theConfigDatabase = nil;
             else
             {
                 [mgr setRingLogin:@""];
+                [RgManager reset];
                 WizardViewController *controller = DYNAMIC_CAST(
                     [[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
                     WizardViewController);
                 if (controller != nil) {
+                    [controller reset];
                     [controller startWizard];
                 }
             }
@@ -749,6 +753,15 @@ static LevelDB* theConfigDatabase = nil;
         [mgr setRingLogin:rgLogin];
         [[RgNetwork instance] login:rgLogin password:rgPass callback:callback];
     }
+}
+
++ (void)reset
+{
+    // clear linphone recent calls
+    linphone_core_clear_call_logs([LinphoneManager getLc]);
+    [[RgNetwork instance] signOut];
+    [[[LinphoneManager instance] chatManager] disconnect];
+    [RgManager configReset];
 }
 
 @end
