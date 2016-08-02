@@ -51,7 +51,7 @@
 - (void)sendMessageTo:(NSString*)to image:(UIImage*)image contact:(NSNumber*)contact;
 //- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply contact:(NSNumber*)contact;
 //- (NSString *)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers contact:(NSNumber*)contact;
-- (NSNumber *)dbGetSessionID:(NSString *)from contact:(NSNumber*)contact;
+- (NSDictionary *)dbGetSessionID:(NSString *)from contact:(NSNumber*)contact uuid:(NSString*)uuid;
 - (NSDictionary*)dbGetSessionData:(NSNumber*)rowid;
 - (NSArray *)dbGetSessions;
 - (NSArray *)dbGetMessages:(NSNumber *)session;

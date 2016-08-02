@@ -14,7 +14,7 @@ target 'RingMail' do
   pod 'RegexKitLite'
   pod 'FMDB'
   pod 'Objective-LevelDB'
-  pod "AFNetworking"
+  pod "AFNetworking", '~> 3.0'
   pod 'NYXImagesKit'
   pod 'DXTableViewModel',  '~> 0.1.0'
   pod 'libPhoneNumber-iOS', '~> 0.8'

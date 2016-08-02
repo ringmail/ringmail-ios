@@ -142,7 +142,8 @@ static LevelDB* theConfigDatabase = nil;
 	{
 		contactNum = [[lm fastAddressBook] getContactId:contact];
 	}
-	return [[lm chatManager] dbGetSessionID:address contact:contactNum];
+	NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address contact:contactNum uuid:nil];
+	return sessionData[@"id"];
 }
 
 + (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video
@@ -181,8 +182,8 @@ static LevelDB* theConfigDatabase = nil;
 	{
 		contactNum = [[lm fastAddressBook] getContactId:contact];
 	}
-	NSNumber *session = [[lm chatManager] dbGetSessionID:address contact:contactNum];
-    [lm setChatSession:session];
+	NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address contact:contactNum uuid:nil];
+    [lm setChatSession:sessionData[@"id"]];
     [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 }
 
@@ -223,13 +224,13 @@ static LevelDB* theConfigDatabase = nil;
 		if ([ok isEqualToString:@"ok"])
 		{
 			RgChatManager *cmgr = [[LinphoneManager instance] chatManager];
-			NSNumber *session = [cmgr dbGetSessionID:address contact:nil];
+			NSDictionary *sessionData = [cmgr dbGetSessionID:address contact:nil uuid:nil];
             [cmgr dbInsertCall:@{
                 @"sip": @"",
                 @"address": address,
                 @"state": [NSNumber numberWithInt:0],
                 @"inbound": [NSNumber numberWithBool:NO],
-		    } session:session];
+		    } session:sessionData[@"id"]];
 			[[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
 				@"address": [res objectForKey:@"target"],
 			}];

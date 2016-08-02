@@ -832,13 +832,14 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 				LOGI(@"Inbound: %@", [NSNumber numberWithBool:inbound]);
 				RgChatManager *cmgr = [self chatManager];
 				NSNumber *contactNum = [data->userInfos objectForKey:@"contact"];
-				NSNumber *session = [cmgr dbGetSessionID:address contact:contactNum];
+				// TODO: Get UUID from server on inbound calls
+				NSDictionary *sessionData = [cmgr dbGetSessionID:address contact:contactNum uuid:nil];
                 [cmgr dbInsertCall:@{
                        @"sip": sip,
                        @"address": address,
                        @"state": [NSNumber numberWithInt:state],
                        @"inbound": [NSNumber numberWithBool:inbound],
-                } session:session];
+                } session:sessionData[@"id"]];
             }
             else
             {
