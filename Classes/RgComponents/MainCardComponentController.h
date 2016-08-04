@@ -13,5 +13,7 @@
 
 @interface MainCardComponentController : CKComponentController
 
+@property NSMutableDictionary *removeButtons;
+
 @end
 
