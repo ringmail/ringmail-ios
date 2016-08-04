@@ -869,7 +869,7 @@
 		}
 		if ((! found) && contact != nil)
 		{
-            FMResultSet *rs2 = [db executeQuery:@"SELECT rowid, uuid, session_tag, contact_id FROM session WHERE contact = ? COLLATE NOCASE", contact];
+            FMResultSet *rs2 = [db executeQuery:@"SELECT rowid, uuid, session_tag, contact_id FROM session WHERE contact_id = ? COLLATE NOCASE", contact];
     		if ([rs2 next])
     		{
 				curId = [NSNumber numberWithLong:[rs2 longForColumnIndex:0]];
@@ -910,13 +910,13 @@
 			{
 				if (! [contact isEqualToNumber:curContact])
 				{
-					updates[@"contact"] = contact;
+					updates[@"contact_id"] = contact;
 					update = YES;
 				}
 			}
 			else if (! [curContact isKindOfClass:[NSNull class]]) // Clear out contact
 			{
-				updates[@"contact"] = [NSNull null];
+				updates[@"contact_id"] = [NSNull null];
 				update = YES;
 			}
 			if (! [from isEqualToString:curTag])
@@ -1193,7 +1193,7 @@
         while ([rs next])
         {
 			NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:[rs resultDictionary]];
-            NSLog(@"Item: %@", item);
+            //NSLog(@"Item: %@", item);
             NSString* last = [item objectForKey:@"last_message"];
             if (last == nil)
             {
@@ -1204,7 +1204,7 @@
         }
         [rs close];
     }];
-    NSLog(@"dbGetMainList: %@", result);
+    //NSLog(@"dbGetMainList: %@", result);
     [dbq close];
     return result;
 }
