@@ -61,6 +61,7 @@
 - (NSNumber *)dbGetSessionUnread;
 - (void)dbDeleteSessionID:(NSNumber *)session;
 - (NSNumber *)dbGetSessionByMD5:(NSString*)lookup;
+- (void)dbHideSession:(NSNumber *)session;
 - (NSData *)dbGetMessageData:(NSNumber*)msgId;
 - (NSNumber*)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid;
 

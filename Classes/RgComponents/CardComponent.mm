@@ -20,9 +20,11 @@
 
 @implementation CardComponent
 
+
+
 + (instancetype)newWithCard:(Card *)card context:(CardContext *)context
 {
-  return [super newWithComponent:cardComponent(card, context)];
+   return [super newWithComponent:cardComponent(card, context)];
 }
 
 static CKComponent *cardComponent(Card *card, CardContext *context)

@@ -22,6 +22,7 @@ extern NSString *const kRgTextUpdate;
 extern NSString *const kRgContactsUpdated;
 extern NSString *const kRgSetAddress;
 extern NSString *const kRgMainRefresh;
+extern NSString *const kRgMainRemove;
 extern NSString *const kRgFavoriteRefresh;
 extern NSString *const kRgAttemptVerify;
 extern NSString *const kRgLaunchBrowser;

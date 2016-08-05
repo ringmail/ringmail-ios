@@ -21,6 +21,7 @@ NSString *const kRgTextUpdate = @"RgTextUpdate";
 NSString *const kRgContactsUpdated = @"RgContactsUpdated";
 NSString *const kRgSetAddress = @"RgSetAddress";
 NSString *const kRgMainRefresh = @"RgMainRefresh";
+NSString *const kRgMainRemove = @"RgMainRemove";
 NSString *const kRgFavoriteRefresh = @"RgFavoriteRefresh";
 NSString *const kRgAttemptVerify = @"kRgAttemptVerify";
 NSString *const kRgLaunchBrowser = @"kRgLaunchBrowser";

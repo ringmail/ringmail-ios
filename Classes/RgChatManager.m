@@ -983,15 +983,34 @@
             //NSLog(@"Update Timestamp For: %@ From: %@ To %@", session, current, event);
             NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
             [ndb set:@{
-                       @"table": @"session",
-                       @"update": @{
-                               @"ts_last_event": [event strftime],
-                           },
-                       @"where": @{
-                               @"rowid": session,
-                           },
-                       }];
+			   @"table": @"session",
+			   @"update": @{
+					   @"hide": @0,
+					   @"ts_last_event": [event strftime],
+				   },
+			   @"where": @{
+					   @"rowid": session,
+				   },
+		    }];
         }
+    }];
+    [dbq close];
+}
+
+- (void)dbHideSession:(NSNumber *)session
+{
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		[ndb set:@{
+		   @"table": @"session",
+		   @"update": @{
+				   @"hide": @1,
+			   },
+		   @"where": @{
+				   @"rowid": session,
+			   },
+		}];
     }];
     [dbq close];
 }
@@ -1178,7 +1197,7 @@
         }
 		else
 		{
-            sql = [sql stringByAppendingString:[NSString stringWithFormat:@"WHERE EXISTS (SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain') OR EXISTS (SELECT * FROM calls WHERE calls.session_id=session.rowid) "]];
+            sql = [sql stringByAppendingString:[NSString stringWithFormat:@"WHERE hide = 0 AND (EXISTS (SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain') OR EXISTS (SELECT * FROM calls WHERE calls.session_id=session.rowid))"]];
 		}
         sql = [sql stringByAppendingString:@"ORDER BY ts_last_event DESC, rowid DESC"];
         FMResultSet *rs;
@@ -1193,13 +1212,17 @@
         while ([rs next])
         {
 			NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:[rs resultDictionary]];
-            //NSLog(@"Item: %@", item);
+            NSLog(@"Item: %@", item);
             NSString* last = [item objectForKey:@"last_message"];
             if (last == nil)
             {
                 last = @"";
             }
 			[item setObject:last forKey:@"last_message"];
+			if (! fav)
+			{
+				item[@"removable"] = @YES;
+			}
             [result addObject:item];
         }
         [rs close];

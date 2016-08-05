@@ -20,15 +20,12 @@
 
 @implementation HashtagCardComponent
 
-@synthesize cardData;
-
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
 	//NSLog(@"Component Data: %@", data);
     UIImage *cardImage = [data objectForKey:@"image"];
     cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
-
 	
     CKComponentViewConfiguration vcfg;
     if ([[data objectForKey:@"unread"] integerValue] > 0)
@@ -57,13 +54,26 @@
         };
     }
 	
-    HashtagCardComponent *c = [super newWithView:{
-        [UIView class],
-        {
-            //{CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeLeftRecognizer, NSSelectorFromString(@"didSwipeLeft:gesture:"), {})},
-            //{CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeRightRecognizer, NSSelectorFromString(@"didSwipeRight:gesture:"), {})},
-        }
-    } component:
+	CKComponentViewConfiguration scfg;
+	if (data[@"removable"])
+	{
+		scfg = {
+    	    [UIView class],
+            {
+                {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeLeftRecognizer, NSSelectorFromString(@"didSwipeLeft:gesture:"), {})},
+                {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeRightRecognizer, NSSelectorFromString(@"didSwipeRight:gesture:"), {})},
+            }
+	 	};
+	}
+	else
+	{
+		scfg = {
+			[UIView class],
+			{}
+		};
+	}
+	
+    HashtagCardComponent *c = [super newWithView:scfg component:
         [CKInsetComponent
         // Left and right inset of 30pts; centered vertically:
         newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
@@ -171,6 +181,16 @@
 {
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     [card gotoHashtag];
+}
+
+static void setupSwipeLeftRecognizer(UIGestureRecognizer* recognizer) {
+    UISwipeGestureRecognizer* sw = (UISwipeGestureRecognizer*)recognizer;
+    [sw setDirection:UISwipeGestureRecognizerDirectionLeft];
+}
+
+static void setupSwipeRightRecognizer(UIGestureRecognizer* recognizer) {
+    UISwipeGestureRecognizer* sw = (UISwipeGestureRecognizer*)recognizer;
+    [sw setDirection:UISwipeGestureRecognizerDirectionRight];
 }
 
 @end

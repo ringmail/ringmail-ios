@@ -9,13 +9,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "MainCardComponentController.h"
+#import "HashtagCardComponentController.h"
+#import "HashtagCardComponent.h"
 #import "CKComponentInternal.h"
-#import "MainCardComponent.h"
 #import "UIColor+Hex.h"
 #import "RgManager.h"
 
-@implementation MainCardComponentController
+@implementation HashtagCardComponentController
 
 - (void)didSwipeLeft:(CKComponent *)component gesture:(UISwipeGestureRecognizer *)gesture
 {
@@ -30,7 +30,7 @@
 		self.removeButtons = [NSMutableDictionary dictionary];
 	}
 	
-    MainCardComponent* mc = (MainCardComponent*)component;
+    HashtagCardComponent* mc = (HashtagCardComponent*)component;
 	NSNumber *session = [[mc cardData] objectForKey:@"id"];
 	//NSLog(@"Button for session id: %@", session);
 	
@@ -57,7 +57,7 @@
         fr.origin.x = 0;
         [view setFrame:fr];
 		
-        MainCardComponent* mc = (MainCardComponent*)component;
+        HashtagCardComponent* mc = (HashtagCardComponent*)component;
     	NSNumber *session = [[mc cardData] objectForKey:@"id"];
 		if (self.removeButtons[session] != nil)
 		{
@@ -72,7 +72,7 @@
 - (void)willRemount
 {
 	[super willRemount];
-	MainCardComponent* mc = (MainCardComponent*)[self component];
+	HashtagCardComponent* mc = (HashtagCardComponent*)[self component];
 	NSNumber *session = [[mc cardData] objectForKey:@"session"];
 	//NSLog(@"willRemount: %@", session);
 	if (self.removeButtons[session] != nil)
@@ -87,7 +87,7 @@
 - (void)willUnmount
 {
 	[super willUnmount];
-	MainCardComponent* mc = (MainCardComponent*)[self component];
+	HashtagCardComponent* mc = (HashtagCardComponent*)[self component];
 	NSNumber *session = [[mc cardData] objectForKey:@"id"];
 	//NSLog(@"willUnmount: %@", session);
 	if (self.removeButtons[session] != nil)

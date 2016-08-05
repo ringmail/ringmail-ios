@@ -224,6 +224,14 @@
 		C42C0DEE1CB16FF100AD5A91 /* ringmail_incoming_reject@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C42C0DE81CB16FF100AD5A91 /* ringmail_incoming_reject@2x.png */; };
 		C42C0DEF1CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C42C0DE91CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
+		C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */; };
+		C43F65D41D53EBE9004CEC70 /* HashtagCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */; };
+		C43F65D81D540233004CEC70 /* ringmail_delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D51D540233004CEC70 /* ringmail_delete@3x.png */; };
+		C43F65D91D540233004CEC70 /* ringmail_delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D51D540233004CEC70 /* ringmail_delete@3x.png */; };
+		C43F65DA1D540233004CEC70 /* ringmail_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D61D540233004CEC70 /* ringmail_delete@2x.png */; };
+		C43F65DB1D540233004CEC70 /* ringmail_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D61D540233004CEC70 /* ringmail_delete@2x.png */; };
+		C43F65DC1D540233004CEC70 /* ringmail_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D71D540233004CEC70 /* ringmail_delete.png */; };
+		C43F65DD1D540233004CEC70 /* ringmail_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D71D540233004CEC70 /* ringmail_delete.png */; };
 		C444F3C71C92240300134788 /* menu-more_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3A61C92240300134788 /* menu-more_active@2x.png */; };
 		C444F3C81C92240300134788 /* menu-more_active.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3A71C92240300134788 /* menu-more_active.png */; };
 		C444F3C91C92240300134788 /* menu-more_active@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3A81C92240300134788 /* menu-more_active@3x.png */; };
@@ -2368,6 +2376,11 @@
 		C42C0DE91CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_incoming_reject@3x.png"; path = "Resources/ringmail_incoming_reject@3x.png"; sourceTree = "<group>"; };
 		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
+		C43F65D11D5309CB004CEC70 /* HashtagCardComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCardComponentController.h; path = RgComponents/HashtagCardComponentController.h; sourceTree = "<group>"; };
+		C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HashtagCardComponentController.mm; path = RgComponents/HashtagCardComponentController.mm; sourceTree = "<group>"; };
+		C43F65D51D540233004CEC70 /* ringmail_delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_delete@3x.png"; path = "Resources/ringmail_delete@3x.png"; sourceTree = "<group>"; };
+		C43F65D61D540233004CEC70 /* ringmail_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_delete@2x.png"; path = "Resources/ringmail_delete@2x.png"; sourceTree = "<group>"; };
+		C43F65D71D540233004CEC70 /* ringmail_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_delete.png; path = Resources/ringmail_delete.png; sourceTree = "<group>"; };
 		C444F3A61C92240300134788 /* menu-more_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-more_active@2x.png"; path = "Resources/menu-more_active@2x.png"; sourceTree = "<group>"; };
 		C444F3A71C92240300134788 /* menu-more_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-more_active.png"; path = "Resources/menu-more_active.png"; sourceTree = "<group>"; };
 		C444F3A81C92240300134788 /* menu-more_active@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-more_active@3x.png"; path = "Resources/menu-more_active@3x.png"; sourceTree = "<group>"; };
@@ -4013,6 +4026,8 @@
 				C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */,
 				C476A7111CF254F100CA3772 /* HashtagCardComponent.h */,
 				C476A7121CF254F100CA3772 /* HashtagCardComponent.mm */,
+				C43F65D11D5309CB004CEC70 /* HashtagCardComponentController.h */,
+				C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */,
 				C4FD78731CFB70520066BDB1 /* HashtagCategoryCardComponent.h */,
 				C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */,
 				C4FD78761CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.h */,
@@ -4237,6 +4252,9 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C43F65D51D540233004CEC70 /* ringmail_delete@3x.png */,
+				C43F65D61D540233004CEC70 /* ringmail_delete@2x.png */,
+				C43F65D71D540233004CEC70 /* ringmail_delete.png */,
 				C4AC2B971D397107003B6232 /* ringmail_dev_logo.png */,
 				C4AC2B981D397107003B6232 /* ringmail_dev_logo@2x.png */,
 				C4AC2B991D397107003B6232 /* ringmail_dev_logo@3x.png */,
@@ -5161,6 +5179,7 @@
 				D3F83F621582223B00336684 /* numpad_seven_over.png in Resources */,
 				D3F83F641582223B00336684 /* numpad_eight_default.png in Resources */,
 				D3F83F661582223B00336684 /* numpad_eight_over.png in Resources */,
+				C43F65DC1D540233004CEC70 /* ringmail_delete.png in Resources */,
 				D3F83F681582223B00336684 /* numpad_nine_default.png in Resources */,
 				C459A42A1CC8634C00CFFF30 /* ringmail_edit@2x.png in Resources */,
 				D3F83F6A1582223B00336684 /* numpad_nine_over.png in Resources */,
@@ -5241,6 +5260,7 @@
 				C444F3FE1C9235DC00134788 /* phone.png in Resources */,
 				D36C43D3158F2F370048BA40 /* cell_conference.png in Resources */,
 				C40FF4B21CACD248007EA0E7 /* ringmail_contact_add_pressed@2x.png in Resources */,
+				C43F65D81D540233004CEC70 /* ringmail_delete@3x.png in Resources */,
 				D36C43D5158F2F370048BA40 /* header_conference.png in Resources */,
 				D36C43D7158F2F370048BA40 /* dialer_alt_default.png in Resources */,
 				C459A4191CC8633000CFFF30 /* ringmail_contact_back.png in Resources */,
@@ -5478,6 +5498,7 @@
 				D3A74EB215C69392001500B9 /* add_call_default~ipad.png in Resources */,
 				D3A74EB415C69392001500B9 /* add_call_disabled~ipad.png in Resources */,
 				C42C0DCC1CAEE9D100AD5A91 /* ringmail_speaker@3x.png in Resources */,
+				C43F65DA1D540233004CEC70 /* ringmail_delete@2x.png in Resources */,
 				D3A74EB615C69392001500B9 /* add_call_over~ipad.png in Resources */,
 				D3A74EB815C69392001500B9 /* add_contact_default~ipad.png in Resources */,
 				D3A74EBA15C69392001500B9 /* add_contact_disabled~ipad.png in Resources */,
@@ -5899,6 +5920,7 @@
 				C4AC281F1D3963FA003B6232 /* numpad_seven_over.png in Resources */,
 				C4AC28201D3963FA003B6232 /* numpad_eight_default.png in Resources */,
 				C4AC28211D3963FA003B6232 /* numpad_eight_over.png in Resources */,
+				C43F65DD1D540233004CEC70 /* ringmail_delete.png in Resources */,
 				C4AC28221D3963FA003B6232 /* numpad_nine_default.png in Resources */,
 				C4AC28231D3963FA003B6232 /* ringmail_edit@2x.png in Resources */,
 				C4AC28241D3963FA003B6232 /* numpad_nine_over.png in Resources */,
@@ -5979,6 +6001,7 @@
 				C4AC286F1D3963FA003B6232 /* phone.png in Resources */,
 				C4AC28701D3963FA003B6232 /* cell_conference.png in Resources */,
 				C4AC28711D3963FA003B6232 /* ringmail_contact_add_pressed@2x.png in Resources */,
+				C43F65D91D540233004CEC70 /* ringmail_delete@3x.png in Resources */,
 				C4AC28721D3963FA003B6232 /* header_conference.png in Resources */,
 				C4AC28731D3963FA003B6232 /* dialer_alt_default.png in Resources */,
 				C4AC28741D3963FA003B6232 /* ringmail_contact_back.png in Resources */,
@@ -6216,6 +6239,7 @@
 				C4AC295A1D3963FA003B6232 /* add_call_default~ipad.png in Resources */,
 				C4AC295B1D3963FA003B6232 /* add_call_disabled~ipad.png in Resources */,
 				C4AC295C1D3963FA003B6232 /* ringmail_speaker@3x.png in Resources */,
+				C43F65DB1D540233004CEC70 /* ringmail_delete@2x.png in Resources */,
 				C4AC295D1D3963FA003B6232 /* add_call_over~ipad.png in Resources */,
 				C4AC295E1D3963FA003B6232 /* add_contact_default~ipad.png in Resources */,
 				C4AC295F1D3963FA003B6232 /* add_contact_disabled~ipad.png in Resources */,
@@ -6758,6 +6782,7 @@
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				C450DBB71C70FFB00053592E /* MainCollectionViewController.mm in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
+				C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */,
 				63B81A101B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C42C0D661CAEDAA800AD5A91 /* RgCallComponent.mm in Sources */,
 				F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */,
@@ -6996,6 +7021,7 @@
 				C4AC2B2C1D3963FA003B6232 /* HashtagCollectionViewController.mm in Sources */,
 				C4AC2B2D1D3963FA003B6232 /* CardModelController.m in Sources */,
 				C4AC2B2E1D3963FA003B6232 /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
+				C43F65D41D53EBE9004CEC70 /* HashtagCardComponentController.mm in Sources */,
 				C4AC2B2F1D3963FA003B6232 /* UIDigitButtonLongVoiceMail.m in Sources */,
 				C4AC2B301D3963FA003B6232 /* NSString+MD5.m in Sources */,
 				C4AC2B311D3963FA003B6232 /* ImageProcessingImplementation.mm in Sources */,

@@ -232,6 +232,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(mainRefreshEvent:)
                                                  name:kRgMainRefresh
                                                object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(removeCard:)
+                                                 name:kRgMainRemove
+                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(mainRefreshEvent:)
@@ -332,8 +337,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (void)removeCard:(NSNotification *)notif{
-    [mainViewController removeCard:notif.userInfo[@"index"]];
+- (void)removeCard:(NSNotification *)notif {
+	[[[LinphoneManager instance] chatManager] dbHideSession:notif.userInfo[@"id"]];
+	[mainViewController updateCollection];
 }
 
 #pragma mark - Debug Functions

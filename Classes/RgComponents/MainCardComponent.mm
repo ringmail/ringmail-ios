@@ -125,6 +125,25 @@
         };
     }
 	
+	CKComponentViewConfiguration scfg;
+	if (data[@"removable"])
+	{
+		scfg = {
+    	    [UIView class],
+            {
+                {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeLeftRecognizer, NSSelectorFromString(@"didSwipeLeft:gesture:"), {})},
+                {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeRightRecognizer, NSSelectorFromString(@"didSwipeRight:gesture:"), {})},
+            }
+	 	};
+	}
+	else
+	{
+		scfg = {
+			[UIView class],
+			{}
+		};
+	}
+	
 	std::vector<CKStackLayoutComponentChild> body = {};
 	if (! [latest isEqualToString:@""])
 	{
@@ -162,14 +181,7 @@
 		};
 	}
 	
-    MainCardComponent *c = [super newWithView:{
-        [UIView class],
-        {
-			// TODO: check if in favorites
-            {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeLeftRecognizer, NSSelectorFromString(@"didSwipeLeft:gesture:"), {})},
-            {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeRightRecognizer, NSSelectorFromString(@"didSwipeRight:gesture:"), {})},
-        }
-    } component:
+    MainCardComponent *c = [super newWithView:scfg component:
         [CKInsetComponent
         // Left and right inset of 30pts; centered vertically:
         newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
