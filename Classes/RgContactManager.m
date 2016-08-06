@@ -434,7 +434,7 @@
         FMResultSet *rs = [db executeQuery:@"SELECT item_hash FROM contact_match"];
         while ([rs next])
         {
-            NSString *match = [rs objectForColumnIndex:0];
+            NSString *match = [rs stringForColumnIndex:0];
             [cur setObject:@(1) forKey:match];
         }
         [rs close];
@@ -447,6 +447,7 @@
 			}
 			else
 			{
+                //NSLog(@"RingMail: Contact Activate: %@", newMatch);
                 [db executeUpdate:@"INSERT INTO contact_match (item_hash) VALUES (?)", newMatch];
 			}
         }
@@ -455,6 +456,7 @@
         [cur enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             //NSLog(@"RingMail: Contact Deactivate: %@", key);
             [db executeUpdate:@"DELETE FROM contact_match WHERE item_hash=?", key];
+
         }];
     }];
     [dbq close];
@@ -483,6 +485,7 @@
 
 - (void)dbUpdateEnabled:(NSArray *)rgUsers
 {
+    __block BOOL refresh = NO;
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         // Get current ringmail users
@@ -513,6 +516,7 @@
                 {
                     [db executeUpdate:@"UPDATE contacts SET ringmail_enabled=1 WHERE apple_id=?", contactID];
                 }
+                refresh = YES;
             }
             [rs close];
             ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContactById:[cur objectForKey:contactID]];
@@ -530,9 +534,16 @@
         [cur enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             //NSLog(@"RingMail: Contact Deactivate: %@", key);
             [db executeUpdate:@"UPDATE contacts SET ringmail_enabled=0 WHERE apple_id=?", key];
+            [[[LinphoneManager instance] chatManager] dbRemoveContact:(NSNumber*)key];
+            refresh = YES;
         }];
     }];
     [dbq close];
+    if (refresh)
+    {
+        NSLog(@"RingMail: Contact Refresh");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactRefresh object:self userInfo:nil];
+    }
 }
 
 - (NSDictionary*)dbGetRgContacts

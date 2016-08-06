@@ -96,4 +96,6 @@
 - (void)updateApplicationBadgeNumber;
 + (PhoneMainView*) instance;
 
+- (void)promptNewOrEdit:(NSString *)address;
+
 @end

@@ -75,20 +75,21 @@
         {
             contact = [[[LinphoneManager instance] fastAddressBook] getContact:sdata[@"session_tag"]];
         }
-    	ContactDetailsViewController *controller = DYNAMIC_CAST(
-    		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
-    		ContactDetailsViewController);
-      	if (controller != nil) {
-        	if (contact)
-        	{
+        if (contact)
+        {
+           	ContactDetailsViewController *controller = DYNAMIC_CAST(
+                [[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
+                ContactDetailsViewController);
+            if (controller != nil)
+            {
         		// Go to Contact details view
            		[controller setContact:contact];
-        	}
-        	else
-        	{
-           		[controller newContact:addr];
-			}
-    	}
+            }
+        }
+        else
+        {
+            [[PhoneMainView instance] promptNewOrEdit:addr];
+        }
 	}
 }
 

@@ -914,7 +914,7 @@
 					update = YES;
 				}
 			}
-			else if (! [curContact isKindOfClass:[NSNull class]]) // Clear out contact
+			else if (! [curContact isKindOfClass:[NSNull class]]) // Clear out contact (require match on server-side)
 			{
 				updates[@"contact_id"] = [NSNull null];
 				update = YES;
@@ -968,6 +968,11 @@
 
 - (void)dbUpdateSessionTimestamp:(NSNumber *)session timestamp:(NSDate *)event
 {
+    [self dbUpdateSessionTimestamp:session timestamp:event show:NO];
+}
+
+- (void)dbUpdateSessionTimestamp:(NSNumber *)session timestamp:(NSDate *)event show:(BOOL)show
+{
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:@"SELECT strftime('%s', ts_last_event) FROM session WHERE rowid = ? and ts_last_event != '0000-00-00 00:00:00'", session];
@@ -984,10 +989,13 @@
             NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
             [ndb set:@{
 			   @"table": @"session",
-			   @"update": @{
+			   @"update":
+                    (show) ? @{
 					   @"hide": @0,
 					   @"ts_last_event": [event strftime],
-				   },
+                    } : @{
+					   @"ts_last_event": [event strftime],
+                    },
 			   @"where": @{
 					   @"rowid": session,
 				   },
@@ -1081,7 +1089,7 @@
         }
     }];
     [dbq close];
-    [self dbUpdateSessionTimestamp:session timestamp:timestamp];
+    [self dbUpdateSessionTimestamp:session timestamp:timestamp show:YES];
 }
 
 - (NSNumber*)dbUpdateMessageStatus:(NSString*)status forUUID:(NSString*)uuid
@@ -1128,6 +1136,22 @@
 		[self dbUpdateSessionTimestamp:session timestamp:[NSDate date]];
 	}
 	return session;
+}
+
+- (void)dbRemoveContact:(NSNumber*)contact
+{
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		NoteRow *chatRow = [ndb row:@"session" where:@{@"contact_id": contact}];
+		if (chatRow != nil)
+		{
+			[chatRow update:@{
+				@"contact_id": [NSNull null],
+			}];
+		}
+    }];
+    [dbq close];
 }
 
 - (NSArray *)dbGetSessions
@@ -1212,7 +1236,7 @@
         while ([rs next])
         {
 			NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:[rs resultDictionary]];
-            NSLog(@"Item: %@", item);
+            //NSLog(@"Item: %@", item);
             NSString* last = [item objectForKey:@"last_message"];
             if (last == nil)
             {
@@ -1392,7 +1416,7 @@
         }];
     }];
     [dbq close];
-	[self dbUpdateSessionTimestamp:session timestamp:[NSDate date]];
+	[self dbUpdateSessionTimestamp:session timestamp:[NSDate date] show:YES];
 }
 
 - (void)dbUpdateCall:(NSDictionary*)callData

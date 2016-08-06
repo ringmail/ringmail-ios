@@ -28,6 +28,7 @@
 #import "SVModalWebViewController.h"
 #import "RgWebViewDelegate.h"
 #import "UIColor+Hex.h"
+#import "DTActionSheet.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 
@@ -702,6 +703,37 @@ static RootViewManager *rootViewManagerInstance = nil;
 		return TRUE;
 	}
 	return FALSE;
+}
+
+#pragma mark - Contact Functions
+
+- (void)promptNewOrEdit:(NSString *)address {
+    __block NSString *addr = address;
+    DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:addr];
+    [sheet addButtonWithTitle:@"New Contact" block:^() {
+         ContactDetailsViewController *controller = DYNAMIC_CAST(
+            [[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
+            ContactDetailsViewController);
+        if (controller != nil)
+        {
+    		// Go to Contact details view
+       		[controller newContact:addr];
+        }
+    }];
+    [sheet addButtonWithTitle:@"Add To Contact" block:^() {
+        [ContactSelection setSelectionMode:ContactSelectionModeEdit];
+        [ContactSelection setAddAddress:addr];
+        [ContactSelection setSipFilter:nil];
+        [ContactSelection setNameOrEmailFilter:nil];
+        [ContactSelection enableEmailFilter:FALSE];
+        ContactsViewController *controller = DYNAMIC_CAST(
+            [[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE],
+            ContactsViewController);
+        if (controller != nil) {
+        }
+    }];
+    [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:^{}];
+    [sheet showInView:self.view];
 }
 
 #pragma mark - ActionSheet Functions

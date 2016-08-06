@@ -125,6 +125,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(chatUpdateEvent:)
                                                  name:kRgTextUpdate
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contactRefreshEvent:)
+                                                 name:kRgContactRefresh
+                                               object:nil];
 	[editButton setOff];
     
     RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
@@ -362,7 +366,10 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
     }
 }
 
-
+- (void)contactRefreshEvent:(NSNotification *)notif {
+    [self update];
+    //[chatViewController updateMessages:nil];
+}
 
 #pragma mark - Action Functions
 
@@ -417,19 +424,19 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
         {
     		contact = [[[LinphoneManager instance] fastAddressBook] getContact:sdata[@"session_tag"]];
         }
-    	ContactDetailsViewController *controller = DYNAMIC_CAST(
-    		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
-    		ContactDetailsViewController);
-      	if (controller != nil) {
-        	if (contact)
-        	{
+        if (contact)
+        {
+            ContactDetailsViewController *controller = DYNAMIC_CAST(
+                [[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
+                ContactDetailsViewController);
+            if (controller != nil) {
         		// Go to Contact details view
            		[controller setContact:contact];
         	}
-        	else
-        	{
-           		[controller newContact:sdata[@"session_tag"]];
-    		}
+        }
+    	else
+    	{
+       		[[PhoneMainView instance] promptNewOrEdit:sdata[@"session_tag"]];
     	}
 	}
 }

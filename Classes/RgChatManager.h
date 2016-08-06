@@ -64,6 +64,7 @@
 - (void)dbHideSession:(NSNumber *)session;
 - (NSData *)dbGetMessageData:(NSNumber*)msgId;
 - (NSNumber*)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid;
+- (void)dbRemoveContact:(NSNumber*)contact;
 
 // Component data sources
 - (NSArray *)dbGetMainList;

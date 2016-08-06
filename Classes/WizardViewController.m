@@ -868,9 +868,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     	}
     }
     
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *countryCode = [locale objectForKey: NSLocaleCountryCode];
+    //NSLog(@"RingMail: Country Code: %@", countryCode);
+    
     NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
     NSError *anError = nil;
-    NBPhoneNumber *myNumber = [phoneUtil parse:data[@"phone"] defaultRegion:@"US" error:&anError];
+    NBPhoneNumber *myNumber = [phoneUtil parse:data[@"phone"] defaultRegion:countryCode error:&anError];
     if (anError == nil && [phoneUtil isValidNumber:myNumber])
     {
         data[@"phone"] = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];

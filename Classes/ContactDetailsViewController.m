@@ -152,7 +152,6 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         [ct sendContactData:updated];
 	}
 	[[LinphoneManager instance].fastAddressBook reload];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactRefresh object:self userInfo:nil];
 }
 
 - (void)selectContact:(ABRecordRef)acontact andReload:(BOOL)reload {
@@ -168,19 +167,14 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 - (void)addCurrentContactContactField:(NSString *)address {
-	LinphoneAddress *linphoneAddress =
-		linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-	NSString *username = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
-    username = [RgManager addressFromSIPUser:username];
-	if ([username rangeOfString:@"@"].length > 0)
+	if ([address rangeOfString:@"@"].length > 0)
     {
-		[tableController addEmailField:username];
+		[tableController addEmailField:address];
 	}
-    else if (linphone_proxy_config_is_phone_number(NULL, [username UTF8String]))
+    else
     {
-		[tableController addPhoneField:username];
+		[tableController addPhoneField:address];
 	}
-	linphone_address_destroy(linphoneAddress);
 
 	[self enableEdit:FALSE];
 	[[tableController tableView] reloadData];
