@@ -27,7 +27,6 @@
                 <outlet property="starButton" destination="Ibb-du-Mee" id="eHa-2V-1rm"/>
                 <outlet property="threeButton" destination="wTM-2V-moZ" id="lQ0-Vz-9Ld"/>
                 <outlet property="twoButton" destination="2fo-9l-mbY" id="vQU-Ys-FjB"/>
-                <outlet property="videoCameraSwitch" destination="160" id="161"/>
                 <outlet property="videoGroup" destination="126" id="129"/>
                 <outlet property="videoPreview" destination="127" id="130"/>
                 <outlet property="videoView" destination="132" id="133"/>
@@ -235,19 +234,6 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <state key="normal" image="ringmail_endcall.png"/>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="160" userLabel="videoCameraSwitch" customClass="UICamSwitch">
-                            <rect key="frame" x="4" y="90" width="85" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Switch camera"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" backgroundImage="switch_camera_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="switch_camera_over.png"/>
-                            <connections>
-                                <outlet property="preview" destination="127" id="172"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -291,7 +277,5 @@
         <image name="numpad_zero_default.png" width="220" height="113"/>
         <image name="numpad_zero_over.png" width="220" height="113"/>
         <image name="ringmail_endcall.png" width="300" height="50"/>
-        <image name="switch_camera_default.png" width="151" height="51"/>
-        <image name="switch_camera_over.png" width="151" height="51"/>
     </resources>
 </document>

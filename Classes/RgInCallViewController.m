@@ -44,7 +44,6 @@
 @synthesize videoGroup;
 @synthesize videoView;
 @synthesize videoPreview;
-@synthesize videoCameraSwitch;
 @synthesize videoWaitingForFirstImage;
 #ifdef TEST_VIDEO_VIEW_CHANGE
 @synthesize testVideoView;
@@ -195,8 +194,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	[videoZoomHandler setup:videoGroup];
 	videoGroup.alpha = 0;
-
-	[videoCameraSwitch setPreview:videoPreview];
 
 	//UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideVideoPreview:)];
 	//tap.numberOfTapsRequired = 1;
@@ -697,11 +694,11 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 #pragma mark VideoPreviewMoving
 
 - (void)moveVideoPreview:(UIPanGestureRecognizer *)dragndrop {
-	CGPoint center = [dragndrop locationInView:videoPreview.superview];
+/*	CGPoint center = [dragndrop locationInView:videoPreview.superview];
 	self.videoPreview.center = center;
 	if (dragndrop.state == UIGestureRecognizerStateEnded) {
 		[self previewTouchLift];
-	}
+	}*/
 }
 
 - (CGFloat)coerce:(CGFloat)value betweenMin:(CGFloat)min andMax:(CGFloat)max {
@@ -715,7 +712,7 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 }
 
 - (void)previewTouchLift {
-	CGRect previewFrame = self.videoPreview.frame;
+/*	CGRect previewFrame = self.videoPreview.frame;
 	previewFrame.origin.x = [self coerce:previewFrame.origin.x
 							  betweenMin:5
 								  andMax:(self.view.frame.size.width - previewFrame.size.width - 5)];
@@ -731,7 +728,7 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 							 self.videoPreview.frame = previewFrame;
 						   }];
 		});
-	}
+	}*/
 }
 
 #pragma mark - Call data

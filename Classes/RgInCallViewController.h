@@ -20,7 +20,6 @@
 #import <UIKit/UIKit.h>
 
 #import "VideoZoomHandler.h"
-#import "UICamSwitch.h"
 
 #import "UICompositeViewController.h"
 #import "InCallTableViewController.h"
@@ -44,7 +43,6 @@
 @property (nonatomic, retain) IBOutlet UIView* testVideoView;
 #endif
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
-@property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* videoWaitingForFirstImage;
 
 @property (nonatomic, strong) IBOutlet UILabel *addressLabel;

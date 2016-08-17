@@ -7752,7 +7752,6 @@
 					HAVE_G729,
 					HAVE_AMR,
 					HAVE_SSL,
-					USE_APN_DEV,
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -8020,7 +8019,6 @@
 					HAVE_G729,
 					HAVE_AMR,
 					HAVE_SSL,
-					USE_APN_DEV,
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;

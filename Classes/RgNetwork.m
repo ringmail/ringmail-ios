@@ -61,11 +61,6 @@ static RgNetwork* theRgNetwork = nil;
                                  @"version": [info objectForKey:@"CFBundleShortVersionString"],
                                  @"build": [info objectForKey:@"CFBundleVersion"],
                                  @"timestamp": [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__],
-#ifdef DEBUG
-                                 @"env": @"dev"
-#else
-                                 @"env": @"prod"
-#endif
                                  };
     NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/login", self.networkHost];
     [manager POST:postUrl parameters:parameters progress:nil success:callback failure:^(NSURLSessionTask *operation, NSError *error) {

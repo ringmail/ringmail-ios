@@ -1251,7 +1251,7 @@
         }
         [rs close];
     }];
-    //NSLog(@"dbGetMainList: %@", result);
+    NSLog(@"dbGetMainList: %@", result);
     [dbq close];
     return result;
 }
