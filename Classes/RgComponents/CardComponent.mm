@@ -17,6 +17,7 @@
 #import "HashtagCardComponent.h"
 #import "HashtagCategoryCardComponent.h"
 #import "HashtagCategoryHeaderComponent.h"
+#import "HashtagCategoryGroupCardComponent.h"
 
 @implementation CardComponent
 
@@ -44,6 +45,18 @@ static CKComponent *cardComponent(Card *card, CardContext *context)
             return [HashtagCategoryCardComponent
                       newWithData:card.data
                       context:context];
+        }
+		else if ([type isEqualToString:@"hashtag_category_group"])
+        {
+			NSArray *cats = [card.data objectForKey:@"group"];
+			NSMutableArray *comps = [NSMutableArray array];
+			for (NSDictionary* itemdata in cats)
+			{
+				[comps addObject:[HashtagCategoryCardComponent
+                      newWithData:itemdata
+                      context:context]];
+			}
+            return [HashtagCategoryGroupCardComponent newWithData:@{ @"group": comps } context:context];
         }
 		else if ([type isEqualToString:@"hashtag_category_header"])
         {

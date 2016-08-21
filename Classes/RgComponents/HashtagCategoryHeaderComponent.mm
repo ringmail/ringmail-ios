@@ -17,9 +17,6 @@
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
-    UIImage *cardImage = [context imageNamed:@"Card1"];
-    cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
-    
     CKComponentViewConfiguration vcfg = {
         [UIView class],
         {

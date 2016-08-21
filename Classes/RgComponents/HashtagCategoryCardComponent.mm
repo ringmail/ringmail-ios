@@ -27,117 +27,154 @@
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
-    UIImage *cardImage = [context imageNamed:@"Card1"];
-    cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
-    
-    CKComponentViewConfiguration vcfg = {
-        [UIView class],
-        {
-            CKComponentTapGestureAttribute(@selector(actionSelect:)),
-            {@selector(setBackgroundColor:), [UIColor whiteColor]},
-            {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#d4d5d7"] CGColor]},
-            {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
-        }
-    };
+	CGRect screenRect = [[UIScreen mainScreen] bounds];
+	CGFloat screenWidth = screenRect.size.width;
+	CGFloat itemWidth = screenWidth / 2;
+	CGFloat circleWidth = itemWidth - 30;
+	CGFloat iconTop = ((circleWidth / 4) - 20) + 5;
+	
+	UIImage *image;
+	
+   	// Get the size
+    CGSize canvasSize = CGSizeMake(circleWidth, circleWidth);
+    CGFloat scale = [UIScreen mainScreen].scale;
+
+    // Resize for retina with the scale factor
+    //canvasSize.width *= scale;
+    //canvasSize.height *= scale;
+
+    // Create the context
+	//UIGraphicsBeginImageContext(canvasSize);
+	UIGraphicsBeginImageContextWithOptions(canvasSize, NO, scale);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+
+    // setup drawing attributes
+    //CGContextSetLineWidth(ctx, 1.0 * scale);
+    CGContextSetLineWidth(ctx, 1.0);
+    CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithHex:@"#d4d5d7"].CGColor);
+    CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
+
+    // setup the circle size
+    CGRect circleRect = CGRectMake( 2, 2, canvasSize.width - 4, canvasSize.height - 4 );
+    circleRect = CGRectInset(circleRect, 0, 0);
+
+    // Draw the Circle
+    CGContextFillEllipseInRect(ctx, circleRect);
+    CGContextStrokeEllipseInRect(ctx, circleRect);
+
+	// Create Image
+	image = UIGraphicsGetImageFromCurrentImageContext();
+	
     HashtagCategoryCardComponent *c = [super newWithComponent:
-        [CKInsetComponent
-        // Left and right inset of 30pts; centered vertically:
-        newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
-        component:
-            [CKBackgroundLayoutComponent
-            newWithComponent:
-                [CKStackLayoutComponent newWithView:vcfg size:{} style:{
-                    .direction = CKStackLayoutDirectionVertical,
+        [CKStackLayoutComponent newWithView:{
+            [UIView class],
+            {CKComponentTapGestureAttribute(@selector(actionSelect:))}
+		} size:{
+			.width = itemWidth - 10,
+			.height = itemWidth - 10,
+		} style:{
+            .direction = CKStackLayoutDirectionVertical,
+            .alignItems = CKStackLayoutAlignItemsStretch
+        }
+        children:{
+			{[CKInsetComponent
+              newWithInsets:{.left = 10, .right = 10, .top = 10, .bottom = 10}
+              component:
+				 [CKBackgroundLayoutComponent newWithComponent:
+					[CKBackgroundLayoutComponent newWithComponent:
+						[CKStackLayoutComponent newWithView:{} size:{.height = itemWidth - 30} style:{
+							.direction = CKStackLayoutDirectionVertical,
+							.alignItems = CKStackLayoutAlignItemsStretch
+						}
+						children:{
+							{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+							{[CKLabelComponent newWithLabelAttributes:{
+								  .string = [[data objectForKey:@"name"] uppercaseString],
+								  .font = [UIFont fontWithName:@"HelveticaNeue" size:18],
+								  .color = [UIColor colorWithHex:@"#33362f"],
+								  .alignment = NSTextAlignmentCenter,
+							  }
+							  viewAttributes:{
+								  {@selector(setBackgroundColor:), [UIColor clearColor]},
+								  {@selector(setUserInteractionEnabled:), @NO},
+							  }
+							  size:{.width = itemWidth - 30}]},
+							{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+						}]
+						background:
+							[CKInsetComponent
+								newWithInsets:{.left = INFINITY, .right = INFINITY, .top = iconTop, .bottom = INFINITY}
+								component:
+									[CKImageComponent newWithImage:[UIImage imageNamed:@"category_icon_tmp.png"] size:{
+										.height = 40, .width = 40
+									}]
+							]
+						]
+					background:[CKImageComponent newWithImage:image]
+				]
+			]}
+            /*{[CKInsetComponent
+              newWithInsets:{.left = 5, .right = 5, .top = 5, .bottom = 5}
+              component:
+                  [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
+                    .direction = CKStackLayoutDirectionHorizontal,
                     .alignItems = CKStackLayoutAlignItemsStretch
-                }
-                children:{
-                    {[CKInsetComponent
-                      newWithInsets:{.left = 5, .right = 5, .top = 5, .bottom = 5}
-                      component:
-                          [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
-                            .direction = CKStackLayoutDirectionHorizontal,
-                            .alignItems = CKStackLayoutAlignItemsStretch
+                  }
+                  children:{
+                      {
+                          .flexGrow = YES,
+                          .component = [CKInsetComponent
+                           newWithInsets:{.left = 7, .right = 5, .top = INFINITY, .bottom = INFINITY}
+                           component:
+                              [CKLabelComponent
+                              newWithLabelAttributes:{
+                                  .string = [data objectForKey:@"name"],
+                                  .font = [UIFont fontWithName:@"HelveticaNeue" size:18],
+                                  .color = [UIColor colorWithHex:@"#33362f"],
+                              }
+                              viewAttributes:{
+                                  {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                  {@selector(setUserInteractionEnabled:), @NO},
+                              }
+                              size:{}]
+                           ]
+                      }, {
+                          .alignSelf = CKStackLayoutAlignSelfEnd,
+                          .component = [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
+                              .direction = CKStackLayoutDirectionHorizontal,
+                              .alignItems = CKStackLayoutAlignItemsStretch
                           }
                           children:{
                               {
-                                  .flexGrow = YES,
-                                  .component = [CKInsetComponent
-                                   newWithInsets:{.left = 7, .right = 5, .top = INFINITY, .bottom = INFINITY}
+                                  [CKInsetComponent
+                                   newWithInsets:{.left = 15, .right = 7, .top = INFINITY, .bottom = INFINITY}
                                    component:
-                                      [CKLabelComponent
-                                      newWithLabelAttributes:{
-                                          .string = [data objectForKey:@"name"],
-                                          .font = [UIFont fontWithName:@"HelveticaNeue" size:18],
-                                          .color = [UIColor colorWithHex:@"#33362f"],
-                                      }
-                                      viewAttributes:{
-                                          {@selector(setBackgroundColor:), [UIColor clearColor]},
-                                          {@selector(setUserInteractionEnabled:), @NO},
-                                      }
-                                      size:{}]
+                                       [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_forward.png"] size:{
+                                          .height = 16,
+                                          .width = 9,
+                                      }]
                                    ]
-                              }, {
-                                  .alignSelf = CKStackLayoutAlignSelfEnd,
-                                  .component = [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
-                                      .direction = CKStackLayoutDirectionHorizontal,
-                                      .alignItems = CKStackLayoutAlignItemsStretch
-                                  }
-                                  children:{
-                                      {
-                                          [CKInsetComponent
-                                           newWithInsets:{.left = 15, .right = 7, .top = INFINITY, .bottom = INFINITY}
-                                           component:
-                                               [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_forward.png"] size:{
-                                                  .height = 16,
-                                                  .width = 9,
-                                              }]
-                                           ]
-                                      },
-                                  }]
-                              }
+                              },
                           }]
-                      ]},
-					{lineComponent()},
-					{[CKComponent newWithView:{
-						{[RgCustomView class]},
-						{
-							{@selector(setupView:), @{
-								@"pattern": data[@"pattern"],
-								@"color": data[@"color"],
-							}},
-						}
-					} size:{
-						.height = 15
-					}]}
-                }]
-             background:
-                [CKComponent
-                newWithView:{
-                    [UIView class],
-                    {
-                        {@selector(setBackgroundColor:), [UIColor whiteColor]},
-                        {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-                        {@selector(setClipsToBounds:), @YES},
-                    }
-                }
-                size:{}]
-             ]
-        ]
+                      }
+                  }]
+              ]},
+			{lineComponent()},
+			{[CKComponent newWithView:{
+				{[RgCustomView class]},
+				{
+					{@selector(setupView:), @{
+						@"pattern": data[@"pattern"],
+						@"color": data[@"color"],
+					}},
+				}
+			} size:{
+				.height = 15
+			}]}*/
+        }]
     ];
     [c setCardData:data];
     return c;
-}
-
-static CKComponent *lineComponent()
-{
-    return [CKComponent
-            newWithView:{
-                [UIView class],
-                {
-                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#d4d5d7"]},
-                }
-            }
-            size:{.height = 1 / [UIScreen mainScreen].scale}];
 }
 
 - (void)actionSelect:(CKButtonComponent *)sender
