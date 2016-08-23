@@ -912,6 +912,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
 	//NSString *password2 = [WizardViewController findTextField:ViewElement_Password2 view:contentView].text;
 
+    // TODO: Re-download this data if it is missing
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithDictionary:@{
         @"first_name": firstname,
         @"last_name": lastname,
