@@ -10,6 +10,8 @@
  */
 
 #import "CardContext.h"
+#import "LinphoneManager.h"
+#import "NYXImagesKit/NYXImagesKit.h"
 
 @implementation CardContext
 {
@@ -35,6 +37,14 @@
 - (UIImage *)imageNamed:(NSString *)imageName
 {
     return _images[imageName];
+}
+
+- (UIImage *)chatImage:(NSString *)uuid key:(NSString *)key
+{
+	NSData *imgData = [[[LinphoneManager instance] chatManager] dbGetMessageDataByUUID:uuid key:key];
+	UIImage *image = [UIImage imageWithData:imgData];
+	image = [image scaleToFitSize:(CGSize){240, 160}];
+	return image;
 }
 
 static NSMutableDictionary *loadImageNames(NSSet *imageNames)

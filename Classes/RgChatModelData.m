@@ -239,7 +239,7 @@
         }
         else if ([type isEqualToString:@"application/json"])
         {
-            NSData* jsonData = [mgr dbGetMessageData:[msgdata objectForKey:@"id"]];
+            NSData* jsonData = [mgr dbGetMessageData:[msgdata objectForKey:@"id"] key:@"msg_data"];
             NSError* error;
             NSDictionary *jsonInfo = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
             //NSString *jsonType = [jsonInfo objectForKey:@"type"];

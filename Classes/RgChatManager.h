@@ -62,8 +62,9 @@
 - (void)dbDeleteSessionID:(NSNumber *)session;
 - (NSNumber *)dbGetSessionByMD5:(NSString*)lookup;
 - (void)dbHideSession:(NSNumber *)session;
-- (NSData *)dbGetMessageData:(NSNumber*)msgId;
-- (NSNumber*)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid;
+- (NSData *)dbGetMessageData:(NSNumber*)msgId key:(NSString*)key;
+- (NSData *)dbGetMessageDataByUUID:(NSString*)uuid key:(NSString*)key;
+- (NSNumber*)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid key:(NSString*)key;
 - (void)dbRemoveContact:(NSNumber*)contact;
 
 // Component data sources

@@ -11,6 +11,7 @@
 #import "NSString+MD5.h"
 #import "NSXMLElement+XMPP.h"
 #import "NoteSQL.h"
+#import "NYXImagesKit/NYXImagesKit.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
 #define THIS_FILE   @"RgChatManager"
@@ -303,7 +304,8 @@
     NSString *imageID = [[[self xmppStream] generateUUID] lowercaseString];
     NSData *imageData = UIImagePNGRepresentation(image);
     NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
-    [messageData setObject:imageData forKey:@"image"];
+    [messageData setObject:image forKey:@"image"];
+    [messageData setObject:imageData forKey:@"data"];
     [messageData setObject:now forKey:@"timestamp"];
     
     [self dbInsertMessage:session type:@"image/png" data:messageData uuid:messageID inbound:NO url:nil];
@@ -524,7 +526,12 @@
                 [[RgNetwork instance] downloadImage:imageUrl callback:^(NSURLSessionTask *operation, id responseObject) {
                     //NSLog(@"RingMail: Chat Download Complete: %@", responseObject);
                     NSData* imageData = responseObject;
-                    [self dbUpdateMessageData:imageData forUUID:uuid];
+                    [self dbUpdateMessageData:imageData forUUID:uuid key:@"msg_data"];
+					// Create thumbnail
+					UIImage *orig = [UIImage imageWithData:imageData];
+                    UIImage *thumb = [orig scaleToFitSize:(CGSize){300, 300}];
+            		NSData *imgThumb = UIImagePNGRepresentation(thumb);
+                    [self dbUpdateMessageData:imgThumb forUUID:uuid key:@"msg_thumbnail"];
                     NSDictionary *dict = @{
                        @"session": session,
                        @"uuid": uuid,
@@ -545,7 +552,7 @@
                     [newData setObject:[NSNumber numberWithBool:1] forKey:@"answered"];
                     [newData removeObjectForKey:@"reply"];
                     NSError *jsonErr = nil;
-                    [self dbUpdateMessageData:[NSJSONSerialization dataWithJSONObject:newData options:0 error:&jsonErr] forUUID:replyUUID];
+                    [self dbUpdateMessageData:[NSJSONSerialization dataWithJSONObject:newData options:0 error:&jsonErr] forUUID:replyUUID key:@"msg_data"];
                     update = YES;
                     uuid = replyUUID;
                 }
@@ -729,7 +736,7 @@
 	{
 		dbPath = @"ringmail_dev";
 	}
-    dbPath = [dbPath stringByAppendingString:@"_v1.2.8.db"];
+    dbPath = [dbPath stringByAppendingString:@"_v1.2.9.db"];
     return dbPath;
 }
 
@@ -769,7 +776,7 @@
                                 @"CREATE INDEX IF NOT EXISTS ts_last_event_1 ON session (ts_last_event);",
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS uuid_1 ON session (uuid);",
 								
-                                @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER, msg_uuid TEXT NOT NULL, msg_status TEXT NOT NULL DEFAULT '', msg_data BLOB DEFAULT NULL, msg_type TEXT DEFAULT 'text/plain', msg_url TEXT DEFAULT NULL);",
+                                @"CREATE TABLE IF NOT EXISTS chat (session_id INTEGER NOT NULL, msg_body TEXT NOT NULL, msg_time TEXT NOT NULL, msg_inbound INTEGER, msg_uuid TEXT NOT NULL, msg_status TEXT NOT NULL DEFAULT '', msg_data BLOB DEFAULT NULL, msg_thumbnail BLOB DEFAULT NULL, msg_type TEXT DEFAULT 'text/plain', msg_url TEXT DEFAULT NULL);",
                                 @"CREATE INDEX IF NOT EXISTS session_id_1 ON chat (session_id);",
                                 @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON chat (msg_uuid);",
 								
@@ -1029,7 +1036,7 @@
 
 - (void)dbDeleteSessionID:(NSNumber *)session
 {
-    //NSLog(@"RingMail: Chat Delete - Session ID:(%@)", from);
+    NSLog(@"RingMail: Chat Delete - Session ID:(%@)", session);
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"DELETE FROM chat WHERE session_id = ?;", session];
@@ -1044,6 +1051,7 @@
     __block NSString* status = (inbound) ? @"" : @"sending";
     __block NSString* body = @"";
     __block NSData* msgData = [NSData data];
+    __block NSData* msgThumb = [NSData data];
     NSObject *url = msgUrl;
     if (url == nil)
     {
@@ -1055,7 +1063,11 @@
     }
     else if ([type isEqualToString:@"image/png"])
     {
-        msgData = [params objectForKey:@"image"];
+        msgData = [params objectForKey:@"data"];
+		// Create thumbnail
+		UIImage *orig = [params objectForKey:@"image"];
+        UIImage *thumb = [orig scaleToFitSize:(CGSize){300, 300}];
+		msgThumb = UIImagePNGRepresentation(thumb);
     }
     else if ([type isEqualToString:@"application/json"])
     {
@@ -1084,6 +1096,7 @@
                            @"msg_status": status,
                            @"msg_type": type,
                            @"msg_data": msgData,
+						   @"msg_thumbnail": msgThumb,
                            @"msg_url": url,
                 }
         }];
@@ -1119,8 +1132,13 @@
 	return session;
 }
 
-- (NSNumber*)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid
+- (NSNumber*)dbUpdateMessageData:(NSData*)data forUUID:(NSString*)uuid key:(NSString*)key
 {
+	__block NSString* dkey = key;
+	if (dkey == nil)
+	{
+		dkey = @"msg_data";
+	}
 	__block NSNumber* session = nil;
     FMDatabaseQueue *dbq = [self database];
     [dbq inDatabase:^(FMDatabase *db) {
@@ -1129,7 +1147,7 @@
 		if (chatRow != nil)
 		{
 			[chatRow update:@{
-				@"msg_data": data,
+				dkey: data,
 			}];
 			session = (NSNumber*)[chatRow data:@"session_id"];
 		}
@@ -1206,9 +1224,11 @@
     [dbq inDatabase:^(FMDatabase *db) {
         NSString *sql = @"";
         sql = [sql stringByAppendingString:@"SELECT rowid, session_tag, unread, contact_id, STRFTIME('%s', ts_last_event) AS timestamp, "];
-        sql = [sql stringByAppendingString:@"(SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_message, "];
-        sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', msg_time) FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as last_time, "];
-	    sql = [sql stringByAppendingString:@"(SELECT msg_inbound FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain' ORDER BY rowid DESC LIMIT 1) as msg_inbound, "];
+        sql = [sql stringByAppendingString:@"(SELECT msg_body FROM chat WHERE chat.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as last_message, "];
+        sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', msg_time) FROM chat WHERE chat.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as last_time, "];
+	    sql = [sql stringByAppendingString:@"(SELECT msg_inbound FROM chat WHERE chat.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as msg_inbound, "];
+	    sql = [sql stringByAppendingString:@"(SELECT msg_uuid FROM chat WHERE chat.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as msg_uuid, "];
+	    sql = [sql stringByAppendingString:@"(SELECT msg_type FROM chat WHERE chat.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as msg_type, "];
         sql = [sql stringByAppendingString:@"(SELECT call_sip FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_id, "];
         sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', call_time) FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_time, "];
         sql = [sql stringByAppendingString:@"(SELECT call_inbound FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_inbound, "];
@@ -1225,7 +1245,7 @@
         }
 		else
 		{
-            sql = [sql stringByAppendingString:[NSString stringWithFormat:@"WHERE hide = 0 AND (EXISTS (SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type = 'text/plain') OR EXISTS (SELECT * FROM calls WHERE calls.session_id=session.rowid))"]];
+            sql = [sql stringByAppendingString:[NSString stringWithFormat:@"WHERE hide = 0 AND (EXISTS (SELECT msg_body FROM chat WHERE chat.session_id=session.rowid AND msg_type IN ('text/plain', 'image/png')) OR EXISTS (SELECT * FROM calls WHERE calls.session_id=session.rowid))"]];
 		}
         sql = [sql stringByAppendingString:@"ORDER BY ts_last_event DESC, rowid DESC"];
         FMResultSet *rs;
@@ -1332,12 +1352,18 @@
     return result;
 }
 
-- (NSData *)dbGetMessageData:(NSNumber*)msgId
+- (NSData *)dbGetMessageData:(NSNumber*)msgId key:(NSString*)key
 {
+	__block NSString* dkey = key;
+	if (dkey == nil)
+	{
+		dkey = @"msg_data";
+	}
     FMDatabaseQueue *dbq = [self database];
     __block NSData* result = nil;
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT msg_data FROM chat WHERE rowid = ?", msgId];
+        NSString *qry = [NSString stringWithFormat:@"SELECT %@ FROM chat WHERE rowid = ?", dkey];
+        FMResultSet *rs = [db executeQuery:qry, msgId];
         if ([rs next])
         {
             result = [rs dataForColumnIndex:0];
@@ -1348,12 +1374,18 @@
     return result;
 }
 
-- (NSData *)dbGetMessageDataByUUID:(NSString*)uuid
+- (NSData *)dbGetMessageDataByUUID:(NSString*)uuid key:(NSString*)key
 {
+	__block NSString* dkey = key;
+	if (dkey == nil)
+	{
+		dkey = @"msg_data";
+	}
     FMDatabaseQueue *dbq = [self database];
     __block NSData* result = nil;
     [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT msg_data FROM chat WHERE msg_uuid = ?", uuid];
+		NSString *qry = [NSString stringWithFormat:@"SELECT %@ FROM chat WHERE msg_uuid = ?", dkey];
+        FMResultSet *rs = [db executeQuery:qry, uuid];
         if ([rs next])
         {
             result = [rs dataForColumnIndex:0];

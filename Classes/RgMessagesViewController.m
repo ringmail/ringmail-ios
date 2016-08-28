@@ -233,7 +233,7 @@
     {
         NSDictionary *lazy = (NSDictionary*)data;
         NSNumber* imageID = [lazy objectForKey:@"id"];
-        UIImage* image = [self getImageByID:imageID];
+        UIImage* image = [self getImageByID:imageID key:@"msg_thumbnail"];
         JSQPhotoMediaItem* mediaData = [[JSQPhotoMediaItem alloc] initWithImage:image];
         if ([(NSString*)[lazy objectForKey:@"direction"] isEqualToString:@"inbound"])
         {
@@ -629,7 +629,7 @@
 				[[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE],
 				ImageViewController);
 			if (controller != nil) {
-				UIImage *fullScreen = [self getImageByID:jsonInfo[@"id"]];
+				UIImage *fullScreen = [self getImageByID:jsonInfo[@"id"] key:@"msg_data"];
 				[controller setImage:fullScreen];
 			}
 		}
@@ -677,19 +677,24 @@
     return normalizedImage;
 }
 
-- (UIImage*)getImageByID:(NSNumber*)imageID
+- (UIImage*)getImageByID:(NSNumber*)imageID key:(NSString*)key
 {
     UIImage* image = nil;
     NSData* imageData = nil;
-    NSObject* cacheData = [imageCache objectForKey:[imageID stringValue]];
+	if (key == nil)
+	{
+		key = @"msg_data";
+	}
+	NSString *ckey = [NSString stringWithFormat:@"%@:%@", key, [imageID stringValue]];
+    NSObject* cacheData = [imageCache objectForKey:ckey];
     if (cacheData == nil)
     {
-        imageData = [[[LinphoneManager instance] chatManager] dbGetMessageData:imageID];
+        imageData = [[[LinphoneManager instance] chatManager] dbGetMessageData:imageID key:key];
         if (imageData != nil)
         {
             image = [UIImage imageWithData:imageData];
         }
-        [imageCache setObject:image forKey:[imageID stringValue]];
+        [imageCache setObject:image forKey:ckey];
     }
     else
     {

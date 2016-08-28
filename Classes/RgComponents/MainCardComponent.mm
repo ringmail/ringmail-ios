@@ -48,6 +48,7 @@
 	
 	NSString *msg = @"";
 	BOOL append_duration = NO;
+	BOOL has_media = NO;
 	if ([[data objectForKey:@"last_event"] isEqualToString:@"chat"] && (![[data objectForKey:@"last_message"] isEqual:[NSNull null]]))
 	{
 		msg = [data objectForKey:@"last_message"];
@@ -58,6 +59,11 @@
 		else
 		{
 			latest = [NSString stringWithFormat:@"Sent %@", latest];
+		}
+		if ([data[@"msg_type"] isEqualToString:@"image/png"])
+		{
+			NSLog(@"Image message: %@", data);
+			has_media = YES;
 		}
 	}
 	else if (! [[data objectForKey:@"call_time"] isEqual:[NSNull null]])
@@ -147,6 +153,34 @@
 	std::vector<CKStackLayoutComponentChild> body = {};
 	if (! [latest isEqualToString:@""])
 	{
+		CKComponent *bodyItem;
+		if (has_media)
+		{
+			UIImage *thumb = [context chatImage:data[@"msg_uuid"] key:@"msg_thumbnail"];
+			bodyItem = [CKStackLayoutComponent newWithView:{} size:{} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStretch
+            } children:{
+                {[CKImageComponent newWithImage:thumb size:{.height=thumb.size.height, .width=thumb.size.width}]},
+                {
+					.flexGrow = YES,
+                }
+            }];
+		}
+		else
+		{
+			bodyItem = [CKTextComponent
+			  newWithTextAttributes:{
+				  .attributedString = attrString,
+				  .lineBreakMode = NSLineBreakByWordWrapping,
+			  }
+			  viewAttributes:{
+				  {@selector(setBackgroundColor:), [UIColor clearColor]},
+				  {@selector(setUserInteractionEnabled:), @NO},
+			  }
+			  accessibilityContext:{}
+			  size:{.width = textWidth}];
+		}
 		body = {
 		   {[CKInsetComponent
 			 newWithInsets:{.left = 20, .right = 0, .top = 15, .bottom = 0}
@@ -165,19 +199,8 @@
 			 ]},
 		   {[CKInsetComponent
 			 newWithInsets:{.left = 20, .right = 0, .top = 12, .bottom = 15}
-			 component:
-			 [CKTextComponent
-			  newWithTextAttributes:{
-				  .attributedString = attrString,
-				  .lineBreakMode = NSLineBreakByWordWrapping,
-			  }
-			  viewAttributes:{
-				  {@selector(setBackgroundColor:), [UIColor clearColor]},
-				  {@selector(setUserInteractionEnabled:), @NO},
-			  }
-			  accessibilityContext:{}
-			  size:{.width = textWidth}]
-			 ]}
+			 component:bodyItem]
+			 }
 		};
 	}
 	

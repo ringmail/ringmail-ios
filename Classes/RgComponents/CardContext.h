@@ -18,5 +18,6 @@
 - (instancetype)initWithImageNames:(NSSet *)imageNames;
 
 - (UIImage *)imageNamed:(NSString *)imageName;
+- (UIImage *)chatImage:(NSString *)uuid key:(NSString *)key;
 
 @end
