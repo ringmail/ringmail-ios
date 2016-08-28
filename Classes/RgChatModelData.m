@@ -223,6 +223,7 @@
             [msgData addObject:[NSNull null]];
             [msgs addObject:@{
                               @"id": [msgdata objectForKey:@"id"],
+                              @"media": @"image",
                               @"type": type,
                               @"sender": sender,
                               @"senderName": senderName,

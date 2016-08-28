@@ -184,8 +184,9 @@
             self.popoverController = nil;
         }
     }*/
-    
-    UIImage *imageSized = [image scaleToFitSize:(CGSize){300, 300}];
+	
+	image = [self normalizedImage:image];
+    UIImage *imageSized = [image scaleToFitSize:(CGSize){3264, 3264}];
     
     RgChatManager* mgr = [[LinphoneManager instance] chatManager];
 	NSDictionary *sdata = [mgr dbGetSessionData:_chatSession];
@@ -231,24 +232,8 @@
     if ([data isKindOfClass:[NSDictionary class]])
     {
         NSDictionary *lazy = (NSDictionary*)data;
-        RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-        UIImage* image = nil;
-        NSData* imageData;
         NSNumber* imageID = [lazy objectForKey:@"id"];
-        NSObject* cacheData = [imageCache objectForKey:[imageID stringValue]];
-        if (cacheData == nil)
-        {
-            imageData = [mgr dbGetMessageData:imageID];
-            if (imageData != nil)
-            {
-                image = [UIImage imageWithData:imageData];
-            }
-            [imageCache setObject:image forKey:[imageID stringValue]];
-        }
-        else
-        {
-            image = (UIImage*)cacheData;
-        }
+        UIImage* image = [self getImageByID:imageID];
         JSQPhotoMediaItem* mediaData = [[JSQPhotoMediaItem alloc] initWithImage:image];
         if ([(NSString*)[lazy objectForKey:@"direction"] isEqualToString:@"inbound"])
         {
@@ -587,15 +572,16 @@
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Tapped message bubble!");
+	NSLog(@"Tapped message bubble!");
     id messageData = [self.chatData.messageData objectAtIndex:indexPath.item];
     if (! [messageData isEqual:[NSNull null]])
     {
         NSDictionary* jsonInfo = (NSDictionary*)messageData;
+		NSLog(@"Bubble data: %@", jsonInfo);
         NSString* jsonType = [jsonInfo objectForKey:@"type"];
-        JSQMessage *message = [self getMessageAtIndex:indexPath.item];
         if ([jsonType isEqualToString:@"question"])
         {
+			JSQMessage *message = [self getMessageAtIndex:indexPath.item];
             if (! [message.senderId isEqualToString:self.senderId] && ! [jsonInfo objectForKey:@"answered"])
             {
                 self.questionData = jsonInfo;
@@ -633,6 +619,21 @@
             }
         }*/
     }
+	else
+	{
+		NSDictionary* jsonInfo = [self.chatData.messages objectAtIndex:indexPath.item];
+		if (jsonInfo[@"media"] != nil && [jsonInfo[@"media"] isEqualToString:@"image"])
+		{
+            NSLog(@"Tapped image bubble: %@", jsonInfo);
+			ImageViewController *controller = DYNAMIC_CAST(
+				[[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE],
+				ImageViewController);
+			if (controller != nil) {
+				UIImage *fullScreen = [self getImageByID:jsonInfo[@"id"]];
+				[controller setImage:fullScreen];
+			}
+		}
+	}
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
@@ -662,6 +663,39 @@
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
         [self finishSendingMessageAnimated:YES];
     }*/
+}
+
+#pragma mark - Utils
+
+- (UIImage *)normalizedImage:(UIImage*)inp {
+    if (inp.imageOrientation == UIImageOrientationUp) return inp;
+
+    UIGraphicsBeginImageContextWithOptions(inp.size, NO, inp.scale);
+    [inp drawInRect:(CGRect){0, 0, inp.size}];
+    UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return normalizedImage;
+}
+
+- (UIImage*)getImageByID:(NSNumber*)imageID
+{
+    UIImage* image = nil;
+    NSData* imageData = nil;
+    NSObject* cacheData = [imageCache objectForKey:[imageID stringValue]];
+    if (cacheData == nil)
+    {
+        imageData = [[[LinphoneManager instance] chatManager] dbGetMessageData:imageID];
+        if (imageData != nil)
+        {
+            image = [UIImage imageWithData:imageData];
+        }
+        [imageCache setObject:image forKey:[imageID stringValue]];
+    }
+    else
+    {
+        image = (UIImage*)cacheData;
+    }
+	return image;
 }
 
 @end
