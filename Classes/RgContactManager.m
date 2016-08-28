@@ -242,7 +242,7 @@
                         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
                         mail.mailComposeDelegate = self;
                         [mail setSubject:@"You're Invited To RingMail"];
-                        [mail setMessageBody:@"You are invited to explore RingMail. Make free calls/text now. https://ringmail.com/" isHTML:NO];
+                        [mail setMessageBody:@"You are invited to explore RingMail. Make free calls/text now. https://ringmail.com/dl" isHTML:NO];
                         [mail setToRecipients:@[val]];
                         [[PhoneMainView instance] presentViewController:mail animated:YES completion:NULL];
                     }];
