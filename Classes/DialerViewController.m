@@ -197,7 +197,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewDidUnload];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+/*- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 										 duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	CGRect frame = [videoPreview frame];
@@ -218,7 +218,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		break;
 	}
 	[videoPreview setFrame:frame];
-}
+}*/
 
 #pragma mark - Event Functions
 

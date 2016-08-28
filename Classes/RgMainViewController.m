@@ -260,7 +260,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+/*- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 										 duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	CGRect frame = [videoPreview frame];
@@ -281,7 +281,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		break;
 	}
 	[videoPreview setFrame:frame];
-}
+}*/
 
 #pragma mark - Event Functions
 

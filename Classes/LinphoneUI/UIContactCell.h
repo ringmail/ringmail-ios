@@ -29,7 +29,9 @@
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImage;
 @property (nonatomic, strong) IBOutlet UIImageView *rgImage;
 @property (nonatomic, assign) ABRecordRef contact;
+@property (nonatomic, strong) IBOutlet UIButton* inviteButton;
 
 - (id)initWithIdentifier:(NSString*)identifier;
+- (IBAction)inviteContact:(id)event;
 
 @end

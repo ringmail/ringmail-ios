@@ -20,6 +20,7 @@
 #import "UIContactCell.h"
 #import "Utils.h"
 #import "FastAddressBook.h"
+#import "LinphoneManager.h"
 
 @implementation UIContactCell
 
@@ -28,6 +29,7 @@
 @synthesize avatarImage;
 @synthesize rgImage;
 @synthesize contact;
+@synthesize inviteButton;
 
 #pragma mark - Lifecycle Functions
 
@@ -133,6 +135,10 @@
 		[lastNameLabel setTextColor:[UIColor blackColor]];
 		[firstNameLabel setTextColor:[UIColor blackColor]];
 	}
+}
+
+- (IBAction)inviteContact:(id)sender {
+	[[[LinphoneManager instance] contactManager] inviteToRingMail:contact];
 }
 
 @end

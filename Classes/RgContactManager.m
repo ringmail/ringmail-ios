@@ -242,7 +242,7 @@
                         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
                         mail.mailComposeDelegate = self;
                         [mail setSubject:@"You're Invited To RingMail"];
-                        [mail setMessageBody:@"You are invited to explore RingMail. Make free calls/text now. https://ringmail.com/dl" isHTML:NO];
+                        [mail setMessageBody:@"You are invited to explore RingMail. Make free calls/text now. https://ringmail.com/" isHTML:NO];
                         [mail setToRecipients:@[val]];
                         [[PhoneMainView instance] presentViewController:mail animated:YES completion:NULL];
                     }];
@@ -368,11 +368,16 @@
 - (FMDatabaseQueue *)database
 {
     NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-#ifdef DEBUG
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contact_dev"];
-#else
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contact"];
-#endif
+	NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    NSString *dbPath;
+    if ([bundleIdentifier isEqualToString:@"com.ringmail.phone"])
+    {
+		dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contact"];
+	}
+	else
+	{
+		dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contact_dev"];
+	}
     dbPath = [docsPath stringByAppendingPathComponent:@"_v0.1.db"];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     return queue;

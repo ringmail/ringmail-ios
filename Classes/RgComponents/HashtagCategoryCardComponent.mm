@@ -89,7 +89,7 @@
 						children:{
 							{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 							{[CKLabelComponent newWithLabelAttributes:{
-								  .string = [[data objectForKey:@"name"] uppercaseString],
+								  .string = [data objectForKey:@"name"],
 								  .font = [UIFont fontWithName:@"HelveticaNeue" size:18],
 								  .color = [UIColor colorWithHex:@"#33362f"],
 								  .alignment = NSTextAlignmentCenter,

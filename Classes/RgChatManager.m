@@ -720,11 +720,15 @@
 + (NSString*)databasePath
 {
     NSString *dbPath;
-#ifdef DEBUG
-    dbPath = @"ringmail_dev";
-#else
-    dbPath = @"ringmail";
-#endif
+	NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    if ([bundleIdentifier isEqualToString:@"com.ringmail.phone"])
+    {
+		dbPath = @"ringmail";
+	}
+	else
+	{
+		dbPath = @"ringmail_dev";
+	}
     dbPath = [dbPath stringByAppendingString:@"_v1.2.8.db"];
     return dbPath;
 }
