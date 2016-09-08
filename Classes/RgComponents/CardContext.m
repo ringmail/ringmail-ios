@@ -12,6 +12,7 @@
 #import "CardContext.h"
 #import "LinphoneManager.h"
 #import "NYXImagesKit/NYXImagesKit.h"
+#import "UIImage+RoundedCorner.h"
 
 @implementation CardContext
 {
@@ -43,7 +44,8 @@
 {
 	NSData *imgData = [[[LinphoneManager instance] chatManager] dbGetMessageDataByUUID:uuid key:key];
 	UIImage *image = [UIImage imageWithData:imgData];
-	image = [image scaleToFitSize:(CGSize){240, 160}];
+	image = [image scaleToFitSize:(CGSize){260, 260}];
+	image = [image roundedCornerImage:10 borderSize:0];
 	return image;
 }
 

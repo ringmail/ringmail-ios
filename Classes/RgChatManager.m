@@ -736,7 +736,7 @@
 	{
 		dbPath = @"ringmail_dev";
 	}
-    dbPath = [dbPath stringByAppendingString:@"_v1.2.9.db"];
+    dbPath = [dbPath stringByAppendingString:@"_v1.2.10.db"];
     return dbPath;
 }
 
