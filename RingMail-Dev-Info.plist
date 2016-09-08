@@ -34,10 +34,10 @@
 			<key>CFBundleURLIconFile</key>
 			<string>linphone_icon_72@2x</string>
 			<key>CFBundleURLName</key>
-			<string>com.ringmail.phone</string>
+			<string>com.ringmail.phone-dev</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ring</string>
+				<string>ringdev</string>
 			</array>
 		</dict>
 	</array>

@@ -230,6 +230,10 @@
 		C43C1A071D691AB70038DC38 /* category_icon_tmp.png in Resources */ = {isa = PBXBuildFile; fileRef = C43C1A041D691AB70038DC38 /* category_icon_tmp.png */; };
 		C43C1A081D691AB70038DC38 /* category_icon_tmp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43C1A051D691AB70038DC38 /* category_icon_tmp@2x.png */; };
 		C43C1A091D691AB70038DC38 /* category_icon_tmp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43C1A051D691AB70038DC38 /* category_icon_tmp@2x.png */; };
+		C43DA5871D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */; };
+		C43DA5881D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */; };
+		C43DA5891D81E9F0007E20A2 /* RingMail-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5861D81E9F0007E20A2 /* RingMail-Info.plist */; };
+		C43DA58A1D81E9F0007E20A2 /* RingMail-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5861D81E9F0007E20A2 /* RingMail-Info.plist */; };
 		C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */; };
 		C43F65D41D53EBE9004CEC70 /* HashtagCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */; };
 		C43F65D81D540233004CEC70 /* ringmail_delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D51D540233004CEC70 /* ringmail_delete@3x.png */; };
@@ -2259,7 +2263,6 @@
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7F787A8F4AFE4EC37D570FB3 /* Pods-RingMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.debug.xcconfig"; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* linphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "linphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9035CFA62FDF2CF9AA4F7FCF /* Pods-RingMail.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.distribution.xcconfig"; sourceTree = "<group>"; };
 		C401E5DA1B95E9ED006C915A /* RgChatModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgChatModelData.h; sourceTree = "<group>"; };
 		C401E5DB1B95E9ED006C915A /* RgChatModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatModelData.m; sourceTree = "<group>"; };
@@ -2386,6 +2389,8 @@
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
 		C43C1A041D691AB70038DC38 /* category_icon_tmp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = category_icon_tmp.png; sourceTree = "<group>"; };
 		C43C1A051D691AB70038DC38 /* category_icon_tmp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category_icon_tmp@2x.png"; sourceTree = "<group>"; };
+		C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RingMail-Dev-Info.plist"; sourceTree = "<group>"; };
+		C43DA5861D81E9F0007E20A2 /* RingMail-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RingMail-Info.plist"; sourceTree = "<group>"; };
 		C43F65D11D5309CB004CEC70 /* HashtagCardComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCardComponentController.h; path = RgComponents/HashtagCardComponentController.h; sourceTree = "<group>"; };
 		C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HashtagCardComponentController.mm; path = RgComponents/HashtagCardComponentController.mm; sourceTree = "<group>"; };
 		C43F65D51D540233004CEC70 /* ringmail_delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_delete@3x.png"; path = "Resources/ringmail_delete@3x.png"; sourceTree = "<group>"; };
@@ -2528,7 +2533,6 @@
 		C4AA1A381C72EE3B003F86FD /* ringmail_card_quote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_card_quote.png; path = Resources/ringmail_card_quote.png; sourceTree = "<group>"; };
 		C4AC27C81D384AA0003B6232 /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVWebViewController.bundle; path = Pods/SVWebViewController/SVWebViewController/SVWebViewController.bundle; sourceTree = "<group>"; };
 		C4AC2B951D3963FA003B6232 /* RingMail-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RingMail-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4AC2B961D3963FB003B6232 /* RingMail copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "RingMail copy-Info.plist"; path = "/Users/mfrager/Projects/RingMail/iOS/linphone-iphone/RingMail copy-Info.plist"; sourceTree = "<absolute>"; };
 		C4AC2B971D397107003B6232 /* ringmail_dev_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_dev_logo.png; path = Resources/ringmail_dev_logo.png; sourceTree = "<group>"; };
 		C4AC2B981D397107003B6232 /* ringmail_dev_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_dev_logo@2x.png"; path = "Resources/ringmail_dev_logo@2x.png"; sourceTree = "<group>"; };
 		C4AC2B991D397107003B6232 /* ringmail_dev_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_dev_logo@3x.png"; path = "Resources/ringmail_dev_logo@3x.png"; sourceTree = "<group>"; };
@@ -3760,7 +3764,6 @@
 				63058A301B4E822F00EFAE36 /* TestsLiblinphone */,
 				630589DD1B4E810900EFAE36 /* TestsUI */,
 				15A3A218E25F260B2A833F2A /* Pods */,
-				C4AC2B961D3963FB003B6232 /* RingMail copy-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -3777,6 +3780,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */,
+				C43DA5861D81E9F0007E20A2 /* RingMail-Info.plist */,
 				C4AC27C81D384AA0003B6232 /* SVWebViewController.bundle */,
 				C41D67E41CA74B0900D7BA72 /* Fonts */,
 				C425095A1C27D62B00BEC5DE /* tessdata */,
@@ -3784,7 +3789,6 @@
 				D3C714B2159DB84400705B8E /* hold.wav */,
 				F0B89C2318DC90850050B60E /* images */,
 				D37E3ECF1619DCC50087659A /* licenses.html */,
-				8D1107310486CEB800E47090 /* linphone-Info.plist */,
 				57F005C315EE2CCF00914747 /* linphonerc */,
 				57F005C615EE2D9200914747 /* linphonerc-factory */,
 				57F005C715EE2D9200914747 /* linphonerc-factory~ipad */,
@@ -5407,6 +5411,7 @@
 				D389363915A6D53200A3A3AA /* chat_bubble_incoming.9.png in Resources */,
 				D389363B15A6D53200A3A3AA /* chat_bubble_outgoing.9.png in Resources */,
 				C444F3DD1C92240300134788 /* menu-contact.png in Resources */,
+				C43DA5891D81E9F0007E20A2 /* RingMail-Info.plist in Resources */,
 				D3D14E7C15A711700074A527 /* avatar_shadow_small.png in Resources */,
 				C444F3FB1C9235DC00134788 /* phone@2x.png in Resources */,
 				D38187B915FE342200C3EDCA /* ContactDetailsViewController.xib in Resources */,
@@ -5506,6 +5511,7 @@
 				D3C31A8015BD8DED008ED271 /* video_off_over_landscape.png in Resources */,
 				D3C31A8215BD8DED008ED271 /* video_on_default_landscape.png in Resources */,
 				D3C31A8415BD8DED008ED271 /* video_on_disabled_landscape.png in Resources */,
+				C43DA5871D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */,
 				D3C31A8615BD8DED008ED271 /* video_on_over_landscape.png in Resources */,
 				D3A74E5915C68162001500B9 /* toolsbar_background.png in Resources */,
 				D38187FC15FE356100C3EDCA /* UIMainBar~ipad.xib in Resources */,
@@ -6150,6 +6156,7 @@
 				C4AC28F21D3963FA003B6232 /* chat_bubble_incoming.9.png in Resources */,
 				C4AC28F31D3963FA003B6232 /* chat_bubble_outgoing.9.png in Resources */,
 				C4AC28F41D3963FA003B6232 /* menu-contact.png in Resources */,
+				C43DA58A1D81E9F0007E20A2 /* RingMail-Info.plist in Resources */,
 				C4AC28F51D3963FA003B6232 /* avatar_shadow_small.png in Resources */,
 				C4AC28F61D3963FA003B6232 /* phone@2x.png in Resources */,
 				C4AC28F71D3963FA003B6232 /* ContactDetailsViewController.xib in Resources */,
@@ -6249,6 +6256,7 @@
 				C4AC29541D3963FA003B6232 /* video_off_over_landscape.png in Resources */,
 				C4AC29551D3963FA003B6232 /* video_on_default_landscape.png in Resources */,
 				C4AC29561D3963FA003B6232 /* video_on_disabled_landscape.png in Resources */,
+				C43DA5881D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */,
 				C4AC29571D3963FA003B6232 /* video_on_over_landscape.png in Resources */,
 				C4AC29581D3963FA003B6232 /* toolsbar_background.png in Resources */,
 				C4AC29591D3963FA003B6232 /* UIMainBar~ipad.xib in Resources */,
@@ -7577,7 +7585,7 @@
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "linphone-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
@@ -7681,7 +7689,7 @@
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "linphone-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
@@ -7784,7 +7792,7 @@
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "linphone-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
@@ -7885,7 +7893,7 @@
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "linphone-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
@@ -7988,7 +7996,7 @@
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "RingMail copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
@@ -8051,7 +8059,7 @@
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "RingMail copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
@@ -8115,7 +8123,7 @@
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "RingMail copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
@@ -8180,7 +8188,7 @@
 					"$(SRCROOT)/Classes/Utils/XMLRPC/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "RingMail copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",

@@ -178,7 +178,7 @@
 				  {@selector(setBackgroundColor:), [UIColor clearColor]},
 				  {@selector(setUserInteractionEnabled:), @NO},
 			  }
-			  accessibilityContext:{}
+			  options:{}
 			  size:{.width = textWidth}];
 		}
 		body = {
