@@ -24,7 +24,6 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     if (self = [super init]) {
         mainCount = [NSNumber numberWithInteger:0];
         mainList = nil;
-        mainPath = RG_HASHTAG_DIRECTORY;
     }
     return self;
 }
@@ -53,76 +52,30 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 - (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count
 {
     NSAssert(count >= 1, @"Count should be a positive integer");
-    NSString* title = @"Hashtag Categories";
-//    if (mainList == nil)
-//    {
-//        // Initialize
-//        mainList = [NSMutableArray array];
-//        if ([mainPath isEqualToString:RG_HASHTAG_DIRECTORY])
-//        {
-//            title = @"Hashtag Categories";
-//            [mainList push:@{
-//                             @"type": @"hashtag_category",
-//                             @"name": @"Lifestyle",
-//							 @"pattern": @"wov",
-//							 @"color": @"grapefruit",
-//                             }];
-//            [mainList push:@{
-//                             @"type": @"hashtag_category",
-//                             @"name": @"Technology",
-//							 @"pattern": @"squared_metal",
-//							 @"color": @"denim",
-//                             }];
-//            [mainList push:@{
-//                             @"type": @"hashtag_category",
-//                             @"name": @"Stocks",
-//							 @"pattern": @"swirl_pattern",
-//							 @"color": @"grass",
-//                             }];
-//            [mainList push:@{
-//                             @"type": @"hashtag_category",
-//                             @"name": @"News",
-//							 @"pattern": @"upfeathers",
-//							 @"color": @"turquoise",
-//                             }];
-//            [mainList push:@{
-//                             @"type": @"hashtag_category",
-//                             @"name": @"Shopping",
-//							 @"pattern": @"dimension",
-//							 @"color": @"banana",
-//                             }];
-//        }
-//        else
-//        {
-//            title = @"Hashtag Categories";
-//            [mainList push:@{
-//                @"type": @"hashtag_category_header",
-//                @"name": mainPath,
-//				@"pattern": @"swirl_pattern",
-//				@"color": @"grape",
-//            }];
-//            for (NSUInteger i = 0; i < 25; i++)
-//            {
-//                [mainList push:@{
-//                    @"type": @"hashtag",
-//                    @"label": [NSString stringWithFormat:@"#tag%lu", (unsigned long)i],
-//                    @"session_tag": [NSString stringWithFormat:@"#tag%lu", (unsigned long)i],
-//					@"image": [UIImage imageNamed:@"avatar_unknown_small.png"],
-//                }];
-//            }
-//        }
-//    }
     NSMutableArray *_cards = [NSMutableArray new];
     NSInteger added = 0;
+    BOOL main = [self.mainPath isEqualToString:@"0"];
     for (NSUInteger i = 0; i < count; i++)
     {
         if ([mainCount intValue] == 0 && i == 0)
         {
-            NSNumber *headerCell = [NSNumber numberWithBool:1];
-            Card *card = [[Card alloc] initWithData:@{@"text": title}
-                                             header:headerCell];
-            [_cards addObject:card];
-            added++;
+            if (main)
+            {
+                Card *card = [[Card alloc] initWithData:@{
+                    @"type": @"hashtag_directory_header",
+                    @"text": @"Explore #Hashtags",
+                } header:@NO];
+                [_cards addObject:card];
+                added++;
+            }
+            else
+            {
+                Card *card = [[Card alloc] initWithData:@{
+                    @"text": @"Explore #Hashtags",
+                } header:@YES];
+                [_cards addObject:card];
+                added++;
+            }
         }
         else
         {

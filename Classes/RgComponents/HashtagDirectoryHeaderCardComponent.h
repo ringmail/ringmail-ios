@@ -9,18 +9,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import "IAWCKImageDownloader.h"
+#import <ComponentKit/ComponentKit.h>
 
-@interface CardContext : NSObject
+@class CardContext;
 
-@property (strong, nonatomic, readwrite) IAWCKImageDownloader *imageDownloader;
+/**
+ A warm card component is a fixed-ratio component that centers the card within its height. It has a nice warm
+ background on which it places the card.
+ */
+@interface HashtagDirectoryHeaderCardComponent : CKCompositeComponent
 
-- (instancetype)initWithImages:(NSDictionary *)addImages;
-- (instancetype)initWithImageNames:(NSSet *)imageNames;
+@property (nonatomic, retain) NSDictionary *cardData;
 
-- (UIImage *)imageNamed:(NSString *)imageName;
-- (UIImage *)chatImage:(NSString *)uuid key:(NSString *)key;
++ (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context;
 
 @end

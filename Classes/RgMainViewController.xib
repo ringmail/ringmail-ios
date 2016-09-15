@@ -74,7 +74,7 @@
                             </connections>
                         </button>
                         <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
-                            <rect key="frame" x="58" y="15" width="174" height="27"/>
+                            <rect key="frame" x="58" y="16" width="174" height="27"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="tintColor" red="0.52948105335235596" green="0.52946513891220093" blue="0.52947413921356201" alpha="1" colorSpace="calibratedRGB"/>

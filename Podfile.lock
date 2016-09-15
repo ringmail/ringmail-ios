@@ -47,6 +47,9 @@ PODS:
   - ObjectiveSugar (1.1.0)
   - OpenCV (3.1.0.1)
   - RegexKitLite (4.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - SVWebViewController (1.0)
   - UIImage-Categories (1.0.0)
   - XMPPFramework (3.6.6):
@@ -208,6 +211,7 @@ DEPENDENCIES:
   - ObjectiveSugar
   - OpenCV
   - RegexKitLite
+  - SDWebImage
   - SVWebViewController (from `git@nova1.revalead.com:ringmail/svwebviewcontroller.git`,
     tag `1.1`)
   - UIImage-Categories (from `https://github.com/nixonnixon/UIImage-Categories.git`)
@@ -253,6 +257,7 @@ SPEC CHECKSUMS:
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OpenCV: 41c4250e2b06a394d6fbb634b5fa622cdd846018
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVWebViewController: aa2e18a41ff5f45be7aeec8e92ca5bcc50b5ebb1
   UIImage-Categories: b9d2ff50c2250ea007f150c2427ff230b5a4789b
   XMPPFramework: b06c210b0b71c08aa41a646bffd2021fa43bb43b

@@ -245,7 +245,7 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	LOGI(@"%@ - url = %ld", NSStringFromSelector(_cmd), [url absoluteString]);
 	NSString *scheme = [[url scheme] lowercaseString];
-	if ([scheme isEqualToString:@"ring"])
+	if ([scheme isEqualToString:@"ring"] || [scheme isEqualToString:@"ringdev"])
     {
         NSString *encodedURL = [url absoluteString];
 		NSString *finalURL = [encodedURL stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

@@ -163,6 +163,7 @@ static RgNetwork* theRgNetwork = nil;
             @"last_name": params[@"last_name"],
             @"email": rgLogin,
             @"phone": params[@"phone"],
+            @"hashtag": params[@"hashtag"],
             @"password": rgPass,
         };
         NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/register_user", self.networkHost];

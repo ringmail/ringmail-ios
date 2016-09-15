@@ -226,10 +226,6 @@
 		C42C0DEE1CB16FF100AD5A91 /* ringmail_incoming_reject@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C42C0DE81CB16FF100AD5A91 /* ringmail_incoming_reject@2x.png */; };
 		C42C0DEF1CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C42C0DE91CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
-		C43C1A061D691AB70038DC38 /* category_icon_tmp.png in Resources */ = {isa = PBXBuildFile; fileRef = C43C1A041D691AB70038DC38 /* category_icon_tmp.png */; };
-		C43C1A071D691AB70038DC38 /* category_icon_tmp.png in Resources */ = {isa = PBXBuildFile; fileRef = C43C1A041D691AB70038DC38 /* category_icon_tmp.png */; };
-		C43C1A081D691AB70038DC38 /* category_icon_tmp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43C1A051D691AB70038DC38 /* category_icon_tmp@2x.png */; };
-		C43C1A091D691AB70038DC38 /* category_icon_tmp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43C1A051D691AB70038DC38 /* category_icon_tmp@2x.png */; };
 		C43DA5871D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */; };
 		C43DA5881D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */; };
 		C43DA5891D81E9F0007E20A2 /* RingMail-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5861D81E9F0007E20A2 /* RingMail-Info.plist */; };
@@ -320,6 +316,14 @@
 		C459A44D1CC870B600CFFF30 /* ringmail_favorite-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A4471CC870B600CFFF30 /* ringmail_favorite-pressed.png */; };
 		C459A44E1CC870B600CFFF30 /* ringmail_favorite-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A4481CC870B600CFFF30 /* ringmail_favorite-pressed@2x.png */; };
 		C459A44F1CC870B600CFFF30 /* ringmail_favorite-pressed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A4491CC870B600CFFF30 /* ringmail_favorite-pressed@3x.png */; };
+		C45CFFDD1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */; };
+		C45CFFDE1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */; };
+		C45CFFEB1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */; };
+		C45CFFEC1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */; };
+		C45CFFF61D8B600A00BEF75F /* ringmail_astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF41D8B600A00BEF75F /* ringmail_astronaut.png */; };
+		C45CFFF71D8B600A00BEF75F /* ringmail_astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF41D8B600A00BEF75F /* ringmail_astronaut.png */; };
+		C45CFFF81D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */; };
+		C45CFFF91D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */; };
 		C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C46997AC1BC19168007B3658 /* incall_buttons_background.png */; };
 		C46997B61BC1A7FB007B3658 /* libvo-amrwbenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */; };
 		C476A7071CF24DFE00CA3772 /* ringpage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7041CF24DFE00CA3772 /* ringpage@3x.png */; };
@@ -2387,8 +2391,6 @@
 		C42C0DE91CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_incoming_reject@3x.png"; path = "Resources/ringmail_incoming_reject@3x.png"; sourceTree = "<group>"; };
 		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
-		C43C1A041D691AB70038DC38 /* category_icon_tmp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = category_icon_tmp.png; sourceTree = "<group>"; };
-		C43C1A051D691AB70038DC38 /* category_icon_tmp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category_icon_tmp@2x.png"; sourceTree = "<group>"; };
 		C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RingMail-Dev-Info.plist"; sourceTree = "<group>"; };
 		C43DA5861D81E9F0007E20A2 /* RingMail-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RingMail-Info.plist"; sourceTree = "<group>"; };
 		C43F65D11D5309CB004CEC70 /* HashtagCardComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCardComponentController.h; path = RgComponents/HashtagCardComponentController.h; sourceTree = "<group>"; };
@@ -2476,6 +2478,12 @@
 		C459A4471CC870B600CFFF30 /* ringmail_favorite-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_favorite-pressed.png"; path = "Resources/ringmail_favorite-pressed.png"; sourceTree = "<group>"; };
 		C459A4481CC870B600CFFF30 /* ringmail_favorite-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_favorite-pressed@2x.png"; path = "Resources/ringmail_favorite-pressed@2x.png"; sourceTree = "<group>"; };
 		C459A4491CC870B600CFFF30 /* ringmail_favorite-pressed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_favorite-pressed@3x.png"; path = "Resources/ringmail_favorite-pressed@3x.png"; sourceTree = "<group>"; };
+		C45CFFDB1D8B34F900BEF75F /* IAWCKImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAWCKImageDownloader.h; path = Utils/IAWCKImageDownloader.h; sourceTree = "<group>"; };
+		C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IAWCKImageDownloader.m; path = Utils/IAWCKImageDownloader.m; sourceTree = "<group>"; };
+		C45CFFE91D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagDirectoryHeaderCardComponent.h; path = RgComponents/HashtagDirectoryHeaderCardComponent.h; sourceTree = "<group>"; };
+		C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HashtagDirectoryHeaderCardComponent.mm; path = RgComponents/HashtagDirectoryHeaderCardComponent.mm; sourceTree = "<group>"; };
+		C45CFFF41D8B600A00BEF75F /* ringmail_astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_astronaut.png; path = Resources/ringmail_astronaut.png; sourceTree = "<group>"; };
+		C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_astronaut@2x.png"; path = "Resources/ringmail_astronaut@2x.png"; sourceTree = "<group>"; };
 		C46997AC1BC19168007B3658 /* incall_buttons_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incall_buttons_background.png; path = Resources/incall_buttons_background.png; sourceTree = "<group>"; };
 		C46997B51BC1A7FB007B3658 /* libvo-amrwbenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libvo-amrwbenc.a"; path = "liblinphone-sdk/apple-darwin/lib/libvo-amrwbenc.a"; sourceTree = "<group>"; };
 		C476A7041CF24DFE00CA3772 /* ringpage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpage@3x.png"; path = "Resources/ringpage@3x.png"; sourceTree = "<group>"; };
@@ -4048,6 +4056,8 @@
 				C41276921D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm */,
 				C4FD78761CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.h */,
 				C4FD78771CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm */,
+				C45CFFE91D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.h */,
+				C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */,
 				C42B72171CA2313D0020A57F /* HashtagModelController.h */,
 				C42B72181CA2313D0020A57F /* HashtagModelController.m */,
 				C42B71FC1CA22DD50020A57F /* HashtagCollectionViewController.h */,
@@ -4107,6 +4117,8 @@
 				C4FD78561CF935CF0066BDB1 /* UIColor+Name.h */,
 				C4FD78571CF939330066BDB1 /* NSObject+NSPerformSelector.h */,
 				C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */,
+				C45CFFDB1D8B34F900BEF75F /* IAWCKImageDownloader.h */,
+				C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -4268,8 +4280,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
-				C43C1A041D691AB70038DC38 /* category_icon_tmp.png */,
-				C43C1A051D691AB70038DC38 /* category_icon_tmp@2x.png */,
+				C45CFFF41D8B600A00BEF75F /* ringmail_astronaut.png */,
+				C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */,
 				C43F65D51D540233004CEC70 /* ringmail_delete@3x.png */,
 				C43F65D61D540233004CEC70 /* ringmail_delete@2x.png */,
 				C43F65D71D540233004CEC70 /* ringmail_delete.png */,
@@ -5229,6 +5241,7 @@
 				C476A7071CF24DFE00CA3772 /* ringpage@3x.png in Resources */,
 				D38187F815FE355D00C3EDCA /* UIMainBar.xib in Resources */,
 				D3ED3E9815872EF1006C0DE4 /* history_all_selected.png in Resources */,
+				C45CFFF61D8B600A00BEF75F /* ringmail_astronaut.png in Resources */,
 				C49548FF1C8685310097E413 /* ringmail_chat_back.png in Resources */,
 				D3ED3E9A15872EF1006C0DE4 /* history_all_default.png in Resources */,
 				D3ED3E9C15872EF1006C0DE4 /* history_edit_default.png in Resources */,
@@ -5604,7 +5617,6 @@
 				C459A4301CC865F300CFFF30 /* ringmail_edit-cancel@2x.png in Resources */,
 				C459A4261CC8634C00CFFF30 /* ringmail_edit-pressed.png in Resources */,
 				C459A44F1CC870B600CFFF30 /* ringmail_favorite-pressed@3x.png in Resources */,
-				C43C1A081D691AB70038DC38 /* category_icon_tmp@2x.png in Resources */,
 				D3A74F2A15C69392001500B9 /* pause_on_default~ipad.png in Resources */,
 				C444F3CD1C92240300134788 /* menu-contact_active@3x.png in Resources */,
 				D3A74F2C15C69392001500B9 /* pause_on_over~ipad.png in Resources */,
@@ -5660,7 +5672,6 @@
 				D33988C215C6DD1600CAF1E4 /* micro_off_disabled_landscape~ipad.png in Resources */,
 				D33988C415C6DD1600CAF1E4 /* micro_off_over_landscape~ipad.png in Resources */,
 				C42C0DCB1CAEE9D100AD5A91 /* ringmail_speaker@2x.png in Resources */,
-				C43C1A061D691AB70038DC38 /* category_icon_tmp.png in Resources */,
 				D33988C615C6DD1600CAF1E4 /* micro_on_default_landscape~ipad.png in Resources */,
 				D33988C815C6DD1600CAF1E4 /* micro_on_disabled_landscape~ipad.png in Resources */,
 				D33988CA15C6DD1600CAF1E4 /* micro_on_over_landscape~ipad.png in Resources */,
@@ -5682,6 +5693,7 @@
 				D33988E015C6DD1600CAF1E4 /* pause_off_default_landscape~ipad.png in Resources */,
 				D33988E215C6DD1600CAF1E4 /* pause_off_over_landscape~ipad.png in Resources */,
 				D33988E415C6DD1600CAF1E4 /* pause_on_default_landscape~ipad.png in Resources */,
+				C45CFFF81D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */,
 				D33988E615C6DD1600CAF1E4 /* pause_on_over_landscape~ipad.png in Resources */,
 				D33988E815C6DD1600CAF1E4 /* speaker_off_default_landscape~ipad.png in Resources */,
 				D33988EA15C6DD1600CAF1E4 /* speaker_off_disabled_landscape~ipad.png in Resources */,
@@ -5974,6 +5986,7 @@
 				C4AC283E1D3963FA003B6232 /* ringpage@3x.png in Resources */,
 				C4AC283F1D3963FA003B6232 /* UIMainBar.xib in Resources */,
 				C4AC28401D3963FA003B6232 /* history_all_selected.png in Resources */,
+				C45CFFF71D8B600A00BEF75F /* ringmail_astronaut.png in Resources */,
 				C4AC28411D3963FA003B6232 /* ringmail_chat_back.png in Resources */,
 				C4AC28421D3963FA003B6232 /* history_all_default.png in Resources */,
 				C4AC28431D3963FA003B6232 /* history_edit_default.png in Resources */,
@@ -6349,7 +6362,6 @@
 				C4AC29AF1D3963FA003B6232 /* ringmail_edit-cancel@2x.png in Resources */,
 				C4AC29B01D3963FA003B6232 /* ringmail_edit-pressed.png in Resources */,
 				C4AC29B11D3963FA003B6232 /* ringmail_favorite-pressed@3x.png in Resources */,
-				C43C1A091D691AB70038DC38 /* category_icon_tmp@2x.png in Resources */,
 				C4AC29B21D3963FA003B6232 /* pause_on_default~ipad.png in Resources */,
 				C4AC29B31D3963FA003B6232 /* menu-contact_active@3x.png in Resources */,
 				C4AC29B41D3963FA003B6232 /* pause_on_over~ipad.png in Resources */,
@@ -6405,7 +6417,6 @@
 				C4AC29E61D3963FA003B6232 /* micro_off_disabled_landscape~ipad.png in Resources */,
 				C4AC29E71D3963FA003B6232 /* micro_off_over_landscape~ipad.png in Resources */,
 				C4AC29E81D3963FA003B6232 /* ringmail_speaker@2x.png in Resources */,
-				C43C1A071D691AB70038DC38 /* category_icon_tmp.png in Resources */,
 				C4AC29E91D3963FA003B6232 /* micro_on_default_landscape~ipad.png in Resources */,
 				C4AC29EA1D3963FA003B6232 /* micro_on_disabled_landscape~ipad.png in Resources */,
 				C4AC29EB1D3963FA003B6232 /* micro_on_over_landscape~ipad.png in Resources */,
@@ -6427,6 +6438,7 @@
 				C4AC29FB1D3963FA003B6232 /* pause_off_default_landscape~ipad.png in Resources */,
 				C4AC29FC1D3963FA003B6232 /* pause_off_over_landscape~ipad.png in Resources */,
 				C4AC29FD1D3963FA003B6232 /* pause_on_default_landscape~ipad.png in Resources */,
+				C45CFFF91D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */,
 				C4AC29FE1D3963FA003B6232 /* pause_on_over_landscape~ipad.png in Resources */,
 				C4AC29FF1D3963FA003B6232 /* speaker_off_default_landscape~ipad.png in Resources */,
 				C4AC2A001D3963FA003B6232 /* speaker_off_disabled_landscape~ipad.png in Resources */,
@@ -6830,6 +6842,7 @@
 				D31B4B21159876C0002E6C72 /* UICompositeViewController.m in Sources */,
 				D31AAF5E159B3919002C6B02 /* InCallTableViewController.m in Sources */,
 				D3211BB0159C4EF10098460B /* UIConferenceHeader.m in Sources */,
+				C45CFFDD1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */,
 				C42B72111CA22EDB0020A57F /* CardContext.m in Sources */,
 				D32460E6159D9AAD00BA7F3A /* UITransparentView.m in Sources */,
 				D32B9DFC15A2F131000B6DEC /* FastAddressBook.m in Sources */,
@@ -6845,6 +6858,7 @@
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,
 				C44F5E091C31E341008E4F38 /* NoteSQL.m in Sources */,
 				C41EF3121B8BCFD40085E75B /* RgMainViewController.m in Sources */,
+				C45CFFEB1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
 				C42B72191CA2313D0020A57F /* HashtagModelController.m in Sources */,
 				636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */,
@@ -6992,6 +7006,7 @@
 				C4AC2AF31D3963FA003B6232 /* InCallTableViewController.m in Sources */,
 				C4AC2AF41D3963FA003B6232 /* UIConferenceHeader.m in Sources */,
 				C4AC2AF51D3963FA003B6232 /* CardContext.m in Sources */,
+				C45CFFDE1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */,
 				C4AC2AF61D3963FA003B6232 /* UITransparentView.m in Sources */,
 				C4AC2AF71D3963FA003B6232 /* FastAddressBook.m in Sources */,
 				C4AC2AF81D3963FA003B6232 /* UITransferButton.m in Sources */,
@@ -7007,6 +7022,7 @@
 				C4AC2B021D3963FA003B6232 /* NoteSQL.m in Sources */,
 				C4AC2B031D3963FA003B6232 /* RgMainViewController.m in Sources */,
 				C4AC2B041D3963FA003B6232 /* ContactDetailsTableViewController.m in Sources */,
+				C45CFFEC1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				C4AC2B051D3963FA003B6232 /* HashtagModelController.m in Sources */,
 				C4AC2B061D3963FA003B6232 /* UIButtonShrinkable.m in Sources */,
 				C4AC2B071D3963FA003B6232 /* InAppProductsManager.m in Sources */,
@@ -8032,8 +8048,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -8096,8 +8112,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -8160,8 +8176,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -8204,7 +8220,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6ae519bf-8580-4641-b487-c290069022a8";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (

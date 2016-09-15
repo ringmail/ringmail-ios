@@ -31,7 +31,8 @@
 	CGFloat screenWidth = screenRect.size.width;
 	CGFloat itemWidth = screenWidth / 2;
 	CGFloat circleWidth = itemWidth - 30;
-	CGFloat iconTop = ((circleWidth / 4) - 20) + 5;
+	CGFloat iconTop = (circleWidth / 4) - 15;
+	CGFloat countTop = (3 * (circleWidth / 4)) - 10;
 	
 	UIImage *image;
 	
@@ -82,32 +83,50 @@
               component:
 				 [CKBackgroundLayoutComponent newWithComponent:
 					[CKBackgroundLayoutComponent newWithComponent:
-						[CKStackLayoutComponent newWithView:{} size:{.height = itemWidth - 30} style:{
-							.direction = CKStackLayoutDirectionVertical,
-							.alignItems = CKStackLayoutAlignItemsStretch
-						}
-						children:{
-							{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-							{[CKLabelComponent newWithLabelAttributes:{
-								  .string = [data objectForKey:@"name"],
-								  .font = [UIFont fontWithName:@"HelveticaNeue" size:18],
-								  .color = [UIColor colorWithHex:@"#33362f"],
-								  .alignment = NSTextAlignmentCenter,
-							  }
-							  viewAttributes:{
-								  {@selector(setBackgroundColor:), [UIColor clearColor]},
-								  {@selector(setUserInteractionEnabled:), @NO},
-							  }
-							  size:{.width = itemWidth - 30}]},
-							{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-						}]
-						background:
+                        [CKBackgroundLayoutComponent newWithComponent:
+    						[CKStackLayoutComponent newWithView:{} size:{.height = itemWidth - 30} style:{
+    							.direction = CKStackLayoutDirectionVertical,
+    							.alignItems = CKStackLayoutAlignItemsStretch
+    						}
+    						children:{
+    							{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+    							{[CKLabelComponent newWithLabelAttributes:{
+    								  .string = [data objectForKey:@"name"],
+    								  .font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16],
+    								  .color = [UIColor colorWithHex:[data objectForKey:@"color"]],
+    								  .alignment = NSTextAlignmentCenter,
+    							  }
+    							  viewAttributes:{
+    								  {@selector(setBackgroundColor:), [UIColor clearColor]},
+    								  {@selector(setUserInteractionEnabled:), @NO},
+    							  }
+    							  size:{.width = itemWidth - 30}]},
+    							{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+    						}]
+                        	background:
 							[CKInsetComponent
 								newWithInsets:{.left = INFINITY, .right = INFINITY, .top = iconTop, .bottom = INFINITY}
 								component:
-									[CKImageComponent newWithImage:[UIImage imageNamed:@"category_icon_tmp.png"] size:{
-										.height = 40, .width = 40
-									}]
+                                    [CKNetworkImageComponent newWithURL:data[@"image_url"]
+                                        imageDownloader:context.imageDownloader
+                                        scenePath:nil size:{ 40, 40 } options:{} attributes:{}]
+							]
+						]
+						background:
+							[CKInsetComponent
+								newWithInsets:{.left = INFINITY, .right = INFINITY, .top = countTop, .bottom = INFINITY}
+								component:
+                                   [CKLabelComponent newWithLabelAttributes:{
+        								  .string = [data objectForKey:@"count"],
+        								  .font = [UIFont fontWithName:@"HelveticaNeue" size:13],
+        								  .color = [UIColor colorWithHex:@"#999999"],
+        								  .alignment = NSTextAlignmentCenter,
+        							  }
+        							  viewAttributes:{
+        								  {@selector(setBackgroundColor:), [UIColor clearColor]},
+        								  {@selector(setUserInteractionEnabled:), @NO},
+        							  }
+        							  size:{}]
 							]
 						]
 					background:[CKImageComponent newWithImage:image]

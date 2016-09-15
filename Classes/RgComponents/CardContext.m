@@ -23,6 +23,7 @@
 {
   if (self = [super init]) {
       _images = addImages;
+      self.imageDownloader = [IAWCKImageDownloader sharedManager];
   }
   return self;
 }
@@ -31,6 +32,7 @@
 {
   if (self = [super init]) {
        _images = loadImageNames(imageNames);
+      self.imageDownloader = [IAWCKImageDownloader sharedManager];
   }
   return self;
 }

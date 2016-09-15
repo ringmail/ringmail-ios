@@ -343,9 +343,9 @@ static LevelDB* theConfigDatabase = nil;
     if ([RgManager configReadyAndVerified])
     {
         __block BOOL video = NO;
-        if ([ringuri isMatchedByRegex:@"^(message|chat)/"])
+        if ([ringuri isMatchedByRegex:@"^(message|chat|text)/"])
         {
-            [ringuri replaceOccurrencesOfRegex:@"^(message|chat)/" withString:@""];
+            [ringuri replaceOccurrencesOfRegex:@"^(message|chat|text)/" withString:@""];
 			if ([RgManager checkRingMailAddress:ringuri])
             {
 				ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:ringuri];

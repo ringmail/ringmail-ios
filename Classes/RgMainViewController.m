@@ -149,11 +149,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 
 	// fix placeholder bar color in >= iOS7
-    NSString *intro = @" Call #Hashtag or Email";
+    NSString *intro = @"#Hashtag, Domain or Email";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
         attributes:@{
             NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
-            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:19]
+            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:16]
         }];
 	addressField.attributedPlaceholder = placeHolderString;
     

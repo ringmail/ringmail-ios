@@ -27,5 +27,6 @@ target 'RingMail' do
   pod 'UIImage-Categories', :git => 'https://github.com/nixonnixon/UIImage-Categories.git'
 #  pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x' 
   pod 'Colours'
+  pod 'SDWebImage'
 end
 

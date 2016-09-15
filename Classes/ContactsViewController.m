@@ -166,7 +166,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kRgContactsUpdated
                                                object:nil];
     
-    NSString *intro = @" Search Contacts";
+    NSString *intro = @"";
     NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro attributes:@{
         NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
         NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:19]

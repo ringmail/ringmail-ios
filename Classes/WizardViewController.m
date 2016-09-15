@@ -32,6 +32,7 @@ typedef enum _ViewElement {
 	ViewElement_Username = 102, // Really "email"
 	ViewElement_Phone = 103,
 	ViewElement_Password = 104,
+    ViewElement_Hashtag = 106,
 	//ViewElement_Password2 = 102,
     ViewElement_Code = 105,
 	ViewElement_Label = 200,
@@ -910,6 +911,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	NSString *lastname = [WizardViewController findTextField:ViewElement_LastName view:contentView].text;
 	NSString *phone = [WizardViewController findTextField:ViewElement_Phone view:contentView].text;
 	NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
+    NSString *hashtag = [WizardViewController findTextField:ViewElement_Hashtag view:contentView].text;
 	//NSString *password2 = [WizardViewController findTextField:ViewElement_Password2 view:contentView].text;
 
     // TODO: Re-download this data if it is missing
@@ -919,6 +921,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         @"email": username,
         @"phone": phone,
         @"password": password,
+        @"hashtag": hashtag,
     }];
 	if ([self verifyRegister:params])
     {

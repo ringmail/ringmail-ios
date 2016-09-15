@@ -85,7 +85,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
-    NSString *intro = @" Call #Hashtag or Email";
+    NSString *intro = @"";
     NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
         attributes:@{
             NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],

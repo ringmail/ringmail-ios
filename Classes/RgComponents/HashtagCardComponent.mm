@@ -135,6 +135,15 @@
                                   children:{
                                       {
                                           [CKInsetComponent
+                                           newWithInsets:{.left = 0, .right = 0, .top = INFINITY, .bottom = INFINITY}
+                                           component:
+                                              [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                                      {UIControlStateNormal,[context imageNamed:@"button_chat"]},
+                                                  } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
+                                           ]
+                                      },
+                                      {
+                                          [CKInsetComponent
                                            newWithInsets:{.left = 12, .right = 7, .top = INFINITY, .bottom = INFINITY}
                                            component:
                                               [CKButtonComponent newWithTitles:{} titleColors:{} images:{
@@ -176,6 +185,12 @@
             }
             size:{.height = 1 / [UIScreen mainScreen].scale}];
 }*/
+
+- (void)actionChat:(CKButtonComponent *)sender
+{
+    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
+    [card showMessages];
+}
 
 - (void)actionGo:(CKButtonComponent *)sender
 {
