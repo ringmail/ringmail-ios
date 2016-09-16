@@ -644,13 +644,22 @@ static UICompositeViewDescription *compositeDescription = nil;
     [RgManager verifyLogin:^(NSURLSessionTask *operation, id responseObject) {
         [waitView setHidden:TRUE];
         BOOL verified = NO;
-        NSDictionary* res = responseObject;
+        NSMutableDictionary* res = [NSMutableDictionary dictionaryWithDictionary:responseObject];
         NSString *ok = [res objectForKey:@"result"];
         if (ok != nil && [ok isEqualToString:@"ok"])
         {
             LevelDB* cfg = [RgManager configDatabase];
             [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
-            [cfg setObject:res forKey:@"ringmail_credentials"];
+            
+            // Add default hashtags for new users
+            if (res[@"default_hashtags"] != nil)
+            {
+                cfg[@"ringmail_hashtags"] = res[@"default_hashtags"];
+                [res removeObjectForKey:@"default_hashtags"];
+            }
+            //
+            
+            [cfg setObject:res forKey:@"ringmail_initial"];
             verified = YES;
         }
         else if ([RgManager configEmailVerified])
@@ -738,16 +747,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)connectToRingMail
 {
     LevelDB* cfg = [RgManager configDatabase];
-    NSDictionary *res = cfg[@"ringmail_credentials"];
+    NSDictionary *res = cfg[@"ringmail_initial"];
     if (res != nil)
     {
-        [cfg removeObjectForKey:@"ringmail_credentials"];
+        [cfg removeObjectForKey:@"ringmail_initial"];
         [[LinphoneManager instance] startLinphoneCore];
         [self reset];
         [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
         [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
                       domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
         [RgManager updateCredentials:res];
+        [RgManager updateContacts:res];
     }
 }
 

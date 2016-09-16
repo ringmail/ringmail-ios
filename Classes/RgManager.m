@@ -613,38 +613,6 @@ static LevelDB* theConfigDatabase = nil;
     [cfg setObject:[cred objectForKey:@"chat_password"] forKey:@"ringmail_chat_password"];
     [RgManager chatEnsureConnection];
     [[RgNetwork instance] registerPushToken];
-    
-    LinphoneManager *mgr = [LinphoneManager instance];
-    RgContactManager *contactMgr = [mgr contactManager];
-    
-    // 1st round of ringmail-enabled contact updates from server (2nd is the reply to sendContactData)
-    [contactMgr dbUpdateEnabled:[cred objectForKey:@"rg_contacts"]];
-    
-    NSString *serverTimestamp = [cred objectForKey:@"ts_latest"];
-    BOOL send = 1; // send first time
-    
-    // Check to see if contacts database is newer than server
-    if (! [serverTimestamp isEqualToString:@""]) // always send if server has no data yet
-    {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ssZ"];
-        NSDate *serverDate = [dateFormatter dateFromString:serverTimestamp];
-        NSDate *serverCount = [cred objectForKey:@"contacts"];
-        NSArray *contactList = [contactMgr getContactList];
-        NSDictionary *summary = [contactMgr getAddressBookStats:contactList];
-        NSDate *internalDate = [summary objectForKey:@"date_update"];
-        NSNumber *internalCount = [summary objectForKey:@"count"];
-        LOGI(@"RingMail: Server(%@:%@) Internal(%@:%@)", serverDate, serverCount, internalDate, internalCount);
-        if ((! ([internalDate compare:serverDate] == NSOrderedDescending)) && [serverCount isEqual:internalCount])
-        {
-            send = 0;
-            LOGI(@"RingMail: Server Contacts Up To Date");
-        }
-    }
-    if (send)
-    {
-        [contactMgr sendContactData];
-    }
 }
 
 + (void)setupPushToken
@@ -670,12 +638,14 @@ static LevelDB* theConfigDatabase = nil;
     else
     {
         mgr.chatManager = [[RgChatManager alloc] init];
+        [RgManager setupDefaultHashtags:cfg];
     }
     NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
     if (chatPass != nil && ! [chatPass isEqualToString:@""])
     {
         [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
     }
+
 }
 
 + (void)chatEnsureConnection
@@ -685,6 +655,7 @@ static LevelDB* theConfigDatabase = nil;
     if (mgr.chatManager == nil)
     {
         mgr.chatManager = [[RgChatManager alloc] init];
+        [RgManager setupDefaultHashtags:cfg];
     }
     if ([[mgr.chatManager xmppStream] isDisconnected])
     {
@@ -696,16 +667,74 @@ static LevelDB* theConfigDatabase = nil;
     }
 }
 
++ (void)setupDefaultHashtags:(LevelDB*)cfg
+{
+    // Setup default hashtags
+    if (cfg[@"ringmail_hashtags"] != nil)
+    {
+        LinphoneManager* mgr = [LinphoneManager instance];
+        NSArray *ht = (NSArray*)cfg[@"ringmail_hashtags"];
+        for (NSString *tag in [[ht reverseObjectEnumerator] allObjects])
+        {
+            NSDictionary *rec = [mgr.chatManager dbGetSessionID:tag contact:nil uuid:nil];
+            [mgr.chatManager dbInsertCall:@{
+                @"sip": @"",
+                @"address": tag,
+                @"state": [NSNumber numberWithInt:0],
+                @"inbound": [NSNumber numberWithBool:NO],
+		    } session:rec[@"id"]];
+            //NSLog(@"Default Hashtag: %@ - %@", tag, rec);
+        }
+        [cfg removeObjectForKey:@"ringmail_hashtags"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+    }
+}
+
++ (void)updateContacts:(NSDictionary*)res
+{
+    LinphoneManager *mgr = [LinphoneManager instance];
+    RgContactManager *contactMgr = [mgr contactManager];
+    
+    // 1st round of ringmail-enabled contact updates from server (2nd is the reply to sendContactData)
+    [contactMgr dbUpdateEnabled:[res objectForKey:@"rg_contacts"]];
+    
+    NSString *serverTimestamp = [res objectForKey:@"ts_latest"];
+    BOOL send = 1; // send first time
+    
+    // Check to see if contacts database is newer than server
+    if (! [serverTimestamp isEqualToString:@""]) // always send if server has no data yet
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ssZ"];
+        NSDate *serverDate = [dateFormatter dateFromString:serverTimestamp];
+        NSDate *serverCount = [res objectForKey:@"contacts"];
+        NSArray *contactList = [contactMgr getContactList];
+        NSDictionary *summary = [contactMgr getAddressBookStats:contactList];
+        NSDate *internalDate = [summary objectForKey:@"date_update"];
+        NSNumber *internalCount = [summary objectForKey:@"count"];
+        LOGI(@"RingMail: Server(%@:%@) Internal(%@:%@)", serverDate, serverCount, internalDate, internalCount);
+        if ((! ([internalDate compare:serverDate] == NSOrderedDescending)) && [serverCount isEqual:internalCount])
+        {
+            send = 0;
+            LOGI(@"RingMail: Server Contacts Up To Date");
+        }
+    }
+    if (send)
+    {
+        [contactMgr sendContactData];
+    }
+}
+
 + (void)initialLogin
 {
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     if ([bundleIdentifier isEqualToString:@"com.ringmail.phone"])
     {
-        LOGI(@"RingMail: Initial - Login");
+        LOGI(@"RingMail: Login");
     }
     else
     {
-        LOGI(@"RingMail: Initial - Login (TESTING)");
+        LOGI(@"RingMail: Login (DEV)");
     }
     LinphoneManager* mgr = [LinphoneManager instance];
     LevelDB* cfg = [RgManager configDatabase];
@@ -726,6 +755,7 @@ static LevelDB* theConfigDatabase = nil;
             if ([ok isEqualToString:@"ok"])
             {
                 [RgManager updateCredentials:res];
+                [RgManager updateContacts:res];
             }
             else
             {
@@ -763,6 +793,7 @@ static LevelDB* theConfigDatabase = nil;
     linphone_core_clear_call_logs([LinphoneManager getLc]);
     [[RgNetwork instance] signOut];
     [[[LinphoneManager instance] chatManager] disconnect];
+    [LinphoneManager instance].chatManager = nil;
     [RgManager configReset];
 }
 

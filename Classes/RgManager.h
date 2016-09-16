@@ -68,6 +68,7 @@ extern NSString *const kRgSelfName;
 + (BOOL)configReadyAndVerified;
 
 + (void)updateCredentials:(NSDictionary*)cred;
++ (void)updateContacts:(NSDictionary*)res;
 + (void)chatConnect;
 + (void)chatEnsureConnection;
 + (void)initialLogin;

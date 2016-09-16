@@ -133,7 +133,7 @@
                                       .alignItems = CKStackLayoutAlignItemsStretch
                                   }
                                   children:{
-                                      {
+                                      /*{
                                           [CKInsetComponent
                                            newWithInsets:{.left = 0, .right = 0, .top = INFINITY, .bottom = INFINITY}
                                            component:
@@ -141,7 +141,7 @@
                                                       {UIControlStateNormal,[context imageNamed:@"button_chat"]},
                                                   } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
                                            ]
-                                      },
+                                      },*/
                                       {
                                           [CKInsetComponent
                                            newWithInsets:{.left = 12, .right = 7, .top = INFINITY, .bottom = INFINITY}
