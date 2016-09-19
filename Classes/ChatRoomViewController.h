@@ -42,6 +42,8 @@
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImage;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIView *chatView;
+@property (nonatomic, strong) IBOutlet UIView *originalToView;
+@property (nonatomic, strong) IBOutlet UILabel *originalToLabel;
 @property (nonatomic, strong) IBOutlet RgMessagesViewController *chatViewController;
 
 @property (nonatomic, strong) IBOutlet UIButton* pictureButton;

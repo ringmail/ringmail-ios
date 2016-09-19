@@ -849,8 +849,25 @@
     NSLog(@"SQL Database Ready");
 }
 
+- (void)dbDumpSessions
+{
+    NSLog(@"RingMail: dump sessions");
+    FMDatabaseQueue *dbq = [self database];
+    [dbq inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM session"];
+        while ([rs next])
+        {
+            NSLog(@"Row: %@", [rs resultDictionary]);
+        }
+        [rs close];
+    }];
+    [dbq close];
+}
+
 - (NSDictionary*)dbGetSessionData:(NSNumber*)rowid
 {
+    [self dbDumpSessions];
+
 	FMDatabaseQueue *dbq = [self database];
     __block NSDictionary* result = nil;
     [dbq inDatabase:^(FMDatabase *db) {
@@ -869,11 +886,19 @@
 
 - (NSDictionary *)dbGetSessionID:(NSString *)from to:(NSString*)origTo contact:(NSNumber*)contact uuid:(NSString*)uuidInput
 {
-    //NSLog(@"RingMail: Chat - Session ID:(%@)", from);
+    NSLog(@"RingMail: Chat - Session ID:(%@, %@)", from, origTo);
     FMDatabaseQueue *dbq = [self database];
     __block NSDictionary* result;
 	__block NSString* uuid = uuidInput;
-	__block NSObject* to = origTo;
+	__block NSString* to;
+    if (origTo == nil)
+    {
+        to = @"";
+    }
+    else
+    {
+        to = [NSString stringWithString:origTo];
+    }
     [dbq inDatabase:^(FMDatabase *db) {
 		BOOL found = NO;
 		NSNumber *curId = nil;
@@ -908,10 +933,7 @@
 		}
 		if (! found)
 		{
-			if (to == nil)
-			{
-				to = @"";
-			}
+            NSLog(@"Original To 1: %@", to);
             FMResultSet *rs3 = [db executeQuery:@"SELECT rowid, uuid, session_tag, contact_id FROM session WHERE session_tag = ? COLLATE NOCASE AND session_to = ? COLLATE NOCASE", from, to];
             if ([rs3 next])
             {
@@ -968,6 +990,7 @@
 		}
 		else
 		{
+            NSLog(@"Original To 2: %@", to);
             NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
 			if (uuid == nil)
 			{
@@ -977,7 +1000,7 @@
                 @"table": @"session",
                 @"insert": @{
                     @"session_tag": from,
-					@"session_to": to,
+					@"session_to": [NSString stringWithString:to],
                     @"contact_id": (contact != nil) ? contact : [NSNull null],
                     @"session_md5": [[NSString stringWithFormat:@"%@:%@", from, to] md5HexDigest],
                     @"unread": @0,

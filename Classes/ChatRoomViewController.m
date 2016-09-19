@@ -39,6 +39,8 @@
 @synthesize addressLabel;
 @synthesize avatarImage;
 @synthesize headerView;
+@synthesize originalToView;
+@synthesize originalToLabel;
 @synthesize chatView;
 @synthesize chatViewController;
 
@@ -187,6 +189,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     {
         UIImage *image = nil;
 		NSDictionary *sdata = [[lm chatManager] dbGetSessionData:session];
+        //NSLog(@"RingMail Chat Session Data: %@", sdata);
         NSString *displayName = sdata[@"session_tag"];
         ABRecordRef acontact = NULL;
 		if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
@@ -204,6 +207,18 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
         addressLabel.text = displayName;
         addressLabel.accessibilityValue = displayName;
+        
+        // Original To
+        if (! [sdata[@"session_to"] isEqualToString:@""])
+        {
+            originalToView.hidden = NO;
+            [originalToLabel setText:sdata[@"session_to"]];
+        }
+        else
+        {
+            // No Original-To
+            originalToView.hidden = YES;
+        }
 
         // Avatar
         if (image == nil) {
