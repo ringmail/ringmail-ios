@@ -134,19 +134,6 @@ static LevelDB* theConfigDatabase = nil;
 	return res;
 }
 
-+ (NSNumber *)getSessionFromAddress:(NSString*)address
-{
-	LinphoneManager *lm = [LinphoneManager instance];
-    ABRecordRef contact = [[lm fastAddressBook] getContact:address];
-	NSNumber *contactNum = nil;
-	if (contact != NULL)
-	{
-		contactNum = [[lm fastAddressBook] getContactId:contact];
-	}
-	NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address contact:contactNum uuid:nil];
-	return sessionData[@"id"];
-}
-
 + (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video
 {
     NSString* displayName = [address copy];
@@ -183,7 +170,7 @@ static LevelDB* theConfigDatabase = nil;
 	{
 		contactNum = [[lm fastAddressBook] getContactId:contact];
 	}
-	NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address contact:contactNum uuid:nil];
+	NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address to:nil contact:contactNum uuid:nil];
     [lm setChatSession:sessionData[@"id"]];
     [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 }
@@ -225,7 +212,7 @@ static LevelDB* theConfigDatabase = nil;
 		if ([ok isEqualToString:@"ok"])
 		{
 			RgChatManager *cmgr = [[LinphoneManager instance] chatManager];
-			NSDictionary *sessionData = [cmgr dbGetSessionID:address contact:nil uuid:nil];
+			NSDictionary *sessionData = [cmgr dbGetSessionID:address to:nil contact:nil uuid:nil];
             [cmgr dbInsertCall:@{
                 @"sip": @"",
                 @"address": address,
@@ -676,7 +663,7 @@ static LevelDB* theConfigDatabase = nil;
         NSArray *ht = (NSArray*)cfg[@"ringmail_hashtags"];
         for (NSString *tag in [[ht reverseObjectEnumerator] allObjects])
         {
-            NSDictionary *rec = [mgr.chatManager dbGetSessionID:tag contact:nil uuid:nil];
+            NSDictionary *rec = [mgr.chatManager dbGetSessionID:tag to:nil contact:nil uuid:nil];
             [mgr.chatManager dbInsertCall:@{
                 @"sip": @"",
                 @"address": tag,

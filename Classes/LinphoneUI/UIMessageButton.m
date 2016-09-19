@@ -74,7 +74,7 @@
         	{
         		contactNum = [[lm fastAddressBook] getContactId:contact];
         	}
-			NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address contact:contactNum uuid:nil];
+			NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address to:nil contact:contactNum uuid:nil];
             [[LinphoneManager instance] setChatSession:sessionData[@"id"]];
             [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 		}

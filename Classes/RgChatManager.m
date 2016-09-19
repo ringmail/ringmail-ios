@@ -244,12 +244,12 @@
 
 #pragma mark Chat actions
 
-- (NSString*)sendMessageTo:(NSString*)to body:(NSString*)body contact:(NSNumber*)contact
+- (NSString*)sendMessageTo:(NSString*)to from:(NSString*)origTo body:(NSString*)body contact:(NSNumber*)contact
 {
-    return [self sendMessageTo:to body:body reply:nil contact:contact];
+    return [self sendMessageTo:to from:origTo body:body reply:nil contact:contact];
 }
 
-- (NSString*)sendMessageTo:(NSString*)to body:(NSString*)text reply:(NSString*)reply contact:(NSNumber*)contact
+- (NSString*)sendMessageTo:(NSString*)to from:(NSString*)origTo body:(NSString*)text reply:(NSString*)reply contact:(NSNumber*)contact
 {
 	NSLog(@"Send Message To: %@", to);
     __block NSDate *now = [NSDate date];
@@ -257,7 +257,7 @@
     NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
     [messageData setObject:text forKey:@"body"];
     [messageData setObject:now forKey:@"timestamp"];
-	NSDictionary *sessionData = [self dbGetSessionID:to contact:contact uuid:nil];
+	NSDictionary *sessionData = [self dbGetSessionID:to to:origTo contact:contact uuid:nil];
 	NSNumber *session = sessionData[@"id"];
 	
     [self dbInsertMessage:session type:@"text/plain" data:messageData uuid:messageID inbound:NO url:nil];
@@ -270,10 +270,15 @@
     [message addAttributeWithName:@"type" stringValue:@"chat"];
     [message addAttributeWithName:@"timestamp" stringValue:[now strftime]];
     [message addAttributeWithName:@"to" stringValue:msgTo];
-	if (contact != nil)
+	if (origTo != nil)
 	{
-		[message addAttributeWithName:@"reply-to" stringValue:self.replyTo];
+		[message addAttributeWithName:@"reply-to" stringValue:origTo];
 	}
+	/*if (contact != nil)
+	{
+		// TODO: something different than a "reply-to" attribute
+		[message addAttributeWithName:@"reply-to" stringValue:self.replyTo];
+	}*/
     if (reply)
     {
        [message addAttributeWithName:@"reply" stringValue:reply];
@@ -283,11 +288,11 @@
     return messageID;
 }
 
-- (void)sendMessageTo:(NSString*)to image:(UIImage*)image contact:(NSNumber*)contact
+- (void)sendMessageTo:(NSString*)to from:(NSString*)origTo image:(UIImage*)image contact:(NSNumber*)contact
 {
     NSDate *now = [NSDate date];
     NSString *msgTo = [RgManager addressToXMPP:to];
-  	NSDictionary *sessionData = [self dbGetSessionID:to contact:contact uuid:nil];
+  	NSDictionary *sessionData = [self dbGetSessionID:to to:origTo contact:contact uuid:nil];
 	NSNumber *session = sessionData[@"id"];
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
     [body setStringValue:@"Picture"];
@@ -298,6 +303,10 @@
     [message addAttributeWithName:@"type" stringValue:@"chat"];
     [message addAttributeWithName:@"timestamp" stringValue:[now strftime]];
     [message addAttributeWithName:@"to" stringValue:msgTo];
+	if (origTo != nil)
+	{
+		[message addAttributeWithName:@"reply-to" stringValue:origTo];
+	}
     [message addChild:body];
     
     // TODO: send images a different way like upload/download
@@ -504,6 +513,7 @@
 					}
 				}
 			}
+			NSString *origTo = [[xmppMessage attributeForName:@"original-to"] stringValue];
             NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
             NSDate *timestamp = [NSDate parse:[[xmppMessage attributeForName:@"timestamp"] stringValue]];
             if (timestamp == nil)
@@ -514,7 +524,7 @@
             [messageData setObject:body forKey:@"body"];
 			
             __block NSString *chatFrom = [RgManager addressFromXMPP:from];
-			NSDictionary *sessionData = [self dbGetSessionID:chatFrom contact:contact uuid:conversation];
+			NSDictionary *sessionData = [self dbGetSessionID:chatFrom to:origTo contact:contact uuid:conversation];
 			__block NSNumber *session = sessionData[@"id"];
 			
             NSXMLElement *attach = [xmppMessage elementForName:@"attachment"];
@@ -637,10 +647,11 @@
                 NSLog(@"XMPP Error: Bad RingMail Address");
                 NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
                 NSString *chatFrom = [RgManager addressFromXMPP:from];
+				NSString *origTo = [[xmppMessage attributeForName:@"original-to"] stringValue];
                 
                 // TODO: Delete the chatroom
 				
-				NSDictionary *sessionData = [self dbGetSessionID:chatFrom contact:nil uuid:nil];
+				NSDictionary *sessionData = [self dbGetSessionID:chatFrom to:origTo contact:nil uuid:nil];
 				NSNumber *session = sessionData[@"id"];
                 //[self dbDeleteSessionID:session];
                 
@@ -738,7 +749,7 @@
 	{
 		dbPath = @"ringmail_dev";
 	}
-    dbPath = [dbPath stringByAppendingString:@"_v1.2.10.db"];
+    dbPath = [dbPath stringByAppendingString:@"_v1.2.12.db"];
     return dbPath;
 }
 
@@ -767,13 +778,14 @@
                                     "label varchar(255) DEFAULT NULL,"
                                     "session_md5 text NOT NULL,"
                                     "session_tag text NOT NULL,"
+									"session_to text NOT NULL,"
                                     "ts_last_event datetime NOT NULL,"
                                     "unread bigint NOT NULL DEFAULT 0,"
 									"uuid varchar(36) NOT NULL DEFAULT ''"
                                 ");",
                           
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS contact_id_1 ON session (contact_id);",
-                                @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON session (session_tag);",
+                                @"CREATE UNIQUE INDEX IF NOT EXISTS session_tag_1 ON session (session_tag, session_to);",
                                 @"CREATE INDEX IF NOT EXISTS session_md5_1 ON session (session_md5);",
                                 @"CREATE INDEX IF NOT EXISTS ts_last_event_1 ON session (ts_last_event);",
                                 @"CREATE UNIQUE INDEX IF NOT EXISTS uuid_1 ON session (uuid);",
@@ -855,12 +867,13 @@
     return result;
 }
 
-- (NSDictionary *)dbGetSessionID:(NSString *)from contact:(NSNumber*)contact uuid:(NSString*)uuidInput
+- (NSDictionary *)dbGetSessionID:(NSString *)from to:(NSString*)origTo contact:(NSNumber*)contact uuid:(NSString*)uuidInput
 {
     //NSLog(@"RingMail: Chat - Session ID:(%@)", from);
     FMDatabaseQueue *dbq = [self database];
     __block NSDictionary* result;
 	__block NSString* uuid = uuidInput;
+	__block NSObject* to = origTo;
     [dbq inDatabase:^(FMDatabase *db) {
 		BOOL found = NO;
 		NSNumber *curId = nil;
@@ -895,7 +908,11 @@
 		}
 		if (! found)
 		{
-            FMResultSet *rs3 = [db executeQuery:@"SELECT rowid, uuid, session_tag, contact_id FROM session WHERE session_tag = ? COLLATE NOCASE", from];
+			if (to == nil)
+			{
+				to = @"";
+			}
+            FMResultSet *rs3 = [db executeQuery:@"SELECT rowid, uuid, session_tag, contact_id FROM session WHERE session_tag = ? COLLATE NOCASE AND session_to = ? COLLATE NOCASE", from, to];
             if ([rs3 next])
             {
 				curId = [NSNumber numberWithLong:[rs3 longForColumnIndex:0]];
@@ -960,8 +977,9 @@
                 @"table": @"session",
                 @"insert": @{
                     @"session_tag": from,
+					@"session_to": to,
                     @"contact_id": (contact != nil) ? contact : [NSNull null],
-                    @"session_md5": [from md5HexDigest],
+                    @"session_md5": [[NSString stringWithFormat:@"%@:%@", from, to] md5HexDigest],
                     @"unread": @0,
                     @"ts_last_event": [[NSDate date] strftime],
                     @"uuid": uuid,
@@ -1181,6 +1199,7 @@
     [dbq close];
 }
 
+// TODO: remove obsolete method dbGetSessions
 - (NSArray *)dbGetSessions
 {
     FMDatabaseQueue *dbq = [self database];

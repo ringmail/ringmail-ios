@@ -833,7 +833,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 				RgChatManager *cmgr = [self chatManager];
 				NSNumber *contactNum = [data->userInfos objectForKey:@"contact"];
 				// TODO: Get UUID from server on inbound calls
-				NSDictionary *sessionData = [cmgr dbGetSessionID:address contact:contactNum uuid:nil];
+				NSDictionary *sessionData = [cmgr dbGetSessionID:address to:nil contact:contactNum uuid:nil];
                 [cmgr dbInsertCall:@{
                        @"sip": sip,
                        @"address": address,

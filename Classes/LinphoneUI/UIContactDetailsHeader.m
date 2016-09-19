@@ -131,7 +131,7 @@
         NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
         if (! [rgAddress isEqualToString:@""])
         {
-			NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress contact:contactNum uuid:nil];
+			NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
             fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:sessionData[@"id"]];
         }
         
@@ -364,7 +364,7 @@
     {
 	   	LinphoneManager *lm = [LinphoneManager instance];
     	NSNumber *contactNum = [[lm fastAddressBook] getContactId:contact];
-		NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:rgAddress contact:contactNum uuid:nil];
+		NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
 		NSNumber *session = sessionData[@"id"];
         [lm setChatSession:session];
         [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
@@ -412,7 +412,7 @@
         
         BOOL fav = NO;
         NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
-		NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress contact:contactNum uuid:nil];
+		NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
 		NSNumber *session = sessionData[@"id"];
         
         LOGI(@"RingMail: Get Session ID: %@ | %@ -> %@", rgAddress, contactNum, session);

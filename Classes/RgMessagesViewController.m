@@ -190,7 +190,7 @@
     
     RgChatManager* mgr = [[LinphoneManager instance] chatManager];
 	NSDictionary *sdata = [mgr dbGetSessionData:_chatSession];
-    [mgr sendMessageTo:sdata[@"session_tag"] image:imageSized contact:NILIFNULL(sdata[@"contact_id"])];
+    [mgr sendMessageTo:sdata[@"session_tag"] from:NILIFNULL(sdata[@"session_to"]) image:imageSized contact:NILIFNULL(sdata[@"contact_id"])];
     
     NSDictionary *dict = @{
         @"session":_chatSession
@@ -215,7 +215,8 @@
         //NSLog(@"RingMail - Send Message To: %@ -> %@", _chatRoom, msgTo);
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
 		NSDictionary *sdata = [mgr dbGetSessionData:_chatSession];
-        NSString *uuid = [mgr sendMessageTo:sdata[@"session_tag"] body:text contact:NILIFNULL(sdata[@"contact_id"])];
+		NSString *origTo = NILIFNULL(sdata[@"session_to"]);
+        NSString *uuid = [mgr sendMessageTo:sdata[@"session_tag"] from:origTo body:text contact:NILIFNULL(sdata[@"contact_id"])];
         [self.chatData loadMessages:uuid];
         //[JSQSystemSoundPlayer jsq_playMessageSentSound];
         [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:@"chat_send" fileExtension:kJSQSystemSoundTypeWAV];
