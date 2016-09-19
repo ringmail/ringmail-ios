@@ -39,15 +39,15 @@
 		}
 		children:{
             {[CKInsetComponent
-                 newWithInsets:{.top = 20, .bottom = 5}
+                 newWithInsets:{.top = 20, .bottom = 15}
                  component:
-                    [CKStackLayoutComponent newWithView:{} size:{.height = 171, .width=screenWidth} style:{
+                    [CKStackLayoutComponent newWithView:{} size:{.height = 233, .width=screenWidth} style:{
             			.direction = CKStackLayoutDirectionHorizontal,
             			.alignItems = CKStackLayoutAlignItemsStretch
             		}
             		children:{
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-            			{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_astronaut.png"] size:{.width=175, .height=171}]},
+            			{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_astronaut.png"] size:{.width=224, .height=233}]},
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
             		}]
             ]},
