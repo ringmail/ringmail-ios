@@ -203,6 +203,152 @@
 			 }
 		};
 	}
+    
+    std::vector<CKStackLayoutComponentChild> cardElements = {};
+    cardElements.push_back(
+        {[CKInsetComponent
+          newWithInsets:{.left = 5, .right = 5, .top = 5, .bottom = 5}
+          component:
+              [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStretch
+              }
+              children:{
+                  {
+                      [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                          {UIControlStateNormal,cardImage},
+                          } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionContact:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}],
+                  }, {
+                      .flexGrow = YES,
+                      .component = [CKInsetComponent
+                       newWithInsets:{.left = 7, .right = 5, .top = INFINITY, .bottom = INFINITY}
+                       component:
+                             [CKStackLayoutComponent newWithView:{
+                                [UIView class],
+                                {CKComponentTapGestureAttribute(@selector(actionContact:))}
+                             } size:{} style:{}
+                                children:{
+                                  {
+                                     [CKInsetComponent
+                                         newWithInsets:{.left = 0, .right = 0, .top = 4, .bottom = 0}
+                                         component:
+                                              [CKLabelComponent
+                                              newWithLabelAttributes:{
+                                                  .string = [data objectForKey:@"label"],
+                                                  .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18],
+                                                  .color = [UIColor colorWithHex:@"#33362f"],
+                                              }
+                                              viewAttributes:{
+                                                  {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                                  {@selector(setUserInteractionEnabled:), @NO},
+                                              }
+                                              size:{}]
+                                    ]
+                                }
+                             }]
+                       ]
+                  }, {
+                      .alignSelf = CKStackLayoutAlignSelfEnd,
+                      .component = [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
+                          .direction = CKStackLayoutDirectionHorizontal,
+                          .alignItems = CKStackLayoutAlignItemsStretch
+                      }
+                      children:{
+                          {
+                              [CKInsetComponent
+                               newWithInsets:{.left = 0, .right = 0, .top = INFINITY, .bottom = INFINITY}
+                               component:
+                                  [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                          {UIControlStateNormal,[context imageNamed:@"button_video"]},
+                                      } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionVideo:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
+                               ]
+                          }, {
+                              [CKInsetComponent
+                               newWithInsets:{.left = 12, .right = 7, .top = INFINITY, .bottom = INFINITY}
+                               component:
+                                  [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                          {UIControlStateNormal,[context imageNamed:@"button_call"]},
+                                      } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionCall:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
+                               ]
+                          },
+                      }]
+                  }
+              }]
+          ]}
+    );
+    if (! [data[@"session_to"] isEqualToString:@""])
+    {
+        cardElements.push_back({lineComponent()});
+        cardElements.push_back(
+            {[CKInsetComponent newWithInsets:{.left = 5, .right = 5, .top = 5, .bottom = 5}
+              component:
+                  [CKStackLayoutComponent newWithView:{} size:{.height = 20} style:{
+                    .direction = CKStackLayoutDirectionHorizontal,
+                    .alignItems = CKStackLayoutAlignItemsStretch
+                  }
+                  children:{
+                      {
+                          .flexGrow = YES,
+                          .component = [CKInsetComponent
+                                 newWithInsets:{.left = 0, .right = 0, .top = 4, .bottom = 0}
+                                 component:
+                                      [CKLabelComponent
+                                      newWithLabelAttributes:{
+                                          .string = [data objectForKey:@"session_to"],
+                                          .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:16],
+                                          .color = [UIColor colorWithHex:@"#33362f"],
+                                          .alignment = NSTextAlignmentCenter,
+                                      }
+                                      viewAttributes:{
+                                          {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                          {@selector(setUserInteractionEnabled:), @NO},
+                                      }
+                                      size:{}]
+                                ]
+                      }
+                  }]
+              ]}
+        );
+    }
+    cardElements.push_back({lineComponent()});
+    cardElements.push_back(
+        {[CKStackLayoutComponent newWithView:{
+            [UIView class],
+            {CKComponentTapGestureAttribute(@selector(actionChat:))}
+        } size:{} style:{
+            .direction = CKStackLayoutDirectionHorizontal,
+            .alignItems = CKStackLayoutAlignItemsStretch
+        }
+        children:{
+           {
+               .flexGrow = YES,
+               .component = [CKStackLayoutComponent newWithView:{} size:{} style:{
+                   .direction = CKStackLayoutDirectionVertical,
+                   .alignItems = CKStackLayoutAlignItemsStretch
+               }
+               children:body] // timestamp & content
+           }, {
+               [CKStackLayoutComponent newWithView:{} size:{} style:{
+                   .direction = CKStackLayoutDirectionVertical,
+                   .alignItems = CKStackLayoutAlignItemsStretch
+               }
+               children:{
+                   {[CKInsetComponent
+                     newWithInsets:{.left = 0, .right = 12, .top = 7, .bottom = 12}
+                     component:
+                         [CKImageComponent newWithImage:[context imageNamed:@"button_chat"] size:{
+                           .height = 30,
+                           .width = 30,
+                       }]
+                     ]},
+                   {
+                        .flexGrow = YES,
+                       .component = [CKComponent newWithView:{} size:{}],
+                   }
+               }]
+           }
+       }]}
+    );
 	
     MainCardComponent *c = [super newWithView:scfg component:
         [CKInsetComponent
@@ -215,116 +361,7 @@
                     .direction = CKStackLayoutDirectionVertical,
                     .alignItems = CKStackLayoutAlignItemsStretch
                 }
-                children:{
-                    {[CKInsetComponent
-                      newWithInsets:{.left = 5, .right = 5, .top = 5, .bottom = 5}
-                      component:
-                          [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
-                            .direction = CKStackLayoutDirectionHorizontal,
-                            .alignItems = CKStackLayoutAlignItemsStretch
-                          }
-                          children:{
-                              {
-                                  [CKButtonComponent newWithTitles:{} titleColors:{} images:{
-                                      {UIControlStateNormal,cardImage},
-                                      } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionContact:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}],
-                              }, {
-                                  .flexGrow = YES,
-                                  .component = [CKInsetComponent
-                                   newWithInsets:{.left = 7, .right = 5, .top = INFINITY, .bottom = INFINITY}
-                                   component:
-                                         [CKStackLayoutComponent newWithView:{
-                                            [UIView class],
-                                            {CKComponentTapGestureAttribute(@selector(actionContact:))}
-                                         } size:{} style:{}
-                                            children:{
-                                              {
-                                                 [CKInsetComponent
-                                                     newWithInsets:{.left = 0, .right = 0, .top = 4, .bottom = 0}
-                                                     component:
-                                                          [CKLabelComponent
-                                                          newWithLabelAttributes:{
-                                                              .string = [data objectForKey:@"label"],
-                                                              .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18],
-                                                              .color = [UIColor colorWithHex:@"#33362f"],
-                                                          }
-                                                          viewAttributes:{
-                                                              {@selector(setBackgroundColor:), [UIColor clearColor]},
-                                                              {@selector(setUserInteractionEnabled:), @NO},
-                                                          }
-                                                          size:{}]
-                                                ]
-                                            }
-                                         }]
-                                   ]
-                              }, {
-                                  .alignSelf = CKStackLayoutAlignSelfEnd,
-                                  .component = [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
-                                      .direction = CKStackLayoutDirectionHorizontal,
-                                      .alignItems = CKStackLayoutAlignItemsStretch
-                                  }
-                                  children:{
-                                      {
-                                          [CKInsetComponent
-                                           newWithInsets:{.left = 0, .right = 0, .top = INFINITY, .bottom = INFINITY}
-                                           component:
-                                              [CKButtonComponent newWithTitles:{} titleColors:{} images:{
-                                                      {UIControlStateNormal,[context imageNamed:@"button_video"]},
-                                                  } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionVideo:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
-                                           ]
-                                      }, {
-                                          [CKInsetComponent
-                                           newWithInsets:{.left = 12, .right = 7, .top = INFINITY, .bottom = INFINITY}
-                                           component:
-                                              [CKButtonComponent newWithTitles:{} titleColors:{} images:{
-                                                      {UIControlStateNormal,[context imageNamed:@"button_call"]},
-                                                  } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionCall:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
-                                           ]
-                                      },
-                                  }]
-                              }
-                          }]
-                      ]},
-                    {lineComponent()},
-                    {
-                        [CKStackLayoutComponent newWithView:{
-                            [UIView class],
-                            {CKComponentTapGestureAttribute(@selector(actionChat:))}
-                        } size:{} style:{
-                            .direction = CKStackLayoutDirectionHorizontal,
-                            .alignItems = CKStackLayoutAlignItemsStretch
-                        }
-                       children:{
-                           {
-                               .flexGrow = YES,
-                               .component = [CKStackLayoutComponent newWithView:{} size:{} style:{
-                                   .direction = CKStackLayoutDirectionVertical,
-                                   .alignItems = CKStackLayoutAlignItemsStretch
-                               }
-                               children:body] // timestamp & content
-                           }, {
-                               [CKStackLayoutComponent newWithView:{} size:{} style:{
-                                   .direction = CKStackLayoutDirectionVertical,
-                                   .alignItems = CKStackLayoutAlignItemsStretch
-                               }
-                               children:{
-                                   {[CKInsetComponent
-                                     newWithInsets:{.left = 0, .right = 12, .top = 7, .bottom = 12}
-                                     component:
-                                         [CKImageComponent newWithImage:[context imageNamed:@"button_chat"] size:{
-                                           .height = 30,
-                                           .width = 30,
-                                       }]
-                                     ]},
-                                   {
-                                        .flexGrow = YES,
-                                       .component = [CKComponent newWithView:{} size:{}],
-                                   }
-                               }]
-                           }
-                       }]
-                    }
-                }]
+                children:cardElements]
              background:
                 [CKComponent
                 newWithView:{

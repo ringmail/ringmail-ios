@@ -866,8 +866,6 @@
 
 - (NSDictionary*)dbGetSessionData:(NSNumber*)rowid
 {
-    [self dbDumpSessions];
-
 	FMDatabaseQueue *dbq = [self database];
     __block NSDictionary* result = nil;
     [dbq inDatabase:^(FMDatabase *db) {
@@ -1270,7 +1268,7 @@
     __block NSMutableArray *result = [NSMutableArray array];
     [dbq inDatabase:^(FMDatabase *db) {
         NSString *sql = @"";
-        sql = [sql stringByAppendingString:@"SELECT rowid, session_tag, unread, contact_id, STRFTIME('%s', ts_last_event) AS timestamp, "];
+        sql = [sql stringByAppendingString:@"SELECT rowid, session_tag, session_to, unread, contact_id, STRFTIME('%s', ts_last_event) AS timestamp, "];
         sql = [sql stringByAppendingString:@"(SELECT msg_body FROM chat WHERE chat.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as last_message, "];
         sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', msg_time) FROM chat WHERE chat.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as last_time, "];
 	    sql = [sql stringByAppendingString:@"(SELECT msg_inbound FROM chat WHERE chat.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as msg_inbound, "];

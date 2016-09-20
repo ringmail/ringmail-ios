@@ -140,7 +140,7 @@
     			}
     		}
 		}
-        //LOGI(@"RingMail: List Object: %@", newdata);
+        LOGI(@"RingMail: List Object: %@", newdata);
         [list2 addObject:newdata];
     }
     return list2;
