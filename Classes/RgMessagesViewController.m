@@ -623,8 +623,11 @@
 	else
 	{
 		NSDictionary* jsonInfo = [self.chatData.messages objectAtIndex:indexPath.item];
-		if (jsonInfo[@"media"] != nil && [jsonInfo[@"media"] isEqualToString:@"image"])
-		{
+        NSLog(@"Tapped bubble jsonInfo: %@", jsonInfo);
+		if (
+			[jsonInfo isKindOfClass:[NSDictionary class]] &&
+			jsonInfo[@"media"] != nil && [jsonInfo[@"media"] isEqualToString:@"image"]
+		) {
             NSLog(@"Tapped image bubble: %@", jsonInfo);
 			ImageViewController *controller = DYNAMIC_CAST(
 				[[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE],

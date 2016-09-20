@@ -29,6 +29,7 @@
 #import "RgWebViewDelegate.h"
 #import "UIColor+Hex.h"
 #import "DTActionSheet.h"
+#import "RegexKitLite/RegexKitLite.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 
@@ -51,7 +52,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 	self = [super init];
 	if (self) {
 		self.portraitViewController = portrait;
-		self.rotatingViewController = [[PhoneMainView alloc] init];
+		self.rotatingViewController = portrait;
+		//self.rotatingViewController = [[PhoneMainView alloc] init];
 
 		self.portraitViewController.name = @"Portrait";
 		self.rotatingViewController.name = @"Rotating";
@@ -88,7 +90,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		currentViewController = newMainView;
 		LinphoneAppDelegate *delegate = (LinphoneAppDelegate *)[UIApplication sharedApplication].delegate;
 
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) { // Disable animations for RingMail
+		if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) { // Disabled animations for RingMail
 			[UIView transitionWithView:delegate.window
 				duration:0.3
 				options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowAnimatedContent
@@ -137,6 +139,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (void)initPhoneMainView {
 	currentView = nil;
 	inhibitedEvents = [[NSMutableArray alloc] init];
+	errorIds = [NSMutableDictionary dictionary];
     webDelegate = [[RgWebViewDelegate alloc] init];
 }
 
@@ -343,8 +346,15 @@ static RootViewManager *rootViewManagerInstance = nil;
 		break;
 	}
 	case LinphoneCallError: {
+		NSString *sipId = [NSString stringWithCString:linphone_call_log_get_call_id(linphone_call_get_call_log(call)) encoding:NSASCIIStringEncoding];
+		NSLog(@"Errors: %@", errorIds);
+		if (errorIds[sipId] == nil)
+		{
+			errorIds[sipId] = @1;
+            [self displayCallError:call message:message];
+		}
 		// Note: These are triggered via HTTP API now, not via SIP
-        if (linphone_call_get_reason(call) == LinphoneReasonMovedPermanently) // Not an error, just a URL
+        /*if (linphone_call_get_reason(call) == LinphoneReasonMovedPermanently) // Not an error, just a URL
         {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
                 // Assume HTTP(S) urls for now, check for ring:// later
@@ -359,7 +369,7 @@ static RootViewManager *rootViewManagerInstance = nil;
         else
         {
             [self displayCallError:call message:message];
-        }
+        }*/
 	}
 	case LinphoneCallEnd: {
 		if (canHideInCallView) {
@@ -657,6 +667,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 		lUserNameChars ? [[NSString alloc] initWithUTF8String:lUserNameChars] : NSLocalizedString(@"Unknown", nil);
 	NSString *lMessage;
 	NSString *lTitle;
+	
+	lUserName = [lUserName stringByReplacingOccurrencesOfRegex:@"\\\\" withString:@"@"];
 
 	// get default proxy
 	LinphoneProxyConfig *proxyCfg;
@@ -671,19 +683,19 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 	switch (linphone_call_get_reason(call)) {
 		case LinphoneReasonNotFound:
-			lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@ is not registered.", nil), lUserName];
+			lMessage = [NSString stringWithFormat:@"%@ Not Registered", lUserName];
 			break;
 		case LinphoneReasonBusy:
-			lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@ is busy.", nil), lUserName];
+			lMessage = [NSString stringWithFormat:@"%@ Busy", lUserName];
 			break;
 		default:
 			if (message != nil) {
-				lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@\nReason was: %@", nil), lMessage, message];
+				lMessage = [NSString stringWithFormat:@"%@\nCall Error: %@", lMessage, message];
 			}
 			break;
 	}
 
-	lTitle = NSLocalizedString(@"Call failed", nil);
+	lTitle = @"Call Failed";
 	UIAlertView *error = [[UIAlertView alloc] initWithTitle:lTitle
 													message:lMessage
 												   delegate:nil

@@ -65,6 +65,7 @@
 @interface PhoneMainView : UIViewController<IncomingCallViewDelegate> {
     @private
     NSMutableArray *inhibitedEvents;
+	NSMutableDictionary *errorIds;
 }
 
 @property (nonatomic, strong) IBOutlet UIView *statusBarBG;

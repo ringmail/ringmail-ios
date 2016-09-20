@@ -44,6 +44,7 @@
 
 #import "RgNetwork.h"
 #import "RgManager.h"
+#import "RegexKitLite/RegexKitLite.h"
 
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
