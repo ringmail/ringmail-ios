@@ -63,7 +63,6 @@ static NSInteger const pageSize = 10;
     sections.insert(0);
     [_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
 	[_cardModelController fetchPageWithCount:pageSize caller:self];
-    //[self enqueuePage:[_cardModelController fetchNewCardsPageWithCount:pageSize]];
 }
 
 - (void)enqueuePage:(CardsPage *)cardsPage
@@ -83,7 +82,11 @@ static NSInteger const pageSize = 10;
         [_dataSource enqueueChangeset:{{}, items}
                       constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
     }
+    
 }
+
+
+
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 

@@ -916,6 +916,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onRegisterClick:(id)sender {
+    
+//    [self changeView:validateAccountView back:FALSE animation:TRUE];  //testing the next screen -- REMOVE MB
+    
 	NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
 	NSString *firstname = [WizardViewController findTextField:ViewElement_FirstName view:contentView].text;
 	NSString *lastname = [WizardViewController findTextField:ViewElement_LastName view:contentView].text;

@@ -43,6 +43,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>3</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<true/>
+	<key>ITSEncryptionExportComplianceCode</key>
+	<string>b5cb085f-772a-4a4f-8c77-5d1332b1f93f</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -50,6 +54,18 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Use your BT headset</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Share photos with your friends and customize avatars</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Make calls with your friends</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Use microphone to make audio calls</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Share photos with your friends and customize avatars</string>
+	<key>NSVoIPUsageDescription</key>
+	<string>Make audio/video calls</string>
 	<key>UIApplicationExitsOnSuspend</key>
 	<false/>
 	<key>UIBackgroundModes</key>

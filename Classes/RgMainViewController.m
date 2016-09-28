@@ -17,7 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#import <AVFoundation/AVAudioSession.h>
+#import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "RgScanViewController.h"
@@ -201,6 +201,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self setNeedsRefresh:NO];
     
 	[addressField setText:@""];
+    addressField.returnKeyType = UIReturnKeyDone;
 	//[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
@@ -492,6 +493,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	if (textField == addressField) {
+        NSLog(@"Return Key entered from MAIN");
 		[addressField resignFirstResponder];
 	}
 	return YES;

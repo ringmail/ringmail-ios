@@ -193,6 +193,7 @@
         }]
     ];
     [c setCardData:data];
+	UIGraphicsEndImageContext();
     return c;
 }
 
