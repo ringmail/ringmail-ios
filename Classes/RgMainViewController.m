@@ -494,6 +494,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	if (textField == addressField) {
         NSLog(@"Return Key entered from MAIN");
+        [goButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 		[addressField resignFirstResponder];
 	}
 	return YES;
