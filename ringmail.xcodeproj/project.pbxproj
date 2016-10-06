@@ -76,6 +76,12 @@
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
 		340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 340751E6150F38FD00B89C47 /* UIVideoButton.m */; };
 		34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 34216F3F1547EBCD00EA9777 /* VideoZoomHandler.m */; };
+		4D000B041DA7044F00D606EC /* IntentHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D000B031DA7044F00D606EC /* IntentHandler.m */; };
+		4D000B0C1DA7045000D606EC /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D000B0B1DA7045000D606EC /* IntentsUI.framework */; };
+		4D000B101DA7045000D606EC /* IntentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D000B0F1DA7045000D606EC /* IntentViewController.m */; };
+		4D000B131DA7045000D606EC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D000B111DA7045000D606EC /* MainInterface.storyboard */; };
+		4D000B171DA7045000D606EC /* RingMailIntentsExtensionUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D000B0A1DA7045000D606EC /* RingMailIntentsExtensionUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D000B1A1DA7045000D606EC /* RingMailIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D000B001DA7044F00D606EC /* RingMailIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */; };
 		4DDB8CF61D9444BC00F5FD71 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */; };
 		4DDB8CF71D9444BC00F5FD71 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */; };
@@ -1902,6 +1908,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4D000B151DA7045000D606EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D000B091DA7045000D606EC;
+			remoteInfo = RingMailIntentsExtensionUI;
+		};
+		4D000B181DA7045000D606EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D000AFF1DA7044F00D606EC;
+			remoteInfo = RingMailIntentsExtension;
+		};
 		630589FC1B4E816A00EFAE36 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 630589F21B4E816900EFAE36 /* KIF.xcodeproj */;
@@ -1996,6 +2016,18 @@
 			dstSubfolderSpec = 7;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D000B251DA7045000D606EC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D000B171DA7045000D606EC /* RingMailIntentsExtensionUI.appex in Embed App Extensions */,
+				4D000B1A1DA7045000D606EC /* RingMailIntentsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C4AC2B8D1D3963FA003B6232 /* CopyFiles */ = {
@@ -2099,6 +2131,16 @@
 		340751E6150F38FD00B89C47 /* UIVideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIVideoButton.m; sourceTree = "<group>"; };
 		34216F3E1547EBCD00EA9777 /* VideoZoomHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoZoomHandler.h; path = LinphoneUI/VideoZoomHandler.h; sourceTree = "<group>"; };
 		34216F3F1547EBCD00EA9777 /* VideoZoomHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoZoomHandler.m; path = LinphoneUI/VideoZoomHandler.m; sourceTree = "<group>"; };
+		4D000B001DA7044F00D606EC /* RingMailIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RingMailIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D000B021DA7044F00D606EC /* IntentHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntentHandler.h; sourceTree = "<group>"; };
+		4D000B031DA7044F00D606EC /* IntentHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntentHandler.m; sourceTree = "<group>"; };
+		4D000B051DA7044F00D606EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D000B0A1DA7045000D606EC /* RingMailIntentsExtensionUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RingMailIntentsExtensionUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D000B0B1DA7045000D606EC /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		4D000B0E1DA7045000D606EC /* IntentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntentViewController.h; sourceTree = "<group>"; };
+		4D000B0F1DA7045000D606EC /* IntentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntentViewController.m; sourceTree = "<group>"; };
+		4D000B121DA7045000D606EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		4D000B141DA7045000D606EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
 		4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
@@ -3343,6 +3385,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4D000AFD1DA7044F00D606EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D000B071DA7045000D606EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D000B0C1DA7045000D606EC /* IntentsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C4AC2B461D3963FA003B6232 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -3590,6 +3647,8 @@
 			children = (
 				1D6058910D05DD3D006BFB54 /* ringmail.app */,
 				C4AC2B951D3963FA003B6232 /* RingMail-Dev.app */,
+				4D000B001DA7044F00D606EC /* RingMailIntentsExtension.appex */,
+				4D000B0A1DA7045000D606EC /* RingMailIntentsExtensionUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3699,6 +3758,8 @@
 			isa = PBXGroup;
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
+				4D000B011DA7044F00D606EC /* RingMailIntentsExtension */,
+				4D000B0D1DA7045000D606EC /* RingMailIntentsExtensionUI */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				F0938158188E629800A55DFA /* iTunesArtwork */,
 				63058A0C1B4E821E00EFAE36 /* LiblinphoneTester */,
@@ -3866,8 +3927,30 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				F03A9B3318C0CF7000C4D7FE /* XCTest.framework */,
 				F1A5A6FEF94855D6B5CB4602 /* Pods_RingMail_Dev.framework */,
+				4D000B0B1DA7045000D606EC /* IntentsUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D000B011DA7044F00D606EC /* RingMailIntentsExtension */ = {
+			isa = PBXGroup;
+			children = (
+				4D000B021DA7044F00D606EC /* IntentHandler.h */,
+				4D000B031DA7044F00D606EC /* IntentHandler.m */,
+				4D000B051DA7044F00D606EC /* Info.plist */,
+			);
+			path = RingMailIntentsExtension;
+			sourceTree = "<group>";
+		};
+		4D000B0D1DA7045000D606EC /* RingMailIntentsExtensionUI */ = {
+			isa = PBXGroup;
+			children = (
+				4D000B0E1DA7045000D606EC /* IntentViewController.h */,
+				4D000B0F1DA7045000D606EC /* IntentViewController.m */,
+				4D000B111DA7045000D606EC /* MainInterface.storyboard */,
+				4D000B141DA7045000D606EC /* Info.plist */,
+			);
+			path = RingMailIntentsExtensionUI;
 			sourceTree = "<group>";
 		};
 		630589DD1B4E810900EFAE36 /* TestsUI */ = {
@@ -4914,6 +4997,40 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* ringmail.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4D000AFF1DA7044F00D606EC /* RingMailIntentsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D000B241DA7045000D606EC /* Build configuration list for PBXNativeTarget "RingMailIntentsExtension" */;
+			buildPhases = (
+				4D000AFC1DA7044F00D606EC /* Sources */,
+				4D000AFD1DA7044F00D606EC /* Frameworks */,
+				4D000AFE1DA7044F00D606EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RingMailIntentsExtension;
+			productName = RingMailIntentsExtension;
+			productReference = 4D000B001DA7044F00D606EC /* RingMailIntentsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		4D000B091DA7045000D606EC /* RingMailIntentsExtensionUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D000B231DA7045000D606EC /* Build configuration list for PBXNativeTarget "RingMailIntentsExtensionUI" */;
+			buildPhases = (
+				4D000B061DA7045000D606EC /* Sources */,
+				4D000B071DA7045000D606EC /* Frameworks */,
+				4D000B081DA7045000D606EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RingMailIntentsExtensionUI;
+			productName = RingMailIntentsExtensionUI;
+			productReference = 4D000B0A1DA7045000D606EC /* RingMailIntentsExtensionUI.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		C4AC27CA1D3963FA003B6232 /* RingMail-Dev */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4AC2B901D3963FA003B6232 /* Build configuration list for PBXNativeTarget "RingMail-Dev" */;
@@ -4927,12 +5044,15 @@
 				C4AC2B8D1D3963FA003B6232 /* CopyFiles */,
 				86ABA1FE7BFEB24019A2D297 /* [CP] Embed Pods Frameworks */,
 				511AEDDAB089CEDE7BC4DCD2 /* [CP] Copy Pods Resources */,
+				4D000B251DA7045000D606EC /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				C4AC27CB1D3963FA003B6232 /* PBXTargetDependency */,
 				C4AC27CD1D3963FA003B6232 /* PBXTargetDependency */,
+				4D000B161DA7045000D606EC /* PBXTargetDependency */,
+				4D000B191DA7045000D606EC /* PBXTargetDependency */,
 			);
 			name = "RingMail-Dev";
 			productName = linphone;
@@ -4956,6 +5076,16 @@
 								enabled = 1;
 							};
 						};
+					};
+					4D000AFF1DA7044F00D606EC = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 3V7D3ULU9N;
+						ProvisioningStyle = Automatic;
+					};
+					4D000B091DA7045000D606EC = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 3V7D3ULU9N;
+						ProvisioningStyle = Automatic;
 					};
 					C4AC27CA1D3963FA003B6232 = {
 						DevelopmentTeam = 3V7D3ULU9N;
@@ -5004,6 +5134,8 @@
 			targets = (
 				1D6058900D05DD3D006BFB54 /* RingMail */,
 				C4AC27CA1D3963FA003B6232 /* RingMail-Dev */,
+				4D000AFF1DA7044F00D606EC /* RingMailIntentsExtension */,
+				4D000B091DA7045000D606EC /* RingMailIntentsExtensionUI */,
 			);
 		};
 /* End PBXProject section */
@@ -5807,6 +5939,21 @@
 				C42C0DC61CAEE9D100AD5A91 /* ringmail_endcall@3x.png in Resources */,
 				C48D3C051D0276FE00FAC3A6 /* chat_in_alert.caf in Resources */,
 				C444F3D51C92240300134788 /* menu-star_active@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D000AFE1DA7044F00D606EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D000B081DA7045000D606EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D000B131DA7045000D606EC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6820,6 +6967,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4D000AFC1DA7044F00D606EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D000B041DA7044F00D606EC /* IntentHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D000B061DA7045000D606EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D000B101DA7045000D606EC /* IntentViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C4AC2AAC1D3963FA003B6232 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -6987,6 +7150,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4D000B161DA7045000D606EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D000B091DA7045000D606EC /* RingMailIntentsExtensionUI */;
+			targetProxy = 4D000B151DA7045000D606EC /* PBXContainerItemProxy */;
+		};
+		4D000B191DA7045000D606EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D000AFF1DA7044F00D606EC /* RingMailIntentsExtension */;
+			targetProxy = 4D000B181DA7045000D606EC /* PBXContainerItemProxy */;
+		};
 		C4AC27CB1D3963FA003B6232 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = libXMLRPC;
@@ -7019,6 +7192,14 @@
 				F0ADFCF91A78EB83004F1102 /* ar */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		4D000B111DA7045000D606EC /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D000B121DA7045000D606EC /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		63058A0F1B4E821E00EFAE36 /* InfoPlist.strings */ = {
@@ -7873,6 +8054,270 @@
 			};
 			name = Distribution;
 		};
+		4D000B1B1DA7045000D606EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RingMailIntentsExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev.RingMailIntentsExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4D000B1C1DA7045000D606EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RingMailIntentsExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev.RingMailIntentsExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D000B1D1DA7045000D606EC /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RingMailIntentsExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev.RingMailIntentsExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		4D000B1E1DA7045000D606EC /* DistributionAdhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RingMailIntentsExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev.RingMailIntentsExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = DistributionAdhoc;
+		};
+		4D000B1F1DA7045000D606EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RingMailIntentsExtensionUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev.RingMailIntentsExtensionUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4D000B201DA7045000D606EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RingMailIntentsExtensionUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev.RingMailIntentsExtensionUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D000B211DA7045000D606EC /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RingMailIntentsExtensionUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev.RingMailIntentsExtensionUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		4D000B221DA7045000D606EC /* DistributionAdhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RingMailIntentsExtensionUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ringmail.phone-dev.RingMailIntentsExtensionUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = DistributionAdhoc;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -8185,6 +8630,26 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
+		};
+		4D000B231DA7045000D606EC /* Build configuration list for PBXNativeTarget "RingMailIntentsExtensionUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D000B1F1DA7045000D606EC /* Debug */,
+				4D000B201DA7045000D606EC /* Release */,
+				4D000B211DA7045000D606EC /* Distribution */,
+				4D000B221DA7045000D606EC /* DistributionAdhoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4D000B241DA7045000D606EC /* Build configuration list for PBXNativeTarget "RingMailIntentsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D000B1B1DA7045000D606EC /* Debug */,
+				4D000B1C1DA7045000D606EC /* Release */,
+				4D000B1D1DA7045000D606EC /* Distribution */,
+				4D000B1E1DA7045000D606EC /* DistributionAdhoc */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ringmail" */ = {
 			isa = XCConfigurationList;
