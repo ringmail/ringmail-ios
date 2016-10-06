@@ -125,6 +125,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
+    addressField.returnKeyType = UIReturnKeyDone;
 }
 
 - (void)viewDidUnload {
@@ -207,7 +208,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSLog(@"textFieldShouldReturn");
 	if (textField == addressField) {
+        NSLog(@"textField == addressField");
+        [goButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 		[addressField resignFirstResponder];
 	}
 	return YES;

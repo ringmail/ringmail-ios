@@ -224,6 +224,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [tapBackground setNumberOfTapsRequired:1];
     [tapBackground setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tapBackground];
+    
+    searchField.returnKeyType = UIReturnKeyDone;
+
 }
 
 #pragma mark -

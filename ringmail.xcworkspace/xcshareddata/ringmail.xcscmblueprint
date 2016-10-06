@@ -13,7 +13,7 @@
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "3D679A1D13C8459F44D2BD0010941A301CB66DE2" : "polarssl\/",
     "B9A509D4F3D25560F565CB53A09A75E2140C5232" : "linphone-iphonesubmodules\/linphone",
-    "0D7533C70B3E77874DB4DC9E2131A9B1895C2C86" : "ringmail-ios_xcode8\/",
+    "0D7533C70B3E77874DB4DC9E2131A9B1895C2C86" : "ringmail-ios\/",
     "10265E242415D473A6A613214DB7AC3EE3D43F93" : "linphone-iphoneClasses\/KIF"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ringmail",

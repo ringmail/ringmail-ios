@@ -105,6 +105,8 @@
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+    
     void (^showAppropriateController)(UIImagePickerControllerSourceType) =
     ^(UIImagePickerControllerSourceType type) {
         UICompositeViewDescription *description = [ImagePickerViewController compositeViewDescription];
