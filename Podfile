@@ -5,7 +5,7 @@ use_frameworks!
 
 # link_with 'RingMail', 'RingMail-Dev'
 
-project '/Users/mark/ringmail-ios/ringmail.xcodeproj’
+project 'ringmail.xcodeproj’
 
 target 'RingMail-Dev' do
 #  pod 'JSQMessagesViewController', :head

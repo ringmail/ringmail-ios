@@ -41,7 +41,7 @@ PODS:
     - KissXML/Core (= 5.1.2)
   - KissXML/Core (5.1.2)
   - leveldb-library (1.18.2)
-  - libPhoneNumber-iOS (0.8.16)
+  - libPhoneNumber-iOS (0.8.17)
   - NSHash (1.0.2)
   - NYXImagesKit (2.3)
   - Objective-LevelDB (2.1.5):
@@ -276,7 +276,7 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   KissXML: 246c842586bb77110e04fb88e19376d96245c856
   leveldb-library: ef0453697c0fda3a9e550e5650e52976e6724548
-  libPhoneNumber-iOS: acb5805f67892db37adc3440290a367923672b51
+  libPhoneNumber-iOS: 9f083847f8cb9b81064cff2ed2c98cbf18d9f9f2
   NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   Objective-LevelDB: fa075efd9d0be645aee51847cc3ee70cdadb80ce
@@ -288,6 +288,6 @@ SPEC CHECKSUMS:
   UIImage-Categories: b9d2ff50c2250ea007f150c2427ff230b5a4789b
   XMPPFramework: 977eef5d00c20fe9fb19c30d84a89c2d5564252d
 
-PODFILE CHECKSUM: 2a54392e8355e8aabee59517e242e77b94a76e96
+PODFILE CHECKSUM: 5bd6645f9b2e792aeef3206de9888ec392c8683e
 
 COCOAPODS: 1.0.1
