@@ -17,7 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#import <AVFoundation/AVAudioSession.h>
+#import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "RgScanViewController.h"
@@ -125,6 +125,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
+    addressField.returnKeyType = UIReturnKeyDone;
 }
 
 - (void)viewDidUnload {
@@ -207,7 +208,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSLog(@"textFieldShouldReturn");
 	if (textField == addressField) {
+        NSLog(@"textField == addressField");
+        [goButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 		[addressField resignFirstResponder];
 	}
 	return YES;

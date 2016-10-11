@@ -36,6 +36,18 @@ int main(int argc, char *argv[]) {
 	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 #endif
 	@autoreleasepool {
-		return UIApplicationMain(argc, argv, nil, NSStringFromClass([LinphoneAppDelegate class]));
+//		return UIApplicationMain(argc, argv, nil, NSStringFromClass([LinphoneAppDelegate class]));
+        int returnValue;
+        @try
+        {
+            returnValue = UIApplicationMain(argc, argv, nil, NSStringFromClass([LinphoneAppDelegate class]));
+        }
+        @catch (NSException* exception)
+        {
+            NSLog(@"Uncaught exception: %@, %@", [exception description],
+                     [exception callStackSymbols]);
+            @throw exception;
+        }
+        return returnValue;
 	}
 }

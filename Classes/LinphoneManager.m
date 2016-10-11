@@ -23,7 +23,7 @@
 #include <netdb.h>
 #include <sys/sysctl.h>
 
-#import <AVFoundation/AVAudioSession.h>
+#import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <CoreTelephony/CTCallCenter.h>
@@ -40,7 +40,7 @@
 
 #import "LinphoneIOSVersion.h"
 
-#import <AVFoundation/AVAudioPlayer.h>
+//#import <AVFoundation/AVAudioPlayer.h>
 
 #import "RgNetwork.h"
 #import "RgManager.h"

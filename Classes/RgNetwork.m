@@ -121,7 +121,7 @@ static RgNetwork* theRgNetwork = nil;
    }
 }
 
- - (void)registerPushTokenVoIP:(NSData*)tokenData
+- (void)registerPushTokenVoIP:(NSData*)tokenData
 {
     if (tokenData != nil) {
         LevelDB* cfg = [RgManager configDatabase];

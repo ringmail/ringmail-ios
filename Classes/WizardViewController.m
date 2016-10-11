@@ -916,12 +916,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onRegisterClick:(id)sender {
+    
+//    [self changeView:validateAccountView back:FALSE animation:TRUE];  //testing the next screen -- REMOVE MB
+    
 	NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
 	NSString *firstname = [WizardViewController findTextField:ViewElement_FirstName view:contentView].text;
 	NSString *lastname = [WizardViewController findTextField:ViewElement_LastName view:contentView].text;
 	NSString *phone = [WizardViewController findTextField:ViewElement_Phone view:contentView].text;
-	NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-    NSString *hashtag = [WizardViewController findTextField:ViewElement_Hashtag view:contentView].text;
+    NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
+    NSString *hashtag = @""; // mrkbxt_edit:  passing empty string for hashtag on register.
+//    NSString *hashtag = [WizardViewController findTextField:ViewElement_Hashtag view:contentView].text;
 	//NSString *password2 = [WizardViewController findTextField:ViewElement_Password2 view:contentView].text;
 
     // TODO: Re-download this data if it is missing
