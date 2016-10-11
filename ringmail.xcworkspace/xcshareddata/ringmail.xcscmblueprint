@@ -10,9 +10,9 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A06139E2-0827-4055-91F0-5E64E379E150",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "0D7533C70B3E77874DB4DC9E2131A9B1895C2C86" : "linphone-iphone",
-    "B9A509D4F3D25560F565CB53A09A75E2140C5232" : "linphone-iphonesubmodules\/linphone",
-    "10265E242415D473A6A613214DB7AC3EE3D43F93" : "linphone-iphoneClasses\/KIF"
+    "0D7533C70B3E77874DB4DC9E2131A9B1895C2C86" : "linphone-iphone\/",
+    "B9A509D4F3D25560F565CB53A09A75E2140C5232" : "linphone-iphone\/submodules\/linphone\/",
+    "10265E242415D473A6A613214DB7AC3EE3D43F93" : "linphone-iphone\/Classes\/KIF\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ringmail",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,

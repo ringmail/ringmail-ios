@@ -876,6 +876,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 					LOGI(@"RingMail Call Ended With Status: %@", status);
 				}
     			[[self chatManager] dbUpdateCall:updates];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
             }
         }
     }

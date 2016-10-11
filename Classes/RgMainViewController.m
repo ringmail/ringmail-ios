@@ -159,7 +159,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     if ([self needsRefresh])
     {
-        LOGI(@"RingMail: Updating Main Card List");
+        LOGI(@"RingMail: Updating Main Card List 1");
         [mainViewController updateCollection];
         [self setNeedsRefresh:NO];
     }
@@ -328,7 +328,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)mainRefreshEvent:(NSNotification *)notif {
     if (self.visible)
     {
-        LOGI(@"RingMail: Updating Main Card List");
+        LOGI(@"RingMail: Updating Main Card List 2");
         [mainViewController updateCollection];
     }
     else
@@ -436,7 +436,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)callUpdate:(LinphoneCall *)call state:(LinphoneCallState)state {
     //NSLog(@"RingMail: %s", __PRETTY_FUNCTION__);
     
-	LinphoneCore *lc = [LinphoneManager getLc];
+	/*LinphoneCore *lc = [LinphoneManager getLc];
 	if (linphone_core_get_calls_nb(lc) > 0) {
 		if (transferMode) {
 			[addCallButton setHidden:true];
@@ -454,7 +454,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[backButton setHidden:true];
 		[addContactButton setHidden:false];
 		[transferButton setHidden:true];
-	}
+	}*/
 }
 
 - (void)setAddress:(NSString *)address {
