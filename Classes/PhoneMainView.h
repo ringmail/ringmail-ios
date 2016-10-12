@@ -30,7 +30,6 @@
 #import "FirstLoginViewController.h"
 #import "IncomingCallViewController.h"
 #import "ChatRoomViewController.h"
-#import "ChatViewController.h"
 #import "RgMainViewController.h"
 #import "RgHashtagDirectoryViewController.h"
 #import "RgFavoriteViewController.h"

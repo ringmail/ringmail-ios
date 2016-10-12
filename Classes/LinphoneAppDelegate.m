@@ -338,28 +338,6 @@
 		if (auto_answer) {
 			[[LinphoneManager instance] acceptCallForCallId:[notification.userInfo objectForKey:@"callId"]];
 		}
-	} else if ([notification.userInfo objectForKey:@"from_addr"] != nil) {
-		NSString *remoteContact = (NSString *)[notification.userInfo objectForKey:@"from_addr"];
-		// Go to ChatRoom view
-		[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
-		LinphoneChatRoom *room = [self findChatRoomForContact:remoteContact];
-		ChatRoomViewController *controller = DYNAMIC_CAST(
-			[[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE],
-			ChatRoomViewController);
-		if (controller != nil && room != nil) {
-			[controller setChatRoom:room];
-		}
-	} else if ([notification.userInfo objectForKey:@"callLog"] != nil) {
-		NSString *callLog = (NSString *)[notification.userInfo objectForKey:@"callLog"];
-		// Go to HistoryDetails view
-		[[PhoneMainView instance] changeCurrentView:[HistoryViewController compositeViewDescription]];
-		HistoryDetailsViewController *controller = DYNAMIC_CAST(
-			[[PhoneMainView instance] changeCurrentView:[HistoryDetailsViewController compositeViewDescription]
-												   push:TRUE],
-			HistoryDetailsViewController);
-		if (controller != nil) {
-			[controller setCallLogId:callLog];
-		}
 	}
 }
 

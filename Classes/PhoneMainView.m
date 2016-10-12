@@ -498,40 +498,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 	return trans;
 }
 
-+ (CATransition *)getTransition:(UICompositeViewDescription *)old new:(UICompositeViewDescription *) new {
-	bool left = false;
-
-   if ([old equal:[RgMainViewController compositeViewDescription]]) {
-		if ([new equal:[ChatViewController compositeViewDescription]] ||
-            [new equal:[ContactsViewController compositeViewDescription]] ||
-            [new equal:[HistoryViewController compositeViewDescription]] ||
-            [new equal:[SettingsViewController compositeViewDescription]]) {
-			left = true;
-		}
-	}  else if ([old equal:[ChatViewController compositeViewDescription]]) {
-		if ([new equal:[ContactsViewController compositeViewDescription]] ||
-			[new equal:[HistoryViewController compositeViewDescription]] ||
-			[new equal:[SettingsViewController compositeViewDescription]]) {
-			left = true;
-		}
-	} else if ([old equal:[ContactsViewController compositeViewDescription]]) {
-		if ([new equal:[HistoryViewController compositeViewDescription]] ||
-            [new equal:[SettingsViewController compositeViewDescription]]) {
-			left = true;
-		}
-	} else if ([old equal:[HistoryViewController compositeViewDescription]]) {
-		if ([new equal:[SettingsViewController compositeViewDescription]]) {
-			left = true;
-		}
-	}
-
-	if (left) {
-		return [PhoneMainView getBackwardTransition];
-	} else {
-		return [PhoneMainView getForwardTransition];
-	}
-}
-
 + (PhoneMainView *)instance {
 	return [[RootViewManager instance] currentView];
 }
@@ -603,13 +569,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 	if (force || ![view equal:vc.currentView] || vc != self) {
         // RingMail: No animated transitions :(->
-		/*if (transition == nil)
-			transition = [PhoneMainView getTransition:vc.currentView new:view];
-		if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
-			[vc.mainViewController setViewTransition:transition];
-		} else {
-			[vc.mainViewController setViewTransition:nil];
-		}*/
+
         [vc.mainViewController setViewTransition:nil];
 		[vc updateStatusBar:view];
 		[vc.mainViewController changeView:view];
