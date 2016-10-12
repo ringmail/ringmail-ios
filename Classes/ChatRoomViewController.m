@@ -27,7 +27,6 @@
 #import <NinePatch.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "Utils.h"
-#import "UIChatRoomCell.h"
 #import "RgChatModelData.h"
 
 #import "UIImage+RoundedCorner.h"

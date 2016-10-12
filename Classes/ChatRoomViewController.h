@@ -21,7 +21,6 @@
 
 #import "UIToggleButton.h"
 #import "UICompositeViewController.h"
-#import "ChatRoomTableViewController.h"
 #import "HPGrowingTextView.h"
 #import "ImagePickerViewController.h"
 #import "OrderedDictionary.h"
@@ -30,7 +29,7 @@
 
 #include "linphone/linphonecore.h"
 
-@interface ChatRoomViewController : UIViewController<UICompositeViewDelegate, ImagePickerDelegate, ChatRoomDelegate> {
+@interface ChatRoomViewController : UIViewController<UICompositeViewDelegate, ImagePickerDelegate> {
     LinphoneChatRoom *chatRoom;
     OrderedDictionary *imageQualities;
     BOOL scrollOnGrowingEnabled;
