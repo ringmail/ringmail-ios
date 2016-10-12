@@ -245,12 +245,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-
-	/*UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil)
-																   style:UIBarButtonItemStyleBordered
-																  target:self
-																  action:@selector(onAboutClick:)];
-	self.navigationItem.rightBarButtonItem = buttonItem;*/
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -272,10 +266,6 @@
 	cell.selectedBackgroundView = selectedBackgroundView;
 	[selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
 	return cell;
-}
-
-- (IBAction)onAboutClick:(id)sender {
-	[[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];
 }
 
 @end
@@ -629,8 +619,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 							}];
 		[alert show];
 
-	} else if ([key isEqual:@"about_button"]) {
-		[[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];
 	} else if ([key isEqualToString:@"reset_logs_button"]) {
 		linphone_core_reset_log_collection();
 	} else if ([key isEqual:@"send_logs_button"]) {

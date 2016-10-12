@@ -26,7 +26,7 @@
 #import "UICompositeViewController.h"
 
 /* These imports are here so that we can import PhoneMainView.h without bothering to import all the rest of the view headers */
-#import "AboutViewController.h"
+
 #import "FirstLoginViewController.h"
 #import "IncomingCallViewController.h"
 #import "ChatRoomViewController.h"
