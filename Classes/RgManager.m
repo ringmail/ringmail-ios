@@ -58,7 +58,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"sip.staging.ringmail.com";
+        return @"staging.ringmail.com";
     }
 }
 
