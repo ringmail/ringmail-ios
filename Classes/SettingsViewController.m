@@ -20,7 +20,6 @@
 #import "SettingsViewController.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
-#import "UILinphone.h"
 #import "UACellBackgroundView.h"
 
 #import "DCRoundSwitch.h"

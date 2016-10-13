@@ -66,7 +66,6 @@
 		22AA8B0113D83F6300B30535 /* UICamSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AA8B0013D83F6300B30535 /* UICamSwitch.m */; };
 		22B5EFA310CE50BD00777D97 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */; };
 		22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5F03410CE6B2F00777D97 /* AddressBook.framework */; };
-		22BB1A69132FF16A005CD7AA /* UIEraseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB1A68132FF16A005CD7AA /* UIEraseButton.m */; };
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
@@ -139,7 +138,6 @@
 		57F005C815EE2D9200914747 /* linphonerc-factory in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C615EE2D9200914747 /* linphonerc-factory */; };
 		57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C715EE2D9200914747 /* linphonerc-factory~ipad */; };
 		631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */; };
-		631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */; };
 		636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D61A1DEC650009B839 /* SettingsViewController.xib */; };
 		636316D91A1DECC90009B839 /* PhoneMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D71A1DECC90009B839 /* PhoneMainView.xib */; };
 		637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 637157A01B283FE200C91677 /* FileTransferDelegate.m */; };
@@ -519,7 +517,6 @@
 		C4AC28581D3963FA003B6232 /* UIStateBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEAFF1A1DF4D9004DE38F /* UIStateBar.xib */; };
 		C4AC28591D3963FA003B6232 /* UIContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088488D19FF8C41007FFCF3 /* UIContactCell.xib */; };
 		C4AC285A1D3963FA003B6232 /* chat_in_view.wav in Resources */ = {isa = PBXBuildFile; fileRef = C48D3BFD1D0276FE00FAC3A6 /* chat_in_view.wav */; };
-		C4AC285B1D3963FA003B6232 /* UICallBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187E415FE349700C3EDCA /* UICallBar.xib */; };
 		C4AC285C1D3963FA003B6232 /* call_status_incoming.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8D158A1C1000756B45 /* call_status_incoming.png */; };
 		C4AC285D1D3963FA003B6232 /* call_status_missed.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8E158A1C1000756B45 /* call_status_missed.png */; };
 		C4AC285E1D3963FA003B6232 /* ringmail_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3C61C92240300134788 /* ringmail_logo.png */; };
@@ -615,7 +612,6 @@
 		C4AC28BA1D3963FA003B6232 /* call_state_ringing_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D31AAF6D159B65E1002C6B02 /* call_state_ringing_default.png */; };
 		C4AC28BB1D3963FA003B6232 /* call_state_outgoing_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BA5159C3D410098460B /* call_state_outgoing_default.png */; };
 		C4AC28BC1D3963FA003B6232 /* ringmail_icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */; };
-		C4AC28BD1D3963FA003B6232 /* UIConferenceHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187F315FE354000C3EDCA /* UIConferenceHeader.xib */; };
 		C4AC28BE1D3963FA003B6232 /* ringmail_contact_back-pressed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A4111CC8633000CFFF30 /* ringmail_contact_back-pressed@3x.png */; };
 		C4AC28BF1D3963FA003B6232 /* cell_call_first.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BB8159C8A820098460B /* cell_call_first.png */; };
 		C4AC28C01D3963FA003B6232 /* back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BBB159CBFD60098460B /* back_default.png */; };
@@ -896,7 +892,6 @@
 		C4AC29D71D3963FA003B6232 /* ringmail_incall-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C42C0D9F1CAEE9D100AD5A91 /* ringmail_incall-arrow@3x.png */; };
 		C4AC29D81D3963FA003B6232 /* transfer_call_disabled~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3BDB9B815C6B5B1007BEAC1 /* transfer_call_disabled~ipad.png */; };
 		C4AC29D91D3963FA003B6232 /* ringmail_edit-cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A42E1CC865F300CFFF30 /* ringmail_edit-cancel@3x.png */; };
-		C4AC29DA1D3963FA003B6232 /* UICallBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187E815FE349D00C3EDCA /* UICallBar~ipad.xib */; };
 		C4AC29DB1D3963FA003B6232 /* dialer_alt_back_default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ACB09915C6D59500E15894 /* dialer_alt_back_default~ipad.png */; };
 		C4AC29DC1D3963FA003B6232 /* dialer_alt_back_over~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ACB09A15C6D59500E15894 /* dialer_alt_back_over~ipad.png */; };
 		C4AC29DD1D3963FA003B6232 /* ringmail_favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A4451CC870B600CFFF30 /* ringmail_favorite@2x.png */; };
@@ -1111,7 +1106,6 @@
 		C4AC2ABB1D3963FA003B6232 /* UISpeakerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22968A5E12F875C600588287 /* UISpeakerButton.m */; };
 		C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B71F31CA22AF90020A57F /* RgHashtagDirectoryViewController.m */; };
 		C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */; };
-		C4AC2AC01D3963FA003B6232 /* UIEraseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB1A68132FF16A005CD7AA /* UIEraseButton.m */; };
 		C4AC2AC11D3963FA003B6232 /* UICamSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AA8B0013D83F6300B30535 /* UICamSwitch.m */; };
 		C4AC2AC21D3963FA003B6232 /* RgIncomingCallComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42C0DD91CB1691E00AD5A91 /* RgIncomingCallComponent.mm */; };
 		C4AC2AC31D3963FA003B6232 /* UIVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 340751E6150F38FD00B89C47 /* UIVideoButton.m */; };
@@ -1128,7 +1122,6 @@
 		C4AC2AD11D3963FA003B6232 /* CardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B72021CA22EDB0020A57F /* CardComponent.mm */; };
 		C4AC2AD21D3963FA003B6232 /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = D326483715887D5200930C67 /* OrderedDictionary.m */; };
 		C4AC2AD31D3963FA003B6232 /* RgCallViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42C0D531CAED35B00AD5A91 /* RgCallViewController.mm */; };
-		C4AC2AD41D3963FA003B6232 /* UICallBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D326483C1588950F00930C67 /* UICallBar.m */; };
 		C4AC2AD51D3963FA003B6232 /* UIToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D32648431588F6FB00930C67 /* UIToggleButton.m */; };
 		C4AC2AD61D3963FA003B6232 /* HeaderComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B720A1CA22EDB0020A57F /* HeaderComponent.mm */; };
 		C4AC2AD71D3963FA003B6232 /* RgChatQuestionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC493B1BF9517900826264 /* RgChatQuestionTable.m */; };
@@ -1156,7 +1149,6 @@
 		C4AC2AF01D3963FA003B6232 /* FavoriteModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */; };
 		C4AC2AF11D3963FA003B6232 /* IncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F26BEF15986B71005F9CAB /* IncomingCallViewController.m */; };
 		C4AC2AF21D3963FA003B6232 /* UICompositeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B4B1F159876C0002E6C72 /* UICompositeViewController.m */; };
-		C4AC2AF41D3963FA003B6232 /* UIConferenceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3211BAE159C4EF00098460B /* UIConferenceHeader.m */; };
 		C4AC2AF51D3963FA003B6232 /* CardContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72041CA22EDB0020A57F /* CardContext.m */; };
 		C4AC2AF61D3963FA003B6232 /* UITransparentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32460E5159D9AAD00BA7F3A /* UITransparentView.m */; };
 		C4AC2AF71D3963FA003B6232 /* FastAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = D32B9DFB15A2F131000B6DEC /* FastAddressBook.m */; };
@@ -1209,7 +1201,6 @@
 		C4AC2B2C1D3963FA003B6232 /* HashtagCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B71FD1CA22DD50020A57F /* HashtagCollectionViewController.mm */; };
 		C4AC2B2D1D3963FA003B6232 /* CardModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72061CA22EDB0020A57F /* CardModelController.m */; };
 		C4AC2B2E1D3963FA003B6232 /* IASKPSTextFieldSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDF15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
-		C4AC2B2F1D3963FA003B6232 /* UIDigitButtonLongVoiceMail.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */; };
 		C4AC2B301D3963FA003B6232 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */; };
 		C4AC2B311D3963FA003B6232 /* ImageProcessingImplementation.mm in Sources */ = {isa = PBXBuildFile; fileRef = C402BEFC1C261ED70076B60C /* ImageProcessingImplementation.mm */; };
 		C4AC2B321D3963FA003B6232 /* ImageProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C402BEFD1C261ED70076B60C /* ImageProcessor.cpp */; };
@@ -1218,7 +1209,6 @@
 		C4AC2B351D3963FA003B6232 /* IASKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE315C2894A005BE9BC /* IASKSlider.m */; };
 		C4AC2B361D3963FA003B6232 /* IASKSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE515C2894A005BE9BC /* IASKSwitch.m */; };
 		C4AC2B371D3963FA003B6232 /* IASKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE715C2894A005BE9BC /* IASKTextField.m */; };
-		C4AC2B381D3963FA003B6232 /* UILinphone.m in Sources */ = {isa = PBXBuildFile; fileRef = D380800415C28A7A005BE9BC /* UILinphone.m */; };
 		C4AC2B391D3963FA003B6232 /* ColorSpaceUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */; };
 		C4AC2B3A1D3963FA003B6232 /* FileTransferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 637157A01B283FE200C91677 /* FileTransferDelegate.m */; };
 		C4AC2B3B1D3963FA003B6232 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D378AB2915DCDB490098505D /* ImagePickerViewController.m */; };
@@ -1333,7 +1323,6 @@
 		D31C9C92158A1C1000756B45 /* call_status_missed.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8E158A1C1000756B45 /* call_status_missed.png */; };
 		D31C9C94158A1C1000756B45 /* call_status_outgoing.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8F158A1C1000756B45 /* call_status_outgoing.png */; };
 		D3211BA6159C3D410098460B /* call_state_outgoing_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BA5159C3D410098460B /* call_state_outgoing_default.png */; };
-		D3211BB0159C4EF10098460B /* UIConferenceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3211BAE159C4EF00098460B /* UIConferenceHeader.m */; };
 		D3211BB9159C8A820098460B /* cell_call_first.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BB8159C8A820098460B /* cell_call_first.png */; };
 		D3211BBE159CBFD60098460B /* back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BBB159CBFD60098460B /* back_default.png */; };
 		D3211BC0159CBFD70098460B /* back_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BBC159CBFD60098460B /* back_disabled.png */; };
@@ -1342,7 +1331,6 @@
 		D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D32409C2158B49A600C8C119 /* UILongTouchButton.m */; };
 		D32460E6159D9AAD00BA7F3A /* UITransparentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32460E5159D9AAD00BA7F3A /* UITransparentView.m */; };
 		D326483815887D5200930C67 /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = D326483715887D5200930C67 /* OrderedDictionary.m */; };
-		D326483E1588950F00930C67 /* UICallBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D326483C1588950F00930C67 /* UICallBar.m */; };
 		D32648441588F6FC00930C67 /* UIToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D32648431588F6FB00930C67 /* UIToggleButton.m */; };
 		D32B6E2415A5B2020033019F /* chat_send_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D32B6E2315A5B2020033019F /* chat_send_disabled.png */; };
 		D32B9DFC15A2F131000B6DEC /* FastAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = D32B9DFB15A2F131000B6DEC /* FastAddressBook.m */; };
@@ -1494,7 +1482,6 @@
 		D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE315C2894A005BE9BC /* IASKSlider.m */; };
 		D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE515C2894A005BE9BC /* IASKSwitch.m */; };
 		D380800215C2894A005BE9BC /* IASKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE715C2894A005BE9BC /* IASKTextField.m */; };
-		D380800515C28A7A005BE9BC /* UILinphone.m in Sources */ = {isa = PBXBuildFile; fileRef = D380800415C28A7A005BE9BC /* UILinphone.m */; };
 		D380801315C299D0005BE9BC /* ColorSpaceUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */; };
 		D38187AD15FE340100C3EDCA /* ChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187B015FE340100C3EDCA /* ChatRoomViewController.xib */; };
 		D38187B515FE341B00C3EDCA /* ContactDetailsLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187B815FE341B00C3EDCA /* ContactDetailsLabelViewController.xib */; };
@@ -1502,9 +1489,6 @@
 		D38187BD15FE342800C3EDCA /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C015FE342800C3EDCA /* ContactsViewController.xib */; };
 		D38187D915FE347700C3EDCA /* IncomingCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187DC15FE347700C3EDCA /* IncomingCallViewController.xib */; };
 		D38187DD15FE348A00C3EDCA /* WizardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187E015FE348A00C3EDCA /* WizardViewController.xib */; };
-		D38187E115FE349700C3EDCA /* UICallBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187E415FE349700C3EDCA /* UICallBar.xib */; };
-		D38187E515FE349D00C3EDCA /* UICallBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187E815FE349D00C3EDCA /* UICallBar~ipad.xib */; };
-		D38187F015FE354000C3EDCA /* UIConferenceHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187F315FE354000C3EDCA /* UIConferenceHeader.xib */; };
 		D38187F415FE354700C3EDCA /* UIContactDetailsFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187F715FE354700C3EDCA /* UIContactDetailsFooter.xib */; };
 		D38187F815FE355D00C3EDCA /* UIMainBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187FB15FE355D00C3EDCA /* UIMainBar.xib */; };
 		D38187FC15FE356100C3EDCA /* UIMainBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187FF15FE356100C3EDCA /* UIMainBar~ipad.xib */; };
@@ -2019,8 +2003,6 @@
 		22AA8B0013D83F6300B30535 /* UICamSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICamSwitch.m; sourceTree = "<group>"; };
 		22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		22B5F03410CE6B2F00777D97 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		22BB1A67132FF16A005CD7AA /* UIEraseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEraseButton.h; sourceTree = "<group>"; };
-		22BB1A68132FF16A005CD7AA /* UIEraseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEraseButton.m; sourceTree = "<group>"; };
 		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2145,8 +2127,6 @@
 		63058AE41B4E952E00EFAE36 /* share */ = {isa = PBXFileReference; lastKnownFileType = folder; name = share; path = "../liblinphone-sdk/apple-darwin/share"; sourceTree = "<group>"; };
 		631C4FAF19D2A8F2004BFE77 /* UIDigitButtonLongPlus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDigitButtonLongPlus.h; sourceTree = "<group>"; };
 		631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDigitButtonLongPlus.m; sourceTree = "<group>"; };
-		631C4FB519D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDigitButtonLongVoiceMail.h; sourceTree = "<group>"; };
-		631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDigitButtonLongVoiceMail.m; sourceTree = "<group>"; };
 		633E388219FFB0F400936D1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		636316D51A1DEC650009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsViewController.xib; sourceTree = "<group>"; };
 		636316D81A1DECC90009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhoneMainView.xib; sourceTree = "<group>"; };
@@ -2526,8 +2506,6 @@
 		D31C9C8E158A1C1000756B45 /* call_status_missed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = call_status_missed.png; path = Resources/call_status_missed.png; sourceTree = "<group>"; };
 		D31C9C8F158A1C1000756B45 /* call_status_outgoing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = call_status_outgoing.png; path = Resources/call_status_outgoing.png; sourceTree = "<group>"; };
 		D3211BA5159C3D410098460B /* call_state_outgoing_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = call_state_outgoing_default.png; path = Resources/call_state_outgoing_default.png; sourceTree = "<group>"; };
-		D3211BAD159C4EF00098460B /* UIConferenceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConferenceHeader.h; sourceTree = "<group>"; };
-		D3211BAE159C4EF00098460B /* UIConferenceHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIConferenceHeader.m; sourceTree = "<group>"; };
 		D3211BB8159C8A820098460B /* cell_call_first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_call_first.png; path = Resources/cell_call_first.png; sourceTree = "<group>"; };
 		D3211BBB159CBFD60098460B /* back_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_default.png; path = Resources/back_default.png; sourceTree = "<group>"; };
 		D3211BBC159CBFD60098460B /* back_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_disabled.png; path = Resources/back_disabled.png; sourceTree = "<group>"; };
@@ -2539,8 +2517,6 @@
 		D32460E5159D9AAD00BA7F3A /* UITransparentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITransparentView.m; sourceTree = "<group>"; };
 		D326483615887D5200930C67 /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderedDictionary.h; path = Utils/OrderedDictionary.h; sourceTree = "<group>"; };
 		D326483715887D5200930C67 /* OrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderedDictionary.m; path = Utils/OrderedDictionary.m; sourceTree = "<group>"; };
-		D326483B1588950F00930C67 /* UICallBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICallBar.h; sourceTree = "<group>"; };
-		D326483C1588950F00930C67 /* UICallBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICallBar.m; sourceTree = "<group>"; };
 		D32648421588F6FA00930C67 /* UIToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIToggleButton.h; sourceTree = "<group>"; };
 		D32648431588F6FB00930C67 /* UIToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIToggleButton.m; sourceTree = "<group>"; };
 		D32B6E2315A5B2020033019F /* chat_send_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_send_disabled.png; path = Resources/chat_send_disabled.png; sourceTree = "<group>"; };
@@ -2729,7 +2705,6 @@
 		D3807FE515C2894A005BE9BC /* IASKSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSwitch.m; sourceTree = "<group>"; };
 		D3807FE615C2894A005BE9BC /* IASKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKTextField.h; sourceTree = "<group>"; };
 		D3807FE715C2894A005BE9BC /* IASKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKTextField.m; sourceTree = "<group>"; };
-		D380800415C28A7A005BE9BC /* UILinphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILinphone.m; sourceTree = "<group>"; };
 		D380801115C29984005BE9BC /* ColorSpaceUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorSpaceUtilities.h; path = Utils/ColorSpaceUtilities.h; sourceTree = "<group>"; };
 		D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorSpaceUtilites.m; path = Utils/ColorSpaceUtilites.m; sourceTree = "<group>"; };
 		D381885815FE44A700C3EDCA /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2930,7 +2905,6 @@
 		D3E84F1D15B00F4100420DAC /* dialer_alt_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialer_alt_background.png; path = Resources/dialer_alt_background.png; sourceTree = "<group>"; };
 		D3E84F3615B011AF00420DAC /* contact_cancel_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contact_cancel_default.png; path = Resources/contact_cancel_default.png; sourceTree = "<group>"; };
 		D3E84F3715B011AF00420DAC /* contact_cancel_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contact_cancel_over.png; path = Resources/contact_cancel_over.png; sourceTree = "<group>"; };
-		D3E84F3C15B018A600420DAC /* UILinphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILinphone.h; sourceTree = "<group>"; };
 		D3E8F68315ADE0570065A226 /* UIContactDetailsFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIContactDetailsFooter.h; sourceTree = "<group>"; };
 		D3E8F68415ADE0580065A226 /* UIContactDetailsFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIContactDetailsFooter.m; sourceTree = "<group>"; };
 		D3EA53FB159850E80037DC6B /* LinphoneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinphoneManager.h; sourceTree = "<group>"; };
@@ -3079,9 +3053,6 @@
 		F09548221883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ImageViewController.xib; sourceTree = "<group>"; };
 		F09548241883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IncomingCallViewController.xib; sourceTree = "<group>"; };
 		F09548251883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/IncomingCallViewController~ipad.xib"; sourceTree = "<group>"; };
-		F09548261883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UICallBar.xib; sourceTree = "<group>"; };
-		F09548271883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/UICallBar~ipad.xib"; sourceTree = "<group>"; };
-		F09548291883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIConferenceHeader.xib; sourceTree = "<group>"; };
 		F095482A1883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIContactDetailsFooter.xib; sourceTree = "<group>"; };
 		F095482B1883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIContactDetailsHeader.xib; sourceTree = "<group>"; };
 		F095482C1883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIMainBar.xib; sourceTree = "<group>"; };
@@ -3103,12 +3074,6 @@
 		F09548481883F55800E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/IncomingCallViewController.strings; sourceTree = "<group>"; };
 		F09548491883F56A00E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/IncomingCallViewController~ipad.strings"; sourceTree = "<group>"; };
 		F095484A1883F56E00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/IncomingCallViewController~ipad.strings"; sourceTree = "<group>"; };
-		F095484B1883F58E00E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UICallBar.strings; sourceTree = "<group>"; };
-		F095484C1883F59200E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/UICallBar.strings; sourceTree = "<group>"; };
-		F095484D1883F5AF00E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/UICallBar~ipad.strings"; sourceTree = "<group>"; };
-		F095484E1883F5B300E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/UICallBar~ipad.strings"; sourceTree = "<group>"; };
-		F095484F1883F5D500E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UIConferenceHeader.strings; sourceTree = "<group>"; };
-		F09548501883F5D900E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/UIConferenceHeader.strings; sourceTree = "<group>"; };
 		F09548511883F5E300E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UIContactDetailsFooter.strings; sourceTree = "<group>"; };
 		F09548521883F5E600E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/UIContactDetailsFooter.strings; sourceTree = "<group>"; };
 		F09548531883F5F400E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UIContactDetailsHeader.strings; sourceTree = "<group>"; };
@@ -3131,10 +3096,7 @@
 		F0AF06FB1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ImageViewController.strings; sourceTree = "<group>"; };
 		F0AF06FD1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/IncomingCallViewController.strings; sourceTree = "<group>"; };
 		F0AF06FE1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/IncomingCallViewController~ipad.strings"; sourceTree = "<group>"; };
-		F0AF06FF1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UICallBar.strings; sourceTree = "<group>"; };
-		F0AF07001A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/UICallBar~ipad.strings"; sourceTree = "<group>"; };
 		F0AF07041A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UICompositeViewController.strings; sourceTree = "<group>"; };
-		F0AF07051A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIConferenceHeader.strings; sourceTree = "<group>"; };
 		F0AF07061A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIContactCell.strings; sourceTree = "<group>"; };
 		F0AF07071A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIContactDetailsFooter.strings; sourceTree = "<group>"; };
 		F0AF07081A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIContactDetailsHeader.strings; sourceTree = "<group>"; };
@@ -3435,10 +3397,6 @@
 			children = (
 				D35E757F159328EA0066B1C1 /* UIAddressTextField.h */,
 				D35E7580159328EB0066B1C1 /* UIAddressTextField.m */,
-				D326483B1588950F00930C67 /* UICallBar.h */,
-				D326483C1588950F00930C67 /* UICallBar.m */,
-				D38187E415FE349700C3EDCA /* UICallBar.xib */,
-				D38187E815FE349D00C3EDCA /* UICallBar~ipad.xib */,
 				C4E985C11BAF98D500939A55 /* UIMessageButton.h */,
 				C4E985C91BAF98E200939A55 /* UIMessageButton.m */,
 				2214EB7812F846B1002A5394 /* UICallButton.h */,
@@ -3448,9 +3406,6 @@
 				D31B4B1E159876C0002E6C72 /* UICompositeViewController.h */,
 				D31B4B1F159876C0002E6C72 /* UICompositeViewController.m */,
 				639CEB051A1DF4EB004DE38F /* UICompositeViewController.xib */,
-				D3211BAD159C4EF00098460B /* UIConferenceHeader.h */,
-				D3211BAE159C4EF00098460B /* UIConferenceHeader.m */,
-				D38187F315FE354000C3EDCA /* UIConferenceHeader.xib */,
 				D3A55FBA15877E5E003FD403 /* UIContactCell.h */,
 				D3A55FBB15877E5E003FD403 /* UIContactCell.m */,
 				F088488D19FF8C41007FFCF3 /* UIContactCell.xib */,
@@ -3464,16 +3419,10 @@
 				2248E90D12F7E4CF00220D9C /* UIDigitButton.m */,
 				631C4FAF19D2A8F2004BFE77 /* UIDigitButtonLongPlus.h */,
 				631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */,
-				631C4FB519D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.h */,
-				631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */,
 				D3C6526515AC1A8F0092A874 /* UIEditableTableViewCell.h */,
 				D3C6526615AC1A8F0092A874 /* UIEditableTableViewCell.m */,
-				22BB1A67132FF16A005CD7AA /* UIEraseButton.h */,
-				22BB1A68132FF16A005CD7AA /* UIEraseButton.m */,
 				2214EB8712F84EBB002A5394 /* UIHangUpButton.h */,
 				2214EB8812F84EBB002A5394 /* UIHangUpButton.m */,
-				D3E84F3C15B018A600420DAC /* UILinphone.h */,
-				D380800415C28A7A005BE9BC /* UILinphone.m */,
 				D35E91F6160CA4FF0023116B /* UILinphoneButton.h */,
 				D35E91F7160CA4FF0023116B /* UILinphoneButton.m */,
 				D35E91F2160CA10B0023116B /* UILinphoneTextField.h */,
@@ -5027,7 +4976,6 @@
 				639CEAFD1A1DF4D9004DE38F /* UIStateBar.xib in Resources */,
 				F088488A19FF8C41007FFCF3 /* UIContactCell.xib in Resources */,
 				C48D3C0D1D0276FE00FAC3A6 /* chat_in_view.wav in Resources */,
-				D38187E115FE349700C3EDCA /* UICallBar.xib in Resources */,
 				D31C9C90158A1C1000756B45 /* call_status_incoming.png in Resources */,
 				D31C9C92158A1C1000756B45 /* call_status_missed.png in Resources */,
 				C444F3E71C92240300134788 /* ringmail_logo.png in Resources */,
@@ -5125,7 +5073,6 @@
 				D31AAF6E159B65E1002C6B02 /* call_state_ringing_default.png in Resources */,
 				D3211BA6159C3D410098460B /* call_state_outgoing_default.png in Resources */,
 				C41EF33B1B8CF1200085E75B /* ringmail_icon_57.png in Resources */,
-				D38187F015FE354000C3EDCA /* UIConferenceHeader.xib in Resources */,
 				C459A4171CC8633000CFFF30 /* ringmail_contact_back-pressed@3x.png in Resources */,
 				D3211BB9159C8A820098460B /* cell_call_first.png in Resources */,
 				D3211BBE159CBFD60098460B /* back_default.png in Resources */,
@@ -5410,7 +5357,6 @@
 				C42C0DBA1CAEE9D100AD5A91 /* ringmail_incall-arrow@3x.png in Resources */,
 				D3BDB9B915C6B5B1007BEAC1 /* transfer_call_disabled~ipad.png in Resources */,
 				C459A4311CC865F300CFFF30 /* ringmail_edit-cancel@3x.png in Resources */,
-				D38187E515FE349D00C3EDCA /* UICallBar~ipad.xib in Resources */,
 				D3ACB09B15C6D59500E15894 /* dialer_alt_back_default~ipad.png in Resources */,
 				D3ACB09D15C6D59500E15894 /* dialer_alt_back_over~ipad.png in Resources */,
 				C459A44B1CC870B600CFFF30 /* ringmail_favorite@2x.png in Resources */,
@@ -5757,7 +5703,6 @@
 				C4AC28581D3963FA003B6232 /* UIStateBar.xib in Resources */,
 				C4AC28591D3963FA003B6232 /* UIContactCell.xib in Resources */,
 				C4AC285A1D3963FA003B6232 /* chat_in_view.wav in Resources */,
-				C4AC285B1D3963FA003B6232 /* UICallBar.xib in Resources */,
 				C4AC285C1D3963FA003B6232 /* call_status_incoming.png in Resources */,
 				C4AC285D1D3963FA003B6232 /* call_status_missed.png in Resources */,
 				C4AC285E1D3963FA003B6232 /* ringmail_logo.png in Resources */,
@@ -5855,7 +5800,6 @@
 				C4AC28BA1D3963FA003B6232 /* call_state_ringing_default.png in Resources */,
 				C4AC28BB1D3963FA003B6232 /* call_state_outgoing_default.png in Resources */,
 				C4AC28BC1D3963FA003B6232 /* ringmail_icon_57.png in Resources */,
-				C4AC28BD1D3963FA003B6232 /* UIConferenceHeader.xib in Resources */,
 				C4AC28BE1D3963FA003B6232 /* ringmail_contact_back-pressed@3x.png in Resources */,
 				C4AC28BF1D3963FA003B6232 /* cell_call_first.png in Resources */,
 				C4AC28C01D3963FA003B6232 /* back_default.png in Resources */,
@@ -6139,7 +6083,6 @@
 				C4AC29D71D3963FA003B6232 /* ringmail_incall-arrow@3x.png in Resources */,
 				C4AC29D81D3963FA003B6232 /* transfer_call_disabled~ipad.png in Resources */,
 				C4AC29D91D3963FA003B6232 /* ringmail_edit-cancel@3x.png in Resources */,
-				C4AC29DA1D3963FA003B6232 /* UICallBar~ipad.xib in Resources */,
 				C4AC29DB1D3963FA003B6232 /* dialer_alt_back_default~ipad.png in Resources */,
 				C4AC29DC1D3963FA003B6232 /* dialer_alt_back_over~ipad.png in Resources */,
 				C4AC29DD1D3963FA003B6232 /* ringmail_favorite@2x.png in Resources */,
@@ -6468,7 +6411,6 @@
 				22968A5F12F875C600588287 /* UISpeakerButton.m in Sources */,
 				C42B71F51CA22AF90020A57F /* RgHashtagDirectoryViewController.m in Sources */,
 				C4FD78751CFB70520066BDB1 /* HashtagCategoryCardComponent.mm in Sources */,
-				22BB1A69132FF16A005CD7AA /* UIEraseButton.m in Sources */,
 				22AA8B0113D83F6300B30535 /* UICamSwitch.m in Sources */,
 				C42C0DDA1CB1691E00AD5A91 /* RgIncomingCallComponent.mm in Sources */,
 				340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */,
@@ -6486,7 +6428,6 @@
 				C42B72101CA22EDB0020A57F /* CardComponent.mm in Sources */,
 				D326483815887D5200930C67 /* OrderedDictionary.m in Sources */,
 				C42C0D541CAED35B00AD5A91 /* RgCallViewController.mm in Sources */,
-				D326483E1588950F00930C67 /* UICallBar.m in Sources */,
 				D32648441588F6FC00930C67 /* UIToggleButton.m in Sources */,
 				C42B72141CA22EDB0020A57F /* HeaderComponent.mm in Sources */,
 				C4BC493C1BF9517900826264 /* RgChatQuestionTable.m in Sources */,
@@ -6515,7 +6456,6 @@
 				C4FE4C701CCD9CA4006A6C94 /* FavoriteModelController.m in Sources */,
 				D3F26BF115986B73005F9CAB /* IncomingCallViewController.m in Sources */,
 				D31B4B21159876C0002E6C72 /* UICompositeViewController.m in Sources */,
-				D3211BB0159C4EF10098460B /* UIConferenceHeader.m in Sources */,
 				C45CFFDD1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */,
 				C42B72111CA22EDB0020A57F /* CardContext.m in Sources */,
 				D32460E6159D9AAD00BA7F3A /* UITransparentView.m in Sources */,
@@ -6570,7 +6510,6 @@
 				C42B71FE1CA22DD50020A57F /* HashtagCollectionViewController.mm in Sources */,
 				C42B72121CA22EDB0020A57F /* CardModelController.m in Sources */,
 				D3807FFA15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
-				631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */,
 				C4D0BC6B1BB4F0A400D1728A /* NSString+MD5.m in Sources */,
 				C402BEFF1C261ED70076B60C /* ImageProcessingImplementation.mm in Sources */,
 				C402BF001C261ED70076B60C /* ImageProcessor.cpp in Sources */,
@@ -6579,7 +6518,6 @@
 				D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */,
 				D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */,
 				D380800215C2894A005BE9BC /* IASKTextField.m in Sources */,
-				D380800515C28A7A005BE9BC /* UILinphone.m in Sources */,
 				D380801315C299D0005BE9BC /* ColorSpaceUtilites.m in Sources */,
 				637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerViewController.m in Sources */,
@@ -6614,7 +6552,6 @@
 				C4AC2ABB1D3963FA003B6232 /* UISpeakerButton.m in Sources */,
 				C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */,
 				C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */,
-				C4AC2AC01D3963FA003B6232 /* UIEraseButton.m in Sources */,
 				C4AC2AC11D3963FA003B6232 /* UICamSwitch.m in Sources */,
 				C4AC2AC21D3963FA003B6232 /* RgIncomingCallComponent.mm in Sources */,
 				C4AC2AC31D3963FA003B6232 /* UIVideoButton.m in Sources */,
@@ -6632,7 +6569,6 @@
 				C4AC2AD11D3963FA003B6232 /* CardComponent.mm in Sources */,
 				C4AC2AD21D3963FA003B6232 /* OrderedDictionary.m in Sources */,
 				C4AC2AD31D3963FA003B6232 /* RgCallViewController.mm in Sources */,
-				C4AC2AD41D3963FA003B6232 /* UICallBar.m in Sources */,
 				C4AC2AD51D3963FA003B6232 /* UIToggleButton.m in Sources */,
 				C4AC2AD61D3963FA003B6232 /* HeaderComponent.mm in Sources */,
 				C4AC2AD71D3963FA003B6232 /* RgChatQuestionTable.m in Sources */,
@@ -6660,7 +6596,6 @@
 				C4AC2AF01D3963FA003B6232 /* FavoriteModelController.m in Sources */,
 				C4AC2AF11D3963FA003B6232 /* IncomingCallViewController.m in Sources */,
 				C4AC2AF21D3963FA003B6232 /* UICompositeViewController.m in Sources */,
-				C4AC2AF41D3963FA003B6232 /* UIConferenceHeader.m in Sources */,
 				C4AC2AF51D3963FA003B6232 /* CardContext.m in Sources */,
 				C45CFFDE1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */,
 				C4AC2AF61D3963FA003B6232 /* UITransparentView.m in Sources */,
@@ -6716,7 +6651,6 @@
 				C4AC2B2D1D3963FA003B6232 /* CardModelController.m in Sources */,
 				C4AC2B2E1D3963FA003B6232 /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
 				C43F65D41D53EBE9004CEC70 /* HashtagCardComponentController.mm in Sources */,
-				C4AC2B2F1D3963FA003B6232 /* UIDigitButtonLongVoiceMail.m in Sources */,
 				C4AC2B301D3963FA003B6232 /* NSString+MD5.m in Sources */,
 				C4AC2B311D3963FA003B6232 /* ImageProcessingImplementation.mm in Sources */,
 				C4AC2B321D3963FA003B6232 /* ImageProcessor.cpp in Sources */,
@@ -6725,7 +6659,6 @@
 				C4AC2B351D3963FA003B6232 /* IASKSlider.m in Sources */,
 				C4AC2B361D3963FA003B6232 /* IASKSwitch.m in Sources */,
 				C4AC2B371D3963FA003B6232 /* IASKTextField.m in Sources */,
-				C4AC2B381D3963FA003B6232 /* UILinphone.m in Sources */,
 				C4AC2B391D3963FA003B6232 /* ColorSpaceUtilites.m in Sources */,
 				C4AC2B3A1D3963FA003B6232 /* FileTransferDelegate.m in Sources */,
 				C4AC2B3B1D3963FA003B6232 /* ImagePickerViewController.m in Sources */,
@@ -6964,39 +6897,6 @@
 				F0AF070F1A24BA770086C9C1 /* ar */,
 			);
 			name = WizardViewController.xib;
-			sourceTree = "<group>";
-		};
-		D38187E415FE349700C3EDCA /* UICallBar.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F09548261883F15400E8A69B /* Base */,
-				F095484B1883F58E00E8A69B /* fr */,
-				F095484C1883F59200E8A69B /* ru */,
-				F0AF06FF1A24BA770086C9C1 /* ar */,
-			);
-			name = UICallBar.xib;
-			sourceTree = "<group>";
-		};
-		D38187E815FE349D00C3EDCA /* UICallBar~ipad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F09548271883F15400E8A69B /* Base */,
-				F095484D1883F5AF00E8A69B /* fr */,
-				F095484E1883F5B300E8A69B /* ru */,
-				F0AF07001A24BA770086C9C1 /* ar */,
-			);
-			name = "UICallBar~ipad.xib";
-			sourceTree = "<group>";
-		};
-		D38187F315FE354000C3EDCA /* UIConferenceHeader.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F09548291883F15400E8A69B /* Base */,
-				F095484F1883F5D500E8A69B /* fr */,
-				F09548501883F5D900E8A69B /* ru */,
-				F0AF07051A24BA770086C9C1 /* ar */,
-			);
-			name = UIConferenceHeader.xib;
 			sourceTree = "<group>";
 		};
 		D38187F715FE354700C3EDCA /* UIContactDetailsFooter.xib */ = {

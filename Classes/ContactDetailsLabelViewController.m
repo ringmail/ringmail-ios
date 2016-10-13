@@ -20,7 +20,6 @@
 #import "ContactDetailsLabelViewController.h"
 
 #import "UACellBackgroundView.h"
-#import "UILinphone.h"
 #import "PhoneMainView.h"
 
 @implementation ContactDetailsLabelViewController

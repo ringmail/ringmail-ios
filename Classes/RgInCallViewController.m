@@ -27,7 +27,6 @@
 #import "RgInCallViewController.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
-#import "UILinphone.h"
 #import "DTActionSheet.h"
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"

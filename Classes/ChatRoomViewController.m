@@ -21,7 +21,6 @@
 #import "PhoneMainView.h"
 #import "LinphoneManager.h"
 #import "DTActionSheet.h"
-#import "UILinphone.h"
 #import "DTAlertView.h"
 #import "Utils/FileTransferDelegate.h"
 #import <NinePatch.h>

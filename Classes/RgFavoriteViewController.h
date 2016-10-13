@@ -6,7 +6,6 @@
 #import "UICompositeViewController.h"
 #import "FavoriteCollectionViewController.h"
 
-#import "UIEraseButton.h"
 #import "UICallButton.h"
 #import "UIMessageButton.h"
 #import "UITransferButton.h"

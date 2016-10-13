@@ -21,7 +21,6 @@
 #import "PhoneMainView.h"
 #import "UIEditableTableViewCell.h"
 #import "UACellBackgroundView.h"
-#import "UILinphone.h"
 #import "OrderedDictionary.h"
 #import "FastAddressBook.h"
 #import "DTAlertView.h"

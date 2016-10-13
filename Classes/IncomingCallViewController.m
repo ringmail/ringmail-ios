@@ -21,7 +21,6 @@
 #import "LinphoneManager.h"
 #import "FastAddressBook.h"
 #import "PhoneMainView.h"
-#import "UILinphone.h"
 
 @implementation IncomingCallViewController
 

@@ -21,7 +21,6 @@
 #import "Utils.h"
 #import "UIEditableTableViewCell.h"
 #import "FastAddressBook.h"
-#import "UILinphone.h"
 #import "PhoneMainView.h"
 #import "DTActionSheet.h"
 #import "UIImage+RoundedCorner.h"

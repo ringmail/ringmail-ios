@@ -22,7 +22,6 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "UACellBackgroundView.h"
-#import "UILinphone.h"
 #import "Utils.h"
 #import "RgContactManager.h"
 
