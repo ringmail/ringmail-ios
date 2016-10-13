@@ -69,7 +69,6 @@
 		22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5F03410CE6B2F00777D97 /* AddressBook.framework */; };
 		22BB1A69132FF16A005CD7AA /* UIEraseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB1A68132FF16A005CD7AA /* UIEraseButton.m */; };
 		22C755601317E59C007BC101 /* UIBluetoothButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7555F1317E59C007BC101 /* UIBluetoothButton.m */; };
-		22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F2508C107141E100AC9B3F /* DialerViewController.m */; };
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
@@ -902,7 +901,6 @@
 		C4AC29D21D3963FA003B6232 /* video_on_default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A74EAF15C69392001500B9 /* video_on_default~ipad.png */; };
 		C4AC29D31D3963FA003B6232 /* video_on_disabled~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A74EB015C69392001500B9 /* video_on_disabled~ipad.png */; };
 		C4AC29D41D3963FA003B6232 /* video_on_over~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A74EB115C69392001500B9 /* video_on_over~ipad.png */; };
-		C4AC29D51D3963FA003B6232 /* DialerViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C815FE345F00C3EDCA /* DialerViewController~ipad.xib */; };
 		C4AC29D61D3963FA003B6232 /* RgChatQuestionInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4BC49441BF9628800826264 /* RgChatQuestionInputCell.xib */; };
 		C4AC29D71D3963FA003B6232 /* ringmail_incall-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C42C0D9F1CAEE9D100AD5A91 /* ringmail_incall-arrow@3x.png */; };
 		C4AC29D81D3963FA003B6232 /* transfer_call_disabled~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3BDB9B815C6B5B1007BEAC1 /* transfer_call_disabled~ipad.png */; };
@@ -968,7 +966,6 @@
 		C4AC2A171D3963FA003B6232 /* msg.caf in Resources */ = {isa = PBXBuildFile; fileRef = D3804E5E15D92A57008072A5 /* msg.caf */; };
 		C4AC2A181D3963FA003B6232 /* msg.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3804E5F15D92A57008072A5 /* msg.wav */; };
 		C4AC2A191D3963FA003B6232 /* linphonerc~ipad in Resources */ = {isa = PBXBuildFile; fileRef = D321FF9815E628CB0098B5F4 /* linphonerc~ipad */; };
-		C4AC2A1A1D3963FA003B6232 /* DialerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C415FE345B00C3EDCA /* DialerViewController.xib */; };
 		C4AC2A1B1D3963FA003B6232 /* linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C315EE2CCF00914747 /* linphonerc */; };
 		C4AC2A1C1D3963FA003B6232 /* ringmail_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C41D67DA1CA722A100D7BA72 /* ringmail_plus.png */; };
 		C4AC2A1D1D3963FA003B6232 /* linphonerc-factory in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C615EE2D9200914747 /* linphonerc-factory */; };
@@ -1115,7 +1112,6 @@
 		C4AC2AAE1D3963FA003B6232 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B81A091B57DA33009604A6 /* TPKeyboardAvoidingTableView.m */; };
 		C4AC2AAF1D3963FA003B6232 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		C4AC2AB01D3963FA003B6232 /* LinphoneAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* LinphoneAppDelegate.m */; };
-		C4AC2AB11D3963FA003B6232 /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F2508C107141E100AC9B3F /* DialerViewController.m */; };
 		C4AC2AB31D3963FA003B6232 /* RgCallDuration.m in Sources */ = {isa = PBXBuildFile; fileRef = C42C0DD41CAF2D9600AD5A91 /* RgCallDuration.m */; };
 		C4AC2AB41D3963FA003B6232 /* UIDigitButtonLongPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */; };
 		C4AC2AB51D3963FA003B6232 /* UIDigitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2248E90D12F7E4CF00220D9C /* UIDigitButton.m */; };
@@ -1530,8 +1526,6 @@
 		D38187B515FE341B00C3EDCA /* ContactDetailsLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187B815FE341B00C3EDCA /* ContactDetailsLabelViewController.xib */; };
 		D38187B915FE342200C3EDCA /* ContactDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187BC15FE342200C3EDCA /* ContactDetailsViewController.xib */; };
 		D38187BD15FE342800C3EDCA /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C015FE342800C3EDCA /* ContactsViewController.xib */; };
-		D38187C115FE345B00C3EDCA /* DialerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C415FE345B00C3EDCA /* DialerViewController.xib */; };
-		D38187C515FE345F00C3EDCA /* DialerViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C815FE345F00C3EDCA /* DialerViewController~ipad.xib */; };
 		D38187C915FE346400C3EDCA /* FirstLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187CC15FE346400C3EDCA /* FirstLoginViewController.xib */; };
 		D38187CD15FE346700C3EDCA /* HistoryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187D015FE346700C3EDCA /* HistoryDetailsViewController.xib */; };
 		D38187D115FE346B00C3EDCA /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187D415FE346B00C3EDCA /* HistoryViewController.xib */; };
@@ -2065,8 +2059,6 @@
 		22BB1A68132FF16A005CD7AA /* UIEraseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEraseButton.m; sourceTree = "<group>"; };
 		22C7555E1317E59C007BC101 /* UIBluetoothButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBluetoothButton.h; sourceTree = "<group>"; };
 		22C7555F1317E59C007BC101 /* UIBluetoothButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBluetoothButton.m; sourceTree = "<group>"; };
-		22F2508B107141E100AC9B3F /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
-		22F2508C107141E100AC9B3F /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DialerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -3145,8 +3137,6 @@
 		F095481A1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactDetailsLabelViewController.xib; sourceTree = "<group>"; };
 		F095481B1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactDetailsViewController.xib; sourceTree = "<group>"; };
 		F095481C1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactsViewController.xib; sourceTree = "<group>"; };
-		F095481D1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DialerViewController.xib; sourceTree = "<group>"; };
-		F095481E1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/DialerViewController~ipad.xib"; sourceTree = "<group>"; };
 		F095481F1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FirstLoginViewController.xib; sourceTree = "<group>"; };
 		F09548201883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistoryDetailsViewController.xib; sourceTree = "<group>"; };
 		F09548211883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistoryViewController.xib; sourceTree = "<group>"; };
@@ -3173,10 +3163,6 @@
 		F09548381883F29C00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ContactDetailsViewController.strings; sourceTree = "<group>"; };
 		F09548391883F2C500E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
 		F095483A1883F2CA00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
-		F095483B1883F2DE00E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DialerViewController.strings; sourceTree = "<group>"; };
-		F095483C1883F2E300E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/DialerViewController.strings; sourceTree = "<group>"; };
-		F095483D1883F49E00E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/DialerViewController~ipad.strings"; sourceTree = "<group>"; };
-		F095483E1883F4A200E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/DialerViewController~ipad.strings"; sourceTree = "<group>"; };
 		F095483F1883F4B700E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FirstLoginViewController.strings; sourceTree = "<group>"; };
 		F09548401883F4BC00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/FirstLoginViewController.strings; sourceTree = "<group>"; };
 		F09548411883F51600E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/HistoryViewController.strings; sourceTree = "<group>"; };
@@ -3214,8 +3200,6 @@
 		F0AF06F31A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactDetailsLabelViewController.strings; sourceTree = "<group>"; };
 		F0AF06F41A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactDetailsViewController.strings; sourceTree = "<group>"; };
 		F0AF06F51A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
-		F0AF06F61A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/DialerViewController.strings; sourceTree = "<group>"; };
-		F0AF06F71A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/DialerViewController~ipad.strings"; sourceTree = "<group>"; };
 		F0AF06F81A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/FirstLoginViewController.strings; sourceTree = "<group>"; };
 		F0AF06F91A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HistoryDetailsViewController.strings; sourceTree = "<group>"; };
 		F0AF06FA1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HistoryViewController.strings; sourceTree = "<group>"; };
@@ -3464,10 +3448,6 @@
 				D35497FB15875372000081D8 /* ContactsViewController.h */,
 				D35497FC15875372000081D8 /* ContactsViewController.m */,
 				D38187C015FE342800C3EDCA /* ContactsViewController.xib */,
-				22F2508B107141E100AC9B3F /* DialerViewController.h */,
-				22F2508C107141E100AC9B3F /* DialerViewController.m */,
-				D38187C415FE345B00C3EDCA /* DialerViewController.xib */,
-				D38187C815FE345F00C3EDCA /* DialerViewController~ipad.xib */,
 				2218A92212FBE1340088A667 /* FirstLoginViewController.h */,
 				2218A92312FBE1340088A667 /* FirstLoginViewController.m */,
 				D38187CC15FE346400C3EDCA /* FirstLoginViewController.xib */,
@@ -5536,7 +5516,6 @@
 				D3A74F5415C69392001500B9 /* video_on_default~ipad.png in Resources */,
 				D3A74F5615C69392001500B9 /* video_on_disabled~ipad.png in Resources */,
 				D3A74F5815C69392001500B9 /* video_on_over~ipad.png in Resources */,
-				D38187C515FE345F00C3EDCA /* DialerViewController~ipad.xib in Resources */,
 				C4BC49451BF9628800826264 /* RgChatQuestionInputCell.xib in Resources */,
 				C42C0DBA1CAEE9D100AD5A91 /* ringmail_incall-arrow@3x.png in Resources */,
 				D3BDB9B915C6B5B1007BEAC1 /* transfer_call_disabled~ipad.png in Resources */,
@@ -5603,7 +5582,6 @@
 				D3804E6015D92A57008072A5 /* msg.caf in Resources */,
 				D3804E6215D92A57008072A5 /* msg.wav in Resources */,
 				D321FF9915E628CB0098B5F4 /* linphonerc~ipad in Resources */,
-				D38187C115FE345B00C3EDCA /* DialerViewController.xib in Resources */,
 				57F005C415EE2CCF00914747 /* linphonerc in Resources */,
 				C41D67DD1CA722A100D7BA72 /* ringmail_plus.png in Resources */,
 				57F005C815EE2D9200914747 /* linphonerc-factory in Resources */,
@@ -6273,7 +6251,6 @@
 				C4AC29D21D3963FA003B6232 /* video_on_default~ipad.png in Resources */,
 				C4AC29D31D3963FA003B6232 /* video_on_disabled~ipad.png in Resources */,
 				C4AC29D41D3963FA003B6232 /* video_on_over~ipad.png in Resources */,
-				C4AC29D51D3963FA003B6232 /* DialerViewController~ipad.xib in Resources */,
 				C4AC29D61D3963FA003B6232 /* RgChatQuestionInputCell.xib in Resources */,
 				C4AC29D71D3963FA003B6232 /* ringmail_incall-arrow@3x.png in Resources */,
 				C4AC29D81D3963FA003B6232 /* transfer_call_disabled~ipad.png in Resources */,
@@ -6340,7 +6317,6 @@
 				C4AC2A171D3963FA003B6232 /* msg.caf in Resources */,
 				C4AC2A181D3963FA003B6232 /* msg.wav in Resources */,
 				C4AC2A191D3963FA003B6232 /* linphonerc~ipad in Resources */,
-				C4AC2A1A1D3963FA003B6232 /* DialerViewController.xib in Resources */,
 				C4AC2A1B1D3963FA003B6232 /* linphonerc in Resources */,
 				C4AC2A1C1D3963FA003B6232 /* ringmail_plus.png in Resources */,
 				C4AC2A1D1D3963FA003B6232 /* linphonerc-factory in Resources */,
@@ -6600,7 +6576,6 @@
 				63B81A0F1B57DA33009604A6 /* TPKeyboardAvoidingTableView.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* LinphoneAppDelegate.m in Sources */,
-				22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */,
 				C42C0DD51CAF2D9600AD5A91 /* RgCallDuration.m in Sources */,
 				631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */,
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
@@ -6758,7 +6733,6 @@
 				C4AC2AAE1D3963FA003B6232 /* TPKeyboardAvoidingTableView.m in Sources */,
 				C4AC2AAF1D3963FA003B6232 /* main.m in Sources */,
 				C4AC2AB01D3963FA003B6232 /* LinphoneAppDelegate.m in Sources */,
-				C4AC2AB11D3963FA003B6232 /* DialerViewController.m in Sources */,
 				C4AC2AB31D3963FA003B6232 /* RgCallDuration.m in Sources */,
 				C4AC2AB41D3963FA003B6232 /* UIDigitButtonLongPlus.m in Sources */,
 				C4AC2AB51D3963FA003B6232 /* UIDigitButton.m in Sources */,
@@ -7117,28 +7091,6 @@
 				F0AF06F51A24BA760086C9C1 /* ar */,
 			);
 			name = ContactsViewController.xib;
-			sourceTree = "<group>";
-		};
-		D38187C415FE345B00C3EDCA /* DialerViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F095481D1883F15300E8A69B /* Base */,
-				F095483B1883F2DE00E8A69B /* fr */,
-				F095483C1883F2E300E8A69B /* ru */,
-				F0AF06F61A24BA760086C9C1 /* ar */,
-			);
-			name = DialerViewController.xib;
-			sourceTree = "<group>";
-		};
-		D38187C815FE345F00C3EDCA /* DialerViewController~ipad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F095481E1883F15300E8A69B /* Base */,
-				F095483D1883F49E00E8A69B /* fr */,
-				F095483E1883F4A200E8A69B /* ru */,
-				F0AF06F71A24BA760086C9C1 /* ar */,
-			);
-			name = "DialerViewController~ipad.xib";
 			sourceTree = "<group>";
 		};
 		D38187CC15FE346400C3EDCA /* FirstLoginViewController.xib */ = {
