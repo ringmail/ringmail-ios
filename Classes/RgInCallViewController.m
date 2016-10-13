@@ -25,7 +25,6 @@
 #import <OpenGLES/EAGLDrawable.h>
 
 #import "RgInCallViewController.h"
-#import "UICallCell.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "UILinphone.h"

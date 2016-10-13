@@ -967,7 +967,6 @@
 		C4AC2A221D3963FA003B6232 /* chat_message_not_delivered.png in Resources */ = {isa = PBXBuildFile; fileRef = 2234C8E815EE2F7F00E18E83 /* chat_message_not_delivered.png */; };
 		C4AC2A231D3963FA003B6232 /* chat_message_inprogress.png in Resources */ = {isa = PBXBuildFile; fileRef = 2234C8ED15EE744200E18E83 /* chat_message_inprogress.png */; };
 		C4AC2A241D3963FA003B6232 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D37EE11016035793003608A6 /* ImageViewController.xib */; };
-		C4AC2A251D3963FA003B6232 /* UICallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D381881415FE3F0B00C3EDCA /* UICallCell.xib */; };
 		C4AC2A271D3963FA003B6232 /* menu-contact_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3B61C92240300134788 /* menu-contact_active@2x.png */; };
 		C4AC2A281D3963FA003B6232 /* background_alt.png in Resources */ = {isa = PBXBuildFile; fileRef = D3998D0316031937009DD22C /* background_alt.png */; };
 		C4AC2A291D3963FA003B6232 /* image_back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3866C261608CA1600830F95 /* image_back_default.png */; };
@@ -1136,7 +1135,6 @@
 		C4AC2AD81D3963FA003B6232 /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72081CA22EDB0020A57F /* CardsPage.m */; };
 		C4AC2AD91D3963FA003B6232 /* UIPauseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D36FB2D41589EF7C0036F6F2 /* UIPauseButton.m */; };
 		C4AC2ADB1D3963FA003B6232 /* UILongTouchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D32409C2158B49A600C8C119 /* UILongTouchButton.m */; };
-		C4AC2ADC1D3963FA003B6232 /* UICallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C43C5158F2E5A0048BA40 /* UICallCell.m */; };
 		C4AC2ADD1D3963FA003B6232 /* RgChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E5E51B960B35006C915A /* RgChatManager.m */; };
 		C4AC2ADE1D3963FA003B6232 /* UIAddressTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D35E7580159328EB0066B1C1 /* UIAddressTextField.m */; };
 		C4AC2ADF1D3963FA003B6232 /* MainCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C450DBB61C70FFB00053592E /* MainCollectionViewController.mm */; };
@@ -1448,7 +1446,6 @@
 		D35EA76515A2DF8D003E025D /* micro_on_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D35EA76215A2DF8D003E025D /* micro_on_disabled.png */; };
 		D365AA7B15A2DE7500CAFE3F /* speaker_off_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D365AA7915A2DE7500CAFE3F /* speaker_off_disabled.png */; };
 		D365AA7D15A2DE7500CAFE3F /* speaker_on_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D365AA7A15A2DE7500CAFE3F /* speaker_on_disabled.png */; };
-		D36C43C6158F2E5A0048BA40 /* UICallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C43C5158F2E5A0048BA40 /* UICallCell.m */; };
 		D36C43D1158F2F370048BA40 /* cell_call.png in Resources */ = {isa = PBXBuildFile; fileRef = D36C43CC158F2F370048BA40 /* cell_call.png */; };
 		D36C43D3158F2F370048BA40 /* cell_conference.png in Resources */ = {isa = PBXBuildFile; fileRef = D36C43CD158F2F370048BA40 /* cell_conference.png */; };
 		D36C43D5158F2F370048BA40 /* header_conference.png in Resources */ = {isa = PBXBuildFile; fileRef = D36C43CE158F2F370048BA40 /* header_conference.png */; };
@@ -1511,7 +1508,6 @@
 		D38187F415FE354700C3EDCA /* UIContactDetailsFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187F715FE354700C3EDCA /* UIContactDetailsFooter.xib */; };
 		D38187F815FE355D00C3EDCA /* UIMainBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187FB15FE355D00C3EDCA /* UIMainBar.xib */; };
 		D38187FC15FE356100C3EDCA /* UIMainBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187FF15FE356100C3EDCA /* UIMainBar~ipad.xib */; };
-		D381881115FE3F0B00C3EDCA /* UICallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D381881415FE3F0B00C3EDCA /* UICallCell.xib */; };
 		D381881515FE3F7F00C3EDCA /* UIContactDetailsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D381881815FE3F7F00C3EDCA /* UIContactDetailsHeader.xib */; };
 		D38327F31580FE3A00FA0D23 /* contacts_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D38327EB1580FE3A00FA0D23 /* contacts_default.png */; };
 		D38327F41580FE3A00FA0D23 /* contacts_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D38327EC1580FE3A00FA0D23 /* contacts_selected.png */; };
@@ -2158,8 +2154,6 @@
 		637157A01B283FE200C91677 /* FileTransferDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileTransferDelegate.m; path = Utils/FileTransferDelegate.m; sourceTree = "<group>"; };
 		639CEAFE1A1DF4D9004DE38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIStateBar.xib; sourceTree = "<group>"; };
 		639CEB041A1DF4EB004DE38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UICompositeViewController.xib; sourceTree = "<group>"; };
-		639CEB0C1A1DF528004DE38F /* fr */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UICallCell.strings; sourceTree = "<group>"; };
-		639CEB0D1A1DF52C004DE38F /* ru */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/UICallCell.strings; sourceTree = "<group>"; };
 		63B81A031B57DA33009604A6 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		63B81A041B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
 		63B81A051B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
@@ -2661,8 +2655,6 @@
 		D35EA76215A2DF8D003E025D /* micro_on_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = micro_on_disabled.png; path = Resources/micro_on_disabled.png; sourceTree = "<group>"; };
 		D365AA7915A2DE7500CAFE3F /* speaker_off_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speaker_off_disabled.png; path = Resources/speaker_off_disabled.png; sourceTree = "<group>"; };
 		D365AA7A15A2DE7500CAFE3F /* speaker_on_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speaker_on_disabled.png; path = Resources/speaker_on_disabled.png; sourceTree = "<group>"; };
-		D36C43C4158F2E5A0048BA40 /* UICallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICallCell.h; sourceTree = "<group>"; };
-		D36C43C5158F2E5A0048BA40 /* UICallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICallCell.m; sourceTree = "<group>"; };
 		D36C43CC158F2F370048BA40 /* cell_call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_call.png; path = Resources/cell_call.png; sourceTree = "<group>"; };
 		D36C43CD158F2F370048BA40 /* cell_conference.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_conference.png; path = Resources/cell_conference.png; sourceTree = "<group>"; };
 		D36C43CE158F2F370048BA40 /* header_conference.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = header_conference.png; path = Resources/header_conference.png; sourceTree = "<group>"; };
@@ -3089,7 +3081,6 @@
 		F09548251883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/IncomingCallViewController~ipad.xib"; sourceTree = "<group>"; };
 		F09548261883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UICallBar.xib; sourceTree = "<group>"; };
 		F09548271883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/UICallBar~ipad.xib"; sourceTree = "<group>"; };
-		F09548281883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UICallCell.xib; sourceTree = "<group>"; };
 		F09548291883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIConferenceHeader.xib; sourceTree = "<group>"; };
 		F095482A1883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIContactDetailsFooter.xib; sourceTree = "<group>"; };
 		F095482B1883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIContactDetailsHeader.xib; sourceTree = "<group>"; };
@@ -3142,7 +3133,6 @@
 		F0AF06FE1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/IncomingCallViewController~ipad.strings"; sourceTree = "<group>"; };
 		F0AF06FF1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UICallBar.strings; sourceTree = "<group>"; };
 		F0AF07001A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/UICallBar~ipad.strings"; sourceTree = "<group>"; };
-		F0AF07011A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UICallCell.strings; sourceTree = "<group>"; };
 		F0AF07041A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UICompositeViewController.strings; sourceTree = "<group>"; };
 		F0AF07051A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIConferenceHeader.strings; sourceTree = "<group>"; };
 		F0AF07061A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIContactCell.strings; sourceTree = "<group>"; };
@@ -3453,9 +3443,6 @@
 				C4E985C91BAF98E200939A55 /* UIMessageButton.m */,
 				2214EB7812F846B1002A5394 /* UICallButton.h */,
 				2214EB7912F846B1002A5394 /* UICallButton.m */,
-				D36C43C4158F2E5A0048BA40 /* UICallCell.h */,
-				D36C43C5158F2E5A0048BA40 /* UICallCell.m */,
-				D381881415FE3F0B00C3EDCA /* UICallCell.xib */,
 				22AA8AFF13D83F6300B30535 /* UICamSwitch.h */,
 				22AA8B0013D83F6300B30535 /* UICamSwitch.m */,
 				D31B4B1E159876C0002E6C72 /* UICompositeViewController.h */,
@@ -5495,7 +5482,6 @@
 				2234C8EB15EE2F7F00E18E83 /* chat_message_not_delivered.png in Resources */,
 				2234C8EE15EE744200E18E83 /* chat_message_inprogress.png in Resources */,
 				D37EE10D16035793003608A6 /* ImageViewController.xib in Resources */,
-				D381881115FE3F0B00C3EDCA /* UICallCell.xib in Resources */,
 				C444F3D71C92240300134788 /* menu-contact_active@2x.png in Resources */,
 				D3998D0416031937009DD22C /* background_alt.png in Resources */,
 				D3866C281608CA1600830F95 /* image_back_default.png in Resources */,
@@ -6225,7 +6211,6 @@
 				C4AC2A221D3963FA003B6232 /* chat_message_not_delivered.png in Resources */,
 				C4AC2A231D3963FA003B6232 /* chat_message_inprogress.png in Resources */,
 				C4AC2A241D3963FA003B6232 /* ImageViewController.xib in Resources */,
-				C4AC2A251D3963FA003B6232 /* UICallCell.xib in Resources */,
 				C4AC2A271D3963FA003B6232 /* menu-contact_active@2x.png in Resources */,
 				C4AC2A281D3963FA003B6232 /* background_alt.png in Resources */,
 				C4AC2A291D3963FA003B6232 /* image_back_default.png in Resources */,
@@ -6508,7 +6493,6 @@
 				C42B72131CA22EDB0020A57F /* CardsPage.m in Sources */,
 				D36FB2D51589EF7C0036F6F2 /* UIPauseButton.m in Sources */,
 				D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */,
-				D36C43C6158F2E5A0048BA40 /* UICallCell.m in Sources */,
 				C401E5E61B960B35006C915A /* RgChatManager.m in Sources */,
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				C450DBB71C70FFB00053592E /* MainCollectionViewController.mm in Sources */,
@@ -6655,7 +6639,6 @@
 				C4AC2AD81D3963FA003B6232 /* CardsPage.m in Sources */,
 				C4AC2AD91D3963FA003B6232 /* UIPauseButton.m in Sources */,
 				C4AC2ADB1D3963FA003B6232 /* UILongTouchButton.m in Sources */,
-				C4AC2ADC1D3963FA003B6232 /* UICallCell.m in Sources */,
 				C4AC2ADD1D3963FA003B6232 /* RgChatManager.m in Sources */,
 				C4AC2ADE1D3963FA003B6232 /* UIAddressTextField.m in Sources */,
 				C4AC2ADF1D3963FA003B6232 /* MainCollectionViewController.mm in Sources */,
@@ -7047,17 +7030,6 @@
 				F0AF070B1A24BA770086C9C1 /* ar */,
 			);
 			name = "UIMainBar~ipad.xib";
-			sourceTree = "<group>";
-		};
-		D381881415FE3F0B00C3EDCA /* UICallCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F09548281883F15400E8A69B /* Base */,
-				639CEB0C1A1DF528004DE38F /* fr */,
-				639CEB0D1A1DF52C004DE38F /* ru */,
-				F0AF07011A24BA770086C9C1 /* ar */,
-			);
-			name = UICallCell.xib;
 			sourceTree = "<group>";
 		};
 		D381881815FE3F7F00C3EDCA /* UIContactDetailsHeader.xib */ = {

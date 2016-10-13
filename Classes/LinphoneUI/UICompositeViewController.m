@@ -525,35 +525,12 @@
 	// Resize TabBar
 	CGRect tabFrame = tabBarView.frame;
 	if (self.tabBarViewController != nil && currentViewDescription.tabBarEnabled) {
-        if ([currentViewDescription.tabBar isEqualToString:@"UICallBar"])
-        {
-            tabFrame.origin.y = viewFrame.size.height;
-            tabFrame.origin.x = viewFrame.size.width;
-            tabFrame.size.height = self.tabBarViewController.view.frame.size.height;
-            // tabFrame.size.width = self.tabBarViewController.view.frame.size.width;
-            tabFrame.origin.y -= tabFrame.size.height;
-            tabFrame.origin.x -= tabFrame.size.width;
-            contentFrame.size.height = tabFrame.origin.y - contentFrame.origin.y;
-            
-            // for some views, we need the content to overlap, in which case
-            // we insert in the tab XIB a mask with tag -1 and with y = the amount of
-            // points that the content should overlap.
-            for (UIView *view in self.tabBarViewController.view.subviews) {
-                if (view.tag == -1) {
-                    contentFrame.size.height += view.frame.origin.y;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            // Top tabBar nav, with componentkit content frame
-            tabFrame.origin.y = statusBarHeight;
-    		tabFrame.size.width = viewFrame.size.width;
-            tabFrame.size.height = 50;
-            contentFrame.origin.y = [UIApplication sharedApplication].statusBarFrame.size.height + tabFrame.size.height;
-            contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
-        }
+        // Top tabBar nav, with componentkit content frame
+        tabFrame.origin.y = statusBarHeight;
+        tabFrame.size.width = viewFrame.size.width;
+        tabFrame.size.height = 50;
+        contentFrame.origin.y = [UIApplication sharedApplication].statusBarFrame.size.height + tabFrame.size.height;
+        contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
 	}
     else
     {
