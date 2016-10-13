@@ -22,7 +22,6 @@
 #import "LinphoneManager.h"
 #import "DTActionSheet.h"
 #import "DTAlertView.h"
-#import "Utils/FileTransferDelegate.h"
 #import <NinePatch.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "Utils.h"
@@ -47,13 +46,6 @@
 - (id)init {
 	self = [super initWithNibName:@"ChatRoomViewController" bundle:[NSBundle mainBundle]];
 	if (self != nil) {
-		self->scrollOnGrowingEnabled = TRUE;
-		self->chatRoom = NULL;
-		self->imageQualities = [[OrderedDictionary alloc]
-			initWithObjectsAndKeys:[NSNumber numberWithFloat:0.9], NSLocalizedString(@"Maximum", nil),
-								   [NSNumber numberWithFloat:0.5], NSLocalizedString(@"Average", nil),
-								   [NSNumber numberWithFloat:0.0], NSLocalizedString(@"Minimum", nil), nil];
-		self->composingVisible = TRUE;
 	}
 	return self;
 }
@@ -109,10 +101,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(applicationWillEnterForeground:)
 												 name:UIApplicationDidBecomeActiveNotification
 											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(textComposeEvent:)
-												 name:kLinphoneTextComposeEvent
-											   object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(chatReceivedEvent:)
                                                  name:kRgTextReceived
@@ -148,9 +136,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-
-	[self setComposingVisible:FALSE withDelay:0]; // will hide the "user is composing.." message
-
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [[self.chatViewController view] removeFromSuperview];
@@ -167,17 +152,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 #pragma mark -
-
-- (void)setChatRoom:(LinphoneChatRoom *)room {
-	self->chatRoom = room;
-}
-
-- (void)applicationWillEnterForeground:(NSNotification *)notif {
-	if (chatRoom != nil) {
-		linphone_chat_room_mark_as_read(chatRoom);
-		[[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
-	}
-}
 
 - (void)update {
 	LinphoneManager *lm = [LinphoneManager instance];
@@ -232,104 +206,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState state, void *ud) {
-	const char *text = (linphone_chat_message_get_file_transfer_information(msg) != NULL)
-						   ? "photo transfer"
-						   : linphone_chat_message_get_text(msg);
-	LOGI(@"Delivery status for [%s] is [%s]", text, linphone_chat_message_state_to_string(state));
-	//ChatRoomViewController *thiz = (__bridge ChatRoomViewController *)ud;
-	//[thiz.tableController updateChatEntry:msg];
-}
-
-- (BOOL)sendMessage:(NSString *)message withExterlBodyUrl:(NSURL *)externalUrl withInternalURL:(NSURL *)internalUrl {
-	if (chatRoom == NULL) {
-		LOGW(@"Cannot send message: No chatroom");
-		return FALSE;
-	}
-
-	LinphoneChatMessage *msg = linphone_chat_room_create_message(chatRoom, [message UTF8String]);
-	if (externalUrl) {
-		linphone_chat_message_set_external_body_url(msg, [[externalUrl absoluteString] UTF8String]);
-	}
-
-	linphone_chat_room_send_message2(chatRoom, msg, message_status, (__bridge void *)(self));
-
-	if (internalUrl) {
-		// internal url is saved in the appdata for display and later save
-		[LinphoneManager setValueInMessageAppData:[internalUrl absoluteString] forKey:@"localimage" inMessage:msg];
-	}
-
-	//[tableController addChatEntry:msg];
-	//[tableController scrollToBottom:true];
-	return TRUE;
-}
-
-- (void)saveAndSend:(UIImage *)image url:(NSURL *)url {
-	// photo from Camera, must be saved first
-	if (url == nil) {
-		[[LinphoneManager instance]
-				.photoLibrary
-			writeImageToSavedPhotosAlbum:image.CGImage
-							 orientation:(ALAssetOrientation)[image imageOrientation]
-						 completionBlock:^(NSURL *assetURL, NSError *error) {
-						   if (error) {
-							   LOGE(@"Cannot save image data downloaded [%@]", [error localizedDescription]);
-
-							   UIAlertView *errorAlert = [[UIAlertView alloc]
-									   initWithTitle:NSLocalizedString(@"Transfer error", nil)
-											 message:NSLocalizedString(@"Cannot write image to photo library", nil)
-											delegate:nil
-								   cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-								   otherButtonTitles:nil, nil];
-							   [errorAlert show];
-						   } else {
-							   LOGI(@"Image saved to [%@]", [assetURL absoluteString]);
-							   [self chatRoomStartImageUpload:image url:assetURL];
-						   }
-						 }];
-	} else {
-		[self chatRoomStartImageUpload:image url:url];
-	}
-}
-
-- (void)chooseImageQuality:(UIImage *)image url:(NSURL *)url {
-	DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Choose the image size", nil)];
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-	  // UIImage *image = [original_image normalizedImage];
-	  for (NSString *key in [imageQualities allKeys]) {
-		  NSNumber *number = [imageQualities objectForKey:key];
-		  NSData *data = UIImageJPEGRepresentation(image, [number floatValue]);
-		  NSNumber *size = [NSNumber numberWithInteger:[data length]];
-
-		  NSString *text = [NSString stringWithFormat:@"%@ (%@)", key, [size toHumanReadableSize]];
-		  [sheet addButtonWithTitle:text
-							  block:^() {
-								[self saveAndSend:[UIImage imageWithData:data] url:url];
-							  }];
-	  }
-	  [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
-	  dispatch_async(dispatch_get_main_queue(), ^{
-		[sheet showInView:[PhoneMainView instance].view];
-	  });
-	});
-}
-
-- (void)setComposingVisible:(BOOL)visible withDelay:(CGFloat)delay {
-
-	if (composingVisible == visible)
-		return;
-	composingVisible = visible;
-}
-
 #pragma mark - Event Functions
-
-- (void)textComposeEvent:(NSNotification *)notif {
-	LinphoneChatRoom *room = [[[notif userInfo] objectForKey:@"room"] pointerValue];
-	if (room && room == chatRoom) {
-		BOOL composing = linphone_chat_room_is_remote_composing(room);
-		[self setComposingVisible:composing withDelay:0.3];
-	}
-}
 
 - (void)chatReceivedEvent:(NSNotification *)notif {
     NSNumber *room = [[notif userInfo] objectForKey:@"session"];
@@ -452,38 +329,6 @@ static void message_status(LinphoneChatMessage *msg, LinphoneChatMessageState st
        		[[PhoneMainView instance] promptNewOrEdit:sdata[@"session_tag"]];
     	}
 	}
-}
-
-#pragma mark ChatRoomDelegate
-
-- (BOOL)chatRoomStartImageUpload:(UIImage *)image url:(NSURL *)url {
-	FileTransferDelegate *fileTransfer = [[FileTransferDelegate alloc] init];
-	[fileTransfer upload:image withURL:url forChatRoom:chatRoom];
-	//[tableController addChatEntry:linphone_chat_message_ref(fileTransfer.message)];
-	//[tableController scrollToBottom:true];
-	return TRUE;
-}
-
-- (void)resendChat:(NSString *)message withExternalUrl:(NSString *)url {
-	[self sendMessage:message withExterlBodyUrl:[NSURL URLWithString:url] withInternalURL:nil];
-}
-
-#pragma mark ImagePickerDelegate
-
-- (void)imagePickerDelegateImage:(UIImage *)image info:(NSDictionary *)info {
-	// Dismiss popover on iPad
-	if ([LinphoneManager runningOnIpad]) {
-		UICompositeViewDescription *description = [ImagePickerViewController compositeViewDescription];
-		ImagePickerViewController *controller =
-			DYNAMIC_CAST([[PhoneMainView instance].mainViewController getCachedController:description.content],
-						 ImagePickerViewController);
-		if (controller != nil) {
-			[controller.popoverController dismissPopoverAnimated:TRUE];
-		}
-	}
-
-	NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
-	[self chooseImageQuality:image url:url];
 }
 
 @end

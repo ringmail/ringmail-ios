@@ -67,7 +67,6 @@
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
-		340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 340751E6150F38FD00B89C47 /* UIVideoButton.m */; };
 		34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 34216F3F1547EBCD00EA9777 /* VideoZoomHandler.m */; };
 		4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */; };
 		4DDB8CF61D9444BC00F5FD71 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */; };
@@ -138,7 +137,6 @@
 		631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */; };
 		636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D61A1DEC650009B839 /* SettingsViewController.xib */; };
 		636316D91A1DECC90009B839 /* PhoneMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D71A1DECC90009B839 /* PhoneMainView.xib */; };
-		637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 637157A01B283FE200C91677 /* FileTransferDelegate.m */; };
 		639CEAFD1A1DF4D9004DE38F /* UIStateBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEAFF1A1DF4D9004DE38F /* UIStateBar.xib */; };
 		639CEB031A1DF4EB004DE38F /* UICompositeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB051A1DF4EB004DE38F /* UICompositeViewController.xib */; };
 		63B81A0C1B57DA33009604A6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 63B81A031B57DA33009604A6 /* LICENSE.txt */; };
@@ -1102,7 +1100,6 @@
 		C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */; };
 		C4AC2AC11D3963FA003B6232 /* UICamSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AA8B0013D83F6300B30535 /* UICamSwitch.m */; };
 		C4AC2AC21D3963FA003B6232 /* RgIncomingCallComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42C0DD91CB1691E00AD5A91 /* RgIncomingCallComponent.mm */; };
-		C4AC2AC31D3963FA003B6232 /* UIVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 340751E6150F38FD00B89C47 /* UIVideoButton.m */; };
 		C4AC2AC41D3963FA003B6232 /* VideoZoomHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 34216F3F1547EBCD00EA9777 /* VideoZoomHandler.m */; };
 		C4AC2AC61D3963FA003B6232 /* PhoneMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F83F8D15822ABD00336684 /* PhoneMainView.m */; };
 		C4AC2AC71D3963FA003B6232 /* RgContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B95261C10E0A900253BB7 /* RgContactManager.m */; };
@@ -1127,7 +1124,6 @@
 		C4AC2AE01D3963FA003B6232 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35E759D159460B50066B1C1 /* SettingsViewController.m */; };
 		C4AC2AE11D3963FA003B6232 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B81A0B1B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		C4AC2AE21D3963FA003B6232 /* RgCallComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42C0D651CAEDAA800AD5A91 /* RgCallComponent.mm */; };
-		C4AC2AE31D3963FA003B6232 /* UITextViewNoDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */; };
 		C4AC2AE41D3963FA003B6232 /* NSObject+NSPerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */; };
 		C4AC2AE51D3963FA003B6232 /* HashtagCategoryHeaderComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78771CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm */; };
 		C4AC2AE61D3963FA003B6232 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B81A051B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.m */; };
@@ -1201,7 +1197,6 @@
 		C4AC2B361D3963FA003B6232 /* IASKSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE515C2894A005BE9BC /* IASKSwitch.m */; };
 		C4AC2B371D3963FA003B6232 /* IASKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE715C2894A005BE9BC /* IASKTextField.m */; };
 		C4AC2B391D3963FA003B6232 /* ColorSpaceUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */; };
-		C4AC2B3A1D3963FA003B6232 /* FileTransferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 637157A01B283FE200C91677 /* FileTransferDelegate.m */; };
 		C4AC2B3B1D3963FA003B6232 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D378AB2915DCDB490098505D /* ImagePickerViewController.m */; };
 		C4AC2B3C1D3963FA003B6232 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22405EFE1601C19100B92522 /* ImageViewController.m */; };
 		C4AC2B3D1D3963FA003B6232 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED40161602172200BF332B /* HPGrowingTextView.m */; };
@@ -1786,7 +1781,6 @@
 		D3F9A9DB15AEEB940045320F /* history_notification.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F9A9DA15AEEB940045320F /* history_notification.png */; };
 		D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F9A9ED15AF277D0045320F /* UACellBackgroundView.m */; };
 		F01A77EB18ED989B00E287CA /* shortring.caf in Resources */ = {isa = PBXBuildFile; fileRef = F01A77EA18ED989B00E287CA /* shortring.caf */; };
-		F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */; };
 		F0642EF119DAC891009DB336 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */; };
 		F066515517F9A02E0064280C /* UITransparentTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F066515417F9A02E0064280C /* UITransparentTVCell.m */; };
 		F070E6331A2622EC00E17AFD /* dialer_padding_left.png in Resources */ = {isa = PBXBuildFile; fileRef = F070E62D1A2622EC00E17AFD /* dialer_padding_left.png */; };
@@ -1993,8 +1987,6 @@
 		2F5AEF511386B4764474AA27 /* Pods-RingMail-Dev.distributionadhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail-Dev.distributionadhoc.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail-Dev/Pods-RingMail-Dev.distributionadhoc.xcconfig"; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* linphone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linphone_Prefix.pch; sourceTree = "<group>"; };
 		340751961506459A00B89C47 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		340751E5150F38FC00B89C47 /* UIVideoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIVideoButton.h; sourceTree = "<group>"; };
-		340751E6150F38FD00B89C47 /* UIVideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIVideoButton.m; sourceTree = "<group>"; };
 		34216F3E1547EBCD00EA9777 /* VideoZoomHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoZoomHandler.h; path = LinphoneUI/VideoZoomHandler.h; sourceTree = "<group>"; };
 		34216F3F1547EBCD00EA9777 /* VideoZoomHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoZoomHandler.m; path = LinphoneUI/VideoZoomHandler.m; sourceTree = "<group>"; };
 		4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -2114,8 +2106,6 @@
 		633E388219FFB0F400936D1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		636316D51A1DEC650009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsViewController.xib; sourceTree = "<group>"; };
 		636316D81A1DECC90009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhoneMainView.xib; sourceTree = "<group>"; };
-		6371579F1B283FE200C91677 /* FileTransferDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileTransferDelegate.h; path = Utils/FileTransferDelegate.h; sourceTree = "<group>"; };
-		637157A01B283FE200C91677 /* FileTransferDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileTransferDelegate.m; path = Utils/FileTransferDelegate.m; sourceTree = "<group>"; };
 		639CEAFE1A1DF4D9004DE38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIStateBar.xib; sourceTree = "<group>"; };
 		639CEB041A1DF4EB004DE38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UICompositeViewController.xib; sourceTree = "<group>"; };
 		63B81A031B57DA33009604A6 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -3009,8 +2999,6 @@
 		F0181B6B18BF7B1200A9A357 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F01A77EA18ED989B00E287CA /* shortring.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = shortring.caf; path = Resources/shortring.caf; sourceTree = "<group>"; };
 		F03A9B3318C0CF7000C4D7FE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		F03CA84118C72F1A0008889D /* UITextViewNoDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextViewNoDefine.h; sourceTree = "<group>"; };
-		F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextViewNoDefine.m; sourceTree = "<group>"; };
 		F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		F0642EF719DAF32E009DB336 /* DTWeakSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTWeakSupport.h; sourceTree = "<group>"; };
 		F066515317F9A02E0064280C /* UITransparentTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITransparentTVCell.h; sourceTree = "<group>"; };
@@ -3411,16 +3399,12 @@
 				D354981E1587716B000081D8 /* UIStateBar.h */,
 				D354981F1587716B000081D8 /* UIStateBar.m */,
 				639CEAFF1A1DF4D9004DE38F /* UIStateBar.xib */,
-				F03CA84118C72F1A0008889D /* UITextViewNoDefine.h */,
-				F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */,
 				D32648421588F6FA00930C67 /* UIToggleButton.h */,
 				D32648431588F6FB00930C67 /* UIToggleButton.m */,
 				F066515317F9A02E0064280C /* UITransparentTVCell.h */,
 				F066515417F9A02E0064280C /* UITransparentTVCell.m */,
 				D32460E4159D9AAD00BA7F3A /* UITransparentView.h */,
 				D32460E5159D9AAD00BA7F3A /* UITransparentView.m */,
-				340751E5150F38FC00B89C47 /* UIVideoButton.h */,
-				340751E6150F38FD00B89C47 /* UIVideoButton.m */,
 			);
 			path = LinphoneUI;
 			sourceTree = "<group>";
@@ -3774,8 +3758,6 @@
 				D37EE15F160377D7003608A6 /* DTFoundation */,
 				D32B9DFA15A2F131000B6DEC /* FastAddressBook.h */,
 				D32B9DFB15A2F131000B6DEC /* FastAddressBook.m */,
-				6371579F1B283FE200C91677 /* FileTransferDelegate.h */,
-				637157A01B283FE200C91677 /* FileTransferDelegate.m */,
 				63B81A021B57DA33009604A6 /* TPKeyboardAvoiding */,
 				D3ED40141602172200BF332B /* GrowingTextView */,
 				D3807FC715C2894A005BE9BC /* InAppSettingsKit */,
@@ -6374,7 +6356,6 @@
 				C4FD78751CFB70520066BDB1 /* HashtagCategoryCardComponent.mm in Sources */,
 				22AA8B0113D83F6300B30535 /* UICamSwitch.m in Sources */,
 				C42C0DDA1CB1691E00AD5A91 /* RgIncomingCallComponent.mm in Sources */,
-				340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */,
 				34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */,
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
 				C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */,
@@ -6401,7 +6382,6 @@
 				C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */,
 				63B81A101B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C42C0D661CAEDAA800AD5A91 /* RgCallComponent.mm in Sources */,
-				F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */,
 				C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */,
 				C4FD78781CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm in Sources */,
 				63B81A0D1B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.m in Sources */,
@@ -6477,7 +6457,6 @@
 				D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */,
 				D380800215C2894A005BE9BC /* IASKTextField.m in Sources */,
 				D380801315C299D0005BE9BC /* ColorSpaceUtilites.m in Sources */,
-				637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerViewController.m in Sources */,
 				22405F001601C19200B92522 /* ImageViewController.m in Sources */,
 				D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */,
@@ -6510,7 +6489,6 @@
 				C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */,
 				C4AC2AC11D3963FA003B6232 /* UICamSwitch.m in Sources */,
 				C4AC2AC21D3963FA003B6232 /* RgIncomingCallComponent.mm in Sources */,
-				C4AC2AC31D3963FA003B6232 /* UIVideoButton.m in Sources */,
 				C4AC2AC41D3963FA003B6232 /* VideoZoomHandler.m in Sources */,
 				C4AC2AC61D3963FA003B6232 /* PhoneMainView.m in Sources */,
 				C4AC2AC71D3963FA003B6232 /* RgContactManager.m in Sources */,
@@ -6536,7 +6514,6 @@
 				C4AC2AE01D3963FA003B6232 /* SettingsViewController.m in Sources */,
 				C4AC2AE11D3963FA003B6232 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C4AC2AE21D3963FA003B6232 /* RgCallComponent.mm in Sources */,
-				C4AC2AE31D3963FA003B6232 /* UITextViewNoDefine.m in Sources */,
 				C4AC2AE41D3963FA003B6232 /* NSObject+NSPerformSelector.m in Sources */,
 				C4AC2AE51D3963FA003B6232 /* HashtagCategoryHeaderComponent.mm in Sources */,
 				C4AC2AE61D3963FA003B6232 /* TPKeyboardAvoidingCollectionView.m in Sources */,
@@ -6613,7 +6590,6 @@
 				C4AC2B361D3963FA003B6232 /* IASKSwitch.m in Sources */,
 				C4AC2B371D3963FA003B6232 /* IASKTextField.m in Sources */,
 				C4AC2B391D3963FA003B6232 /* ColorSpaceUtilites.m in Sources */,
-				C4AC2B3A1D3963FA003B6232 /* FileTransferDelegate.m in Sources */,
 				C4AC2B3B1D3963FA003B6232 /* ImagePickerViewController.m in Sources */,
 				C4AC2B3C1D3963FA003B6232 /* ImageViewController.m in Sources */,
 				C4AC2B3D1D3963FA003B6232 /* HPGrowingTextView.m in Sources */,

@@ -22,18 +22,13 @@
 #import "UIToggleButton.h"
 #import "UICompositeViewController.h"
 #import "HPGrowingTextView.h"
-#import "ImagePickerViewController.h"
 #import "OrderedDictionary.h"
 #import "RgMessagesViewController.h"
 #import "RgManager.h"
 
 #include "linphone/linphonecore.h"
 
-@interface ChatRoomViewController : UIViewController<UICompositeViewDelegate, ImagePickerDelegate> {
-    LinphoneChatRoom *chatRoom;
-    OrderedDictionary *imageQualities;
-    BOOL scrollOnGrowingEnabled;
-    BOOL composingVisible;
+@interface ChatRoomViewController : UIViewController<UICompositeViewDelegate> {
 }
 
 @property (nonatomic, strong) IBOutlet UIToggleButton *editButton;
@@ -45,14 +40,10 @@
 @property (nonatomic, strong) IBOutlet UILabel *originalToLabel;
 @property (nonatomic, strong) IBOutlet RgMessagesViewController *chatViewController;
 
-@property (nonatomic, strong) IBOutlet UIButton* pictureButton;
-
 - (IBAction)onBackClick:(id)event;
 - (IBAction)onEditClick:(id)event;
 - (IBAction)onCallClick:(id)sender;
 - (IBAction)onVideoClick:(id)sender;
 - (IBAction)onContactClick:(id)sender;
-
-- (void)setChatRoom:(LinphoneChatRoom*)room;
 
 @end

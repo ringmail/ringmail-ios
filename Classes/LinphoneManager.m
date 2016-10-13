@@ -32,7 +32,6 @@
 
 #import "LinphoneManager.h"
 #import "LinphoneCoreSettingsStore.h"
-#import "Utils/FileTransferDelegate.h"
 
 #include "linphone/linphonecore_utils.h"
 #include "linphone/lpconfig.h"
@@ -298,8 +297,6 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 		speakerEnabled = FALSE;
 		bluetoothEnabled = FALSE;
 		tunnelMode = FALSE;
-
-		_fileTransferDelegates = [[NSMutableArray alloc] init];
 
 		pushCallIDs = [[NSMutableArray alloc] init];
 		photoLibrary = [[ALAssetsLibrary alloc] init];
@@ -1588,11 +1585,6 @@ static BOOL libStarted = FALSE;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	if (theLinphoneCore != nil) { // just in case application terminate before linphone core initialization
-
-		for (FileTransferDelegate *ftd in _fileTransferDelegates) {
-			[ftd stopAndDestroy];
-		}
-		[_fileTransferDelegates removeAllObjects];
 
 		LOGI(@"Destroy linphonecore");
 		linphone_core_destroy(theLinphoneCore);
