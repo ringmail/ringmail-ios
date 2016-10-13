@@ -67,7 +67,6 @@
 		22B5EFA310CE50BD00777D97 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */; };
 		22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5F03410CE6B2F00777D97 /* AddressBook.framework */; };
 		22BB1A69132FF16A005CD7AA /* UIEraseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB1A68132FF16A005CD7AA /* UIEraseButton.m */; };
-		22C755601317E59C007BC101 /* UIBluetoothButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7555F1317E59C007BC101 /* UIBluetoothButton.m */; };
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
@@ -139,12 +138,10 @@
 		57F005C415EE2CCF00914747 /* linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C315EE2CCF00914747 /* linphonerc */; };
 		57F005C815EE2D9200914747 /* linphonerc-factory in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C615EE2D9200914747 /* linphonerc-factory */; };
 		57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C715EE2D9200914747 /* linphonerc-factory~ipad */; };
-		630CF5571AF7CE1500539F7A /* UITextField+DoneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 630CF5561AF7CE1500539F7A /* UITextField+DoneButton.m */; };
 		631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */; };
 		631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */; };
 		636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D61A1DEC650009B839 /* SettingsViewController.xib */; };
 		636316D91A1DECC90009B839 /* PhoneMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D71A1DECC90009B839 /* PhoneMainView.xib */; };
-		636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */ = {isa = PBXBuildFile; fileRef = 636316DD1A1DEF2F0009B839 /* UIButtonShrinkable.m */; };
 		637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 637157A01B283FE200C91677 /* FileTransferDelegate.m */; };
 		639CEAFD1A1DF4D9004DE38F /* UIStateBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEAFF1A1DF4D9004DE38F /* UIStateBar.xib */; };
 		639CEB031A1DF4EB004DE38F /* UICompositeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB051A1DF4EB004DE38F /* UICompositeViewController.xib */; };
@@ -1111,11 +1108,9 @@
 		C4AC2AB61D3963FA003B6232 /* UICallButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB7912F846B1002A5394 /* UICallButton.m */; };
 		C4AC2AB71D3963FA003B6232 /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = C402BEF41C261D240076B60C /* UIImage+OpenCV.mm */; };
 		C4AC2AB81D3963FA003B6232 /* UIHangUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB8812F84EBB002A5394 /* UIHangUpButton.m */; };
-		C4AC2AB91D3963FA003B6232 /* UITextField+DoneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 630CF5561AF7CE1500539F7A /* UITextField+DoneButton.m */; };
 		C4AC2ABA1D3963FA003B6232 /* UIMicroButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EBF212F86360002A5394 /* UIMicroButton.m */; };
 		C4AC2ABB1D3963FA003B6232 /* UISpeakerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22968A5E12F875C600588287 /* UISpeakerButton.m */; };
 		C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B71F31CA22AF90020A57F /* RgHashtagDirectoryViewController.m */; };
-		C4AC2ABE1D3963FA003B6232 /* UIBluetoothButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7555F1317E59C007BC101 /* UIBluetoothButton.m */; };
 		C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */; };
 		C4AC2AC01D3963FA003B6232 /* UIEraseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB1A68132FF16A005CD7AA /* UIEraseButton.m */; };
 		C4AC2AC11D3963FA003B6232 /* UICamSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AA8B0013D83F6300B30535 /* UICamSwitch.m */; };
@@ -1179,7 +1174,6 @@
 		C4AC2B031D3963FA003B6232 /* RgMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */; };
 		C4AC2B041D3963FA003B6232 /* ContactDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37C639A15AADEF5009D0BAC /* ContactDetailsTableViewController.m */; };
 		C4AC2B051D3963FA003B6232 /* HashtagModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72181CA2313D0020A57F /* HashtagModelController.m */; };
-		C4AC2B061D3963FA003B6232 /* UIButtonShrinkable.m in Sources */ = {isa = PBXBuildFile; fileRef = 636316DD1A1DEF2F0009B839 /* UIButtonShrinkable.m */; };
 		C4AC2B071D3963FA003B6232 /* InAppProductsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E59A3E1ADE70D900646FB3 /* InAppProductsManager.m */; };
 		C4AC2B081D3963FA003B6232 /* UIEditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C6526615AC1A8F0092A874 /* UIEditableTableViewCell.m */; };
 		C4AC2B091D3963FA003B6232 /* ContactDetailsLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D378906315AC373B00BD776C /* ContactDetailsLabelViewController.m */; };
@@ -2031,8 +2025,6 @@
 		22B5F03410CE6B2F00777D97 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		22BB1A67132FF16A005CD7AA /* UIEraseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEraseButton.h; sourceTree = "<group>"; };
 		22BB1A68132FF16A005CD7AA /* UIEraseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEraseButton.m; sourceTree = "<group>"; };
-		22C7555E1317E59C007BC101 /* UIBluetoothButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBluetoothButton.h; sourceTree = "<group>"; };
-		22C7555F1317E59C007BC101 /* UIBluetoothButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBluetoothButton.m; sourceTree = "<group>"; };
 		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2155,8 +2147,6 @@
 		63058ACE1B4E922500EFAE36 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = ../submodules/linphone/tester/sounds; sourceTree = "<group>"; };
 		63058AE11B4E93A100EFAE36 /* tester_hosts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tester_hosts; path = submodules/linphone/tester/tester_hosts; sourceTree = SOURCE_ROOT; };
 		63058AE41B4E952E00EFAE36 /* share */ = {isa = PBXFileReference; lastKnownFileType = folder; name = share; path = "../liblinphone-sdk/apple-darwin/share"; sourceTree = "<group>"; };
-		630CF5551AF7CE1500539F7A /* UITextField+DoneButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DoneButton.h"; sourceTree = "<group>"; };
-		630CF5561AF7CE1500539F7A /* UITextField+DoneButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DoneButton.m"; sourceTree = "<group>"; };
 		631C4FAF19D2A8F2004BFE77 /* UIDigitButtonLongPlus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDigitButtonLongPlus.h; sourceTree = "<group>"; };
 		631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDigitButtonLongPlus.m; sourceTree = "<group>"; };
 		631C4FB519D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDigitButtonLongVoiceMail.h; sourceTree = "<group>"; };
@@ -2164,8 +2154,6 @@
 		633E388219FFB0F400936D1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		636316D51A1DEC650009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsViewController.xib; sourceTree = "<group>"; };
 		636316D81A1DECC90009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhoneMainView.xib; sourceTree = "<group>"; };
-		636316DC1A1DEECB0009B839 /* UIButtonShrinkable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonShrinkable.h; sourceTree = "<group>"; };
-		636316DD1A1DEF2F0009B839 /* UIButtonShrinkable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonShrinkable.m; sourceTree = "<group>"; };
 		6371579F1B283FE200C91677 /* FileTransferDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileTransferDelegate.h; path = Utils/FileTransferDelegate.h; sourceTree = "<group>"; };
 		637157A01B283FE200C91677 /* FileTransferDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileTransferDelegate.m; path = Utils/FileTransferDelegate.m; sourceTree = "<group>"; };
 		639CEAFE1A1DF4D9004DE38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIStateBar.xib; sourceTree = "<group>"; };
@@ -3457,12 +3445,6 @@
 			children = (
 				D35E757F159328EA0066B1C1 /* UIAddressTextField.h */,
 				D35E7580159328EB0066B1C1 /* UIAddressTextField.m */,
-				22C7555E1317E59C007BC101 /* UIBluetoothButton.h */,
-				22C7555F1317E59C007BC101 /* UIBluetoothButton.m */,
-				636316DC1A1DEECB0009B839 /* UIButtonShrinkable.h */,
-				630CF5551AF7CE1500539F7A /* UITextField+DoneButton.h */,
-				630CF5561AF7CE1500539F7A /* UITextField+DoneButton.m */,
-				636316DD1A1DEF2F0009B839 /* UIButtonShrinkable.m */,
 				D326483B1588950F00930C67 /* UICallBar.h */,
 				D326483C1588950F00930C67 /* UICallBar.m */,
 				D38187E415FE349700C3EDCA /* UICallBar.xib */,
@@ -6497,11 +6479,9 @@
 				2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */,
 				C402BEF51C261D240076B60C /* UIImage+OpenCV.mm in Sources */,
 				2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */,
-				630CF5571AF7CE1500539F7A /* UITextField+DoneButton.m in Sources */,
 				2214EBF312F86360002A5394 /* UIMicroButton.m in Sources */,
 				22968A5F12F875C600588287 /* UISpeakerButton.m in Sources */,
 				C42B71F51CA22AF90020A57F /* RgHashtagDirectoryViewController.m in Sources */,
-				22C755601317E59C007BC101 /* UIBluetoothButton.m in Sources */,
 				C4FD78751CFB70520066BDB1 /* HashtagCategoryCardComponent.mm in Sources */,
 				22BB1A69132FF16A005CD7AA /* UIEraseButton.m in Sources */,
 				22AA8B0113D83F6300B30535 /* UICamSwitch.m in Sources */,
@@ -6569,7 +6549,6 @@
 				C45CFFEB1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
 				C42B72191CA2313D0020A57F /* HashtagModelController.m in Sources */,
-				636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */,
 				63E59A3F1ADE70D900646FB3 /* InAppProductsManager.m in Sources */,
 				D3C6526715AC1A8F0092A874 /* UIEditableTableViewCell.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
@@ -6647,11 +6626,9 @@
 				C4AC2AB61D3963FA003B6232 /* UICallButton.m in Sources */,
 				C4AC2AB71D3963FA003B6232 /* UIImage+OpenCV.mm in Sources */,
 				C4AC2AB81D3963FA003B6232 /* UIHangUpButton.m in Sources */,
-				C4AC2AB91D3963FA003B6232 /* UITextField+DoneButton.m in Sources */,
 				C4AC2ABA1D3963FA003B6232 /* UIMicroButton.m in Sources */,
 				C4AC2ABB1D3963FA003B6232 /* UISpeakerButton.m in Sources */,
 				C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */,
-				C4AC2ABE1D3963FA003B6232 /* UIBluetoothButton.m in Sources */,
 				C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */,
 				C4AC2AC01D3963FA003B6232 /* UIEraseButton.m in Sources */,
 				C4AC2AC11D3963FA003B6232 /* UICamSwitch.m in Sources */,
@@ -6718,7 +6695,6 @@
 				C4AC2B041D3963FA003B6232 /* ContactDetailsTableViewController.m in Sources */,
 				C45CFFEC1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				C4AC2B051D3963FA003B6232 /* HashtagModelController.m in Sources */,
-				C4AC2B061D3963FA003B6232 /* UIButtonShrinkable.m in Sources */,
 				C4AC2B071D3963FA003B6232 /* InAppProductsManager.m in Sources */,
 				C4AC2B081D3963FA003B6232 /* UIEditableTableViewCell.m in Sources */,
 				C4AC2B091D3963FA003B6232 /* ContactDetailsLabelViewController.m in Sources */,

@@ -21,7 +21,6 @@
 #import "WizardViewController.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
-#import "UITextField+DoneButton.h"
 
 #import "DTAlertView.h"
 #import "RgNetwork.h"
