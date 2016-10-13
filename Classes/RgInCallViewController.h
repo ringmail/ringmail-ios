@@ -1,4 +1,4 @@
-/* InCallViewController.h
+/* RgInCallViewController.h
  *
  * Copyright (C) 2009  Belledonne Comunications, Grenoble, France
  *
@@ -22,7 +22,6 @@
 #import "VideoZoomHandler.h"
 
 #import "UICompositeViewController.h"
-#import "InCallTableViewController.h"
 #import "RgCallViewController.h"
 #import "RgCallDuration.h"
 #import "UIDigitButton.h"
