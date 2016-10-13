@@ -147,7 +147,6 @@
 		636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */ = {isa = PBXBuildFile; fileRef = 636316DD1A1DEF2F0009B839 /* UIButtonShrinkable.m */; };
 		637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 637157A01B283FE200C91677 /* FileTransferDelegate.m */; };
 		639CEAFD1A1DF4D9004DE38F /* UIStateBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEAFF1A1DF4D9004DE38F /* UIStateBar.xib */; };
-		639CEB001A1DF4E4004DE38F /* UIHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB021A1DF4E4004DE38F /* UIHistoryCell.xib */; };
 		639CEB031A1DF4EB004DE38F /* UICompositeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB051A1DF4EB004DE38F /* UICompositeViewController.xib */; };
 		63B81A0C1B57DA33009604A6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 63B81A031B57DA33009604A6 /* LICENSE.txt */; };
 		63B81A0D1B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B81A051B57DA33009604A6 /* TPKeyboardAvoidingCollectionView.m */; };
@@ -506,7 +505,6 @@
 		C4AC28461D3963FA003B6232 /* history_missed_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED3E9615872EF1006C0DE4 /* history_missed_selected.png */; };
 		C4AC28471D3963FA003B6232 /* history_missed_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED3E9715872EF1006C0DE4 /* history_missed_default.png */; };
 		C4AC28481D3963FA003B6232 /* ringmail_contact_small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C888891C14FD3800FD86FC /* ringmail_contact_small.png */; };
-		C4AC28491D3963FA003B6232 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187D415FE346B00C3EDCA /* HistoryViewController.xib */; };
 		C4AC284A1D3963FA003B6232 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C015FE342800C3EDCA /* ContactsViewController.xib */; };
 		C4AC284B1D3963FA003B6232 /* contacts_all_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D354980215875534000081D8 /* contacts_all_selected.png */; };
 		C4AC284C1D3963FA003B6232 /* contacts_all_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D354980315875534000081D8 /* contacts_all_default.png */; };
@@ -529,7 +527,6 @@
 		C4AC285D1D3963FA003B6232 /* call_status_missed.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8E158A1C1000756B45 /* call_status_missed.png */; };
 		C4AC285E1D3963FA003B6232 /* ringmail_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3C61C92240300134788 /* ringmail_logo.png */; };
 		C4AC285F1D3963FA003B6232 /* call_status_outgoing.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8F158A1C1000756B45 /* call_status_outgoing.png */; };
-		C4AC28601D3963FA003B6232 /* UIHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB021A1DF4E4004DE38F /* UIHistoryCell.xib */; };
 		C4AC28611D3963FA003B6232 /* led_connected.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A5C158A4446001C6B0B /* led_connected.png */; };
 		C4AC28621D3963FA003B6232 /* ringmail_card_video.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AA1A261C72D3CB003F86FD /* ringmail_card_video.png */; };
 		C4AC28631D3963FA003B6232 /* led_error.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A5D158A4446001C6B0B /* led_error.png */; };
@@ -709,7 +706,6 @@
 		C4AC29141D3963FA003B6232 /* menu-contact@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3B51C92240300134788 /* menu-contact@2x.png */; };
 		C4AC29151D3963FA003B6232 /* options_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254B15AE207B00D493FA /* options_selected.png */; };
 		C4AC29161D3963FA003B6232 /* transfer_call_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254E15AE256100D493FA /* transfer_call_disabled.png */; };
-		C4AC29171D3963FA003B6232 /* HistoryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187D015FE346700C3EDCA /* HistoryDetailsViewController.xib */; };
 		C4AC29181D3963FA003B6232 /* history_notification.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F9A9DA15AEEB940045320F /* history_notification.png */; };
 		C4AC29191D3963FA003B6232 /* cancel_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E84F1715B00F4100420DAC /* cancel_default.png */; };
 		C4AC291A1D3963FA003B6232 /* RgScanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C402BEF01C2616B20076B60C /* RgScanViewController.xib */; };
@@ -1132,9 +1128,7 @@
 		C4AC2AC71D3963FA003B6232 /* RgContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B95261C10E0A900253BB7 /* RgContactManager.m */; };
 		C4AC2AC81D3963FA003B6232 /* UIMainBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED3E851586291B006C0DE4 /* UIMainBar.m */; };
 		C4AC2AC91D3963FA003B6232 /* HashtagCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C476A7121CF254F100CA3772 /* HashtagCardComponent.mm */; };
-		C4AC2ACA1D3963FA003B6232 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED3EA51587334C006C0DE4 /* HistoryTableViewController.m */; };
 		C4AC2ACB1D3963FA003B6232 /* InteractiveCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B720C1CA22EDB0020A57F /* InteractiveCardComponent.mm */; };
-		C4AC2ACC1D3963FA003B6232 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED3EB615873929006C0DE4 /* HistoryViewController.m */; };
 		C4AC2ACD1D3963FA003B6232 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35497FC15875372000081D8 /* ContactsViewController.m */; };
 		C4AC2ACE1D3963FA003B6232 /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3549815158761D0000081D8 /* ContactsTableViewController.m */; };
 		C4AC2ACF1D3963FA003B6232 /* UIStateBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D354981F1587716B000081D8 /* UIStateBar.m */; };
@@ -1148,7 +1142,6 @@
 		C4AC2AD71D3963FA003B6232 /* RgChatQuestionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC493B1BF9517900826264 /* RgChatQuestionTable.m */; };
 		C4AC2AD81D3963FA003B6232 /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72081CA22EDB0020A57F /* CardsPage.m */; };
 		C4AC2AD91D3963FA003B6232 /* UIPauseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D36FB2D41589EF7C0036F6F2 /* UIPauseButton.m */; };
-		C4AC2ADA1D3963FA003B6232 /* UIHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D31C9C97158A1CDE00756B45 /* UIHistoryCell.m */; };
 		C4AC2ADB1D3963FA003B6232 /* UILongTouchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D32409C2158B49A600C8C119 /* UILongTouchButton.m */; };
 		C4AC2ADC1D3963FA003B6232 /* UICallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C43C5158F2E5A0048BA40 /* UICallCell.m */; };
 		C4AC2ADD1D3963FA003B6232 /* RgChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E5E51B960B35006C915A /* RgChatManager.m */; };
@@ -1194,7 +1187,6 @@
 		C4AC2B081D3963FA003B6232 /* UIEditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C6526615AC1A8F0092A874 /* UIEditableTableViewCell.m */; };
 		C4AC2B091D3963FA003B6232 /* ContactDetailsLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D378906315AC373B00BD776C /* ContactDetailsLabelViewController.m */; };
 		C4AC2B0A1D3963FA003B6232 /* UIContactDetailsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E8F68415ADE0580065A226 /* UIContactDetailsFooter.m */; };
-		C4AC2B0B1D3963FA003B6232 /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C4AC2B0C1D3963FA003B6232 /* UIRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FB30341A680E73008CA393 /* UIRoundedImageView.m */; };
 		C4AC2B0D1D3963FA003B6232 /* UITransparentTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F066515417F9A02E0064280C /* UITransparentTVCell.m */; };
 		C4AC2B0E1D3963FA003B6232 /* UACellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F9A9ED15AF277D0045320F /* UACellBackgroundView.m */; };
@@ -1314,7 +1306,6 @@
 		C4FE4C791CCDA03F006A6C94 /* RgFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4C771CCDA03F006A6C94 /* RgFavoriteViewController.m */; };
 		C4FE4C7A1CCDA03F006A6C94 /* RgFavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4FE4C781CCDA03F006A6C94 /* RgFavoriteViewController.xib */; };
 		C4FE7FF91CA8CEED0099D048 /* MainCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FE7FF81CA8C3C10099D048 /* MainCardComponentController.mm */; };
-		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
 		C9C8254715AE204D00D493FA /* transfer_call_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254115AE204D00D493FA /* transfer_call_default.png */; };
@@ -1353,7 +1344,6 @@
 		D31C9C90158A1C1000756B45 /* call_status_incoming.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8D158A1C1000756B45 /* call_status_incoming.png */; };
 		D31C9C92158A1C1000756B45 /* call_status_missed.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8E158A1C1000756B45 /* call_status_missed.png */; };
 		D31C9C94158A1C1000756B45 /* call_status_outgoing.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C9C8F158A1C1000756B45 /* call_status_outgoing.png */; };
-		D31C9C98158A1CDF00756B45 /* UIHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D31C9C97158A1CDE00756B45 /* UIHistoryCell.m */; };
 		D3211BA6159C3D410098460B /* call_state_outgoing_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BA5159C3D410098460B /* call_state_outgoing_default.png */; };
 		D3211BB0159C4EF10098460B /* UIConferenceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3211BAE159C4EF00098460B /* UIConferenceHeader.m */; };
 		D3211BB9159C8A820098460B /* cell_call_first.png in Resources */ = {isa = PBXBuildFile; fileRef = D3211BB8159C8A820098460B /* cell_call_first.png */; };
@@ -1523,8 +1513,6 @@
 		D38187B515FE341B00C3EDCA /* ContactDetailsLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187B815FE341B00C3EDCA /* ContactDetailsLabelViewController.xib */; };
 		D38187B915FE342200C3EDCA /* ContactDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187BC15FE342200C3EDCA /* ContactDetailsViewController.xib */; };
 		D38187BD15FE342800C3EDCA /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C015FE342800C3EDCA /* ContactsViewController.xib */; };
-		D38187CD15FE346700C3EDCA /* HistoryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187D015FE346700C3EDCA /* HistoryDetailsViewController.xib */; };
-		D38187D115FE346B00C3EDCA /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187D415FE346B00C3EDCA /* HistoryViewController.xib */; };
 		D38187D915FE347700C3EDCA /* IncomingCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187DC15FE347700C3EDCA /* IncomingCallViewController.xib */; };
 		D38187DD15FE348A00C3EDCA /* WizardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187E015FE348A00C3EDCA /* WizardViewController.xib */; };
 		D38187E115FE349700C3EDCA /* UICallBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187E415FE349700C3EDCA /* UICallBar.xib */; };
@@ -1757,8 +1745,6 @@
 		D3ED3E9E15872EF1006C0DE4 /* history_edit_over.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED3E9515872EF1006C0DE4 /* history_edit_over.png */; };
 		D3ED3EA015872EF1006C0DE4 /* history_missed_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED3E9615872EF1006C0DE4 /* history_missed_selected.png */; };
 		D3ED3EA215872EF1006C0DE4 /* history_missed_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED3E9715872EF1006C0DE4 /* history_missed_default.png */; };
-		D3ED3EA71587334E006C0DE4 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED3EA51587334C006C0DE4 /* HistoryTableViewController.m */; };
-		D3ED3EB81587392C006C0DE4 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED3EB615873929006C0DE4 /* HistoryViewController.m */; };
 		D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED40161602172200BF332B /* HPGrowingTextView.m */; };
 		D3ED401B1602172200BF332B /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED40181602172200BF332B /* HPTextViewInternal.m */; };
 		D3F26BF115986B73005F9CAB /* IncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F26BEF15986B71005F9CAB /* IncomingCallViewController.m */; };
@@ -2184,14 +2170,11 @@
 		633E388219FFB0F400936D1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		636316D51A1DEC650009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsViewController.xib; sourceTree = "<group>"; };
 		636316D81A1DECC90009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhoneMainView.xib; sourceTree = "<group>"; };
-		636316DA1A1DEDD40009B839 /* fr */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/HistoryDetailsViewController.strings; sourceTree = "<group>"; };
-		636316DB1A1DEDD80009B839 /* ru */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HistoryDetailsViewController.strings; sourceTree = "<group>"; };
 		636316DC1A1DEECB0009B839 /* UIButtonShrinkable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonShrinkable.h; sourceTree = "<group>"; };
 		636316DD1A1DEF2F0009B839 /* UIButtonShrinkable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonShrinkable.m; sourceTree = "<group>"; };
 		6371579F1B283FE200C91677 /* FileTransferDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileTransferDelegate.h; path = Utils/FileTransferDelegate.h; sourceTree = "<group>"; };
 		637157A01B283FE200C91677 /* FileTransferDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileTransferDelegate.m; path = Utils/FileTransferDelegate.m; sourceTree = "<group>"; };
 		639CEAFE1A1DF4D9004DE38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIStateBar.xib; sourceTree = "<group>"; };
-		639CEB011A1DF4E4004DE38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIHistoryCell.xib; sourceTree = "<group>"; };
 		639CEB041A1DF4EB004DE38F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UICompositeViewController.xib; sourceTree = "<group>"; };
 		639CEB0C1A1DF528004DE38F /* fr */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UICallCell.strings; sourceTree = "<group>"; };
 		639CEB0D1A1DF52C004DE38F /* ru */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/UICallCell.strings; sourceTree = "<group>"; };
@@ -2525,8 +2508,6 @@
 		C4FE4C771CCDA03F006A6C94 /* RgFavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgFavoriteViewController.m; sourceTree = "<group>"; };
 		C4FE4C781CCDA03F006A6C94 /* RgFavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgFavoriteViewController.xib; sourceTree = "<group>"; };
 		C4FE7FF81CA8C3C10099D048 /* MainCardComponentController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MainCardComponentController.mm; path = RgComponents/MainCardComponentController.mm; sourceTree = "<group>"; };
-		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
-		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
 		C9C8253F15AE204D00D493FA /* options_add_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_add_disabled.png; path = Resources/options_add_disabled.png; sourceTree = "<group>"; };
 		C9C8254015AE204D00D493FA /* options_transfer_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_transfer_disabled.png; path = Resources/options_transfer_disabled.png; sourceTree = "<group>"; };
@@ -2570,8 +2551,6 @@
 		D31C9C8D158A1C1000756B45 /* call_status_incoming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = call_status_incoming.png; path = Resources/call_status_incoming.png; sourceTree = "<group>"; };
 		D31C9C8E158A1C1000756B45 /* call_status_missed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = call_status_missed.png; path = Resources/call_status_missed.png; sourceTree = "<group>"; };
 		D31C9C8F158A1C1000756B45 /* call_status_outgoing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = call_status_outgoing.png; path = Resources/call_status_outgoing.png; sourceTree = "<group>"; };
-		D31C9C96158A1CDE00756B45 /* UIHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHistoryCell.h; sourceTree = "<group>"; };
-		D31C9C97158A1CDE00756B45 /* UIHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHistoryCell.m; sourceTree = "<group>"; };
 		D3211BA5159C3D410098460B /* call_state_outgoing_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = call_state_outgoing_default.png; path = Resources/call_state_outgoing_default.png; sourceTree = "<group>"; };
 		D3211BAD159C4EF00098460B /* UIConferenceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConferenceHeader.h; sourceTree = "<group>"; };
 		D3211BAE159C4EF00098460B /* UIConferenceHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIConferenceHeader.m; sourceTree = "<group>"; };
@@ -3008,10 +2987,6 @@
 		D3ED3E9515872EF1006C0DE4 /* history_edit_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_edit_over.png; path = Resources/history_edit_over.png; sourceTree = "<group>"; };
 		D3ED3E9615872EF1006C0DE4 /* history_missed_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_missed_selected.png; path = Resources/history_missed_selected.png; sourceTree = "<group>"; };
 		D3ED3E9715872EF1006C0DE4 /* history_missed_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_missed_default.png; path = Resources/history_missed_default.png; sourceTree = "<group>"; };
-		D3ED3EA41587334B006C0DE4 /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
-		D3ED3EA51587334C006C0DE4 /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HistoryTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		D3ED3EB515873928006C0DE4 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
-		D3ED3EB615873929006C0DE4 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HistoryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D3ED40151602172200BF332B /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
 		D3ED40161602172200BF332B /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		D3ED40171602172200BF332B /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
@@ -3131,8 +3106,6 @@
 		F095481A1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactDetailsLabelViewController.xib; sourceTree = "<group>"; };
 		F095481B1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactDetailsViewController.xib; sourceTree = "<group>"; };
 		F095481C1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactsViewController.xib; sourceTree = "<group>"; };
-		F09548201883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistoryDetailsViewController.xib; sourceTree = "<group>"; };
-		F09548211883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistoryViewController.xib; sourceTree = "<group>"; };
 		F09548221883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ImageViewController.xib; sourceTree = "<group>"; };
 		F09548231883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InCallViewController.xib; sourceTree = "<group>"; };
 		F09548241883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IncomingCallViewController.xib; sourceTree = "<group>"; };
@@ -3156,8 +3129,6 @@
 		F09548381883F29C00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ContactDetailsViewController.strings; sourceTree = "<group>"; };
 		F09548391883F2C500E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
 		F095483A1883F2CA00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
-		F09548411883F51600E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/HistoryViewController.strings; sourceTree = "<group>"; };
-		F09548421883F51B00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HistoryViewController.strings; sourceTree = "<group>"; };
 		F09548431883F52600E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ImageViewController.strings; sourceTree = "<group>"; };
 		F09548441883F52900E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ImageViewController.strings; sourceTree = "<group>"; };
 		F09548451883F53F00E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InCallViewController.strings; sourceTree = "<group>"; };
@@ -3191,8 +3162,6 @@
 		F0AF06F31A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactDetailsLabelViewController.strings; sourceTree = "<group>"; };
 		F0AF06F41A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactDetailsViewController.strings; sourceTree = "<group>"; };
 		F0AF06F51A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
-		F0AF06F91A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HistoryDetailsViewController.strings; sourceTree = "<group>"; };
-		F0AF06FA1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HistoryViewController.strings; sourceTree = "<group>"; };
 		F0AF06FB1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ImageViewController.strings; sourceTree = "<group>"; };
 		F0AF06FC1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InCallViewController.strings; sourceTree = "<group>"; };
 		F0AF06FD1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/IncomingCallViewController.strings; sourceTree = "<group>"; };
@@ -3205,7 +3174,6 @@
 		F0AF07061A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIContactCell.strings; sourceTree = "<group>"; };
 		F0AF07071A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIContactDetailsFooter.strings; sourceTree = "<group>"; };
 		F0AF07081A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIContactDetailsHeader.strings; sourceTree = "<group>"; };
-		F0AF07091A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIHistoryCell.strings; sourceTree = "<group>"; };
 		F0AF070A1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIMainBar.strings; sourceTree = "<group>"; };
 		F0AF070B1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/UIMainBar~ipad.strings"; sourceTree = "<group>"; };
 		F0AF070C1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIStateBar.strings; sourceTree = "<group>"; };
@@ -3438,14 +3406,6 @@
 				D35497FB15875372000081D8 /* ContactsViewController.h */,
 				D35497FC15875372000081D8 /* ContactsViewController.m */,
 				D38187C015FE342800C3EDCA /* ContactsViewController.xib */,
-				C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */,
-				C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */,
-				D38187D015FE346700C3EDCA /* HistoryDetailsViewController.xib */,
-				D3ED3EA41587334B006C0DE4 /* HistoryTableViewController.h */,
-				D3ED3EA51587334C006C0DE4 /* HistoryTableViewController.m */,
-				D3ED3EB515873928006C0DE4 /* HistoryViewController.h */,
-				D3ED3EB615873929006C0DE4 /* HistoryViewController.m */,
-				D38187D415FE346B00C3EDCA /* HistoryViewController.xib */,
 				D378AB2815DCDB480098505D /* ImagePickerViewController.h */,
 				D378AB2915DCDB490098505D /* ImagePickerViewController.m */,
 				22405EFD1601C19000B92522 /* ImageViewController.h */,
@@ -3562,9 +3522,6 @@
 				22BB1A68132FF16A005CD7AA /* UIEraseButton.m */,
 				2214EB8712F84EBB002A5394 /* UIHangUpButton.h */,
 				2214EB8812F84EBB002A5394 /* UIHangUpButton.m */,
-				D31C9C96158A1CDE00756B45 /* UIHistoryCell.h */,
-				D31C9C97158A1CDE00756B45 /* UIHistoryCell.m */,
-				639CEB021A1DF4E4004DE38F /* UIHistoryCell.xib */,
 				D3E84F3C15B018A600420DAC /* UILinphone.h */,
 				D380800415C28A7A005BE9BC /* UILinphone.m */,
 				D35E91F6160CA4FF0023116B /* UILinphoneButton.h */,
@@ -5103,7 +5060,6 @@
 				D3ED3EA015872EF1006C0DE4 /* history_missed_selected.png in Resources */,
 				D3ED3EA215872EF1006C0DE4 /* history_missed_default.png in Resources */,
 				C4C8888A1C14FD3800FD86FC /* ringmail_contact_small.png in Resources */,
-				D38187D115FE346B00C3EDCA /* HistoryViewController.xib in Resources */,
 				D38187BD15FE342800C3EDCA /* ContactsViewController.xib in Resources */,
 				D354980615875534000081D8 /* contacts_all_selected.png in Resources */,
 				D354980815875534000081D8 /* contacts_all_default.png in Resources */,
@@ -5126,7 +5082,6 @@
 				D31C9C92158A1C1000756B45 /* call_status_missed.png in Resources */,
 				C444F3E71C92240300134788 /* ringmail_logo.png in Resources */,
 				D31C9C94158A1C1000756B45 /* call_status_outgoing.png in Resources */,
-				639CEB001A1DF4E4004DE38F /* UIHistoryCell.xib in Resources */,
 				D3432A62158A4446001C6B0B /* led_connected.png in Resources */,
 				C4AA1A291C72D3CB003F86FD /* ringmail_card_video.png in Resources */,
 				D3432A64158A4446001C6B0B /* led_error.png in Resources */,
@@ -5308,7 +5263,6 @@
 				C444F3D61C92240300134788 /* menu-contact@2x.png in Resources */,
 				C9C8254C15AE207B00D493FA /* options_selected.png in Resources */,
 				C9C8254F15AE256100D493FA /* transfer_call_disabled.png in Resources */,
-				D38187CD15FE346700C3EDCA /* HistoryDetailsViewController.xib in Resources */,
 				D3F9A9DB15AEEB940045320F /* history_notification.png in Resources */,
 				D3E84F1E15B00F4100420DAC /* cancel_default.png in Resources */,
 				C402BEF21C2616B20076B60C /* RgScanViewController.xib in Resources */,
@@ -5838,7 +5792,6 @@
 				C4AC28461D3963FA003B6232 /* history_missed_selected.png in Resources */,
 				C4AC28471D3963FA003B6232 /* history_missed_default.png in Resources */,
 				C4AC28481D3963FA003B6232 /* ringmail_contact_small.png in Resources */,
-				C4AC28491D3963FA003B6232 /* HistoryViewController.xib in Resources */,
 				C4AC284A1D3963FA003B6232 /* ContactsViewController.xib in Resources */,
 				C4AC284B1D3963FA003B6232 /* contacts_all_selected.png in Resources */,
 				C4AC284C1D3963FA003B6232 /* contacts_all_default.png in Resources */,
@@ -5861,7 +5814,6 @@
 				C4AC285D1D3963FA003B6232 /* call_status_missed.png in Resources */,
 				C4AC285E1D3963FA003B6232 /* ringmail_logo.png in Resources */,
 				C4AC285F1D3963FA003B6232 /* call_status_outgoing.png in Resources */,
-				C4AC28601D3963FA003B6232 /* UIHistoryCell.xib in Resources */,
 				C4AC28611D3963FA003B6232 /* led_connected.png in Resources */,
 				C4AC28621D3963FA003B6232 /* ringmail_card_video.png in Resources */,
 				C4AC28631D3963FA003B6232 /* led_error.png in Resources */,
@@ -6044,7 +5996,6 @@
 				C4AC29141D3963FA003B6232 /* menu-contact@2x.png in Resources */,
 				C4AC29151D3963FA003B6232 /* options_selected.png in Resources */,
 				C4AC29161D3963FA003B6232 /* transfer_call_disabled.png in Resources */,
-				C4AC29171D3963FA003B6232 /* HistoryDetailsViewController.xib in Resources */,
 				C4AC29181D3963FA003B6232 /* history_notification.png in Resources */,
 				C4AC29191D3963FA003B6232 /* cancel_default.png in Resources */,
 				C4AC291A1D3963FA003B6232 /* RgScanViewController.xib in Resources */,
@@ -6583,9 +6534,7 @@
 				C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */,
 				D3ED3E871586291E006C0DE4 /* UIMainBar.m in Sources */,
 				C476A7131CF254F100CA3772 /* HashtagCardComponent.mm in Sources */,
-				D3ED3EA71587334E006C0DE4 /* HistoryTableViewController.m in Sources */,
 				C42B72151CA22EDB0020A57F /* InteractiveCardComponent.mm in Sources */,
-				D3ED3EB81587392C006C0DE4 /* HistoryViewController.m in Sources */,
 				D35497FE15875372000081D8 /* ContactsViewController.m in Sources */,
 				D3549816158761D0000081D8 /* ContactsTableViewController.m in Sources */,
 				D35498211587716B000081D8 /* UIStateBar.m in Sources */,
@@ -6600,7 +6549,6 @@
 				C4BC493C1BF9517900826264 /* RgChatQuestionTable.m in Sources */,
 				C42B72131CA22EDB0020A57F /* CardsPage.m in Sources */,
 				D36FB2D51589EF7C0036F6F2 /* UIPauseButton.m in Sources */,
-				D31C9C98158A1CDF00756B45 /* UIHistoryCell.m in Sources */,
 				D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */,
 				D36C43C6158F2E5A0048BA40 /* UICallCell.m in Sources */,
 				C401E5E61B960B35006C915A /* RgChatManager.m in Sources */,
@@ -6649,7 +6597,6 @@
 				D3C6526715AC1A8F0092A874 /* UIEditableTableViewCell.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
-				C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */,
 				63FB30351A680E73008CA393 /* UIRoundedImageView.m in Sources */,
 				F066515517F9A02E0064280C /* UITransparentTVCell.m in Sources */,
 				D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */,
@@ -6739,9 +6686,7 @@
 				C4AC2AC71D3963FA003B6232 /* RgContactManager.m in Sources */,
 				C4AC2AC81D3963FA003B6232 /* UIMainBar.m in Sources */,
 				C4AC2AC91D3963FA003B6232 /* HashtagCardComponent.mm in Sources */,
-				C4AC2ACA1D3963FA003B6232 /* HistoryTableViewController.m in Sources */,
 				C4AC2ACB1D3963FA003B6232 /* InteractiveCardComponent.mm in Sources */,
-				C4AC2ACC1D3963FA003B6232 /* HistoryViewController.m in Sources */,
 				C4AC2ACD1D3963FA003B6232 /* ContactsViewController.m in Sources */,
 				C4AC2ACE1D3963FA003B6232 /* ContactsTableViewController.m in Sources */,
 				C4AC2ACF1D3963FA003B6232 /* UIStateBar.m in Sources */,
@@ -6756,7 +6701,6 @@
 				C4AC2AD71D3963FA003B6232 /* RgChatQuestionTable.m in Sources */,
 				C4AC2AD81D3963FA003B6232 /* CardsPage.m in Sources */,
 				C4AC2AD91D3963FA003B6232 /* UIPauseButton.m in Sources */,
-				C4AC2ADA1D3963FA003B6232 /* UIHistoryCell.m in Sources */,
 				C4AC2ADB1D3963FA003B6232 /* UILongTouchButton.m in Sources */,
 				C4AC2ADC1D3963FA003B6232 /* UICallCell.m in Sources */,
 				C4AC2ADD1D3963FA003B6232 /* RgChatManager.m in Sources */,
@@ -6804,7 +6748,6 @@
 				C4AC2B081D3963FA003B6232 /* UIEditableTableViewCell.m in Sources */,
 				C4AC2B091D3963FA003B6232 /* ContactDetailsLabelViewController.m in Sources */,
 				C4AC2B0A1D3963FA003B6232 /* UIContactDetailsFooter.m in Sources */,
-				C4AC2B0B1D3963FA003B6232 /* HistoryDetailsViewController.m in Sources */,
 				C4AC2B0C1D3963FA003B6232 /* UIRoundedImageView.m in Sources */,
 				C4AC2B0D1D3963FA003B6232 /* UITransparentTVCell.m in Sources */,
 				C4AC2B0E1D3963FA003B6232 /* UACellBackgroundView.m in Sources */,
@@ -6979,15 +6922,6 @@
 			name = UIStateBar.xib;
 			sourceTree = "<group>";
 		};
-		639CEB021A1DF4E4004DE38F /* UIHistoryCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				639CEB011A1DF4E4004DE38F /* Base */,
-				F0AF07091A24BA770086C9C1 /* ar */,
-			);
-			name = UIHistoryCell.xib;
-			sourceTree = "<group>";
-		};
 		639CEB051A1DF4EB004DE38F /* UICompositeViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -7074,28 +7008,6 @@
 				F0AF06F51A24BA760086C9C1 /* ar */,
 			);
 			name = ContactsViewController.xib;
-			sourceTree = "<group>";
-		};
-		D38187D015FE346700C3EDCA /* HistoryDetailsViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F09548201883F15400E8A69B /* Base */,
-				636316DA1A1DEDD40009B839 /* fr */,
-				636316DB1A1DEDD80009B839 /* ru */,
-				F0AF06F91A24BA760086C9C1 /* ar */,
-			);
-			name = HistoryDetailsViewController.xib;
-			sourceTree = "<group>";
-		};
-		D38187D415FE346B00C3EDCA /* HistoryViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F09548211883F15400E8A69B /* Base */,
-				F09548411883F51600E8A69B /* fr */,
-				F09548421883F51B00E8A69B /* ru */,
-				F0AF06FA1A24BA770086C9C1 /* ar */,
-			);
-			name = HistoryViewController.xib;
 			sourceTree = "<group>";
 		};
 		D38187DC15FE347700C3EDCA /* IncomingCallViewController.xib */ = {

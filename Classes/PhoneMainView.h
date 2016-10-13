@@ -36,8 +36,6 @@
 #import "ContactDetailsViewController.h"
 #import "ContactDetailsLabelViewController.h"
 #import "ImagePickerViewController.h"
-#import "HistoryViewController.h"
-#import "HistoryDetailsViewController.h"
 #import "SettingsViewController.h"
 #import "WizardViewController.h"
 #import "ImageViewController.h"
