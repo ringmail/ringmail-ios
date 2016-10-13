@@ -47,7 +47,6 @@
 		2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB7912F846B1002A5394 /* UICallButton.m */; };
 		2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB8812F84EBB002A5394 /* UIHangUpButton.m */; };
 		2214EBF312F86360002A5394 /* UIMicroButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EBF212F86360002A5394 /* UIMicroButton.m */; };
-		2218A92512FBE1340088A667 /* FirstLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2218A92312FBE1340088A667 /* FirstLoginViewController.m */; };
 		22276E8713C73D8A00210156 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22276E8613C73D8A00210156 /* CoreVideo.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		22276E8913C73DC000210156 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22276E8813C73DC000210156 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2234C8E915EE2F7F00E18E83 /* chat_message_delivered.png in Resources */ = {isa = PBXBuildFile; fileRef = 2234C8E715EE2F7F00E18E83 /* chat_message_delivered.png */; };
@@ -395,7 +394,6 @@
 		C4AC27D41D3963FA003B6232 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
 		C4AC27D51D3963FA003B6232 /* ring.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2237D4081084D7A9001383EE /* ring.wav */; };
 		C4AC27D71D3963FA003B6232 /* ring.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2242E312125235120061DDCE /* ring.caf */; };
-		C4AC27D81D3963FA003B6232 /* FirstLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187CC15FE346400C3EDCA /* FirstLoginViewController.xib */; };
 		C4AC27D91D3963FA003B6232 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2214783B1386A2030020F8B8 /* Localizable.strings */; };
 		C4AC27DA1D3963FA003B6232 /* rootca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 70571E1913FABCB000CDD3C2 /* rootca.pem */; };
 		C4AC27DB1D3963FA003B6232 /* history_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D347347C1580E5F8003C7B8C /* history_default.png */; };
@@ -1121,7 +1119,6 @@
 		C4AC2AB91D3963FA003B6232 /* UITextField+DoneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 630CF5561AF7CE1500539F7A /* UITextField+DoneButton.m */; };
 		C4AC2ABA1D3963FA003B6232 /* UIMicroButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EBF212F86360002A5394 /* UIMicroButton.m */; };
 		C4AC2ABB1D3963FA003B6232 /* UISpeakerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22968A5E12F875C600588287 /* UISpeakerButton.m */; };
-		C4AC2ABC1D3963FA003B6232 /* FirstLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2218A92312FBE1340088A667 /* FirstLoginViewController.m */; };
 		C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B71F31CA22AF90020A57F /* RgHashtagDirectoryViewController.m */; };
 		C4AC2ABE1D3963FA003B6232 /* UIBluetoothButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7555F1317E59C007BC101 /* UIBluetoothButton.m */; };
 		C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */; };
@@ -1526,7 +1523,6 @@
 		D38187B515FE341B00C3EDCA /* ContactDetailsLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187B815FE341B00C3EDCA /* ContactDetailsLabelViewController.xib */; };
 		D38187B915FE342200C3EDCA /* ContactDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187BC15FE342200C3EDCA /* ContactDetailsViewController.xib */; };
 		D38187BD15FE342800C3EDCA /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187C015FE342800C3EDCA /* ContactsViewController.xib */; };
-		D38187C915FE346400C3EDCA /* FirstLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187CC15FE346400C3EDCA /* FirstLoginViewController.xib */; };
 		D38187CD15FE346700C3EDCA /* HistoryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187D015FE346700C3EDCA /* HistoryDetailsViewController.xib */; };
 		D38187D115FE346B00C3EDCA /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187D415FE346B00C3EDCA /* HistoryViewController.xib */; };
 		D38187D915FE347700C3EDCA /* IncomingCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38187DC15FE347700C3EDCA /* IncomingCallViewController.xib */; };
@@ -2028,8 +2024,6 @@
 		2214EB8812F84EBB002A5394 /* UIHangUpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHangUpButton.m; sourceTree = "<group>"; };
 		2214EBF112F86360002A5394 /* UIMicroButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMicroButton.h; sourceTree = "<group>"; };
 		2214EBF212F86360002A5394 /* UIMicroButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMicroButton.m; sourceTree = "<group>"; };
-		2218A92212FBE1340088A667 /* FirstLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLoginViewController.h; sourceTree = "<group>"; };
-		2218A92312FBE1340088A667 /* FirstLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FirstLoginViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		22276E8613C73D8A00210156 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		22276E8813C73DC000210156 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2234C8E715EE2F7F00E18E83 /* chat_message_delivered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_message_delivered.png; path = Resources/chat_message_delivered.png; sourceTree = "<group>"; };
@@ -3137,7 +3131,6 @@
 		F095481A1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactDetailsLabelViewController.xib; sourceTree = "<group>"; };
 		F095481B1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactDetailsViewController.xib; sourceTree = "<group>"; };
 		F095481C1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactsViewController.xib; sourceTree = "<group>"; };
-		F095481F1883F15300E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FirstLoginViewController.xib; sourceTree = "<group>"; };
 		F09548201883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistoryDetailsViewController.xib; sourceTree = "<group>"; };
 		F09548211883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistoryViewController.xib; sourceTree = "<group>"; };
 		F09548221883F15400E8A69B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ImageViewController.xib; sourceTree = "<group>"; };
@@ -3163,8 +3156,6 @@
 		F09548381883F29C00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ContactDetailsViewController.strings; sourceTree = "<group>"; };
 		F09548391883F2C500E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
 		F095483A1883F2CA00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
-		F095483F1883F4B700E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FirstLoginViewController.strings; sourceTree = "<group>"; };
-		F09548401883F4BC00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/FirstLoginViewController.strings; sourceTree = "<group>"; };
 		F09548411883F51600E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/HistoryViewController.strings; sourceTree = "<group>"; };
 		F09548421883F51B00E8A69B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HistoryViewController.strings; sourceTree = "<group>"; };
 		F09548431883F52600E8A69B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ImageViewController.strings; sourceTree = "<group>"; };
@@ -3200,7 +3191,6 @@
 		F0AF06F31A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactDetailsLabelViewController.strings; sourceTree = "<group>"; };
 		F0AF06F41A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactDetailsViewController.strings; sourceTree = "<group>"; };
 		F0AF06F51A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactsViewController.strings; sourceTree = "<group>"; };
-		F0AF06F81A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/FirstLoginViewController.strings; sourceTree = "<group>"; };
 		F0AF06F91A24BA760086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HistoryDetailsViewController.strings; sourceTree = "<group>"; };
 		F0AF06FA1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HistoryViewController.strings; sourceTree = "<group>"; };
 		F0AF06FB1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ImageViewController.strings; sourceTree = "<group>"; };
@@ -3448,9 +3438,6 @@
 				D35497FB15875372000081D8 /* ContactsViewController.h */,
 				D35497FC15875372000081D8 /* ContactsViewController.m */,
 				D38187C015FE342800C3EDCA /* ContactsViewController.xib */,
-				2218A92212FBE1340088A667 /* FirstLoginViewController.h */,
-				2218A92312FBE1340088A667 /* FirstLoginViewController.m */,
-				D38187CC15FE346400C3EDCA /* FirstLoginViewController.xib */,
 				C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */,
 				C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */,
 				D38187D015FE346700C3EDCA /* HistoryDetailsViewController.xib */,
@@ -5002,7 +4989,6 @@
 				22F254811073D99800AC9B3F /* ringback.wav in Resources */,
 				2237D4091084D7A9001383EE /* ring.wav in Resources */,
 				2242E313125235120061DDCE /* ring.caf in Resources */,
-				D38187C915FE346400C3EDCA /* FirstLoginViewController.xib in Resources */,
 				2214783D1386A2030020F8B8 /* Localizable.strings in Resources */,
 				70571E1A13FABCB000CDD3C2 /* rootca.pem in Resources */,
 				D347347E1580E5F8003C7B8C /* history_default.png in Resources */,
@@ -5738,7 +5724,6 @@
 				C4AC27D41D3963FA003B6232 /* ringback.wav in Resources */,
 				C4AC27D51D3963FA003B6232 /* ring.wav in Resources */,
 				C4AC27D71D3963FA003B6232 /* ring.caf in Resources */,
-				C4AC27D81D3963FA003B6232 /* FirstLoginViewController.xib in Resources */,
 				C4AC27D91D3963FA003B6232 /* Localizable.strings in Resources */,
 				C4AC27DA1D3963FA003B6232 /* rootca.pem in Resources */,
 				C4AC27DB1D3963FA003B6232 /* history_default.png in Resources */,
@@ -6585,7 +6570,6 @@
 				630CF5571AF7CE1500539F7A /* UITextField+DoneButton.m in Sources */,
 				2214EBF312F86360002A5394 /* UIMicroButton.m in Sources */,
 				22968A5F12F875C600588287 /* UISpeakerButton.m in Sources */,
-				2218A92512FBE1340088A667 /* FirstLoginViewController.m in Sources */,
 				C42B71F51CA22AF90020A57F /* RgHashtagDirectoryViewController.m in Sources */,
 				22C755601317E59C007BC101 /* UIBluetoothButton.m in Sources */,
 				C4FD78751CFB70520066BDB1 /* HashtagCategoryCardComponent.mm in Sources */,
@@ -6742,7 +6726,6 @@
 				C4AC2AB91D3963FA003B6232 /* UITextField+DoneButton.m in Sources */,
 				C4AC2ABA1D3963FA003B6232 /* UIMicroButton.m in Sources */,
 				C4AC2ABB1D3963FA003B6232 /* UISpeakerButton.m in Sources */,
-				C4AC2ABC1D3963FA003B6232 /* FirstLoginViewController.m in Sources */,
 				C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */,
 				C4AC2ABE1D3963FA003B6232 /* UIBluetoothButton.m in Sources */,
 				C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */,
@@ -7091,17 +7074,6 @@
 				F0AF06F51A24BA760086C9C1 /* ar */,
 			);
 			name = ContactsViewController.xib;
-			sourceTree = "<group>";
-		};
-		D38187CC15FE346400C3EDCA /* FirstLoginViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F095481F1883F15300E8A69B /* Base */,
-				F095483F1883F4B700E8A69B /* fr */,
-				F09548401883F4BC00E8A69B /* ru */,
-				F0AF06F81A24BA760086C9C1 /* ar */,
-			);
-			name = FirstLoginViewController.xib;
 			sourceTree = "<group>";
 		};
 		D38187D015FE346700C3EDCA /* HistoryDetailsViewController.xib */ = {

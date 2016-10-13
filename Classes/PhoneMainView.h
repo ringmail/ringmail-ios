@@ -27,7 +27,6 @@
 
 /* These imports are here so that we can import PhoneMainView.h without bothering to import all the rest of the view headers */
 
-#import "FirstLoginViewController.h"
 #import "IncomingCallViewController.h"
 #import "ChatRoomViewController.h"
 #import "RgMainViewController.h"
@@ -40,7 +39,6 @@
 #import "HistoryViewController.h"
 #import "HistoryDetailsViewController.h"
 #import "SettingsViewController.h"
-#import "FirstLoginViewController.h"
 #import "WizardViewController.h"
 #import "ImageViewController.h"
 
