@@ -1199,8 +1199,6 @@
 		C4AC2B391D3963FA003B6232 /* ColorSpaceUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */; };
 		C4AC2B3B1D3963FA003B6232 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D378AB2915DCDB490098505D /* ImagePickerViewController.m */; };
 		C4AC2B3C1D3963FA003B6232 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22405EFE1601C19100B92522 /* ImageViewController.m */; };
-		C4AC2B3D1D3963FA003B6232 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED40161602172200BF332B /* HPGrowingTextView.m */; };
-		C4AC2B3E1D3963FA003B6232 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED40181602172200BF332B /* HPTextViewInternal.m */; };
 		C4AC2B3F1D3963FA003B6232 /* DTActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D37EE161160377D7003608A6 /* DTActionSheet.m */; };
 		C4AC2B401D3963FA003B6232 /* UIImage+operation.m in Sources */ = {isa = PBXBuildFile; fileRef = C402BF021C2623E10076B60C /* UIImage+operation.m */; };
 		C4AC2B411D3963FA003B6232 /* UILinphoneTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D35E91F3160CA10B0023116B /* UILinphoneTextField.m */; };
@@ -1697,8 +1695,6 @@
 		D3ED3E9E15872EF1006C0DE4 /* history_edit_over.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED3E9515872EF1006C0DE4 /* history_edit_over.png */; };
 		D3ED3EA015872EF1006C0DE4 /* history_missed_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED3E9615872EF1006C0DE4 /* history_missed_selected.png */; };
 		D3ED3EA215872EF1006C0DE4 /* history_missed_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED3E9715872EF1006C0DE4 /* history_missed_default.png */; };
-		D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED40161602172200BF332B /* HPGrowingTextView.m */; };
-		D3ED401B1602172200BF332B /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED40181602172200BF332B /* HPTextViewInternal.m */; };
 		D3F26BF115986B73005F9CAB /* IncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F26BEF15986B71005F9CAB /* IncomingCallViewController.m */; };
 		D3F26BF715986DAD005F9CAB /* history_ok_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F26BF515986DAD005F9CAB /* history_ok_default.png */; };
 		D3F26BF915986DAD005F9CAB /* history_ok_over.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F26BF615986DAD005F9CAB /* history_ok_over.png */; };
@@ -2901,10 +2897,6 @@
 		D3ED3E9515872EF1006C0DE4 /* history_edit_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_edit_over.png; path = Resources/history_edit_over.png; sourceTree = "<group>"; };
 		D3ED3E9615872EF1006C0DE4 /* history_missed_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_missed_selected.png; path = Resources/history_missed_selected.png; sourceTree = "<group>"; };
 		D3ED3E9715872EF1006C0DE4 /* history_missed_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_missed_default.png; path = Resources/history_missed_default.png; sourceTree = "<group>"; };
-		D3ED40151602172200BF332B /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
-		D3ED40161602172200BF332B /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
-		D3ED40171602172200BF332B /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
-		D3ED40181602172200BF332B /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		D3F26BEE15986B71005F9CAB /* IncomingCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomingCallViewController.h; sourceTree = "<group>"; };
 		D3F26BEF15986B71005F9CAB /* IncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomingCallViewController.m; sourceTree = "<group>"; };
 		D3F26BF515986DAD005F9CAB /* history_ok_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_ok_default.png; path = Resources/history_ok_default.png; sourceTree = "<group>"; };
@@ -3759,7 +3751,6 @@
 				D32B9DFA15A2F131000B6DEC /* FastAddressBook.h */,
 				D32B9DFB15A2F131000B6DEC /* FastAddressBook.m */,
 				63B81A021B57DA33009604A6 /* TPKeyboardAvoiding */,
-				D3ED40141602172200BF332B /* GrowingTextView */,
 				D3807FC715C2894A005BE9BC /* InAppSettingsKit */,
 				D3B90E1115C2CB5700F64F8C /* NinePatch.xcodeproj */,
 				D326483615887D5200930C67 /* OrderedDictionary.h */,
@@ -3903,18 +3894,6 @@
 				D3B90E1915C2CB5800F64F8C /* libNinePatch.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D3ED40141602172200BF332B /* GrowingTextView */ = {
-			isa = PBXGroup;
-			children = (
-				D3ED40151602172200BF332B /* HPGrowingTextView.h */,
-				D3ED40161602172200BF332B /* HPGrowingTextView.m */,
-				D3ED40171602172200BF332B /* HPTextViewInternal.h */,
-				D3ED40181602172200BF332B /* HPTextViewInternal.m */,
-			);
-			name = GrowingTextView;
-			path = Utils/GrowingTextView;
 			sourceTree = "<group>";
 		};
 		D3F7997E15BD31EC0018C273 /* TPMultiLayoutViewController */ = {
@@ -6459,8 +6438,6 @@
 				D380801315C299D0005BE9BC /* ColorSpaceUtilites.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerViewController.m in Sources */,
 				22405F001601C19200B92522 /* ImageViewController.m in Sources */,
-				D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */,
-				D3ED401B1602172200BF332B /* HPTextViewInternal.m in Sources */,
 				D37EE162160377D7003608A6 /* DTActionSheet.m in Sources */,
 				C402BF031C2623E10076B60C /* UIImage+operation.m in Sources */,
 				D35E91F4160CA10B0023116B /* UILinphoneTextField.m in Sources */,
@@ -6592,8 +6569,6 @@
 				C4AC2B391D3963FA003B6232 /* ColorSpaceUtilites.m in Sources */,
 				C4AC2B3B1D3963FA003B6232 /* ImagePickerViewController.m in Sources */,
 				C4AC2B3C1D3963FA003B6232 /* ImageViewController.m in Sources */,
-				C4AC2B3D1D3963FA003B6232 /* HPGrowingTextView.m in Sources */,
-				C4AC2B3E1D3963FA003B6232 /* HPTextViewInternal.m in Sources */,
 				C4AC2B3F1D3963FA003B6232 /* DTActionSheet.m in Sources */,
 				C4AC2B401D3963FA003B6232 /* UIImage+operation.m in Sources */,
 				C4AC2B411D3963FA003B6232 /* UILinphoneTextField.m in Sources */,

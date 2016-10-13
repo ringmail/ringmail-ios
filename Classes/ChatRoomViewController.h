@@ -21,7 +21,6 @@
 
 #import "UIToggleButton.h"
 #import "UICompositeViewController.h"
-#import "HPGrowingTextView.h"
 #import "OrderedDictionary.h"
 #import "RgMessagesViewController.h"
 #import "RgManager.h"
