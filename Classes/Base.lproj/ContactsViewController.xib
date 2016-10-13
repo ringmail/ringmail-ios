@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -13,10 +13,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactsViewController">
             <connections>
-                <outlet property="addButton" destination="6" id="91"/>
-                <outlet property="allButton" destination="4" id="27"/>
-                <outlet property="backButton" destination="87" id="90"/>
-                <outlet property="linphoneButton" destination="5" id="31"/>
                 <outlet property="searchField" destination="hVk-qC-eOy" id="a9W-tS-EOU"/>
                 <outlet property="toolBar" destination="3" id="n95-dF-EoN"/>
                 <outlet property="view" destination="2" id="16"/>
@@ -31,87 +27,6 @@
                     <frame key="frameInset" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" id="93" userLabel="switchView">
-                            <frame key="frameInset" minX="100.00%" width="214" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="4" userLabel="allButton">
-                                    <frame key="frameInset" width="107" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <accessibility key="accessibilityConfiguration" label="All contacts filter"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <inset key="titleEdgeInsets" minX="0.0" minY="16" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="All" backgroundImage="contacts_all_default.png">
-                                        <color key="titleColor" red="0.28619974851608276" green="0.32144349813461304" blue="0.35980013012886047" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <state key="selected" backgroundImage="contacts_all_selected.png">
-                                        <color key="titleColor" red="0.97037827968597412" green="0.97034931182861328" blue="0.97036576271057129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <state key="highlighted" backgroundImage="contacts_all_selected.png">
-                                        <color key="titleColor" red="0.97037827968597412" green="0.97034931182861328" blue="0.97036576271057129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onAllClick:" destination="-1" eventType="touchUpInside" id="29"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="5" userLabel="linphoneButton">
-                                    <frame key="frameInset" width="107" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                    <accessibility key="accessibilityConfiguration" label="Linphone contacts filter"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <inset key="titleEdgeInsets" minX="5" minY="14" maxX="10" maxY="0.0"/>
-                                    <state key="normal" title="Linphone" backgroundImage="contacts_linphone_default.png">
-                                        <color key="titleColor" red="0.28619974851608276" green="0.32144349813461304" blue="0.35980013012886047" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <state key="selected" backgroundImage="contacts_linphone_selected.png">
-                                        <color key="titleColor" red="0.97037827968597412" green="0.97034931182861328" blue="0.97036576271057129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <state key="highlighted" backgroundImage="contacts_linphone_selected.png">
-                                        <color key="titleColor" red="0.97037827968597412" green="0.97034931182861328" blue="0.97036576271057129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onLinphoneClick:" destination="-1" eventType="touchUpInside" id="47"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="6" userLabel="addButton">
-                                    <frame key="frameInset" minY="-1" width="45" height="45"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                    <accessibility key="accessibilityConfiguration" label="Add contact"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <inset key="titleEdgeInsets" minX="0.0" minY="18" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" image="ringmail_contact_add.png">
-                                        <color key="titleColor" red="0.28619974851608276" green="0.32144349813461304" blue="0.35980013012886047" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <state key="highlighted" backgroundImage="ringmail_contact_add_pressed.png">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onAddContactClick:" destination="-1" eventType="touchUpInside" id="86"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </view>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="87" userLabel="backButton">
-                            <frame key="frameInset" width="107" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Back"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="18" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Back" backgroundImage="contacts_back_default.png">
-                                <color key="titleColor" red="0.28619974851608276" green="0.32144349813461304" blue="0.35980013012886047" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="contacts_back_over.png">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="89"/>
-                            </connections>
-                        </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search.png" id="jKy-6q-slX">
                             <frame key="frameInset" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -141,14 +56,6 @@
         </view>
     </objects>
     <resources>
-        <image name="contacts_all_default.png" width="213" height="88"/>
-        <image name="contacts_all_selected.png" width="213" height="88"/>
-        <image name="contacts_back_default.png" width="214" height="88"/>
-        <image name="contacts_back_over.png" width="214" height="88"/>
-        <image name="contacts_linphone_default.png" width="213" height="88"/>
-        <image name="contacts_linphone_selected.png" width="213" height="88"/>
-        <image name="ringmail_contact_add.png" width="45" height="45"/>
-        <image name="ringmail_contact_add_pressed.png" width="45" height="45"/>
         <image name="search.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

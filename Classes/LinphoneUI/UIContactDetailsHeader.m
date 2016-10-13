@@ -40,7 +40,6 @@
 @synthesize tableView;
 @synthesize contactDetailsDelegate;
 @synthesize popoverController;
-@synthesize rgImage;
 @synthesize rgInvite;
 @synthesize rgMember;
 @synthesize callButton;
@@ -125,8 +124,6 @@
     NSLog(@"RingMail: Contact ID: %@ - has rg:%d", contactID, rgMember);
     if (rgMember)
     {
-        //[rgImage setHidden:NO];
-        
         BOOL fav = NO;
         NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
         if (! [rgAddress isEqualToString:@""])
@@ -152,7 +149,6 @@
     }
     else
     {
-        //[rgImage setHidden:YES];
         [favoriteButton setHidden:YES];
         [chatButton setHidden:YES];
         [callButton setHidden:YES];
@@ -408,8 +404,6 @@
     BOOL member = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
     if (member)
     {
-        //[rgImage setHidden:NO];
-        
         BOOL fav = NO;
         NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
 		NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];

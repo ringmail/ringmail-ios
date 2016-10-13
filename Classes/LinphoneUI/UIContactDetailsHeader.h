@@ -39,7 +39,6 @@
 @property (nonatomic, strong) IBOutlet UIView *editView;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet id<ContactDetailsDelegate> contactDetailsDelegate;
-@property (nonatomic, strong) IBOutlet UIImageView *rgImage;
 @property (nonatomic, strong) IBOutlet UIButton *rgInvite;
 @property (nonatomic, strong) IBOutlet UIButton *callButton;
 @property (nonatomic, strong) IBOutlet UIButton *chatButton;
