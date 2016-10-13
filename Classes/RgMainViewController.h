@@ -25,7 +25,6 @@
 #import "UICamSwitch.h"
 #import "UICallButton.h"
 #import "UIMessageButton.h"
-#import "UITransferButton.h"
 #import "UIDigitButton.h"
 
 @interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, MFMailComposeViewControllerDelegate> {
@@ -43,7 +42,6 @@
 @property (nonatomic, strong) IBOutlet UICallButton* goButton;
 @property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;
 @property (nonatomic, strong) IBOutlet UICallButton* addCallButton;
-@property (nonatomic, strong) IBOutlet UITransferButton* transferButton;
 @property (nonatomic, strong) IBOutlet UIButton* backButton;
 
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;

@@ -39,7 +39,6 @@
 @synthesize addContactButton;
 @synthesize backButton;
 @synthesize addCallButton;
-@synthesize transferButton;
 @synthesize callButton;
 @synthesize goButton;
 @synthesize messageButton;
@@ -435,26 +434,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)callUpdate:(LinphoneCall *)call state:(LinphoneCallState)state {
     //NSLog(@"RingMail: %s", __PRETTY_FUNCTION__);
-    
-	/*LinphoneCore *lc = [LinphoneManager getLc];
-	if (linphone_core_get_calls_nb(lc) > 0) {
-		if (transferMode) {
-			[addCallButton setHidden:true];
-			[transferButton setHidden:false];
-		} else {
-			[addCallButton setHidden:false];
-			[transferButton setHidden:true];
-		}
-		//[callButton setHidden:true];
-		[backButton setHidden:false];
-		[addContactButton setHidden:true];
-	} else {
-		[addCallButton setHidden:true];
-		//[callButton setHidden:false];
-		[backButton setHidden:true];
-		[addContactButton setHidden:false];
-		[transferButton setHidden:true];
-	}*/
 }
 
 - (void)setAddress:(NSString *)address {
@@ -468,27 +447,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self callUpdate:call state:state];
 }
 
-/*- (void)call:(NSString *)address {
-	NSString *displayName = nil;
-	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-	if (contact) {
-		displayName = [FastAddressBook getContactDisplayName:contact];
-	}
-	[self call:address displayName:displayName];
-}*/
-
-/*- (void)call:(NSString *)address displayName:(NSString *)displayName {
-	[[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
-}*/
-
 #pragma mark - UITextFieldDelegate Functions
-
-/*- (BOOL)textField:(UITextField *)textField
-	shouldChangeCharactersInRange:(NSRange)range
-				replacementString:(NSString *)string {
-	//[textField performSelector:@selector() withObject:nil afterDelay:0];
-	return YES;
-}*/
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	if (textField == addressField) {
@@ -540,7 +499,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	if ([[addressField text] length] > 0) {
 		[addContactButton setEnabled:TRUE];
 		[addCallButton setEnabled:TRUE];
-		[transferButton setEnabled:TRUE];
         NSString* addr = [addressField text];
         if ([[addr substringToIndex:1] isEqualToString:@"#"])
         {
@@ -557,7 +515,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	} else {
 		[addContactButton setEnabled:FALSE];
 		[addCallButton setEnabled:FALSE];
-		[transferButton setEnabled:FALSE];
         messageButton.hidden = YES;
         callButton.hidden = YES;
         goButton.hidden = YES;

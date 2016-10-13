@@ -8,7 +8,6 @@
 
 #import "UICallButton.h"
 #import "UIMessageButton.h"
-#import "UITransferButton.h"
 #import "UIDigitButton.h"
 
 @interface RgFavoriteViewController : UIViewController <UICompositeViewDelegate> {
