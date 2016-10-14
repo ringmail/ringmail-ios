@@ -1478,8 +1478,6 @@ static BOOL libStarted = FALSE;
 	// create linphone core
 	[self createLinphoneCore];
 
-	_iapManager = [[InAppProductsManager alloc] init];
-
 	linphone_core_migrate_to_multi_transport(theLinphoneCore);
 
 	// init audio session (just getting the instance will init)
@@ -1567,7 +1565,6 @@ static BOOL libStarted = FALSE;
 											 selector:@selector(configuringStateChangedNotificationHandler:)
 												 name:kLinphoneConfiguringStateUpdate
 											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inappReady:) name:kIAPReady object:nil];
     
 	/*call iterate once immediately in order to initiate background connections with sip server or remote provisioning
 	 * grab, if any */
@@ -2457,13 +2454,6 @@ static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 		linphone_tunnel_auto_detect(tunnel);
 		break;
 	}
-}
-
-#pragma mark - InApp Purchase events
-
-- (void)inappReady:(NSNotification *)notif {
-	// Query our in-app server to retrieve InApp purchases
-	[_iapManager retrievePurchases];
 }
 
 - (void)removeAllAccounts {

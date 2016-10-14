@@ -147,7 +147,6 @@
 		63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */; };
 		63D2680F1B174A5E00A2CC11 /* numpad_one_voicemail_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 63D2680D1B174A5E00A2CC11 /* numpad_one_voicemail_default.png */; };
 		63D268101B174A5E00A2CC11 /* numpad_one_voicemail_over.png in Resources */ = {isa = PBXBuildFile; fileRef = 63D2680E1B174A5E00A2CC11 /* numpad_one_voicemail_over.png */; };
-		63E59A3F1ADE70D900646FB3 /* InAppProductsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E59A3E1ADE70D900646FB3 /* InAppProductsManager.m */; };
 		70571E1A13FABCB000CDD3C2 /* rootca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 70571E1913FABCB000CDD3C2 /* rootca.pem */; };
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
 		70E542F513E147EB002BA2C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F413E147EB002BA2C0 /* QuartzCore.framework */; };
@@ -1152,7 +1151,6 @@
 		C4AC2B031D3963FA003B6232 /* RgMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */; };
 		C4AC2B041D3963FA003B6232 /* ContactDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37C639A15AADEF5009D0BAC /* ContactDetailsTableViewController.m */; };
 		C4AC2B051D3963FA003B6232 /* HashtagModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72181CA2313D0020A57F /* HashtagModelController.m */; };
-		C4AC2B071D3963FA003B6232 /* InAppProductsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E59A3E1ADE70D900646FB3 /* InAppProductsManager.m */; };
 		C4AC2B081D3963FA003B6232 /* UIEditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C6526615AC1A8F0092A874 /* UIEditableTableViewCell.m */; };
 		C4AC2B091D3963FA003B6232 /* ContactDetailsLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D378906315AC373B00BD776C /* ContactDetailsLabelViewController.m */; };
 		C4AC2B0A1D3963FA003B6232 /* UIContactDetailsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E8F68415ADE0580065A226 /* UIContactDetailsFooter.m */; };
@@ -1208,7 +1206,6 @@
 		C4AC2B451D3963FA003B6232 /* CAAnimation+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = D37E3ECC1619C27A0087659A /* CAAnimation+Blocks.m */; };
 		C4AC2B481D3963FA003B6232 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */; };
 		C4AC2B601D3963FA003B6232 /* libNinePatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
-		C4AC2B611D3963FA003B6232 /* libXMLRPC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3554ED115CA79AA00478841 /* libXMLRPC.a */; };
 		C4AC2B621D3963FA003B6232 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5F03410CE6B2F00777D97 /* AddressBook.framework */; };
 		C4AC2B631D3963FA003B6232 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */; };
 		C4AC2B641D3963FA003B6232 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22405EED1600B4E400B92522 /* AssetsLibrary.framework */; };
@@ -1278,7 +1275,6 @@
 		D3012CC41610467D007CD926 /* linphone_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D3012CC31610467D007CD926 /* linphone_logo.png */; };
 		D3012CC616105ECF007CD926 /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F5F8D91609A86700D3DA1A /* bubble.png */; };
 		D30562151671DC4900C97967 /* libNinePatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
-		D30562161671DC4900C97967 /* libXMLRPC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3554ED115CA79AA00478841 /* libXMLRPC.a */; };
 		D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D306459D1611EC2900BB571E /* UILoadingImageView.m */; };
 		D30BBD1815D402A7000F93DD /* contact_ok_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D30BBD1715D402A7000F93DD /* contact_ok_disabled.png */; };
 		D3119E7215B6A4710005D4A4 /* contacts_back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3119E7015B6A4710005D4A4 /* contacts_back_default.png */; };
@@ -1846,33 +1842,12 @@
 			remoteGlobalIDString = FAB8A0141CAC546A00C6DFC1;
 			remoteInfo = KIFFrameworkConsumerTests;
 		};
-		C4AC27CC1D3963FA003B6232 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 903B0DB512F7574800BD6E09;
-			remoteInfo = libXMLRPC;
-		};
 		C4AC27CE1D3963FA003B6232 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3B90E1115C2CB5700F64F8C /* NinePatch.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = NinePatch;
-		};
-		D3554ED015CA79AA00478841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 903B0DB612F7574800BD6E09;
-			remoteInfo = libXMLRPC;
-		};
-		D3554ED415CA79B900478841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 903B0DB512F7574800BD6E09;
-			remoteInfo = libXMLRPC;
 		};
 		D3B90E1815C2CB5800F64F8C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2117,8 +2092,6 @@
 		63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTAlertView.m; sourceTree = "<group>"; };
 		63D2680D1B174A5E00A2CC11 /* numpad_one_voicemail_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_one_voicemail_default.png; path = Resources/numpad_one_voicemail_default.png; sourceTree = "<group>"; };
 		63D2680E1B174A5E00A2CC11 /* numpad_one_voicemail_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_one_voicemail_over.png; path = Resources/numpad_one_voicemail_over.png; sourceTree = "<group>"; };
-		63E59A3D1ADE6ECB00646FB3 /* InAppProductsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppProductsManager.h; sourceTree = "<group>"; };
-		63E59A3E1ADE70D900646FB3 /* InAppProductsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppProductsManager.m; sourceTree = "<group>"; };
 		70571E1913FABCB000CDD3C2 /* rootca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rootca.pem; path = "liblinphone-sdk/apple-darwin/share/linphone/rootca.pem"; sourceTree = "<group>"; };
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -2573,7 +2546,6 @@
 		D354981915876FE7000081D8 /* list_details_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = list_details_over.png; path = Resources/list_details_over.png; sourceTree = "<group>"; };
 		D354981E1587716B000081D8 /* UIStateBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStateBar.h; sourceTree = "<group>"; };
 		D354981F1587716B000081D8 /* UIStateBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIStateBar.m; sourceTree = "<group>"; };
-		D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XMLRPC.xcodeproj; path = Utils/XMLRPC/XMLRPC.xcodeproj; sourceTree = "<group>"; };
 		D35860D515B549B500513429 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = Utils/Utils.m; sourceTree = "<group>"; };
 		D35E757515931E5D0066B1C1 /* switch_camera_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_camera_default.png; path = Resources/switch_camera_default.png; sourceTree = "<group>"; };
 		D35E757615931E5D0066B1C1 /* switch_camera_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_camera_over.png; path = Resources/switch_camera_over.png; sourceTree = "<group>"; };
@@ -3100,7 +3072,6 @@
 				4DDB8CFC1D9444BC00F5FD71 /* libz.1.dylib in Frameworks */,
 				C48A1F031CDFFADA00E095F8 /* VideoToolbox.framework in Frameworks */,
 				D30562151671DC4900C97967 /* libNinePatch.a in Frameworks */,
-				D30562161671DC4900C97967 /* libXMLRPC.a in Frameworks */,
 				22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */,
 				22B5EFA310CE50BD00777D97 /* AddressBookUI.framework in Frameworks */,
 				22405EEE1600B4E400B92522 /* AssetsLibrary.framework in Frameworks */,
@@ -3185,7 +3156,6 @@
 				4DE0EB071D948A300009E015 /* libx264.a in Frameworks */,
 				C4AC2B481D3963FA003B6232 /* VideoToolbox.framework in Frameworks */,
 				C4AC2B601D3963FA003B6232 /* libNinePatch.a in Frameworks */,
-				C4AC2B611D3963FA003B6232 /* libXMLRPC.a in Frameworks */,
 				C4AC2B621D3963FA003B6232 /* AddressBook.framework in Frameworks */,
 				C4AC2B631D3963FA003B6232 /* AddressBookUI.framework in Frameworks */,
 				C4AC2B641D3963FA003B6232 /* AssetsLibrary.framework in Frameworks */,
@@ -3291,8 +3261,6 @@
 				22405EFD1601C19000B92522 /* ImageViewController.h */,
 				22405EFE1601C19100B92522 /* ImageViewController.m */,
 				D37EE11016035793003608A6 /* ImageViewController.xib */,
-				63E59A3D1ADE6ECB00646FB3 /* InAppProductsManager.h */,
-				63E59A3E1ADE70D900646FB3 /* InAppProductsManager.m */,
 				D3F26BEE15986B71005F9CAB /* IncomingCallViewController.h */,
 				D3F26BEF15986B71005F9CAB /* IncomingCallViewController.m */,
 				D38187DC15FE347700C3EDCA /* IncomingCallViewController.xib */,
@@ -3759,7 +3727,6 @@
 				D3F9A9EB15AF27620045320F /* UACellBackgroundView */,
 				C9B3A6FD15B485DB006F52EE /* Utils.h */,
 				D35860D515B549B500513429 /* Utils.m */,
-				D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */,
 				C42786141C70263300DD946D /* UIColor+Hex.m */,
 				C4FD78551CF935C60066BDB1 /* UIColor+Hex.h */,
 				C4FD784B1CF932950066BDB1 /* UIColor+Name.m */,
@@ -3770,14 +3737,6 @@
 				C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */,
 			);
 			name = Utils;
-			sourceTree = "<group>";
-		};
-		D3554EC615CA79A900478841 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D3554ED115CA79AA00478841 /* libXMLRPC.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D37E3ECA1619C27A0087659A /* CAAnimationBlocks */ = {
@@ -4597,7 +4556,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D3554ED515CA79B900478841 /* PBXTargetDependency */,
 				D3B90E1B15C2CBC800F64F8C /* PBXTargetDependency */,
 			);
 			name = RingMail;
@@ -4622,7 +4580,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C4AC27CB1D3963FA003B6232 /* PBXTargetDependency */,
 				C4AC27CD1D3963FA003B6232 /* PBXTargetDependency */,
 			);
 			name = "RingMail-Dev";
@@ -4688,10 +4645,6 @@
 					ProductGroup = D3B90E1215C2CB5700F64F8C /* Products */;
 					ProjectRef = D3B90E1115C2CB5700F64F8C /* NinePatch.xcodeproj */;
 				},
-				{
-					ProductGroup = D3554EC615CA79A900478841 /* Products */;
-					ProjectRef = D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -4742,13 +4695,6 @@
 			fileType = wrapper.cfbundle;
 			path = KIFFrameworkConsumerTests.xctest;
 			remoteRef = C48A1EFD1CDFF9C100E095F8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D3554ED115CA79AA00478841 /* libXMLRPC.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libXMLRPC.a;
-			remoteRef = D3554ED015CA79AA00478841 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D3B90E1915C2CB5800F64F8C /* libNinePatch.a */ = {
@@ -6391,7 +6337,6 @@
 				C45CFFEB1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
 				C42B72191CA2313D0020A57F /* HashtagModelController.m in Sources */,
-				63E59A3F1ADE70D900646FB3 /* InAppProductsManager.m in Sources */,
 				D3C6526715AC1A8F0092A874 /* UIEditableTableViewCell.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
@@ -6521,7 +6466,6 @@
 				C4AC2B041D3963FA003B6232 /* ContactDetailsTableViewController.m in Sources */,
 				C45CFFEC1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				C4AC2B051D3963FA003B6232 /* HashtagModelController.m in Sources */,
-				C4AC2B071D3963FA003B6232 /* InAppProductsManager.m in Sources */,
 				C4AC2B081D3963FA003B6232 /* UIEditableTableViewCell.m in Sources */,
 				C4AC2B091D3963FA003B6232 /* ContactDetailsLabelViewController.m in Sources */,
 				C4AC2B0A1D3963FA003B6232 /* UIContactDetailsFooter.m in Sources */,
@@ -6582,20 +6526,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C4AC27CB1D3963FA003B6232 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libXMLRPC;
-			targetProxy = C4AC27CC1D3963FA003B6232 /* PBXContainerItemProxy */;
-		};
 		C4AC27CD1D3963FA003B6232 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = NinePatch;
 			targetProxy = C4AC27CE1D3963FA003B6232 /* PBXContainerItemProxy */;
-		};
-		D3554ED515CA79B900478841 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libXMLRPC;
-			targetProxy = D3554ED415CA79B900478841 /* PBXContainerItemProxy */;
 		};
 		D3B90E1B15C2CBC800F64F8C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -31,7 +31,6 @@
 #import "IASKAppSettingsViewController.h"
 #import "FastAddressBook.h"
 #import "Utils.h"
-#import "InAppProductsManager.h"
 
 #include "linphone/linphonecore.h"
 #include "linphone/linphone_tunnel.h"
@@ -217,7 +216,6 @@ typedef struct _LinphoneManagerSounds {
 @property (copy) void (^silentPushCompletion)(UIBackgroundFetchResult);
 @property (readonly) BOOL wasRemoteProvisioned;
 @property (readonly) LpConfig *configDb;
-@property (readonly) InAppProductsManager *iapManager;
 @property (nonatomic, strong) RgChatManager *chatManager;
 @property (nonatomic, strong) RgContactManager *contactManager;
 @property (nonatomic, strong) NSNumber *chatSession;
