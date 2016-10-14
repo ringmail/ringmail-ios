@@ -32,6 +32,17 @@
 #pragma mark - INSendMessageIntentHandling
 
 - (void)resolveRecipientsForSendMessage:(INSendMessageIntent *)intent withCompletion:(void (^)(NSArray<INPersonResolutionResult *> *resolutionResults))completion {
+    
+    NSLog(@"{ intent: %@, identifier: %@, recipients: %@, groupName: %@, content: %@, serviceName: %@, description: %@ }",intent, intent.identifier, intent.recipients, intent.groupName, intent.content, intent.serviceName, intent.description);
+
+//  "RingMail-Dev send message to Mike"
+    
+//    {intent: <INSendMessageIntent: 0x100215fc0>, identifier: 8faea7f3f7d76459de922887eb9460cc095850f1, recipients: ("<INPerson: 0x10035e7a0>"), groupName: (null), content: Testing, serviceName: (null), description: <INSendMessageIntent: 0x100215fc0>
+
+//  "RingMail-Dev send message to #dyl"
+    
+//    {intent: <INSendMessageIntent: 0x1002174d0>, identifier: e770483215b9454f4c09801220cdc44cc0c5990c, recipients: ("<INPerson: 0x100226670>"), groupName: (null), content: (null),serviceName: (null), description: <INSendMessageIntent: 0x1002174d0> }
+    
     NSArray<INPerson *> *recipients = intent.recipients;
 
     if (recipients.count == 0) {
@@ -41,6 +52,16 @@
     NSMutableArray<INPersonResolutionResult *> *resolutionResults = [NSMutableArray array];
     
     for (INPerson *recipient in recipients) {
+        
+        NSLog(@"{ recipient.identifier: %@, recipient.spokenPhrase: %@, recipient.pronunciationHint: %@, recipient.personHandle.value: %@, recipient.personHandle.type: %ld, recipient.aliases: %@, recipient.description: %@, recipient.displayName: %@, recipient.contactIdentifier: %@, recipient.customIdentifier: %@, recipient.nameComponents.givenName: %@, recipient.nameComponents.familyName: %@, recipient.nameComponents.nickname: %@, recipient.image: %@ }", recipient.identifier, recipient.spokenPhrase, recipient.pronunciationHint, recipient.personHandle.value, (long)recipient.personHandle.type, recipient.aliases, recipient.description, recipient.displayName, recipient.contactIdentifier, recipient.customIdentifier, recipient.nameComponents.givenName, recipient.nameComponents.familyName, recipient.nameComponents.nickname, recipient.image);
+
+//  "RingMail-Dev send message to Mike"
+        
+//    { recipient.identifier: (null), recipient.spokenPhrase: Mike, recipient.pronunciationHint: Mike, recipient.personHandle.value: (null), recipient.personHandle.type: 0, recipient.aliases: (null), recipient.description: <INPerson: 0x10035e7a0>, recipient.displayName: Mike Frager, recipient.contactIdentifier: (null), recipient.customIdentifier: (null), recipient.nameComponents.givenName: Mike, recipient.nameComponents.familyName: Frager, recipient.nameComponents.nickname: (null), recipient.image: (null) }
+        
+//  "RingMail-Dev send message to #dyl"
+        
+//        { recipient.identifier: (null), recipient.spokenPhrase: #TheWild, recipient.pronunciationHint: #TheWild, recipient.personHandle.value: (null), recipient.personHandle.type: 0, recipient.aliases: (null), recipient.description: <INPerson: 0x100226670>, recipient.displayName: #TheWild, recipient.contactIdentifier: (null), recipient.customIdentifier: (null), recipient.nameComponents.givenName: (null), recipient.nameComponents.familyName: (null), recipient.nameComponents.nickname: (null), recipient.image: (null) }
         
         IntentContactManager *contactManager = [[IntentContactManager alloc] init];
         
