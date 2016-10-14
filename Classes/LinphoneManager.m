@@ -315,8 +315,6 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 #endif
 		}
 
-		[self migrateFromUserPrefs];
-        
 		fastAddressBook = [[FastAddressBook alloc] init];
         
         /* RingMail */
@@ -332,13 +330,6 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 }
 
 - (void)dealloc {
-
-	/*OSStatus lStatus = AudioSessionRemovePropertyListenerWithUserData(
-		kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, (__bridge void *)(self));
-	if (lStatus) {
-		LOGE(@"cannot un register route change handler [%ld]", lStatus);
-	}*/
-
 	[[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kLinphoneGlobalStateUpdate];
 	[[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kLinphoneConfiguringStateUpdate];
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AVAudioSessionRouteChangeNotification];
@@ -352,229 +343,6 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 	}
 }
 
-#pragma mark - Migration
-
-static int check_should_migrate_images(void *data, int argc, char **argv, char **cnames) {
-	*((BOOL *)data) = TRUE;
-	return 0;
-}
-
-- (BOOL)migrateChatDBIfNeeded:(LinphoneCore *)lc {
-	sqlite3 *newDb;
-	char *errMsg;
-	NSError *error;
-	NSString *oldDbPath = [LinphoneManager documentFile:kLinphoneOldChatDBFilename];
-	NSString *newDbPath = [LinphoneManager documentFile:kLinphoneInternalChatDBFilename];
-	BOOL shouldMigrate = [[NSFileManager defaultManager] fileExistsAtPath:oldDbPath];
-	BOOL shouldMigrateImages = FALSE;
-	LinphoneProxyConfig *default_proxy;
-	const char *identity = NULL;
-	BOOL migrated = FALSE;
-	char *attach_stmt = NULL;
-
-	linphone_core_get_default_proxy(lc, &default_proxy);
-
-	if (sqlite3_open([newDbPath UTF8String], &newDb) != SQLITE_OK) {
-		LOGE(@"Can't open \"%@\" sqlite3 database.", newDbPath);
-		return FALSE;
-	}
-
-	const char *check_appdata =
-		"SELECT url,message FROM history WHERE url LIKE 'assets-library%' OR message LIKE 'assets-library%' LIMIT 1;";
-	// will set "needToMigrateImages to TRUE if a result comes by
-	sqlite3_exec(newDb, check_appdata, check_should_migrate_images, &shouldMigrateImages, NULL);
-	if (!shouldMigrate && !shouldMigrateImages) {
-		sqlite3_close(newDb);
-		return FALSE;
-	}
-
-	LOGI(@"Starting migration procedure");
-
-	if (shouldMigrate) {
-
-		// attach old database to the new one:
-		attach_stmt = sqlite3_mprintf("ATTACH DATABASE %Q AS oldchats", [oldDbPath UTF8String]);
-		if (sqlite3_exec(newDb, attach_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
-			LOGE(@"Can't attach old chat table, error[%s] ", errMsg);
-			sqlite3_free(errMsg);
-			goto exit_dbmigration;
-		}
-
-		// migrate old chats to the new db. The iOS stores timestamp in UTC already, so we can directly put it in the
-		// 'utc' field and set 'time' to -1
-		const char *migration_statement =
-			"INSERT INTO history (localContact,remoteContact,direction,message,utc,read,status,time) "
-			"SELECT localContact,remoteContact,direction,message,time,read,state,'-1' FROM oldchats.chat";
-
-		if (sqlite3_exec(newDb, migration_statement, NULL, NULL, &errMsg) != SQLITE_OK) {
-			LOGE(@"DB migration failed, error[%s] ", errMsg);
-			sqlite3_free(errMsg);
-			goto exit_dbmigration;
-		}
-
-		// invert direction of old messages, because iOS was storing the direction flag incorrectly
-		const char *invert_direction = "UPDATE history SET direction = NOT direction";
-		if (sqlite3_exec(newDb, invert_direction, NULL, NULL, &errMsg) != SQLITE_OK) {
-			LOGE(@"Inverting direction failed, error[%s]", errMsg);
-			sqlite3_free(errMsg);
-			goto exit_dbmigration;
-		}
-
-		// replace empty from: or to: by the current identity.
-		if (default_proxy) {
-			identity = linphone_proxy_config_get_identity(default_proxy);
-		}
-		if (!identity) {
-			identity = "sip:unknown@sip.linphone.org";
-		}
-
-		char *from_conversion =
-			sqlite3_mprintf("UPDATE history SET localContact = %Q WHERE localContact = ''", identity);
-		if (sqlite3_exec(newDb, from_conversion, NULL, NULL, &errMsg) != SQLITE_OK) {
-			LOGE(@"FROM conversion failed, error[%s] ", errMsg);
-			sqlite3_free(errMsg);
-		}
-		sqlite3_free(from_conversion);
-
-		char *to_conversion =
-			sqlite3_mprintf("UPDATE history SET remoteContact = %Q WHERE remoteContact = ''", identity);
-		if (sqlite3_exec(newDb, to_conversion, NULL, NULL, &errMsg) != SQLITE_OK) {
-			LOGE(@"DB migration failed, error[%s] ", errMsg);
-			sqlite3_free(errMsg);
-		}
-		sqlite3_free(to_conversion);
-	}
-
-	// local image paths were stored in the 'message' field historically. They were
-	// very temporarily stored in the 'url' field, and now we migrated them to a JSON-
-	// encoded field. These are the migration steps to migrate them.
-
-	// move already stored images from the messages to the appdata JSON field
-	const char *assetslib_migration = "UPDATE history SET appdata='{\"localimage\":\"'||message||'\"}' , message='' "
-									  "WHERE message LIKE 'assets-library%'";
-	if (sqlite3_exec(newDb, assetslib_migration, NULL, NULL, &errMsg) != SQLITE_OK) {
-		LOGE(@"Assets-history migration for MESSAGE failed, error[%s] ", errMsg);
-		sqlite3_free(errMsg);
-	}
-
-	// move already stored images from the url to the appdata JSON field
-	const char *assetslib_migration_fromurl =
-		"UPDATE history SET appdata='{\"localimage\":\"'||url||'\"}' , url='' WHERE url LIKE 'assets-library%'";
-	if (sqlite3_exec(newDb, assetslib_migration_fromurl, NULL, NULL, &errMsg) != SQLITE_OK) {
-		LOGE(@"Assets-history migration for URL failed, error[%s] ", errMsg);
-		sqlite3_free(errMsg);
-	}
-
-	// We will lose received messages with remote url, they will be displayed in plain. We can't do much for them..
-	migrated = TRUE;
-
-exit_dbmigration:
-
-	if (attach_stmt)
-		sqlite3_free(attach_stmt);
-
-	sqlite3_close(newDb);
-
-	// in any case, we should remove the old chat db
-	if (shouldMigrate && ![[NSFileManager defaultManager] removeItemAtPath:oldDbPath error:&error]) {
-		LOGE(@"Could not remove old chat DB: %@", error);
-	}
-
-	LOGI(@"Message storage migration finished: success = %@", migrated ? @"TRUE" : @"FALSE");
-	return migrated;
-}
-
-- (void)migrateFromUserPrefs {
-	static NSString *migration_flag = @"userpref_migration_done";
-
-	if (configDb == nil)
-		return;
-
-	if ([self lpConfigIntForKey:migration_flag withDefault:0]) {
-		LOGI(@"UserPrefs migration already performed, skip");
-		return;
-	}
-
-	NSDictionary *defaults = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
-	NSArray *defaults_keys = [defaults allKeys];
-	NSDictionary *values =
-		@{ @"backgroundmode_preference" : @YES,
-		   @"debugenable_preference" : @NO,
-		   @"start_at_boot_preference" : @YES };
-	BOOL shouldSync = FALSE;
-
-	LOGI(@"%lu user prefs", (unsigned long)[defaults_keys count]);
-
-	for (NSString *userpref in values) {
-		if ([defaults_keys containsObject:userpref]) {
-			LOGI(@"Migrating %@ from user preferences: %d", userpref, [[defaults objectForKey:userpref] boolValue]);
-			[self lpConfigSetBool:[[defaults objectForKey:userpref] boolValue] forKey:userpref];
-			[[NSUserDefaults standardUserDefaults] removeObjectForKey:userpref];
-			shouldSync = TRUE;
-		} else if ([self lpConfigStringForKey:userpref] == nil) {
-			// no default value found in our linphonerc, we need to add them
-			[self lpConfigSetBool:[[values objectForKey:userpref] boolValue] forKey:userpref];
-		}
-	}
-
-	if (shouldSync) {
-		LOGI(@"Synchronizing...");
-		[[NSUserDefaults standardUserDefaults] synchronize];
-	}
-	// don't get back here in the future
-	[self lpConfigSetBool:YES forKey:migration_flag];
-}
-
-- (void)migrationLinphoneSettings {
-	// we need to proceed to the migration *after* the chat database was opened, so that we know it is in consistent
-	// state
-	NSString *chatDBFileName = [LinphoneManager documentFile:kLinphoneInternalChatDBFilename];
-	if ([self migrateChatDBIfNeeded:theLinphoneCore]) {
-		// if a migration was performed, we should reinitialize the chat database
-		linphone_core_set_chat_database_path(theLinphoneCore,
-											 [chatDBFileName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-	}
-
-	/* AVPF migration */
-/*	if ([self lpConfigBoolForKey:@"avpf_migration_done"] == FALSE) {
-		const MSList *proxies = linphone_core_get_proxy_config_list(theLinphoneCore);
-		while (proxies) {
-			LinphoneProxyConfig *proxy = (LinphoneProxyConfig *)proxies->data;
-			const char *addr = linphone_proxy_config_get_addr(proxy);
-			// we want to enable AVPF for the proxies
-			if (addr && strstr(addr, "sip.linphone.org") != 0) {
-				LOGI(@"Migrating proxy config to use AVPF");
-				linphone_proxy_config_enable_avpf(proxy, TRUE);
-			}
-			proxies = proxies->next;
-		}
-		[self lpConfigSetBool:TRUE forKey:@"avpf_migration_done"];
-	}*/
-	/* Quality Reporting migration */
-/*	if ([self lpConfigBoolForKey:@"quality_report_migration_done"] == FALSE) {
-		const MSList *proxies = linphone_core_get_proxy_config_list(theLinphoneCore);
-		while (proxies) {
-			LinphoneProxyConfig *proxy = (LinphoneProxyConfig *)proxies->data;
-			const char *addr = linphone_proxy_config_get_addr(proxy);
-			// we want to enable quality reporting for the proxies that are on linphone.org
-			if (addr && strstr(addr, "sip.linphone.org") != 0) {
-				LOGI(@"Migrating proxy config to send quality report");
-				linphone_proxy_config_set_quality_reporting_collector(proxy, "sip:voip-metrics@sip.linphone.org");
-				linphone_proxy_config_set_quality_reporting_interval(proxy, 180);
-				linphone_proxy_config_enable_quality_reporting(proxy, TRUE);
-			}
-			proxies = proxies->next;
-		}
-		[self lpConfigSetBool:TRUE forKey:@"quality_report_migration_done"];
-	}*/
-	/* File transfer migration */
-	/*if ([self lpConfigBoolForKey:@"file_transfer_migration_done"] == FALSE) {
-		NSString *newURL = @"https://www.linphone.org:444/lft.php";
-		LOGI(@"Migrating sharing server url from %@ to %@", [self lpConfigStringForKey:@"sharing_server_preference"], newURL);
-		[self lpConfigSetString:newURL forKey:@"sharing_server_preference"];
-		[self lpConfigSetBool:TRUE forKey:@"file_transfer_migration_done"];
-	}*/
-}
 #pragma mark - Linphone Core Functions
 
 + (LinphoneCore *)getLc {
@@ -1351,25 +1119,27 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 
 #pragma mark - VTable
 
-static LinphoneCoreVTable linphonec_vtable = {.show = NULL,
-											  .call_state_changed =
-												  (LinphoneCoreCallStateChangedCb)linphone_iphone_call_state,
-											  .registration_state_changed = linphone_iphone_registration_state,
-											  .notify_presence_received = NULL,
-											  .new_subscription_requested = NULL,
-											  .auth_info_requested = NULL,
-											  .display_status = linphone_iphone_display_status,
-											  .display_message = linphone_iphone_log_user_info,
-											  .display_warning = linphone_iphone_log_user_warning,
-											  .display_url = NULL,
-											  .text_received = NULL,
-											  .message_received = linphone_iphone_message_received,
-											  .dtmf_received = NULL,
-											  .transfer_state_changed = linphone_iphone_transfer_state_changed,
-											  .is_composing_received = linphone_iphone_is_composing_received,
-											  .configuring_status = linphone_iphone_configuring_status_changed,
-											  .global_state_changed = linphone_iphone_global_state_changed,
-											  .notify_received = linphone_iphone_notify_received};
+static LinphoneCoreVTable linphonec_vtable = {
+    .show = NULL,
+    .call_state_changed =
+      (LinphoneCoreCallStateChangedCb)linphone_iphone_call_state,
+    .registration_state_changed = linphone_iphone_registration_state,
+    .notify_presence_received = NULL,
+    .new_subscription_requested = NULL,
+    .auth_info_requested = NULL,
+    .display_status = linphone_iphone_display_status,
+    .display_message = linphone_iphone_log_user_info,
+    .display_warning = linphone_iphone_log_user_warning,
+    .display_url = NULL,
+    .text_received = NULL,
+    .message_received = linphone_iphone_message_received,
+    .dtmf_received = NULL,
+    .transfer_state_changed = linphone_iphone_transfer_state_changed,
+    .is_composing_received = linphone_iphone_is_composing_received,
+    .configuring_status = linphone_iphone_configuring_status_changed,
+    .global_state_changed = linphone_iphone_global_state_changed,
+    .notify_received = linphone_iphone_notify_received
+};
 
 #pragma mark -
 
@@ -1416,8 +1186,6 @@ static LinphoneCoreVTable linphonec_vtable = {.show = NULL,
 
 	linphone_core_set_zrtp_secrets_file(theLinphoneCore, [zrtpSecretsFileName UTF8String]);
 	linphone_core_set_chat_database_path(theLinphoneCore, [chatDBFileName UTF8String]);
-
-	[self migrationLinphoneSettings];
 
 	[self setupNetworkReachabilityCallback];
 

@@ -112,22 +112,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(attemptVerify:)
 												 name:kRgAttemptVerify
 											   object:nil];
-	/*[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(configuringUpdate:)
-												 name:kLinphoneConfiguringStateUpdate
-											   object:nil];*/
-    // RingMail: Disabling this for now because of crash on launch
-    /*[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(checkValidation:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-    /*[[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidBecomeActiveNotification
-                                                  object:nil];*/
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
@@ -139,12 +127,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[viewTapGestureRecognizer setDelegate:self];
 	[contentView addGestureRecognizer:viewTapGestureRecognizer];
 
-	/*if ([LinphoneManager runningOnIpad]) {
-		[LinphoneUtils adjustFontSize:choiceView mult:2.22f];
-		[LinphoneUtils adjustFontSize:createAccountView mult:2.22f];
-		[LinphoneUtils adjustFontSize:connectAccountView mult:2.22f];
-		[LinphoneUtils adjustFontSize:validateAccountView mult:2.22f];
-	}*/
 }
 
 #pragma mark -
@@ -526,45 +508,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	activeTextField = textField;
 }
 
-/*- (BOOL)textField:(UITextField *)textField
-	shouldChangeCharactersInRange:(NSRange)range
-				replacementString:(NSString *)string {
-	// only validate the username when creating a new account
-	if ((textField.tag == ViewElement_Username) && (currentView == createAccountView)) {
-		BOOL isValidUsername = YES;
-
-        NSRegularExpression *regex =
-            [NSRegularExpression regularExpressionWithPattern:@"^[a-z0-9-_\\.@+]*$"
-                                                      options:NSRegularExpressionCaseInsensitive
-                                                        error:nil];
-
-        NSArray *matches = [regex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
-        isValidUsername = ([matches count] != 0);
-
-		if (!isValidUsername) {
-			UILabel *error = [WizardViewController findLabel:ViewElement_Username_Error view:contentView];
-
-			// show error with fade animation
-			[error setText:[NSString stringWithFormat:NSLocalizedString(@"Illegal character in %@: %@", nil), NSLocalizedString(@"username", nil), string]];
-			error.alpha = 0;
-			error.hidden = NO;
-			[UIView animateWithDuration:0.3
-							 animations:^{
-							   error.alpha = 1;
-							 }];
-
-			// hide again in 2s
-			[NSTimer scheduledTimerWithTimeInterval:2.0f
-											 target:self
-										   selector:@selector(hideError:)
-										   userInfo:nil
-											repeats:NO];
-			return NO;
-		}
-	}
-	return YES;
-}*/
-
 - (void)hideError:(NSTimer *)timer {
 	UILabel *error_label = [WizardViewController findLabel:ViewElement_Username_Error view:contentView];
 	if (error_label) {
@@ -898,9 +841,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[errors appendString:@"The password is too short.\n"];
 	}
 
-	/*if (![password2 isEqualToString:password]) {
-		[errors appendString:NSLocalizedString(@"The passwords are different.\n", nil)];
-	}*/
 	if ([errors length]) {
 		UIAlertView *errorView =
 			[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)", nil)
@@ -1011,37 +951,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 		LOGI(@"Canceled remote provisioning");
 	}
 }
-
-/*- (void)configuringUpdate:(NSNotification *)notif {
-	LinphoneConfiguringState status = (LinphoneConfiguringState)[[notif.userInfo valueForKey:@"state"] integerValue];
-
-	[waitView setHidden:true];
-
-	switch (status) {
-	case LinphoneConfiguringSuccessful:
-		if (nextView == nil) {
-			[self fillDefaultValues];
-		} else {
-			[self changeView:nextView back:false animation:TRUE];
-			nextView = nil;
-		}
-		break;
-	case LinphoneConfiguringFailed: {
-		NSString *error_message = [notif.userInfo valueForKey:@"message"];
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Provisioning Load error", nil)
-														message:error_message
-													   delegate:nil
-											  cancelButtonTitle:NSLocalizedString(@"OK", nil)
-											  otherButtonTitles:nil];
-		[alert show];
-		break;
-	}
-
-	case LinphoneConfiguringSkipped:
-	default:
-		break;
-	}
-}*/
 
 #pragma mark - Event Functions
 

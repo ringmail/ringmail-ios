@@ -53,6 +53,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 	if (self) {
 		self.portraitViewController = portrait;
 		self.rotatingViewController = portrait;
+        
+        // This line creates duplicate linphone cores for some reason
 		//self.rotatingViewController = [[PhoneMainView alloc] init];
 
 		self.portraitViewController.name = @"Portrait";
@@ -517,26 +519,6 @@ static RootViewManager *rootViewManagerInstance = nil;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     statusBarBG.backgroundColor = [UIColor colorWithHex:@"#F4F4F4" alpha:1.0f];
 
-    /*
-	BOOL toLightStatus = (to_view != NULL) && ![to_view darkBackground];
-	if (!toLightStatus) {
-		// black bg: white text on black background
-		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
-		[UIView animateWithDuration:0.3f
-						 animations:^{
-						   statusBarBG.backgroundColor = [UIColor blackColor];
-						 }];
-
-	} else {
-		// light bg: black text on white bg
-		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-		[UIView animateWithDuration:0.3f
-						 animations:^{
-						   statusBarBG.backgroundColor = [UIColor colorWithWhite:0.935 alpha:1];
-						 }];
-	}
-    */
 #endif
 }
 
