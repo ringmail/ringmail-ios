@@ -36,6 +36,8 @@
 //- (void)call:(NSString*)address displayName:(NSString *)displayName;
 //- (void)call:(NSString*)address;
 
+- (void)handleUserActivity;
+
 @property (nonatomic, assign) BOOL transferMode;
 
 @property (nonatomic, strong) IBOutlet UITextField* addressField;
@@ -60,5 +62,6 @@
 
 - (IBAction)onAddContactClick: (id) event;
 - (IBAction)onAddressChange: (id)sender;
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Intents/Intents.h>
+#import "IntentContactManager.h"
 
 @interface IntentHandler : INExtension
 

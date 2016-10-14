@@ -53,6 +53,7 @@
 @synthesize mainViewController;
 @synthesize needsRefresh;
 
+
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -167,6 +168,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.visible = YES;
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 
@@ -248,7 +250,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(mainRefreshEvent:)
                                                  name:kLinphoneCallUpdate
                                                object:nil];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUserActivity) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)viewDidUnload {
@@ -572,6 +575,26 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (controller != nil)
     {
         [controller beginScan];
+    }
+}
+
+- (void)handleUserActivity {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *callAddress = [defaults stringForKey:@"callAddress"];
+    
+    if ([callAddress length] > 0) {
+        callAddress = [callAddress stringByReplacingOccurrencesOfRegex:@"^\\s+" withString:@""];
+        callAddress = [callAddress stringByReplacingOccurrencesOfRegex:@"\\s+$" withString:@""];
+        
+        if ([RgManager checkRingMailAddress:callAddress]) {
+            [defaults setObject:@"" forKey:@"callAddress"];
+            
+            if ([[callAddress substringToIndex:1] isEqualToString:@"#"])
+                [RgManager startHashtag:callAddress];
+            else
+                [RgManager startCall:callAddress contact:NULL video:NO];
+        }
     }
 }
 

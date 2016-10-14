@@ -82,6 +82,7 @@
 		4D000B131DA7045000D606EC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D000B111DA7045000D606EC /* MainInterface.storyboard */; };
 		4D000B171DA7045000D606EC /* RingMailIntentsExtensionUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D000B0A1DA7045000D606EC /* RingMailIntentsExtensionUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4D000B1A1DA7045000D606EC /* RingMailIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D000B001DA7044F00D606EC /* RingMailIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D5111521DAD8ADC00695DD5 /* IntentContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */; };
 		4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */; };
 		4DDB8CF61D9444BC00F5FD71 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */; };
 		4DDB8CF71D9444BC00F5FD71 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */; };
@@ -2141,6 +2142,10 @@
 		4D000B0F1DA7045000D606EC /* IntentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntentViewController.m; sourceTree = "<group>"; };
 		4D000B121DA7045000D606EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4D000B141DA7045000D606EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D5111501DAD8AA600695DD5 /* IntentContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntentContactManager.h; sourceTree = "<group>"; };
+		4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntentContactHandler.m; sourceTree = "<group>"; };
+		4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RingMail-Dev.entitlements"; sourceTree = "<group>"; };
+		4D79D0341DAD889D002D1894 /* NSHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSHash.framework; path = "../Library/Developer/Xcode/DerivedData/ringmail-fiijohizvnzsdxamyqqzvjmihcml/Build/Products/Debug-iphoneos/NSHash/NSHash.framework"; sourceTree = "<group>"; };
 		4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
 		4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
@@ -3611,9 +3616,9 @@
 				D37DC6C01594AE1800B2A5EB /* LinphoneCoreSettingsStore.m */,
 				D3EA53FB159850E80037DC6B /* LinphoneManager.h */,
 				D3EA53FC159850E80037DC6B /* LinphoneManager.m */,
+				D3F83F8C158229C500336684 /* PhoneMainView.h */,
 				2214EB7012F84668002A5394 /* LinphoneUI */,
 				F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */,
-				D3F83F8C158229C500336684 /* PhoneMainView.h */,
 				D3F83F8D15822ABD00336684 /* PhoneMainView.m */,
 				636316D71A1DECC90009B839 /* PhoneMainView.xib */,
 				D35E759C159460B50066B1C1 /* SettingsViewController.h */,
@@ -3757,6 +3762,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				4D000B011DA7044F00D606EC /* RingMailIntentsExtension */,
 				4D000B0D1DA7045000D606EC /* RingMailIntentsExtensionUI */,
@@ -3836,6 +3842,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D79D0341DAD889D002D1894 /* NSHash.framework */,
 				4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */,
 				4DE0EB221D948CAA0009E015 /* libresolv.9.dylib */,
 				4DE0EB231D948CAA0009E015 /* libresolv.dylib */,
@@ -3935,6 +3942,8 @@
 		4D000B011DA7044F00D606EC /* RingMailIntentsExtension */ = {
 			isa = PBXGroup;
 			children = (
+				4D5111501DAD8AA600695DD5 /* IntentContactManager.h */,
+				4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */,
 				4D000B021DA7044F00D606EC /* IntentHandler.h */,
 				4D000B031DA7044F00D606EC /* IntentHandler.m */,
 				4D000B051DA7044F00D606EC /* Info.plist */,
@@ -5092,6 +5101,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.Siri = {
 								enabled = 1;
 							};
 						};
@@ -6972,6 +6984,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D000B041DA7044F00D606EC /* IntentHandler.m in Sources */,
+				4D5111521DAD8ADC00695DD5 /* IntentContactHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8376,6 +8389,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
+				CODE_SIGN_ENTITLEMENTS = "RingMail-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
@@ -8440,6 +8454,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
+				CODE_SIGN_ENTITLEMENTS = "RingMail-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
@@ -8501,7 +8516,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = "RingMail-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
@@ -8563,7 +8578,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = "RingMail-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
@@ -8640,6 +8655,7 @@
 				4D000B221DA7045000D606EC /* DistributionAdhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		4D000B241DA7045000D606EC /* Build configuration list for PBXNativeTarget "RingMailIntentsExtension" */ = {
 			isa = XCConfigurationList;
@@ -8650,6 +8666,7 @@
 				4D000B1E1DA7045000D606EC /* DistributionAdhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ringmail" */ = {
 			isa = XCConfigurationList;
