@@ -521,14 +521,11 @@
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
     
-//    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-//    AAPLViewController *viewController = (AAPLViewController *)(navigationController.viewControllers)[0];
-    
     NSDictionary *tempDict = [[userActivity userInfo] copy];
-    NSString *callAddressString = tempDict[@"callAddress"];
+    NSString *callContactIDString = tempDict[@"callContactID"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:callAddressString forKey:@"callAddress"];
+    [defaults setObject:callContactIDString forKey:@"callContactID"];
     
     return YES;
 }

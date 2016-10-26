@@ -215,12 +215,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[videoCameraSwitch setHidden:FALSE];
 		}
 	}
-   	
+
   	[[NSNotificationCenter defaultCenter] addObserver:self
                                          selector:@selector(setAddressEvent:)
                                              name:kRgSetAddress
                                            object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(mainRefreshEvent:)
                                                  name:kRgTextReceived
@@ -251,7 +251,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kLinphoneCallUpdate
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUserActivity) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleUserActivity)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 - (void)viewDidUnload {
@@ -262,6 +265,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgContactRefresh object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 /*- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -581,21 +585,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)handleUserActivity {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *callAddress = [defaults stringForKey:@"callAddress"];
+    NSString *callContactIDString = [defaults stringForKey:@"callContactID"];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    NSNumber *contactID = [nf numberFromString:callContactIDString];
     
-    if ([callAddress length] > 0) {
-        callAddress = [callAddress stringByReplacingOccurrencesOfRegex:@"^\\s+" withString:@""];
-        callAddress = [callAddress stringByReplacingOccurrencesOfRegex:@"\\s+$" withString:@""];
-        
-        if ([RgManager checkRingMailAddress:callAddress]) {
-            [defaults setObject:@"" forKey:@"callAddress"];
-            
-            if ([[callAddress substringToIndex:1] isEqualToString:@"#"])
-                [RgManager startHashtag:callAddress];
-            else
-                [RgManager startCall:callAddress contact:NULL video:NO];
-        }
-    }
+    [defaults setObject:@"" forKey:@"callContactID"];
+    
+    ABRecordRef contact;
+    contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactID];
+    
+    NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+    
+    if (rgAddress != nil)
+        [RgManager startCall:rgAddress contact:contact video:NO];
 }
 
 @end
