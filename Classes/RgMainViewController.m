@@ -586,18 +586,23 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *callContactIDString = [defaults stringForKey:@"callContactID"];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    NSNumber *contactID = [nf numberFromString:callContactIDString];
     
-    [defaults setObject:@"" forKey:@"callContactID"];
+    if (![callContactIDString isEqual: @""]) {
     
-    ABRecordRef contact;
-    contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactID];
-    
-    NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
-    
-    if (rgAddress != nil)
-        [RgManager startCall:rgAddress contact:contact video:NO];
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        NSNumber *contactID = [nf numberFromString:callContactIDString];
+        
+        [defaults setObject:@"" forKey:@"callContactID"];
+        
+        ABRecordRef contact;
+        contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactID];
+        
+        NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+        
+        if (rgAddress != nil)
+            [RgManager startCall:rgAddress contact:contact video:NO];
+
+    }
 }
 
 @end
