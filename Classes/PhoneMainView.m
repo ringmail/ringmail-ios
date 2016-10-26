@@ -459,7 +459,6 @@ static RootViewManager *rootViewManagerInstance = nil;
         NSLog(@"RingMail: Startup - Need Setup Wizard");
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *callContactIDString = [defaults stringForKey:@"callContactID"];
         [defaults setObject:@"" forKey:@"callContactID"];
         
         WizardViewController *controller = DYNAMIC_CAST(
