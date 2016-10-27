@@ -173,7 +173,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillDisappear:animated];
 
 	// Remove observer
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
+//	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil]; //mrkbxt - commented out to allow maincollectionview update after phone call.
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
     /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
     
@@ -334,6 +334,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)mainRefreshEvent:(NSNotification *)notif {
+
     if (self.visible)
     {
         LOGI(@"RingMail: Updating Main Card List");
@@ -442,7 +443,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark -
 
 - (void)callUpdate:(LinphoneCall *)call state:(LinphoneCallState)state {
-    //NSLog(@"RingMail: %s", __PRETTY_FUNCTION__);
+//    NSLog(@"RingMail: %s", __PRETTY_FUNCTION__);
     
 	LinphoneCore *lc = [LinphoneManager getLc];
 	if (linphone_core_get_calls_nb(lc) > 0) {
