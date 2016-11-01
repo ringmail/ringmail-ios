@@ -584,6 +584,8 @@ static LevelDB* theConfigDatabase = nil;
     NSString *newSipUser = [cred objectForKey:@"sip_login"];
     //NSString *oldSipUser = [settings objectForKey:@"username_preference"];
     NSString *newSipPass = [cred objectForKey:@"sip_password"];
+    
+    NSLog(@"RingMail SIP Login: %@ Password: %@", newSipUser, newSipPass);
     //NSString *oldSipPass = [settings objectForKey:@"password_preference"];
     //if ((! [oldSipUser isEqualToString:newSipUser]) || (! [oldSipPass isEqualToString:newSipPass]))
     //{

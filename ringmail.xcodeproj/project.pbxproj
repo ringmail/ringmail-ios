@@ -183,6 +183,8 @@
 		C41EF33B1B8CF1200085E75B /* ringmail_icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */; };
 		C41EF33C1B8CF1200085E75B /* ringmail_icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */; };
 		C41EF33D1B8CF1200085E75B /* ringmail_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */; };
+		C41F6D2C1DC902B6006C9D20 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C41F6D2B1DC902B6006C9D20 /* NSStringAdditions.m */; };
+		C41F6D2D1DC902B6006C9D20 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C41F6D2B1DC902B6006C9D20 /* NSStringAdditions.m */; };
 		C422AD321B99F1A900D1F1CD /* RgNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = C422AD311B99F1A900D1F1CD /* RgNetwork.m */; };
 		C42509621C27E30C00BEC5DE /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = C425095A1C27D62B00BEC5DE /* tessdata */; };
 		C42786151C70263300DD946D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C42786141C70263300DD946D /* UIColor+Hex.m */; };
@@ -2139,6 +2141,8 @@
 		C41EF3381B8CF1200085E75B /* ringmail_icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_57.png; path = Resources/ringmail_icon_57.png; sourceTree = "<group>"; };
 		C41EF3391B8CF1200085E75B /* ringmail_icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_114.png; path = Resources/ringmail_icon_114.png; sourceTree = "<group>"; };
 		C41EF33A1B8CF1200085E75B /* ringmail_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_icon_120.png; path = Resources/ringmail_icon_120.png; sourceTree = "<group>"; };
+		C41F6D2A1DC902B6006C9D20 /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringAdditions.h; path = Utils/NSStringAdditions.h; sourceTree = "<group>"; };
+		C41F6D2B1DC902B6006C9D20 /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringAdditions.m; path = Utils/NSStringAdditions.m; sourceTree = "<group>"; };
 		C422AD301B99F1A900D1F1CD /* RgNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgNetwork.h; sourceTree = "<group>"; };
 		C422AD311B99F1A900D1F1CD /* RgNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgNetwork.m; sourceTree = "<group>"; };
 		C425095A1C27D62B00BEC5DE /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
@@ -3735,6 +3739,8 @@
 				C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */,
 				C45CFFDB1D8B34F900BEF75F /* IAWCKImageDownloader.h */,
 				C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */,
+				C41F6D2A1DC902B6006C9D20 /* NSStringAdditions.h */,
+				C41F6D2B1DC902B6006C9D20 /* NSStringAdditions.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -6360,6 +6366,7 @@
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				C4FE4C6F1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm in Sources */,
+				C41F6D2C1DC902B6006C9D20 /* NSStringAdditions.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
 				D3807FEC15C2894A005BE9BC /* IASKSpecifierValuesViewController.m in Sources */,
 				D3807FEE15C2894A005BE9BC /* IASKSettingsReader.m in Sources */,
@@ -6490,6 +6497,7 @@
 				C4AC2B211D3963FA003B6232 /* IASKAppSettingsViewController.m in Sources */,
 				C4AC2B221D3963FA003B6232 /* FavoriteCollectionViewController.mm in Sources */,
 				C4AC2B231D3963FA003B6232 /* IASKAppSettingsWebViewController.m in Sources */,
+				C41F6D2D1DC902B6006C9D20 /* NSStringAdditions.m in Sources */,
 				C4AC2B241D3963FA003B6232 /* IASKSpecifierValuesViewController.m in Sources */,
 				C4AC2B251D3963FA003B6232 /* IASKSettingsReader.m in Sources */,
 				C4AC2B261D3963FA003B6232 /* IASKSettingsStore.m in Sources */,

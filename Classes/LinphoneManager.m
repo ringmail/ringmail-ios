@@ -1281,8 +1281,9 @@ static BOOL libStarted = FALSE;
 		LOGI(@"linphonecore is already created");
 		return;
 	}
-	linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
-	[self setLogsEnabled:[self lpConfigBoolForKey:@"debugenable_preference"]];
+    [LinphoneLogger enableLogs:ORTP_DEBUG];
+	//linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
+	//[self setLogsEnabled:[self lpConfigBoolForKey:@"debugenable_preference"]];
 	LOGI(@"Create linphonecore");
 	connectivity = none;
 
@@ -1624,7 +1625,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		src = srcIpad;
 	}
 	NSString *dst = [LinphoneManager documentFile:@"linphonerc"];
-	[LinphoneManager copyFile:src destination:dst override:NO];
+	[LinphoneManager copyFile:src destination:dst override:YES];
 }
 
 - (void)overrideDefaultSettings {
