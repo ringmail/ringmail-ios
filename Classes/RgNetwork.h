@@ -19,7 +19,7 @@ typedef void (^RgConversation)(NSString *to);
 @property (nonatomic, strong) NSNumber* pushReady;
 
 + (RgNetwork *)instance;
-- (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback;
+- (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback failure:(RgNetworkError)failure;
 - (void)verifyPhone:(NSString*)code callback:(RgNetworkCallback)callback;
 - (void)registerPushToken;
 
