@@ -51,6 +51,7 @@
 @synthesize mainViewController;
 @synthesize needsRefresh;
 
+
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -165,11 +166,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.visible = YES;
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 
 	// Remove observer
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
+//	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil]; //mrkbxt - commented out to allow maincollectionview update after phone call.
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
     /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
     
@@ -211,12 +213,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[videoCameraSwitch setHidden:FALSE];
 		}
 	}
-   	
+
   	[[NSNotificationCenter defaultCenter] addObserver:self
                                          selector:@selector(setAddressEvent:)
                                              name:kRgSetAddress
                                            object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(mainRefreshEvent:)
                                                  name:kRgTextReceived
@@ -246,7 +248,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(mainRefreshEvent:)
                                                  name:kLinphoneCallUpdate
                                                object:nil];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleUserActivity)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 - (void)viewDidUnload {
@@ -257,6 +263,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgContactRefresh object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 /*- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -325,6 +332,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)mainRefreshEvent:(NSNotification *)notif {
+
     if (self.visible)
     {
         LOGI(@"RingMail: Updating Main Card List 2");
@@ -526,6 +534,29 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (controller != nil)
     {
         [controller beginScan];
+    }
+}
+
+- (void)handleUserActivity {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *callContactIDString = [defaults stringForKey:@"callContactID"];
+    
+    if (![callContactIDString isEqual: @""]) {
+    
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        NSNumber *contactID = [nf numberFromString:callContactIDString];
+        
+        [defaults setObject:@"" forKey:@"callContactID"];
+        
+        ABRecordRef contact;
+        contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactID];
+        
+        NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+        
+        if (rgAddress != nil)
+            [RgManager startCall:rgAddress contact:contact video:NO];
+
     }
 }
 

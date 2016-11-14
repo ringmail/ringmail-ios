@@ -620,6 +620,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [self changeView:validatePhoneView back:false animation:TRUE];
             }
         }
+    }
+    failure:^(NSURLSessionTask *operation, NSError *error) {
+       NSLog(@"at verifyEmail: failure");
     }];
 }
 
@@ -792,6 +795,18 @@ static UICompositeViewDescription *compositeDescription = nil;
                         }
                     }
                 }
+            }
+            failure:^(NSURLSessionTask *operation, NSError *error) {
+                LOGI(@"Login failure network error");
+
+                DTAlertView *alert = [[DTAlertView alloc]
+                                      initWithTitle:NSLocalizedString(@"Network Error", nil)
+                                      message:@"Please try again later"];
+                [alert addCancelButtonWithTitle:NSLocalizedString(@"Close", nil)
+                                          block:^{
+                                              [waitView setHidden:true];
+                                          }];
+                [alert show];
             }];
         }
     }

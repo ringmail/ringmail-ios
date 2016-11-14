@@ -758,11 +758,14 @@ static LevelDB* theConfigDatabase = nil;
                     [controller startWizard];
                 }
             }
+        }
+        failure:^(NSURLSessionTask *operation, NSError *error) {
+            LOGI(@"Initial login failure - network error");
         }];
     }
 }
 
-+ (void)verifyLogin:(RgNetworkCallback)callback
++ (void)verifyLogin:(RgNetworkCallback)callback failure:(RgNetworkError)failure
 {
     LOGI(@"RingMail: Verify - Login");
     LinphoneManager* mgr = [LinphoneManager instance];
@@ -772,7 +775,7 @@ static LevelDB* theConfigDatabase = nil;
     if (rgLogin != nil && rgPass != nil)
     {
         [mgr setRingLogin:rgLogin];
-        [[RgNetwork instance] login:rgLogin password:rgPass callback:callback];
+        [[RgNetwork instance] login:rgLogin password:rgPass callback:callback failure:failure];
     }
 }
 

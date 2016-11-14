@@ -166,7 +166,14 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    
+    NSDictionary *activityDic = [launchOptions objectForKey:UIApplicationLaunchOptionsUserActivityDictionaryKey];
+    if (activityDic) {
+        NSString *callAddressString = [activityDic valueForKey:@"callAddress"];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:callAddressString forKey:@"callAddress"];
+    }
+    
 	UIApplication *app = [UIApplication sharedApplication];
 	//UIApplicationState state = app.applicationState;
 
@@ -467,6 +474,32 @@
 			 completionHandler:(void (^)())completionHandler {
 	LOGI(@"%@", NSStringFromSelector(_cmd));
 	completionHandler();
+}
+
+
+#pragma mark - NSUserActivity
+
+- (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType {
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
+    
+    NSDictionary *tempDict = [[userActivity userInfo] copy];
+    NSString *callContactIDString = tempDict[@"callContactID"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:callContactIDString forKey:@"callContactID"];
+    
+    return YES;
+}
+
+- (void)application:(UIApplication *)application didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error {
+
+}
+
+- (void)application:(UIApplication *)application didUpdateUserActivity:(NSUserActivity *)userActivity {
+
 }
 
 @end

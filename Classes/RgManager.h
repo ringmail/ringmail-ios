@@ -72,6 +72,6 @@ extern NSString *const kRgSelfName;
 + (void)chatConnect;
 + (void)chatEnsureConnection;
 + (void)initialLogin;
-+ (void)verifyLogin:(RgNetworkCallback)callback;
++ (void)verifyLogin:(RgNetworkCallback)callback failure:(RgNetworkError)failure;
 
 @end

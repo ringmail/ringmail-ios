@@ -48,10 +48,11 @@ static RgNetwork* theRgNetwork = nil;
     }];
 }
 
-- (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback
+- (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback failure:(RgNetworkError)failure
 {
     NSLog(@"RingMail: Login Request");
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setTimeoutInterval:15]; // mrkbxt
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     LevelDB* cfg = [RgManager configDatabase];
     NSDictionary *parameters = @{
@@ -63,9 +64,7 @@ static RgNetwork* theRgNetwork = nil;
                                  @"timestamp": [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__],
                                  };
     NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/login", self.networkHost];
-    [manager POST:postUrl parameters:parameters progress:nil success:callback failure:^(NSURLSessionTask *operation, NSError *error) {
-        NSLog(@"RingMail API Error: %@", error);
-    }];
+    [manager POST:postUrl parameters:parameters progress:nil success:callback failure:failure];
 }
 
 - (void)verifyPhone:(NSString*)code callback:(RgNetworkCallback)callback

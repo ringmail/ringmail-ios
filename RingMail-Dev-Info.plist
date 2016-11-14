@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.ringmail.phone-dev.handlecall</string>
+		<string>com.ringmail.phone-dev.handlemsg</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
@@ -64,6 +69,8 @@
 	<string>Use microphone to make audio calls</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Share photos with your friends and customize avatars</string>
+	<key>NSSiriUsageDescription</key>
+	<string>Make calls and texts your contacts</string>
 	<key>NSVoIPUsageDescription</key>
 	<string>Make audio/video calls</string>
 	<key>UIApplicationExitsOnSuspend</key>
