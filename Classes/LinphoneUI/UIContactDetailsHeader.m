@@ -92,6 +92,7 @@
 	tableView.accessibilityIdentifier = @"Contact Name Table";
 }
 
+
 #pragma mark - Propery Functions
 
 - (void)setContact:(ABRecordRef)acontact {
@@ -169,7 +170,7 @@
 
 	// Contact label
 	{ [addressLabel setText:[FastAddressBook getContactDisplayName:contact]]; }
-
+    
 	[tableView reloadData];
 }
 

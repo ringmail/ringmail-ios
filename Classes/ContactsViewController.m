@@ -166,10 +166,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kRgContactsUpdated
                                                object:nil];
     
-    NSString *intro = @"";
+    NSString *intro = @"Contact Name";
     NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro attributes:@{
         NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
-        NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:19]
+        NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:16]
     }];
     searchField.attributedPlaceholder = placeHolderString;
 }

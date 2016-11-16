@@ -330,5 +330,4 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-
 @end

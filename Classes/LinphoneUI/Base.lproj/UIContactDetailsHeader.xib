@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -33,7 +32,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13" userLabel="editView">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13" userLabel="editView">
                     <frame key="frameInset" width="270" height="160"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="15">
@@ -70,99 +69,103 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12" userLabel="normalView">
-                    <frame key="frameInset" width="321" height="200"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12" userLabel="normalView">
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" image="avatar_unknown_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="avatarImage">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="avatar_unknown_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="avatarImage">
                             <frame key="frameInset" minX="110" minY="10" width="101" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="QAq-2r-CyN"/>
                                 <constraint firstAttribute="width" constant="100" id="QWY-zQ-NXn"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Contact1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="addressLabel">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Contact1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="addressLabel">
                             <frame key="frameInset" minY="120" width="320" height="40"/>
                             <accessibility key="accessibilityConfiguration" label="Contact name"/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEM-vL-GAO" userLabel="Invite">
+                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEM-vL-GAO" userLabel="Invite">
                             <frame key="frameInset" minY="160" width="320" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="3zv-cU-cZm"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
                             <state key="normal" title="Invite To RingMail"/>
                             <connections>
                                 <action selector="onInvite:" destination="-1" eventType="touchUpInside" id="Wnt-Cp-pRA"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAs-m8-olx" userLabel="FavoriteButton">
-                            <frame key="frameInset" minY="155" width="45" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="45" id="LTZ-iG-z8v"/>
-                                <constraint firstAttribute="width" constant="45" id="Re7-i1-SoL"/>
-                            </constraints>
-                            <state key="normal" image="ringmail_favorite.png"/>
-                            <connections>
-                                <action selector="onActionFavorite:" destination="-1" eventType="touchUpInside" id="ymn-BE-gCb"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFT-px-iZV" userLabel="VideoButton">
-                            <frame key="frameInset" minX="45" minY="155" width="46" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="45" id="7Z4-0f-NPi"/>
-                                <constraint firstAttribute="width" constant="45" id="gfa-fg-ED4"/>
-                            </constraints>
-                            <state key="normal" image="camera.png"/>
-                            <connections>
-                                <action selector="onActionVideo:" destination="-1" eventType="touchUpInside" id="OjS-LX-x4B"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWx-aW-PFf" userLabel="CallButton">
-                            <frame key="frameInset" minX="90" minY="155" width="45" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="45" id="I0J-Cn-cqv"/>
-                                <constraint firstAttribute="width" constant="45" id="yfo-1g-fJE"/>
-                            </constraints>
-                            <state key="normal" image="phone.png"/>
-                            <connections>
-                                <action selector="onActionCall:" destination="-1" eventType="touchUpInside" id="BF4-Tc-Z5Q"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6z-Sd-uf3" userLabel="ChatButton">
-                            <frame key="frameInset" minX="135" minY="155" width="45" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="45" id="GYe-v4-6sh"/>
-                                <constraint firstAttribute="width" constant="45" id="rq9-cl-Uvy"/>
-                            </constraints>
-                            <state key="normal" image="quote.png"/>
-                            <connections>
-                                <action selector="onActionChat:" destination="-1" eventType="touchUpInside" id="TBA-73-cx4"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ceE-Y3-ZPI">
+                            <frame key="frameInset" minY="155" width="216" height="45"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAs-m8-olx" userLabel="FavoriteButton">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="LTZ-iG-z8v"/>
+                                        <constraint firstAttribute="width" constant="45" id="Re7-i1-SoL"/>
+                                    </constraints>
+                                    <state key="normal" image="ringmail_favorite.png"/>
+                                    <connections>
+                                        <action selector="onActionFavorite:" destination="-1" eventType="touchUpInside" id="ymn-BE-gCb"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFT-px-iZV" userLabel="VideoButton">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="7Z4-0f-NPi"/>
+                                        <constraint firstAttribute="width" constant="45" id="gfa-fg-ED4"/>
+                                    </constraints>
+                                    <state key="normal" image="camera.png"/>
+                                    <connections>
+                                        <action selector="onActionVideo:" destination="-1" eventType="touchUpInside" id="OjS-LX-x4B"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWx-aW-PFf" userLabel="CallButton">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="I0J-Cn-cqv"/>
+                                        <constraint firstAttribute="width" constant="45" id="yfo-1g-fJE"/>
+                                    </constraints>
+                                    <state key="normal" image="phone.png"/>
+                                    <connections>
+                                        <action selector="onActionCall:" destination="-1" eventType="touchUpInside" id="fja-9O-zoa"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6z-Sd-uf3" userLabel="ChatButton">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="GYe-v4-6sh"/>
+                                        <constraint firstAttribute="width" constant="45" id="rq9-cl-Uvy"/>
+                                    </constraints>
+                                    <state key="normal" image="quote.png"/>
+                                    <connections>
+                                        <action selector="onActionChat:" destination="-1" eventType="touchUpInside" id="TBA-73-cx4"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="BWx-aW-PFf" firstAttribute="top" secondItem="12" secondAttribute="top" constant="155" id="5EH-8U-URx"/>
-                        <constraint firstItem="sAs-m8-olx" firstAttribute="top" secondItem="12" secondAttribute="top" constant="155" id="7G2-T5-RCP"/>
-                        <constraint firstItem="8" firstAttribute="width" secondItem="12" secondAttribute="width" id="N0I-Lh-e58"/>
-                        <constraint firstItem="8" firstAttribute="top" secondItem="12" secondAttribute="top" constant="120" id="UCX-cD-5Th"/>
-                        <constraint firstItem="iEM-vL-GAO" firstAttribute="top" secondItem="12" secondAttribute="top" constant="160" id="WQe-f1-cEH"/>
-                        <constraint firstItem="iEM-vL-GAO" firstAttribute="width" secondItem="12" secondAttribute="width" id="XPn-ky-cS2"/>
-                        <constraint firstItem="F6z-Sd-uf3" firstAttribute="centerX" secondItem="12" secondAttribute="trailing" multiplier="4:5" id="YXr-kB-2WS"/>
-                        <constraint firstItem="6" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="a2z-B2-3xO"/>
-                        <constraint firstItem="BWx-aW-PFf" firstAttribute="centerX" secondItem="12" secondAttribute="trailing" multiplier="3:5" id="eGY-5k-a6Z"/>
-                        <constraint firstItem="F6z-Sd-uf3" firstAttribute="top" secondItem="12" secondAttribute="top" constant="155" id="gYo-Q4-r0S"/>
-                        <constraint firstItem="sAs-m8-olx" firstAttribute="centerX" secondItem="12" secondAttribute="trailing" multiplier="1:5" id="gzX-fK-tbE"/>
-                        <constraint firstItem="bFT-px-iZV" firstAttribute="top" secondItem="12" secondAttribute="top" constant="155" id="n8R-F6-3Bg"/>
-                        <constraint firstItem="bFT-px-iZV" firstAttribute="centerX" secondItem="12" secondAttribute="trailing" multiplier="2:5" id="nnx-g0-tPH"/>
-                        <constraint firstItem="6" firstAttribute="top" secondItem="12" secondAttribute="top" constant="10" id="xBy-z7-AHe"/>
+                        <constraint firstItem="iEM-vL-GAO" firstAttribute="top" secondItem="8" secondAttribute="bottom" id="2Dv-Ih-qNM"/>
+                        <constraint firstItem="6" firstAttribute="top" secondItem="12" secondAttribute="top" constant="10" id="3sH-yR-h0W"/>
+                        <constraint firstItem="ceE-Y3-ZPI" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="7so-t4-IPr"/>
+                        <constraint firstItem="6" firstAttribute="centerX" secondItem="iEM-vL-GAO" secondAttribute="centerX" id="Hsl-eh-dag"/>
+                        <constraint firstItem="6" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="J0a-Qe-dje"/>
+                        <constraint firstAttribute="bottom" secondItem="ceE-Y3-ZPI" secondAttribute="bottom" id="OD6-0c-u5M"/>
+                        <constraint firstItem="8" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="10" id="mjP-cF-8Uu"/>
+                        <constraint firstItem="iEM-vL-GAO" firstAttribute="leading" secondItem="8" secondAttribute="leading" id="olo-1F-UJ1"/>
+                        <constraint firstItem="6" firstAttribute="centerX" secondItem="8" secondAttribute="centerX" id="wdP-he-CXI"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="13" firstAttribute="width" secondItem="4" secondAttribute="width" id="6eh-Jk-Fsd"/>
-                <constraint firstItem="12" firstAttribute="width" secondItem="4" secondAttribute="width" id="KST-Hp-ngg"/>
+                <constraint firstItem="12" firstAttribute="top" secondItem="13" secondAttribute="top" id="MUj-ld-Hkc"/>
+                <constraint firstItem="12" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="VPl-OY-WlI"/>
+                <constraint firstAttribute="bottom" secondItem="12" secondAttribute="bottom" id="WOj-hp-BVH"/>
+                <constraint firstAttribute="bottom" secondItem="13" secondAttribute="bottom" constant="40" id="dMt-ut-9e3"/>
+                <constraint firstItem="12" firstAttribute="leading" secondItem="13" secondAttribute="leading" id="eeZ-Ex-KzL"/>
+                <constraint firstItem="12" firstAttribute="top" secondItem="4" secondAttribute="top" id="fKY-OM-nPa"/>
+                <constraint firstItem="12" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="meK-xd-HPj"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

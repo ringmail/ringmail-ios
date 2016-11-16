@@ -104,8 +104,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	[super viewDidLoad];
 	[headerController view]; // Force view load
 	[footerController view]; // Force view load
-
+    
 	self.tableView.accessibilityIdentifier = @"Contact numbers table";
+    
 }
 
 #pragma mark -
@@ -675,6 +676,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		return nil;
 	}
 }
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 	if (section == (ContactSections_MAX - 1)) {
