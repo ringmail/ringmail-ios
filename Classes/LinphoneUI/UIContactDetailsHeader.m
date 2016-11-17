@@ -80,7 +80,7 @@
 	return self;
 }
 
-#pragma mark - ViewController Functions
+#pragma mark - ViewController  Functions
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
