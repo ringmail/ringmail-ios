@@ -92,6 +92,7 @@ static NSString *sNameOrEmailFilter;
 @synthesize addButton;
 @synthesize toolBar;
 @synthesize searchField;
+@synthesize searchButton;
 
 typedef enum _HistoryView { History_All, History_Linphone, History_Search, History_MAX } HistoryView;
 
@@ -308,6 +309,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
 	[self searchBar:searchBar textDidChange:@""];
 	[searchBar resignFirstResponder];
+}
+
+- (IBAction)onSearch:(id)sender {
+    [searchField becomeFirstResponder];
 }
 
 #pragma mark - Rotation handling

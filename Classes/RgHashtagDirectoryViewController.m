@@ -42,6 +42,7 @@
 @synthesize mainViewController;
 @synthesize path;
 @synthesize waitView;
+@synthesize searchButton;
 
 #pragma mark - Lifecycle Functions
 
@@ -250,6 +251,10 @@ static UICompositeViewDescription *compositeDescription = nil;
         callButton.hidden = YES;
         goButton.hidden = YES;
 	}
+}
+
+- (IBAction)onSearch:(id)sender {
+    [addressField becomeFirstResponder];
 }
 
 @end

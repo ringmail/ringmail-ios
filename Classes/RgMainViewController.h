@@ -45,6 +45,7 @@
 @property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;
 @property (nonatomic, strong) IBOutlet UICallButton* addCallButton;
 @property (nonatomic, strong) IBOutlet UIButton* backButton;
+@property (nonatomic, strong) IBOutlet UIButton* searchButton;
 
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;

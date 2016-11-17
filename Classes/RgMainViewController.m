@@ -42,6 +42,7 @@
 @synthesize callButton;
 @synthesize goButton;
 @synthesize messageButton;
+@synthesize searchButton;
 
 @synthesize backgroundView;
 @synthesize videoPreview;
@@ -535,6 +536,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     {
         [controller beginScan];
     }
+}
+
+- (IBAction)onSearch:(id)sender {
+    [addressField becomeFirstResponder];
 }
 
 - (void)handleUserActivity {

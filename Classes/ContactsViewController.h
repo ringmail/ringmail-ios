@@ -88,6 +88,7 @@ typedef enum _ContactSelectionMode {
 @property (nonatomic, strong) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) IBOutlet UIButton *addButton;
 @property (strong, nonatomic) IBOutlet UITextField *searchField;
+@property (nonatomic, strong) IBOutlet UIButton* searchButton;
 
 - (IBAction)onAllClick:(id)event;
 - (IBAction)onLinphoneClick:(id)event;
