@@ -486,9 +486,13 @@
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
     
     NSDictionary *tempDict = [[userActivity userInfo] copy];
+    NSString *msgContactIDString = tempDict[@"msgContactID"];
+    NSString *msgTextString = tempDict[@"msgText"];
     NSString *callContactIDString = tempDict[@"callContactID"];
-    
+        
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:msgContactIDString forKey:@"msgContactID"];
+    [defaults setObject:msgTextString forKey:@"msgText"];
     [defaults setObject:callContactIDString forKey:@"callContactID"];
     
     return YES;

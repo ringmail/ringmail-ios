@@ -333,7 +333,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)mainRefreshEvent:(NSNotification *)notif {
-
     if (self.visible)
     {
         LOGI(@"RingMail: Updating Main Card List 2");
@@ -545,14 +544,35 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)handleUserActivity {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    NSString *msgContactIDString = @"51";  // test mike as recip
+    NSString *msgContactIDString = [defaults stringForKey:@"msgContactID"];
     NSString *callContactIDString = [defaults stringForKey:@"callContactID"];
-    
-    if (![callContactIDString isEqual: @""]) {
+
+    if (![msgContactIDString isEqual: @""]) {
+        
+        [defaults setObject:@"" forKey:@"msgContactID"];
     
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        NSNumber *contactID = [nf numberFromString:callContactIDString];
+        NSNumber *contactID = [nf numberFromString:msgContactIDString];
+        
+        ABRecordRef contact;
+        contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactID];
+        NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+        
+        if (rgAddress != nil)
+        {
+            NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactID uuid:nil];
+            [[LinphoneManager instance] setChatSession:sessionData[@"id"]];
+            [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+        }
+    }
+    
+    if (![callContactIDString isEqual: @""]) {
         
         [defaults setObject:@"" forKey:@"callContactID"];
+        
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        NSNumber *contactID = [nf numberFromString:callContactIDString];
         
         ABRecordRef contact;
         contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactID];
@@ -561,7 +581,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         
         if (rgAddress != nil)
             [RgManager startCall:rgAddress contact:contact video:NO];
-
+        
     }
 }
 

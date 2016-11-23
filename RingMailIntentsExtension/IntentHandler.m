@@ -50,8 +50,8 @@
     }
     NSMutableArray<INPersonResolutionResult *> *resolutionResults = [NSMutableArray array];
     
-    for (INPerson *recipient in recipients) {
-        
+//    for (INPerson *recipient in recipients) {
+    
 //        NSLog(@"{ recipient.identifier: %@, recipient.spokenPhrase: %@, recipient.pronunciationHint: %@, recipient.personHandle.value: %@, recipient.personHandle.type: %ld, recipient.aliases: %@, recipient.description: %@, recipient.displayName: %@, recipient.contactIdentifier: %@, recipient.customIdentifier: %@, recipient.nameComponents.givenName: %@, recipient.nameComponents.familyName: %@, recipient.nameComponents.nickname: %@, recipient.image: %@ }", recipient.identifier, recipient.spokenPhrase, recipient.pronunciationHint, recipient.personHandle.value, (long)recipient.personHandle.type, recipient.aliases, recipient.description, recipient.displayName, recipient.contactIdentifier, recipient.customIdentifier, recipient.nameComponents.givenName, recipient.nameComponents.familyName, recipient.nameComponents.nickname, recipient.image);
 
 //  "RingMail-Dev send message to Mike"
@@ -61,22 +61,32 @@
 //  "RingMail-Dev send message to #dyl"
         
 //        { recipient.identifier: (null), recipient.spokenPhrase: #TheWild, recipient.pronunciationHint: #TheWild, recipient.personHandle.value: (null), recipient.personHandle.type: 0, recipient.aliases: (null), recipient.description: <INPerson: 0x100226670>, recipient.displayName: #TheWild, recipient.contactIdentifier: (null), recipient.customIdentifier: (null), recipient.nameComponents.givenName: (null), recipient.nameComponents.familyName: (null), recipient.nameComponents.nickname: (null), recipient.image: (null) }
-        
+    
+    if (recipients.count > 1) {
+        for (INPerson *recipient in recipients)
+            [resolutionResults addObject:[INPersonResolutionResult disambiguationWithPeopleToDisambiguate:recipients]];
+    }
+    else if (recipients.count == 1)
+    {
         IntentContactManager *contactManager = [[IntentContactManager alloc] init];
         
-        if ([contactManager findContact:recipient])
-            NSLog(@"Found Recepient Name:  %@",recipient.displayName);
-
-        NSArray<INPerson *> *matchingContacts = @[recipient];
-        
-        if (matchingContacts.count > 1)
-            [resolutionResults addObject:[INPersonResolutionResult disambiguationWithPeopleToDisambiguate:matchingContacts]];
-        else if (matchingContacts.count == 1)
-            [resolutionResults addObject:[INPersonResolutionResult successWithResolvedPerson:recipient]];
-        else
-            [resolutionResults addObject:[INPersonResolutionResult unsupported]];
-        
+        if ([contactManager findABContactID:recipients[0]]) {
+            if (contactManager->foundContactsID.count == 1) {
+                
+                NSString *contactID = contactID = contactManager->foundContactsID[0];
+                NSString *fname = recipients[0].nameComponents.givenName;
+                
+                INPerson *confirmedRecipient = [[INPerson alloc] initWithPersonHandle:[[INPersonHandle alloc] initWithValue:contactID type:INPersonHandleTypeEmailAddress] nameComponents:nil displayName:fname image:nil contactIdentifier:contactID customIdentifier:contactID];
+                
+                [resolutionResults addObject:[INPersonResolutionResult successWithResolvedPerson:confirmedRecipient]];
+                
+            }
+            else if (contactManager->foundContactsID.count > 1)
+                [resolutionResults addObject:[INPersonResolutionResult unsupported]];
+        }
     }
+    else
+        [resolutionResults addObject:[INPersonResolutionResult unsupported]];
     completion(resolutionResults);
 }
 
@@ -100,27 +110,41 @@
     
     NSString *activityType = @"com.ringmail.phone-dev.handlemsg";
     NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:activityType];
-    activity.title = @"title";
-    activity.userInfo = @{@"location": @"TEST"};
-    activity.eligibleForSearch = YES;
-    activity.eligibleForPublicIndexing = YES;
+    
+//    activity.title = @"title";
+//    activity.userInfo = @{@"location": @"TEST"};
+//    activity.eligibleForSearch = YES;
+//    activity.eligibleForPublicIndexing = YES;
+    
+    INPerson *recipient = intent.recipients[0];
+    NSString *msgContactID = recipient.personHandle.value;
+    NSString *msgText = intent.content;
+    
+    NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc] init];
+    [mutableDict setObject:msgContactID forKey:@"msgContactID"];
+    [mutableDict setObject:msgText forKey:@"msgText"];
+    
+    NSDictionary *dict = [mutableDict copy];
+    
+    activity.userInfo = dict;
+    
     INSendMessageIntentResponse *response = [[INSendMessageIntentResponse alloc] initWithCode:INSendMessageIntentResponseCodeInProgress userActivity:activity];
     completion(response);
 }
 
-- (void)handleSearchForMessages:(INSearchForMessagesIntent *)intent completion:(void (^)(INSearchForMessagesIntentResponse *response))completion {
-    
-    NSUserActivity *userActivity = [[NSUserActivity alloc] initWithActivityType:NSStringFromClass([INSearchForMessagesIntent class])];
-    INSearchForMessagesIntentResponse *response = [[INSearchForMessagesIntentResponse alloc] initWithCode:INSearchForMessagesIntentResponseCodeSuccess userActivity:userActivity];
-    response.messages = @[[[INMessage alloc]
-                           initWithIdentifier:@"identifier"
-                           content:@"I am so excited about SiriKit!"
-                           dateSent:[NSDate date]
-                           sender:[[INPerson alloc] initWithPersonHandle:[[INPersonHandle alloc] initWithValue:@"sarah@example.com" type:INPersonHandleTypeEmailAddress] nameComponents:nil displayName:@"Sarah" image:nil contactIdentifier:nil customIdentifier:nil]
-                           recipients:@[[[INPerson alloc] initWithPersonHandle:[[INPersonHandle alloc] initWithValue:@"+1-415-555-5555" type:INPersonHandleTypePhoneNumber] nameComponents:nil displayName:@"John" image:nil contactIdentifier:nil customIdentifier:nil]]
-                           ]];
-    completion(response);
-}
+//- (void)handleSearchForMessages:(INSearchForMessagesIntent *)intent completion:(void (^)(INSearchForMessagesIntentResponse *response))completion {
+//    
+//    NSUserActivity *userActivity = [[NSUserActivity alloc] initWithActivityType:NSStringFromClass([INSearchForMessagesIntent class])];
+//    INSearchForMessagesIntentResponse *response = [[INSearchForMessagesIntentResponse alloc] initWithCode:INSearchForMessagesIntentResponseCodeSuccess userActivity:userActivity];
+//    response.messages = @[[[INMessage alloc]
+//                           initWithIdentifier:@"identifier"
+//                           content:@"I am so excited about SiriKit!"
+//                           dateSent:[NSDate date]
+//                           sender:[[INPerson alloc] initWithPersonHandle:[[INPersonHandle alloc] initWithValue:@"sarah@example.com" type:INPersonHandleTypeEmailAddress] nameComponents:nil displayName:@"Sarah" image:nil contactIdentifier:nil customIdentifier:nil]
+//                           recipients:@[[[INPerson alloc] initWithPersonHandle:[[INPersonHandle alloc] initWithValue:@"+1-415-555-5555" type:INPersonHandleTypePhoneNumber] nameComponents:nil displayName:@"John" image:nil contactIdentifier:nil customIdentifier:nil]]
+//                           ]];
+//    completion(response);
+//}
 
 - (void)handleSetMessageAttribute:(INSetMessageAttributeIntent *)intent completion:(void (^)(INSetMessageAttributeIntentResponse *response))completion {
     NSUserActivity *userActivity = [[NSUserActivity alloc] initWithActivityType:NSStringFromClass([INSetMessageAttributeIntent class])];

@@ -54,6 +54,19 @@
 {
     [super viewDidAppear:animated];
     //self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  //  mrkbxt
+    NSString *msgTextString = [defaults stringForKey:@"msgText"];
+    
+    if([msgTextString length] > 0)
+    {
+        self.inputToolbar.contentView.textView.text = msgTextString;
+        [self.inputToolbar.contentView.textView becomeFirstResponder];
+        [defaults setObject:@"" forKey:@"msgText"];
+        
+//        [self.inputToolbar.contentView.rightBarButtonItem sendActionsForControlEvents: UIControlEventTouchUpInside];  // mrkbxt
+
+    }
 }
 
 #pragma mark - Chat room switch

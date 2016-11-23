@@ -117,6 +117,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(contactRefreshEvent:)
                                                  name:kRgContactRefresh
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleUserActivity)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+    
 	[editButton setOff];
     
     RgMessagesViewController* mc = [RgMessagesViewController messagesViewController];
@@ -329,6 +334,21 @@ static UICompositeViewDescription *compositeDescription = nil;
        		[[PhoneMainView instance] promptNewOrEdit:sdata[@"session_tag"]];
     	}
 	}
+}
+
+- (void)handleUserActivity {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    NSString *msgTextString = [defaults stringForKey:@"msgText"];
+    
+    if (![msgTextString isEqual: @""]) {
+        
+        [defaults setObject:@"" forKey:@"msgText"];
+        
+        
+    }
+
 }
 
 @end
