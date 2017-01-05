@@ -115,6 +115,8 @@
                 {CKComponentViewAttribute::LayerAttribute(@selector(setShadowRadius:)),@3},
                 {CKComponentViewAttribute::LayerAttribute(@selector(setShadowColor:)),(id)[[UIColor colorWithHex:@"#0077c3"] CGColor]},
                 {CKComponentViewAttribute::LayerAttribute(@selector(setShadowOffset:)),[NSValue valueWithCGSize:CGSizeMake(2, 2)]},
+                {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @20.0},
+                {@selector(setClipsToBounds:), @YES}
             }
         };
     }
@@ -126,7 +128,8 @@
                 {@selector(setBackgroundColor:), [UIColor whiteColor]},
                 {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#d4d5d7"] CGColor]},
                 {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
-                
+                {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @20.0},
+                {@selector(setClipsToBounds:), @YES}
             }
         };
     }
@@ -369,7 +372,8 @@
                     {
                         {@selector(setBackgroundColor:), [UIColor whiteColor]},
                         {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-                        {@selector(setClipsToBounds:), @YES},
+                        {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @20.0},
+                        {@selector(setClipsToBounds:), @YES}
                     }
                 }
                 size:{}]
