@@ -2,6 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SFUIText-Bold.ttf</string>
+		<string>SFUIText-Light.ttf</string>
+		<string>SFUIText-Regular.ttf</string>
+		<string>SFUIText-Semibold.ttf</string>
+		<string>SFUIText-Medium.ttf</string>
+		<string>fontawesome-webfont.tff</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>

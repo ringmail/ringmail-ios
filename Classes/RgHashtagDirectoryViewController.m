@@ -66,37 +66,50 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"HashtagDirectory"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"Explore"
 																content:@"RgHashtagDirectoryViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
+                                                                 navBar:@"UINavBar"
 																 tabBar:@"UIMainBar"
+                                                          navBarEnabled:true
 														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@"Categories"
+                                                               segRight:@"My Activity"];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;
 }
 
+
 #pragma mark - ViewController Functions
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSegControl)
+                                                 name:@"RgSegmentControl"
+                                               object:nil];
 
     NSString *intro = @"#Hashtag";
     NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-        attributes:@{
-            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
-            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:16]
-        }];
-    
-	addressField.attributedPlaceholder = placeHolderString;
+    attributes:@{
+                 NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
+                 NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
+                 }];
+    addressField.attributedPlaceholder = placeHolderString;
+    addressField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
+    addressField.textColor = [UIColor colorWithHex:@"#222222"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
 
 }
 
@@ -255,6 +268,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onSearch:(id)sender {
     [addressField becomeFirstResponder];
+}
+
+- (void)handleSegControl {
+    printf("hashtag segement controller hit\n");
 }
 
 @end

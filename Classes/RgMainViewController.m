@@ -75,15 +75,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"Dialer"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"Ring Mail"
 																content:@"RgMainViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
+                                                                 navBar:@"UINavBar"
 																 tabBar:@"UIMainBar"
+                                                          navBarEnabled:true
 														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@"All"
+                                                               segRight:@"Missed"];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;
@@ -104,12 +108,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(coreUpdateEvent:)
 												 name:kLinphoneCoreUpdate
 											   object:nil];
-
+    
     
     /*[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(removeCard:)
                                                  name:@"RgMainCardRemove"
                                                object:nil];*/
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSegControl)
+                                                 name:@"RgSegmentControl"
+                                               object:nil];
     
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
@@ -152,10 +161,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *intro = @"#Hashtag, Domain or Email";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
         attributes:@{
-            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
-            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:16]
+            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
+            NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
         }];
 	addressField.attributedPlaceholder = placeHolderString;
+    addressField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
+    addressField.textColor = [UIColor colorWithHex:@"#222222"];
     
     if ([self needsRefresh])
     {
@@ -165,6 +176,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     self.visible = YES;
+
 }
 
 
@@ -175,6 +187,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 //	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil]; //mrkbxt - commented out to allow maincollectionview update after phone call.
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
     /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
     
     self.visible = NO;
 }
@@ -254,6 +267,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleUserActivity)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+    
+    printf("rgmain loaded\n");
+    
 }
 
 - (void)viewDidUnload {
@@ -583,6 +599,10 @@ static UICompositeViewDescription *compositeDescription = nil;
             [RgManager startCall:rgAddress contact:contact video:NO];
         
     }
+}
+
+- (void)handleSegControl {
+    printf("rgmain segement controller hit\n");
 }
 
 @end

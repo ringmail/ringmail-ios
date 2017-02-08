@@ -66,11 +66,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"RgChatQuestionSelect"
 															   stateBar:nil
 														stateBarEnabled:false
+                                                                 navBar:@"UINavBar"
 																 tabBar:@"UIMainBar"
+                                                          navBarEnabled:true  
 														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@""
+                                                               segRight:@""];
 	}
 	return compositeDescription;
 }

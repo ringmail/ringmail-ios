@@ -35,6 +35,9 @@ static NSString *const kDisappearAnimation = @"disappear";
 @synthesize chatNotificationView;
 @synthesize chatNotificationLabel;
 @synthesize logoView;
+@synthesize background;
+
+NSArray *buttonArray;
 
 #pragma mark - Lifecycle Functions
 
@@ -110,7 +113,11 @@ static NSString *const kDisappearAnimation = @"disappear";
         UIImage *logo = [UIImage imageNamed:@"ringmail_dev_logo"];
         [logoView setImage:logo];
     }
-
+    
+    buttonArray = [[NSArray alloc] initWithObjects:historyButton,contactsButton,dialerButton,settingsButton,hashtagButton,nil];
+    
+    [self setInstance: [UIScreen mainScreen].applicationFrame.size.width];
+    
 	[super viewDidLoad]; // Have to be after due to TPMultiLayoutViewController
 }
 
@@ -133,6 +140,49 @@ static NSString *const kDisappearAnimation = @"disappear";
 	[chatNotificationView setHidden:TRUE];
 	[self update:FALSE];
 }
+
+
+- (void)setInstance:(int)widthIn
+{
+    buttonArray = [[NSArray alloc] initWithObjects:historyButton,contactsButton,dialerButton,hashtagButton,settingsButton,nil];
+    
+    NSArray *imgPrefix =  [NSArray arrayWithObjects:@"tabs_recents%@%@",@"tabs_contacts%@%@",@"tabs_ring%@%@",@"tabs_explore%@%@",@"tabs_settings%@%@",nil];
+    NSArray *imgSuffix = [NSArray arrayWithObjects:@"_5@2x",@"@2x",@"@3x",nil];
+    NSArray *imgState = [NSArray arrayWithObjects:@"_normal",@"_pressed",@"_selected",nil];
+    
+    int i = 0; int j = 0;
+    
+    if (widthIn == 320) {
+        printf("I'm a iPhone 4/5/Se\n");
+        background.image = [UIImage imageNamed:@"tabs_background_5@2x"];
+    }
+    else if (widthIn == 375) {
+        printf("I'm a iPhone 6/7\n");
+        background.image = [UIImage imageNamed:@"tabs_background@2x"];
+        j = 1;
+    }
+    else if (widthIn == 414) {
+        printf("I'm a iPhone 6/7 Plus\n");
+        background.image = [UIImage imageNamed:@"tabs_background@3x"];
+        j = 2;
+    }
+    
+    for (UIButton* btn in buttonArray) {
+        NSString *tabNorm = [NSString stringWithFormat:imgPrefix[i], imgState[0], imgSuffix[j]];
+        NSString *tabPres = [NSString stringWithFormat:imgPrefix[i], imgState[1], imgSuffix[j]];
+        NSString *tabSele = [NSString stringWithFormat:imgPrefix[i], imgState[2], imgSuffix[j]];
+        
+        [btn setImage:[UIImage imageNamed:tabNorm] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:tabPres] forState:UIControlStateHighlighted];
+        [btn setImage:[UIImage imageNamed:tabSele] forState:UIControlStateSelected];
+        
+        CGSize imageSize = btn.imageView.image.size;
+        btn.titleEdgeInsets = UIEdgeInsetsMake(imageSize.height, -imageSize.width, 0.0, 0.0);
+        
+        i++;
+    }
+}
+
 
 #pragma mark - Event Functions
 
@@ -189,6 +239,15 @@ static NSString *const kDisappearAnimation = @"disappear";
         missedCalls = [NSNumber numberWithInt:[missedCalls intValue] + linphone_core_get_missed_calls_count([LinphoneManager getLc])];
     }*/
 	[self updateUnreadMessage:appear];
+    
+    // center button text below button image
+//    for (UIButton* btn in buttonArray) {
+//        CGSize imageSize = btn.imageView.image.size;
+//        CGSize titleSize = [btn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: btn.titleLabel.font}];
+//        CGSize contentSize = btn.frame.size;
+//        btn.titleEdgeInsets = UIEdgeInsetsMake((contentSize.height - titleSize.height - 4), -(imageSize.width/2 + titleSize.width/2), 0.0, 0.0);
+//    }
+
 }
 
 - (void)updateUnreadMessage:(BOOL)appear {

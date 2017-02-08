@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFUIText-Regular.ttf">
+            <string>SFUIText-Regular</string>
+        </array>
+        <array key="SFUIText-Semibold.ttf">
+            <string>SFUIText-Semibold</string>
+        </array>
+        <array key="fontawesome-webfont.ttf">
+            <string>FontAwesome</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UINavBar">
+            <connections>
+                <outlet property="backButton" destination="xaF-kH-DJ7" id="6FB-Rc-NP1"/>
+                <outlet property="background" destination="38p-KF-uvZ" id="Cou-UU-w4S"/>
+                <outlet property="headerLabel" destination="0rt-2P-RyV" id="Vcp-tR-fSR"/>
+                <outlet property="leftLabel" destination="bTS-UH-a3H" id="n39-cK-ezx"/>
+                <outlet property="rightLabel" destination="32Y-5x-k5m" id="VX9-a3-Ytp"/>
+                <outlet property="segmentButton" destination="83b-0d-TgV" id="82i-s4-x02"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_navigation_tabs.png" translatesAutoresizingMaskIntoConstraints="NO" id="38p-KF-uvZ" userLabel="background">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaF-kH-DJ7">
+                    <rect key="frame" x="0.0" y="0.0" width="30" height="95"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="Wes-gi-fQW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="22"/>
+                    <connections>
+                        <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="5hP-B9-FvU"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTS-UH-a3H" userLabel="Left">
+                    <rect key="frame" x="30" y="37" width="50" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="VRR-2T-QTT"/>
+                        <constraint firstAttribute="height" constant="21" id="mjl-sZ-gf4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="19"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rt-2P-RyV">
+                    <rect key="frame" x="120" y="37" width="175" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="175" id="Ct6-hP-FF7"/>
+                        <constraint firstAttribute="height" constant="21" id="Fns-t7-EwN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="19"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32Y-5x-k5m" userLabel="Right">
+                    <rect key="frame" x="354" y="37" width="50" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="4nZ-y8-auq"/>
+                        <constraint firstAttribute="height" constant="21" id="Rhl-BB-pKG"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="19"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="83b-0d-TgV">
+                    <rect key="frame" x="112" y="61" width="190" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="segmentedControlChanged:" destination="-1" eventType="valueChanged" id="CzD-Nq-5bW"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="xaF-kH-DJ7" firstAttribute="bottom" secondItem="38p-KF-uvZ" secondAttribute="bottom" id="9VJ-IA-YEo"/>
+                <constraint firstItem="bTS-UH-a3H" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="9fa-0N-ajw"/>
+                <constraint firstAttribute="trailing" secondItem="32Y-5x-k5m" secondAttribute="trailing" constant="10" id="9gk-ML-bYW"/>
+                <constraint firstItem="0rt-2P-RyV" firstAttribute="centerX" secondItem="38p-KF-uvZ" secondAttribute="centerX" id="DwV-vi-iYT"/>
+                <constraint firstItem="0rt-2P-RyV" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="G12-K8-RF8"/>
+                <constraint firstItem="xaF-kH-DJ7" firstAttribute="leading" secondItem="38p-KF-uvZ" secondAttribute="leading" id="KLU-yi-VRJ"/>
+                <constraint firstItem="38p-KF-uvZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ODH-Y4-yUd"/>
+                <constraint firstItem="xaF-kH-DJ7" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="WUl-RS-MFb"/>
+                <constraint firstItem="bTS-UH-a3H" firstAttribute="leading" secondItem="xaF-kH-DJ7" secondAttribute="trailing" id="gTt-Iu-LKr"/>
+                <constraint firstItem="38p-KF-uvZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gkL-1Y-igh"/>
+                <constraint firstItem="32Y-5x-k5m" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="lxO-IK-Zmj"/>
+                <constraint firstItem="xaF-kH-DJ7" firstAttribute="top" secondItem="38p-KF-uvZ" secondAttribute="top" id="qmc-jH-ldv"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="55" y="-231.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="header_navigation_tabs.png" width="414" height="95"/>
+    </resources>
+</document>

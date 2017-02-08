@@ -527,6 +527,16 @@ static RootViewManager *rootViewManagerInstance = nil;
 #endif
 }
 
+- (void)updateNavBar:(UICompositeViewDescription*) vc {
+    printf("updating Nav Bar for: %s\n", [vc.name UTF8String]);  // mrkbxt
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+//    NSMutalbeDictionary *dict = [NSDictionary dictionaryWithObject:vc.name forKey:@"message"];
+    dict[@"header"] = vc.name;
+    dict[@"lSeg"] = vc.segLeft;
+    dict[@"rSeg"] = vc.segRight;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarViewChange" object:nil userInfo:dict];
+}
+
 - (void)fullScreen:(BOOL)enabled {
 	[statusBarBG setHidden:enabled];
 	[mainViewController setFullScreen:enabled];
@@ -561,6 +571,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		[vc updateStatusBar:view];
 		[vc.mainViewController changeView:view];
 		vc->currentView = view;
+        [vc updateNavBar:view];
 	}
 
 	//[[RootViewManager instance] setViewControllerForDescription:view];

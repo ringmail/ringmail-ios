@@ -112,11 +112,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"ContactsViewController"
 															   stateBar:nil
 														stateBarEnabled:false
+                                                                 navBar:@"UINavBar"
 																 tabBar:@"UIMainBar"
+                                                          navBarEnabled:true
 														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@""
+                                                               segRight:@""];
 	}
 	return compositeDescription;
 }
@@ -125,6 +129,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
 }
 
 - (void)relayoutTableView {
@@ -167,12 +173,21 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kRgContactsUpdated
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSegControl)
+                                                 name:@"RgSegmentControl"
+                                               object:nil];
+    
     NSString *intro = @"Contact Name";
-    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro attributes:@{
-        NSForegroundColorAttributeName:[UIColor colorWithHex:@"#878787"],
-        NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:16]
-    }];
+    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
+    attributes:@{
+                 NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
+                 NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
+                 }];
     searchField.attributedPlaceholder = placeHolderString;
+    searchField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
+    searchField.textColor = [UIColor colorWithHex:@"#222222"];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -313,6 +328,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onSearch:(id)sender {
     [searchField becomeFirstResponder];
+}
+
+
+- (void)handleSegControl {
+    printf("contacts segement controller hit\n");
 }
 
 #pragma mark - Rotation handling

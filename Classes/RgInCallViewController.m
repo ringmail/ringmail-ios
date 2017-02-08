@@ -97,11 +97,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"RgInCallViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
+                                                                 navBar:nil
 																 tabBar:nil
+                                                          navBarEnabled:true
 														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:true
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@""
+                                                               segRight:@""];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;

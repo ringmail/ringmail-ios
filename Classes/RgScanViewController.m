@@ -46,11 +46,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"RgScanViewController"
 															   stateBar:nil
 														stateBarEnabled:false
+                                                                 navBar:nil
 																 tabBar:nil
+                                                          navBarEnabled:false
 														  tabBarEnabled:false
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@""
+                                                               segRight:@""];
 	}
 	return compositeDescription;
 }

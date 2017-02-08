@@ -295,6 +295,24 @@ static RgNetwork* theRgNetwork = nil;
     }
 }
 
+// mrkbxt
+- (void)businessCategoryDirectory:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"login"] = rgLogin;
+        parameters[@"password"] = rgPass;
+        parameters[@"parent"] = params[@"parent"];
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/business_cat_directory", self.networkHost];
+        [manager POST:postUrl parameters:parameters progress:nil success:okay failure:fail];
+    }
+}
+
 - (void)lookupConversation:(NSDictionary*)params callback:(RgNetworkCallback)callback
 {
     LevelDB* cfg = [RgManager configDatabase];

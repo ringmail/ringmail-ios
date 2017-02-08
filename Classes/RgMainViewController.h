@@ -35,6 +35,7 @@
 //- (void)call:(NSString*)address;
 
 - (void)handleUserActivity;
+- (void)handleSegControl;
 
 @property (nonatomic, assign) BOOL transferMode;
 

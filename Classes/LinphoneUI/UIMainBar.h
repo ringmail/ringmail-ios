@@ -31,11 +31,14 @@
 @property (nonatomic, strong) IBOutlet UIView *chatNotificationView;
 @property (nonatomic, strong) IBOutlet UILabel *chatNotificationLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *logoView;
+@property (nonatomic, strong) IBOutlet UIImageView* background;
 
 -(IBAction) onHistoryClick: (id) event;
 -(IBAction) onContactsClick: (id) event;
 -(IBAction) onDialerClick: (id) event;
 -(IBAction) onSettingsClick: (id) event;
 -(IBAction) onHashtagClick: (id) event;
+
+- (void)setInstance:(int)widthIn;
 
 @end

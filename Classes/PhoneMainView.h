@@ -85,6 +85,7 @@
 - (void)displayIncomingCall:(LinphoneCall*) call;
 - (void)setVolumeHidden:(BOOL)hidden;
 
+- (void)updateNavBar:(UICompositeViewDescription*) vc;
 
 - (void)addInhibitedEvent:(id)event;
 - (BOOL)removeInhibitedEvent:(id)event;

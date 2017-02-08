@@ -23,6 +23,8 @@
 #import "LinphoneManager.h"
 #import "TPMultiLayoutViewController.h"
 
+#import "UINavBar.h"
+
 @interface UICompositeViewDescription: NSObject{
 }
 
@@ -30,22 +32,30 @@
 @property (strong) NSString *content;
 @property (strong) NSString *stateBar;
 @property (assign) BOOL stateBarEnabled;
+@property (strong) NSString *navBar;
 @property (strong) NSString *tabBar;
+@property (assign) BOOL navBarEnabled;
 @property (assign) BOOL tabBarEnabled;
 @property (assign) BOOL fullscreen;
 @property (assign) BOOL landscapeMode;
 @property (assign) BOOL portraitMode;
 @property (assign) BOOL darkBackground;
+@property (strong) NSString *segLeft;
+@property (strong) NSString *segRight;
 
 - (id)copy;
 - (BOOL)equal:(UICompositeViewDescription*) description;
 - (id)init:(NSString *)name content:(NSString *)content stateBar:(NSString*)stateBar 
-                        stateBarEnabled:(BOOL) stateBarEnabled 
+                        stateBarEnabled:(BOOL) stateBarEnabled
+                                 navBar:(NSString*)navBar
                                  tabBar:(NSString*)tabBar
+                          navBarEnabled:(BOOL) navBarEnabled
                           tabBarEnabled:(BOOL) tabBarEnabled
                              fullscreen:(BOOL) fullscreen
                           landscapeMode:(BOOL) landscapeMode
-                           portraitMode:(BOOL) portraitMode;
+                           portraitMode:(BOOL) portraitMode
+                                 segLeft:(NSString*)segLeft
+                                segRight:(NSString*)segRight;
 
 @end
 
@@ -67,6 +77,8 @@
 @property (nonatomic, strong) IBOutlet UIView* stateBarView;
 @property (nonatomic, strong) IBOutlet UIView* contentView;
 @property (nonatomic, strong) IBOutlet UIView* tabBarView;
+@property (nonatomic, strong) IBOutlet UIView* navBarView;
+
 
 - (void)changeView:(UICompositeViewDescription *)description;
 - (void)setFullScreen:(BOOL) enabled;

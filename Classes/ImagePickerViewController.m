@@ -54,11 +54,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"ImagePickerViewController"
 															   stateBar:nil
 														stateBarEnabled:false
+                                                                 navBar:nil
 																 tabBar:nil
+                                                          navBarEnabled:false
 														  tabBarEnabled:false
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@""
+                                                               segRight:@""];
 		compositeDescription.darkBackground = false;
 	}
 	return compositeDescription;

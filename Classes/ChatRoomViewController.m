@@ -64,11 +64,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"ChatRoomViewController"
 															   stateBar:nil
 														stateBarEnabled:false
+                                                                 navBar:nil
 																 tabBar:/*@"UIMainBar"*/ nil
+                                                          navBarEnabled:false
 														  tabBarEnabled:false /*to keep room for chat*/
 															 fullscreen:false
 														  landscapeMode:true
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@""
+                                                               segRight:@""];
 	}
 	return compositeDescription;
 }

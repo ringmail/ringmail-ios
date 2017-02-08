@@ -394,7 +394,6 @@
 	LOGI(@"%@ : %@", NSStringFromSelector(_cmd), [error localizedDescription]);
 	[[LinphoneManager instance] setPushNotificationToken:nil];
 }
-
 #pragma mark - PushKit VoIP
 
 -(void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type

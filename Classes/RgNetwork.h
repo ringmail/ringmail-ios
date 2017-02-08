@@ -33,6 +33,7 @@ typedef void (^RgConversation)(NSString *to);
 - (void)updateContacts:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 - (void)lookupHashtag:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 - (void)hashtagDirectory:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail;
+- (void)businessCategoryDirectory:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail;
 - (void)lookupConversation:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 
 @end

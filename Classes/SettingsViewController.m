@@ -409,11 +409,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"SettingsViewController"
 															   stateBar:nil
 														stateBarEnabled:false
+                                                                 navBar:@"UINavBar"
 																 tabBar:@"UIMainBar"
+                                                          navBarEnabled:true
 														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@""
+                                                               segRight:@""];
 	}
 	return compositeDescription;
 }
@@ -442,6 +446,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[settingsController dismiss:self];
 	// Set observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kIASKAppSettingChanged object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -459,6 +464,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(appSettingChanged:)
 												 name:kIASKAppSettingChanged
 											   object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSegControl)
+                                                 name:@"RgSegmentControl"
+                                               object:nil];
 }
 
 #pragma mark - Event Functions
@@ -468,6 +478,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[settingsController setHiddenKeys:hiddenKeys animated:TRUE];
 }
 
+- (void)handleSegControl {
+    printf("settings segement controller hit\n");
+}
 #pragma mark -
 
 + (IASKSpecifier *)disableCodecSpecifier:(IASKSpecifier *)specifier {

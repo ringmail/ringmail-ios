@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="HelveticaNeueLTStd-Cn.otf">
-            <string>HelveticaNeueLTStd-Cn</string>
+        <array key="SFUIText-Light.ttf">
+            <string>SFUIText-Light</string>
         </array>
     </customFonts>
     <objects>
@@ -26,16 +29,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="uYS-gf-oKR" userLabel="Input">
-                    <frame key="frameInset" height="50"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYS-gf-oKR" userLabel="Input" customClass="RgSearchBackgroundView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search.png" id="2wn-ER-DYo">
-                            <frame key="frameInset" width="50" height="50"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hashtag_rocket_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="2wn-ER-DYo">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="5Ba-JC-CbS" userLabel="searchButton">
-                            <frame key="frameInset" width="50" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ba-JC-CbS" userLabel="searchButton">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
@@ -48,8 +51,8 @@
                                 <action selector="onSearch:" destination="-1" eventType="touchUpInside" id="YFb-Ql-u7G"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="kRY-QU-HcA" userLabel="messageButton" customClass="UIMessageButton">
-                            <frame key="frameInset" minY="10" width="30" height="30" maxX="22"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRY-QU-HcA" userLabel="messageButton" customClass="UIMessageButton">
+                            <rect key="frame" x="268" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
@@ -61,8 +64,8 @@
                                 <outlet property="addressField" destination="4" id="shi-Uq-Vf1"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="EWA-nB-tDT" userLabel="callButton" customClass="UICallButton">
-                            <frame key="frameInset" minY="10" width="30" height="30" maxX="64"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWA-nB-tDT" userLabel="callButton" customClass="UICallButton">
+                            <rect key="frame" x="226" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
@@ -74,8 +77,8 @@
                                 <outlet property="addressField" destination="4" id="tLL-tB-jPU"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="224" userLabel="goButton" customClass="UICallButton">
-                            <frame key="frameInset" minY="10" width="30" height="30" maxX="22"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="224" userLabel="goButton" customClass="UICallButton">
+                            <rect key="frame" x="268" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
@@ -88,14 +91,14 @@
                                 <outlet property="addressField" destination="4" id="235"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" id="4" userLabel="addressField" customClass="UIAddressTextField">
-                            <frame key="frameInset" minX="58" minY="16" height="27" maxX="88"/>
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="addressField" customClass="UIAddressTextField">
+                            <rect key="frame" x="58" y="11" width="174" height="27"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="tintColor" red="0.52948105335235596" green="0.52946513891220093" blue="0.52947413921356201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Enter a address"/>
-                            <color key="textColor" red="0.20000000000000001" green="0.21176470588235294" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
+                            <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                             <connections>
                                 <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="208"/>
@@ -106,8 +109,8 @@
                     <color key="backgroundColor" red="0.88627450980392153" green="0.89411764705882346" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Zpr-Mg-asO" userLabel="scanButton">
-                    <frame key="frameInset" minX="8" minY="44" height="37" maxX="252"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpr-Mg-asO" userLabel="scanButton">
+                    <rect key="frame" x="8" y="44" width="60" height="37"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
@@ -120,8 +123,8 @@
                         <action selector="onScan:" destination="-1" eventType="touchUpInside" id="i0Q-uv-UiZ"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" id="WIg-uW-eVV">
-                    <frame key="frameInset" minY="50"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIg-uW-eVV">
+                    <rect key="frame" x="0.0" y="50" width="320" height="324"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
@@ -133,10 +136,10 @@
     </objects>
     <resources>
         <image name="call_disabled.png" width="214" height="138"/>
+        <image name="hashtag_rocket_icon.png" width="51" height="53"/>
         <image name="phone.png" width="30" height="30"/>
         <image name="quote.png" width="30" height="30"/>
         <image name="ringpage.png" width="30" height="30"/>
-        <image name="search.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

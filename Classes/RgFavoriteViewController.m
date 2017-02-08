@@ -55,15 +55,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"Favorites"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"Recent Activity"
 																content:@"RgFavoriteViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
+                                                                 navBar:@"UINavBar"
 																 tabBar:@"UIMainBar"
+                                                          navBarEnabled:true
 														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+														   portraitMode:true
+                                                                segLeft:@"All"
+                                                               segRight:@"Missed"];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;
@@ -74,6 +78,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSegControl)
+                                                 name:@"RgSegmentControl"
+                                               object:nil];
 	
     if ([self needsRefresh])
     {
@@ -88,6 +96,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillDisappear:animated];
     
     self.visible = NO;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
 }
 
 - (void)viewDidLoad {
@@ -166,6 +176,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     {
         [self setNeedsRefresh:YES];
     }
+}
+
+- (void)handleSegControl {
+    printf("recents segement controller hit\n");
 }
 
 #pragma mark -
