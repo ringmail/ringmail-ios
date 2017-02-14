@@ -612,7 +612,7 @@
         navFrame.size.width = viewFrame.size.width;
 //        contentFrame.origin.y = [UIApplication sharedApplication].statusBarFrame.size.height + navFrame.size.height;
         contentFrame.origin.y = navFrame.size.height;
-        contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
+        contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y - tabFrame.size.height;
     }
     else
     {

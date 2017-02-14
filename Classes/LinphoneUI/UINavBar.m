@@ -125,16 +125,16 @@ static NSString *const kDisappearAnimation = @"disappear";
     CGRect segFrame = segmentButton.frame;
     
     if (widthIn == 320) {
-        background.image = [UIImage imageNamed:@"header_navigation_tabs_5@2x"];
+        background.image = [UIImage imageNamed:@"header_navigation_tabs_5_blue@2x.jpg"];
         [segmentButton setFrame:CGRectMake(segFrame.origin.x, segFrame.origin.y, segFrame.size.width, 24.0)];
     }
     else if (widthIn == 375) {
-        background.image = [UIImage imageNamed:@"header_navigation_tabs@2x"];
+        background.image = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
         [segmentButton setFrame:CGRectMake(segFrame.origin.x, segFrame.origin.y, segFrame.size.width, 27.0)];
 //        j = 1;
     }
     else if (widthIn == 414) {
-        background.image = [UIImage imageNamed:@"header_navigation_tabs@3x"];
+        background.image = [UIImage imageNamed:@"header_navigation_tabs_blue@3x.jpg"];
         [segmentButton setFrame:CGRectMake(segFrame.origin.x, segFrame.origin.y, segFrame.size.width, 30.0)];
 //        j = 2;
     }

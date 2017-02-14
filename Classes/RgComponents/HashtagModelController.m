@@ -63,7 +63,8 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
             {
                 Card *card = [[Card alloc] initWithData:@{
                     @"type": @"hashtag_directory_header",
-                    @"text": @"Explore #Hashtags",
+                    @"text": @"",
+//                    @"text": @"Explore #Hashtags",
                 } header:@NO];
                 [_cards addObject:card];
                 added++;
@@ -71,7 +72,8 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
             else
             {
                 Card *card = [[Card alloc] initWithData:@{
-                    @"text": @"Explore #Hashtags",
+//                    @"text": @"Explore #Hashtags",
+                    @"text": @"",
                 } header:@YES];
                 [_cards addObject:card];
                 added++;

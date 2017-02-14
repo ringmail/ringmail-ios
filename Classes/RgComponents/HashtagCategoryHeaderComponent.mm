@@ -23,6 +23,8 @@
             {@selector(setBackgroundColor:), [UIColor whiteColor]},
             {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#d4d5d7"] CGColor]},
             {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
+            {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @10.0},
+            {@selector(setClipsToBounds:), @YES},
         }
     };
     HashtagCategoryHeaderComponent *c = [super newWithComponent:
@@ -91,30 +93,30 @@
                               },
                           }]
                       ]},
-					{lineComponent()},
-					{[CKComponent newWithView:{
-						{[RgCustomView class]},
-						{
-							{@selector(setupView:), @{
-								@"pattern": data[@"pattern"],
-								@"color": data[@"color"],
-							}},
-						}
-					} size:{
-						.height = 15
-					}]}
+//					{lineComponent()},
+//					{[CKComponent newWithView:{
+//						{[RgCustomView class]},
+//						{
+//							{@selector(setupView:), @{
+//								@"pattern": data[@"pattern"],
+//								@"color": data[@"color"],
+//							}},
+//						}
+//					} size:{
+//						.height = 15
+//					}]}
                 }]
-             background:
-                [CKComponent
-                newWithView:{
-                    [UIView class],
-                    {
-                        {@selector(setBackgroundColor:), [UIColor whiteColor]},
-                        {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-                        {@selector(setClipsToBounds:), @YES},
-                    }
-                }
-                size:{}]
+             background: nil
+//                [CKComponent
+//                newWithView:{
+//                    [UIView class],
+//                    {
+//                        {@selector(setBackgroundColor:), [UIColor whiteColor]},
+//                        {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+//                        {@selector(setClipsToBounds:), @YES},
+//                    }
+//                }
+//                size:{}]
              ]
         ]
     ];

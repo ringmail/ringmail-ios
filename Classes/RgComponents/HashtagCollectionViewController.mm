@@ -49,7 +49,7 @@ static NSInteger const pageSize = 10;
     // thread. The preloaded images are then cached on the component context for use inside components.
     NSDictionary *images = @{};
 	
-    self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:1.0f];
+    self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:0.0f];
     self.collectionView.delegate = self;
     
     CardContext *context = [[CardContext alloc] initWithImages:images];

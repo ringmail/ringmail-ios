@@ -39,34 +39,63 @@
 		}
 		children:{
             {[CKInsetComponent
-                 newWithInsets:{.top = 20, .bottom = 15}
+                 newWithInsets:{.top = 0, .bottom = 0}
                  component:
-                    [CKStackLayoutComponent newWithView:{} size:{.height = 233, .width=screenWidth} style:{
+                    [CKStackLayoutComponent newWithView:{} size:{.height = 174, .width=screenWidth} style:{
             			.direction = CKStackLayoutDirectionHorizontal,
             			.alignItems = CKStackLayoutAlignItemsStretch
             		}
             		children:{
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-            			{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_astronaut.png"] size:{.width=224, .height=233}]},
+                        {hashtagDirHeaderImgComponent(&screenWidth)},
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
             		}]
             ]},
-            {[CKLabelComponent
-                 newWithLabelAttributes:{
-                     .string = data[@"text"],
-                     .font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16],
-                     .alignment = NSTextAlignmentCenter,
-                     .color = [UIColor colorWithHex:@"#33362f"],
-                 }
-                 viewAttributes:{
-                     {@selector(setBackgroundColor:), [UIColor clearColor]},
-                     {@selector(setUserInteractionEnabled:), @NO},
-                 }
-                 size:{.width=screenWidth}]}
+            {[CKInsetComponent
+               newWithInsets:{.left = 20, .right = 20}
+               component:
+                    [CKLabelComponent
+                     newWithLabelAttributes:{
+                         .string = data[@"text"],
+                         .font = [UIFont fontWithName:@"SFUIText-Bold" size:19],
+                         .alignment = NSTextAlignmentLeft,
+                         .color = [UIColor colorWithHex:@"#222222"],
+                     }
+                     viewAttributes:{
+                         {@selector(setBackgroundColor:), [UIColor clearColor]},
+                         {@selector(setUserInteractionEnabled:), @NO},
+                     }
+                     size:{.width=screenWidth}]
+            ]}
         }]
 	];
     [c setCardData:data];
     return c;
+}
+
+
+CKComponent* hashtagDirHeaderImgComponent(float* wIn)
+{
+    UIImage* tmpImg;
+    
+    if (*wIn == 320)
+        tmpImg = [UIImage imageNamed:@"explore_banner_ip5p@2x.png"];
+    else if (*wIn == 375)
+        tmpImg = [UIImage imageNamed:@"explore_banner_ip6-7s@2x.png"];
+    else if (*wIn == 414)
+        tmpImg = [UIImage imageNamed:@"explore_banner_ip6-7p@3x.png"];
+    
+    return
+    [
+     CKComponent newWithView:{
+         [UIImageView class],
+         {
+             {@selector(setImage:), tmpImg},
+             {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+         }
+     }
+     size:{*wIn, *wIn / (tmpImg.size.width/tmpImg.size.height)}
+     ];
 }
 
 @end

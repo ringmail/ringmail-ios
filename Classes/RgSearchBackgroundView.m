@@ -39,10 +39,10 @@
         // UIColor* c2 = UIColorFromRGB(0xCAEAFF);
     
         //  pre-computed lighter colors
-        UIColor* c1 = UIColorFromRGB(0xA58A99);
-        UIColor* c2 = UIColorFromRGB(0xD3EEFF);
+        UIColor* c1 = UIColorFromRGB(0x869BC4);
+        UIColor* c2 = UIColorFromRGB(0xCAEAFF);
     
-        CGFloat locations[2] = { 0, 0.89 };
+        CGFloat locations[2] = { 0, 1.0 };
         NSArray *colors = @[(id)c1.CGColor,
                             (id)c2.CGColor];
     
@@ -72,9 +72,9 @@
         CGContextSetStrokeColor(context, CGColorGetComponents(strokefillColor.CGColor));
         CGContextSetFillColor(context, CGColorGetComponents(strokefillColor.CGColor));
         CGContextSetLineJoin(context, kCGLineJoinRound);
-//        CGContextSetLineWidth(context, (1 / [UIScreen mainScreen].scale));
+        //        CGContextSetLineWidth(context, (1 / [UIScreen mainScreen].scale));
         CGContextSetLineWidth(context, 1);
-//        CGContextSetShouldAntialias(context, NO);
+        //        CGContextSetShouldAntialias(context, NO);
         // draw path
         CGContextAddPath(context, path);
         CGContextDrawPath(context, kCGPathFillStroke);

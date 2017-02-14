@@ -131,6 +131,22 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[mainController collectionView] setBounces:YES];
     [[mainController collectionView] setAlwaysBounceVertical:YES];
     
+    int width = [UIScreen mainScreen].applicationFrame.size.width;
+    UIImageView *background;
+    
+    if (width == 320) {
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip5@2x.png"]];
+    }
+    else if (width == 375) {
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];
+    }
+    else if (width == 414) {
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
+    }
+    
+    [mainView addSubview:background];
+    [mainView sendSubviewToBack:background];
+    
     CGRect r = mainView.frame;
     r.origin.y = 0;
     [mainController.view setFrame:r];
