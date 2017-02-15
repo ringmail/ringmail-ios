@@ -25,7 +25,7 @@
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
 	//NSLog(@"Component Data: %@", data);
     UIImage *cardImage = [data objectForKey:@"image"];
-    cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
+    cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:8 interpolationQuality:kCGInterpolationHigh];
 	
     CKComponentViewConfiguration vcfg;
     if ([[data objectForKey:@"unread"] integerValue] > 0)
@@ -76,7 +76,7 @@
     HashtagCardComponent *c = [super newWithView:scfg component:
         [CKInsetComponent
         // Left and right inset of 30pts; centered vertically:
-        newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
+        newWithInsets:{.left = 0, .right = 0, .top = 0, .bottom = 0}
         component:
             [CKBackgroundLayoutComponent
             newWithComponent:
@@ -86,7 +86,7 @@
                 }
                 children:{
                     {[CKInsetComponent
-                      newWithInsets:{.left = 5, .right = 5, .top = 5, .bottom = 5}
+                      newWithInsets:{.left = 20, .right = 10, .top = 5, .bottom = 5}
                       component:
                           [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
                             .direction = CKStackLayoutDirectionHorizontal,
@@ -109,12 +109,12 @@
                                             children:{
                                               {
                                                  [CKInsetComponent
-                                                     newWithInsets:{.left = 0, .right = 0, .top = 4, .bottom = 0}
+                                                     newWithInsets:{.left = 0, .right = 10, .top = 4, .bottom = 0}
                                                      component:
                                                           [CKLabelComponent
                                                           newWithLabelAttributes:{
                                                               .string = [data objectForKey:@"label"],
-                                                              .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18],
+                                                              .font = [UIFont fontWithName:@"SFUIText-Medium" size:17],
                                                               .color = [UIColor colorWithHex:@"#33362f"],
                                                           }
                                                           viewAttributes:{
@@ -144,10 +144,10 @@
                                       },*/
                                       {
                                           [CKInsetComponent
-                                           newWithInsets:{.left = 12, .right = 7, .top = INFINITY, .bottom = INFINITY}
+                                           newWithInsets:{.left = 12, .right = 8, .top = INFINITY, .bottom = INFINITY}
                                            component:
                                               [CKButtonComponent newWithTitles:{} titleColors:{} images:{
-                                                      {UIControlStateNormal,[UIImage imageNamed:@"ringpage.png"]},
+                                                      {UIControlStateNormal,[UIImage imageNamed:@"explore_hashtag_categories_rm_icon@3x.png"]},
                                                   } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionGo:) size:{.height = 30, .width = 30} attributes:{} accessibilityConfiguration:{}]
                                            ]
                                       },

@@ -175,6 +175,9 @@
 		4D3D66AA1E453AE900C2BCE3 /* UINavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D66A71E453AE900C2BCE3 /* UINavBar.m */; };
 		4D3D66AD1E453BB500C2BCE3 /* UINavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D66B01E453BB500C2BCE3 /* UINavBar.xib */; };
 		4D3D66AE1E453BB500C2BCE3 /* UINavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D66B01E453BB500C2BCE3 /* UINavBar.xib */; };
+		4D4C6B6A1E5297B900602945 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */; };
+		4D4C6B741E53C66A00602945 /* explore_hashtag_categories_rm_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4C6B721E53C66A00602945 /* explore_hashtag_categories_rm_icon@2x.png */; };
+		4D4C6B751E53C66A00602945 /* explore_hashtag_categories_rm_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4C6B731E53C66A00602945 /* explore_hashtag_categories_rm_icon@3x.png */; };
 		4D5111521DAD8ADC00695DD5 /* IntentContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */; };
 		4D5A51461E41072400F5127D /* SFUIText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D5A51441E41072400F5127D /* SFUIText-Medium.ttf */; };
 		4D5A51471E41072400F5127D /* SFUIText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D5A51441E41072400F5127D /* SFUIText-Medium.ttf */; };
@@ -240,6 +243,12 @@
 		4D96850B1E4E3971008464B7 /* explore_hashtagdir_icon3@iph6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685091E4E3970008464B7 /* explore_hashtagdir_icon3@iph6-7p@3x.jpg */; };
 		4D96850D1E4E3BDB008464B7 /* explore_hashtagdir_full1@iph6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D96850C1E4E3BDB008464B7 /* explore_hashtagdir_full1@iph6-7p@3x.jpg */; };
 		4D96850E1E4E3BDB008464B7 /* explore_hashtagdir_full1@iph6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D96850C1E4E3BDB008464B7 /* explore_hashtagdir_full1@iph6-7p@3x.jpg */; };
+		4D9685121E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D96850F1E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */; };
+		4D9685131E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D96850F1E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */; };
+		4D9685141E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685101E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */; };
+		4D9685151E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685101E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */; };
+		4D9685161E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */; };
+		4D9685171E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */; };
 		4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */; };
 		4DDB8CF61D9444BC00F5FD71 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */; };
 		4DDB8CF71D9444BC00F5FD71 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */; };
@@ -303,6 +312,8 @@
 		4DE0EB211D948C880009E015 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE0EB1F1D948C880009E015 /* libiconv.tbd */; };
 		4DE0EB241D948CAA0009E015 /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE0EB221D948CAA0009E015 /* libresolv.9.dylib */; };
 		4DE0EB251D948CAA0009E015 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE0EB231D948CAA0009E015 /* libresolv.dylib */; };
+		4DFC66D81E53D4F2004811E7 /* explore_hashtag_categories_rm_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4C6B721E53C66A00602945 /* explore_hashtag_categories_rm_icon@2x.png */; };
+		4DFC66DA1E53D4F5004811E7 /* explore_hashtag_categories_rm_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4C6B731E53C66A00602945 /* explore_hashtag_categories_rm_icon@3x.png */; };
 		57F005C415EE2CCF00914747 /* linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C315EE2CCF00914747 /* linphonerc */; };
 		57F005C815EE2D9200914747 /* linphonerc-factory in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C615EE2D9200914747 /* linphonerc-factory */; };
 		57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C715EE2D9200914747 /* linphonerc-factory~ipad */; };
@@ -2208,6 +2219,8 @@
 		4D3D66A61E453AE900C2BCE3 /* UINavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavBar.h; sourceTree = "<group>"; };
 		4D3D66A71E453AE900C2BCE3 /* UINavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavBar.m; sourceTree = "<group>"; };
 		4D3D66AF1E453BB500C2BCE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UINavBar.xib; sourceTree = "<group>"; };
+		4D4C6B721E53C66A00602945 /* explore_hashtag_categories_rm_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "explore_hashtag_categories_rm_icon@2x.png"; sourceTree = "<group>"; };
+		4D4C6B731E53C66A00602945 /* explore_hashtag_categories_rm_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "explore_hashtag_categories_rm_icon@3x.png"; sourceTree = "<group>"; };
 		4D5111501DAD8AA600695DD5 /* IntentContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntentContactManager.h; sourceTree = "<group>"; };
 		4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntentContactHandler.m; sourceTree = "<group>"; };
 		4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RingMail-Dev.entitlements"; sourceTree = "<group>"; };
@@ -2242,6 +2255,9 @@
 		4D9685031E4BE49B008464B7 /* hashtag_rocket_icon_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hashtag_rocket_icon_blue@2x.png"; sourceTree = "<group>"; };
 		4D9685091E4E3970008464B7 /* explore_hashtagdir_icon3@iph6-7p@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "explore_hashtagdir_icon3@iph6-7p@3x.jpg"; sourceTree = "<group>"; };
 		4D96850C1E4E3BDB008464B7 /* explore_hashtagdir_full1@iph6-7p@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "explore_hashtagdir_full1@iph6-7p@3x.jpg"; sourceTree = "<group>"; };
+		4D96850F1E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "explore_hashtag_category_sample_banner1_ip5@2x.jpg"; sourceTree = "<group>"; };
+		4D9685101E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg"; sourceTree = "<group>"; };
+		4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg"; sourceTree = "<group>"; };
 		4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
 		4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
@@ -3347,6 +3363,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D4C6B6A1E5297B900602945 /* ComponentKit.framework in Frameworks */,
 				4DDB8CF61D9444BC00F5FD71 /* libc++.1.dylib in Frameworks */,
 				4DDB8CF71D9444BC00F5FD71 /* libiconv.2.dylib in Frameworks */,
 				4DDB8CF81D9444BC00F5FD71 /* libresolv.9.dylib in Frameworks */,
@@ -4220,6 +4237,11 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4D4C6B721E53C66A00602945 /* explore_hashtag_categories_rm_icon@2x.png */,
+				4D4C6B731E53C66A00602945 /* explore_hashtag_categories_rm_icon@3x.png */,
+				4D96850F1E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */,
+				4D9685101E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */,
+				4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */,
 				4D96850C1E4E3BDB008464B7 /* explore_hashtagdir_full1@iph6-7p@3x.jpg */,
 				4D9685091E4E3970008464B7 /* explore_hashtagdir_icon3@iph6-7p@3x.jpg */,
 				4D9684EE1E4BCB7F008464B7 /* explore_background_ip5p@2x.png */,
@@ -5249,6 +5271,7 @@
 				C444F3D91C92240300134788 /* menu-hash_active@2x.png in Resources */,
 				4D3D66421E45317400C2BCE3 /* tabs_settings_pressed@3x.png in Resources */,
 				D3F83F521582223B00336684 /* numpad_three_over.png in Resources */,
+				4D9685121E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg in Resources */,
 				D3F83F541582223B00336684 /* numpad_four_default.png in Resources */,
 				D3F83F561582223B00336684 /* numpad_four_over.png in Resources */,
 				D3F83F581582223B00336684 /* numpad_five_default.png in Resources */,
@@ -5297,6 +5320,7 @@
 				D38187F815FE355D00C3EDCA /* UIMainBar.xib in Resources */,
 				D3ED3E9815872EF1006C0DE4 /* history_all_selected.png in Resources */,
 				C45CFFF61D8B600A00BEF75F /* ringmail_astronaut.png in Resources */,
+				4D9685141E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg in Resources */,
 				C49548FF1C8685310097E413 /* ringmail_chat_back.png in Resources */,
 				D3ED3E9A15872EF1006C0DE4 /* history_all_default.png in Resources */,
 				4D3D665E1E45317F00C2BCE3 /* tabs_explore_normal@2x.png in Resources */,
@@ -5370,6 +5394,7 @@
 				C49744311C7C0A7400AD43A1 /* ringmail_input_call.png in Resources */,
 				4D3D665C1E45317F00C2BCE3 /* tabs_contacts_selected@2x.png in Resources */,
 				D35E757815931E5D0066B1C1 /* switch_camera_default.png in Resources */,
+				4D4C6B741E53C66A00602945 /* explore_hashtag_categories_rm_icon@2x.png in Resources */,
 				C459A42F1CC865F300CFFF30 /* ringmail_edit-cancel.png in Resources */,
 				D35E757A15931E5D0066B1C1 /* switch_camera_over.png in Resources */,
 				D35E758915932DE60066B1C1 /* backspace_disabled.png in Resources */,
@@ -5383,6 +5408,7 @@
 				C42C0DD21CAEE9D100AD5A91 /* ringmail_mic@3x.png in Resources */,
 				C444F3DC1C92240300134788 /* menu-star.png in Resources */,
 				D3EA5403159852080037DC6B /* chat_edit_default.png in Resources */,
+				4D4C6B751E53C66A00602945 /* explore_hashtag_categories_rm_icon@3x.png in Resources */,
 				4D3D66301E45317400C2BCE3 /* tabs_explore_pressed@3x.png in Resources */,
 				C4AA1A2A1C72D3CB003F86FD /* ringmail_card_call.png in Resources */,
 				F0C1F9161A28781F009402C9 /* strech-top.png in Resources */,
@@ -5809,6 +5835,7 @@
 				4D3D669E1E45318C00C2BCE3 /* tabs_ring_selected_5@2x.png in Resources */,
 				D30BBD1815D402A7000F93DD /* contact_ok_disabled.png in Resources */,
 				D3804E6015D92A57008072A5 /* msg.caf in Resources */,
+				4D9685161E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg in Resources */,
 				D3804E6215D92A57008072A5 /* msg.wav in Resources */,
 				D321FF9915E628CB0098B5F4 /* linphonerc~ipad in Resources */,
 				57F005C415EE2CCF00914747 /* linphonerc in Resources */,
@@ -6255,6 +6282,7 @@
 				C4AC28B41D3963FA003B6232 /* options_disabled.png in Resources */,
 				C4AC28B51D3963FA003B6232 /* menu-home@2x.png in Resources */,
 				C4AC28B61D3963FA003B6232 /* options_over.png in Resources */,
+				4DFC66DA1E53D4F5004811E7 /* explore_hashtag_categories_rm_icon@3x.png in Resources */,
 				C4AC28B71D3963FA003B6232 /* conference_default.png in Resources */,
 				C4AC28B81D3963FA003B6232 /* conference_over.png in Resources */,
 				C4AC28B91D3963FA003B6232 /* search.png in Resources */,
@@ -6609,6 +6637,7 @@
 				4D9684E41E4BADFA008464B7 /* explore_banner_ip6-7s@2x.png in Resources */,
 				C4AC29FE1D3963FA003B6232 /* pause_on_over_landscape~ipad.png in Resources */,
 				C4AC29FF1D3963FA003B6232 /* speaker_off_default_landscape~ipad.png in Resources */,
+				4D9685131E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg in Resources */,
 				C4AC2A001D3963FA003B6232 /* speaker_off_disabled_landscape~ipad.png in Resources */,
 				C4AC2A011D3963FA003B6232 /* speaker_off_over_landscape~ipad.png in Resources */,
 				C4AC2A021D3963FA003B6232 /* speaker_on_default_landscape~ipad.png in Resources */,
@@ -6620,12 +6649,14 @@
 				C4AC2A081D3963FA003B6232 /* ringmail_contact_add.png in Resources */,
 				C4AC2A091D3963FA003B6232 /* video_off_default_landscape~ipad.png in Resources */,
 				C4AC2A0A1D3963FA003B6232 /* video_off_disabled_landscape~ipad.png in Resources */,
+				4D9685151E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg in Resources */,
 				C4AC2A0C1D3963FA003B6232 /* video_off_over_landscape~ipad.png in Resources */,
 				C4AC2A0D1D3963FA003B6232 /* video_on_default_landscape~ipad.png in Resources */,
 				C4AC2A0E1D3963FA003B6232 /* ping_out_send.caf in Resources */,
 				C4AC2A0F1D3963FA003B6232 /* menu-more_active@2x.png in Resources */,
 				C4AC2A101D3963FA003B6232 /* chat_in_alert.wav in Resources */,
 				C4AC2A111D3963FA003B6232 /* video_on_disabled_landscape~ipad.png in Resources */,
+				4DFC66D81E53D4F2004811E7 /* explore_hashtag_categories_rm_icon@2x.png in Resources */,
 				C4AC2A121D3963FA003B6232 /* video_on_over_landscape~ipad.png in Resources */,
 				C4AC2A131D3963FA003B6232 /* dialer_alt_back_default_landscape~ipad.png in Resources */,
 				C4AC2A141D3963FA003B6232 /* dialer_alt_back_over_landscape~ipad.png in Resources */,
@@ -6644,6 +6675,7 @@
 				C4AC2A201D3963FA003B6232 /* wizard_linphone_create.rc in Resources */,
 				C4AC2A211D3963FA003B6232 /* chat_message_delivered.png in Resources */,
 				C4AC2A221D3963FA003B6232 /* chat_message_not_delivered.png in Resources */,
+				4D9685171E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg in Resources */,
 				C4AC2A231D3963FA003B6232 /* chat_message_inprogress.png in Resources */,
 				C4AC2A241D3963FA003B6232 /* ImageViewController.xib in Resources */,
 				C4AC2A271D3963FA003B6232 /* menu-contact_active@2x.png in Resources */,
@@ -7536,6 +7568,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -7655,6 +7688,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
@@ -7773,6 +7807,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
@@ -7889,6 +7924,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",

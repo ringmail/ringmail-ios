@@ -71,12 +71,14 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
             }
             else
             {
-                Card *card = [[Card alloc] initWithData:@{
-//                    @"text": @"Explore #Hashtags",
-                    @"text": @"",
-                } header:@YES];
-                [_cards addObject:card];
-                added++;
+                // mrkbxt remove hashtagcategoryheadercomponent header label card
+                
+//                Card *card = [[Card alloc] initWithData:@{
+////                    @"text": @"Explore #Hashtags",
+//                    @"text": @"",
+//                } header:@YES]; // mrkbxt from @YES to @NO
+//                [_cards addObject:card];
+//                added++;
             }
         }
         else

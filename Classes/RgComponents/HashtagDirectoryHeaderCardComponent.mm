@@ -33,6 +33,8 @@
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     float screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    UIImage* headerImg = getImageDir(&screenWidth);
+    
     HashtagDirectoryHeaderCardComponent *c = [super newWithComponent:
         [CKStackLayoutComponent newWithView:{} size:{.width=screenWidth} style:{
 			.direction = CKStackLayoutDirectionVertical,
@@ -41,13 +43,13 @@
             {[CKInsetComponent
                  newWithInsets:{.top = 0, .bottom = 0}
                  component:
-                    [CKStackLayoutComponent newWithView:{} size:{.height = 174, .width=screenWidth} style:{
+                    [CKStackLayoutComponent newWithView:{} size:{.height = headerImg.size.height, .width=screenWidth} style:{
             			.direction = CKStackLayoutDirectionHorizontal,
             			.alignItems = CKStackLayoutAlignItemsStretch
             		}
             		children:{
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-                        {hashtagDirHeaderImgComponent(&screenWidth)},
+                        {hashtagDirHeaderImgComponent(&screenWidth,headerImg)},
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
             		}]
             ]},
@@ -74,7 +76,7 @@
 }
 
 
-CKComponent* hashtagDirHeaderImgComponent(float* wIn)
+UIImage* getImageDir(float* wIn)
 {
     UIImage* tmpImg;
     
@@ -85,16 +87,22 @@ CKComponent* hashtagDirHeaderImgComponent(float* wIn)
     else if (*wIn == 414)
         tmpImg = [UIImage imageNamed:@"explore_banner_ip6-7p@3x.png"];
     
+    return tmpImg;
+}
+
+
+CKComponent* hashtagDirHeaderImgComponent(float* wIn, UIImage* iIn)
+{
     return
     [
      CKComponent newWithView:{
          [UIImageView class],
          {
-             {@selector(setImage:), tmpImg},
+             {@selector(setImage:), iIn},
              {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
          }
      }
-     size:{*wIn, *wIn / (tmpImg.size.width/tmpImg.size.height)}
+     size:{*wIn, *wIn / (iIn.size.width/iIn.size.height)}
      ];
 }
 

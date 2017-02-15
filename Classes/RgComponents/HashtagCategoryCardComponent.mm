@@ -45,16 +45,15 @@
                     {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @20.0},
                     {@selector(setClipsToBounds:), @YES},
                     {@selector(setBackgroundColor:), [UIColor whiteColor]},
-                }
-            }
+                }}
             size:{.width = rectWidth}
             style:{}
             children:{
                 {hashtagCatImgComponent(test,&rectWidth)},
                 {hashtagCatInsetLabelComponent(data)},
             }
-        ]
-        ]];
+        ]]];
+    
     [c setCardData:data];
 
     return c;

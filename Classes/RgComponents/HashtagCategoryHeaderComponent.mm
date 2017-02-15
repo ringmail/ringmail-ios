@@ -17,112 +17,100 @@
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
-    CKComponentViewConfiguration vcfg = {
-        [UIView class],
-        {
-            {@selector(setBackgroundColor:), [UIColor whiteColor]},
-            {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#d4d5d7"] CGColor]},
-            {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
-            {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @10.0},
-            {@selector(setClipsToBounds:), @YES},
-        }
-    };
+    float screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    UIImage* headerImg = getImage(&screenWidth);
+    
     HashtagCategoryHeaderComponent *c = [super newWithComponent:
         [CKInsetComponent
-        // Left and right inset of 30pts; centered vertically:
-        newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
+        newWithInsets:{.top = 0, .left = 0, .bottom = 0, .right = 0}
         component:
-            [CKBackgroundLayoutComponent
-            newWithComponent:
-                [CKStackLayoutComponent newWithView:vcfg size:{} style:{
-                    .direction = CKStackLayoutDirectionVertical,
-                    .alignItems = CKStackLayoutAlignItemsStretch
-                }
-                children:{
-                    {[CKInsetComponent
-                      newWithInsets:{.left = 5, .right = 5, .top = 5, .bottom = 5}
-                      component:
-                          [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
-                            .direction = CKStackLayoutDirectionHorizontal,
-                            .alignItems = CKStackLayoutAlignItemsStretch
-                          }
-                          children:{
-							  {
-                                  .alignSelf = CKStackLayoutAlignSelfEnd,
-                                  .component = [CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
-                                      .direction = CKStackLayoutDirectionHorizontal,
-                                      .alignItems = CKStackLayoutAlignItemsStretch
-                                  }
-                                  children:{
-									{[CKStackLayoutComponent newWithView:{
-                                        [UIView class],
-                                        {CKComponentTapGestureAttribute(@selector(actionBack:))}
-									} size:{.height = 40} style:{
-                                          .direction = CKStackLayoutDirectionHorizontal,
-                                          .alignItems = CKStackLayoutAlignItemsStretch
-                                      }
-                                      children:{
-                                          {[CKInsetComponent
-                                               newWithInsets:{.left = 10, .right = 10, .top = INFINITY, .bottom = INFINITY}
-                                               component:
-                                                   [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_contact_back.png"] size:{
-                                                      .height = 16,
-                                                      .width = 9,
-                                               }]
-                                          ]},
-								 	 }]}
-                                  }]
-                              },
-                              {
-                                  .flexGrow = YES,
-                                  .component = [CKInsetComponent
-                                   newWithInsets:{.left = 7, .right = 5, .top = INFINITY, .bottom = INFINITY}
-                                   component:
-                                      [CKLabelComponent
-                                      newWithLabelAttributes:{
-                                          .string = [data objectForKey:@"name"],
-                                          .font = [UIFont fontWithName:@"HelveticaNeue" size:18],
-                                          .color = [UIColor colorWithHex:@"#33362f"],
-                                      }
-                                      viewAttributes:{
-                                          {@selector(setBackgroundColor:), [UIColor clearColor]},
-                                          {@selector(setUserInteractionEnabled:), @NO},
-                                      }
-                                      size:{}]
-                                   ]
-                              },
-                          }]
-                      ]},
-//					{lineComponent()},
-//					{[CKComponent newWithView:{
-//						{[RgCustomView class]},
-//						{
-//							{@selector(setupView:), @{
-//								@"pattern": data[@"pattern"],
-//								@"color": data[@"color"],
-//							}},
-//						}
-//					} size:{
-//						.height = 15
-//					}]}
-                }]
-             background: nil
-//                [CKComponent
-//                newWithView:{
-//                    [UIView class],
-//                    {
-//                        {@selector(setBackgroundColor:), [UIColor whiteColor]},
-//                        {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-//                        {@selector(setClipsToBounds:), @YES},
-//                    }
-//                }
-//                size:{}]
-             ]
-        ]
-    ];
+        [CKStackLayoutComponent newWithView:{
+            [UIView class],{
+                {@selector(setBackgroundColor:), [UIColor whiteColor]},
+            }}
+            size:{.width = screenWidth, .height=(headerImg.size.height + 106)}
+            style:{}
+            children:{
+                {hashtagCatDirHeaderImgComponent(&screenWidth,headerImg)},
+                {hashtagCatDirHeaderLabelComponent(&screenWidth,data)},
+            }
+        ]]];
+    
     [c setCardData:data];
+    
     return c;
 }
+
+
+UIImage* getImage(float* wIn)
+{
+    UIImage* tmpImg;
+    
+    if (*wIn == 320)
+        tmpImg = [UIImage imageNamed:@"explore_hashtag_category_sample_banner1_ip5@2x.jpg"];
+    else if (*wIn == 375)
+        tmpImg = [UIImage imageNamed:@"explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg"];
+    else if (*wIn == 414)
+        tmpImg = [UIImage imageNamed:@"explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg"];
+    
+    return tmpImg;
+}
+
+
+CKComponent* hashtagCatDirHeaderImgComponent(float* wIn, UIImage* iIn)
+{
+    return
+    [
+        CKComponent newWithView:{
+            [UIImageView class],
+            {
+                {@selector(setImage:), iIn},
+                {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+            }
+        }
+        size:{*wIn, *wIn / (iIn.size.width/iIn.size.height)}
+    ];
+}
+
+
+CKInsetComponent* hashtagCatDirHeaderLabelComponent(float* wIn, NSDictionary * data)
+{
+    return
+    [
+        CKInsetComponent
+        newWithInsets:{.left = 20, .right = 0, .top = 23, .bottom = 0}
+        component:
+            [CKStackLayoutComponent
+            newWithView:{}
+            size:{}
+            style:{.spacing = 8}
+            children:{
+                {[CKLabelComponent newWithLabelAttributes:{
+                    .string = [data objectForKey:@"name"],
+                    .color = [UIColor colorWithHex:@"#213E87"],
+                    .font = [UIFont fontWithName:@"SFUIText-SemiBold" size:24],
+                    .alignment = NSTextAlignmentLeft,
+                }
+                    viewAttributes:{
+                        {@selector(setBackgroundColor:), [UIColor clearColor]},
+                        {@selector(setUserInteractionEnabled:), @NO},
+                    }
+                    size:{.width = *wIn}]},
+                {[CKLabelComponent newWithLabelAttributes:{
+                    .string = [data objectForKey:@"name"],
+                    .color = [UIColor colorWithHex:@"#222222"],
+                    .font = [UIFont fontWithName:@"SFUIText-Light" size:19],
+                    .alignment = NSTextAlignmentLeft,
+                }
+                    viewAttributes:{
+                        {@selector(setBackgroundColor:), [UIColor clearColor]},
+                        {@selector(setUserInteractionEnabled:), @NO},
+                    }
+                    size:{.width = *wIn}]},
+            }]
+    ];
+}
+
 
 static CKComponent *lineComponent()
 {
@@ -135,6 +123,7 @@ static CKComponent *lineComponent()
             }
             size:{.height = 1 / [UIScreen mainScreen].scale}];
 }
+
 
 - (void)actionBack:(CKButtonComponent *)sender
 {
