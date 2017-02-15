@@ -576,10 +576,9 @@
     
     int screenSizeWidth = [UIScreen mainScreen].applicationFrame.size.width;
     
-	// Resize TabBar
+	// Resize TabBar  (bottom bar)
 	CGRect tabFrame = tabBarView.frame;
 	if (self.tabBarViewController != nil && currentViewDescription.tabBarEnabled) {
-//     Bottom tabBar nav, with componentkit content frame
         tabFrame.size.height = 50;
         contentFrame.origin.y = statusBarHeight;
         contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y - tabFrame.size.height;
@@ -587,30 +586,20 @@
         tabFrame.size.width = viewFrame.size.width;
 	}
     
-    // Resize NavBar
+    // Resize NavBar (top bar)
     CGRect navFrame = navBarView.frame;
     if (self.navBarViewController != nil && currentViewDescription.navBarEnabled) {
-//     Top navBar nav, with componentkit content frame
         
-        if (screenSizeWidth == 320) {
-            printf("NavBar: I'm a iPhone 4/5/Se\n");
-            navFrame.size.height = 74;
-//            background.image = [UIImage imageNamed:@"tabs_background_5@2x"];
-        }
-        else if (screenSizeWidth == 375) {
-            printf("NavBar: I'm a iPhone 6/7\n");
-            navFrame.size.height = 85;
-//            background.image = [UIImage imageNamed:@"tabs_background@2x"];
-        }
-        else if (screenSizeWidth == 414) {
-            printf("NavBar: I'm a iPhone 6/7 Plus\n");
+        if (screenSizeWidth == 320)
+            navFrame.size.height = 73;
+        else if (screenSizeWidth == 375)
+            navFrame.size.height = 84;
+        else if (screenSizeWidth == 414)
             navFrame.size.height = 95;
-//            background.image = [UIImage imageNamed:@"tabs_background@3x"];
-        }
-//        navFrame.origin.y = statusBarHeight;
+
         navFrame.origin.y = 0.0;
         navFrame.size.width = viewFrame.size.width;
-//        contentFrame.origin.y = [UIApplication sharedApplication].statusBarFrame.size.height + navFrame.size.height;
+        
         contentFrame.origin.y = navFrame.size.height;
         contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y - tabFrame.size.height;
     }

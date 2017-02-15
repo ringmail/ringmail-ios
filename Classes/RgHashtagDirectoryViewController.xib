@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,15 +30,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="pJO-1T-tNF" userLabel="Input" customClass="RgSearchBackgroundView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJO-1T-tNF" userLabel="Input" customClass="RgSearchBackgroundView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hashtag_rocket_icon_blue.png" id="4kl-gT-mth">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hashtag_rocket_icon_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="4kl-gT-mth">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="bDl-if-cdy"/>
+                            </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Y7b-wH-q6b" userLabel="searchButton" customClass="UIMessageButton">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7b-wH-q6b" userLabel="searchButton" customClass="UIMessageButton">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
@@ -51,7 +52,20 @@
                                 <action selector="onSearch:" destination="-1" eventType="touchUpInside" id="1Eh-gb-QGJ"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="3It-BT-vcm" userLabel="messageButton" customClass="UIMessageButton">
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="li4-cH-yll" userLabel="addressField" customClass="UIAddressTextField">
+                            <rect key="frame" x="56" y="14" width="252" height="22"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.52948105339999996" green="0.52946513890000002" blue="0.52947413919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <accessibility key="accessibilityConfiguration" label="Enter a address"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.21176470589999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                            <connections>
+                                <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="Rq7-eM-3aM"/>
+                                <outlet property="delegate" destination="-1" id="D0A-tn-DyS"/>
+                            </connections>
+                        </textField>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3It-BT-vcm" userLabel="messageButton" customClass="UIMessageButton">
                             <rect key="frame" x="268" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
@@ -64,7 +78,7 @@
                                 <outlet property="addressField" destination="li4-cH-yll" id="QbN-RY-fwZ"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="edP-O7-WMf" userLabel="callButton" customClass="UICallButton">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edP-O7-WMf" userLabel="callButton" customClass="UICallButton">
                             <rect key="frame" x="226" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
@@ -77,7 +91,7 @@
                                 <outlet property="addressField" destination="li4-cH-yll" id="Jd9-ze-5V4"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="QEQ-VT-WsT" userLabel="goButton" customClass="UICallButton">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEQ-VT-WsT" userLabel="goButton" customClass="UICallButton">
                             <rect key="frame" x="268" y="10" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
@@ -91,34 +105,30 @@
                                 <outlet property="addressField" destination="li4-cH-yll" id="ue4-CM-Mgj"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" id="li4-cH-yll" userLabel="addressField" customClass="UIAddressTextField">
-                            <rect key="frame" x="58" y="11" width="174" height="27"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="tintColor" red="0.52948105339999996" green="0.52946513890000002" blue="0.52947413919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <accessibility key="accessibilityConfiguration" label="Enter a address"/>
-                            <color key="textColor" red="0.20000000000000001" green="0.21176470589999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
-                            <connections>
-                                <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="Rq7-eM-3aM"/>
-                                <outlet property="delegate" destination="-1" id="D0A-tn-DyS"/>
-                            </connections>
-                        </textField>
                     </subviews>
                     <color key="backgroundColor" red="0.8862745098" green="0.89411764709999997" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="li4-cH-yll" firstAttribute="leading" secondItem="4kl-gT-mth" secondAttribute="trailing" constant="6" id="6Kf-kM-Mbb"/>
+                        <constraint firstAttribute="trailing" secondItem="li4-cH-yll" secondAttribute="trailing" constant="12" id="H1X-mV-XpO"/>
+                        <constraint firstItem="4kl-gT-mth" firstAttribute="leading" secondItem="pJO-1T-tNF" secondAttribute="leading" id="HlM-cA-hEk"/>
+                        <constraint firstAttribute="bottom" secondItem="4kl-gT-mth" secondAttribute="bottom" id="OCJ-dA-MOJ"/>
+                        <constraint firstItem="li4-cH-yll" firstAttribute="centerY" secondItem="pJO-1T-tNF" secondAttribute="centerY" id="XqF-JV-PBG"/>
+                        <constraint firstItem="4kl-gT-mth" firstAttribute="centerY" secondItem="pJO-1T-tNF" secondAttribute="centerY" id="jfj-Hm-tFY"/>
+                        <constraint firstAttribute="height" constant="50" id="mRa-jO-9p4"/>
+                        <constraint firstItem="4kl-gT-mth" firstAttribute="top" secondItem="pJO-1T-tNF" secondAttribute="top" id="yZh-dJ-wCA"/>
+                    </constraints>
                 </view>
-                <view contentMode="scaleToFill" id="WIg-uW-eVV">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIg-uW-eVV">
                     <rect key="frame" x="0.0" y="50" width="320" height="324"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view hidden="YES" tag="6" contentMode="scaleToFill" id="ZfE-U7-AXi" userLabel="waitView">
+                <view hidden="YES" tag="6" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZfE-U7-AXi" userLabel="waitView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" tag="7" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="neI-cU-NTD" userLabel="activityIndicatorView">
+                        <activityIndicatorView opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="neI-cU-NTD" userLabel="activityIndicatorView">
                             <rect key="frame" x="142" y="168" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
@@ -126,6 +136,11 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="pJO-1T-tNF" secondAttribute="trailing" id="6XV-nj-Fb0"/>
+                <constraint firstItem="pJO-1T-tNF" firstAttribute="leading" secondItem="171" secondAttribute="leading" id="ksA-PU-Nd0"/>
+                <constraint firstItem="pJO-1T-tNF" firstAttribute="top" secondItem="171" secondAttribute="top" id="qtm-IH-3Nm"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="341" y="331"/>
@@ -133,7 +148,7 @@
     </objects>
     <resources>
         <image name="call_disabled.png" width="214" height="138"/>
-        <image name="hashtag_rocket_icon_blue.png" width="32" height="32"/>
+        <image name="hashtag_rocket_icon_blue.png" width="53" height="53"/>
         <image name="phone.png" width="30" height="30"/>
         <image name="quote.png" width="30" height="30"/>
         <image name="ringpage.png" width="30" height="30"/>

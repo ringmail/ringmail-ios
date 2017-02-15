@@ -29,18 +29,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYS-gf-oKR" userLabel="Input" customClass="RgSearchBackgroundView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYS-gf-oKR" userLabel="Input" customClass="RgSearchBackgroundView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hashtag_rocket_icon_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="2wn-ER-DYo">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hashtag_rocket_icon_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="2wn-ER-DYo">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ba-JC-CbS" userLabel="searchButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ba-JC-CbS" userLabel="searchButton">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="bzh-UL-9St"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                             <state key="normal">
                                 <color key="titleColor" red="0.3294117647" green="0.80000000000000004" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,6 +49,32 @@
                             <state key="disabled" image="call_disabled.png"/>
                             <connections>
                                 <action selector="onSearch:" destination="-1" eventType="touchUpInside" id="YFb-Ql-u7G"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="addressField" customClass="UIAddressTextField">
+                            <rect key="frame" x="56" y="15" width="252" height="20"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <accessibility key="accessibilityConfiguration" label="Enter a address"/>
+                            <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                            <connections>
+                                <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="208"/>
+                                <outlet property="delegate" destination="-1" id="190"/>
+                            </connections>
+                        </textField>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWA-nB-tDT" userLabel="callButton" customClass="UICallButton">
+                            <rect key="frame" x="226" y="10" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Call"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                            <state key="normal" image="phone.png">
+                                <color key="titleColor" red="0.32941176470588235" green="0.80000000000000004" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <outlet property="addressField" destination="4" id="tLL-tB-jPU"/>
                             </connections>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRY-QU-HcA" userLabel="messageButton" customClass="UIMessageButton">
@@ -64,22 +90,9 @@
                                 <outlet property="addressField" destination="4" id="shi-Uq-Vf1"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWA-nB-tDT" userLabel="callButton" customClass="UICallButton">
-                            <rect key="frame" x="226" y="10" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Call"/>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                            <state key="normal" image="phone.png">
-                                <color key="titleColor" red="0.32941176470588235" green="0.80000000000000004" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="tLL-tB-jPU"/>
-                            </connections>
-                        </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="224" userLabel="goButton" customClass="UICallButton">
                             <rect key="frame" x="268" y="10" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Call"/>
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                             <state key="normal" image="ringpage.png">
@@ -91,26 +104,25 @@
                                 <outlet property="addressField" destination="4" id="235"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="addressField" customClass="UIAddressTextField">
-                            <rect key="frame" x="58" y="11" width="174" height="27"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="tintColor" red="0.52948105335235596" green="0.52946513891220093" blue="0.52947413921356201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <accessibility key="accessibilityConfiguration" label="Enter a address"/>
-                            <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
-                            <connections>
-                                <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="208"/>
-                                <outlet property="delegate" destination="-1" id="190"/>
-                            </connections>
-                        </textField>
                     </subviews>
                     <color key="backgroundColor" red="0.88627450980392153" green="0.89411764705882346" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="5Ba-JC-CbS" firstAttribute="top" secondItem="2wn-ER-DYo" secondAttribute="top" id="1wa-vs-hOG"/>
+                        <constraint firstItem="4" firstAttribute="leading" secondItem="2wn-ER-DYo" secondAttribute="trailing" constant="6" id="3qL-4D-rvx"/>
+                        <constraint firstItem="4" firstAttribute="centerY" secondItem="uYS-gf-oKR" secondAttribute="centerY" id="9OB-NN-hwH"/>
+                        <constraint firstItem="5Ba-JC-CbS" firstAttribute="leading" secondItem="2wn-ER-DYo" secondAttribute="leading" id="DcY-dW-qDM"/>
+                        <constraint firstItem="5Ba-JC-CbS" firstAttribute="trailing" secondItem="2wn-ER-DYo" secondAttribute="trailing" id="EZr-y9-5kM"/>
+                        <constraint firstItem="5Ba-JC-CbS" firstAttribute="bottom" secondItem="2wn-ER-DYo" secondAttribute="bottom" id="TOe-mP-sdz"/>
+                        <constraint firstItem="2wn-ER-DYo" firstAttribute="top" secondItem="uYS-gf-oKR" secondAttribute="top" id="e4s-bp-4XS"/>
+                        <constraint firstAttribute="bottom" secondItem="2wn-ER-DYo" secondAttribute="bottom" id="frr-3y-e2U"/>
+                        <constraint firstItem="2wn-ER-DYo" firstAttribute="leading" secondItem="uYS-gf-oKR" secondAttribute="leading" id="lwa-xd-sY9"/>
+                        <constraint firstAttribute="height" constant="50" id="onI-4o-bW2"/>
+                        <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" constant="12" id="wsP-Sl-omJ"/>
+                    </constraints>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpr-Mg-asO" userLabel="scanButton">
-                    <rect key="frame" x="8" y="44" width="60" height="37"/>
+                    <rect key="frame" x="7" y="57" width="60" height="37"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Call"/>
                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
@@ -129,6 +141,11 @@
                     <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="uYS-gf-oKR" secondAttribute="trailing" id="1Iw-ff-pnj"/>
+                <constraint firstItem="uYS-gf-oKR" firstAttribute="top" secondItem="171" secondAttribute="top" id="3rj-q7-skU"/>
+                <constraint firstItem="uYS-gf-oKR" firstAttribute="leading" secondItem="171" secondAttribute="leading" id="rPE-sc-J89"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="341" y="331"/>
@@ -136,7 +153,7 @@
     </objects>
     <resources>
         <image name="call_disabled.png" width="214" height="138"/>
-        <image name="hashtag_rocket_icon_blue.png" width="32" height="32"/>
+        <image name="hashtag_rocket_icon_blue.png" width="53" height="53"/>
         <image name="phone.png" width="30" height="30"/>
         <image name="quote.png" width="30" height="30"/>
         <image name="ringpage.png" width="30" height="30"/>

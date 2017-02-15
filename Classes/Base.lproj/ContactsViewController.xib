@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -26,24 +26,23 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="3" userLabel="toolBar" customClass="RgSearchBackgroundView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3" userLabel="toolBar" customClass="RgSearchBackgroundView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hashtag_rocket_icon_blue.png" id="jKy-6q-slX">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hashtag_rocket_icon_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="jKy-6q-slX">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="wSu-LU-v70"/>
+                            </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u0d-36-47K" userLabel="searchButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0d-36-47K" userLabel="searchButton">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <connections>
                                 <action selector="onSearch:" destination="-1" eventType="touchUpInside" id="xjH-3v-zoE"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" id="hVk-qC-eOy" userLabel="searchField">
-                            <rect key="frame" x="58" y="12" width="203" height="27"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="hVk-qC-eOy" userLabel="searchField">
+                            <rect key="frame" x="56" y="14" width="252" height="22"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="tintColor" red="0.20000000000000001" green="0.21176470589999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Enter a address"/>
@@ -57,16 +56,35 @@
                         </textField>
                     </subviews>
                     <color key="backgroundColor" red="0.88627450980392153" green="0.89411764705882346" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="u0d-36-47K" firstAttribute="bottom" secondItem="jKy-6q-slX" secondAttribute="bottom" id="88A-pP-Sf9"/>
+                        <constraint firstItem="jKy-6q-slX" firstAttribute="top" secondItem="3" secondAttribute="top" id="AqZ-pR-fcv"/>
+                        <constraint firstAttribute="height" constant="50" id="Cjn-oz-ra2"/>
+                        <constraint firstAttribute="bottom" secondItem="jKy-6q-slX" secondAttribute="bottom" id="DC4-JW-vDO"/>
+                        <constraint firstItem="u0d-36-47K" firstAttribute="trailing" secondItem="jKy-6q-slX" secondAttribute="trailing" id="JUa-oS-kVv"/>
+                        <constraint firstItem="jKy-6q-slX" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="dCu-Jf-kol"/>
+                        <constraint firstItem="u0d-36-47K" firstAttribute="top" secondItem="jKy-6q-slX" secondAttribute="top" id="eRl-3a-jHc"/>
+                        <constraint firstItem="hVk-qC-eOy" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="eaf-JW-AZF"/>
+                        <constraint firstItem="hVk-qC-eOy" firstAttribute="leading" secondItem="jKy-6q-slX" secondAttribute="trailing" constant="6" id="iAF-yh-FR1"/>
+                        <constraint firstItem="jKy-6q-slX" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="oYm-js-5mk"/>
+                        <constraint firstItem="u0d-36-47K" firstAttribute="leading" secondItem="jKy-6q-slX" secondAttribute="leading" id="ptp-On-Vye"/>
+                        <constraint firstAttribute="trailing" secondItem="hVk-qC-eOy" secondAttribute="trailing" constant="12" id="rvp-so-3od"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" id="8Fw-Oj-fuW"/>
+                <constraint firstItem="3" firstAttribute="top" secondItem="2" secondAttribute="top" id="Euv-1n-Ht2"/>
+                <constraint firstItem="3" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="zd8-QR-Zrd"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="230" y="108"/>
         </view>
     </objects>
     <resources>
-        <image name="hashtag_rocket_icon_blue.png" width="32" height="32"/>
+        <image name="hashtag_rocket_icon_blue.png" width="53" height="53"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

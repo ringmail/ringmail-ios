@@ -153,16 +153,13 @@ NSArray *buttonArray;
     int i = 0; int j = 0;
     
     if (widthIn == 320) {
-        printf("I'm a iPhone 4/5/Se\n");
         background.image = [UIImage imageNamed:@"tabs_background_5@2x"];
     }
     else if (widthIn == 375) {
-        printf("I'm a iPhone 6/7\n");
         background.image = [UIImage imageNamed:@"tabs_background@2x"];
         j = 1;
     }
     else if (widthIn == 414) {
-        printf("I'm a iPhone 6/7 Plus\n");
         background.image = [UIImage imageNamed:@"tabs_background@3x"];
         j = 2;
     }

@@ -89,8 +89,6 @@ static NSString *const kDisappearAnimation = @"disappear";
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
     
-    [self setInstance: [UIScreen mainScreen].applicationFrame.size.width];
-    
     [backButton setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
 }
 
@@ -102,6 +100,10 @@ static NSString *const kDisappearAnimation = @"disappear";
                                                   object:nil];
 }
 
+- (void)viewDidLayoutSubviews {
+    [self setInstance: [UIScreen mainScreen].applicationFrame.size.width];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -110,49 +112,31 @@ static NSString *const kDisappearAnimation = @"disappear";
 
 - (void)setInstance:(int)widthIn
 {
-
-//    [self.delegate didSelectUINavBar:self];
-
-
-//    buttonArray = [[NSArray alloc] initWithObjects:historyButton,contactsButton,dialerButton,hashtagButton,settingsButton,nil];
-    
-//    NSArray *imgPrefix =  [NSArray arrayWithObjects:@"tabs_recents%@%@",@"tabs_contacts%@%@",@"tabs_ring%@%@",@"tabs_explore%@%@",@"tabs_settings%@%@",nil];
-//    NSArray *imgSuffix = [NSArray arrayWithObjects:@"_5@2x",@"@2x",@"@3x",nil];
-//    NSArray *imgState = [NSArray arrayWithObjects:@"_normal",@"_pressed",@"_selected",nil];
-//    
-//    int i = 0; int j = 0;
-    
     CGRect segFrame = segmentButton.frame;
-    
+    UIImage* tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
+    double segFrameHeight = 27;
+    double segFrameWidth = 170;
+
     if (widthIn == 320) {
-        background.image = [UIImage imageNamed:@"header_navigation_tabs_5_blue@2x.jpg"];
-        [segmentButton setFrame:CGRectMake(segFrame.origin.x, segFrame.origin.y, segFrame.size.width, 24.0)];
+        tmpImg = [UIImage imageNamed:@"header_navigation_tabs_5_blue@2x.jpg"];
+        segFrameHeight = 24;
+        segFrameWidth = 145;
     }
     else if (widthIn == 375) {
-        background.image = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
-        [segmentButton setFrame:CGRectMake(segFrame.origin.x, segFrame.origin.y, segFrame.size.width, 27.0)];
-//        j = 1;
+        tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
+//        segFrameHeight = 27;
+//        segFrameWidth = 170;
     }
     else if (widthIn == 414) {
-        background.image = [UIImage imageNamed:@"header_navigation_tabs_blue@3x.jpg"];
-        [segmentButton setFrame:CGRectMake(segFrame.origin.x, segFrame.origin.y, segFrame.size.width, 30.0)];
-//        j = 2;
+        tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@3x.jpg"];
+        segFrameHeight = 30;
+        segFrameWidth = 189;
     }
     
-//    for (UIButton* btn in buttonArray) {
-//        NSString *tabNorm = [NSString stringWithFormat:imgPrefix[i], imgState[0], imgSuffix[j]];
-//        NSString *tabPres = [NSString stringWithFormat:imgPrefix[i], imgState[1], imgSuffix[j]];
-//        NSString *tabSele = [NSString stringWithFormat:imgPrefix[i], imgState[2], imgSuffix[j]];
-//        
-//        [btn setImage:[UIImage imageNamed:tabNorm] forState:UIControlStateNormal];
-//        [btn setImage:[UIImage imageNamed:tabPres] forState:UIControlStateHighlighted];
-//        [btn setImage:[UIImage imageNamed:tabSele] forState:UIControlStateSelected];
-//        
-//        CGSize imageSize = btn.imageView.image.size;
-//        btn.titleEdgeInsets = UIEdgeInsetsMake(imageSize.height, -imageSize.width, 0.0, 0.0);
-//        
-//        i++;
-//    }
+    background.frame = CGRectMake(0, 0, tmpImg.size.width, tmpImg.size.height);
+    background.image = tmpImg;
+    [segmentButton setFrame:CGRectMake(segFrame.origin.x, segFrame.origin.y, segFrameWidth, segFrameHeight)];
+    
 }
 
 // mrkbxt
