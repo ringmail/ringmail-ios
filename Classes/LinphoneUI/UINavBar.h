@@ -31,6 +31,6 @@
 -(IBAction) segmentedControlChanged:(id)sender;
 
 - (void)setInstance:(int)widthIn;
-- (void)updateLabels:(NSNotification *) notification;
+- (void)updateLabelsBtns:(NSNotification *) notification;
 
 @end

@@ -107,6 +107,12 @@ CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary* data)
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{
         @"category_id":[[self cardData] objectForKey:@"id"]
     }];
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    dict[@"header"] = @"Hashtag Card";
+    dict[@"lSeg"] = @"";
+    dict[@"rSeg"] = @"";
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarViewChange" object:nil userInfo:dict];
 }
 
 

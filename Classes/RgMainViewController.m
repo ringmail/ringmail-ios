@@ -156,7 +156,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     		}
     	}
     }
-
+    
 	// fix placeholder bar color in >= iOS7
     NSString *intro = @"#Hashtag, Domain or Email";
 	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro

@@ -174,19 +174,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     [mainViewController removeFromParentViewController];
     [self.componentView removeFromSuperview];
-    
+
     path = newPath;
-    
+
+    NSLog(@"updatePath: %@", newPath);
+
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
-    
+
     HashtagCollectionViewController *mainController = [[HashtagCollectionViewController alloc] initWithCollectionViewLayout:flowLayout path:path];
-    
+
     [[mainController collectionView] setBounces:YES];
     [[mainController collectionView] setAlwaysBounceVertical:YES];
-    
+
     CGRect r = mainView.frame;
     r.origin.y = 0;
     [mainController.view setFrame:r];

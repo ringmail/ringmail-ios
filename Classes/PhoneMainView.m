@@ -530,7 +530,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (void)updateNavBar:(UICompositeViewDescription*) vc {
     printf("updating Nav Bar for: %s\n", [vc.name UTF8String]);  // mrkbxt
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-//    NSMutalbeDictionary *dict = [NSDictionary dictionaryWithObject:vc.name forKey:@"message"];
     dict[@"header"] = vc.name;
     dict[@"lSeg"] = vc.segLeft;
     dict[@"rSeg"] = vc.segRight;

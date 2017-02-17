@@ -17,6 +17,11 @@ static NSString *const kBounceAnimation = @"bounce";
 static NSString *const kAppearAnimation = @"appear";
 static NSString *const kDisappearAnimation = @"disappear";
 
+typedef enum {
+    Ring, Explore, Recents, Contacts, Settings, HTagCard
+} NavView;
+
+
 @synthesize background;
 @synthesize backButton;
 @synthesize segmentButton;
@@ -24,7 +29,6 @@ static NSString *const kDisappearAnimation = @"disappear";
 @synthesize leftLabel;
 @synthesize rightLabel;
 
-//@synthesize delegate;
 
 #pragma mark - Lifecycle Functions
 
@@ -44,7 +48,7 @@ static NSString *const kDisappearAnimation = @"disappear";
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateLabels:)
+                                             selector:@selector(updateLabelsBtns:)
                                                  name:@"navBarViewChange"
                                                object:nil];
 
@@ -116,11 +120,13 @@ static NSString *const kDisappearAnimation = @"disappear";
     UIImage* tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
     double segFrameHeight = 27;
     double segFrameWidth = 170;
+    double segXShifted = segFrame.origin.x;
 
     if (widthIn == 320) {
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_5_blue@2x.jpg"];
         segFrameHeight = 24;
         segFrameWidth = 145;
+        segXShifted += 12.5;
     }
     else if (widthIn == 375) {
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
@@ -131,26 +137,72 @@ static NSString *const kDisappearAnimation = @"disappear";
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@3x.jpg"];
         segFrameHeight = 30;
         segFrameWidth = 189;
+        segXShifted -= 9.5;
     }
     
     background.frame = CGRectMake(0, 0, tmpImg.size.width, tmpImg.size.height);
     background.image = tmpImg;
-    [segmentButton setFrame:CGRectMake(segFrame.origin.x, segFrame.origin.y, segFrameWidth, segFrameHeight)];
+    [segmentButton setFrame:CGRectMake(segXShifted, segFrame.origin.y, segFrameWidth, segFrameHeight)];
     
 }
 
 // mrkbxt
-- (void)updateLabels:(NSNotification *) notification {
+- (void)updateLabelsBtns:(NSNotification *) notification {
+    
     NSDictionary *dict = notification.userInfo;
     NSString *header = [dict valueForKey:@"header"];
-    NSString *lSeg = [dict valueForKey:@"lSeg"];
-    NSString *rSeg = [dict valueForKey:@"rSeg"];
     
-    if (header != nil) {
-        headerLabel.text = header;
-        [segmentButton setTitle:lSeg forSegmentAtIndex:0];
-        [segmentButton setTitle:rSeg forSegmentAtIndex:1];
+    headerLabel.text = header;
+    [headerLabel setHidden:NO];
+    [segmentButton setTitle:[dict valueForKey:@"lSeg"] forSegmentAtIndex:0];
+    [segmentButton setTitle:[dict valueForKey:@"rSeg"] forSegmentAtIndex:1];
+    [leftLabel setHidden:YES];
+    [rightLabel setHidden:YES];
+    [backButton setHidden:YES];
+    [backButton setEnabled:NO];
+    
+    NavView navView = [self navViewFromString:header];
+    
+    switch (navView)
+    {
+        case Ring:
+        case Explore:
+        case Recents:
+            [segmentButton setEnabled:YES];
+            [segmentButton setHidden:NO];
+            break;
+        case Contacts:
+        case Settings:
+            [segmentButton setEnabled:NO];
+            [segmentButton setHidden:YES];
+            break;
+        case HTagCard:
+            [segmentButton setEnabled:NO];
+            [segmentButton setHidden:YES];
+            [backButton setHidden:NO];
+            [backButton setEnabled:YES];
+            [headerLabel setHidden:NO];
+            headerLabel.text = @"Explore";
+            break;
+        default:
+            break;
     }
+
+}
+
+
+- (NavView)navViewFromString:(NSString*) sIn {
+    
+    NSDictionary<NSString*,NSNumber*> *navViews = @{
+        @"Ring Mail": @(Ring),
+        @"Explore": @(Explore),
+        @"Recent Activity": @(Recents),
+        @"Contacts": @(Contacts),
+        @"Settings": @(Settings),
+        @"Hashtag Card": @(HTagCard),
+    };
+    
+    return [[navViews valueForKey:sIn] intValue];
 }
 
 
@@ -168,7 +220,9 @@ static NSString *const kDisappearAnimation = @"disappear";
 #pragma mark - Action Functions
 
 - (IBAction)onBackClick:(id)event {
-//    [[PhoneMainView instance] changeCurrentView:[RgFavoriteViewController compositeViewDescription]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{@"category_id": @"0",}];
+    NSNotification *resestNotif = [[NSNotification alloc] initWithName:@"resetBtnLabelsHeader" object:nil userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity"}];
+    [self updateLabelsBtns:resestNotif];
 }
 
 
