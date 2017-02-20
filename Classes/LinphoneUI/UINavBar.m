@@ -21,6 +21,8 @@ typedef enum {
     Ring, Explore, Recents, Contacts, Settings, HTagCard
 } NavView;
 
+int backState = 0;
+
 
 @synthesize background;
 @synthesize backButton;
@@ -152,6 +154,9 @@ typedef enum {
     NSDictionary *dict = notification.userInfo;
     NSString *header = [dict valueForKey:@"header"];
     
+    if (backState && [header isEqual: @"Explore"])
+        header = @"Hashtag Card";
+    
     headerLabel.text = header;
     [headerLabel setHidden:NO];
     [segmentButton setTitle:[dict valueForKey:@"lSeg"] forSegmentAtIndex:0];
@@ -181,6 +186,7 @@ typedef enum {
             [segmentButton setHidden:YES];
             [backButton setHidden:NO];
             [backButton setEnabled:YES];
+            backState = 1;
             [headerLabel setHidden:NO];
             headerLabel.text = @"Explore";
             break;
@@ -222,6 +228,7 @@ typedef enum {
 - (IBAction)onBackClick:(id)event {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{@"category_id": @"0",}];
     NSNotification *resestNotif = [[NSNotification alloc] initWithName:@"resetBtnLabelsHeader" object:nil userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity"}];
+    backState = 0;
     [self updateLabelsBtns:resestNotif];
 }
 
