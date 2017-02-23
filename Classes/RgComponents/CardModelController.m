@@ -51,6 +51,8 @@
     for (NSDictionary* r in list)
     {
         NSString *address = [r objectForKey:@"session_tag"];
+        
+        NSLog(@"buildCards address: %@", address);  // mrkbxt
 
         NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:r];
 		

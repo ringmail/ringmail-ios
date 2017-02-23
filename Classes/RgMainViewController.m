@@ -268,7 +268,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     
-    printf("rgmain loaded\n");
+    
+//    [self testMissedCall];  // mrkbxt
+//    [self testResetMissedCall];  // mrkbxt
     
 }
 
@@ -603,6 +605,45 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)handleSegControl {
     printf("rgmain segement controller hit\n");
+}
+
+- (void)testMissedCall {
+    LinphoneCallState state = LinphoneCallEnd;
+    // Update call
+    NSMutableDictionary *updates = [NSMutableDictionary dictionaryWithDictionary:@{
+       @"sip": @"",
+       @"state": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],
+       }];
+    if (state == LinphoneCallEnd || state == LinphoneCallError)
+    {
+        NSString *status;
+        int sts = 2;
+
+        if (sts == LinphoneCallMissed)
+        {
+            status = @"missed";
+        }
+        
+        [updates setObject:status forKey:@"status"];
+    }
+    [[[LinphoneManager instance] chatManager] dbUpdateCall:updates];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+}
+
+- (void)testResetMissedCall {
+    LinphoneCallState state = LinphoneCallEnd;
+    
+    NSMutableDictionary *updates = [NSMutableDictionary dictionaryWithDictionary:@{
+       @"sip": @"",
+       @"state": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],
+       }];
+
+    NSString* status = @"reset";
+        
+    [updates setObject:status forKey:@"status"];
+    
+    [[[LinphoneManager instance] chatManager] dbUpdateCall:updates];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
 }
 
 @end

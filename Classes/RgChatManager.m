@@ -1526,6 +1526,10 @@
         {
             [db executeUpdate:@"UPDATE session SET unread = unread + 1 WHERE rowid = ?", session];
         }
+        if ([callData[@"status"] isEqualToString:@"reset"])  // mrkbxt
+        {
+            [db executeUpdate:@"UPDATE session SET unread = 0 WHERE rowid = ?", session];
+        }
     }];
     [dbq close];
 	if (session != nil)

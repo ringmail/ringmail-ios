@@ -446,7 +446,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 	if (address == nil) {
 		address = NSLocalizedString(@"Unknown", nil);
 	}
-
+    
 	if (state == LinphoneCallIncomingReceived) {
 
 		/*first step is to re-enable ctcall center*/
@@ -1306,7 +1306,7 @@ static BOOL libStarted = FALSE;
     libmsbcg729_init(f);
     libmswebrtc_init(f);
     linphone_core_reload_ms_plugins(theLinphoneCore, NULL);
-
+    
 #if !TARGET_IPHONE_SIMULATOR
     ms_factory_enable_filter_from_name(f, "MSH264Dec", NO);
     //ms_factory_enable_filter_from_name(f, "MSOpenH264Enc", NO);

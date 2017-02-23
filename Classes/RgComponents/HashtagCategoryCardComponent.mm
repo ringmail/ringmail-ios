@@ -33,7 +33,7 @@
 	CGFloat itemWidth = screenWidth / 2;
 	CGFloat rectWidth = itemWidth - 16;
 
-    UIImage* test = [UIImage imageNamed:@"explore_hashtagdir_full1@iph6-7p@3x.jpg"];
+//    UIImage* test = [UIImage imageNamed:@"explore_hashtagdir_full1@iph6-7p@3x.jpg"];
     
     HashtagCategoryCardComponent *c = [super newWithComponent:
         [CKInsetComponent
@@ -49,7 +49,10 @@
             size:{.width = rectWidth}
             style:{}
             children:{
-                {hashtagCatImgComponent(test,&rectWidth)},
+                {[CKNetworkImageComponent newWithURL:data[@"image_url"]
+                                     imageDownloader:context.imageDownloader
+                                           scenePath:nil size:{ rectWidth, rectWidth * .73 } options:{} attributes:{}]},
+//                {hashtagCatImgComponent(data[@"image_url"],&rectWidth)},
                 {hashtagCatInsetLabelComponent(data)},
             }
         ]]];
