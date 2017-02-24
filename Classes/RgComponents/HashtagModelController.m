@@ -30,48 +30,24 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 
 
 - (void)fetchPageWithCount:(NSInteger)count caller:(HashtagCollectionViewController*)caller
-{
-//    if ([mainPath isEqual: @"0"])
-//    {
-        [caller.waitDelegate showWaiting];
-        [[RgNetwork instance] businessCategoryDirectory:@{
-             @"parent": @"1",
-             } success:^(NSURLSessionTask *operation, id responseObject) {
-                 [caller.waitDelegate hideWaiting];
-                 NSDictionary* res = responseObject;
-                 NSLog(@"API Response: %@", res);
-                 NSString *ok = [res objectForKey:@"result"];
-                 if (ok != nil && [ok isEqualToString:@"ok"])
-                 {
-                     mainList = res[@"directory"];
-                 }
-                 [caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
-             } failure:^(NSURLSessionTask *operation, NSError *error) {
-                 [caller.waitDelegate hideWaiting];
-                 NSLog(@"RingMail API Error: %@", [error localizedDescription]);
-             }];
-//
-//    }
-//    else
-//    {
-//        [caller.waitDelegate showWaiting];
-//        [[RgNetwork instance] hashtagDirectory:@{
-//            @"category_id": mainPath,
-//        } success:^(NSURLSessionTask *operation, id responseObject) {
-//            [caller.waitDelegate hideWaiting];
-//            NSDictionary* res = responseObject;
-//            NSLog(@"API Response: %@", res);
-//            NSString *ok = [res objectForKey:@"result"];
-//            if (ok != nil && [ok isEqualToString:@"ok"])
-//            {
-//                mainList = res[@"directory"];
-//            }
-//            [caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
-//        } failure:^(NSURLSessionTask *operation, NSError *error) {
-//            [caller.waitDelegate hideWaiting];
-//            NSLog(@"RingMail API Error: %@", [error localizedDescription]);
-//        }];
-//    }
+{    
+    [caller.waitDelegate showWaiting];
+    [[RgNetwork instance] businessCategoryDirectory:@{
+         @"parent": mainPath,
+         } success:^(NSURLSessionTask *operation, id responseObject) {
+             [caller.waitDelegate hideWaiting];
+             NSDictionary* res = responseObject;
+             NSLog(@"API Response: %@", res);
+             NSString *ok = [res objectForKey:@"result"];
+             if (ok != nil && [ok isEqualToString:@"ok"])
+             {
+                 mainList = res[@"directory"];
+             }
+             [caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
+         } failure:^(NSURLSessionTask *operation, NSError *error) {
+             [caller.waitDelegate hideWaiting];
+             NSLog(@"RingMail API Error: %@", [error localizedDescription]);
+         }];
 }
 
 

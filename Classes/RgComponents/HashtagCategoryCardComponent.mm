@@ -51,7 +51,7 @@
             children:{
                 {[CKNetworkImageComponent newWithURL:data[@"image_url"]
                                      imageDownloader:context.imageDownloader
-                                           scenePath:nil size:{ rectWidth, rectWidth * .73 } options:{} attributes:{}]},
+                                           scenePath:nil size:{ rectWidth, rectWidth * 0.73 } options:{} attributes:{}]},
 //                {hashtagCatImgComponent(data[@"image_url"],&rectWidth)},
                 {hashtagCatInsetLabelComponent(data)},
             }
