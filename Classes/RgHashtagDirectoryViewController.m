@@ -191,10 +191,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         [categoryStack addObject:newPath];
     }
     
-    for (id object in categoryStack) {
-        NSLog(@"categoryStack: %@", object);
-    }
-
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
