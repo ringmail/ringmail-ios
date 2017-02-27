@@ -45,7 +45,7 @@
                     {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @20.0},
                     {@selector(setClipsToBounds:), @YES},
                     {@selector(setBackgroundColor:), [UIColor whiteColor]},
-                    {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#000000"] CGColor]},
+                    {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#222222"] CGColor]},
                     {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
                 }}
             size:{.width = rectWidth}
@@ -86,7 +86,7 @@ CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary* data)
     return
     [
          CKInsetComponent newWithInsets:
-            {.left = 10, .right = 10, .top = 8, .bottom = INFINITY}
+            {.left = 10, .right = 10, .top = 6, .bottom = INFINITY}
             component: [
                 CKLabelComponent newWithLabelAttributes:{
                     .string = [data objectForKey:@"name"],
