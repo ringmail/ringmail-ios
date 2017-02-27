@@ -205,7 +205,7 @@ int backState = 0;
 - (NavView)navViewFromString:(NSString*) sIn {
     
     NSDictionary<NSString*,NSNumber*> *navViews = @{
-        @"Ring Mail": @(Ring),
+        @"RingMail": @(Ring),
         @"Explore": @(Explore),
         @"Recent Activity": @(Recents),
         @"Contacts": @(Contacts),
