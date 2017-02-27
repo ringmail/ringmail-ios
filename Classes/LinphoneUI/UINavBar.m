@@ -147,9 +147,9 @@ int backState = 0;
     background.image = tmpImg;
     [segmentButton setFrame:CGRectMake(segXShifted, segFrame.origin.y, segFrameWidth, segFrameHeight)];
     
-    [headerLabel setCenter:CGPointMake(headerLabel.center.x,background.frame.size.height/3)];
-    [leftLabel setCenter:CGPointMake(leftLabel.center.x, background.frame.size.height/3)];
-    [rightLabel setCenter:CGPointMake(rightLabel.center.x,background.frame.size.height/3)];
+    [headerLabel setCenter:CGPointMake(headerLabel.center.x,(background.frame.size.height/3)+5)];
+    [leftLabel setCenter:CGPointMake(leftLabel.center.x, (background.frame.size.height/3)+5)];
+    [rightLabel setCenter:CGPointMake(rightLabel.center.x,(background.frame.size.height/3)+5)];
     [segmentButton setCenter:CGPointMake(segmentButton.center.x,((background.frame.size.height/3)*2)+5)];
     
 }
