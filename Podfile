@@ -3,7 +3,7 @@
 
 use_frameworks!
 
-# link_with 'RingMail', 'RingMail-Dev'
+#link_with 'RingMail', 'RingMail-Dev'
 
 project 'ringmail.xcodeproj’
 
@@ -13,6 +13,8 @@ target 'RingMail-Dev' do
   pod 'SVWebViewController', :git => 'git@nova1.revalead.com:ringmail/svwebviewcontroller.git', :tag => '1.1'
 #  pod 'XMPPFramework'
   pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :branch => 'master'
+#  pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :tag => '3.7.0'
+  pod 'CocoaLumberjack'
   pod 'RegexKitLite'
   pod 'FMDB'
   pod 'Objective-LevelDB'
@@ -29,6 +31,6 @@ target 'RingMail-Dev' do
   pod 'UIImage-Categories', :git => 'https://github.com/nixonnixon/UIImage-Categories.git'
 #  pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x' 
   pod 'Colours'
-  pod 'SDWebImage'
+  pod 'SDWebImage', :git => 'https://github.com/rs/SDWebImage.git', :tag => '3.8.2'
 end
 
