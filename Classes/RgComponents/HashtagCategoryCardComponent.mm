@@ -45,7 +45,7 @@
                     {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @20.0},
                     {@selector(setClipsToBounds:), @YES},
                     {@selector(setBackgroundColor:), [UIColor whiteColor]},
-                    {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#222222"] CGColor]},
+                    {CKComponentViewAttribute::LayerAttribute(@selector(setBorderColor:)), (id)[[UIColor colorWithHex:@"#444444"] CGColor]},
                     {CKComponentViewAttribute::LayerAttribute(@selector(setBorderWidth:)), 1 / [UIScreen mainScreen].scale},
                 }}
             size:{.width = rectWidth}
