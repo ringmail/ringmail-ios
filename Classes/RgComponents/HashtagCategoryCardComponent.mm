@@ -86,7 +86,7 @@ CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary* data)
     return
     [
          CKInsetComponent newWithInsets:
-            {.left = 10, .right = 10, .top = 6, .bottom = INFINITY}
+            {.left = 10, .right = 10, .top = 4, .bottom = INFINITY}
             component: [
                 CKLabelComponent newWithLabelAttributes:{
                     .string = [data objectForKey:@"name"],
