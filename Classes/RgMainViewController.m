@@ -75,7 +75,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"Ring Mail"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"RingMail"
 																content:@"RgMainViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
