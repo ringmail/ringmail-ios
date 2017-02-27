@@ -106,7 +106,7 @@ CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary* data)
 {
     //Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     //[card showMessages];
-    NSLog(@"Selected: %@", [[self cardData] objectForKey:@"name"]);
+//    NSLog(@"Selected: %@", [[self cardData] objectForKey:@"name"]);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{
         @"category_id":[[self cardData] objectForKey:@"id"]
     }];

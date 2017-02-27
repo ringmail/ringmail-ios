@@ -156,6 +156,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
     addressField.returnKeyType = UIReturnKeyDone;
+    
+    categoryStack = [[NSMutableArray alloc] init];
+    [categoryStack addObject:@"0"];
 }
 
 - (void)viewDidUnload {
@@ -174,10 +177,23 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     [mainViewController removeFromParentViewController];
     [self.componentView removeFromSuperview];
-
-    path = newPath;
-
-    NSLog(@"updatePath: %@", newPath);
+    
+    if ([newPath isEqual:@"0"])
+    {
+        [categoryStack removeLastObject];
+        path = [categoryStack lastObject];
+        if ([path isEqual:@"0"])
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarViewChange" object:self userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
+    }
+    else
+    {
+        path = newPath;
+        [categoryStack addObject:newPath];
+    }
+    
+    for (id object in categoryStack) {
+        NSLog(@"categoryStack: %@", object);
+    }
 
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];

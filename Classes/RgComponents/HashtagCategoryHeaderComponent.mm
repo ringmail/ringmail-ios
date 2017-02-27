@@ -124,15 +124,15 @@ static CKComponent *lineComponent()
             size:{.height = 1 / [UIScreen mainScreen].scale}];
 }
 
-
-- (void)actionBack:(CKButtonComponent *)sender
-{
-    //Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
-    //[card showMessages];
-    NSLog(@"Selected: %@", [[self cardData] objectForKey:@"id"]);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{
-        @"category_id": @"0",
-    }];
-}
+// mrkbxt
+//- (void)actionBack:(CKButtonComponent *)sender
+//{
+//    //Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
+//    //[card showMessages];
+//    NSLog(@"Selected: %@", [[self cardData] objectForKey:@"id"]);
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{
+//        @"category_id": @"0",
+//    }];
+//}
 
 @end

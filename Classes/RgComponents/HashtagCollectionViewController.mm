@@ -28,7 +28,7 @@
 
 @synthesize waitDelegate;
 
-static NSInteger const pageSize = 10;
+static NSInteger const pageSize = 42;
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout path:(NSString*)path
 {

@@ -27,6 +27,9 @@
 #import "CardsPage.h"
 
 @interface RgHashtagDirectoryViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, CardPageLoading> {
+    @private
+    NSMutableArray* categoryStack;
+    
 }
 
 @property (nonatomic, strong) IBOutlet UITextField* addressField;
@@ -40,6 +43,5 @@
 @property (nonatomic, retain) HashtagCollectionViewController* mainViewController;
 @property (nonatomic, retain) NSString* path;
 @property (nonatomic, weak) UIView *componentView;
-
 
 @end

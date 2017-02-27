@@ -154,6 +154,11 @@ int backState = 0;
     NSDictionary *dict = notification.userInfo;
     NSString *header = [dict valueForKey:@"header"];
     
+    NSString *backStateReset = [dict valueForKey:@"backstate"];
+    
+    if ([backStateReset isEqual:@"reset"])
+        backState = 0;
+    
     if (backState && [header isEqual: @"Explore"])
         header = @"Hashtag Card";
     
@@ -227,9 +232,9 @@ int backState = 0;
 
 - (IBAction)onBackClick:(id)event {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{@"category_id": @"0",}];
-    NSNotification *resestNotif = [[NSNotification alloc] initWithName:@"resetBtnLabelsHeader" object:nil userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity"}];
-    backState = 0;
-    [self updateLabelsBtns:resestNotif];
+//    NSNotification *resetNotif = [[NSNotification alloc] initWithName:@"resetBtnLabelsHeader" object:nil userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity"}];
+//    backState = 0;
+//    [self updateLabelsBtns:resetNotif];
 }
 
 
