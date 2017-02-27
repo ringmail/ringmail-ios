@@ -96,6 +96,7 @@ int backState = 0;
                                                object:nil];
     
     [backButton setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
+
 }
 
 - (void)viewDidUnload {
@@ -145,6 +146,11 @@ int backState = 0;
     background.frame = CGRectMake(0, 0, tmpImg.size.width, tmpImg.size.height);
     background.image = tmpImg;
     [segmentButton setFrame:CGRectMake(segXShifted, segFrame.origin.y, segFrameWidth, segFrameHeight)];
+    
+    [headerLabel setCenter:CGPointMake(headerLabel.center.x,background.frame.size.height/3)];
+    [leftLabel setCenter:CGPointMake(leftLabel.center.x, background.frame.size.height/3)];
+    [rightLabel setCenter:CGPointMake(rightLabel.center.x,background.frame.size.height/3)];
+    [segmentButton setCenter:CGPointMake(segmentButton.center.x,((background.frame.size.height/3)*2)+5)];
     
 }
 
