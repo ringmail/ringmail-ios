@@ -45,7 +45,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"www-mb.ringxml.com";
+        return @"www-mf.ringxml.com";
     }
 }
 
@@ -58,7 +58,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"www-mb.ringxml.com";
+        return @"sip-mf.ringxml.com";
     }
 }
 

@@ -14,7 +14,6 @@
 #import "NYXImagesKit/NYXImagesKit.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
-#define THIS_FILE   @"RgChatManager"
 #define THIS_METHOD NSStringFromSelector(_cmd)
 
 @implementation RgChatManager

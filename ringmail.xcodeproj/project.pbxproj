@@ -523,6 +523,7 @@
 		C45CFFF81D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */; };
 		C45CFFF91D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */; };
 		C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C46997AC1BC19168007B3658 /* incall_buttons_background.png */; };
+		C46E91901E63935800607CB5 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C46E918F1E63935800607CB5 /* libstdc++.6.0.9.tbd */; };
 		C476A7071CF24DFE00CA3772 /* ringpage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7041CF24DFE00CA3772 /* ringpage@3x.png */; };
 		C476A7081CF24DFE00CA3772 /* ringpage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7051CF24DFE00CA3772 /* ringpage@2x.png */; };
 		C476A7091CF24DFE00CA3772 /* ringpage.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7061CF24DFE00CA3772 /* ringpage.png */; };
@@ -2612,6 +2613,8 @@
 		C45CFFF41D8B600A00BEF75F /* ringmail_astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_astronaut.png; path = Resources/ringmail_astronaut.png; sourceTree = "<group>"; };
 		C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_astronaut@2x.png"; path = "Resources/ringmail_astronaut@2x.png"; sourceTree = "<group>"; };
 		C46997AC1BC19168007B3658 /* incall_buttons_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incall_buttons_background.png; path = Resources/incall_buttons_background.png; sourceTree = "<group>"; };
+		C46E918D1E63930F00607CB5 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		C46E918F1E63935800607CB5 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		C476A7041CF24DFE00CA3772 /* ringpage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpage@3x.png"; path = "Resources/ringpage@3x.png"; sourceTree = "<group>"; };
 		C476A7051CF24DFE00CA3772 /* ringpage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpage@2x.png"; path = "Resources/ringpage@2x.png"; sourceTree = "<group>"; };
 		C476A7061CF24DFE00CA3772 /* ringpage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringpage.png; path = Resources/ringpage.png; sourceTree = "<group>"; };
@@ -3418,6 +3421,7 @@
 			files = (
 				4D3D66111E452AF900C2BCE3 /* ComponentKit.framework in Frameworks */,
 				4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */,
+				C46E91901E63935800607CB5 /* libstdc++.6.0.9.tbd in Frameworks */,
 				4DE0EB241D948CAA0009E015 /* libresolv.9.dylib in Frameworks */,
 				4DE0EB251D948CAA0009E015 /* libresolv.dylib in Frameworks */,
 				4DE0EB201D948C880009E015 /* libiconv.dylib in Frameworks */,
@@ -3471,8 +3475,9 @@
 				4DE0EB051D948A300009E015 /* libvo-amrwbenc.a in Frameworks */,
 				4DE0EB061D948A300009E015 /* libvpx.a in Frameworks */,
 				4DE0EB071D948A300009E015 /* libx264.a in Frameworks */,
-				C4AC2B481D3963FA003B6232 /* VideoToolbox.framework in Frameworks */,
 				C4AC2B601D3963FA003B6232 /* libNinePatch.a in Frameworks */,
+				4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */,
+				C4AC2B481D3963FA003B6232 /* VideoToolbox.framework in Frameworks */,
 				C4AC2B621D3963FA003B6232 /* AddressBook.framework in Frameworks */,
 				C4AC2B631D3963FA003B6232 /* AddressBookUI.framework in Frameworks */,
 				C4AC2B641D3963FA003B6232 /* AssetsLibrary.framework in Frameworks */,
@@ -3777,6 +3782,8 @@
 			isa = PBXGroup;
 			children = (
 				4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */,
+				C46E918F1E63935800607CB5 /* libstdc++.6.0.9.tbd */,
+				C46E918D1E63930F00607CB5 /* libstdc++.tbd */,
 				4D79D0341DAD889D002D1894 /* NSHash.framework */,
 				4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */,
 				4DE0EB221D948CAA0009E015 /* libresolv.9.dylib */,
@@ -5088,6 +5095,7 @@
 					};
 					C4AC27CA1D3963FA003B6232 = {
 						DevelopmentTeam = 3V7D3ULU9N;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -6842,7 +6850,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		511AEDDAB089CEDE7BC4DCD2 /* [CP] Copy Pods Resources */ = {
@@ -7532,6 +7540,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -7602,6 +7612,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -7638,6 +7649,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				"OTHER_CFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PROVISIONING_PROFILE = "bbefbc2b-57db-48d9-875a-4ddd85caf998";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
@@ -7653,6 +7665,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -7723,6 +7737,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -7774,6 +7789,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -7841,6 +7858,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -7875,6 +7893,7 @@
 					"$(SRCROOT)/submodules",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PROVISIONING_PROFILE = "f2f7323f-2029-430a-ba77-d90a07e04a65";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
@@ -7890,6 +7909,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -8222,6 +8243,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -8257,6 +8279,7 @@
 					"$(SRCROOT)/submodules",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PROVISIONING_PROFILE = "12046a36-97dd-4ef8-8cfe-09798b148583";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
@@ -8273,6 +8296,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -8322,6 +8347,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
@@ -8338,6 +8364,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -8384,6 +8412,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
@@ -8400,6 +8429,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -8446,6 +8477,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
@@ -8462,6 +8494,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -8510,6 +8544,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Werror=objc-method-access",
