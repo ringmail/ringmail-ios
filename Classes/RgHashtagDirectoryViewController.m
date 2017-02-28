@@ -135,7 +135,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     UIImageView *background;
     
     if (width == 320) {
-        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip5@2x.png"]];
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
     }
     else if (width == 375) {
         background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];

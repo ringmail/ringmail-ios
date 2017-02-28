@@ -33,6 +33,20 @@
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     float screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    
+    if ([[data objectForKey:@"text"] isEqual:@"blankTopInset"])
+    {
+        HashtagDirectoryHeaderCardComponent *c = [super newWithComponent:
+        [CKStackLayoutComponent newWithView:{} size:{.width=screenWidth, .height=12} style:{
+            .direction = CKStackLayoutDirectionVertical,
+        }
+        children:{}]
+        ];
+        
+        [c setCardData:data];
+         return c;
+    }
+
     UIImage* headerImg = getImageDir(&screenWidth);
     
     HashtagDirectoryHeaderCardComponent *c = [super newWithComponent:
@@ -71,6 +85,7 @@
             ]}
         }]
 	];
+    
     [c setCardData:data];
     return c;
 }

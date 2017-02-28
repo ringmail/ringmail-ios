@@ -57,6 +57,8 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     NSMutableArray *_cards = [NSMutableArray new];
     NSInteger added = 0;
     BOOL main = [self.mainPath isEqualToString:@"0"];
+    BOOL headerRemoveLock = 0;
+    
     for (NSUInteger i = 0; i < count; i++)
     {
         if ([mainCount intValue] == 0 && i == 0)
@@ -66,21 +68,18 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
                 Card *card = [[Card alloc] initWithData:@{
                     @"type": @"hashtag_directory_header",
                     @"text": @"",
-//                    @"text": @"Explore #Hashtags",
                 } header:@NO];
                 [_cards addObject:card];
                 added++;
             }
             else
             {
-                // mrkbxt remove hashtagcategoryheadercomponent header label card
-                
-//                Card *card = [[Card alloc] initWithData:@{
-////                    @"text": @"Explore #Hashtags",
-//                    @"text": @"",
-//                } header:@YES]; // mrkbxt from @YES to @NO
-//                [_cards addObject:card];
-//                added++;
+                Card *card = [[Card alloc] initWithData:@{
+                    @"type": @"hashtag_directory_header",
+                    @"text": @"",
+                    } header:@NO];
+                [_cards addObject:card];
+                added++;
             }
         }
         else
@@ -92,6 +91,12 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
                 NSMutableDictionary *cardData = [NSMutableDictionary dictionaryWithDictionary:itemData];
                 if (itemData != nil)
                 {
+                    if (([[cardData objectForKey:@"type"] isEqual: @"hashtag"]) && !headerRemoveLock)
+                    {
+                        [_cards removeObjectAtIndex:0];
+                        headerRemoveLock = 1;
+                    }
+                    
                     UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
                     cardData[@"image"] = defaultImage;
                     // Todo: translate to name
