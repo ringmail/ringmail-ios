@@ -47,8 +47,8 @@
 	}
     HashtagCategoryGroupCardComponent *c = [super newWithComponent:
 		[CKInsetComponent newWithInsets:{
-			.left = 10,
-			.right = 10,
+			.left = 8,
+			.right = 8,
 			.top = 0,
 			.bottom = 0,
 		} component:

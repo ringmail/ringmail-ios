@@ -31,13 +31,13 @@
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
 	CGFloat screenWidth = screenRect.size.width;
 	CGFloat itemWidth = screenWidth / 2;
-	CGFloat rectWidth = itemWidth - 16;
+	CGFloat rectWidth = itemWidth - 20;
 
 //    UIImage* test = [UIImage imageNamed:@"explore_hashtagdir_full1@iph6-7p@3x.jpg"];
     
     HashtagCategoryCardComponent *c = [super newWithComponent:
         [CKInsetComponent
-        newWithInsets:{.top = 0, .left = 2, .bottom = 8, .right = 6}
+        newWithInsets:{.top = 0, .left = 6, .bottom = 12, .right = 6}
         component:
             [CKStackLayoutComponent newWithView:{
                 [UIView class],{
