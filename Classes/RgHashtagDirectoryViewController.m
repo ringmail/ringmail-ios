@@ -31,6 +31,8 @@
 
 #include "linphone/linphonecore.h"
 
+#import "RgLocationManager.h"
+
 @implementation RgHashtagDirectoryViewController
 
 @synthesize addressField;
@@ -104,13 +106,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     addressField.attributedPlaceholder = placeHolderString;
     addressField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
     addressField.textColor = [UIColor colorWithHex:@"#222222"];
+    
+    [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
+    [[RgLocationManager sharedInstance] startUpdatingLocation];
+    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
-
+    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
 }
 
 - (void)viewDidLoad {
@@ -302,6 +308,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)handleSegControl {
     printf("hashtag segement controller hit\n");
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object  change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"currentLocation"])
+        [[RgLocationManager sharedInstance] stopUpdatingLocation];
 }
 
 @end

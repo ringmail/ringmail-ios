@@ -9,6 +9,7 @@
 #import "LinphoneManager.h"
 #import "RgNetwork.h"
 #import "RgContactManager.h"
+#import "RgLocationManager.h"
 
 static RgNetwork* theRgNetwork = nil;
 
@@ -303,11 +304,16 @@ static RgNetwork* theRgNetwork = nil;
     NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
     if (rgLogin != nil && rgPass != nil)
     {
+        NSString *lat = [NSString stringWithFormat:@"%f", [RgLocationManager sharedInstance].currentLocation.coordinate.latitude];
+        NSString *lon = [NSString stringWithFormat:@"%f", [RgLocationManager sharedInstance].currentLocation.coordinate.longitude];
+        
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
         parameters[@"login"] = rgLogin;
         parameters[@"password"] = rgPass;
         parameters[@"parent"] = params[@"parent"];
+        parameters[@"lat"] = lat;
+        parameters[@"lon"] = lon;
         NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/business_cat_directory", self.networkHost];
         [manager POST:postUrl parameters:parameters progress:nil success:okay failure:fail];
     }

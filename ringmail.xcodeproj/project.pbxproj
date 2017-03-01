@@ -83,6 +83,9 @@
 		4D4C6B741E53C66A00602945 /* explore_hashtag_categories_rm_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4C6B721E53C66A00602945 /* explore_hashtag_categories_rm_icon@2x.png */; };
 		4D4C6B751E53C66A00602945 /* explore_hashtag_categories_rm_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4C6B731E53C66A00602945 /* explore_hashtag_categories_rm_icon@3x.png */; };
 		4D5111521DAD8ADC00695DD5 /* IntentContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */; };
+		4D5251BF1E6645C20064F955 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5251BE1E6645C20064F955 /* CoreLocation.framework */; };
+		4D5251C41E6756EA0064F955 /* RgLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5251C31E6756EA0064F955 /* RgLocationManager.m */; };
+		4D5251C51E6756EA0064F955 /* RgLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5251C31E6756EA0064F955 /* RgLocationManager.m */; };
 		4D5A51461E41072400F5127D /* SFUIText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D5A51441E41072400F5127D /* SFUIText-Medium.ttf */; };
 		4D5A51471E41072400F5127D /* SFUIText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D5A51441E41072400F5127D /* SFUIText-Medium.ttf */; };
 		4D5A51481E41072400F5127D /* SFUIText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D5A51441E41072400F5127D /* SFUIText-Medium.ttf */; };
@@ -2177,6 +2180,9 @@
 		4D5111501DAD8AA600695DD5 /* IntentContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntentContactManager.h; sourceTree = "<group>"; };
 		4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntentContactHandler.m; sourceTree = "<group>"; };
 		4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RingMail-Dev.entitlements"; sourceTree = "<group>"; };
+		4D5251BE1E6645C20064F955 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4D5251C21E6756EA0064F955 /* RgLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgLocationManager.h; sourceTree = "<group>"; };
+		4D5251C31E6756EA0064F955 /* RgLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgLocationManager.m; sourceTree = "<group>"; };
 		4D5A51441E41072400F5127D /* SFUIText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Medium.ttf"; sourceTree = "<group>"; };
 		4D5A514A1E41109D00F5127D /* SFUIText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Bold.ttf"; sourceTree = "<group>"; };
 		4D5A514B1E41109D00F5127D /* SFUIText-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Light.ttf"; sourceTree = "<group>"; };
@@ -3419,6 +3425,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D5251BF1E6645C20064F955 /* CoreLocation.framework in Frameworks */,
 				4D3D66111E452AF900C2BCE3 /* ComponentKit.framework in Frameworks */,
 				4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */,
 				C46E91901E63935800607CB5 /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -3513,6 +3520,8 @@
 				C4D999511B96910A003CC323 /* RgManager.m */,
 				C422AD301B99F1A900D1F1CD /* RgNetwork.h */,
 				C422AD311B99F1A900D1F1CD /* RgNetwork.m */,
+				4D5251C21E6756EA0064F955 /* RgLocationManager.h */,
+				4D5251C31E6756EA0064F955 /* RgLocationManager.m */,
 				C41B95251C10E0A900253BB7 /* RgContactManager.h */,
 				C41B95261C10E0A900253BB7 /* RgContactManager.m */,
 				C42B71F21CA22AF90020A57F /* RgHashtagDirectoryViewController.h */,
@@ -3781,6 +3790,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D5251BE1E6645C20064F955 /* CoreLocation.framework */,
 				4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */,
 				C46E918F1E63935800607CB5 /* libstdc++.6.0.9.tbd */,
 				C46E918D1E63930F00607CB5 /* libstdc++.tbd */,
@@ -6967,6 +6977,7 @@
 				D35497FE15875372000081D8 /* ContactsViewController.m in Sources */,
 				D3549816158761D0000081D8 /* ContactsTableViewController.m in Sources */,
 				D35498211587716B000081D8 /* UIStateBar.m in Sources */,
+				4D5251C41E6756EA0064F955 /* RgLocationManager.m in Sources */,
 				D3A55FBC15877E5E003FD403 /* UIContactCell.m in Sources */,
 				C41276931D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */,
 				C42B72101CA22EDB0020A57F /* CardComponent.mm in Sources */,
@@ -7117,6 +7128,7 @@
 				C4AC2ACD1D3963FA003B6232 /* ContactsViewController.m in Sources */,
 				C4AC2ACE1D3963FA003B6232 /* ContactsTableViewController.m in Sources */,
 				C4AC2ACF1D3963FA003B6232 /* UIStateBar.m in Sources */,
+				4D5251C51E6756EA0064F955 /* RgLocationManager.m in Sources */,
 				C4AC2AD01D3963FA003B6232 /* UIContactCell.m in Sources */,
 				C41276941D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */,
 				C4AC2AD11D3963FA003B6232 /* CardComponent.mm in Sources */,

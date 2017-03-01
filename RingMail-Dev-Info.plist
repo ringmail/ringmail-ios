@@ -79,6 +79,8 @@
 	<string>Share photos with your friends and customize avatars</string>
 	<key>NSSiriUsageDescription</key>
 	<string>Make calls and texts your contacts</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Discover nearby hashtags</string>
 	<key>NSVoIPUsageDescription</key>
 	<string>Make audio/video calls</string>
 	<key>UIApplicationExitsOnSuspend</key>

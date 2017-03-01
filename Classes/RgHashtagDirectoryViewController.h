@@ -26,6 +26,8 @@
 #import "UIMessageButton.h"
 #import "CardsPage.h"
 
+#import <CoreLocation/CoreLocation.h>
+
 @interface RgHashtagDirectoryViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, CardPageLoading> {
     @private
     NSMutableArray* categoryStack;
