@@ -25,6 +25,9 @@
 
 @synthesize cardData;
 
+CKComponent* hashtagCatImgComponent(UIImage*, CGFloat*);
+CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary*);
+
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {

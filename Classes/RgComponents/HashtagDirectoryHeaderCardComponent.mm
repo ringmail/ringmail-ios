@@ -30,6 +30,10 @@
 
 @synthesize cardData;
 
+UIImage* getImageDir(float*);
+CKComponent* hashtagDirHeaderImgComponent(float*, UIImage*);
+
+
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     float screenWidth = [[UIScreen mainScreen] bounds].size.width;

@@ -23,10 +23,12 @@
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
-	//NSLog(@"Component Data: %@", data);
     UIImage *cardImage = [data objectForKey:@"image"];
     cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:8 interpolationQuality:kCGInterpolationHigh];
-	
+    
+    int screenSizeWidth = [UIScreen mainScreen].applicationFrame.size.width;
+    int labelWidth = screenSizeWidth - 140;
+    
     CKComponentViewConfiguration vcfg;
     if ([[data objectForKey:@"unread"] integerValue] > 0)
     {
@@ -121,7 +123,7 @@
                                                               {@selector(setBackgroundColor:), [UIColor clearColor]},
                                                               {@selector(setUserInteractionEnabled:), @NO},
                                                           }
-                                                          size:{}]
+                                                          size:{.width = labelWidth}]
                                                 ]
                                             }
                                          }]
