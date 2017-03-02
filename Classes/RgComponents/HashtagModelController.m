@@ -91,7 +91,7 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
                 NSMutableDictionary *cardData = [NSMutableDictionary dictionaryWithDictionary:itemData];
                 if (itemData != nil)
                 {
-                    if (([[cardData objectForKey:@"type"] isEqual: @"hashtag"]) && !headerRemoveLock)
+                    if (([[cardData objectForKey:@"type"] isEqual: @"hashtag_category_header"]) && !headerRemoveLock)
                     {
                         [_cards removeObjectAtIndex:0];
                         headerRemoveLock = 1;
