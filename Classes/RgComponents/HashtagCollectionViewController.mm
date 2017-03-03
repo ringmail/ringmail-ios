@@ -48,6 +48,8 @@ static NSInteger const pageSize = 42;
     // happens on background threads but +[UIImage imageNamed:] is not thread safe and needs to be called on the main
     // thread. The preloaded images are then cached on the component context for use inside components.
     NSDictionary *images = @{};
+    
+    NSString *screenWidth = [NSString stringWithFormat:@"%f", [UIScreen mainScreen].applicationFrame.size.width];
 	
     self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:0.0f];
     self.collectionView.delegate = self;
@@ -62,7 +64,7 @@ static NSInteger const pageSize = 42;
     CKArrayControllerSections sections;
     sections.insert(0);
     [_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
-	[_cardModelController fetchPageWithCount:pageSize caller:self];
+    [_cardModelController fetchPageWithCount:pageSize screenWidth:screenWidth caller:self];
 }
 
 - (void)enqueuePage:(CardsPage *)cardsPage

@@ -51,7 +51,8 @@ CKComponent* hashtagDirHeaderImgComponent(float*, UIImage*);
          return c;
     }
 
-    UIImage* headerImg = getImageDir(&screenWidth);
+//    UIImage* headerImg = getImageDir(&screenWidth);
+    NSString* hdht = data[@"header_img_ht"];
     
     HashtagDirectoryHeaderCardComponent *c = [super newWithComponent:
         [CKStackLayoutComponent newWithView:{} size:{.width=screenWidth} style:{
@@ -61,13 +62,16 @@ CKComponent* hashtagDirHeaderImgComponent(float*, UIImage*);
             {[CKInsetComponent
                  newWithInsets:{.top = 0, .bottom = 0}
                  component:
-                    [CKStackLayoutComponent newWithView:{} size:{.height = headerImg.size.height, .width=screenWidth} style:{
+                    [CKStackLayoutComponent newWithView:{} size:{.height = [hdht floatValue], .width=screenWidth} style:{
             			.direction = CKStackLayoutDirectionHorizontal,
             			.alignItems = CKStackLayoutAlignItemsStretch
             		}
             		children:{
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-                        {hashtagDirHeaderImgComponent(&screenWidth,headerImg)},
+                        {[CKNetworkImageComponent newWithURL:data[@"header_img_url"]
+                            imageDownloader:context.imageDownloader
+                            scenePath:nil size:{ screenWidth, [hdht floatValue] } options:{} attributes:{}]},
+//                        {hashtagDirHeaderImgComponent(&screenWidth,headerImg)},
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
             		}]
             ]},

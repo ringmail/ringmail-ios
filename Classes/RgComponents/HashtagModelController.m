@@ -29,11 +29,12 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 }
 
 
-- (void)fetchPageWithCount:(NSInteger)count caller:(HashtagCollectionViewController*)caller
-{    
+- (void)fetchPageWithCount:(NSInteger)count screenWidth:(NSString*)screenWidth caller:(HashtagCollectionViewController*)caller
+{
     [caller.waitDelegate showWaiting];
     [[RgNetwork instance] businessCategoryDirectory:@{
          @"parent": mainPath,
+         @"screenWidth": screenWidth,
          } success:^(NSURLSessionTask *operation, id responseObject) {
              [caller.waitDelegate hideWaiting];
              NSDictionary* res = responseObject;
@@ -56,31 +57,35 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     NSAssert(count >= 1, @"Count should be a positive integer");
     NSMutableArray *_cards = [NSMutableArray new];
     NSInteger added = 0;
-    BOOL main = [self.mainPath isEqualToString:@"0"];
     BOOL headerRemoveLock = 0;
     
     for (NSUInteger i = 0; i < count; i++)
     {
         if ([mainCount intValue] == 0 && i == 0)
         {
-            if (main)
+            NSDictionary* tempGroup = mainList[0];
+            NSArray* firstGroupItems = tempGroup[@"group"];
+            NSDictionary* headerCardData = firstGroupItems[0];
+            Card *card;
+            
+            if (headerCardData)
             {
-                Card *card = [[Card alloc] initWithData:@{
+                card = [[Card alloc] initWithData:@{
                     @"type": @"hashtag_directory_header",
                     @"text": @"",
-                } header:@NO];
-                [_cards addObject:card];
-                added++;
+                    @"header_img_url": headerCardData[@"header_img_url"],
+                    @"header_img_ht": headerCardData[@"header_img_ht"],
+                    } header:@NO];
             }
             else
             {
-                Card *card = [[Card alloc] initWithData:@{
+                card = [[Card alloc] initWithData:@{
                     @"type": @"hashtag_directory_header",
                     @"text": @"",
                     } header:@NO];
-                [_cards addObject:card];
-                added++;
             }
+            [_cards addObject:card];
+            added++;
         }
         else
         {

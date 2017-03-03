@@ -314,6 +314,7 @@ static RgNetwork* theRgNetwork = nil;
         parameters[@"parent"] = params[@"parent"];
         parameters[@"lat"] = lat;
         parameters[@"lon"] = lon;
+        parameters[@"width"] = params[@"screenWidth"];
         NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/business_cat_directory", self.networkHost];
         [manager POST:postUrl parameters:parameters progress:nil success:okay failure:fail];
     }
