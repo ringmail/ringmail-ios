@@ -108,7 +108,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
     
-    FavoriteCollectionViewController *mainController = [[FavoriteCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
+    MainCollectionViewController *mainController = [[MainCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
     
     [[mainController collectionView] setBounces:YES];
     [[mainController collectionView] setAlwaysBounceVertical:YES];

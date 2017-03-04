@@ -6,6 +6,7 @@
 
 @interface SendComponent : CKCompositeComponent
 
++ (id)initialState;
 + (instancetype)newWithSend:(Send *)call context:(SendContext *)context;
 
 @end

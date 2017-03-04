@@ -27,7 +27,7 @@ target 'RingMail-Dev' do
   pod 'OpenCV'
   pod 'CRMediaPickerController'
   pod 'ObjectiveSugar'
-  pod 'ComponentKit'
+  pod 'ComponentKit', :git => 'https://github.com/facebook/componentkit.git', :tag => '0.15.1'
   pod 'UIImage-Categories', :git => 'https://github.com/nixonnixon/UIImage-Categories.git'
 #  pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x' 
   pod 'Colours'

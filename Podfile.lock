@@ -59,7 +59,7 @@ DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - CocoaLumberjack
   - Colours
-  - ComponentKit
+  - ComponentKit (from `https://github.com/facebook/componentkit.git`, tag `0.15.1`)
   - CRMediaPickerController
   - DXTableViewModel (~> 0.1.0)
   - FMDB
@@ -77,6 +77,9 @@ DEPENDENCIES:
   - XMPPFramework (from `https://github.com/robbiehanson/XMPPFramework.git`, branch `master`)
 
 EXTERNAL SOURCES:
+  ComponentKit:
+    :git: https://github.com/facebook/componentkit.git
+    :tag: 0.15.1
   JSQMessagesViewController:
     :branch: ringmail
     :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
@@ -93,6 +96,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 CHECKOUT OPTIONS:
+  ComponentKit:
+    :git: https://github.com/facebook/componentkit.git
+    :tag: 0.15.1
   JSQMessagesViewController:
     :commit: 08356e2f7edabf995840291f3b94844c94f376ba
     :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
@@ -106,7 +112,7 @@ CHECKOUT OPTIONS:
     :commit: 7d98f1c9c8a3217584fd797771dae199cb8eeb65
     :git: https://github.com/nixonnixon/UIImage-Categories.git
   XMPPFramework:
-    :commit: 2bf459c08706320f4b1d31c76514ad6032632af5
+    :commit: b8300e8d77ddc154e7ed9c7e08c5c2af90455c28
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 SPEC CHECKSUMS:
@@ -135,6 +141,6 @@ SPEC CHECKSUMS:
   UIImage-Categories: b9d2ff50c2250ea007f150c2427ff230b5a4789b
   XMPPFramework: 544da7ab3faf7005de303708630a4e9741efb907
 
-PODFILE CHECKSUM: 2e34e327762247fbf26dab2ecf2299d41e713a8d
+PODFILE CHECKSUM: 08fedddfe1962f7caac0ac6589b7d4a7764ea001
 
 COCOAPODS: 1.2.0

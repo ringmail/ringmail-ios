@@ -4,7 +4,7 @@
 #import <UIKit/UIKit.h>
 
 #import "UICompositeViewController.h"
-#import "FavoriteCollectionViewController.h"
+#import "MainCollectionViewController.h"
 
 #import "UICallButton.h"
 #import "UIMessageButton.h"
@@ -14,7 +14,7 @@
 }
 
 @property (nonatomic, strong) IBOutlet UIView* mainView;
-@property (nonatomic, retain) FavoriteCollectionViewController* mainViewController;
+@property (nonatomic, retain) MainCollectionViewController* mainViewController;
 @property (nonatomic, assign) BOOL needsRefresh;
 @property (nonatomic, assign) BOOL visible;
 

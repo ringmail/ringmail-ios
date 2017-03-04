@@ -4,17 +4,40 @@
 #import "Send.h"
 #import "SendContext.h"
 #import "SendComponent.h"
+#import "SendComponentController.h"
 #import "SendViewController.h"
+#import "TextInputComponent.h"
+#import "SendToInputComponent.h"
+#import "FavoritesBarComponent.h"
 
 #import "UIColor+Hex.h"
 
 @implementation SendComponent
+
++ (id)initialState
+{
+	return [NSMutableDictionary dictionaryWithDictionary:@{
+		@"enable_send": @NO,
+	}];
+}
 
 + (instancetype)newWithSend:(Send *)send context:(SendContext *)context
 {
 	NSLog(@"Send Data: %@", [send data]);
 	CKComponentScope scope(self);
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+	
+	NSMutableDictionary* currentState = scope.state();
+	NSString *sendButtonImageName;
+	if ([currentState[@"enable_send"] boolValue])
+	{
+		sendButtonImageName = @"arrow_pressed.png";
+	}
+	else
+	{
+		sendButtonImageName = @"arrow_normal.png";
+	}
+	NSLog(@"State: %@", currentState);
     SendComponent *c = [super newWithView:{} component:
 		[CKInsetComponent newWithInsets:{.top = 12, .bottom = 0, .left = 0, .right = 0} component:
 			[CKStackLayoutComponent newWithView:{} size:{} style:{
@@ -36,18 +59,28 @@
 					   .alignItems = CKStackLayoutAlignItemsStretch
 					}
 					children:{
-						{[CKInsetComponent newWithInsets:{.top = 10, .bottom = 10, .left = 40, .right = 10} component:
-							[CKLabelComponent newWithLabelAttributes:{
-								.string = @"To: mfrager@gmail.com",
-								.font = [UIFont systemFontOfSize:16],
-								.alignment = NSTextAlignmentLeft,
-							}
-							viewAttributes:{
-								{@selector(setBackgroundColor:), [UIColor clearColor]},
-								{@selector(setUserInteractionEnabled:), @NO},
-							}
-							size:{.height = 20}]
-						]},
+						{[CKStackLayoutComponent newWithView:{} size:{.height = 40} style:{
+						   .direction = CKStackLayoutDirectionHorizontal,
+						   .alignItems = CKStackLayoutAlignItemsStart
+						}
+						children:{
+							{[CKImageComponent newWithImage:[UIImage imageNamed:@"plus_icon_normal.png"] size:{.height = 40, .width = 40}]},
+							{[CKInsetComponent newWithInsets:{.top = 10, .bottom = 10, .left = 0, .right = 0} component:
+								[CKLabelComponent newWithLabelAttributes:{
+									.string = @"To:",
+									.font = [UIFont systemFontOfSize:16],
+									.alignment = NSTextAlignmentLeft,
+								}
+								viewAttributes:{
+									{@selector(setBackgroundColor:), [UIColor clearColor]},
+									{@selector(setUserInteractionEnabled:), @NO},
+								}
+								size:{.height = 20, .width = 30}]
+							]},
+							{[CKInsetComponent newWithInsets:{.top = 10, .bottom = 10, .left = 0, .right = 0} component:
+								[SendToInputComponent newWithTag:[NSNumber numberWithInt:0] size:{.height = 20, .width = width - 100}]
+							]}
+						}]},
 						{[CKStackLayoutComponent newWithView:{
 							[UIView class],
 							{
@@ -55,23 +88,18 @@
 								{@selector(setClipsToBounds:), @YES}
 							}
 						} size:{.height = 110} style:{
-						   .direction = CKStackLayoutDirectionVertical,
-						   .alignItems = CKStackLayoutAlignItemsStretch
+						   .direction = CKStackLayoutDirectionHorizontal,
+						   .alignItems = CKStackLayoutAlignItemsStart
 						}
 						children:{
-							{[CKInsetComponent newWithInsets:{.top = 10, .bottom = 10, .left = 40, .right = 10} component:
-								[CKLabelComponent newWithLabelAttributes:{
-									.string = @"Message",
-									.font = [UIFont systemFontOfSize:16],
-									.alignment = NSTextAlignmentLeft,
-									.color = [UIColor colorWithHex:@"#686868"]
-								}
-								viewAttributes:{
-									{@selector(setBackgroundColor:), [UIColor clearColor]},
-									{@selector(setUserInteractionEnabled:), @NO},
-								}
-								size:{}]
-							]}
+							{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 35, .right = 10} component:
+								[TextInputComponent newWithTag:[NSNumber numberWithInt:1] size:{.height = 95, .width = width - 105}]
+							]},
+							{[CKInsetComponent newWithInsets:{.top = 70, .bottom = 0, .left = 0, .right = 10} component:
+								[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+									{UIControlStateNormal,[UIImage imageNamed:sendButtonImageName]},
+								} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionSend:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}]
+							]},
 						}]}
 					}]
 				]},
@@ -87,11 +115,11 @@
 					   .alignItems = CKStackLayoutAlignItemsStretch
 					}
 					children:{
-						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_button1_moments.png"]]},
+						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button1_camera.png"]]},
 						{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button2_camera.png"]]},
+						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button2_video.png"]]},
 						{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button3_video.png"]]},
+						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button3_moments.png"]]},
 					}]
 				]},
 				// Favorites
@@ -130,12 +158,14 @@
 							{@selector(setBackgroundColor:), [UIColor colorWithHex:@"#D1D1D1"]},
 						}
 					} size:{.height = 1 / [UIScreen mainScreen].scale, .width = width}]},
-					{[CKComponent newWithView:{
+					{[FavoritesBarComponent newWithSize:{.height = 76, .width = width}]},
+					
+					/*{[CKComponent newWithView:{
 						[UIView class],
 						{
 							{@selector(setBackgroundColor:), [UIColor colorWithHex:@"#CCD8E3"]},
 						}
-					} size:{.height = 76, .width = width}]},
+					} size:{.height = 76, .width = width}]},*/
 				}]},
 				// Media library
 				{

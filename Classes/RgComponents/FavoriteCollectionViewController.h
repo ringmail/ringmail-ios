@@ -10,11 +10,8 @@
 #define FavoriteCollectionViewController_h
 
 #import <UIKit/UIKit.h>
-#import "CardModelController.h"
 
 @interface FavoriteCollectionViewController : UICollectionViewController
-
-- (void)updateCollection;
 
 @end
 
