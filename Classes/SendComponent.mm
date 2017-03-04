@@ -159,13 +159,6 @@
 						}
 					} size:{.height = 1 / [UIScreen mainScreen].scale, .width = width}]},
 					{[FavoritesBarComponent newWithSize:{.height = 76, .width = width}]},
-					
-					/*{[CKComponent newWithView:{
-						[UIView class],
-						{
-							{@selector(setBackgroundColor:), [UIColor colorWithHex:@"#CCD8E3"]},
-						}
-					} size:{.height = 76, .width = width}]},*/
 				}]},
 				// Media library
 				{

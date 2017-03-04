@@ -9,6 +9,7 @@
 #import <ComponentKit/CKComponentScope.h>
 #import "FavoritesBarComponent.h"
 #import "FavoriteCollectionViewController.h"
+#import "UIColor+Hex.h"
 
 #define UIViewParentController(__view) ({ \
     UIResponder *__responder = __view; \
@@ -16,6 +17,7 @@
         __responder = [__responder nextResponder]; \
     (UIViewController *)__responder; \
 })
+
 
 @interface FavoritesBarComponent ()
 
@@ -48,20 +50,36 @@
 + (FavoritesBarView *)newStatefulView:(id)context
 {
 	FavoritesBarView* fv = [[FavoritesBarView alloc] init];
+	fv.componentView = nil;
 	return fv;
 }
 
 + (void)configureStatefulView:(FavoritesBarView *)sv forComponent:(FavoritesBarComponent *)component
 {
+	NSLog(@"configureStatefulView");
+	if (sv.componentView != nil)
+	{
+		[sv.componentView removeFromSuperview];
+	}
+	[sv setBackgroundColor:[UIColor colorWithHex:@"#CCD8E3"]];
 	UIViewController* parent = UIViewParentController(sv);
 	FavoriteCollectionViewController* favController = component.favoritesCollection;
 	CGRect r = sv.frame;
-    r.origin.y = 0;
-    [favController.view setFrame:r];
-    [sv addSubview:favController.view];
-    [parent addChildViewController:favController];
-    [favController didMoveToParentViewController:parent];
-	//[component.favoritesCollection setCollectionView:sv];
+	r.origin.y = 0;
+	[favController.view setFrame:r];
+	[sv addSubview:favController.view];
+	[parent addChildViewController:favController];
+	[favController didMoveToParentViewController:parent];
+	sv.componentView = favController.view;
+}
+
+- (void)willRemount
+{
+	[super willRemount];
+	NSLog(@"willRemount");
+/*	FavoritesBarComponent* fb = (FavoritesBarComponent*)self.component;
+	FavoriteCollectionViewController* favController = fb.favoritesCollection;
+	[favController.view removeFromSuperview];*/
 }
 
 @end

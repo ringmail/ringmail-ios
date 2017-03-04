@@ -12,29 +12,31 @@
 static CKComponent *favoriteComponent(Favorite *fav, FavoriteContext *context)
 {
     NSString* name = [fav.data objectForKey:@"name"];
-	return [CKStackLayoutComponent newWithView:{} size:{ .height = 76, .width = 60} style:{
+	return [CKStackLayoutComponent newWithView:{} size:{ .height = 76, .width = 80} style:{
 		.direction = CKStackLayoutDirectionVertical,
 		.alignItems = CKStackLayoutAlignItemsStart
 	}
 	children:{
-		{[CKInsetComponent newWithInsets:{.top = 5, .left = INFINITY, .bottom = 5, .right = INFINITY} component:
+		{[CKInsetComponent newWithInsets:{.top = 4, .left = INFINITY, .bottom = 0, .right = INFINITY} component:
 			[CKComponent newWithView:{
 				[UIView class],
 				{
-					{@selector(setBackgroundColor:), [UIColor blueColor]},
+					{@selector(setBackgroundColor:), [UIColor grayColor]},
+					{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @24.0}
 				}
-			} size:{.height = 36, .width = 36}]
+			} size:{.height = 48, .width = 48}]
 		]},
-		{[CKInsetComponent newWithInsets:{.top = 8, .left = 5, .bottom = 12, .right = 5} component:
+		{[CKInsetComponent newWithInsets:{.top = 4, .left = INFINITY, .bottom = 0, .right = INFINITY} component:
 			[CKLabelComponent newWithLabelAttributes:{
 				.string = name,
-				.font = [UIFont systemFontOfSize:10],
+				.font = [UIFont systemFontOfSize:12],
+				.alignment = NSTextAlignmentCenter,
 			}
 			viewAttributes:{
 				{@selector(setBackgroundColor:), [UIColor clearColor]},
 				{@selector(setUserInteractionEnabled:), @NO},
 			}
-			size:{.height = 10, .width = 50}]
+			size:{.height = 16, .width = 70}]
 		]}
 	}];
 }

@@ -14,7 +14,13 @@
 @end
 
 @interface FavoritesBarView : UIView;
+
+@property (nonatomic, weak) UIView *componentView;
+
 @end
 
 @interface FavoritesBarComponentController : CKStatefulViewComponentController
+
+- (void)willRemount;
+
 @end

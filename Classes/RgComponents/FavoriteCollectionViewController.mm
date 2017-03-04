@@ -18,7 +18,7 @@
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
 }
 
-static NSInteger const pageSize = 10;
+static NSInteger const pageSize = 50;
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
 {
@@ -38,21 +38,23 @@ static NSInteger const pageSize = 10;
     // thread. The preloaded images are then cached on the component context for use inside components.
 	
 	//NSMutableDictionary *images = [NSMutableDictionary dictionaryWithDictionary:@{}];
-    
-    self.collectionView.backgroundColor = [UIColor clearColor];
-    self.collectionView.delegate = self;
-    
-    FavoriteContext *context = [[FavoriteContext alloc] init];
-    _dataSource = [[CKCollectionViewDataSource alloc] initWithCollectionView:self.collectionView
-                                                 supplementaryViewDataSource:nil
-                                                           componentProvider:[self class]
-                                                                     context:context
-                                                   cellConfigurationFunction:nil];
-    // Insert the initial section
-    CKArrayControllerSections sections;
-    sections.insert(0);
-    [_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
-    [self _enqueuePage:[_modelController fetchNewFavoritesPageWithCount:pageSize]];
+	
+	dispatch_async(dispatch_get_main_queue(), ^{
+		self.collectionView.backgroundColor = [UIColor clearColor];
+		self.collectionView.delegate = self;
+		
+		FavoriteContext *context = [[FavoriteContext alloc] init];
+		_dataSource = [[CKCollectionViewDataSource alloc] initWithCollectionView:self.collectionView
+													 supplementaryViewDataSource:nil
+															   componentProvider:[self class]
+																		 context:context
+													   cellConfigurationFunction:nil];
+		// Insert the initial section
+		CKArrayControllerSections sections;
+		sections.insert(0);
+		[_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
+		[self _enqueuePage:[_modelController fetchNewFavoritesPageWithCount:pageSize]];
+	});
 }
 
 - (void)_enqueuePage:(FavoritesPage *)favsPage
