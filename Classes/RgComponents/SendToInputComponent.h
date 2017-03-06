@@ -17,4 +17,9 @@
 @end
 
 @interface SendToInputComponentController : CKStatefulViewComponentController
+
+- (void)didMount;
+- (void)didUnmount;
+- (void)resetText:(NSNotification*)notif;
+
 @end

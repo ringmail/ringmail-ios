@@ -8,10 +8,12 @@
 
 #import <ComponentKit/CKComponentScope.h>
 #import "TextInputComponent.h"
+#import "RgManager.h"
 
 @interface TextInputComponent ()
 
 @property (nonatomic, strong) NSNumber* tag;
+@property (nonatomic, weak) TextInputView* textInputView;
 
 @end
 
@@ -24,6 +26,7 @@
 	if (c)
 	{
 		c->_tag = inputTag;
+		c->_textInputView = nil;
 	}
 	return c;
 }
@@ -43,6 +46,24 @@
 	statefulView.font = [UIFont systemFontOfSize:16];
 	statefulView.textContainerInset = UIEdgeInsetsZero;
 	[statefulView setTag:[component.tag integerValue]];
+	component.textInputView = statefulView;
+}
+
+- (void)didMount {
+	[super didMount];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetText:) name:kRgSendComponentReset object:nil];
+}
+
+- (void)didUnmount {
+	[super didUnmount];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
+}
+
+- (void)resetText:(NSNotification*)notif
+{
+	TextInputComponent* cp = (TextInputComponent*)self.component;
+	TextInputView* tv = cp.textInputView;
+	[tv setText:@""];
 }
 
 @end

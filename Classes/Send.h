@@ -6,4 +6,6 @@
 
 - (instancetype)initWithData:(NSDictionary *)data;
 
+- (void)sendMessage:(NSDictionary *)msgdata;
+
 @end

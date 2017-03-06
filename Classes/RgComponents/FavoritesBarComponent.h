@@ -9,18 +9,18 @@
 #import <ComponentKit/CKStatefulViewComponent.h>
 #import <ComponentKit/CKStatefulViewComponentController.h>
 
+#import "FavoriteCollectionViewController.h"
+
 @interface FavoritesBarComponent : CKStatefulViewComponent
 + (instancetype)newWithSize:(const CKComponentSize &)size;
 @end
 
 @interface FavoritesBarView : UIView;
 
-@property (nonatomic, weak) UIView *componentView;
+@property (nonatomic, weak) FavoriteCollectionViewController *componentViewController;
 
 @end
 
 @interface FavoritesBarComponentController : CKStatefulViewComponentController
-
-- (void)willRemount;
 
 @end

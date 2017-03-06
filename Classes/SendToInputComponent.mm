@@ -8,10 +8,12 @@
 
 #import <ComponentKit/CKComponentScope.h>
 #import "SendToInputComponent.h"
+#import "RgManager.h"
 
 @interface SendToInputComponent ()
 
 @property (nonatomic, strong) NSNumber* tag;
+@property (nonatomic, weak) SendToInputView* sendToView;
 
 @end
 
@@ -24,6 +26,7 @@
 	if (c)
 	{
 		c->_tag = inputTag;
+		c->_sendToView = nil;
 	}
 	return c;
 }
@@ -45,6 +48,24 @@
 	[statefulView setAutocorrectionType:UITextAutocorrectionTypeNo];
 	[statefulView setKeyboardType:UIKeyboardTypeEmailAddress];
 	[statefulView setTag:[component.tag integerValue]];
+	component.sendToView = statefulView;
+}
+
+- (void)didMount {
+	[super didMount];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetText:) name:kRgSendComponentReset object:nil];
+}
+
+- (void)didUnmount {
+	[super didUnmount];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
+}
+
+- (void)resetText:(NSNotification*)notif
+{
+	SendToInputComponent* cp = (SendToInputComponent*)self.component;
+	SendToInputView* tv = cp.sendToView;
+	[tv setText:@""];
 }
 
 @end

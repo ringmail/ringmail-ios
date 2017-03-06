@@ -997,7 +997,7 @@
                 @"table": @"session",
                 @"insert": @{
                     @"session_tag": from,
-					@"session_to": [NSString stringWithString:to],
+					@"session_to": to,
                     @"contact_id": (contact != nil) ? contact : [NSNull null],
                     @"session_md5": [[NSString stringWithFormat:@"%@:%@", from, to] md5HexDigest],
                     @"unread": @0,

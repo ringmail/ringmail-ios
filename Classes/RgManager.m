@@ -29,6 +29,9 @@ NSString *const kRgToggleNumberPad = @"kRgToggleNumberPad";
 NSString *const kRgCallRefresh = @"kRgCallRefresh";
 NSString *const kRgContactRefresh = @"kRgContactRefresh";
 
+// New skin
+NSString *const kRgSendComponentReset = @"kRgSendComponentReset";
+
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
 
@@ -45,7 +48,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"www-mb.ringxml.com";
+        return @"www-mf.ringxml.com";
     }
 }
 
@@ -58,7 +61,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"sip-mb.ringxml.com";
+        return @"sip-mf.ringxml.com";
     }
 }
 

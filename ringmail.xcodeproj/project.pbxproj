@@ -569,6 +569,10 @@
 		C484AC581C991DF700AE2E5D /* bubble_ringmail_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C484AC561C991DF700AE2E5D /* bubble_ringmail_blue@2x.png */; };
 		C48A1F031CDFFADA00E095F8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */; };
 		C48A1F061CE127C600E095F8 /* ringmail_wizard_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A1F051CE127C600E095F8 /* ringmail_wizard_background.png */; };
+		C48AE3D41E6DCF5100F3C9B1 /* SendCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */; };
+		C48AE3D51E6DCF5100F3C9B1 /* SendCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */; };
+		C48AE3D81E6DCF6300F3C9B1 /* SendCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48AE3D71E6DCF6300F3C9B1 /* SendCardComponentController.mm */; };
+		C48AE3D91E6DCF6300F3C9B1 /* SendCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48AE3D71E6DCF6300F3C9B1 /* SendCardComponentController.mm */; };
 		C48D3C041D0276FE00FAC3A6 /* call_in.caf in Resources */ = {isa = PBXBuildFile; fileRef = C48D3BF41D0276FE00FAC3A6 /* call_in.caf */; };
 		C48D3C051D0276FE00FAC3A6 /* chat_in_alert.caf in Resources */ = {isa = PBXBuildFile; fileRef = C48D3BF51D0276FE00FAC3A6 /* chat_in_alert.caf */; };
 		C48D3C061D0276FE00FAC3A6 /* chat_in_view.caf in Resources */ = {isa = PBXBuildFile; fileRef = C48D3BF61D0276FE00FAC3A6 /* chat_in_view.caf */; };
@@ -2695,6 +2699,10 @@
 		C484AC561C991DF700AE2E5D /* bubble_ringmail_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble_ringmail_blue@2x.png"; path = "Resources/bubble_ringmail_blue@2x.png"; sourceTree = "<group>"; };
 		C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		C48A1F051CE127C600E095F8 /* ringmail_wizard_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_wizard_background.png; path = Resources/ringmail_wizard_background.png; sourceTree = "<group>"; };
+		C48AE3CA1E6DCF4500F3C9B1 /* SendCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendCardComponent.h; path = RgComponents/SendCardComponent.h; sourceTree = "<group>"; };
+		C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SendCardComponent.mm; sourceTree = "<group>"; };
+		C48AE3D61E6DCF5A00F3C9B1 /* SendCardComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendCardComponentController.h; path = RgComponents/SendCardComponentController.h; sourceTree = "<group>"; };
+		C48AE3D71E6DCF6300F3C9B1 /* SendCardComponentController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SendCardComponentController.mm; sourceTree = "<group>"; };
 		C48D3BF41D0276FE00FAC3A6 /* call_in.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = call_in.caf; path = Resources/call_in.caf; sourceTree = "<group>"; };
 		C48D3BF51D0276FE00FAC3A6 /* chat_in_alert.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat_in_alert.caf; path = Resources/chat_in_alert.caf; sourceTree = "<group>"; };
 		C48D3BF61D0276FE00FAC3A6 /* chat_in_view.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat_in_view.caf; path = Resources/chat_in_view.caf; sourceTree = "<group>"; };
@@ -4150,6 +4158,10 @@
 				C4A853E11E66115C00FEAFB0 /* SendComponent.mm */,
 				C470BF951E68DD55009968E2 /* SendComponentController.h */,
 				C470BF961E68DD69009968E2 /* SendComponentController.mm */,
+				C48AE3CA1E6DCF4500F3C9B1 /* SendCardComponent.h */,
+				C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */,
+				C48AE3D61E6DCF5A00F3C9B1 /* SendCardComponentController.h */,
+				C48AE3D71E6DCF6300F3C9B1 /* SendCardComponentController.mm */,
 				C4A853CC1E660D7800FEAFB0 /* SendViewController.h */,
 				C4A853D51E660D9000FEAFB0 /* SendViewController.mm */,
 				C470BF6E1E68C532009968E2 /* SendToInputComponent.h */,
@@ -7138,6 +7150,7 @@
 				C42B72111CA22EDB0020A57F /* CardContext.m in Sources */,
 				D32460E6159D9AAD00BA7F3A /* UITransparentView.m in Sources */,
 				D32B9DFC15A2F131000B6DEC /* FastAddressBook.m in Sources */,
+				C48AE3D41E6DCF5100F3C9B1 /* SendCardComponent.mm in Sources */,
 				D350F20E15A43BB100149E54 /* WizardViewController.m in Sources */,
 				D3F795D615A582810077328B /* ChatRoomViewController.m in Sources */,
 				C4B9B9D61BB9BEDF00677220 /* RgWebViewDelegate.m in Sources */,
@@ -7148,6 +7161,7 @@
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,
 				C44F5E091C31E341008E4F38 /* NoteSQL.m in Sources */,
 				C41EF3121B8BCFD40085E75B /* RgMainViewController.m in Sources */,
+				C48AE3D81E6DCF6300F3C9B1 /* SendCardComponentController.mm in Sources */,
 				C45CFFEB1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				C4593A551E6A3EBF001C3BDD /* FavoriteContext.m in Sources */,
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
@@ -7300,6 +7314,7 @@
 				C4AC2AF61D3963FA003B6232 /* UITransparentView.m in Sources */,
 				C4AC2AF71D3963FA003B6232 /* FastAddressBook.m in Sources */,
 				C4AC2AF91D3963FA003B6232 /* WizardViewController.m in Sources */,
+				C48AE3D51E6DCF5100F3C9B1 /* SendCardComponent.mm in Sources */,
 				C4AC2AFA1D3963FA003B6232 /* ChatRoomViewController.m in Sources */,
 				C4AC2AFC1D3963FA003B6232 /* RgWebViewDelegate.m in Sources */,
 				C4AC2AFD1D3963FA003B6232 /* RgNetwork.m in Sources */,
@@ -7310,6 +7325,7 @@
 				C4AC2B021D3963FA003B6232 /* NoteSQL.m in Sources */,
 				C4AC2B031D3963FA003B6232 /* RgMainViewController.m in Sources */,
 				C4AC2B041D3963FA003B6232 /* ContactDetailsTableViewController.m in Sources */,
+				C48AE3D91E6DCF6300F3C9B1 /* SendCardComponentController.mm in Sources */,
 				C45CFFEC1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				C4593A561E6A3EBF001C3BDD /* FavoriteContext.m in Sources */,
 				C4AC2B051D3963FA003B6232 /* HashtagModelController.m in Sources */,

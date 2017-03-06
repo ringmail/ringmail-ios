@@ -11,7 +11,17 @@
 
 #import <ComponentKit/ComponentKit.h>
 
-@interface SendComponentController : CKComponentController
+@interface SendCardComponentController : CKComponentController
+
+@property NSMutableDictionary *state;
+
+- (void)didMount;
+- (void)didUnmount;
+
+- (void)textFieldDidChange:(NSNotification *)notif;
+- (void)resetSend:(NSNotification *)notif;
+
+- (void)actionSend:(CKButtonComponent *)sender;
 
 @end
 
