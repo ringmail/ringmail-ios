@@ -111,7 +111,7 @@
                                             children:{
                                               {
                                                  [CKInsetComponent
-                                                     newWithInsets:{.left = 0, .right = 10, .top = 4, .bottom = 0}
+                                                     newWithInsets:{.left = 0, .right = 10, .top = 2, .bottom = 0}
                                                      component:
                                                           [CKLabelComponent
                                                           newWithLabelAttributes:{

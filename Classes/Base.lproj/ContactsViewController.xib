@@ -7,17 +7,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeueLTStd-Cn.otf">
-            <string>HelveticaNeueLTStd-Cn</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactsViewController">
             <connections>
-                <outlet property="searchButton" destination="u0d-36-47K" id="Bco-EX-3nl"/>
-                <outlet property="searchField" destination="hVk-qC-eOy" id="a9W-tS-EOU"/>
-                <outlet property="toolBar" destination="3" id="n95-dF-EoN"/>
                 <outlet property="view" destination="2" id="16"/>
             </connections>
         </placeholder>
@@ -25,67 +17,12 @@
         <view contentMode="scaleToFill" id="2">
             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3" userLabel="toolBar" customClass="RgSearchBackgroundView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hashtag_rocket_icon_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="jKy-6q-slX">
-                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="50" id="wSu-LU-v70"/>
-                            </constraints>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0d-36-47K" userLabel="searchButton">
-                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <connections>
-                                <action selector="onSearch:" destination="-1" eventType="touchUpInside" id="xjH-3v-zoE"/>
-                            </connections>
-                        </button>
-                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="hVk-qC-eOy" userLabel="searchField">
-                            <rect key="frame" x="56" y="12" width="252" height="26"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="tintColor" red="0.20000000000000001" green="0.21176470589999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <accessibility key="accessibilityConfiguration" label="Enter a address"/>
-                            <color key="textColor" red="0.20000000000000001" green="0.21176470589999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
-                            <connections>
-                                <action selector="onSearchChange:" destination="-1" eventType="editingChanged" id="mdt-5h-8qY"/>
-                                <outlet property="delegate" destination="-1" id="OxV-tC-GAU"/>
-                            </connections>
-                        </textField>
-                    </subviews>
-                    <color key="backgroundColor" red="0.88627450980392153" green="0.89411764705882346" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="u0d-36-47K" firstAttribute="bottom" secondItem="jKy-6q-slX" secondAttribute="bottom" id="88A-pP-Sf9"/>
-                        <constraint firstItem="jKy-6q-slX" firstAttribute="top" secondItem="3" secondAttribute="top" id="AqZ-pR-fcv"/>
-                        <constraint firstAttribute="height" constant="50" id="Cjn-oz-ra2"/>
-                        <constraint firstAttribute="bottom" secondItem="jKy-6q-slX" secondAttribute="bottom" id="DC4-JW-vDO"/>
-                        <constraint firstItem="u0d-36-47K" firstAttribute="trailing" secondItem="jKy-6q-slX" secondAttribute="trailing" id="JUa-oS-kVv"/>
-                        <constraint firstItem="jKy-6q-slX" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="dCu-Jf-kol"/>
-                        <constraint firstItem="u0d-36-47K" firstAttribute="top" secondItem="jKy-6q-slX" secondAttribute="top" id="eRl-3a-jHc"/>
-                        <constraint firstItem="hVk-qC-eOy" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="eaf-JW-AZF"/>
-                        <constraint firstItem="hVk-qC-eOy" firstAttribute="leading" secondItem="jKy-6q-slX" secondAttribute="trailing" constant="6" id="iAF-yh-FR1"/>
-                        <constraint firstItem="jKy-6q-slX" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="oYm-js-5mk"/>
-                        <constraint firstItem="u0d-36-47K" firstAttribute="leading" secondItem="jKy-6q-slX" secondAttribute="leading" id="ptp-On-Vye"/>
-                        <constraint firstAttribute="trailing" secondItem="hVk-qC-eOy" secondAttribute="trailing" constant="12" id="rvp-so-3od"/>
-                    </constraints>
-                </view>
-            </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" id="8Fw-Oj-fuW"/>
-                <constraint firstItem="3" firstAttribute="top" secondItem="2" secondAttribute="top" id="Euv-1n-Ht2"/>
-                <constraint firstItem="3" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="zd8-QR-Zrd"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="230" y="108"/>
         </view>
     </objects>
-    <resources>
-        <image name="hashtag_rocket_icon_blue.png" width="53" height="53"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

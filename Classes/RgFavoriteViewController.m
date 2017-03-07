@@ -30,6 +30,13 @@
 
 #include "linphone/linphonecore.h"
 
+#import "RgSearchBarViewController.h"
+
+@interface RgFavoriteViewController()
+@property BOOL isSearchBarVisible;
+@property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@end
+
 @implementation RgFavoriteViewController
 
 @synthesize mainView;
@@ -102,6 +109,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@""];
+    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+    self.isSearchBarVisible = YES;
+    [self addChildViewController:self.searchBarViewController];
+    [self.view addSubview:self.searchBarViewController.view];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];

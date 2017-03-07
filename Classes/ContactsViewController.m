@@ -24,6 +24,8 @@
 
 #import <AddressBook/ABPerson.h>
 
+#import "RgSearchBarViewController.h"
+
 @implementation ContactSelection
 
 static ContactSelectionMode sSelectionMode = ContactSelectionModeNone;
@@ -79,6 +81,13 @@ static NSString *sNameOrEmailFilter;
 
 @end
 
+
+@interface ContactsViewController()
+@property BOOL isSearchBarVisible;
+@property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@end
+
+
 @implementation ContactsViewController
 
 @synthesize tableController;
@@ -90,9 +99,6 @@ static NSString *sNameOrEmailFilter;
 @synthesize linphoneButton;
 @synthesize backButton;
 @synthesize addButton;
-@synthesize toolBar;
-@synthesize searchField;
-@synthesize searchButton;
 
 typedef enum _HistoryView { History_All, History_Linphone, History_Search, History_MAX } HistoryView;
 
@@ -135,9 +141,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)relayoutTableView {
 	CGRect subViewFrame = self.view.frame;
-	// let the toolBar be visible
-	subViewFrame.origin.y += self.toolBar.frame.size.height;
-	subViewFrame.size.height -= self.toolBar.frame.size.height;
+	// let the searchBar be visible
+	subViewFrame.origin.y += 50;
+	subViewFrame.size.height -= 50;
     self.tableView.frame = subViewFrame;
 	/*[UIView animateWithDuration:0.2
 					 animations:^{
@@ -177,16 +183,6 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleSegControl)
                                                  name:@"RgSegmentControl"
                                                object:nil];
-    
-    NSString *intro = @"Contact Name";
-    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-    attributes:@{
-                 NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
-                 NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
-                 }];
-    searchField.attributedPlaceholder = placeHolderString;
-    searchField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
-    searchField.textColor = [UIColor colorWithHex:@"#222222"];
 
 }
 
@@ -213,6 +209,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Contact Name"];
+    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+    self.isSearchBarVisible = YES;
+    [self addChildViewController:self.searchBarViewController];
+    [self.view addSubview:self.searchBarViewController.view];
 
 	[self changeView:History_All];
 
@@ -241,8 +243,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [tapBackground setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tapBackground];
     
-    searchField.returnKeyType = UIReturnKeyDone;
-
 }
 
 #pragma mark -
@@ -321,15 +321,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[PhoneMainView instance] popCurrentView];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-	[self searchBar:searchBar textDidChange:@""];
-	[searchBar resignFirstResponder];
-}
-
-- (IBAction)onSearch:(id)sender {
-    [searchField becomeFirstResponder];
-}
-
 
 - (void)handleSegControl {
     printf("contacts segement controller hit\n");
@@ -384,26 +375,13 @@ replacementString:(NSString *)string {
     return YES;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == searchField) {
-        [searchField resignFirstResponder];
-    }
-    return YES;
-}
+
 
 #pragma mark - Text Field Functions
 
 - (IBAction)dismissKeyboard:(id)sender
 {
     [self.view endEditing:YES];
-}
-
-- (IBAction)onSearchChange:(id)sender
-{
-    NSString *searchText = [searchField text];
-    NSLog(@"Search: %@", searchText);
-    [ContactSelection setNameOrEmailFilter:searchText];
-    [tableController loadData];
 }
 
 #pragma mark - searchField delegate
@@ -429,7 +407,6 @@ replacementString:(NSString *)string {
 }
 
 - (void)viewDidUnload {
-	[self setToolBar:nil];
 	[super viewDidUnload];
 }
 

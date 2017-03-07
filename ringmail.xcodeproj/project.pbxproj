@@ -157,6 +157,10 @@
 		4D9685161E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */; };
 		4D9685171E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */; };
 		4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */; };
+		4DAA6B011E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
+		4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
+		4DAA6B031E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
+		4DAA6B041E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
 		4DDB8CF61D9444BC00F5FD71 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */; };
 		4DDB8CF71D9444BC00F5FD71 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */; };
 		4DDB8CF81D9444BC00F5FD71 /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF11D9444BB00F5FD71 /* libresolv.9.dylib */; };
@@ -2218,6 +2222,9 @@
 		4D9685101E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg"; sourceTree = "<group>"; };
 		4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg"; sourceTree = "<group>"; };
 		4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4DAA6AFE1E6E16C700D9DE84 /* RgSearchBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgSearchBarViewController.h; sourceTree = "<group>"; };
+		4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgSearchBarViewController.m; sourceTree = "<group>"; };
+		4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgSearchBarViewController.xib; sourceTree = "<group>"; };
 		4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
 		4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
 		4DDB8CF11D9444BB00F5FD71 /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = ../../../usr/lib/libresolv.9.dylib; sourceTree = "<group>"; };
@@ -3533,6 +3540,9 @@
 				C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */,
 				C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */,
 				C4AA1A211C71314E003F86FD /* RgMainViewController.xib */,
+				4DAA6AFE1E6E16C700D9DE84 /* RgSearchBarViewController.h */,
+				4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */,
+				4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */,
 				4D9684D21E48F4AA008464B7 /* RgSearchBackgroundView.h */,
 				4D9684D31E48F4AA008464B7 /* RgSearchBackgroundView.m */,
 				C4FD785A1CF93EF20066BDB1 /* RgCustomView.h */,
@@ -5326,6 +5336,7 @@
 				C4FD78721CF94EEE0066BDB1 /* ringmail_forward.png in Resources */,
 				C42C0DEC1CB16FF100AD5A91 /* ringmail_incoming_answer@3x.png in Resources */,
 				C459A4151CC8633000CFFF30 /* ringmail_contact_back-pressed.png in Resources */,
+				4DAA6B031E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */,
 				F070E6381A2622EC00E17AFD /* incall_padding_right.png in Resources */,
 				D3ED3E6A15861A53006C0DE4 /* add_contact_default.png in Resources */,
 				D3ED3E6C15861A53006C0DE4 /* add_contact_disabled.png in Resources */,
@@ -6400,6 +6411,7 @@
 				C4AC290D1D3963FA003B6232 /* button_alert_background_over.png in Resources */,
 				C4AC290E1D3963FA003B6232 /* SVWebViewController.bundle in Resources */,
 				C4AC290F1D3963FA003B6232 /* pattern_squared_metal.png in Resources */,
+				4DAA6B041E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */,
 				C4AC29101D3963FA003B6232 /* options_add_disabled.png in Resources */,
 				C4AC29111D3963FA003B6232 /* options_transfer_disabled.png in Resources */,
 				C4AC29121D3963FA003B6232 /* transfer_call_default.png in Resources */,
@@ -6979,6 +6991,7 @@
 				D35498211587716B000081D8 /* UIStateBar.m in Sources */,
 				4D5251C41E6756EA0064F955 /* RgLocationManager.m in Sources */,
 				D3A55FBC15877E5E003FD403 /* UIContactCell.m in Sources */,
+				4DAA6B011E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */,
 				C41276931D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */,
 				C42B72101CA22EDB0020A57F /* CardComponent.mm in Sources */,
 				D326483815887D5200930C67 /* OrderedDictionary.m in Sources */,
@@ -7130,6 +7143,7 @@
 				C4AC2ACF1D3963FA003B6232 /* UIStateBar.m in Sources */,
 				4D5251C51E6756EA0064F955 /* RgLocationManager.m in Sources */,
 				C4AC2AD01D3963FA003B6232 /* UIContactCell.m in Sources */,
+				4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */,
 				C41276941D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */,
 				C4AC2AD11D3963FA003B6232 /* CardComponent.mm in Sources */,
 				C4AC2AD21D3963FA003B6232 /* OrderedDictionary.m in Sources */,

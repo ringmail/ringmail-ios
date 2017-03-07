@@ -34,12 +34,6 @@
     
 }
 
-@property (nonatomic, strong) IBOutlet UITextField* addressField;
-@property (nonatomic, strong) IBOutlet UICallButton* callButton;
-@property (nonatomic, strong) IBOutlet UICallButton* goButton;
-@property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;
-@property (nonatomic, strong) IBOutlet UIButton* backButton;
-@property (nonatomic, strong) IBOutlet UIButton* searchButton;
 @property (nonatomic, strong) IBOutlet UIView* mainView;
 @property (nonatomic, strong) IBOutlet UIView *waitView;
 @property (nonatomic, retain) HashtagCollectionViewController* mainViewController;

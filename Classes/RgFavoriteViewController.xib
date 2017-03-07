@@ -19,44 +19,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYS-gf-oKR" userLabel="Input" customClass="RgSearchBackgroundView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hashtag_rocket_icon_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ryl-87-nqx">
-                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="50" id="TwE-kW-KMQ"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.88627450980392153" green="0.89411764705882346" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="btI-Hb-Lfc"/>
-                        <constraint firstItem="Ryl-87-nqx" firstAttribute="leading" secondItem="uYS-gf-oKR" secondAttribute="leading" id="cL2-cN-rdk"/>
-                        <constraint firstAttribute="bottom" secondItem="Ryl-87-nqx" secondAttribute="bottom" id="pIg-7i-5dj"/>
-                        <constraint firstItem="Ryl-87-nqx" firstAttribute="top" secondItem="uYS-gf-oKR" secondAttribute="top" id="u9e-aW-MUl"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIg-uW-eVV">
                     <rect key="frame" x="0.0" y="50" width="320" height="324"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="uYS-gf-oKR" secondAttribute="trailing" id="T2L-bs-wgQ"/>
-                <constraint firstItem="uYS-gf-oKR" firstAttribute="leading" secondItem="171" secondAttribute="leading" id="nt4-5a-RDA"/>
-                <constraint firstItem="uYS-gf-oKR" firstAttribute="top" secondItem="171" secondAttribute="top" id="vR4-BT-5oM"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="372" y="383"/>
         </view>
     </objects>
-    <resources>
-        <image name="hashtag_rocket_icon_blue.png" width="53" height="53"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

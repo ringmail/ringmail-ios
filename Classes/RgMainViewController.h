@@ -30,23 +30,10 @@
 @interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, MFMailComposeViewControllerDelegate> {
 }
 
-- (void)setAddress:(NSString*)address;
-//- (void)call:(NSString*)address displayName:(NSString *)displayName;
-//- (void)call:(NSString*)address;
-
 - (void)handleUserActivity;
 - (void)handleSegControl;
 
 @property (nonatomic, assign) BOOL transferMode;
-
-@property (nonatomic, strong) IBOutlet UITextField* addressField;
-@property (nonatomic, strong) IBOutlet UIButton* addContactButton;
-@property (nonatomic, strong) IBOutlet UICallButton* callButton;
-@property (nonatomic, strong) IBOutlet UICallButton* goButton;
-@property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;
-@property (nonatomic, strong) IBOutlet UICallButton* addCallButton;
-@property (nonatomic, strong) IBOutlet UIButton* backButton;
-@property (nonatomic, strong) IBOutlet UIButton* searchButton;
 
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
@@ -59,7 +46,5 @@
 @property (nonatomic, assign) BOOL visible;
 
 - (IBAction)onAddContactClick: (id) event;
-- (IBAction)onAddressChange: (id)sender;
-
 
 @end
