@@ -7,5 +7,6 @@
 - (instancetype)initWithData:(NSDictionary *)data;
 
 - (void)sendMessage:(NSDictionary *)msgdata;
+- (void)showMomentCamera;
 
 @end

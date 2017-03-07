@@ -1,7 +1,10 @@
 #import "Send.h"
 
 #import "LinphoneManager.h"
+#import "PhoneMainView.h"
 #import "RgManager.h"
+#import "ChatRoomViewController.h"
+#import "MomentCameraViewController.h"
 
 @implementation Send
 
@@ -28,7 +31,15 @@
     	NSLog(@"Sent Message UUID: %@", uuid);
 		
     	[[NSNotificationCenter defaultCenter] postNotificationName:@"kRgSendComponentReset" object:nil];
+		NSDictionary *sessionData = [mgr dbGetSessionID:to to:nil contact:nil uuid:nil];
+		[[LinphoneManager instance] setChatSession:sessionData[@"id"]];
+		[[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 	}
+}
+
+- (void)showMomentCamera
+{
+	[[PhoneMainView instance] changeCurrentView:[MomentCameraViewController compositeViewDescription] push:TRUE];
 }
 
 @end

@@ -13,5 +13,7 @@
 
 @interface SendComponentController : CKComponentController
 
+- (void)showMomentCamera:(CKButtonComponent *)sender;
+
 @end
 

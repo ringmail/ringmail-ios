@@ -552,7 +552,7 @@
 		if (currentViewDescription.fullscreen != [fullscreen boolValue]) {
 			currentViewDescription.fullscreen = [fullscreen boolValue];
 			[[UIApplication sharedApplication] setStatusBarHidden:currentViewDescription.fullscreen
-													withAnimation:UIStatusBarAnimationSlide];
+													withAnimation:UIStatusBarAnimationNone];
 		} else {
 			fullscreen = nil; // No change = No Update
 		}

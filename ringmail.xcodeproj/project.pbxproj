@@ -1478,6 +1478,30 @@
 		C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */; };
 		C4D999521B96910A003CC323 /* RgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D999511B96910A003CC323 /* RgManager.m */; };
 		C4DA56481BBB020900E36352 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C4A193631B300974404 /* ImageIO.framework */; };
+		C4E1CB351E6E1A2400698166 /* MomentCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E1CB341E6E1A2400698166 /* MomentCameraViewController.m */; };
+		C4E1CB361E6E1A2400698166 /* MomentCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E1CB341E6E1A2400698166 /* MomentCameraViewController.m */; };
+		C4E1CB391E6E1A8400698166 /* MomentCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB371E6E1A8400698166 /* MomentCameraViewController.xib */; };
+		C4E1CB3A1E6E1A8400698166 /* MomentCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB371E6E1A8400698166 /* MomentCameraViewController.xib */; };
+		C4E1CB3D1E6E20F100698166 /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E1CB3C1E6E20F100698166 /* ViewUtils.m */; };
+		C4E1CB3E1E6E20F100698166 /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E1CB3C1E6E20F100698166 /* ViewUtils.m */; };
+		C4E1CB461E6E281E00698166 /* camera-cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB3F1E6E281E00698166 /* camera-cancel.png */; };
+		C4E1CB471E6E281E00698166 /* camera-cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB3F1E6E281E00698166 /* camera-cancel.png */; };
+		C4E1CB481E6E281E00698166 /* camera-cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB401E6E281E00698166 /* camera-cancel@2x.png */; };
+		C4E1CB491E6E281E00698166 /* camera-cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB401E6E281E00698166 /* camera-cancel@2x.png */; };
+		C4E1CB4A1E6E281E00698166 /* camera-cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB411E6E281E00698166 /* camera-cancel@3x.png */; };
+		C4E1CB4B1E6E281E00698166 /* camera-cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB411E6E281E00698166 /* camera-cancel@3x.png */; };
+		C4E1CB4C1E6E281E00698166 /* camera-flash.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB421E6E281E00698166 /* camera-flash.png */; };
+		C4E1CB4D1E6E281E00698166 /* camera-flash.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB421E6E281E00698166 /* camera-flash.png */; };
+		C4E1CB4E1E6E281E00698166 /* camera-flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB431E6E281E00698166 /* camera-flash@2x.png */; };
+		C4E1CB4F1E6E281E00698166 /* camera-flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB431E6E281E00698166 /* camera-flash@2x.png */; };
+		C4E1CB501E6E281E00698166 /* camera-switch.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB441E6E281E00698166 /* camera-switch.png */; };
+		C4E1CB511E6E281E00698166 /* camera-switch.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB441E6E281E00698166 /* camera-switch.png */; };
+		C4E1CB521E6E281E00698166 /* camera-switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB451E6E281E00698166 /* camera-switch@2x.png */; };
+		C4E1CB531E6E281E00698166 /* camera-switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB451E6E281E00698166 /* camera-switch@2x.png */; };
+		C4E1CB561E6E3EAD00698166 /* MomentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E1CB551E6E3EAD00698166 /* MomentEditViewController.m */; };
+		C4E1CB571E6E3EAD00698166 /* MomentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E1CB551E6E3EAD00698166 /* MomentEditViewController.m */; };
+		C4E1CB5A1E6E3EC200698166 /* MomentEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB581E6E3EC200698166 /* MomentEditViewController.xib */; };
+		C4E1CB5B1E6E3EC200698166 /* MomentEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB581E6E3EC200698166 /* MomentEditViewController.xib */; };
 		C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */ = {isa = PBXBuildFile; fileRef = C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */; };
 		C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E985C91BAF98E200939A55 /* UIMessageButton.m */; };
 		C4FD784C1CF932950066BDB1 /* UIColor+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD784B1CF932950066BDB1 /* UIColor+Name.m */; };
@@ -2762,6 +2786,21 @@
 		C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_splashscreen_iphone6.png; path = Resources/ringmail_splashscreen_iphone6.png; sourceTree = "<group>"; };
 		C4D999501B96910A003CC323 /* RgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgManager.h; sourceTree = "<group>"; };
 		C4D999511B96910A003CC323 /* RgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgManager.m; sourceTree = "<group>"; };
+		C4E1CB2B1E6E1A1600698166 /* MomentCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentCameraViewController.h; sourceTree = "<group>"; };
+		C4E1CB341E6E1A2400698166 /* MomentCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentCameraViewController.m; sourceTree = "<group>"; };
+		C4E1CB381E6E1A8400698166 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MomentCameraViewController.xib; sourceTree = "<group>"; };
+		C4E1CB3B1E6E20C400698166 /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
+		C4E1CB3C1E6E20F100698166 /* ViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtils.m; sourceTree = "<group>"; };
+		C4E1CB3F1E6E281E00698166 /* camera-cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-cancel.png"; path = "Resources/camera-cancel.png"; sourceTree = "<group>"; };
+		C4E1CB401E6E281E00698166 /* camera-cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-cancel@2x.png"; path = "Resources/camera-cancel@2x.png"; sourceTree = "<group>"; };
+		C4E1CB411E6E281E00698166 /* camera-cancel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-cancel@3x.png"; path = "Resources/camera-cancel@3x.png"; sourceTree = "<group>"; };
+		C4E1CB421E6E281E00698166 /* camera-flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-flash.png"; path = "Resources/camera-flash.png"; sourceTree = "<group>"; };
+		C4E1CB431E6E281E00698166 /* camera-flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-flash@2x.png"; path = "Resources/camera-flash@2x.png"; sourceTree = "<group>"; };
+		C4E1CB441E6E281E00698166 /* camera-switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-switch.png"; path = "Resources/camera-switch.png"; sourceTree = "<group>"; };
+		C4E1CB451E6E281E00698166 /* camera-switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-switch@2x.png"; path = "Resources/camera-switch@2x.png"; sourceTree = "<group>"; };
+		C4E1CB541E6E3E9F00698166 /* MomentEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentEditViewController.h; sourceTree = "<group>"; };
+		C4E1CB551E6E3EAD00698166 /* MomentEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentEditViewController.m; sourceTree = "<group>"; };
+		C4E1CB591E6E3EC200698166 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MomentEditViewController.xib; sourceTree = "<group>"; };
 		C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_linphone_ringmail.rc; path = Resources/wizard_linphone_ringmail.rc; sourceTree = "<group>"; };
 		C4E985C11BAF98D500939A55 /* UIMessageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMessageButton.h; sourceTree = "<group>"; };
 		C4E985C91BAF98E200939A55 /* UIMessageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMessageButton.m; sourceTree = "<group>"; };
@@ -3652,6 +3691,12 @@
 				D3F795D315A582800077328B /* ChatRoomViewController.h */,
 				D3F795D415A582800077328B /* ChatRoomViewController.m */,
 				D38187B015FE340100C3EDCA /* ChatRoomViewController.xib */,
+				C4E1CB2B1E6E1A1600698166 /* MomentCameraViewController.h */,
+				C4E1CB341E6E1A2400698166 /* MomentCameraViewController.m */,
+				C4E1CB371E6E1A8400698166 /* MomentCameraViewController.xib */,
+				C4E1CB541E6E3E9F00698166 /* MomentEditViewController.h */,
+				C4E1CB551E6E3EAD00698166 /* MomentEditViewController.m */,
+				C4E1CB581E6E3EC200698166 /* MomentEditViewController.xib */,
 				D30BBD1215D3EFEB000F93DD /* ContactDetailsDelegate.h */,
 				D378906215AC373B00BD776C /* ContactDetailsLabelViewController.h */,
 				D378906315AC373B00BD776C /* ContactDetailsLabelViewController.m */,
@@ -3684,9 +3729,9 @@
 				D37DC6C01594AE1800B2A5EB /* LinphoneCoreSettingsStore.m */,
 				D3EA53FB159850E80037DC6B /* LinphoneManager.h */,
 				D3EA53FC159850E80037DC6B /* LinphoneManager.m */,
-				D3F83F8C158229C500336684 /* PhoneMainView.h */,
 				2214EB7012F84668002A5394 /* LinphoneUI */,
 				F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */,
+				D3F83F8C158229C500336684 /* PhoneMainView.h */,
 				D3F83F8D15822ABD00336684 /* PhoneMainView.m */,
 				636316D71A1DECC90009B839 /* PhoneMainView.xib */,
 				D35E759C159460B50066B1C1 /* SettingsViewController.h */,
@@ -4217,6 +4262,8 @@
 				C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */,
 				C41F6D2A1DC902B6006C9D20 /* NSStringAdditions.h */,
 				C41F6D2B1DC902B6006C9D20 /* NSStringAdditions.m */,
+				C4E1CB3B1E6E20C400698166 /* ViewUtils.h */,
+				C4E1CB3C1E6E20F100698166 /* ViewUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -4358,6 +4405,13 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C4E1CB3F1E6E281E00698166 /* camera-cancel.png */,
+				C4E1CB401E6E281E00698166 /* camera-cancel@2x.png */,
+				C4E1CB411E6E281E00698166 /* camera-cancel@3x.png */,
+				C4E1CB421E6E281E00698166 /* camera-flash.png */,
+				C4E1CB431E6E281E00698166 /* camera-flash@2x.png */,
+				C4E1CB441E6E281E00698166 /* camera-switch.png */,
+				C4E1CB451E6E281E00698166 /* camera-switch@2x.png */,
 				C470BF8C1E68C834009968E2 /* ringpanel_button1_camera@2x.png */,
 				C470BF8D1E68C834009968E2 /* ringpanel_button2_video@2x.png */,
 				C470BF8E1E68C834009968E2 /* ringpanel_button3_moments@2x.png */,
@@ -5364,9 +5418,11 @@
 				D3832803158100E400FA0D23 /* chat_over.png in Resources */,
 				C444F3CB1C92240300134788 /* menu-star_active@3x.png in Resources */,
 				D3F83F0C158205A100336684 /* micro_off_default.png in Resources */,
+				C4E1CB481E6E281E00698166 /* camera-cancel@2x.png in Resources */,
 				D3F83F0E158205A100336684 /* micro_off_over.png in Resources */,
 				C42C0DD11CAEE9D100AD5A91 /* ringmail_mic@2x.png in Resources */,
 				C4FD78711CF94EEE0066BDB1 /* ringmail_forward@2x.png in Resources */,
+				C4E1CB4A1E6E281E00698166 /* camera-cancel@3x.png in Resources */,
 				D3F83F10158205A100336684 /* micro_on_default.png in Resources */,
 				C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */,
 				D3F83F12158205A100336684 /* micro_on_over.png in Resources */,
@@ -5558,6 +5614,7 @@
 				D3EA5405159852080037DC6B /* chat_edit_over.png in Resources */,
 				D3EA5407159852080037DC6B /* chat_add_default.png in Resources */,
 				D3EA5409159852080037DC6B /* chat_add_over.png in Resources */,
+				C4E1CB521E6E281E00698166 /* camera-switch@2x.png in Resources */,
 				C4FD78701CF94EEE0066BDB1 /* ringmail_forward@3x.png in Resources */,
 				D3EA5418159858A80037DC6B /* list_delete_default.png in Resources */,
 				F070E6351A2622EC00E17AFD /* incall_padding_left_landscape.png in Resources */,
@@ -5618,6 +5675,7 @@
 				D3196D3415A321E3007FEEBA /* options_add_default.png in Resources */,
 				D3196D3615A321E3007FEEBA /* options_add_over.png in Resources */,
 				D3196D3815A321E3007FEEBA /* options_transfer_default.png in Resources */,
+				C4E1CB391E6E1A8400698166 /* MomentCameraViewController.xib in Resources */,
 				D3196D3A15A321E3007FEEBA /* options_transfer_over.png in Resources */,
 				D38187DD15FE348A00C3EDCA /* WizardViewController.xib in Resources */,
 				D350F21C15A43D3400149E54 /* setup_back_default.png in Resources */,
@@ -5706,6 +5764,7 @@
 				C48D3C081D0276FE00FAC3A6 /* ping_in_reply.caf in Resources */,
 				C42C0DEB1CB16FF100AD5A91 /* ringmail_incoming_answer@2x.png in Resources */,
 				D3157A8A15B4466F00DD8C4C /* history_details_add_default.png in Resources */,
+				C4E1CB4E1E6E281E00698166 /* camera-flash@2x.png in Resources */,
 				D3157A8C15B4466F00DD8C4C /* history_details_add_over.png in Resources */,
 				D3157A9015B446CB00DD8C4C /* history_details_back_default.png in Resources */,
 				D3157A9215B446CB00DD8C4C /* history_details_back_over.png in Resources */,
@@ -5847,6 +5906,7 @@
 				D3A74F1815C69392001500B9 /* options_default~ipad.png in Resources */,
 				4DF612EA1E5CD6A5005624D2 /* tabs_recents_selected_5@2x.png in Resources */,
 				4DF612DA1E5CD6A5005624D2 /* tabs_contacts_normal_5@2x.png in Resources */,
+				C4E1CB501E6E281E00698166 /* camera-switch.png in Resources */,
 				D3A74F1A15C69392001500B9 /* options_disabled~ipad.png in Resources */,
 				D3A74F1C15C69392001500B9 /* options_over~ipad.png in Resources */,
 				F070E6371A2622EC00E17AFD /* incall_padding_right_landscape.png in Resources */,
@@ -6025,6 +6085,7 @@
 				D3F5F9271609A86700D3DA1A /* setup_start_over_landscape~ipad.png in Resources */,
 				D3F5F9291609A86700D3DA1A /* setup_start_over~ipad.png in Resources */,
 				D3F5F92B1609A86700D3DA1A /* setup_welcome_logo~ipad.png in Resources */,
+				C4E1CB461E6E281E00698166 /* camera-cancel.png in Resources */,
 				C42C0D4A1CAEC9DE00AD5A91 /* RgInCallViewController.xib in Resources */,
 				D3F5F987160B1A0900D3DA1A /* chat_progressbar_background.png in Resources */,
 				C49606FF1CA3810A00C988B6 /* ringmail_chat_back@2x.png in Resources */,
@@ -6096,6 +6157,7 @@
 				F0938159188E629800A55DFA /* iTunesArtwork in Resources */,
 				15AF3C6C16F37A4A00FC52EC /* route_phone_off_default.png in Resources */,
 				C48D3C041D0276FE00FAC3A6 /* call_in.caf in Resources */,
+				C4E1CB4C1E6E281E00698166 /* camera-flash.png in Resources */,
 				C444F3DB1C92240300134788 /* menu-home_active@2x.png in Resources */,
 				15AF3C6E16F37A4A00FC52EC /* route_phone_off_disabled.png in Resources */,
 				15AF3C7016F37A4A00FC52EC /* route_phone_off_over.png in Resources */,
@@ -6105,6 +6167,7 @@
 				15AF3C8816F37A5500FC52EC /* route_speaker_off_over.png in Resources */,
 				15AF3C8C16F37A5500FC52EC /* route_speaker_on_default.png in Resources */,
 				C4AC2B9A1D397107003B6232 /* ringmail_dev_logo.png in Resources */,
+				C4E1CB5A1E6E3EC200698166 /* MomentEditViewController.xib in Resources */,
 				15AF3C9816F37A5D00FC52EC /* routes_default.png in Resources */,
 				C4FD786C1CF94A290066BDB1 /* pattern_dimension.png in Resources */,
 				15AF3C9A16F37A5D00FC52EC /* routes_disabled.png in Resources */,
@@ -6402,6 +6465,7 @@
 				C4AC28991D3963FA003B6232 /* list_delete_default.png in Resources */,
 				C4AC289A1D3963FA003B6232 /* incall_padding_left_landscape.png in Resources */,
 				C4AC289B1D3963FA003B6232 /* list_delete_over.png in Resources */,
+				C4E1CB4F1E6E281E00698166 /* camera-flash@2x.png in Resources */,
 				C4AC289C1D3963FA003B6232 /* IncomingCallViewController.xib in Resources */,
 				C4AC289D1D3963FA003B6232 /* background-launch.png in Resources */,
 				C4AC289E1D3963FA003B6232 /* ringmail_speaker-x@2x.png in Resources */,
@@ -6414,10 +6478,12 @@
 				4DF612F11E5CD6A5005624D2 /* tabs_ring_selected_5@2x.png in Resources */,
 				C4AC28A41D3963FA003B6232 /* menu-more_active.png in Resources */,
 				C4AC28A51D3963FA003B6232 /* avatar_unknown_small.png in Resources */,
+				C4E1CB491E6E281E00698166 /* camera-cancel@2x.png in Resources */,
 				C4AC28A61D3963FA003B6232 /* avatar_shadow.png in Resources */,
 				C4AC28A71D3963FA003B6232 /* ringmail_endcall.png in Resources */,
 				C4AC28A81D3963FA003B6232 /* add_call_default.png in Resources */,
 				C4AC28A91D3963FA003B6232 /* menu-hash@3x.png in Resources */,
+				C4E1CB471E6E281E00698166 /* camera-cancel.png in Resources */,
 				C4AC28AA1D3963FA003B6232 /* bubble_ringmail_blue.png in Resources */,
 				C4AC28AB1D3963FA003B6232 /* ringmail_icon_114.png in Resources */,
 				C4AC28AC1D3963FA003B6232 /* add_call_disabled.png in Resources */,
@@ -6622,6 +6688,7 @@
 				C4AC29641D3963FA003B6232 /* back_over~ipad.png in Resources */,
 				C4AC29651D3963FA003B6232 /* background_top~ipad.png in Resources */,
 				C4AC29661D3963FA003B6232 /* backspace_default~ipad.png in Resources */,
+				C4E1CB4D1E6E281E00698166 /* camera-flash.png in Resources */,
 				4D9684D11E456641008464B7 /* hashtag_rocket_icon@2x.png in Resources */,
 				C4AC29671D3963FA003B6232 /* backspace_disabled~ipad.png in Resources */,
 				C4AC29681D3963FA003B6232 /* RgFavoriteViewController.xib in Resources */,
@@ -6655,6 +6722,7 @@
 				C4AC297F1D3963FA003B6232 /* contacts_selected_landscape~ipad.png in Resources */,
 				C4AC29801D3963FA003B6232 /* contacts_selected~ipad.png in Resources */,
 				C4AC29811D3963FA003B6232 /* dialer_address_background_landscape~ipad.png in Resources */,
+				C4E1CB5B1E6E3EC200698166 /* MomentEditViewController.xib in Resources */,
 				C4AC29821D3963FA003B6232 /* dialer_address_background~ipad.png in Resources */,
 				C4AC29831D3963FA003B6232 /* dialer_alt_default~ipad.png in Resources */,
 				C4AC29841D3963FA003B6232 /* dialer_alt_over~ipad.png in Resources */,
@@ -6868,6 +6936,7 @@
 				C4AC2A451D3963FA003B6232 /* setup_start_over~ipad.png in Resources */,
 				C4AC2A461D3963FA003B6232 /* setup_welcome_logo~ipad.png in Resources */,
 				C4AC2A471D3963FA003B6232 /* RgInCallViewController.xib in Resources */,
+				C4E1CB511E6E281E00698166 /* camera-switch.png in Resources */,
 				C4AC2A481D3963FA003B6232 /* chat_progressbar_background.png in Resources */,
 				C4AC2A491D3963FA003B6232 /* ringmail_chat_back@2x.png in Resources */,
 				C4AC2A4A1D3963FA003B6232 /* setup_back_default_landscape~ipad.png in Resources */,
@@ -6908,6 +6977,7 @@
 				C4AC2A6B1D3963FA003B6232 /* IncomingCallViewController~ipad.xib in Resources */,
 				C4AC2A6C1D3963FA003B6232 /* ringmail_contact_add_pressed@3x.png in Resources */,
 				C4AC2A6D1D3963FA003B6232 /* accept_default_landscape~ipad.png in Resources */,
+				C4E1CB531E6E281E00698166 /* camera-switch@2x.png in Resources */,
 				C4AC2A6E1D3963FA003B6232 /* accept_default~ipad.png in Resources */,
 				C4AC2A6F1D3963FA003B6232 /* accept_over_landscape~ipad.png in Resources */,
 				4D9684C01E454977008464B7 /* header_navigation_tabs_5@2x.png in Resources */,
@@ -6923,6 +6993,7 @@
 				C470BF871E68C7E6009968E2 /* plus_icon_pressed@2x.png in Resources */,
 				C4AC2A771D3963FA003B6232 /* decline_over_landscape~ipad.png in Resources */,
 				C4AC2A781D3963FA003B6232 /* decline_over~ipad.png in Resources */,
+				C4E1CB3A1E6E1A8400698166 /* MomentCameraViewController.xib in Resources */,
 				C4AC2A791D3963FA003B6232 /* licenses.html in Resources */,
 				C4AC2A7A1D3963FA003B6232 /* callbar_left_padding.png in Resources */,
 				C4AC2A7B1D3963FA003B6232 /* callbar_right_padding.png in Resources */,
@@ -6971,6 +7042,7 @@
 				C4AC2AA21D3963FA003B6232 /* routes_disabled_landscape.png in Resources */,
 				C4AC2AA31D3963FA003B6232 /* ringmail_contact_back-pressed@2x.png in Resources */,
 				C4AC2AA41D3963FA003B6232 /* routes_over_landscape.png in Resources */,
+				C4E1CB4B1E6E281E00698166 /* camera-cancel@3x.png in Resources */,
 				C4AC2AA51D3963FA003B6232 /* ringmail_favorite@3x.png in Resources */,
 				C4AC2AA61D3963FA003B6232 /* routes_selected_landscape.png in Resources */,
 				C4AC2AA71D3963FA003B6232 /* ringmail_endcall@3x.png in Resources */,
@@ -7128,6 +7200,7 @@
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				C450DBB71C70FFB00053592E /* MainCollectionViewController.mm in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
+				C4E1CB3D1E6E20F100698166 /* ViewUtils.m in Sources */,
 				C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */,
 				63B81A101B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C42C0D661CAEDAA800AD5A91 /* RgCallComponent.mm in Sources */,
@@ -7180,6 +7253,7 @@
 				C40F0E821C928C8A0011F8B6 /* RgChatBubbleFactory.m in Sources */,
 				C42C0D521CAECA1500AD5A91 /* RgInCallViewController.m in Sources */,
 				C4D999521B96910A003CC323 /* RgManager.m in Sources */,
+				C4E1CB351E6E1A2400698166 /* MomentCameraViewController.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				C4FE4C791CCDA03F006A6C94 /* RgFavoriteViewController.m in Sources */,
 				C42C0D5D1CAED86800AD5A91 /* RgCallContext.m in Sources */,
@@ -7189,6 +7263,7 @@
 				C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */,
 				C4593A591E6A4086001C3BDD /* FavoriteComponent.mm in Sources */,
 				C4A853E21E66115C00FEAFB0 /* SendComponent.mm in Sources */,
+				C4E1CB561E6E3EAD00698166 /* MomentEditViewController.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				C4FE4C6F1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm in Sources */,
@@ -7292,6 +7367,7 @@
 				C4AC2ADE1D3963FA003B6232 /* UIAddressTextField.m in Sources */,
 				C4AC2ADF1D3963FA003B6232 /* MainCollectionViewController.mm in Sources */,
 				C4AC2AE01D3963FA003B6232 /* SettingsViewController.m in Sources */,
+				C4E1CB3E1E6E20F100698166 /* ViewUtils.m in Sources */,
 				C4AC2AE11D3963FA003B6232 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C4AC2AE21D3963FA003B6232 /* RgCallComponent.mm in Sources */,
 				C4AC2AE41D3963FA003B6232 /* NSObject+NSPerformSelector.m in Sources */,
@@ -7344,6 +7420,7 @@
 				C4AC2B151D3963FA003B6232 /* RgInCallViewController.m in Sources */,
 				C4AC2B161D3963FA003B6232 /* RgManager.m in Sources */,
 				C4AC2B171D3963FA003B6232 /* DCRoundSwitchOutlineLayer.m in Sources */,
+				C4E1CB361E6E1A2400698166 /* MomentCameraViewController.m in Sources */,
 				C4AC2B181D3963FA003B6232 /* RgFavoriteViewController.m in Sources */,
 				C4AC2B191D3963FA003B6232 /* RgCallContext.m in Sources */,
 				C4AC2B1A1D3963FA003B6232 /* Card.m in Sources */,
@@ -7353,6 +7430,7 @@
 				C4AC2B201D3963FA003B6232 /* DCRoundSwitchToggleLayer.m in Sources */,
 				C4593A5A1E6A4086001C3BDD /* FavoriteComponent.mm in Sources */,
 				C4A853E31E66115C00FEAFB0 /* SendComponent.mm in Sources */,
+				C4E1CB571E6E3EAD00698166 /* MomentEditViewController.m in Sources */,
 				C4AC2B211D3963FA003B6232 /* IASKAppSettingsViewController.m in Sources */,
 				C4AC2B221D3963FA003B6232 /* FavoriteCollectionViewController.mm in Sources */,
 				C4AC2B231D3963FA003B6232 /* IASKAppSettingsWebViewController.m in Sources */,
@@ -7548,6 +7626,22 @@
 				C4BC492B1BF9474000826264 /* Base */,
 			);
 			name = RgChatQuestionSelect.xib;
+			sourceTree = "<group>";
+		};
+		C4E1CB371E6E1A8400698166 /* MomentCameraViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4E1CB381E6E1A8400698166 /* Base */,
+			);
+			name = MomentCameraViewController.xib;
+			sourceTree = "<group>";
+		};
+		C4E1CB581E6E3EC200698166 /* MomentEditViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4E1CB591E6E3EC200698166 /* Base */,
+			);
+			name = MomentEditViewController.xib;
 			sourceTree = "<group>";
 		};
 		D37EE11016035793003608A6 /* ImageViewController.xib */ = {

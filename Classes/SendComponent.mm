@@ -64,7 +64,9 @@
 						{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button2_video.png"]]},
 						{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button3_moments.png"]]},
+						{[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+							{UIControlStateNormal,[UIImage imageNamed:@"ringpanel_button3_moments.png"]},
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(showMomentCamera:) size:{} attributes:{} accessibilityConfiguration:{}]},
 					}]
 				]},
 				// Favorites

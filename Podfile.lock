@@ -14,6 +14,24 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - CLImageEditor/AllTools (0.1.8):
+    - CLImageEditor/Core
+    - CLImageEditor/EmoticonTool
+    - CLImageEditor/ResizeTool
+    - CLImageEditor/SplashTool
+    - CLImageEditor/StickerTool
+    - CLImageEditor/TextTool
+  - CLImageEditor/Core (0.1.8)
+  - CLImageEditor/EmoticonTool (0.1.8):
+    - CLImageEditor/Core
+  - CLImageEditor/ResizeTool (0.1.8):
+    - CLImageEditor/Core
+  - CLImageEditor/SplashTool (0.1.8):
+    - CLImageEditor/Core
+  - CLImageEditor/StickerTool (0.1.8):
+    - CLImageEditor/Core
+  - CLImageEditor/TextTool (0.1.8):
+    - CLImageEditor/Core
   - CocoaAsyncSocket (7.6.0)
   - CocoaLumberjack (3.1.0):
     - CocoaLumberjack/Default (= 3.1.0)
@@ -37,6 +55,7 @@ PODS:
   - leveldb-library (1.18.2)
   - libidn (1.33)
   - libPhoneNumber-iOS (0.9.4)
+  - LLSimpleCamera (5.0.0)
   - NSHash (1.0.2)
   - NYXImagesKit (2.3)
   - Objective-LevelDB (2.1.5):
@@ -57,6 +76,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - CLImageEditor/AllTools
   - CocoaLumberjack
   - Colours
   - ComponentKit (from `https://github.com/facebook/componentkit.git`, tag `0.15.1`)
@@ -65,6 +85,7 @@ DEPENDENCIES:
   - FMDB
   - JSQMessagesViewController (from `git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git`, branch `ringmail`)
   - libPhoneNumber-iOS (~> 0.8)
+  - LLSimpleCamera (from `https://github.com/omergul123/LLSimpleCamera.git`, tag `v5.0.0`)
   - NSHash (~> 1.0.2)
   - NYXImagesKit
   - Objective-LevelDB
@@ -83,6 +104,9 @@ EXTERNAL SOURCES:
   JSQMessagesViewController:
     :branch: ringmail
     :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
+  LLSimpleCamera:
+    :git: https://github.com/omergul123/LLSimpleCamera.git
+    :tag: v5.0.0
   SDWebImage:
     :git: https://github.com/rs/SDWebImage.git
     :tag: 3.8.2
@@ -102,6 +126,9 @@ CHECKOUT OPTIONS:
   JSQMessagesViewController:
     :commit: 08356e2f7edabf995840291f3b94844c94f376ba
     :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
+  LLSimpleCamera:
+    :git: https://github.com/omergul123/LLSimpleCamera.git
+    :tag: v5.0.0
   SDWebImage:
     :git: https://github.com/rs/SDWebImage.git
     :tag: 3.8.2
@@ -117,6 +144,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  CLImageEditor: 0d4d5a14aa317c097418b05b5736fec4b8a90dcf
   CocoaAsyncSocket: b9d5589f07baf9de8f34cc25abd4fcba28f13805
   CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
   Colours: f24220c38f13deac88612667e9b4a7fb96b871d4
@@ -130,6 +158,7 @@ SPEC CHECKSUMS:
   leveldb-library: ef0453697c0fda3a9e550e5650e52976e6724548
   libidn: 90fc1a62b60288dcf543f13f4ebca913f17d829f
   libPhoneNumber-iOS: 63bab980d1fc9783d82d955800ac9d7c1d81fde3
+  LLSimpleCamera: 7175ccb81be71c83d79933089322eb662b1f0327
   NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   Objective-LevelDB: fa075efd9d0be645aee51847cc3ee70cdadb80ce
@@ -141,6 +170,6 @@ SPEC CHECKSUMS:
   UIImage-Categories: b9d2ff50c2250ea007f150c2427ff230b5a4789b
   XMPPFramework: 544da7ab3faf7005de303708630a4e9741efb907
 
-PODFILE CHECKSUM: 08fedddfe1962f7caac0ac6589b7d4a7764ea001
+PODFILE CHECKSUM: 216560ed398242c66c995cd1e8a9b3fdccb49020
 
 COCOAPODS: 1.2.0
