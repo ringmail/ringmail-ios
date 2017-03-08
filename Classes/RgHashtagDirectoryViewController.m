@@ -160,6 +160,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     categoryStack = [[NSMutableArray alloc] init];
     [categoryStack addObject:@"0"];
+    
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
 }
 
 - (void)viewDidUnload {
@@ -178,6 +182,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     [mainViewController removeFromParentViewController];
     [self.componentView removeFromSuperview];
+    
+    [self.searchBarViewController dismissKeyboard:nil];
     
     if ([newPath isEqual:@"0"])
     {

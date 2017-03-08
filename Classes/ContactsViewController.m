@@ -215,7 +215,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.isSearchBarVisible = YES;
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
-
+    
 	[self changeView:History_All];
 
 	[linphoneButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE];
@@ -238,7 +238,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
 	[tableController.tableView setBackgroundView:nil];					 // Can't do it in Xib: issue with ios4
     
-    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
     [tapBackground setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tapBackground];

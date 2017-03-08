@@ -212,7 +212,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     mainViewController = mainController;
     [self setNeedsRefresh:NO];
     
-    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
 
@@ -438,14 +438,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self callUpdate:call state:state];
 }
 
-
-#pragma mark - Text Field Functions
-
--(void) dismissKeyboard:(id)sender
-{
-    //[addressField resignFirstResponder];
-    [self.view endEditing:YES];
-}
 
 #pragma mark - MFComposeMailDelegate
 

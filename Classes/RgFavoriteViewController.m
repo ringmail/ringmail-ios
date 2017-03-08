@@ -135,6 +135,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     mainViewController = mainController;
     [self setNeedsRefresh:NO];
     
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
+    
 	// Set observer
 	[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshEvent:)
