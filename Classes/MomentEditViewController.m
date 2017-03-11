@@ -60,16 +60,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 	self.image = [[PhoneMainView instance] momentImage];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-	CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:image delegate:self];
-	[self presentViewController:editor animated:NO completion:nil];
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+}
+
+#pragma mark - Operations
+
+- (void)editImage:(UIImage*)img
+{
+	image = img;
+	CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:image delegate:self];
+	[self presentViewController:editor animated:NO completion:nil];
 }
 
 #pragma mark - CLImageEditor delegate
@@ -82,10 +84,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)imageEditorDidCancel:(CLImageEditor*)editor;
 {
-	NSLog(@"Cancel Moment Edit");
+	//NSLog(@"Cancel Moment Edit");
     [editor dismissViewControllerAnimated:NO completion:nil];
-	[[PhoneMainView instance] popCurrentView];
-	//[[PhoneMainView instance] changeCurrentView:[MomentCameraViewController compositeViewDescription] push:FALSE];
+	[[PhoneMainView instance] changeCurrentView:[MomentCameraViewController compositeViewDescription] push:FALSE];
 }
 
 @end

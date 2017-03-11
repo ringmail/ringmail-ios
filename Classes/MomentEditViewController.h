@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) UIImage* image;
 
+- (void)editImage:(UIImage*)img;
+
 - (void)imageEditor:(CLImageEditor*)editor didFinishEdittingWithImage:(UIImage*)image;
 - (void)imageEditorDidCancel:(CLImageEditor*)editor;
 

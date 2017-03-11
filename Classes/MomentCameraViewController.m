@@ -207,9 +207,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     //__weak MomentCameraViewController* weakSelf = self;
 	[self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
 		if(!error) {
-			NSLog(@"Image captured!!!!");
-			[[PhoneMainView instance] setMomentImage:image];
-			[[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:YES];
+			//NSLog(@"Image captured!!!!");
+			//[[PhoneMainView instance] setMomentImage:image];
+			MomentEditViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:NO], MomentEditViewController);
+			[ctl editImage:image];
 			//[editor setImage:image];
 			//ImageViewController *imageVC = [[ImageViewController alloc] initWithImage:image];
 			//[weakSelf presentViewController:imageVC animated:NO completion:nil];
