@@ -208,9 +208,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
 		if(!error) {
 			NSLog(@"Image captured!!!!");
-			
-			MomentEditViewController *editor = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:FALSE], MomentEditViewController);
-			[editor setImage:image];
+			[[PhoneMainView instance] setMomentImage:image];
+			[[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:YES];
+			//[editor setImage:image];
 			//ImageViewController *imageVC = [[ImageViewController alloc] initWithImage:image];
 			//[weakSelf presentViewController:imageVC animated:NO completion:nil];
 		}
@@ -224,7 +224,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
 	NSLog(@"Close button pressed");
 	[self.camera stop];
-	[[PhoneMainView instance] popCurrentView];
+	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE];
 }
 
 /* other lifecycle methods */

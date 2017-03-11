@@ -135,6 +135,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 @synthesize statusBarBG;
 @synthesize volumeView;
 @synthesize webDelegate;
+@synthesize momentImage;
 
 #pragma mark - Lifecycle Functions
 

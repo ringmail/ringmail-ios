@@ -102,3 +102,7 @@
 [submodule "submodules/bcunit"]
 	path = submodules/bcunit
 	url = git://git.linphone.org/bcunit.git
+[submodule "Classes/Utils/CLImageEditor"]
+	path = Classes/Utils/CLImageEditor
+	url = git@nova1.revalead.com:ringmail/climageeditor.git
+	branch = ringmail

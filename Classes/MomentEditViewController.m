@@ -1,4 +1,5 @@
 #import "MomentEditViewController.h"
+#import "MomentCameraViewController.h"
 #import "ViewUtils.h"
 #import "Utils.h"
 #import "PhoneMainView.h"
@@ -51,26 +52,24 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
 	[super viewDidLoad];
 	self.view.backgroundColor = [UIColor blackColor];
-	
-	//CGRect screenRect = [[UIScreen mainScreen] bounds];
-	
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+	self.image = [[PhoneMainView instance] momentImage];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+	CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:image delegate:self];
+	[self presentViewController:editor animated:NO completion:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-}
-
-- (void)setImage:(UIImage*)newImage
-{
-	image = newImage;
-	CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:image delegate:self];
-	[self presentViewController:editor animated:NO completion:nil];
 }
 
 #pragma mark - CLImageEditor delegate
@@ -81,8 +80,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     //[editor dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)imageEditor:(CLImageEditor *)editor willDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled
+- (void)imageEditorDidCancel:(CLImageEditor*)editor;
 {
+	NSLog(@"Cancel Moment Edit");
+    [editor dismissViewControllerAnimated:NO completion:nil];
+	[[PhoneMainView instance] popCurrentView];
+	//[[PhoneMainView instance] changeCurrentView:[MomentCameraViewController compositeViewDescription] push:FALSE];
 }
 
 @end
