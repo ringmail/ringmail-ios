@@ -41,6 +41,8 @@ bool animInactive = YES;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.clipsToBounds = YES;
 }
 
 - (void)viewDidUnload {
@@ -141,6 +143,7 @@ bool animInactive = YES;
         UIImageView *rocketAnimImg =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,50,50)];
         rocketAnimImg.image=[UIImage imageNamed:@"hashtag_rocket_icon_blue.png"];
         [self.view addSubview:rocketAnimImg];
+        
         
         [CATransaction begin];
         

@@ -102,8 +102,6 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
                         headerRemoveLock = 1;
                     }
                     
-                    UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
-                    cardData[@"image"] = defaultImage;
                     // Todo: translate to name
                     Card *card = [[Card alloc] initWithData:cardData header:[NSNumber numberWithBool:0]];
                     [_cards addObject:card];

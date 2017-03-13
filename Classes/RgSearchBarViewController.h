@@ -24,6 +24,8 @@
 @property (nonatomic, assign) BOOL visible;
 @property (nonatomic, strong) NSString* placeHolder;
 
+@property (nonatomic, copy) NSString *imageName;
+
 - (id)initWithPlaceHolder:(NSString *)placeHolder;
 - (void)setAddress:(NSString*)address;
 - (void)dismissKeyboard:(id)sender;

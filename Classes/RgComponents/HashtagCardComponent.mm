@@ -23,8 +23,8 @@
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
-    UIImage *cardImage = [data objectForKey:@"image"];
-    cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:8 interpolationQuality:kCGInterpolationHigh];
+//    UIImage *cardImage = [data objectForKey:@"image"];
+//    cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:8 interpolationQuality:kCGInterpolationHigh];
     
     int screenSizeWidth = [UIScreen mainScreen].applicationFrame.size.width;
     int labelWidth = screenSizeWidth - 140;
@@ -74,7 +74,8 @@
 			{}
 		};
 	}
-	
+    
+
     HashtagCardComponent *c = [super newWithView:scfg component:
         [CKInsetComponent
         // Left and right inset of 30pts; centered vertically:
@@ -87,6 +88,7 @@
                     .alignItems = CKStackLayoutAlignItemsStretch
                 }
                 children:{
+
                     {[CKInsetComponent
                       newWithInsets:{.left = 20, .right = 10, .top = 5, .bottom = 5}
                       component:
@@ -96,9 +98,17 @@
                           }
                           children:{
                               {
-                                  [CKButtonComponent newWithTitles:{} titleColors:{} images:{
-                                      {UIControlStateNormal,cardImage},
-                                      } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionGo:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}],
+                                  [CKBackgroundLayoutComponent
+                                   newWithComponent:
+                                       [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                                          {UIControlStateNormal,nil},}
+                                       backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionGo:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}]
+                                   
+                                   background:
+                                       [CKNetworkImageComponent newWithURL:data[@"image"]
+                                                           imageDownloader:context.imageDownloader
+                                                                 scenePath:nil size:{ 40, 40 } options:{.defaultImage=[UIImage imageNamed:@"avatar_unknown_small.png"]} attributes:{{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @8.0},{@selector(setClipsToBounds:), @YES}}]
+                                   ]
                               }, {
                                   .flexGrow = YES,
                                   .component = [CKInsetComponent

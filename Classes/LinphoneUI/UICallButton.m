@@ -68,6 +68,7 @@
     {
         if ([RgManager checkRingMailAddress:address])
         {
+            addressField.text = @"";
 			if ([[address substringToIndex:1] isEqualToString:@"#"])
 			{
 				[RgManager startHashtag:address];
