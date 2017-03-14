@@ -666,6 +666,10 @@
 		C49744311C7C0A7400AD43A1 /* ringmail_input_call.png in Resources */ = {isa = PBXBuildFile; fileRef = C497442F1C7C0A7400AD43A1 /* ringmail_input_call.png */; };
 		C49744321C7C0A7400AD43A1 /* ringmail_input_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = C49744301C7C0A7400AD43A1 /* ringmail_input_chat.png */; };
 		C497443C1C7C153100AD43A1 /* red_disk.svg in Resources */ = {isa = PBXBuildFile; fileRef = C497443B1C7C153100AD43A1 /* red_disk.svg */; };
+		C4A76E6D1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */; };
+		C4A76E6E1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */; };
+		C4A76E6F1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6C1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png */; };
+		C4A76E701E776AF100DD17F2 /* ringmail_triangle_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6C1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png */; };
 		C4A853D61E660D9000FEAFB0 /* SendViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4A853D51E660D9000FEAFB0 /* SendViewController.mm */; };
 		C4A853D71E660D9000FEAFB0 /* SendViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4A853D51E660D9000FEAFB0 /* SendViewController.mm */; };
 		C4A853D91E660E1000FEAFB0 /* Send.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A853D81E660E1000FEAFB0 /* Send.m */; };
@@ -2891,6 +2895,8 @@
 		C497442F1C7C0A7400AD43A1 /* ringmail_input_call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_input_call.png; path = Resources/ringmail_input_call.png; sourceTree = "<group>"; };
 		C49744301C7C0A7400AD43A1 /* ringmail_input_chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_input_chat.png; path = Resources/ringmail_input_chat.png; sourceTree = "<group>"; };
 		C497443B1C7C153100AD43A1 /* red_disk.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = red_disk.svg; path = Resources/red_disk.svg; sourceTree = "<group>"; };
+		C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_triangle_green@2x.png"; path = "Resources/ringmail_triangle_green@2x.png"; sourceTree = "<group>"; };
+		C4A76E6C1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_triangle_grey@2x.png"; path = "Resources/ringmail_triangle_grey@2x.png"; sourceTree = "<group>"; };
 		C4A853CC1E660D7800FEAFB0 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendViewController.h; path = RgComponents/SendViewController.h; sourceTree = "<group>"; };
 		C4A853D51E660D9000FEAFB0 /* SendViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SendViewController.mm; sourceTree = "<group>"; };
 		C4A853D81E660E1000FEAFB0 /* Send.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Send.m; path = RgComponents/Send.m; sourceTree = "<group>"; };
@@ -4729,6 +4735,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */,
+				C4A76E6C1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png */,
 				C4E1CB3F1E6E281E00698166 /* camera-cancel.png */,
 				C4E1CB401E6E281E00698166 /* camera-cancel@2x.png */,
 				C4E1CB411E6E281E00698166 /* camera-cancel@3x.png */,
@@ -6144,6 +6152,7 @@
 				D3C31A7C15BD8DED008ED271 /* video_off_default_landscape.png in Resources */,
 				D3C31A7E15BD8DED008ED271 /* video_off_disabled_landscape.png in Resources */,
 				D3C31A8015BD8DED008ED271 /* video_off_over_landscape.png in Resources */,
+				C4A76E6D1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */,
 				4D9684EC1E4BCB79008464B7 /* explore_background_ip6-7p@3x.png in Resources */,
 				D3C31A8215BD8DED008ED271 /* video_on_default_landscape.png in Resources */,
 				D3C31A8415BD8DED008ED271 /* video_on_disabled_landscape.png in Resources */,
@@ -6364,6 +6373,7 @@
 				D3804E6215D92A57008072A5 /* msg.wav in Resources */,
 				D321FF9915E628CB0098B5F4 /* linphonerc~ipad in Resources */,
 				57F005C415EE2CCF00914747 /* linphonerc in Resources */,
+				C4A76E6F1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png in Resources */,
 				C41D67DD1CA722A100D7BA72 /* ringmail_plus.png in Resources */,
 				C470BF931E68C834009968E2 /* ringpanel_button3_moments@2x.png in Resources */,
 				57F005C815EE2D9200914747 /* linphonerc-factory in Resources */,
@@ -6710,6 +6720,7 @@
 				C4AC284F1D3963FA003B6232 /* contacts_linphone_default.png in Resources */,
 				C4AC28501D3963FA003B6232 /* wizard_remote.rc in Resources */,
 				C4AC28511D3963FA003B6232 /* contacts_add_default.png in Resources */,
+				C4A76E6E1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */,
 				C4AC28521D3963FA003B6232 /* contacts_add_over.png in Resources */,
 				C4AC28531D3963FA003B6232 /* ringmail_mic-x.png in Resources */,
 				C4AC28541D3963FA003B6232 /* list_details_default.png in Resources */,
@@ -7315,6 +7326,7 @@
 				C4AC2A751D3963FA003B6232 /* decline_default_landscape~ipad.png in Resources */,
 				4DF6130C1E5CD6AE005624D2 /* tabs_contacts_normal@2x.png in Resources */,
 				C470BF921E68C834009968E2 /* ringpanel_button2_video@2x.png in Resources */,
+				C4A76E701E776AF100DD17F2 /* ringmail_triangle_grey@2x.png in Resources */,
 				C4AC2A761D3963FA003B6232 /* decline_default~ipad.png in Resources */,
 				C470BF871E68C7E6009968E2 /* plus_icon_pressed@2x.png in Resources */,
 				C4AC2A771D3963FA003B6232 /* decline_over_landscape~ipad.png in Resources */,
@@ -7392,7 +7404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		511AEDDAB089CEDE7BC4DCD2 /* [CP] Copy Pods Resources */ = {

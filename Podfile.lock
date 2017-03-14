@@ -120,7 +120,7 @@ CHECKOUT OPTIONS:
     :commit: 7d98f1c9c8a3217584fd797771dae199cb8eeb65
     :git: https://github.com/nixonnixon/UIImage-Categories.git
   XMPPFramework:
-    :commit: b8300e8d77ddc154e7ed9c7e08c5c2af90455c28
+    :commit: 8e58862248731924632a7090e77d9ed7619821f7
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 SPEC CHECKSUMS:
@@ -152,4 +152,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: dc968b6faf9fc79c879aa64c0e453a0f371989dc
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.0.1

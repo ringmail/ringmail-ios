@@ -34,6 +34,7 @@
 
 @synthesize mainView;
 @synthesize mainViewController;
+@synthesize backgroundImageView;
 @synthesize needsRefresh;
 
 #pragma mark - Lifecycle Functions
@@ -102,6 +103,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    int width = [UIScreen mainScreen].applicationFrame.size.width;
+    if (width == 320) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
+    }
+    else if (width == 375) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];
+    }
+    else if (width == 414) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
+    }
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];

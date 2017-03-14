@@ -28,7 +28,7 @@
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
 	//NSLog(@"Component Data: %@", data);
     UIImage *cardImage = [data objectForKey:@"image"];
-    cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:40 interpolationQuality:kCGInterpolationHigh];
+    cardImage = [cardImage thumbnailImage:92 transparentBorder:0 cornerRadius:46 interpolationQuality:kCGInterpolationHigh];
 
     NSString *latest;
     NSDate *dateLatest = [data objectForKey:@"timestamp"];
@@ -102,7 +102,8 @@
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 
     // Cheat and get a width constraint for the card text box
-    CGFloat textWidth = [[UIScreen mainScreen] bounds].size.width - 100;
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat textWidth = width - 100;
     
     CKComponentViewConfiguration vcfg;
     if ([[data objectForKey:@"unread"] integerValue] > 0)
@@ -354,30 +355,82 @@
     );
 	
     MainCardComponent *c = [super newWithView:scfg component:
-        [CKInsetComponent
-        // Left and right inset of 30pts; centered vertically:
-        newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 10}
-        component:
-            [CKBackgroundLayoutComponent
-            newWithComponent:
-                [CKStackLayoutComponent newWithView:vcfg size:{} style:{
-                    .direction = CKStackLayoutDirectionVertical,
-                    .alignItems = CKStackLayoutAlignItemsStretch
-                }
-                children:cardElements]
-             background:
-                [CKComponent
-                newWithView:{
+        [CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 2, .bottom = 2} component:
+            [CKBackgroundLayoutComponent newWithComponent:
+                [CKStackLayoutComponent newWithView:{} size:{.width = width - 20, .height = 62} style:{
+                    .direction = CKStackLayoutDirectionHorizontal,
+                    .alignItems = CKStackLayoutAlignItemsStart
+                } children:{
+                    // Icon
+                    {[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 8, .bottom = 8} component:
+                        [CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]
+                    ]},
+                    // Name & message
+                    {[CKStackLayoutComponent newWithView:{} size:{.width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/), .height = 62} style:{
+                        .direction = CKStackLayoutDirectionVertical,
+                        .alignItems = CKStackLayoutAlignItemsStart
+                    } children:{
+                        {[CKInsetComponent newWithInsets:{.left = 0, .right = 4, .top = 6, .bottom = 0} component:
+                            [CKLabelComponent newWithLabelAttributes:{
+    							.string = [data objectForKey:@"label"],
+    							.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold],
+    							.alignment = NSTextAlignmentLeft,
+    						} viewAttributes:{
+    							{@selector(setBackgroundColor:), [UIColor clearColor]},
+    							{@selector(setUserInteractionEnabled:), @NO},
+    						} size:{.height = 20}]
+                        ]},
+                        {[CKInsetComponent newWithInsets:{.left = 0, .right = 4, .top = 2, .bottom = 2} component:
+                            [CKLabelComponent newWithLabelAttributes:{
+                                .string = @"Texting 123...",
+                                .font = [UIFont systemFontOfSize:12],
+                                .alignment = NSTextAlignmentLeft,
+                            } viewAttributes:{
+                                {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                {@selector(setUserInteractionEnabled:), @NO},
+                            } size:{.height = 32, .width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/ + 4/*inset*/)}]
+                        ]}
+                    }]},
+                    {[CKComponent newWithView:{
+                        [UIView class],
+                        {
+                            {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#D1D1D1"]},
+                        }
+                    } size:{.height = 62, .width = 1 / [UIScreen mainScreen].scale}]},
+                    // Actions button
+                    {[CKStackLayoutComponent newWithView:{} size:{.width = 74, .height = 62} style:{
+                        .direction = CKStackLayoutDirectionVertical,
+                        .alignItems = CKStackLayoutAlignItemsStart
+                    } children:{
+                        {[CKInsetComponent newWithInsets:{.left = 20, .right = INFINITY, .top = 16, .bottom = 0} component:
+                            [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_triangle_green.png"]]
+                        ]},
+                        {[CKInsetComponent newWithInsets:{.left = 8, .right = 20, .top = 3, .bottom = 0} component:
+                            [CKLabelComponent newWithLabelAttributes:{
+    								.string = @"TODAY >",
+    								.font = [UIFont systemFontOfSize:9 weight:UIFontWeightBold],
+    								.alignment = NSTextAlignmentLeft,
+    							}
+    							viewAttributes:{
+    								{@selector(setBackgroundColor:), [UIColor clearColor]},
+    								{@selector(setUserInteractionEnabled:), @NO},
+    							}
+    							size:{.height = 11, .width = 54}]
+                        ]},
+                    }]}
+                    // Actions button
+                }]
+            background:
+                [CKComponent newWithView:{
                     [UIView class],
                     {
-                        {@selector(setBackgroundColor:), [UIColor whiteColor]},
+                        {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#F7F7F7"]},
                         {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-                        {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @20.0},
+                        {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @10.0},
                         {@selector(setClipsToBounds:), @YES}
                     }
-                }
-                size:{}]
-             ]
+                } size:{}]
+            ]
         ]
     ];
     [c setCardData:data];
