@@ -218,6 +218,8 @@ static LevelDB* theConfigDatabase = nil;
                                                                        @"address": address,
                                                                        @"state": [NSNumber numberWithInt:0],
                                                                        @"inbound": [NSNumber numberWithBool:NO],
+                                                                       @"img_path": [res objectForKey:@"img_path"],
+                                                                       @"avatar_img": [res objectForKey:@"avatar_img"],
                                                                        } session:sessionData[@"id"]];
                                                   [[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
                                                                                                                                                      @"address": [res objectForKey:@"target"],

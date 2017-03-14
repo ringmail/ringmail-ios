@@ -23,8 +23,18 @@
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
+    
 //    UIImage *cardImage = [data objectForKey:@"image"];
 //    cardImage = [cardImage thumbnailImage:80 transparentBorder:0 cornerRadius:8 interpolationQuality:kCGInterpolationHigh];
+    
+    NSURL *avartarUrl;
+    
+    if ([data objectForKey:@"avatar_url"])
+        avartarUrl = [NSURL URLWithString:data[@"avatar_url"]];
+    else if (data[@"image"])
+        avartarUrl = [NSURL URLWithString:data[@"image"]];
+    else
+        avartarUrl = nil;
     
     int screenSizeWidth = [UIScreen mainScreen].applicationFrame.size.width;
     int labelWidth = screenSizeWidth - 140;
@@ -103,9 +113,8 @@
                                        [CKButtonComponent newWithTitles:{} titleColors:{} images:{
                                           {UIControlStateNormal,nil},}
                                        backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionGo:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}]
-                                   
                                    background:
-                                       [CKNetworkImageComponent newWithURL:data[@"image"]
+                                       [CKNetworkImageComponent newWithURL:avartarUrl
                                                            imageDownloader:context.imageDownloader
                                                                  scenePath:nil size:{ 40, 40 } options:{.defaultImage=[UIImage imageNamed:@"avatar_unknown_small.png"]} attributes:{{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @8.0},{@selector(setClipsToBounds:), @YES}}]
                                    ]
