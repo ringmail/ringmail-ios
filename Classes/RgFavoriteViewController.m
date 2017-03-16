@@ -41,7 +41,7 @@
 
 @synthesize mainView;
 @synthesize mainViewController;
-@synthesize backgroundImageView;
+@synthesize backgroundImageView2;
 @synthesize needsRefresh;
 
 #pragma mark - Lifecycle Functions

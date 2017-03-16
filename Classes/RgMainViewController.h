@@ -34,7 +34,6 @@
 
 @property (nonatomic, assign) BOOL transferMode;
 
-@property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
 @property (nonatomic, retain) IBOutlet SendViewController* sendViewController;

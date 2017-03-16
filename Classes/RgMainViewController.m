@@ -43,7 +43,6 @@
 @implementation RgMainViewController
 
 @synthesize transferMode;
-@synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
 @synthesize needsRefresh;
@@ -143,12 +142,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     				linphone_core_enable_video_preview(lc, TRUE);
     			}
 
-    			[backgroundView setHidden:FALSE];
     			[videoCameraSwitch setHidden:FALSE];
     		} else {
     			linphone_core_set_native_preview_window_id(lc, NULL);
     			linphone_core_enable_video_preview(lc, FALSE);
-    			[backgroundView setHidden:TRUE];
     			[videoCameraSwitch setHidden:TRUE];
     		}
     	}
@@ -305,11 +302,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 		LinphoneCore *lc = [LinphoneManager getLc];
 		if (linphone_core_video_enabled(lc) && linphone_core_video_preview_enabled(lc)) {
 			linphone_core_set_native_preview_window_id(lc, (__bridge void *)(videoPreview));
-			[backgroundView setHidden:FALSE];
 			[videoCameraSwitch setHidden:FALSE];
 		} else {
 			linphone_core_set_native_preview_window_id(lc, NULL);
-			[backgroundView setHidden:TRUE];
 			[videoCameraSwitch setHidden:TRUE];
 		}
 	}
