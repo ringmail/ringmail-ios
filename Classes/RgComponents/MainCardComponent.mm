@@ -9,6 +9,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#import "CKComponentSubclass.h"
 #import "MainCardComponent.h"
 #import "MainCardComponentController.h"
 #import "Card.h"
@@ -208,48 +209,88 @@
             } options:{} size:{.height = 34, .width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/ + 4/*inset*/ )}]
         ]}
     }];
-    
-    BOOL showActions = YES;
+	
+	NSNumber *st = scope.state();
+    BOOL showActions = [st boolValue];
     CKComponent* card = nil;
     if (showActions)
     {
-        card = [CKStackLayoutComponent newWithView:{} size:{.width = width - 20, .height = 62} style:{
-            .direction = CKStackLayoutDirectionHorizontal,
+        card = [CKStackLayoutComponent newWithView:{} size:{.width = width - 20, .height = 128} style:{
+            .direction = CKStackLayoutDirectionVertical,
             .alignItems = CKStackLayoutAlignItemsStart
         } children:{
-            // Icon
-            {[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 8, .bottom = 8} component:
-                [CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]
-            ]},
-            // Name & message
-            {body},
+        	{[CKStackLayoutComponent newWithView:{} size:{.width = width - 20, .height = 62} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStart
+            } children:{
+				{[CKStackLayoutComponent newWithView:{
+					[UIView class],
+					{CKComponentTapGestureAttribute(@selector(actionChat:))}
+				} size:{.width = width - 94, .height = 62} style:{
+					.direction = CKStackLayoutDirectionHorizontal,
+					.alignItems = CKStackLayoutAlignItemsStart
+				} children:{
+					// Icon
+					{[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 8, .bottom = 8} component:
+						[CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]
+					]},
+					// Name & message
+					{body},
+				}]},
+                {[CKComponent newWithView:{
+                    [UIView class],
+                    {
+                        {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#D1D1D1"]},
+                    }
+                } size:{.height = 62, .width = 1 / [UIScreen mainScreen].scale}]},
+                // Actions button
+                {[CKStackLayoutComponent newWithView:{} size:{.width = 74, .height = 62} style:{
+                    .direction = CKStackLayoutDirectionVertical,
+                    .alignItems = CKStackLayoutAlignItemsStart
+                } children:{
+                    {[CKInsetComponent newWithInsets:{.left = 20, .right = INFINITY, .top = 16, .bottom = 0} component:
+						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+							{UIControlStateNormal,[UIImage imageNamed:@"ringmail_triangle_grey.png"]},
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionButton:) size:{} attributes:{} accessibilityConfiguration:{}]
+                    ]},
+                    {[CKInsetComponent newWithInsets:{.left = 6, .right = 20, .top = 3, .bottom = 0} component:
+                        [CKLabelComponent newWithLabelAttributes:{
+    							.string = @"TODAY >",
+    							.font = [UIFont systemFontOfSize:9 weight:UIFontWeightBold],
+    							.alignment = NSTextAlignmentLeft,
+    						}
+    						viewAttributes:{
+    							{@selector(setBackgroundColor:), [UIColor clearColor]},
+    							{@selector(setUserInteractionEnabled:), @NO},
+    						}
+    						size:{.height = 11, .width = 54}]
+                    ]},
+                }]}
+			}]},
             {[CKComponent newWithView:{
                 [UIView class],
                 {
                     {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#D1D1D1"]},
                 }
-            } size:{.height = 62, .width = 1 / [UIScreen mainScreen].scale}]},
-            // Actions button
-            {[CKStackLayoutComponent newWithView:{} size:{.width = 74, .height = 62} style:{
-                .direction = CKStackLayoutDirectionVertical,
-                .alignItems = CKStackLayoutAlignItemsStart
-            } children:{
-                {[CKInsetComponent newWithInsets:{.left = 20, .right = INFINITY, .top = 16, .bottom = 0} component:
-                    [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_triangle_grey.png"]]
-                ]},
-                {[CKInsetComponent newWithInsets:{.left = 6, .right = 20, .top = 3, .bottom = 0} component:
-                    [CKLabelComponent newWithLabelAttributes:{
-							.string = @"TODAY >",
-							.font = [UIFont systemFontOfSize:9 weight:UIFontWeightBold],
-							.alignment = NSTextAlignmentLeft,
-						}
-						viewAttributes:{
-							{@selector(setBackgroundColor:), [UIColor clearColor]},
-							{@selector(setUserInteractionEnabled:), @NO},
-						}
-						size:{.height = 11, .width = 54}]
-                ]},
-            }]}
+            } size:{.height = 1 / [UIScreen mainScreen].scale, .width = width - 20}]},
+			{[CKInsetComponent newWithInsets:{.left = INFINITY, .right = INFINITY, .top = 13, .bottom = 13} component:
+    		    [CKStackLayoutComponent newWithView:{} size:{.width = 281, .height = 65} style:{
+                    .direction = CKStackLayoutDirectionHorizontal,
+                    .alignItems = CKStackLayoutAlignItemsStart
+                } children:{
+					{[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+						{UIControlStateNormal,[UIImage imageNamed:@"ringmail_action_call_normal.png"]},
+					} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionCall:) size:{.height=39, .width=87} attributes:{} accessibilityConfiguration:{}]},
+					{[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 0} component:
+						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+							{UIControlStateNormal,[UIImage imageNamed:@"ringmail_action_video_normal.png"]},
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionVideo:) size:{.height=39, .width=87} attributes:{} accessibilityConfiguration:{}]
+					]},
+					{[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+						{UIControlStateNormal,[UIImage imageNamed:@"ringmail_action_text_normal.png"]},
+					} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height=39, .width=87} attributes:{} accessibilityConfiguration:{}]},
+				}]
+			]},
         }];
     }
     else
@@ -258,12 +299,20 @@
             .direction = CKStackLayoutDirectionHorizontal,
             .alignItems = CKStackLayoutAlignItemsStart
         } children:{
-            // Icon
-            {[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 8, .bottom = 8} component:
-                [CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]
-            ]},
-            // Name & message
-            {body},
+			{[CKStackLayoutComponent newWithView:{
+                [UIView class],
+                {CKComponentTapGestureAttribute(@selector(actionChat:))}
+			} size:{.width = width - 94, .height = 62} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStart
+            } children:{
+                // Icon
+                {[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 8, .bottom = 8} component:
+                    [CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]
+                ]},
+                // Name & message
+                {body},
+			}]},
             {[CKComponent newWithView:{
                 [UIView class],
                 {
@@ -276,7 +325,9 @@
                 .alignItems = CKStackLayoutAlignItemsStart
             } children:{
                 {[CKInsetComponent newWithInsets:{.left = 20, .right = INFINITY, .top = 16, .bottom = 0} component:
-                    [CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_triangle_green.png"]]
+					[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+							{UIControlStateNormal,[UIImage imageNamed:@"ringmail_triangle_green.png"]},
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionButton:) size:{} attributes:{} accessibilityConfiguration:{}]
                 ]},
                 {[CKInsetComponent newWithInsets:{.left = 6, .right = 20, .top = 3, .bottom = 0} component:
                     [CKLabelComponent newWithLabelAttributes:{
@@ -313,16 +364,20 @@
     return c;
 }
 
-static CKComponent *lineComponent()
++ (id)initialState
 {
-    return [CKComponent
-            newWithView:{
-                [UIView class],
-                {
-                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#d4d5d7"]},
-                }
-            }
-            size:{.height = 1 / [UIScreen mainScreen].scale}];
+	return [NSNumber numberWithBool:NO];
+}
+
+- (void)actionButton:(CKButtonComponent *)sender
+{
+	NSLog(@"Action Button 1");
+	[self updateState:^(id oldState){
+		NSLog(@"Action Button 2");
+		NSNumber* st = oldState;
+		st = [NSNumber numberWithBool:(! [st boolValue])];
+		return st;
+	}mode:CKUpdateModeAsynchronous];
 }
 
 - (void)actionChat:(CKButtonComponent *)sender
