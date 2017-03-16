@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgMainViewController">
             <connections>
-                <outlet property="backgroundImageView" destination="gUn-KU-5Lv" id="yB9-jY-ylB"/>
                 <outlet property="mainView" destination="WIg-uW-eVV" id="eRx-5b-D7O"/>
                 <outlet property="view" destination="171" id="176"/>
             </connections>
