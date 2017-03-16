@@ -31,18 +31,20 @@
 
 #include "linphone/linphonecore.h"
 
+#import "RgLocationManager.h"
+#import "RgSearchBarViewController.h"
+
+@interface RgHashtagDirectoryViewController()
+@property BOOL isSearchBarVisible;
+@property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@end
+
 @implementation RgHashtagDirectoryViewController
 
-@synthesize addressField;
-@synthesize backButton;
-@synthesize callButton;
-@synthesize goButton;
-@synthesize messageButton;
 @synthesize mainView;
 @synthesize mainViewController;
 @synthesize path;
 @synthesize waitView;
-@synthesize searchButton;
 
 #pragma mark - Lifecycle Functions
 
@@ -94,27 +96,27 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleSegControl)
                                                  name:@"RgSegmentControl"
                                                object:nil];
-
-    NSString *intro = @"#Hashtag";
-    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-    attributes:@{
-                 NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
-                 NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
-                 }];
-    addressField.attributedPlaceholder = placeHolderString;
-    addressField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
-    addressField.textColor = [UIColor colorWithHex:@"#222222"];
+    
+    [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
+    [[RgLocationManager sharedInstance] startUpdatingLocation];
+    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
-
+    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag"];
+    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+    self.isSearchBarVisible = YES;
+    [self addChildViewController:self.searchBarViewController];
+    [self.view addSubview:self.searchBarViewController.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updatePathEvent:)
@@ -135,7 +137,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     UIImageView *background;
     
     if (width == 320) {
-        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip5@2x.png"]];
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
     }
     else if (width == 375) {
         background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];
@@ -155,10 +157,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
-    addressField.returnKeyType = UIReturnKeyDone;
     
     categoryStack = [[NSMutableArray alloc] init];
     [categoryStack addObject:@"0"];
+    
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
 }
 
 - (void)viewDidUnload {
@@ -177,6 +182,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     [mainViewController removeFromParentViewController];
     [self.componentView removeFromSuperview];
+    
+    [self.searchBarViewController dismissKeyboard:nil];
     
     if ([newPath isEqual:@"0"])
     {
@@ -211,24 +218,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     mainViewController = mainController;
 }
 
-- (void)setAddressEvent:(NSNotification *)notif
-{
-    NSString *newAddress = [notif.userInfo objectForKey:@"address"];
-    NSLog(@"RingMail - Set Address Event: %@", newAddress);
-    [addressField setText:newAddress];
-    if ([[newAddress substringToIndex:1] isEqualToString:@"#"])
-    {
-        messageButton.hidden = YES;
-        callButton.hidden = YES;
-        goButton.hidden = NO;
-    }
-    else
-    {
-        messageButton.hidden = NO;
-        callButton.hidden = NO;
-        goButton.hidden = YES;
-    }
-}
 
 #pragma mark - CardPageLoading Functions
 
@@ -242,24 +231,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[waitView setHidden:YES];
 }
 
-#pragma mark - UITextFieldDelegate Functions
-
-- (BOOL)textField:(UITextField *)textField
-	shouldChangeCharactersInRange:(NSRange)range
-				replacementString:(NSString *)string {
-	//[textField performSelector:@selector() withObject:nil afterDelay:0];
-	return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"textFieldShouldReturn");
-	if (textField == addressField) {
-        NSLog(@"textField == addressField");
-        [goButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-		[addressField resignFirstResponder];
-	}
-	return YES;
-}
 
 #pragma mark - MFComposeMailDelegate
 
@@ -274,34 +245,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Action Functions
 
-- (IBAction)onAddressChange:(id)sender {
-	if ([[addressField text] length] > 0) {
-        NSString* addr = [addressField text];
-        if ([[addr substringToIndex:1] isEqualToString:@"#"])
-        {
-            messageButton.hidden = YES;
-            callButton.hidden = YES;
-            goButton.hidden = NO;
-        }
-        else
-        {
-            messageButton.hidden = NO;
-            callButton.hidden = NO;
-            goButton.hidden = YES;
-        }
-	} else {
-        messageButton.hidden = YES;
-        callButton.hidden = YES;
-        goButton.hidden = YES;
-	}
-}
-
-- (IBAction)onSearch:(id)sender {
-    [addressField becomeFirstResponder];
-}
 
 - (void)handleSegControl {
     printf("hashtag segement controller hit\n");
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object  change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"currentLocation"])
+        [[RgLocationManager sharedInstance] stopUpdatingLocation];
 }
 
 @end

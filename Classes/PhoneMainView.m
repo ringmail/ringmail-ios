@@ -380,7 +380,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 			RgMainViewController *controller = DYNAMIC_CAST(
 				[self changeCurrentView:[RgMainViewController compositeViewDescription]], RgMainViewController);
 			if (controller != nil) {
-				[controller setAddress:@""];
+//				[controller setAddress:@""];  // mrkbxt
 				[controller setTransferMode:FALSE];
 			}
 		} else {

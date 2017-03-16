@@ -32,18 +32,17 @@
 
 #include "linphone/linphonecore.h"
 
+#import "RgLocationManager.h"
+#import "RgSearchBarViewController.h"
+
+@interface RgMainViewController()
+@property BOOL isSearchBarVisible;
+@property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@end
+
 @implementation RgMainViewController
 
 @synthesize transferMode;
-
-@synthesize addressField;
-@synthesize addContactButton;
-@synthesize backButton;
-@synthesize addCallButton;
-@synthesize callButton;
-@synthesize goButton;
-@synthesize messageButton;
-@synthesize searchButton;
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
@@ -122,7 +121,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// disabled by default. In this case, updating by pushing a new version with
 	// xcode would result in the callbutton being disabled all the time.
 	// We force it enabled anyway now.
-	[callButton setEnabled:TRUE];
+//	[callButton setEnabled:TRUE];
 
 	// Update on show
 	LinphoneManager *mgr = [LinphoneManager instance];
@@ -155,18 +154,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     	}
     }
     
-	// fix placeholder bar color in >= iOS7
-    NSString *intro = @"#Hashtag, Domain or Email";
-	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
-        attributes:@{
-            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
-            NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
-        }];
-	addressField.attributedPlaceholder = placeHolderString;
-    addressField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
-    addressField.textColor = [UIColor colorWithHex:@"#222222"];
-    
     self.visible = YES;
+    
+    [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
+    [[RgLocationManager sharedInstance] startUpdatingLocation];
+    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
 
 }
 
@@ -178,6 +170,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
     /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
+    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
     
     self.visible = NO;
 }
@@ -195,8 +188,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
     }
 
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
+    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+    self.isSearchBarVisible = YES;
+    [self addChildViewController:self.searchBarViewController];
+    [self.view addSubview:self.searchBarViewController.view];
+    
 	/*
-	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
@@ -211,10 +210,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	*/
     [self setNeedsRefresh:NO];
     
-	[addressField setText:@""];
-    addressField.returnKeyType = UIReturnKeyDone;
-	//[addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
-    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
 
@@ -224,12 +220,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[videoCameraSwitch setHidden:FALSE];
 		}
 	}
-
-  	[[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(setAddressEvent:)
-                                             name:kRgSetAddress
-                                           object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(mainRefreshEvent:)
                                                  name:kRgTextReceived
@@ -264,10 +255,6 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleUserActivity)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
-    
-//    [self testMissedCall];  // mrkbxt
-//    [self testResetMissedCall];  // mrkbxt
     
 }
 
@@ -328,24 +315,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-- (void)setAddressEvent:(NSNotification *)notif
-{
-    NSString *newAddress = [notif.userInfo objectForKey:@"address"];
-    LOGI(@"RingMail: Set Address Event: %@", newAddress);
-    [addressField setText:newAddress];
-    if ([newAddress length] > 0 && [[newAddress substringToIndex:1] isEqualToString:@"#"])
-    {
-        messageButton.hidden = YES;
-        callButton.hidden = YES;
-        goButton.hidden = NO;
-    }
-    else
-    {
-        messageButton.hidden = NO;
-        callButton.hidden = NO;
-        goButton.hidden = YES;
-    }
-}
 
 - (void)mainRefreshEvent:(NSNotification *)notif {
     if (self.visible)
@@ -459,9 +428,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     //NSLog(@"RingMail: %s", __PRETTY_FUNCTION__);
 }
 
-- (void)setAddress:(NSString *)address {
-	[addressField setText:address];
-}
 
 - (void)setTransferMode:(BOOL)atransferMode {
 	transferMode = atransferMode;
@@ -470,24 +436,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self callUpdate:call state:state];
 }
 
-#pragma mark - UITextFieldDelegate Functions
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	if (textField == addressField) {
-        NSLog(@"Return Key entered from MAIN");
-        [goButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-		[addressField resignFirstResponder];
-	}
-	return YES;
-}
-
-#pragma mark - Text Field Functions
-
--(void) dismissKeyboard:(id)sender
-{
-    //[addressField resignFirstResponder];
-    [self.view endEditing:YES];
-}
 
 #pragma mark - MFComposeMailDelegate
 
@@ -504,7 +452,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onAddContactClick:(id)event {
 	[ContactSelection setSelectionMode:ContactSelectionModeEdit];
-	[ContactSelection setAddAddress:[addressField text]];
 	[ContactSelection setSipFilter:nil];
 	[ContactSelection setNameOrEmailFilter:nil];
 	[ContactSelection enableEmailFilter:FALSE];
@@ -515,34 +462,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-- (IBAction)onAddressChange:(id)sender {
-	if ([self displayDebugPopup:self.addressField.text]) {
-		self.addressField.text = @"";
-	}
-	if ([[addressField text] length] > 0) {
-		[addContactButton setEnabled:TRUE];
-		[addCallButton setEnabled:TRUE];
-        NSString* addr = [addressField text];
-        if ([[addr substringToIndex:1] isEqualToString:@"#"])
-        {
-            messageButton.hidden = YES;
-            callButton.hidden = YES;
-            goButton.hidden = NO;
-        }
-        else
-        {
-            messageButton.hidden = NO;
-            callButton.hidden = NO;
-            goButton.hidden = YES;
-        }
-	} else {
-		[addContactButton setEnabled:FALSE];
-		[addCallButton setEnabled:FALSE];
-        messageButton.hidden = YES;
-        callButton.hidden = YES;
-        goButton.hidden = YES;
-	}
-}
 
 /*- (IBAction)onScan:(id)sender {
     RgScanViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgScanViewController compositeViewDescription] push:TRUE], RgScanViewController);
@@ -552,9 +471,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }*/
 
-- (IBAction)onSearch:(id)sender {
-    [addressField becomeFirstResponder];
-}
+
 
 - (void)handleUserActivity {
     
@@ -604,43 +521,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     printf("rgmain segement controller hit\n");
 }
 
-- (void)testMissedCall {
-    LinphoneCallState state = LinphoneCallEnd;
-    // Update call
-    NSMutableDictionary *updates = [NSMutableDictionary dictionaryWithDictionary:@{
-       @"sip": @"",
-       @"state": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],
-       }];
-    if (state == LinphoneCallEnd || state == LinphoneCallError)
-    {
-        NSString *status;
-        int sts = 2;
 
-        if (sts == LinphoneCallMissed)
-        {
-            status = @"missed";
-        }
-        
-        [updates setObject:status forKey:@"status"];
-    }
-    [[[LinphoneManager instance] chatManager] dbUpdateCall:updates];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
-}
+#pragma mark - KVO
 
-- (void)testResetMissedCall {
-    LinphoneCallState state = LinphoneCallEnd;
-    
-    NSMutableDictionary *updates = [NSMutableDictionary dictionaryWithDictionary:@{
-       @"sip": @"",
-       @"state": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],
-       }];
-
-    NSString* status = @"reset";
-        
-    [updates setObject:status forKey:@"status"];
-    
-    [[[LinphoneManager instance] chatManager] dbUpdateCall:updates];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object  change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"currentLocation"])
+        [[RgLocationManager sharedInstance] stopUpdatingLocation];
 }
 
 @end

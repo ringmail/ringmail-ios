@@ -30,10 +30,29 @@
 
 @synthesize cardData;
 
+UIImage* getImageDir(float*);
+CKComponent* hashtagDirHeaderImgComponent(float*, UIImage*);
+
+
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     float screenWidth = [[UIScreen mainScreen] bounds].size.width;
-    UIImage* headerImg = getImageDir(&screenWidth);
+    
+    if ([[data objectForKey:@"text"] isEqual:@"blankTopInset"])
+    {
+        HashtagDirectoryHeaderCardComponent *c = [super newWithComponent:
+        [CKStackLayoutComponent newWithView:{} size:{.width=screenWidth, .height=12} style:{
+            .direction = CKStackLayoutDirectionVertical,
+        }
+        children:{}]
+        ];
+        
+        [c setCardData:data];
+         return c;
+    }
+
+//    UIImage* headerImg = getImageDir(&screenWidth);
+    NSString* hdht = data[@"header_img_ht"];
     
     HashtagDirectoryHeaderCardComponent *c = [super newWithComponent:
         [CKStackLayoutComponent newWithView:{} size:{.width=screenWidth} style:{
@@ -43,13 +62,16 @@
             {[CKInsetComponent
                  newWithInsets:{.top = 0, .bottom = 0}
                  component:
-                    [CKStackLayoutComponent newWithView:{} size:{.height = headerImg.size.height, .width=screenWidth} style:{
+                    [CKStackLayoutComponent newWithView:{} size:{.height = [hdht floatValue], .width=screenWidth} style:{
             			.direction = CKStackLayoutDirectionHorizontal,
             			.alignItems = CKStackLayoutAlignItemsStretch
             		}
             		children:{
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-                        {hashtagDirHeaderImgComponent(&screenWidth,headerImg)},
+                        {[CKNetworkImageComponent newWithURL:data[@"header_img_url"]
+                            imageDownloader:context.imageDownloader
+                            scenePath:nil size:{ screenWidth, [hdht floatValue] } options:{} attributes:{}]},
+//                        {hashtagDirHeaderImgComponent(&screenWidth,headerImg)},
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
             		}]
             ]},
@@ -71,6 +93,7 @@
             ]}
         }]
 	];
+    
     [c setCardData:data];
     return c;
 }

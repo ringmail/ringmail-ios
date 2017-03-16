@@ -30,6 +30,13 @@
 
 #include "linphone/linphonecore.h"
 
+#import "RgSearchBarViewController.h"
+
+@interface RgFavoriteViewController()
+@property BOOL isSearchBarVisible;
+@property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@end
+
 @implementation RgFavoriteViewController
 
 @synthesize mainView;
@@ -114,6 +121,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
     }
     
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@""];
+    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+    self.isSearchBarVisible = YES;
+    [self addChildViewController:self.searchBarViewController];
+    [self.view addSubview:self.searchBarViewController.view];
+    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
@@ -132,6 +145,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
     [self setNeedsRefresh:NO];
+    
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
     
 	// Set observer
 	[[NSNotificationCenter defaultCenter] addObserver:self

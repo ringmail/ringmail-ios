@@ -52,8 +52,6 @@
     {
         NSString *address = [r objectForKey:@"session_tag"];
         
-        NSLog(@"buildCards address: %@", address);  // mrkbxt
-
         NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:r];
 		
 		// Index
@@ -64,7 +62,14 @@
             [newdata setObject:@"hashtag" forKey:@"type"];
             [newdata setObject:address forKey:@"label"];
             [newdata setObject:defaultImage forKey:@"image"];
-		}
+            
+            if (![[r objectForKey:@"avatar_img"] isEqual:[NSNull null]] && ![[r objectForKey:@"img_path"] isEqual:[NSNull null]]) {
+                NSString *avatarUrl = [NSString stringWithFormat:@"%@%@%@%@",@"https://",[RgManager ringmailHost],[r objectForKey:@"img_path"],[r objectForKey:@"avatar_img"]];
+                [newdata setObject:avatarUrl forKey:@"avatar_url"];
+            }
+            else
+                [newdata setObject:@"" forKey:@"avatar_url"];
+        }
 		else
 		{
     		// Avatar image

@@ -10,4 +10,6 @@
 
 @interface RgSearchBackgroundView : UIView
 
+@property (nonatomic, assign) BOOL sepLineVisible;
+
 @end

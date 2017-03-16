@@ -810,6 +810,9 @@
 								
 								@"CREATE TABLE IF NOT EXISTS favorites (id INTEGER PRIMARY KEY NOT NULL, contact_id bigint NOT NULL);",
 								@"CREATE UNIQUE INDEX IF NOT EXISTS contact_id_1 ON favorites (contact_id);",
+                          
+                                @"CREATE TABLE IF NOT EXISTS htag_avatars (id INTEGER PRIMARY KEY NOT NULL, address text NOT NULL UNIQUE, url varchar(255) DEFAULT NULL);",  // mrkbxt
+                          
                           nil];
         for (NSString *sql in setup)
         {
@@ -1277,7 +1280,9 @@
         sql = [sql stringByAppendingString:@"(SELECT STRFTIME('%s', call_time) FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_time, "];
         sql = [sql stringByAppendingString:@"(SELECT call_inbound FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_inbound, "];
 		sql = [sql stringByAppendingString:@"(SELECT call_duration FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_duration, "];
-		sql = [sql stringByAppendingString:@"(SELECT call_status FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_status "];
+		sql = [sql stringByAppendingString:@"(SELECT call_status FROM calls WHERE calls.session_id=session.rowid ORDER BY rowid DESC LIMIT 1) as call_status, "];
+        sql = [sql stringByAppendingString:@"(SELECT url FROM htag_avatars WHERE htag_avatars.address=session.session_tag ORDER BY rowid DESC LIMIT 1) as avatar_img, "];  // mrkbxt
+        sql = [sql stringByAppendingString:@"(SELECT url FROM htag_avatars WHERE htag_avatars.address LIKE 'img_path' ORDER BY rowid DESC LIMIT 1) as img_path "];
         sql = [sql stringByAppendingString:@"FROM session "];
         if (session)
         {
@@ -1318,6 +1323,7 @@
             [result addObject:item];
         }
         [rs close];
+                
     }];
     NSLog(@"dbGetMainList: %@", result);
     [dbq close];
@@ -1494,6 +1500,14 @@
                 @"call_status":@"created",
             }
         }];
+        if ([callData objectForKey:@"avatar_img"])
+        {
+            [db executeUpdate:@"REPLACE INTO htag_avatars (address, url) VALUES (?, ?)",[callData objectForKey:@"address"],[callData objectForKey:@"avatar_img"]];  // mrkbxt
+        }
+        if ([callData objectForKey:@"img_path"])
+        {
+            [db executeUpdate:@"REPLACE INTO htag_avatars (address, url) VALUES ('img_path', ?)",[callData objectForKey:@"img_path"]];  // mrkbxt
+        }
     }];
     [dbq close];
 	[self dbUpdateSessionTimestamp:session timestamp:[NSDate date] show:YES];
