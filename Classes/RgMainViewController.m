@@ -20,14 +20,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "RgScanViewController.h"
 #import "RgMainViewController.h"
+#import "RgScanViewController.h"
 #import "RgInCallViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "UIColor+Hex.h"
+#import "SendViewController.h"
 
 #include "linphone/linphonecore.h"
 
@@ -45,11 +46,9 @@
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
-//@synthesize mainController;
-@synthesize mainView;
-@synthesize mainViewController;
 @synthesize needsRefresh;
-
+@synthesize sendViewController;
+@synthesize backgroundImageView;
 
 #pragma mark - Lifecycle Functions
 
@@ -155,12 +154,16 @@ static UICompositeViewDescription *compositeDescription = nil;
     	}
     }
     
-    if ([self needsRefresh])
-    {
-        LOGI(@"RingMail: Updating Main Card List 1");
-        [mainViewController updateCollection];
-        [self setNeedsRefresh:NO];
-    }
+	// fix placeholder bar color in >= iOS7
+    NSString *intro = @"#Hashtag, Domain or Email";
+	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
+        attributes:@{
+            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
+            NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
+        }];
+	addressField.attributedPlaceholder = placeHolderString;
+    addressField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
+    addressField.textColor = [UIColor colorWithHex:@"#222222"];
     
     self.visible = YES;
     
@@ -169,7 +172,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
 
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
@@ -193,23 +195,31 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
     
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    int width = [UIScreen mainScreen].applicationFrame.size.width;
+    if (width == 320) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
+    }
+    else if (width == 375) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];
+    }
+    else if (width == 414) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
+    }
+
+	/*
+	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
-    
-    MainCollectionViewController *mainController = [[MainCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
-    
-    [[mainController collectionView] setBounces:YES];
-    [[mainController collectionView] setAlwaysBounceVertical:YES];
-    
-    CGRect r = mainView.frame;
+
+	CGRect r = mainView.frame;
     r.origin.y = 0;
     [mainController.view setFrame:r];
     [mainView addSubview:mainController.view];
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
+	*/
     [self setNeedsRefresh:NO];
     
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
@@ -322,7 +332,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (self.visible)
     {
         LOGI(@"RingMail: Updating Main Card List 2");
-        [mainViewController updateCollection];
+        //[mainViewController updateCollection];
     }
     else
     {
@@ -332,7 +342,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)removeCard:(NSNotification *)notif {
 	[[[LinphoneManager instance] chatManager] dbHideSession:notif.userInfo[@"id"]];
-	[mainViewController updateCollection];
+	//[mainViewController updateCollection];
 }
 
 #pragma mark - Debug Functions
@@ -465,13 +475,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 
-- (IBAction)onScan:(id)sender {
+/*- (IBAction)onScan:(id)sender {
     RgScanViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgScanViewController compositeViewDescription] push:TRUE], RgScanViewController);
     if (controller != nil)
     {
         [controller beginScan];
     }
-}
+}*/
 
 
 

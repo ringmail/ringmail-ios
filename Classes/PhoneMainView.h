@@ -70,6 +70,7 @@
 @property (weak, readonly) UICompositeViewDescription *currentView;
 @property (readonly, strong) MPVolumeView* volumeView;
 @property (nonatomic, strong) RgWebViewDelegate* webDelegate;
+@property (nonatomic, strong) UIImage* momentImage;
 
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView;
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView push:(BOOL)push;

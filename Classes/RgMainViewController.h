@@ -20,12 +20,11 @@
 #import <UIKit/UIKit.h>
 
 #import "UICompositeViewController.h"
-#import "MainCollectionViewController.h"
-
 #import "UICamSwitch.h"
 #import "UICallButton.h"
 #import "UIMessageButton.h"
 #import "UIDigitButton.h"
+#import "SendViewController.h"
 
 @interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, MFMailComposeViewControllerDelegate> {
 }
@@ -38,10 +37,8 @@
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
-//@property (nonatomic, strong) IBOutlet RgMainTableViewController* tableController;
-//@property (nonatomic, strong) IBOutlet MainCollectionViewController* mainController;
-@property (nonatomic, strong) IBOutlet UIView* mainView;
-@property (nonatomic, retain) MainCollectionViewController* mainViewController;
+@property (nonatomic, retain) IBOutlet SendViewController* sendViewController;
+@property (nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
 @property (nonatomic, assign) BOOL needsRefresh;
 @property (nonatomic, assign) BOOL visible;
 

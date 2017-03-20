@@ -41,6 +41,7 @@
 
 @synthesize mainView;
 @synthesize mainViewController;
+@synthesize backgroundImageView;
 @synthesize needsRefresh;
 
 #pragma mark - Lifecycle Functions
@@ -109,6 +110,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    int width = [UIScreen mainScreen].applicationFrame.size.width;
+    if (width == 320) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
+    }
+    else if (width == 375) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];
+    }
+    else if (width == 414) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
+    }
     
     self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@""];
     self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
@@ -121,7 +132,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
     
-    FavoriteCollectionViewController *mainController = [[FavoriteCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
+    MainCollectionViewController *mainController = [[MainCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
     
     [[mainController collectionView] setBounces:YES];
     [[mainController collectionView] setAlwaysBounceVertical:YES];
