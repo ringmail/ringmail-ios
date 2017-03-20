@@ -69,6 +69,7 @@
 		[parent addChildViewController:favController];
 		[favController didMoveToParentViewController:parent];
 		sv.componentViewController = favController;
+		[[favController collectionView] setAlwaysBounceHorizontal:YES];
 	}
 	else
 	{
