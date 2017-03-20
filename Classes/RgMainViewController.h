@@ -32,14 +32,13 @@
 - (void)handleUserActivity;
 - (void)handleSegControl;
 
-@property (nonatomic, assign) BOOL transferMode;
-
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
 @property (nonatomic, retain) IBOutlet SendViewController* sendViewController;
 @property (nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
 @property (nonatomic, assign) BOOL needsRefresh;
 @property (nonatomic, assign) BOOL visible;
+@property (nonatomic, assign) BOOL transferMode;
 
 - (IBAction)onAddContactClick: (id) event;
 
