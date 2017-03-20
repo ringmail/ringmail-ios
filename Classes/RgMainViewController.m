@@ -123,7 +123,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// xcode would result in the callbutton being disabled all the time.
 	// We force it enabled anyway now.
 //	[callButton setEnabled:TRUE];
-
+    
 	// Update on show
 	LinphoneManager *mgr = [LinphoneManager instance];
     if ([[mgr coreReady] boolValue])

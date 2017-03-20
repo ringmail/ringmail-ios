@@ -84,10 +84,34 @@ static NSInteger const pageSize = 42;
         [_dataSource enqueueChangeset:{{}, items}
                       constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
     }
-    
 }
 
+#pragma mark - Update collection
 
+- (void)updateCollection:(bool)myActivity
+{
+    if (myActivity)
+    {
+        CKArrayControllerInputItems items;
+        
+        NSMutableArray *newList = [_cardModelController readMainList];
+        NSInteger newCount = [newList count];
+
+        for (NSInteger i = 0; i < [[_cardModelController mainCount] integerValue]; i++)
+            items.remove([NSIndexPath indexPathForRow:i inSection:0]);
+    
+        for (NSInteger i = 0; i < newCount-1; i++)
+        {
+            Card *card = [[Card alloc] initWithData:newList[i]
+                                             header:[NSNumber numberWithBool:0]];
+            
+            items.insert([NSIndexPath indexPathForRow:i inSection:0], card);
+        }
+        
+        [_dataSource enqueueChangeset:{{}, items}
+                      constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+    }
+}
 
 
 #pragma mark - UICollectionViewDelegateFlowLayout

@@ -45,6 +45,7 @@
 @synthesize mainViewController;
 @synthesize path;
 @synthesize waitView;
+@synthesize needsRefresh;
 
 #pragma mark - Lifecycle Functions
 
@@ -93,13 +94,23 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleSegControl)
+                                             selector:@selector(handleSegControl:)
                                                  name:@"RgSegmentControl"
                                                object:nil];
     
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
+    
+    
+    
+//    if ([self needsRefresh])
+//    {
+//        LOGI(@"RingMail: Updating Hashtag Card List 1");
+//        [mainViewController updateCollection];
+//        [self setNeedsRefresh:NO];
+//    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -185,7 +196,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [self.searchBarViewController dismissKeyboard:nil];
     
-    if ([newPath isEqual:@"0"])
+    
+    if ([newPath isEqual:@"Categories"])
+    {
+        // seg control changing back to last category view. exiting VC is removed and new re-allocated using exiting path value
+    }
+    else if ([newPath isEqual:@"0"])
     {
         [categoryStack removeLastObject];
         path = [categoryStack lastObject];
@@ -246,8 +262,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Action Functions
 
 
-- (void)handleSegControl {
-    printf("hashtag segement controller hit\n");
+- (void)handleSegControl:(NSNotification *)notif {
+    NSString *segIndex = [notif.userInfo objectForKey:@"segIndex"];
+    
+    if([segIndex isEqual: @"0"])
+        [self updatePath:@"Categories"];
+    else if ([segIndex isEqual: @"1"])
+        [mainViewController updateCollection:true];
 }
 
 #pragma mark - KVO

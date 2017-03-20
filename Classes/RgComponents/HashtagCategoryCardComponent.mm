@@ -35,7 +35,7 @@ CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary*);
 	CGFloat screenWidth = screenRect.size.width;
 	CGFloat itemWidth = screenWidth / 2;
 	CGFloat rectWidth = itemWidth - 20;
-
+    
 //    UIImage* test = [UIImage imageNamed:@"explore_hashtagdir_full1@iph6-7p@3x.jpg"];
     
     HashtagCategoryCardComponent *c = [super newWithComponent:
