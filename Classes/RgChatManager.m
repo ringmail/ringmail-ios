@@ -748,7 +748,7 @@
 	{
 		dbPath = @"ringmail_dev";
 	}
-    dbPath = [dbPath stringByAppendingString:@"_v1.2.12.db"];
+    dbPath = [dbPath stringByAppendingString:@"_v1.2.13.db"];
     return dbPath;
 }
 
@@ -1000,7 +1000,7 @@
                 @"table": @"session",
                 @"insert": @{
                     @"session_tag": from,
-					@"session_to": [NSString stringWithString:to],
+					@"session_to": to,
                     @"contact_id": (contact != nil) ? contact : [NSNull null],
                     @"session_md5": [[NSString stringWithFormat:@"%@:%@", from, to] md5HexDigest],
                     @"unread": @0,

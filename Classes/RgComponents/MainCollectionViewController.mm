@@ -33,7 +33,7 @@ static NSInteger const pageSize = 10;
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
         _cardModelController = [[CardModelController alloc] init];
-		[_cardModelController setHeader:@"Recent Activity"];
+		[_cardModelController setHeader:@""];
         //self.title = @"Wilde Guess";
         //self.navigationItem.prompt = @"Tap to reveal which cards are from Oscar Wilde";
     }
@@ -54,7 +54,7 @@ static NSInteger const pageSize = 10;
                              @"button_video":[UIImage imageNamed:@"camera.png"],
                              }];
     
-    self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:1.0f];
+    self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.delegate = self;
     
     CardContext *context = [[CardContext alloc] initWithImages:images];

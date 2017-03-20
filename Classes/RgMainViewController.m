@@ -20,14 +20,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "RgScanViewController.h"
 #import "RgMainViewController.h"
+#import "RgScanViewController.h"
 #import "RgInCallViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "UIColor+Hex.h"
+#import "SendViewController.h"
 
 #include "linphone/linphonecore.h"
 
@@ -42,14 +43,11 @@
 @implementation RgMainViewController
 
 @synthesize transferMode;
-@synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
-//@synthesize mainController;
-@synthesize mainView;
-@synthesize mainViewController;
 @synthesize needsRefresh;
-
+@synthesize sendViewController;
+@synthesize backgroundImageView;
 
 #pragma mark - Lifecycle Functions
 
@@ -144,22 +142,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     				linphone_core_enable_video_preview(lc, TRUE);
     			}
 
-    			[backgroundView setHidden:FALSE];
     			[videoCameraSwitch setHidden:FALSE];
     		} else {
     			linphone_core_set_native_preview_window_id(lc, NULL);
     			linphone_core_enable_video_preview(lc, FALSE);
-    			[backgroundView setHidden:TRUE];
     			[videoCameraSwitch setHidden:TRUE];
     		}
     	}
-    }
-    
-    if ([self needsRefresh])
-    {
-        LOGI(@"RingMail: Updating Main Card List 1");
-        [mainViewController updateCollection];
-        [self setNeedsRefresh:NO];
     }
     
     self.visible = YES;
@@ -169,7 +158,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
 
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
@@ -186,30 +174,37 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    
+    int width = [UIScreen mainScreen].applicationFrame.size.width;
+    if (width == 320) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
+    }
+    else if (width == 375) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];
+    }
+    else if (width == 414) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
+    }
+
     self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
     self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
     self.isSearchBarVisible = YES;
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
     
+	/*
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
-    
-    MainCollectionViewController *mainController = [[MainCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
-    
-    [[mainController collectionView] setBounces:YES];
-    [[mainController collectionView] setAlwaysBounceVertical:YES];
-    
-    CGRect r = mainView.frame;
+
+	CGRect r = mainView.frame;
     r.origin.y = 0;
     [mainController.view setFrame:r];
     [mainView addSubview:mainController.view];
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
+	*/
     [self setNeedsRefresh:NO];
     
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
@@ -307,11 +302,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 		LinphoneCore *lc = [LinphoneManager getLc];
 		if (linphone_core_video_enabled(lc) && linphone_core_video_preview_enabled(lc)) {
 			linphone_core_set_native_preview_window_id(lc, (__bridge void *)(videoPreview));
-			[backgroundView setHidden:FALSE];
 			[videoCameraSwitch setHidden:FALSE];
 		} else {
 			linphone_core_set_native_preview_window_id(lc, NULL);
-			[backgroundView setHidden:TRUE];
 			[videoCameraSwitch setHidden:TRUE];
 		}
 	}
@@ -322,7 +315,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (self.visible)
     {
         LOGI(@"RingMail: Updating Main Card List 2");
-        [mainViewController updateCollection];
+        //[mainViewController updateCollection];
     }
     else
     {
@@ -332,7 +325,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)removeCard:(NSNotification *)notif {
 	[[[LinphoneManager instance] chatManager] dbHideSession:notif.userInfo[@"id"]];
-	[mainViewController updateCollection];
+	//[mainViewController updateCollection];
 }
 
 #pragma mark - Debug Functions
@@ -465,13 +458,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 
-- (IBAction)onScan:(id)sender {
+/*- (IBAction)onScan:(id)sender {
     RgScanViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgScanViewController compositeViewDescription] push:TRUE], RgScanViewController);
     if (controller != nil)
     {
         [controller beginScan];
     }
-}
+}*/
 
 
 

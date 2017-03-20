@@ -37,6 +37,7 @@ PODS:
   - leveldb-library (1.18.2)
   - libidn (1.33)
   - libPhoneNumber-iOS (0.9.4)
+  - LLSimpleCamera (5.0.0)
   - NSHash (1.0.2)
   - NYXImagesKit (2.3)
   - Objective-LevelDB (2.1.5):
@@ -59,12 +60,13 @@ DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - CocoaLumberjack
   - Colours
-  - ComponentKit
+  - ComponentKit (from `https://github.com/facebook/componentkit.git`, tag `0.15.1`)
   - CRMediaPickerController
   - DXTableViewModel (~> 0.1.0)
   - FMDB
   - JSQMessagesViewController (from `git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git`, branch `ringmail`)
   - libPhoneNumber-iOS (~> 0.8)
+  - LLSimpleCamera (from `https://github.com/omergul123/LLSimpleCamera.git`, tag `v5.0.0`)
   - NSHash (~> 1.0.2)
   - NYXImagesKit
   - Objective-LevelDB
@@ -77,9 +79,15 @@ DEPENDENCIES:
   - XMPPFramework (from `https://github.com/robbiehanson/XMPPFramework.git`, branch `master`)
 
 EXTERNAL SOURCES:
+  ComponentKit:
+    :git: https://github.com/facebook/componentkit.git
+    :tag: 0.15.1
   JSQMessagesViewController:
     :branch: ringmail
     :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
+  LLSimpleCamera:
+    :git: https://github.com/omergul123/LLSimpleCamera.git
+    :tag: v5.0.0
   SDWebImage:
     :git: https://github.com/rs/SDWebImage.git
     :tag: 3.8.2
@@ -93,9 +101,15 @@ EXTERNAL SOURCES:
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 CHECKOUT OPTIONS:
+  ComponentKit:
+    :git: https://github.com/facebook/componentkit.git
+    :tag: 0.15.1
   JSQMessagesViewController:
     :commit: 08356e2f7edabf995840291f3b94844c94f376ba
     :git: git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git
+  LLSimpleCamera:
+    :git: https://github.com/omergul123/LLSimpleCamera.git
+    :tag: v5.0.0
   SDWebImage:
     :git: https://github.com/rs/SDWebImage.git
     :tag: 3.8.2
@@ -106,7 +120,7 @@ CHECKOUT OPTIONS:
     :commit: 7d98f1c9c8a3217584fd797771dae199cb8eeb65
     :git: https://github.com/nixonnixon/UIImage-Categories.git
   XMPPFramework:
-    :commit: 2bf459c08706320f4b1d31c76514ad6032632af5
+    :commit: 8e58862248731924632a7090e77d9ed7619821f7
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 SPEC CHECKSUMS:
@@ -124,6 +138,7 @@ SPEC CHECKSUMS:
   leveldb-library: ef0453697c0fda3a9e550e5650e52976e6724548
   libidn: 90fc1a62b60288dcf543f13f4ebca913f17d829f
   libPhoneNumber-iOS: 63bab980d1fc9783d82d955800ac9d7c1d81fde3
+  LLSimpleCamera: 7175ccb81be71c83d79933089322eb662b1f0327
   NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   Objective-LevelDB: fa075efd9d0be645aee51847cc3ee70cdadb80ce
@@ -135,6 +150,6 @@ SPEC CHECKSUMS:
   UIImage-Categories: b9d2ff50c2250ea007f150c2427ff230b5a4789b
   XMPPFramework: 544da7ab3faf7005de303708630a4e9741efb907
 
-PODFILE CHECKSUM: 2e34e327762247fbf26dab2ecf2299d41e713a8d
+PODFILE CHECKSUM: dc968b6faf9fc79c879aa64c0e453a0f371989dc
 
 COCOAPODS: 1.0.1

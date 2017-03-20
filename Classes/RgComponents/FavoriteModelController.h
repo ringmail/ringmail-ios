@@ -1,7 +1,15 @@
 #import <Foundation/Foundation.h>
 #import "RegexKitLite/RegexKitLite.h"
-#import "CardModelController.h"
+#import "FavoriteModelController.h"
 
-@interface FavoriteModelController : CardModelController
+@class CKCollectionViewDataSource;
+@class FavoritesPage;
+
+@interface FavoriteModelController : NSObject
+
+@property (nonatomic, retain) NSArray *favList;
+@property (nonatomic, retain) NSNumber *mainCount;
+
+- (FavoritesPage *)fetchNewFavoritesPageWithCount:(NSInteger)count;
 
 @end
