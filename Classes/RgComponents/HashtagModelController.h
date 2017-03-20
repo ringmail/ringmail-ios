@@ -34,4 +34,7 @@ extern NSString *const RG_HASHTAG_DIRECTORY;
 - (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count;
 - (void)fetchPageWithCount:(NSInteger)count screenWidth:(NSString*)screenWidth caller:(HashtagCollectionViewController*)caller;
 
+- (NSArray *)buildCards:(NSArray*)list;
+- (NSMutableArray *)readMainList;
+
 @end

@@ -121,7 +121,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// xcode would result in the callbutton being disabled all the time.
 	// We force it enabled anyway now.
 //	[callButton setEnabled:TRUE];
-
+    
 	// Update on show
 	LinphoneManager *mgr = [LinphoneManager instance];
     if ([[mgr coreReady] boolValue])
@@ -151,6 +151,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     	}
     }
     
+	// fix placeholder bar color in >= iOS7
+    NSString *intro = @"#Hashtag, Domain or Email";
+	NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:intro
+        attributes:@{
+            NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
+            NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
+        }];
+	addressField.attributedPlaceholder = placeHolderString;
+    addressField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
+    addressField.textColor = [UIColor colorWithHex:@"#222222"];
+    
     self.visible = YES;
     
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
@@ -174,6 +185,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
+    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+    self.isSearchBarVisible = YES;
+    [self addChildViewController:self.searchBarViewController];
+    [self.view addSubview:self.searchBarViewController.view];
+    
     int width = [UIScreen mainScreen].applicationFrame.size.width;
     if (width == 320) {
 		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
@@ -192,7 +210,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.view addSubview:self.searchBarViewController.view];
     
 	/*
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];

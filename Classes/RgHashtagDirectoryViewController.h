@@ -39,5 +39,6 @@
 @property (nonatomic, retain) HashtagCollectionViewController* mainViewController;
 @property (nonatomic, retain) NSString* path;
 @property (nonatomic, weak) UIView *componentView;
+@property (nonatomic, assign) BOOL needsRefresh;
 
 @end
