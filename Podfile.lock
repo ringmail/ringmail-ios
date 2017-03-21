@@ -36,7 +36,7 @@ PODS:
   - KissXML (5.2.0)
   - leveldb-library (1.18.2)
   - libidn (1.33)
-  - libPhoneNumber-iOS (0.9.4)
+  - libPhoneNumber-iOS (0.9.6)
   - NSHash (1.0.2)
   - NYXImagesKit (2.3)
   - Objective-LevelDB (2.1.5):
@@ -106,7 +106,7 @@ CHECKOUT OPTIONS:
     :commit: 7d98f1c9c8a3217584fd797771dae199cb8eeb65
     :git: https://github.com/nixonnixon/UIImage-Categories.git
   XMPPFramework:
-    :commit: 2bf459c08706320f4b1d31c76514ad6032632af5
+    :commit: 8e58862248731924632a7090e77d9ed7619821f7
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 SPEC CHECKSUMS:
@@ -123,7 +123,7 @@ SPEC CHECKSUMS:
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
   leveldb-library: ef0453697c0fda3a9e550e5650e52976e6724548
   libidn: 90fc1a62b60288dcf543f13f4ebca913f17d829f
-  libPhoneNumber-iOS: 63bab980d1fc9783d82d955800ac9d7c1d81fde3
+  libPhoneNumber-iOS: 36044ed9658b5c11ee3cb3011751e47251d34992
   NSHash: 173d9782d4b7dec17bf32f22d8ab203c88655a04
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   Objective-LevelDB: fa075efd9d0be645aee51847cc3ee70cdadb80ce

@@ -25,7 +25,7 @@
 
 @synthesize cardData;
 
-CKComponent* hashtagCatImgComponent(UIImage*, CGFloat*);
+//CKComponent* hashtagCatImgComponent(UIImage*, CGFloat*);
 CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary*);
 
 
@@ -68,20 +68,20 @@ CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary*);
 }
 
 
-CKComponent* hashtagCatImgComponent(UIImage* imgIn, CGFloat* wIn)
-{
-    return
-    [
-        CKComponent newWithView:{
-            [UIImageView class],
-            {
-              {@selector(setImage:), imgIn},
-              {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-            }
-        }
-        size:{*wIn, *wIn / (imgIn.size.width/imgIn.size.height)}
-    ];
-}
+//CKComponent* hashtagCatImgComponent(UIImage* imgIn, CGFloat* wIn)
+//{
+//    return
+//    [
+//        CKComponent newWithView:{
+//            [UIImageView class],
+//            {
+//              {@selector(setImage:), imgIn},
+//              {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+//            }
+//        }
+//        size:{*wIn, *wIn / (imgIn.size.width/imgIn.size.height)}
+//    ];
+//}
 
 
 CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary* data)
