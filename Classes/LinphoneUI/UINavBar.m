@@ -130,17 +130,18 @@ int backState = 0;
         segFrameHeight = 24;
         segFrameWidth = 145;
         segXShifted += 12.5;
+        [backButton setCenter:CGPointMake(backButton.center.x,38)];
     }
     else if (widthIn == 375) {
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
-//        segFrameHeight = 27;
-//        segFrameWidth = 170;
+        [backButton setCenter:CGPointMake(backButton.center.x,42)];
     }
     else if (widthIn == 414) {
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@3x.jpg"];
         segFrameHeight = 30;
         segFrameWidth = 189;
         segXShifted -= 9.5;
+        [backButton setCenter:CGPointMake(backButton.center.x,46)];
     }
     
     background.frame = CGRectMake(0, 0, tmpImg.size.width, tmpImg.size.height);
@@ -186,11 +187,13 @@ int backState = 0;
         case Recents:
             [segmentButton setEnabled:YES];
             [segmentButton setHidden:NO];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"1",}];
             break;
         case Contacts:
         case Settings:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"0",}];
             break;
         case HTagCard:
             [segmentButton setEnabled:NO];
@@ -200,11 +203,11 @@ int backState = 0;
             backState = 1;
             [headerLabel setHidden:NO];
             headerLabel.text = @"Explore";
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"0",}];
             break;
         default:
             break;
     }
-
 }
 
 
@@ -238,9 +241,6 @@ int backState = 0;
 
 - (IBAction)onBackClick:(id)event {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{@"category_id": @"0",}];
-//    NSNotification *resetNotif = [[NSNotification alloc] initWithName:@"resetBtnLabelsHeader" object:nil userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity"}];
-//    backState = 0;
-//    [self updateLabelsBtns:resetNotif];
 }
 
 
@@ -251,7 +251,7 @@ int backState = 0;
     NSDictionary* dict = [NSDictionary dictionaryWithObject: [NSString stringWithFormat: @"%ld", s.selectedSegmentIndex] forKey:@"segIndex"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RgSegmentControl" object:nil userInfo:dict];
-
+    
 }
 
 

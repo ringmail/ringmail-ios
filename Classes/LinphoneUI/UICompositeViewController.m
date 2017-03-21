@@ -196,8 +196,21 @@
 	/* Force landscape view to match portrait view, because portrait view inherits
 	   the device screen size at load */
 	[self updateViewsFramesAccordingToLaunchOrientation];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateNavFrame:)
+                                                 name:@"UICompositeVCNavBarHeight"
+                                               object:nil];
+    
 	[super viewDidLoad];
 }
+
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UICompositeVCNavBarHeight" object:nil];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
@@ -416,6 +429,44 @@
 	}
 	return UIInterfaceOrientationPortrait;
 }
+
+-(void)updateNavFrame:(NSNotification *)notif
+{
+    int screenSizeWidth = [UIScreen mainScreen].applicationFrame.size.width;
+    
+    CGRect viewFrame = [self.view frame];
+    CGRect navFrame = navBarView.frame;
+    CGRect contentFrame = contentView.frame;
+    CGRect tabFrame = tabBarView.frame;
+        
+    if ([[notif.userInfo objectForKey:@"segContState"] isEqual: @"1"])
+    {
+        if (screenSizeWidth == 320 && (navFrame.size.height != 73))
+            navFrame.size.height = 73;
+        else if (screenSizeWidth == 375 && (navFrame.size.height != 84))
+            navFrame.size.height = 84;
+        else if (screenSizeWidth == 414 && (navFrame.size.height != 95))
+            navFrame.size.height = 95;
+    }
+    else
+    {
+        if (screenSizeWidth == 320 && (navFrame.size.height == 73))
+            navFrame.size.height = 55;
+        else if (screenSizeWidth == 375 && (navFrame.size.height == 84))
+            navFrame.size.height = 65;
+        else if (screenSizeWidth == 414 && (navFrame.size.height == 95))
+            navFrame.size.height = 71;
+    }
+    
+    contentFrame.origin.y = navFrame.size.height;
+    contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y - tabFrame.size.height;
+    
+    [contentView setFrame:contentFrame];
+    [self.contentViewController.view setFrame:[contentView bounds]];
+    [navBarView setFrame:navFrame];
+    [self.navBarViewController.view setFrame:[navBarView bounds]];
+}
+
 
 #define IPHONE_STATUSBAR_HEIGHT 20
 
