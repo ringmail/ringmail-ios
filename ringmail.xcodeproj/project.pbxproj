@@ -156,7 +156,6 @@
 		4D9685151E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685101E528B06008464B7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */; };
 		4D9685161E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */; };
 		4D9685171E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9685111E528B06008464B7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */; };
-		4D9EA9A41D9499D0002E6E4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */; };
 		4DAA6B011E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B031E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
@@ -665,6 +664,23 @@
 		C48AE3D51E6DCF5100F3C9B1 /* SendCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */; };
 		C48AE3D81E6DCF6300F3C9B1 /* SendCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48AE3D71E6DCF6300F3C9B1 /* SendCardComponentController.mm */; };
 		C48AE3D91E6DCF6300F3C9B1 /* SendCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48AE3D71E6DCF6300F3C9B1 /* SendCardComponentController.mm */; };
+		C48C10891E81AB0B0094F1F3 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10881E81AB0B0094F1F3 /* Media.m */; };
+		C48C108A1E81AB0B0094F1F3 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10881E81AB0B0094F1F3 /* Media.m */; };
+		C48C108D1E81AB230094F1F3 /* MediaContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C108C1E81AB230094F1F3 /* MediaContext.m */; };
+		C48C108E1E81AB230094F1F3 /* MediaContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C108C1E81AB230094F1F3 /* MediaContext.m */; };
+		C48C10911E81AB4A0094F1F3 /* MediaPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10901E81AB4A0094F1F3 /* MediaPage.m */; };
+		C48C10921E81AB4A0094F1F3 /* MediaPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10901E81AB4A0094F1F3 /* MediaPage.m */; };
+		C48C10951E81AB6B0094F1F3 /* MediaComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48C10941E81AB6B0094F1F3 /* MediaComponent.mm */; };
+		C48C10961E81AB6B0094F1F3 /* MediaComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48C10941E81AB6B0094F1F3 /* MediaComponent.mm */; };
+		C48C10991E81AB820094F1F3 /* MediaModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10981E81AB820094F1F3 /* MediaModelController.m */; };
+		C48C109A1E81AB820094F1F3 /* MediaModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10981E81AB820094F1F3 /* MediaModelController.m */; };
+		C48C109D1E81AB9D0094F1F3 /* MediaCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48C109C1E81AB9D0094F1F3 /* MediaCollectionViewController.mm */; };
+		C48C109E1E81AB9D0094F1F3 /* MediaCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48C109C1E81AB9D0094F1F3 /* MediaCollectionViewController.mm */; };
+		C48C10A11E81ABC00094F1F3 /* MediaBarComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48C10A01E81ABC00094F1F3 /* MediaBarComponent.mm */; };
+		C48C10A21E81ABC00094F1F3 /* MediaBarComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48C10A01E81ABC00094F1F3 /* MediaBarComponent.mm */; };
+		C48C10A41E81BA470094F1F3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48C10A31E81BA470094F1F3 /* Photos.framework */; };
+		C48C10A71E81CCC40094F1F3 /* MediaAssetProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10A61E81CCC40094F1F3 /* MediaAssetProvider.m */; };
+		C48C10A81E81CCC40094F1F3 /* MediaAssetProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10A61E81CCC40094F1F3 /* MediaAssetProvider.m */; };
 		C48D3C041D0276FE00FAC3A6 /* call_in.caf in Resources */ = {isa = PBXBuildFile; fileRef = C48D3BF41D0276FE00FAC3A6 /* call_in.caf */; };
 		C48D3C051D0276FE00FAC3A6 /* chat_in_alert.caf in Resources */ = {isa = PBXBuildFile; fileRef = C48D3BF51D0276FE00FAC3A6 /* chat_in_alert.caf */; };
 		C48D3C061D0276FE00FAC3A6 /* chat_in_view.caf in Resources */ = {isa = PBXBuildFile; fileRef = C48D3BF61D0276FE00FAC3A6 /* chat_in_view.caf */; };
@@ -1535,7 +1551,7 @@
 		C4AC2B441D3963FA003B6232 /* UILoadingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D306459D1611EC2900BB571E /* UILoadingImageView.m */; };
 		C4AC2B451D3963FA003B6232 /* CAAnimation+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = D37E3ECC1619C27A0087659A /* CAAnimation+Blocks.m */; };
 		C4AC2B481D3963FA003B6232 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */; };
-		C4AC2B601D3963FA003B6232 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
+		C4AC2B601D3963FA003B6232 /* libNinePatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
 		C4AC2B621D3963FA003B6232 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5F03410CE6B2F00777D97 /* AddressBook.framework */; };
 		C4AC2B631D3963FA003B6232 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */; };
 		C4AC2B641D3963FA003B6232 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22405EED1600B4E400B92522 /* AssetsLibrary.framework */; };
@@ -1628,7 +1644,7 @@
 		C9C8254F15AE256100D493FA /* transfer_call_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254E15AE256100D493FA /* transfer_call_disabled.png */; };
 		D3012CC41610467D007CD926 /* linphone_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D3012CC31610467D007CD926 /* linphone_logo.png */; };
 		D3012CC616105ECF007CD926 /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F5F8D91609A86700D3DA1A /* bubble.png */; };
-		D30562151671DC4900C97967 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
+		D30562151671DC4900C97967 /* libNinePatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
 		D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D306459D1611EC2900BB571E /* UILoadingImageView.m */; };
 		D30BBD1815D402A7000F93DD /* contact_ok_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D30BBD1715D402A7000F93DD /* contact_ok_disabled.png */; };
 		D3119E7215B6A4710005D4A4 /* contacts_back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3119E7015B6A4710005D4A4 /* contacts_back_default.png */; };
@@ -2906,6 +2922,23 @@
 		C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SendCardComponent.mm; sourceTree = "<group>"; };
 		C48AE3D61E6DCF5A00F3C9B1 /* SendCardComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendCardComponentController.h; path = RgComponents/SendCardComponentController.h; sourceTree = "<group>"; };
 		C48AE3D71E6DCF6300F3C9B1 /* SendCardComponentController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SendCardComponentController.mm; sourceTree = "<group>"; };
+		C48C107F1E81AB010094F1F3 /* Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Media.h; path = RgComponents/Media.h; sourceTree = "<group>"; };
+		C48C10881E81AB0B0094F1F3 /* Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Media.m; sourceTree = "<group>"; };
+		C48C108B1E81AB190094F1F3 /* MediaContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaContext.h; path = RgComponents/MediaContext.h; sourceTree = "<group>"; };
+		C48C108C1E81AB230094F1F3 /* MediaContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaContext.m; sourceTree = "<group>"; };
+		C48C108F1E81AB410094F1F3 /* MediaPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaPage.h; path = RgComponents/MediaPage.h; sourceTree = "<group>"; };
+		C48C10901E81AB4A0094F1F3 /* MediaPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPage.m; sourceTree = "<group>"; };
+		C48C10931E81AB5A0094F1F3 /* MediaComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaComponent.h; path = RgComponents/MediaComponent.h; sourceTree = "<group>"; };
+		C48C10941E81AB6B0094F1F3 /* MediaComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MediaComponent.mm; sourceTree = "<group>"; };
+		C48C10971E81AB790094F1F3 /* MediaModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaModelController.h; path = RgComponents/MediaModelController.h; sourceTree = "<group>"; };
+		C48C10981E81AB820094F1F3 /* MediaModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaModelController.m; sourceTree = "<group>"; };
+		C48C109B1E81AB920094F1F3 /* MediaCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaCollectionViewController.h; path = RgComponents/MediaCollectionViewController.h; sourceTree = "<group>"; };
+		C48C109C1E81AB9D0094F1F3 /* MediaCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MediaCollectionViewController.mm; sourceTree = "<group>"; };
+		C48C109F1E81ABB50094F1F3 /* MediaBarComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaBarComponent.h; path = RgComponents/MediaBarComponent.h; sourceTree = "<group>"; };
+		C48C10A01E81ABC00094F1F3 /* MediaBarComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MediaBarComponent.mm; sourceTree = "<group>"; };
+		C48C10A31E81BA470094F1F3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		C48C10A51E81CCAE0094F1F3 /* MediaAssetProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaAssetProvider.h; path = Utils/MediaAssetProvider.h; sourceTree = "<group>"; };
+		C48C10A61E81CCC40094F1F3 /* MediaAssetProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAssetProvider.m; sourceTree = "<group>"; };
 		C48D3BF41D0276FE00FAC3A6 /* call_in.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = call_in.caf; path = Resources/call_in.caf; sourceTree = "<group>"; };
 		C48D3BF51D0276FE00FAC3A6 /* chat_in_alert.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat_in_alert.caf; path = Resources/chat_in_alert.caf; sourceTree = "<group>"; };
 		C48D3BF61D0276FE00FAC3A6 /* chat_in_view.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat_in_view.caf; path = Resources/chat_in_view.caf; sourceTree = "<group>"; };
@@ -3681,7 +3714,7 @@
 				4DDB8CFB1D9444BC00F5FD71 /* libxml2.2.dylib in Frameworks */,
 				4DDB8CFC1D9444BC00F5FD71 /* libz.1.dylib in Frameworks */,
 				C48A1F031CDFFADA00E095F8 /* VideoToolbox.framework in Frameworks */,
-				D30562151671DC4900C97967 /* ReferenceProxy in Frameworks */,
+				D30562151671DC4900C97967 /* libNinePatch.a in Frameworks */,
 				22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */,
 				22B5EFA310CE50BD00777D97 /* AddressBookUI.framework in Frameworks */,
 				22405EEE1600B4E400B92522 /* AssetsLibrary.framework in Frameworks */,
@@ -3725,6 +3758,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48C10A41E81BA470094F1F3 /* Photos.framework in Frameworks */,
 				C44A41201E73380F000F3E24 /* libstdc++.6.0.9.tbd in Frameworks */,
 				4D5251BF1E6645C20064F955 /* CoreLocation.framework in Frameworks */,
 				4D3D66111E452AF900C2BCE3 /* ComponentKit.framework in Frameworks */,
@@ -3781,7 +3815,7 @@
 				4DE0EB051D948A300009E015 /* libvo-amrwbenc.a in Frameworks */,
 				4DE0EB061D948A300009E015 /* libvpx.a in Frameworks */,
 				4DE0EB071D948A300009E015 /* libx264.a in Frameworks */,
-				C4AC2B601D3963FA003B6232 /* ReferenceProxy in Frameworks */,
+				C4AC2B601D3963FA003B6232 /* libNinePatch.a in Frameworks */,
 				C44A411E1E7337F8000F3E24 /* AVFoundation.framework in Frameworks */,
 				C44A411B1E733776000F3E24 /* Accelerate.framework in Frameworks */,
 				C44A411D1E7337AB000F3E24 /* CoreImage.framework in Frameworks */,
@@ -4017,7 +4051,7 @@
 			path = LinphoneUI;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA = {
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
 				4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */,
@@ -4100,6 +4134,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C48C10A31E81BA470094F1F3 /* Photos.framework */,
 				C44A411F1E73380F000F3E24 /* libstdc++.6.0.9.tbd */,
 				4D5251BE1E6645C20064F955 /* CoreLocation.framework */,
 				4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */,
@@ -4343,6 +4378,20 @@
 				C4FE7FF81CA8C3C10099D048 /* MainCardComponentController.mm */,
 				C450DBBD1C70FFC80053592E /* MainCollectionViewController.h */,
 				C450DBB61C70FFB00053592E /* MainCollectionViewController.mm */,
+				C48C107F1E81AB010094F1F3 /* Media.h */,
+				C48C10881E81AB0B0094F1F3 /* Media.m */,
+				C48C108B1E81AB190094F1F3 /* MediaContext.h */,
+				C48C108C1E81AB230094F1F3 /* MediaContext.m */,
+				C48C108F1E81AB410094F1F3 /* MediaPage.h */,
+				C48C10901E81AB4A0094F1F3 /* MediaPage.m */,
+				C48C10931E81AB5A0094F1F3 /* MediaComponent.h */,
+				C48C10941E81AB6B0094F1F3 /* MediaComponent.mm */,
+				C48C10971E81AB790094F1F3 /* MediaModelController.h */,
+				C48C10981E81AB820094F1F3 /* MediaModelController.m */,
+				C48C109B1E81AB920094F1F3 /* MediaCollectionViewController.h */,
+				C48C109C1E81AB9D0094F1F3 /* MediaCollectionViewController.mm */,
+				C48C109F1E81ABB50094F1F3 /* MediaBarComponent.h */,
+				C48C10A01E81ABC00094F1F3 /* MediaBarComponent.mm */,
 				C4593A431E6A379D001C3BDD /* Favorite.h */,
 				C4593A4C1E6A37A8001C3BDD /* Favorite.m */,
 				C4593A531E6A3EB4001C3BDD /* FavoriteContext.h */,
@@ -4632,6 +4681,8 @@
 				C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */,
 				C45CFFDB1D8B34F900BEF75F /* IAWCKImageDownloader.h */,
 				C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */,
+				C48C10A51E81CCAE0094F1F3 /* MediaAssetProvider.h */,
+				C48C10A61E81CCC40094F1F3 /* MediaAssetProvider.m */,
 				C41F6D2A1DC902B6006C9D20 /* NSStringAdditions.h */,
 				C41F6D2B1DC902B6006C9D20 /* NSStringAdditions.m */,
 				C4E1CB3B1E6E20C400698166 /* ViewUtils.h */,
@@ -5682,7 +5733,7 @@
 				Base,
 				ar,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -7499,7 +7550,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/Tools/git_version.sh";
+			shellScript = $SRCROOT/Tools/git_version.sh;
 		};
 		86ABA1FE7BFEB24019A2D297 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7528,7 +7579,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/Tools/git_version.sh";
+			shellScript = $SRCROOT/Tools/git_version.sh;
 		};
 		C4AC2AAB1D3963FA003B6232 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7541,7 +7592,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/Tools/ImageOptim.sh";
+			shellScript = $SRCROOT/Tools/ImageOptim.sh;
 		};
 		D33CF34715D3985000CD4B85 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7554,7 +7605,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/Tools/ImageOptim.sh";
+			shellScript = $SRCROOT/Tools/ImageOptim.sh;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -7575,6 +7626,7 @@
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
 				2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */,
 				C44A41001E70E415000F3E24 /* CLToolbarMenuItem.m in Sources */,
+				C48C10991E81AB820094F1F3 /* MediaModelController.m in Sources */,
 				C44A41021E70E415000F3E24 /* UIView+CLImageToolInfo.m in Sources */,
 				C402BEF51C261D240076B60C /* UIImage+OpenCV.mm in Sources */,
 				2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */,
@@ -7605,6 +7657,7 @@
 				C42C0D541CAED35B00AD5A91 /* RgCallViewController.mm in Sources */,
 				D32648441588F6FC00930C67 /* UIToggleButton.m in Sources */,
 				C42B72141CA22EDB0020A57F /* HeaderComponent.mm in Sources */,
+				C48C10951E81AB6B0094F1F3 /* MediaComponent.mm in Sources */,
 				C4BC493C1BF9517900826264 /* RgChatQuestionTable.m in Sources */,
 				C42B72131CA22EDB0020A57F /* CardsPage.m in Sources */,
 				D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */,
@@ -7632,6 +7685,7 @@
 				D3EA53FD159850E80037DC6B /* LinphoneManager.m in Sources */,
 				63B81A0E1B57DA33009604A6 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				C44A40D81E70E415000F3E24 /* CLClippingTool.m in Sources */,
+				C48C10911E81AB4A0094F1F3 /* MediaPage.m in Sources */,
 				C4FE4C701CCD9CA4006A6C94 /* FavoriteModelController.m in Sources */,
 				D3F26BF115986B73005F9CAB /* IncomingCallViewController.m in Sources */,
 				C44A410A1E70E415000F3E24 /* UIImage+Utility.m in Sources */,
@@ -7654,6 +7708,7 @@
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,
 				C44F5E091C31E341008E4F38 /* NoteSQL.m in Sources */,
 				C41EF3121B8BCFD40085E75B /* RgMainViewController.m in Sources */,
+				C48C109D1E81AB9D0094F1F3 /* MediaCollectionViewController.mm in Sources */,
 				C48AE3D81E6DCF6300F3C9B1 /* SendCardComponentController.mm in Sources */,
 				C45CFFEB1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				C4593A551E6A3EBF001C3BDD /* FavoriteContext.m in Sources */,
@@ -7674,6 +7729,7 @@
 				C470BF781E68C540009968E2 /* SendToInputComponent.mm in Sources */,
 				C44A410C1E70E416000F3E24 /* UIView+Frame.m in Sources */,
 				C4BC49361BF9477B00826264 /* RgChatQuestionSelect.m in Sources */,
+				C48C10891E81AB0B0094F1F3 /* Media.m in Sources */,
 				C40F0E821C928C8A0011F8B6 /* RgChatBubbleFactory.m in Sources */,
 				C42C0D521CAECA1500AD5A91 /* RgInCallViewController.m in Sources */,
 				C4D999521B96910A003CC323 /* RgManager.m in Sources */,
@@ -7708,6 +7764,7 @@
 				C44A40D01E70E415000F3E24 /* CLImageEditorTheme.m in Sources */,
 				D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */,
 				C44A41161E7335CD000F3E24 /* CLEmoticonTool.m in Sources */,
+				C48C108D1E81AB230094F1F3 /* MediaContext.m in Sources */,
 				C44A40DE1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
 				4D9684D41E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
@@ -7722,6 +7779,8 @@
 				C401E5DC1B95E9ED006C915A /* RgChatModelData.m in Sources */,
 				D3807FFC15C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
 				D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */,
+				C48C10A11E81ABC00094F1F3 /* MediaBarComponent.mm in Sources */,
+				C48C10A71E81CCC40094F1F3 /* MediaAssetProvider.m in Sources */,
 				D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */,
 				C44A40E41E70E415000F3E24 /* CLPixellateEffect.m in Sources */,
 				D380800215C2894A005BE9BC /* IASKTextField.m in Sources */,
@@ -7777,6 +7836,7 @@
 				C4AC2AB51D3963FA003B6232 /* UIDigitButton.m in Sources */,
 				C4AC2AB61D3963FA003B6232 /* UICallButton.m in Sources */,
 				C44A41011E70E415000F3E24 /* CLToolbarMenuItem.m in Sources */,
+				C48C109A1E81AB820094F1F3 /* MediaModelController.m in Sources */,
 				C44A41031E70E415000F3E24 /* UIView+CLImageToolInfo.m in Sources */,
 				C4AC2AB71D3963FA003B6232 /* UIImage+OpenCV.mm in Sources */,
 				C4AC2AB81D3963FA003B6232 /* UIHangUpButton.m in Sources */,
@@ -7807,6 +7867,7 @@
 				C4AC2AD31D3963FA003B6232 /* RgCallViewController.mm in Sources */,
 				C4AC2AD51D3963FA003B6232 /* UIToggleButton.m in Sources */,
 				C4AC2AD61D3963FA003B6232 /* HeaderComponent.mm in Sources */,
+				C48C10961E81AB6B0094F1F3 /* MediaComponent.mm in Sources */,
 				C4AC2AD71D3963FA003B6232 /* RgChatQuestionTable.m in Sources */,
 				C4AC2AD81D3963FA003B6232 /* CardsPage.m in Sources */,
 				C4AC2ADB1D3963FA003B6232 /* UILongTouchButton.m in Sources */,
@@ -7834,6 +7895,7 @@
 				C4AC2AEE1D3963FA003B6232 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				C4AC2AF01D3963FA003B6232 /* FavoriteModelController.m in Sources */,
 				C44A40D91E70E415000F3E24 /* CLClippingTool.m in Sources */,
+				C48C10921E81AB4A0094F1F3 /* MediaPage.m in Sources */,
 				C4AC2AF11D3963FA003B6232 /* IncomingCallViewController.m in Sources */,
 				C4AC2AF21D3963FA003B6232 /* UICompositeViewController.m in Sources */,
 				C44A410B1E70E415000F3E24 /* UIImage+Utility.m in Sources */,
@@ -7856,6 +7918,7 @@
 				C4AC2B021D3963FA003B6232 /* NoteSQL.m in Sources */,
 				C4AC2B031D3963FA003B6232 /* RgMainViewController.m in Sources */,
 				C4AC2B041D3963FA003B6232 /* ContactDetailsTableViewController.m in Sources */,
+				C48C109E1E81AB9D0094F1F3 /* MediaCollectionViewController.mm in Sources */,
 				C48AE3D91E6DCF6300F3C9B1 /* SendCardComponentController.mm in Sources */,
 				C45CFFEC1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */,
 				C4593A561E6A3EBF001C3BDD /* FavoriteContext.m in Sources */,
@@ -7876,6 +7939,7 @@
 				C470BF791E68C540009968E2 /* SendToInputComponent.mm in Sources */,
 				C44A410D1E70E416000F3E24 /* UIView+Frame.m in Sources */,
 				C4AC2B141D3963FA003B6232 /* RgChatBubbleFactory.m in Sources */,
+				C48C108A1E81AB0B0094F1F3 /* Media.m in Sources */,
 				C4AC2B151D3963FA003B6232 /* RgInCallViewController.m in Sources */,
 				C4AC2B161D3963FA003B6232 /* RgManager.m in Sources */,
 				C4AC2B171D3963FA003B6232 /* DCRoundSwitchOutlineLayer.m in Sources */,
@@ -7910,6 +7974,7 @@
 				C44A40D11E70E415000F3E24 /* CLImageEditorTheme.m in Sources */,
 				C4AC2B2A1D3963FA003B6232 /* IASKPSSliderSpecifierViewCell.m in Sources */,
 				C44A41171E7335CD000F3E24 /* CLEmoticonTool.m in Sources */,
+				C48C108E1E81AB230094F1F3 /* MediaContext.m in Sources */,
 				C44A40DF1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
 				4D9684D51E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
 				C4AC2B2B1D3963FA003B6232 /* RgCustomView.m in Sources */,
@@ -7924,6 +7989,8 @@
 				C4AC2B331D3963FA003B6232 /* RgChatModelData.m in Sources */,
 				C4AC2B341D3963FA003B6232 /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
 				C4AC2B351D3963FA003B6232 /* IASKSlider.m in Sources */,
+				C48C10A21E81ABC00094F1F3 /* MediaBarComponent.mm in Sources */,
+				C48C10A81E81CCC40094F1F3 /* MediaAssetProvider.m in Sources */,
 				C4AC2B361D3963FA003B6232 /* IASKSwitch.m in Sources */,
 				C44A40E51E70E415000F3E24 /* CLPixellateEffect.m in Sources */,
 				C4AC2B371D3963FA003B6232 /* IASKTextField.m in Sources */,

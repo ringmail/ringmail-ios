@@ -10,6 +10,7 @@
 #import "TextInputComponent.h"
 #import "SendToInputComponent.h"
 #import "FavoritesBarComponent.h"
+#import "MediaBarComponent.h"
 
 #import "UIColor+Hex.h"
 
@@ -127,16 +128,17 @@
 							}
 							size:{.height = 15, .width = width}]
 						]},
-						{[CKComponent newWithView:{
+						{[MediaBarComponent newWithMedia:[send data][@"media"] size:{.height = 71, .width = width}]},
+						/*{[CKComponent newWithView:{
 							[UIView class],
 							{
 								{@selector(setBackgroundColor:), [UIColor colorWithHex:@"#CCCCCC"]},
 							}
-						} size:{.height = 71, .width = width}]},
+						} size:{.height = 71, .width = width}]},*/
 						{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 0, .right = 0} component:
 							[CKLabelComponent newWithLabelAttributes:{
 								.string = @"10 Photos, 5 Videos",
-								.font = [UIFont systemFontOfSize:9],
+								.font = [UIFont systemFontOfSize:10],
 								.alignment = NSTextAlignmentCenter,
 							}
 							viewAttributes:{

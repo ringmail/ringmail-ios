@@ -4,6 +4,9 @@
 
 #import <Foundation/Foundation.h>
 #import <ComponentKit/ComponentKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
+
 #import "UIColor+Hex.h"
 #import "SendViewController.h"
 #import "SendComponent.h"
@@ -41,6 +44,44 @@
 	
 	if (self->_hostView == nil)
 	{
+		// load recent media
+		int max = 25;
+		int count = 0;
+		NSMutableArray *assets = [NSMutableArray new];
+		PHFetchOptions *mainopts = [[PHFetchOptions alloc] init];
+		mainopts.sortDescriptors = @[
+			[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO],
+        ];
+        PHFetchResult *collects = [PHAssetCollection fetchMomentsWithOptions:mainopts];
+        for (PHAssetCollection *collection in collects)
+		{
+			NSLog(@"Collection(%@): %@", collection.localizedTitle, collection);
+			PHFetchOptions *opts = [[PHFetchOptions alloc] init];
+			opts.fetchLimit = max;
+			opts.sortDescriptors = @[
+				[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO],
+            ];
+			PHFetchResult *fr = [PHAsset fetchAssetsInAssetCollection:collection options:opts];
+            for (PHAsset *asset in fr)
+			{
+				if (count < max)
+				{
+					[assets addObject:asset];
+					count++;
+				}
+            }
+			NSLog(@"Assets 1: %@", assets);
+			if (count == max)
+			{
+				break;
+			}
+        }
+		[assets sortUsingComparator:^NSComparisonResult(PHAsset* obj1, PHAsset* obj2) {
+			return [obj2.creationDate compare:obj1.creationDate];
+		}];
+		NSLog(@"Assets 2: %@", assets);
+	
+		// build panel
 		CGFloat height = self.view.frame.size.height;
 		CGFloat width = [[UIScreen mainScreen] bounds].size.width;
 		NSLog(@"Height: %f", height);
@@ -52,7 +93,9 @@
 		SendContext *context = [[SendContext alloc] init];
 		[_hostView updateContext:context mode:CKUpdateModeSynchronous];
 		
-		Send *send = [[Send alloc] initWithData:@{}];
+		Send *send = [[Send alloc] initWithData:@{
+			@"media": assets,
+		}];
 		[_hostView updateModel:send mode:CKUpdateModeSynchronous];
 		
 		[self.view addSubview:_hostView];

@@ -198,21 +198,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
     
-	/*
-	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [flowLayout setMinimumInteritemSpacing:0];
-    [flowLayout setMinimumLineSpacing:0];
-
-	CGRect r = mainView.frame;
-    r.origin.y = 0;
-    [mainController.view setFrame:r];
-    [mainView addSubview:mainController.view];
-    [self addChildViewController:mainController];
-    [mainController didMoveToParentViewController:self];
-    mainViewController = mainController;
-	*/
-    [self setNeedsRefresh:NO];
+    [self setNeedsRefresh:NO]; // Remove this?
     
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
