@@ -123,7 +123,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad {
 	[super viewDidLoad];
     
-    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag"];
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
     self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
     self.isSearchBarVisible = YES;
     [self addChildViewController:self.searchBarViewController];
