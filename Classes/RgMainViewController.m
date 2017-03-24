@@ -21,7 +21,6 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "RgMainViewController.h"
-#import "RgScanViewController.h"
 #import "RgInCallViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
@@ -38,6 +37,7 @@
 @interface RgMainViewController()
 @property BOOL isSearchBarVisible;
 @property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@property (nonatomic, retain) IBOutlet SendViewController* sendViewController;
 @end
 
 @implementation RgMainViewController
@@ -48,13 +48,18 @@
 @synthesize needsRefresh;
 @synthesize sendViewController;
 @synthesize backgroundImageView;
+@synthesize sendInfo;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
+	NSLog(@"RgMainViewController init");
 	self = [super initWithNibName:@"RgMainViewController" bundle:[NSBundle mainBundle]];
 	if (self) {
 		self->transferMode = FALSE;
+		self->sendInfo = [NSMutableDictionary dictionaryWithDictionary:@{
+			@"media": [self getMediaThumbnails:[self getLatestMedia]],
+		}];
 	}
 	return self;
 }
@@ -93,6 +98,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
+	NSLog(@"RgMainViewController viewWillAppear");
 
 	// Set observer
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -157,6 +164,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[RgLocationManager sharedInstance] startUpdatingLocation];
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
 
+	// TODO: fix updating when there are new photos or videos (PHPhoto​Library​Change​Observer)
+	// Code below does NOT work
+	/*NSArray* update = [self getLatestMedia];
+	if ([self hasNewMedia:update current:sendInfo[@"media"]])
+	{
+		sendInfo[@"media"] = [self getMediaThumbnails:update];
+		[sendViewController setSendInfo:sendInfo];
+		[sendViewController updateSend];
+	}*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -245,7 +261,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleUserActivity)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
+	
+	[sendViewController setSendInfo:sendInfo];
 }
 
 - (void)viewDidUnload {
@@ -450,17 +467,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-
-/*- (IBAction)onScan:(id)sender {
-    RgScanViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgScanViewController compositeViewDescription] push:TRUE], RgScanViewController);
-    if (controller != nil)
-    {
-        [controller beginScan];
-    }
-}*/
-
-
-
 - (void)handleUserActivity {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -516,6 +522,105 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     if([keyPath isEqualToString:@"currentLocation"])
         [[RgLocationManager sharedInstance] stopUpdatingLocation];
+}
+
+#pragma mark - Photos & Videos
+
+- (BOOL)hasNewMedia:(NSArray*)media current:(NSArray*)prev
+{
+	if ([prev count] == 0)
+	{
+		if ([media count] > 0)
+		{
+			return YES;
+		}
+		else
+		{
+			return NO;
+		}
+	}
+	else if ([media count] > 0 && [prev count] > 0)
+	{
+		NSString* item1 = [(PHAsset*)media[0][@"asset"] localIdentifier];
+		NSString* item2 = [(PHAsset*)prev[0][@"asset"] localIdentifier];
+		if ([item1 isEqualToString:item2])
+		{
+			return NO;
+		}
+		else
+		{
+			return YES;
+		}
+	}
+	else
+	{
+		return NO; // Both empty
+	}
+}
+
+- (NSArray*)getLatestMedia
+{
+    // load recent media
+    int max = 25;
+    int count = 0;
+    NSMutableArray *assets = [NSMutableArray new];
+    PHFetchOptions *mainopts = [[PHFetchOptions alloc] init];
+    mainopts.sortDescriptors = @[
+    	[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO],
+    ];
+    PHFetchResult *collects = [PHAssetCollection fetchMomentsWithOptions:mainopts];
+    for (PHAssetCollection *collection in collects)
+    {
+    	//NSLog(@"Collection(%@): %@", collection.localizedTitle, collection);
+    	PHFetchOptions *opts = [[PHFetchOptions alloc] init];
+    	opts.fetchLimit = max;
+    	opts.sortDescriptors = @[
+    		[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO],
+        ];
+    	PHFetchResult *fr = [PHAsset fetchAssetsInAssetCollection:collection options:opts];
+        for (PHAsset *asset in fr)
+    	{
+    		if (count < max)
+    		{
+    			[assets addObject:@{@"asset": asset}];
+    			count++;
+    		}
+        }
+    	if (count == max)
+    	{
+    		break;
+    	}
+    }
+    [assets sortUsingComparator:^NSComparisonResult(NSDictionary* obj1, NSDictionary* obj2) {
+    	return [[(PHAsset*)obj2[@"asset"] creationDate] compare:[(PHAsset*)obj1[@"asset"] creationDate]];
+    }];
+    //NSLog(@"Latest Media: %@", assets);
+	return assets;
+}
+
+- (NSArray*)getMediaThumbnails:(NSArray*)media
+{
+	__block NSMutableArray* res = [NSMutableArray new];
+	PHImageManager* imageManager = [PHImageManager defaultManager];
+	PHImageRequestOptions* opts = [PHImageRequestOptions new];
+	opts.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+	opts.resizeMode = PHImageRequestOptionsResizeModeExact;
+	opts.synchronous = YES;
+	for (NSDictionary* item in media)
+	{
+		[imageManager requestImageForAsset:item[@"asset"] targetSize:CGSizeMake(142, 142) contentMode:PHImageContentModeAspectFill options:opts resultHandler:^(UIImage* image, NSDictionary* info){
+			[res addObject:@{
+				@"asset": item[@"asset"],
+				@"thumbnail": image,
+			}];
+		}];
+	}
+	return res;
+}
+
+- (void)addMedia:(NSDictionary*)param
+{
+	[sendViewController addMedia:param];
 }
 
 @end

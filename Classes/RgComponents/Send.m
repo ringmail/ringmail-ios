@@ -4,6 +4,8 @@
 #import "PhoneMainView.h"
 #import "RgManager.h"
 #import "ChatRoomViewController.h"
+#import "PhotoCameraViewController.h"
+#import "VideoCameraViewController.h"
 #import "MomentCameraViewController.h"
 
 @implementation Send
@@ -35,6 +37,16 @@
 		[[LinphoneManager instance] setChatSession:sessionData[@"id"]];
 		[[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
 	}
+}
+
+- (void)showPhotoCamera
+{
+	[[PhoneMainView instance] changeCurrentView:[PhotoCameraViewController compositeViewDescription] push:TRUE];
+}
+
+- (void)showVideoCamera
+{
+	[[PhoneMainView instance] changeCurrentView:[VideoCameraViewController compositeViewDescription] push:TRUE];
 }
 
 - (void)showMomentCamera

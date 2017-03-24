@@ -30,9 +30,7 @@
 		NSInteger mainIndex = [mainCount intValue] + i;
 		if ([mediaData count] > mainIndex)
 		{
-			Media* mediaItem = [[Media alloc] initWithData:@{
-				@"asset": [mediaData objectAtIndex:mainIndex],
-			}];
+			Media* mediaItem = [[Media alloc] initWithData:[mediaData objectAtIndex:mainIndex]];
 			[mediaList addObject:mediaItem];
 			added++;
 		}

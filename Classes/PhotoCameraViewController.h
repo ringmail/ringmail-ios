@@ -5,7 +5,7 @@
 #import "LLSimpleCamera.h"
 #import "BaseCameraViewController.h"
 
-@interface MomentCameraViewController : BaseCameraViewController<UICompositeViewDelegate> {
+@interface PhotoCameraViewController : BaseCameraViewController<UICompositeViewDelegate> {
 }
 
 @property (strong, nonatomic) LLSimpleCamera *camera;

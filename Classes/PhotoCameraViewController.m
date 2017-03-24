@@ -1,16 +1,16 @@
-#import "MomentCameraViewController.h"
+#import "PhotoCameraViewController.h"
 #import "ViewUtils.h"
 #import "Utils.h"
 #import "PhoneMainView.h"
 #import "LLSimpleCamera.h"
 #import "MomentEditViewController.h"
 
-@implementation MomentCameraViewController
+@implementation PhotoCameraViewController
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
-	self = [super initWithNibName:@"MomentCameraViewController" bundle:[NSBundle mainBundle]];
+	self = [super initWithNibName:@"PhotoCameraViewController" bundle:[NSBundle mainBundle]];
 	if (self != nil) {
 	}
 	return self;
@@ -26,8 +26,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"MomentCamera"
-																content:@"MomentCameraViewController"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"PhotoCamera"
+																content:@"PhotoCameraViewController"
 															   stateBar:nil
 														stateBarEnabled:false
                                                                  navBar:nil
@@ -68,7 +68,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.camera.fixOrientationAfterCapture = YES;
     
     // take the required actions on a device change
-    __weak MomentCameraViewController* weakSelf = self;
+    __weak PhotoCameraViewController* weakSelf = self;
     [self.camera setOnDeviceChange:^(LLSimpleCamera *camera, AVCaptureDevice * device) {
         
         NSLog(@"Device changed.");
@@ -205,12 +205,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)snapButtonPressed:(UIButton *)button
 {
-    //__weak MomentCameraViewController* weakSelf = self;
+    //__weak PhotoCameraViewController* weakSelf = self;
 	[self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
 		if(!error) {
 			//NSLog(@"Image captured!!!!");
 			MomentEditViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:NO], MomentEditViewController);
-			[ctl setEditMode:RgSendMediaEditModeMoment];
 			[ctl editImage:image];
 		}
 		else {

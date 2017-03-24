@@ -5,6 +5,8 @@
 
 @interface MediaComponent : CKCompositeComponent
 
+@property (nonatomic, weak) NSDictionary* localData;
+
 + (instancetype)newWithMedia:(Media *)media context:(MediaContext *)context;
 
 @end

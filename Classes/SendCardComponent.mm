@@ -23,11 +23,10 @@
 
 + (instancetype)newWithSend:(Send *)send context:(SendContext *)context
 {
-	NSLog(@"Send Card Data: %@", [send data]);
 	CKComponentScope scope(self);
+	NSMutableDictionary* currentState = scope.state();
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
 	
-	NSMutableDictionary* currentState = scope.state();
 	NSString *sendButtonImageName;
 	if ([currentState[@"enable_send"] boolValue])
 	{
@@ -37,7 +36,38 @@
 	{
 		sendButtonImageName = @"arrow_normal.png";
 	}
-	NSLog(@"State: %@", currentState);
+	
+	std::vector<CKStackLayoutComponentChild> sendContent;
+	if ([send data][@"send_media"] != nil)
+	{
+		sendContent.push_back(
+			{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 15, .right = 0} component:
+				[CKCompositeComponent newWithView:{
+                    [UIView class],
+                    {
+                        {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @10.0},
+						{@selector(setClipsToBounds:), @YES},
+                    }
+				} component:
+					[CKImageComponent newWithImage:[send data][@"send_media"] size:{.height = 90, .width = 90}]
+				]
+			]}
+		);
+		sendContent.push_back(
+			{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 0, .right = 5} component:
+				[TextInputComponent newWithTag:[NSNumber numberWithInt:1] size:{.height = 95, .width = width - 170}]
+			]}
+		);
+	}
+	else
+	{
+		sendContent.push_back(
+			{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 35, .right = 5} component:
+				[TextInputComponent newWithTag:[NSNumber numberWithInt:1] size:{.height = 95, .width = width - 100}]
+			]}
+		);
+	}
+	
     SendCardComponent *c = [super newWithView:{} component:
 		[CKInsetComponent newWithInsets:{.top = 0, .bottom = 0, .left = 10, .right = 10} component:
 			[CKStackLayoutComponent newWithView:{
@@ -82,13 +112,15 @@
 					}
 				} size:{.height = 110} style:{
 				   .direction = CKStackLayoutDirectionHorizontal,
-				   .alignItems = CKStackLayoutAlignItemsStart
+				   .alignItems = CKStackLayoutAlignItemsStretch
 				}
 				children:{
-					{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 35, .right = 10} component:
-						[TextInputComponent newWithTag:[NSNumber numberWithInt:1] size:{.height = 95, .width = width - 105}]
-					]},
-					{[CKInsetComponent newWithInsets:{.top = 70, .bottom = 0, .left = 0, .right = 10} component:
+					{[CKStackLayoutComponent newWithView:{} size:{.height = 110, .width = width - 80} style:{
+    				   .direction = CKStackLayoutDirectionHorizontal,
+    				   .alignItems = CKStackLayoutAlignItemsStart
+    				} children:sendContent]},
+					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+					{[CKInsetComponent newWithInsets:{.top = 70, .bottom = 0, .left = 0, .right = 0} component:
 						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
 							{UIControlStateNormal,[UIImage imageNamed:sendButtonImageName]},
 						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionSend:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}]

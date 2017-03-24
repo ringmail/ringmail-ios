@@ -44,9 +44,7 @@ static NSInteger const pageSize = 25;
 		self.collectionView.backgroundColor = [UIColor clearColor];
 		self.collectionView.delegate = self;
 		
-		PHImageRequestOptions *params = [[PHImageRequestOptions alloc] init];
-		params.resizeMode = PHImageRequestOptionsResizeModeExact;
-		MediaContext *context = [[MediaContext alloc] initWithMedia:_modelController.mediaData targetSize:CGSizeMake(142, 142) contentMode:PHImageContentModeAspectFill options:params];
+		MediaContext *context = [[MediaContext alloc] init];
 		_dataSource = [[CKCollectionViewDataSource alloc] initWithCollectionView:self.collectionView
 													 supplementaryViewDataSource:nil
 															   componentProvider:[self class]

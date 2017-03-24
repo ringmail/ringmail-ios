@@ -17,10 +17,7 @@
 
 - (void)didMount;
 - (void)didUnmount;
-
 - (void)textFieldDidChange:(NSNotification *)notif;
-- (void)resetSend:(NSNotification *)notif;
-
 - (void)actionSend:(CKButtonComponent *)sender;
 
 @end

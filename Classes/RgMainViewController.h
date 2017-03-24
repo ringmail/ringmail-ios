@@ -18,27 +18,28 @@
  */       
 
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 
 #import "UICompositeViewController.h"
 #import "UICamSwitch.h"
 #import "UICallButton.h"
 #import "UIMessageButton.h"
 #import "UIDigitButton.h"
-#import "SendViewController.h"
 
 @interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, MFMailComposeViewControllerDelegate> {
 }
 
 - (void)handleUserActivity;
 - (void)handleSegControl;
+- (void)addMedia:(NSDictionary*)param;
 
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
-@property (nonatomic, retain) IBOutlet SendViewController* sendViewController;
 @property (nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
 @property (nonatomic, assign) BOOL needsRefresh;
 @property (nonatomic, assign) BOOL visible;
 @property (nonatomic, assign) BOOL transferMode;
+@property (nonatomic, strong) NSMutableDictionary* sendInfo;
 
 - (IBAction)onAddContactClick: (id) event;
 

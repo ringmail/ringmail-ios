@@ -31,6 +31,7 @@ NSString *const kRgContactRefresh = @"kRgContactRefresh";
 
 // New skin
 NSString *const kRgSendComponentReset = @"kRgSendComponentReset";
+NSString *const kRgSendComponentAddMedia = @"kRgSendComponentAddMedia";
 
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";

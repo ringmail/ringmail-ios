@@ -21,7 +21,9 @@
 - (FavoritesPage *)fetchNewFavoritesPageWithCount:(NSInteger)count;
 {
 	NSAssert(count >= 1, @"Count should be a positive integer");
+	// TODO: move this to SendViewController.mm and pass value into root component data
 	NSArray* favQuery = [[[LinphoneManager instance] chatManager] dbGetMainList:nil favorites:YES];
+	//
 	UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
 	NSMutableArray* favData = [NSMutableArray array];
 	for (NSDictionary* r in favQuery)

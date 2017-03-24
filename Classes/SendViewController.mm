@@ -10,6 +10,7 @@
 #import "UIColor+Hex.h"
 #import "SendViewController.h"
 #import "SendComponent.h"
+#import "RgManager.h"
 
 @interface SendViewController () <CKComponentProvider, CKComponentHostingViewDelegate>
 
@@ -22,13 +23,17 @@
     CKComponentHostingView *_hostView;
 }
 
+@synthesize sendInfo;
+
 - (id)init
 {
+	NSLog(@"SendViewController init");
 	if (self = [super init])
 	{
 		self->_hostView = nil;
 		self->_componentDataSource = nil;
 		self->_sizeRangeProvider = nil;
+		sendInfo = nil;
 	}
 	return self;
 }
@@ -40,51 +45,15 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+	NSLog(@"SendViewController viewWillAppear");
 	[super viewWillAppear:animated];
 	
 	if (self->_hostView == nil)
 	{
-		// load recent media
-		int max = 25;
-		int count = 0;
-		NSMutableArray *assets = [NSMutableArray new];
-		PHFetchOptions *mainopts = [[PHFetchOptions alloc] init];
-		mainopts.sortDescriptors = @[
-			[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO],
-        ];
-        PHFetchResult *collects = [PHAssetCollection fetchMomentsWithOptions:mainopts];
-        for (PHAssetCollection *collection in collects)
-		{
-			NSLog(@"Collection(%@): %@", collection.localizedTitle, collection);
-			PHFetchOptions *opts = [[PHFetchOptions alloc] init];
-			opts.fetchLimit = max;
-			opts.sortDescriptors = @[
-				[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO],
-            ];
-			PHFetchResult *fr = [PHAsset fetchAssetsInAssetCollection:collection options:opts];
-            for (PHAsset *asset in fr)
-			{
-				if (count < max)
-				{
-					[assets addObject:asset];
-					count++;
-				}
-            }
-			NSLog(@"Assets 1: %@", assets);
-			if (count == max)
-			{
-				break;
-			}
-        }
-		[assets sortUsingComparator:^NSComparisonResult(PHAsset* obj1, PHAsset* obj2) {
-			return [obj2.creationDate compare:obj1.creationDate];
-		}];
-		NSLog(@"Assets 2: %@", assets);
-	
 		// build panel
 		CGFloat height = self.view.frame.size.height;
 		CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-		NSLog(@"Height: %f", height);
+		//NSLog(@"Height: %f", height);
 		_sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
 		_hostView = [[CKComponentHostingView alloc] initWithComponentProvider:[self class] sizeRangeProvider:_sizeRangeProvider];
 		_hostView.delegate = self;
@@ -93,19 +62,24 @@
 		SendContext *context = [[SendContext alloc] init];
 		[_hostView updateContext:context mode:CKUpdateModeSynchronous];
 		
-		Send *send = [[Send alloc] initWithData:@{
-			@"media": assets,
-		}];
-		[_hostView updateModel:send mode:CKUpdateModeSynchronous];
-		
+   		NSLog(@"Initial sendInfo: %@", sendInfo);
+		if (sendInfo != nil)
+		{
+    		Send *send = [[Send alloc] initWithData:sendInfo];
+    		[_hostView updateModel:send mode:CKUpdateModeSynchronous];
+		}
 		[self.view addSubview:_hostView];
 	}
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMedia:) name:kRgSendComponentAddMedia object:nil];
 }
 
-/*- (void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-}*/
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentAddMedia object:nil];
+}
 
 + (id)initialState
 {
@@ -120,16 +94,50 @@
 
 #pragma mark - CKComponentHostingViewDelegate <NSObject>
 - (void)componentHostingViewDidInvalidateSize:(CKComponentHostingView *)hostingView {
-    NSLog(@"componentHostingViewDidInvalidateSize");
+    //NSLog(@"componentHostingViewDidInvalidateSize");
+}
+
+#pragma mark - Event handlers
+
+- (void)selectMedia:(NSNotification *)notif {
+	NSDictionary *data = notif.userInfo;
+	NSLog(@"Select Media: %@", data);
+	// get image
+	PHImageManager* imageManager = [PHImageManager defaultManager];
+	PHImageRequestOptions* opts = [PHImageRequestOptions new];
+	opts.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+	opts.resizeMode = PHImageRequestOptionsResizeModeExact;
+	opts.synchronous = YES;
+	[imageManager requestImageForAsset:data[@"asset"] targetSize:CGSizeMake(180, 180) contentMode:PHImageContentModeAspectFill options:opts resultHandler:^(UIImage* image, NSDictionary* info){
+		sendInfo[@"send_media"] = image;
+	}];
+	sendInfo[@"send_asset"] = data[@"asset"];
+	if (_hostView != nil)
+	{
+    	Send *send = [[Send alloc] initWithData:sendInfo];
+    	[_hostView updateModel:send mode:CKUpdateModeAsynchronous];
+	}
+}
+
+- (void)addMedia:(NSDictionary*)param
+{
+	sendInfo[@"send_media"] = param[@"thumbnail"];
+	sendInfo[@"send_file"] = param[@"file"];
+	if (_hostView != nil)
+	{
+    	Send *send = [[Send alloc] initWithData:sendInfo];
+    	[_hostView updateModel:send mode:CKUpdateModeAsynchronous];
+	}
 }
 
 #pragma mark - Update
 
-- (void)updateSend:(NSDictionary*)data
+- (void)updateSend
 {
 	if (_hostView != nil)
 	{
-		Send *send = [[Send alloc] initWithData:data];
+		NSLog(@"Update Send View");
+		Send *send = [[Send alloc] initWithData:sendInfo];
 		[_hostView updateModel:send mode:CKUpdateModeSynchronous];
 	}
 }
