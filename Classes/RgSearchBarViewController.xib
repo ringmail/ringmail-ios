@@ -16,6 +16,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgSearchBarViewController">
             <connections>
                 <outlet property="addressField" destination="IhO-DS-dM9" id="RTe-Yc-0ye"/>
+                <outlet property="addressLabel" destination="B5K-dj-8Ti" id="41K-im-kl7"/>
                 <outlet property="background" destination="Ofu-Rg-kvf" id="OAh-CF-fc6"/>
                 <outlet property="callButton" destination="Vsr-wD-qKw" id="WRY-eH-xpl"/>
                 <outlet property="goButton" destination="aDx-Np-URP" id="ShV-W2-sp1"/>
@@ -62,6 +63,12 @@
                         <outlet property="delegate" destination="-1" id="4pi-La-9b0"/>
                     </connections>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5K-dj-8Ti">
+                    <rect key="frame" x="56" y="15" width="252" height="20"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
+                    <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsr-wD-qKw" userLabel="callButton" customClass="UICallButton">
                     <rect key="frame" x="226" y="10" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -97,7 +104,10 @@
                 <constraint firstItem="IoP-Qu-KM5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="P5l-1J-VsT"/>
                 <constraint firstItem="Ofu-Rg-kvf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QYB-ud-epR"/>
                 <constraint firstAttribute="bottom" secondItem="Ofu-Rg-kvf" secondAttribute="bottom" id="TH0-HR-zOn"/>
+                <constraint firstItem="B5K-dj-8Ti" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="deV-X1-uX8"/>
                 <constraint firstItem="IoP-Qu-KM5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fMW-98-Dt8"/>
+                <constraint firstItem="B5K-dj-8Ti" firstAttribute="trailing" secondItem="IhO-DS-dM9" secondAttribute="trailing" id="g1I-Mx-MKP"/>
+                <constraint firstItem="B5K-dj-8Ti" firstAttribute="leading" secondItem="IhO-DS-dM9" secondAttribute="leading" id="kGO-nF-UvN"/>
                 <constraint firstAttribute="trailing" secondItem="Ofu-Rg-kvf" secondAttribute="trailing" id="whI-Pr-H0a"/>
                 <constraint firstItem="IhO-DS-dM9" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="yiP-HW-zY0"/>
             </constraints>
@@ -105,7 +115,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-14.5" y="-144"/>
+            <point key="canvasLocation" x="-15" y="-144"/>
         </view>
     </objects>
     <resources>
