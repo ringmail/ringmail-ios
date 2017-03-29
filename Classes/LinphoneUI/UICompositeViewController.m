@@ -197,10 +197,10 @@
 	   the device screen size at load */
 	[self updateViewsFramesAccordingToLaunchOrientation];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateNavFrame:)
-                                                 name:@"UICompositeVCNavBarHeight"
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(updateNavFrame:)
+//                                                 name:@"UICompositeVCNavBarHeight"
+//                                               object:nil];
     
 	[super viewDidLoad];
 }
@@ -208,7 +208,7 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UICompositeVCNavBarHeight" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UICompositeVCNavBarHeight" object:nil];
 }
 
 

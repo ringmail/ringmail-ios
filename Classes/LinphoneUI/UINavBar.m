@@ -187,13 +187,13 @@ int backState = 0;
         case Recents:
             [segmentButton setEnabled:YES];
             [segmentButton setHidden:NO];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"1",}];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"1",}];
             break;
         case Contacts:
         case Settings:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"0",}];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"0",}];
             break;
         case HTagCard:
             [segmentButton setEnabled:NO];
@@ -203,7 +203,7 @@ int backState = 0;
             backState = 1;
             [headerLabel setHidden:NO];
             headerLabel.text = @"Explore";
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"0",}];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"0",}];
             break;
         default:
             break;

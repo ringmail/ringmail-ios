@@ -102,18 +102,11 @@ bool animInactive = YES;
     
     if (!addressActive && addressEmpty)
         [self animateRocket:YES];
-    else if (addressActive && addressEmpty)
-    {
-        [addressField resignFirstResponder];
-        addressLabel.layer.opacity = 0.0;
-    }
     else
     {
-        [self animateRocket:NO];
-        [goButton sendActionsForControlEvents:UIControlEventTouchUpInside];
         [addressField resignFirstResponder];
-        [addressField setText:@""];
         addressLabel.layer.opacity = 0.0;
+        [addressField setText:@""];
     }
 }
 
@@ -154,6 +147,7 @@ bool animInactive = YES;
                 animation6a.keyPath = @"opacity";
                 animation6a.toValue = @1;
                 animation6a.toValue = @0;
+                animation6a.beginTime = CACurrentMediaTime() + 2.0f;
                 animation6a.duration = 0.75f;
                 animation6a.fillMode = kCAFillModeForwards;
                 animation6a.removedOnCompletion = NO;
@@ -164,6 +158,7 @@ bool animInactive = YES;
                 animation6b.keyPath = @"position.x";
                 animation6b.fromValue = [NSNumber numberWithFloat:addressX];
                 animation6b.toValue = [NSNumber numberWithFloat:addressX + 50];
+                animation6b.beginTime = CACurrentMediaTime() + 2.0f;
                 animation6b.duration = 0.75f;
                 animation6b.fillMode = kCAFillModeForwards;
                 animation6b.removedOnCompletion = NO;

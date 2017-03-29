@@ -207,7 +207,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         path = [categoryStack lastObject];
         if ([path isEqual:@"0"])
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"1",}];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"1",}];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarViewChange" object:self userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
         }
     }
