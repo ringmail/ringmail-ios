@@ -287,7 +287,7 @@
     return messageID;
 }
 
-- (void)sendMessageTo:(NSString*)to from:(NSString*)origTo image:(UIImage*)image contact:(NSNumber*)contact
+- (NSString*)sendMessageTo:(NSString*)to from:(NSString*)origTo image:(UIImage*)image contact:(NSNumber*)contact
 {
     NSDate *now = [NSDate date];
     NSString *msgTo = [RgManager addressToXMPP:to];
@@ -332,6 +332,7 @@
             [[self xmppStream] sendElement:message];
         }
     }];
+    return messageID;
 }
 
 /*- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply

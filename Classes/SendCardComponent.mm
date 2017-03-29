@@ -21,11 +21,23 @@
 	}];
 }
 
-+ (instancetype)newWithSend:(Send *)send context:(SendContext *)context
++ (instancetype)newWithSend:(Send *)item context:(SendContext *)context
 {
 	CKComponentScope scope(self);
 	NSMutableDictionary* currentState = scope.state();
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+	
+	// There is a copy of this check in the component controller
+	BOOL enable = NO;
+	if ((item.data[@"send_media"] != nil) && ([currentState[@"to"] length] > 0))
+	{
+		enable = YES;
+	}
+	else if (([currentState[@"message"] length] > 0) && ([currentState[@"to"] length] > 0))
+	{
+		enable = YES;
+	}
+  	currentState[@"enable_send"] = [NSNumber numberWithBool:enable];
 	
 	NSString *sendButtonImageName;
 	if ([currentState[@"enable_send"] boolValue])
@@ -38,7 +50,7 @@
 	}
 	
 	std::vector<CKStackLayoutComponentChild> sendContent;
-	if ([send data][@"send_media"] != nil)
+	if ([item data][@"send_media"] != nil)
 	{
 		sendContent.push_back(
 			{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 15, .right = 0} component:
@@ -49,7 +61,17 @@
 						{@selector(setClipsToBounds:), @YES},
                     }
 				} component:
-					[CKImageComponent newWithImage:[send data][@"send_media"] size:{.height = 90, .width = 90}]
+					[CKBackgroundLayoutComponent newWithComponent:
+						[CKInsetComponent newWithInsets:{.top = 0, .bottom = 66, .left = 66, .right = 0} component:
+							[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+								{UIControlStateNormal,[UIImage imageNamed:@"icon_close.png"]},
+							} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionMediaRemove:) size:{.height = 24, .width = 24} attributes:{} accessibilityConfiguration:{}]
+						]
+					 background:
+				 		[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+							{UIControlStateNormal,[item data][@"send_media"]},
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionMediaTap:) size:{.height = 90, .width = 90} attributes:{} accessibilityConfiguration:{}]
+					]
 				]
 			]}
 		);
@@ -129,6 +151,10 @@
 			}]
 		]
 	];
+	if (c)
+	{
+		c->_send = item;
+	}
     return c;
 }
 

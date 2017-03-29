@@ -122,7 +122,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleSegControl)
                                                  name:@"RgSegmentControl"
                                                object:nil];
-    
+	
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
 	// xcode would result in the callbutton being disabled all the time.

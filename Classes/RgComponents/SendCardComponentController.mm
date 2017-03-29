@@ -29,6 +29,7 @@
 	[self setState:[NSMutableDictionary dictionaryWithDictionary:@{
 		@"enable_send": @NO,
 		@"message": @"",
+		@"to": @"",
 	}]];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextViewTextDidChangeNotification object:nil];
@@ -42,6 +43,29 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
 }
 
+- (BOOL)enableSend
+{
+	SendCardComponent* sc = (SendCardComponent*)self.component;
+	Send* send = sc.send;
+	NSDictionary* data = send.data;
+	NSMutableDictionary* st = [self state];
+	//NSLog(@"Current: %ld %ld", [st[@"message"] length], [st[@"to"] length]);
+	
+	// This code is copied into the actual component
+	BOOL enable = NO;
+	if ((data[@"send_media"] != nil) && ([st[@"to"] length] > 0))
+	{
+		enable = YES;
+	}
+	else if (([st[@"message"] length] > 0) && ([st[@"to"] length] > 0))
+	{
+		enable = YES;
+	}
+	st[@"enable_send"] = [NSNumber numberWithBool:enable];
+	//NSLog(@"Send enabled: %@", st);
+	return enable;
+}
+
 - (void)textFieldDidChange:(NSNotification *)notif {
 	NSInteger tag = [((UIView*)notif.object) tag];
 	NSString *text = [notif.object text];
@@ -52,30 +76,17 @@
 	else if (tag == 1) // Message
 	{
 		[self state][@"message"] = text;
-		__block NSMutableDictionary *st = [self state];
-		BOOL changed = NO;
-		if ([text length] > 0)
-		{
-			if (! [st[@"enable_send"] boolValue])
-			{
-				st[@"enable_send"] = @YES;
-				changed = YES;
-			}
-		}
-		else
-		{
-			if ([st[@"enable_send"] boolValue])
-			{
-				st[@"enable_send"] = @NO;
-				changed = YES;
-			}
-		}
-		if (changed)
-		{
-			[self.component updateState:^(id oldState){
-				return st;
-			} mode:CKUpdateModeAsynchronous];
-		}
+	}
+	BOOL is_enabled = [[self state][@"enable_send"] boolValue];
+	BOOL now_enabled = [self enableSend];
+	BOOL changed = ((! is_enabled) && now_enabled) || ((! now_enabled) && is_enabled);
+	__block NSMutableDictionary *st = [self state];
+	if (changed)
+	{
+		NSLog(@"Enabled Send Changed 1");
+		[self.component updateState:^(id oldState){
+			return st;
+		} mode:CKUpdateModeAsynchronous];
 	}
 	//NSLog(@"Tag: %@ - Text: %@", [NSNumber numberWithInteger:tag], text);
 }
@@ -85,6 +96,7 @@
 	[self setState:[NSMutableDictionary dictionaryWithDictionary:@{
 		@"enable_send": @NO,
 		@"message": @"",
+		@"to": @"",
 	}]];
 	__block NSMutableDictionary *st = [self state];
 	[self.component updateState:^(id oldState){
@@ -95,12 +107,24 @@
 - (void)actionSend:(CKButtonComponent *)sender
 {
 	//NSLog(@"Send: %@", [self state]);
-	Send *obj = [[Send alloc] initWithData:@{}];
+	SendCardComponent* sc = (SendCardComponent*)self.component;
+	Send* obj = sc.send;
 	NSDictionary *msgdata = [self state];
 	if ([msgdata[@"enable_send"] boolValue])
 	{
 		[obj sendMessage:msgdata];
 	}
+}
+
+- (void)actionMediaRemove:(CKButtonComponent *)sender
+{
+	//NSLog(@"%s", __PRETTY_FUNCTION__);
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentRemoveMedia object:nil];
+}
+
+- (void)actionMediaTap:(CKButtonComponent *)sender
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

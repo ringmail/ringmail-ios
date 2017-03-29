@@ -251,6 +251,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)chatUpdateEvent:(NSNotification *)notif {
+	NSLog(@"%s", __PRETTY_FUNCTION__);
     NSNumber *room = [[notif userInfo] objectForKey:@"session"];
     if ([room isEqualToNumber:chatViewController.chatSession])
     {

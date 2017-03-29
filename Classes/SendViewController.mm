@@ -72,6 +72,10 @@
 	}
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMedia:) name:kRgSendComponentAddMedia object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMedia) name:kRgSendComponentRemoveMedia object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSend) name:kRgSendComponentReset object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -79,6 +83,8 @@
 	[super viewWillDisappear:animated];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentAddMedia object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentRemoveMedia object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
 }
 
 + (id)initialState
@@ -130,7 +136,33 @@
 	}
 }
 
+- (void)removeMedia
+{
+	if (sendInfo[@"send_media"])
+	{
+		[sendInfo removeObjectForKey:@"send_media"];
+	}
+	if (sendInfo[@"send_file"])
+	{
+		[sendInfo removeObjectForKey:@"send_file"];
+	}
+	if (sendInfo[@"send_asset"])
+	{
+		[sendInfo removeObjectForKey:@"send_asset"];
+	}
+	if (_hostView != nil)
+	{
+    	Send *send = [[Send alloc] initWithData:sendInfo];
+    	[_hostView updateModel:send mode:CKUpdateModeAsynchronous];
+	}
+}
+
 #pragma mark - Update
+
+- (void)resetSend
+{
+	[self removeMedia];
+}
 
 - (void)updateSend
 {

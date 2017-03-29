@@ -493,6 +493,8 @@
 		C445D1BE1E674CF70037A9DE /* background_favorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C445D1BC1E674CF70037A9DE /* background_favorites@2x.png */; };
 		C445D1C11E6778220037A9DE /* TextInputComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C445D1C01E6778220037A9DE /* TextInputComponent.mm */; };
 		C445D1C21E6778220037A9DE /* TextInputComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C445D1C01E6778220037A9DE /* TextInputComponent.mm */; };
+		C44669E21E8B1E310062329B /* icon_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44669E11E8B1E310062329B /* icon_close@2x.png */; };
+		C44669E31E8B1E310062329B /* icon_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C44669E11E8B1E310062329B /* icon_close@2x.png */; };
 		C44A40CC1E70E415000F3E24 /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C44A407A1E70E415000F3E24 /* CLImageEditor.bundle */; };
 		C44A40CD1E70E415000F3E24 /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C44A407A1E70E415000F3E24 /* CLImageEditor.bundle */; };
 		C44A40CE1E70E415000F3E24 /* CLImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = C44A407C1E70E415000F3E24 /* CLImageEditor.m */; };
@@ -2775,6 +2777,7 @@
 		C445D1BC1E674CF70037A9DE /* background_favorites@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background_favorites@2x.png"; path = "Resources/background_favorites@2x.png"; sourceTree = "<group>"; };
 		C445D1BF1E6778210037A9DE /* TextInputComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextInputComponent.h; path = RgComponents/TextInputComponent.h; sourceTree = "<group>"; };
 		C445D1C01E6778220037A9DE /* TextInputComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TextInputComponent.mm; path = RgComponents/TextInputComponent.mm; sourceTree = "<group>"; };
+		C44669E11E8B1E310062329B /* icon_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_close@2x.png"; path = "Resources/icon_close@2x.png"; sourceTree = "<group>"; };
 		C44A407A1E70E415000F3E24 /* CLImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLImageEditor.bundle; sourceTree = "<group>"; };
 		C44A407B1E70E415000F3E24 /* CLImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageEditor.h; sourceTree = "<group>"; };
 		C44A407C1E70E415000F3E24 /* CLImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageEditor.m; sourceTree = "<group>"; };
@@ -4855,6 +4858,7 @@
 			isa = PBXGroup;
 			children = (
 				4DFD607A1E70DD84003505B7 /* smoke15.png */,
+				C44669E11E8B1E310062329B /* icon_close@2x.png */,
 				C45606501E78A27400572943 /* ringmail_action_call_presssed@2x.png */,
 				C45606511E78A27400572943 /* ringmail_action_text_normal@2x.png */,
 				C45606521E78A27400572943 /* ringmail_action_text_presssed@2x.png */,
@@ -5851,6 +5855,7 @@
 				22F254811073D99800AC9B3F /* ringback.wav in Resources */,
 				2237D4091084D7A9001383EE /* ring.wav in Resources */,
 				2242E313125235120061DDCE /* ring.caf in Resources */,
+				C44669E21E8B1E310062329B /* icon_close@2x.png in Resources */,
 				2214783D1386A2030020F8B8 /* Localizable.strings in Resources */,
 				C456065A1E78A27400572943 /* ringmail_action_text_presssed@2x.png in Resources */,
 				70571E1A13FABCB000CDD3C2 /* rootca.pem in Resources */,
@@ -6949,6 +6954,7 @@
 				C4AC28A21D3963FA003B6232 /* UICompositeViewController.xib in Resources */,
 				4DF6133E1E5CD6B7005624D2 /* tabs_contacts_pressed@3x.png in Resources */,
 				C456065F1E78A27400572943 /* ringmail_action_video_presssed@2x.png in Resources */,
+				C44669E31E8B1E310062329B /* icon_close@2x.png in Resources */,
 				C4AC28A31D3963FA003B6232 /* avatar_unknown.png in Resources */,
 				4DF612F11E5CD6A5005624D2 /* tabs_ring_selected_5@2x.png in Resources */,
 				C4AC28A41D3963FA003B6232 /* menu-more_active.png in Resources */,

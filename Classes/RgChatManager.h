@@ -48,7 +48,7 @@
 - (void)dropTables;
 - (NSString *)sendMessageTo:(NSString*)msgTo from:(NSString*)origTo body:(NSString*)body contact:(NSNumber*)contact;
 - (NSString *)sendMessageTo:(NSString*)msgTo from:(NSString*)origTo body:(NSString*)body reply:(NSString*)reply contact:(NSNumber*)contact;
-- (void)sendMessageTo:(NSString*)to from:(NSString*)origTo image:(UIImage*)image contact:(NSNumber*)contact;
+- (NSString *)sendMessageTo:(NSString*)to from:(NSString*)origTo image:(UIImage*)image contact:(NSNumber*)contact;
 //- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply contact:(NSNumber*)contact;
 //- (NSString *)sendQuestionTo:(NSString*)to question:(NSString*)question answers:(NSArray*)answers contact:(NSNumber*)contact;
 - (NSDictionary *)dbGetSessionID:(NSString *)from to:(NSString*)origTo contact:(NSNumber*)contact uuid:(NSString*)uuid;

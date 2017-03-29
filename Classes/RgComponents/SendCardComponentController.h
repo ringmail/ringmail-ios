@@ -19,6 +19,8 @@
 - (void)didUnmount;
 - (void)textFieldDidChange:(NSNotification *)notif;
 - (void)actionSend:(CKButtonComponent *)sender;
+- (void)actionMediaTap:(CKButtonComponent *)sender;
+- (void)actionMediaRemove:(CKButtonComponent *)sender;
 
 @end
 

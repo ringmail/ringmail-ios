@@ -14,6 +14,7 @@
 - (void)updateSend;
 - (void)selectMedia:(NSNotification *)notif;
 - (void)addMedia:(NSDictionary*)param;
+- (void)removeMedia;
 
 @end
 
