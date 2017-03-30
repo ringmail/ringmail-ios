@@ -23,7 +23,6 @@ typedef enum {
 
 int backState = 0;
 
-
 @synthesize background;
 @synthesize backButton;
 @synthesize segmentButton;
@@ -53,25 +52,6 @@ int backState = 0;
                                              selector:@selector(updateLabelsBtns:)
                                                  name:@"navBarViewChange"
                                                object:nil];
-
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(changeViewEvent:)
-//                                                 name:kLinphoneMainViewChange
-//                                               object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(callUpdate:)
-//                                                 name:kLinphoneCallUpdate
-//                                               object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(textReceived:)
-//                                                 name:kRgTextReceived
-//                                               object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(settingsUpdate:)
-//                                                 name:kLinphoneSettingsUpdate
-//                                               object:nil];
-//    [self update:FALSE];
-//    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -79,12 +59,6 @@ int backState = 0;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"navBarViewChange" object:nil];
     
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneMainViewChange object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneTextReceived object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneSettingsUpdate object:nil];
-    
-    //missedCalls = [NSNumber numberWithInt:0];
 }
 
 - (void)viewDidLoad {
@@ -130,29 +104,37 @@ int backState = 0;
         segFrameHeight = 24;
         segFrameWidth = 145;
         segXShifted += 12.5;
-        [backButton setCenter:CGPointMake(backButton.center.x,38)];
+        [backButton setCenter:CGPointMake(backButton.center.x,(tmpImg.size.height / 2))];
     }
     else if (widthIn == 375) {
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
-        [backButton setCenter:CGPointMake(backButton.center.x,42)];
+        [backButton setCenter:CGPointMake(backButton.center.x, (tmpImg.size.height / 2))];
     }
     else if (widthIn == 414) {
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@3x.jpg"];
         segFrameHeight = 30;
         segFrameWidth = 189;
         segXShifted -= 9.5;
-        [backButton setCenter:CGPointMake(backButton.center.x,46)];
+        [backButton setCenter:CGPointMake(backButton.center.x, (tmpImg.size.height / 2))];
     }
     
     background.frame = CGRectMake(0, 0, tmpImg.size.width, tmpImg.size.height);
     background.image = tmpImg;
     [segmentButton setFrame:CGRectMake(segXShifted, segFrame.origin.y, segFrameWidth, segFrameHeight)];
-    
-    [headerLabel setCenter:CGPointMake(headerLabel.center.x,(background.frame.size.height/3)+5)];
-    [leftLabel setCenter:CGPointMake(leftLabel.center.x, (background.frame.size.height/3)+5)];
-    [rightLabel setCenter:CGPointMake(rightLabel.center.x,(background.frame.size.height/3)+5)];
     [segmentButton setCenter:CGPointMake(segmentButton.center.x,((background.frame.size.height/3)*2)+5)];
     
+    if (segmentButton.hidden)
+    {
+        [headerLabel setCenter:CGPointMake(headerLabel.center.x,background.frame.size.height/2)];
+        [leftLabel setCenter:CGPointMake(leftLabel.center.x,background.frame.size.height/2)];
+        [rightLabel setCenter:CGPointMake(rightLabel.center.x,background.frame.size.height/2)];
+    }
+    else
+    {
+        [headerLabel setCenter:CGPointMake(headerLabel.center.x,(background.frame.size.height/3)+5)];
+        [leftLabel setCenter:CGPointMake(leftLabel.center.x, (background.frame.size.height/3)+5)];
+        [rightLabel setCenter:CGPointMake(rightLabel.center.x,(background.frame.size.height/3)+5)];
+    }
 }
 
 // mrkbxt
@@ -187,13 +169,11 @@ int backState = 0;
         case Recents:
             [segmentButton setEnabled:YES];
             [segmentButton setHidden:NO];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"1",}];
             break;
         case Contacts:
         case Settings:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"0",}];
             break;
         case HTagCard:
             [segmentButton setEnabled:NO];
@@ -203,7 +183,6 @@ int backState = 0;
             backState = 1;
             [headerLabel setHidden:NO];
             headerLabel.text = @"Explore";
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"0",}];
             break;
         default:
             break;
@@ -229,11 +208,7 @@ int backState = 0;
 #pragma mark - Event Functions
 
 - (void)applicationWillEnterForeground:(NSNotification *)notif {
-    // Force the animations
-//    [[self.view layer] removeAllAnimations];
-//    [chatNotificationView.layer setTransform:CATransform3DIdentity];
-//    [chatNotificationView setHidden:TRUE];
-//    [self update:FALSE];
+
 }
 
 
