@@ -1,4 +1,4 @@
-/* RgFavoriteViewController.h
+/* MessagesViewController.h
  */
 
 #import <UIKit/UIKit.h>
@@ -10,7 +10,7 @@
 #import "UIMessageButton.h"
 #import "UIDigitButton.h"
 
-@interface RgFavoriteViewController : UIViewController <UICompositeViewDelegate> {
+@interface MessagesViewController : UIViewController <UICompositeViewDelegate> {
 }
 
 @property (nonatomic, strong) IBOutlet UIView* mainView;

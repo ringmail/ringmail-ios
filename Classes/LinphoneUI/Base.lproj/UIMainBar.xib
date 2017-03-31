@@ -19,11 +19,11 @@
                 <outlet property="chatNotificationLabel" destination="38" id="40"/>
                 <outlet property="chatNotificationView" destination="37" id="41"/>
                 <outlet property="contactsButton" destination="8" id="27"/>
-                <outlet property="dialerButton" destination="7" id="12"/>
                 <outlet property="hashtagButton" destination="5" id="lDT-P2-haw"/>
-                <outlet property="historyButton" destination="6" id="13"/>
                 <outlet property="logoView" destination="pkJ-2Y-4Pr" id="GhF-hx-8sn"/>
+                <outlet property="messagesButton" destination="6" id="wyh-Bo-dMb"/>
                 <outlet property="portraitView" destination="3" id="43"/>
+                <outlet property="ringmailButton" destination="7" id="WAS-gj-gzq"/>
                 <outlet property="settingsButton" destination="9" id="29"/>
                 <outlet property="view" destination="3" id="14"/>
             </connections>
@@ -63,10 +63,10 @@
                         <color key="titleColor" red="0.12941176469999999" green="0.24313725489999999" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="onHashtagClick:" destination="-1" eventType="touchUpInside" id="itT-Ar-Shm"/>
+                        <action selector="onExploreClick:" destination="-1" eventType="touchUpInside" id="3iu-Ze-IV5"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="history">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="messages">
                     <rect key="frame" x="83" y="0.0" width="82.5" height="50"/>
                     <accessibility key="accessibilityConfiguration" label="History"/>
                     <constraints>
@@ -74,7 +74,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="10"/>
                     <inset key="titleEdgeInsets" minX="-83" minY="35" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Recents" image="tabs_recents_normal.png">
+                    <state key="normal" title="Messages" image="tabs_recents_normal.png">
                         <color key="titleColor" red="0.25882352939999997" green="0.55294117649999996" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -85,10 +85,10 @@
                         <color key="titleColor" red="0.12941176469999999" green="0.24313725489999999" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="22"/>
+                        <action selector="onMessagesClick:" destination="-1" eventType="touchUpInside" id="RzX-iq-9NM"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="dialer">
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="ringmail">
                     <rect key="frame" x="165.5" y="0.0" width="83" height="50"/>
                     <accessibility key="accessibilityConfiguration" label="Dialer"/>
                     <constraints>
@@ -111,7 +111,7 @@
                         <color key="titleColor" red="0.12941176469999999" green="0.24313725489999999" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
+                        <action selector="onRingMailClick:" destination="-1" eventType="touchUpInside" id="1ZF-qG-dUg"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="contacts">
@@ -213,7 +213,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="846.5" y="353"/>
+            <point key="canvasLocation" x="748" y="327"/>
         </view>
     </objects>
     <resources>

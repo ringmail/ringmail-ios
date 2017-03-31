@@ -1,4 +1,4 @@
-/* RgFavoriteViewController.h
+/* MessagesViewController.h
  *
  * Copyright (C) 2009  Belledonne Comunications, Grenoble, France
  *
@@ -20,8 +20,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "RgScanViewController.h"
-#import "RgFavoriteViewController.h"
+#import "MessagesViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
@@ -32,12 +31,12 @@
 
 #import "RgSearchBarViewController.h"
 
-@interface RgFavoriteViewController()
+@interface MessagesViewController()
 @property BOOL isSearchBarVisible;
 @property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
 @end
 
-@implementation RgFavoriteViewController
+@implementation MessagesViewController
 
 @synthesize mainView;
 @synthesize mainViewController;
@@ -47,7 +46,7 @@
 #pragma mark - Lifecycle Functions
 
 - (id)init {
-	self = [super initWithNibName:@"RgFavoriteViewController" bundle:[NSBundle mainBundle]];
+	self = [super initWithNibName:@"MessagesViewController" bundle:[NSBundle mainBundle]];
 	return self;
 }
 
@@ -64,7 +63,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
 		compositeDescription = [[UICompositeViewDescription alloc] init:@"Recent Activity"
-																content:@"RgFavoriteViewController"
+																content:@"MessagesViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true
                                                                  navBar:@"UINavBar"

@@ -27,11 +27,11 @@ static NSString *const kBounceAnimation = @"bounce";
 static NSString *const kAppearAnimation = @"appear";
 static NSString *const kDisappearAnimation = @"disappear";
 
-@synthesize historyButton;
-@synthesize contactsButton;
-@synthesize dialerButton;
-@synthesize settingsButton;
 @synthesize hashtagButton;
+@synthesize messagesButton;
+@synthesize ringmailButton;
+@synthesize contactsButton;
+@synthesize settingsButton;
 @synthesize chatNotificationView;
 @synthesize chatNotificationLabel;
 @synthesize logoView;
@@ -114,7 +114,7 @@ NSArray *buttonArray;
         [logoView setImage:logo];
     }
     
-    buttonArray = [[NSArray alloc] initWithObjects:historyButton,contactsButton,dialerButton,settingsButton,hashtagButton,nil];
+    buttonArray = [[NSArray alloc] initWithObjects:messagesButton,contactsButton,ringmailButton,settingsButton,hashtagButton,nil];
     
     [self setInstance: [UIScreen mainScreen].applicationFrame.size.width];
     
@@ -144,7 +144,7 @@ NSArray *buttonArray;
 
 - (void)setInstance:(int)widthIn
 {
-    buttonArray = [[NSArray alloc] initWithObjects:historyButton,contactsButton,dialerButton,hashtagButton,settingsButton,nil];
+    buttonArray = [[NSArray alloc] initWithObjects:messagesButton,contactsButton,ringmailButton,hashtagButton,settingsButton,nil];
     
     NSArray *imgPrefix =  [NSArray arrayWithObjects:@"tabs_recents%@%@",@"tabs_contacts%@%@",@"tabs_ring%@%@",@"tabs_explore%@%@",@"tabs_settings%@%@",nil];
     NSArray *imgSuffix = [NSArray arrayWithObjects:@"_5@2x",@"@2x",@"@3x",nil];
@@ -307,10 +307,10 @@ NSArray *buttonArray;
 
 - (void)updateView:(UICompositeViewDescription *)view {
 	// Update buttons
-	if ([view equal:[RgFavoriteViewController compositeViewDescription]]) {
-		historyButton.selected = TRUE;
+	if ([view equal:[MessagesViewController compositeViewDescription]]) {
+		messagesButton.selected = TRUE;
 	} else {
-		historyButton.selected = FALSE;
+		messagesButton.selected = FALSE;
 	}
 	if ([view equal:[ContactsViewController compositeViewDescription]]) {
 		contactsButton.selected = TRUE;
@@ -318,9 +318,9 @@ NSArray *buttonArray;
 		contactsButton.selected = FALSE;
 	}
 	if ([view equal:[RgMainViewController compositeViewDescription]]) {
-		dialerButton.selected = TRUE;
+		ringmailButton.selected = TRUE;
 	} else {
-		dialerButton.selected = FALSE;
+		ringmailButton.selected = FALSE;
 	}
 	if ([view equal:[SettingsViewController compositeViewDescription]]) {
 		settingsButton.selected = TRUE;
@@ -336,8 +336,16 @@ NSArray *buttonArray;
 
 #pragma mark - Action Functions
 
-- (IBAction)onHistoryClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[RgFavoriteViewController compositeViewDescription]];
+- (IBAction)onExploreClick:(id)event {
+	[[PhoneMainView instance] changeCurrentView:[RgHashtagDirectoryViewController compositeViewDescription]];
+}
+
+- (IBAction)onMessagesClick:(id)event {
+	[[PhoneMainView instance] changeCurrentView:[MessagesViewController compositeViewDescription]];
+}
+
+- (IBAction)onRingMailClick:(id)event {
+	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
 }
 
 - (IBAction)onContactsClick:(id)event {
@@ -349,17 +357,10 @@ NSArray *buttonArray;
 	[[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription]];
 }
 
-- (IBAction)onDialerClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
-}
-
 - (IBAction)onSettingsClick:(id)event {
 	[[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
 }
 
-- (IBAction)onHashtagClick:(id)event {
-	[[PhoneMainView instance] changeCurrentView:[RgHashtagDirectoryViewController compositeViewDescription]];
-}
 
 #pragma mark - TPMultiLayoutViewController Functions
 
