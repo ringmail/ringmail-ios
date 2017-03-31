@@ -7,11 +7,11 @@
 
 @interface ChatRoomModelController : NSObject
 
-@property (nonatomic, retain) NSArray *elements;
+@property (nonatomic, retain) NSMutableArray *elements;
 @property (nonatomic, retain) NSNumber *chatThreadID;
 @property (nonatomic, retain) NSNumber *mainCount;
 
-- (id)initWithID:(NSNumber*)threadID;
+- (id)initWithID:(NSNumber*)threadID elements:(NSArray*)elems;
 - (ChatElementPage *)fetchNewChatElementPageWithCount:(NSInteger)count;
 
 @end

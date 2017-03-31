@@ -434,6 +434,8 @@
 		C42C0DEE1CB16FF100AD5A91 /* ringmail_incoming_reject@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C42C0DE81CB16FF100AD5A91 /* ringmail_incoming_reject@2x.png */; };
 		C42C0DEF1CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C42C0DE91CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png */; };
 		C431598C1B95354C001A795E /* RgMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C431598B1B95354C001A795E /* RgMessagesViewController.m */; };
+		C43354D61E8EEFD000748F4C /* ringmail_chat_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43354D51E8EEFD000748F4C /* ringmail_chat_background@2x.png */; };
+		C43354D71E8EEFD000748F4C /* ringmail_chat_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43354D51E8EEFD000748F4C /* ringmail_chat_background@2x.png */; };
 		C43DA5871D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */; };
 		C43DA58A1D81E9F0007E20A2 /* RingMail-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C43DA5861D81E9F0007E20A2 /* RingMail-Info.plist */; };
 		C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */; };
@@ -2738,6 +2740,7 @@
 		C42C0DE91CB16FF100AD5A91 /* ringmail_incoming_reject@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_incoming_reject@3x.png"; path = "Resources/ringmail_incoming_reject@3x.png"; sourceTree = "<group>"; };
 		C431598A1B95354C001A795E /* RgMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMessagesViewController.h; sourceTree = "<group>"; };
 		C431598B1B95354C001A795E /* RgMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMessagesViewController.m; sourceTree = "<group>"; };
+		C43354D51E8EEFD000748F4C /* ringmail_chat_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_chat_background@2x.png"; path = "Resources/ringmail_chat_background@2x.png"; sourceTree = "<group>"; };
 		C43DA5851D81E9F0007E20A2 /* RingMail-Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RingMail-Dev-Info.plist"; sourceTree = "<group>"; };
 		C43DA5861D81E9F0007E20A2 /* RingMail-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RingMail-Info.plist"; sourceTree = "<group>"; };
 		C43F65D11D5309CB004CEC70 /* HashtagCardComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCardComponentController.h; path = RgComponents/HashtagCardComponentController.h; sourceTree = "<group>"; };
@@ -4903,6 +4906,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C43354D51E8EEFD000748F4C /* ringmail_chat_background@2x.png */,
 				4DFD607A1E70DD84003505B7 /* smoke15.png */,
 				C44669E11E8B1E310062329B /* icon_close@2x.png */,
 				C45606501E78A27400572943 /* ringmail_action_call_presssed@2x.png */,
@@ -6118,6 +6122,7 @@
 				636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */,
 				4DF6130B1E5CD6AE005624D2 /* tabs_contacts_normal@2x.png in Resources */,
 				4DF6134B1E5CD6B7005624D2 /* tabs_recents_selected@3x.png in Resources */,
+				C43354D61E8EEFD000748F4C /* ringmail_chat_background@2x.png in Resources */,
 				D34F6F9E1594D3FB0095705B /* InAppSettings.bundle in Resources */,
 				C459A4281CC8634C00CFFF30 /* ringmail_edit-pressed@3x.png in Resources */,
 				C42C0DD21CAEE9D100AD5A91 /* ringmail_mic@3x.png in Resources */,
@@ -7296,6 +7301,7 @@
 				C4AC29A51D3963FA003B6232 /* options_transfer_disabled~ipad.png in Resources */,
 				C4AC29A61D3963FA003B6232 /* options_transfer_over~ipad.png in Resources */,
 				C4AC29A71D3963FA003B6232 /* ringmail_edit-cancel-pressed@2x.png in Resources */,
+				C43354D71E8EEFD000748F4C /* ringmail_chat_background@2x.png in Resources */,
 				C4AC29A81D3963FA003B6232 /* ringmail_endcall@2x.png in Resources */,
 				C4AC29A91D3963FA003B6232 /* search@3x.png in Resources */,
 				C4AC29AA1D3963FA003B6232 /* ping_out_receive.caf in Resources */,

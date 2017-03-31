@@ -8,12 +8,14 @@
 
 @implementation ChatRoomModelController
 
+@synthesize elements;
 @synthesize mainCount;
 @synthesize chatThreadID;
 
-- (id)initWithID:(NSNumber*)threadID
+- (id)initWithID:(NSNumber*)threadID elements:(NSArray*)elems
 {
     if (self = [super init]) {
+		elements = [NSMutableArray arrayWithArray:elems];
         mainCount = [NSNumber numberWithInteger:0];
         chatThreadID = threadID;
     }
@@ -24,11 +26,18 @@
 {
 	NSAssert(count >= 1, @"Count should be a positive integer");
 	
-	// TODO: move this to outer view controller?
-	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:self.chatThreadID];
-	NSLog(@"%@", messages);
-	NSArray* elementList = @[];
+	NSMutableArray* elementList = [NSMutableArray array];
 	NSInteger added = 0;
+	for (NSUInteger i = 0; i < count; i++)
+    {
+		NSInteger mainIndex = [mainCount intValue] + i;
+		if ([elements count] > mainIndex)
+		{
+			ChatElement* item = [[ChatElement alloc] initWithData:[elements objectAtIndex:mainIndex]];
+			[elementList addObject:item];
+			added++;
+		}
+	}
 	
 	ChatElementPage *elementPage = [[ChatElementPage alloc] initWithChatElements:elementList position:[mainCount integerValue]];
 	mainCount = [NSNumber numberWithInteger:[mainCount integerValue] + added];

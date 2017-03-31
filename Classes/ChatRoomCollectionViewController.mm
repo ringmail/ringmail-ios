@@ -20,11 +20,11 @@
 
 static NSInteger const pageSize = 50;
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID elements:(NSArray*)elems
 {
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleWidthAndHeight];
-        _modelController = [[ChatRoomModelController alloc] initWithID:threadID];
+        _modelController = [[ChatRoomModelController alloc] initWithID:threadID elements:elems];
     }
     return self;
 }

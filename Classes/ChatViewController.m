@@ -11,6 +11,7 @@
 @implementation ChatViewController
 
 @synthesize mainView;
+@synthesize backgroundImageView;
 @synthesize chatRoom;
 
 #pragma mark - Lifecycle Functions
@@ -62,13 +63,26 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	[backgroundImageView setImage:[UIImage imageNamed:@"ringmail_chat_background.png"]];
+	/*int width = [UIScreen mainScreen].applicationFrame.size.width;
+    if (width == 320) {
+    }
+    else if (width == 375) {
+    }
+    else if (width == 414) {
+    }*/
 
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
+	
+	NSNumber* threadID = [[LinphoneManager instance] chatSession];
+   	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID];
+	NSLog(@"%@", messages);
     
-    ChatRoomCollectionViewController *mainController = [[ChatRoomCollectionViewController alloc] initWithCollectionViewLayout:flowLayout chatThreadID:[[LinphoneManager instance] chatSession]];
+    ChatRoomCollectionViewController *mainController = [[ChatRoomCollectionViewController alloc] initWithCollectionViewLayout:flowLayout chatThreadID:threadID elements:messages];
     
     [[mainController collectionView] setBounces:YES];
     [[mainController collectionView] setAlwaysBounceVertical:YES];

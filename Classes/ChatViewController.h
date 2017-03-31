@@ -10,6 +10,7 @@
 }
 
 @property (nonatomic, strong) IBOutlet UIView* mainView;
+@property (nonatomic, retain) IBOutlet UIImageView* backgroundImageView;
 @property (nonatomic, retain) ChatRoomCollectionViewController* chatRoom;
 
 @end

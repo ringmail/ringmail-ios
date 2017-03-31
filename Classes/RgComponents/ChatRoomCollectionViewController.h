@@ -13,7 +13,7 @@
 
 @interface ChatRoomCollectionViewController : UICollectionViewController
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID;
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID elements:(NSArray*)elems;
 
 @end
 
