@@ -33,6 +33,8 @@ target 'RingMail-Dev' do
   pod 'Colours'
   pod 'SDWebImage', :git => 'https://github.com/rs/SDWebImage.git', :tag => '3.8.2'
   pod 'LLSimpleCamera', :git => 'https://github.com/omergul123/LLSimpleCamera.git', :tag => 'v5.0.0'
+  pod 'SlackTextViewController'
+  pod 'LoremIpsum'
 #  pod 'FCUUID'  # Later :)
 end
 

@@ -39,7 +39,8 @@
 - (void)showMessages
 {
     [[LinphoneManager instance] setChatSession:_data[@"id"]];
-    [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription] push:TRUE];
+    //[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription] push:TRUE];
+    [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
 }
 
 - (void)startCall:(BOOL)video
