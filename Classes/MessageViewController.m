@@ -64,7 +64,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (instancetype)init
 {
-    self = [super initWithTableViewStyle:UITableViewStylePlain];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    [flowLayout setMinimumInteritemSpacing:0];
+    [flowLayout setMinimumLineSpacing:0];
+    self = [super initWithCollectionViewLayout:flowLayout];
+    //self = [super initWithTableViewStyle:UITableViewStylePlain];
     if (self) {
         [self commonInit];
     }
@@ -647,7 +652,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     return [super textView:textView shouldChangeTextInRange:range replacementText:text];
 }
-
 
 #pragma mark - UITableViewDataSource Methods
 

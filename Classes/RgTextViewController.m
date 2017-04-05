@@ -1,6 +1,8 @@
 #import "RgTextViewController.h"
 #import "SLKInputAccessoryView.h"
 
+#import "LinphoneManager.h"
+
 #import "UIResponder+SLKAdditions.h"
 #import "SLKUIConstants.h"
 
@@ -51,6 +53,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 @end
 
 @implementation RgTextViewController
+@synthesize chatRoom = _chatRoom;
 @synthesize tableView = _tableView;
 @synthesize collectionView = _collectionView;
 @synthesize scrollView = _scrollView;
@@ -168,6 +171,9 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [self.view addSubview:self.autoCompletionView];
     [self.view addSubview:self.typingIndicatorProxyView];
     [self.view addSubview:self.textInputbar];
+	
+	[self addChildViewController:_chatRoom];
+    [_chatRoom didMoveToParentViewController:self];
     
     [self slk_setupViewConstraints];
     
@@ -194,7 +200,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 {
     [super viewDidAppear:animated];
     
-    [self.scrollViewProxy flashScrollIndicators];
+    //[self.scrollViewProxy flashScrollIndicators];
     
     self.viewVisible = YES;
 }
@@ -220,8 +226,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
-    [self slk_adjustContentConfigurationIfNeeded];
 }
 
 - (void)viewDidLayoutSubviews
@@ -258,12 +262,31 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (UICollectionView *)collectionViewWithLayout:(UICollectionViewLayout *)layout
 {
     if (!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    	NSNumber* threadID = [[LinphoneManager instance] chatSession];
+       	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID];
+    	NSLog(@"%@", messages);
+    		
+        ChatRoomCollectionViewController *mainController = [[ChatRoomCollectionViewController alloc] initWithCollectionViewLayout:layout chatThreadID:threadID elements:messages];
+        
+        [[mainController collectionView] setBounces:YES];
+        [[mainController collectionView] setAlwaysBounceVertical:YES];
+        
+        //CGRect r = mainView.frame;
+        //r.origin.y = 0;
+        //[mainController.view setFrame:r];
+        //[mainView addSubview:mainController.view];
+        //[self addChildViewController:mainController];
+        //[mainController didMoveToParentViewController:self];
+        _chatRoom = mainController;
+        _collectionView = (UICollectionView*)mainController.collectionView;
+		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+	
+        /*_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
         _collectionView.scrollsToTop = YES;
         _collectionView.dataSource = self;
-        _collectionView.delegate = self;
+        _collectionView.delegate = self;*/
     }
     return _collectionView;
 }
@@ -523,13 +546,13 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
         return;
     }
     
-    _singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slk_didTapScrollView:)];
+/*    _singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slk_didTapScrollView:)];
     _singleTapGesture.delegate = self;
     [_singleTapGesture requireGestureRecognizerToFail:scrollView.panGestureRecognizer];
     
     [scrollView addGestureRecognizer:self.singleTapGesture];
     
-    [scrollView.panGestureRecognizer addTarget:self action:@selector(slk_didPanTextInputBar:)];
+    [scrollView.panGestureRecognizer addTarget:self action:@selector(slk_didPanTextInputBar:)]; */
     
     _scrollViewProxy = scrollView;
 }
@@ -542,7 +565,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     
     _autoCompleting = autoCompleting;
     
-    self.scrollViewProxy.scrollEnabled = !autoCompleting;
+    //self.scrollViewProxy.scrollEnabled = !autoCompleting;
 }
 
 - (void)setInverted:(BOOL)inverted
@@ -553,7 +576,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     
     _inverted = inverted;
     
-    self.scrollViewProxy.transform = inverted ? CGAffineTransformMake(1, 0, 0, -1, 0, 0) : CGAffineTransformIdentity;
+    //self.scrollViewProxy.transform = inverted ? CGAffineTransformMake(1, 0, 0, -1, 0, 0) : CGAffineTransformIdentity;
 }
 
 - (void)setBounces:(BOOL)bounces
@@ -933,7 +956,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     // Checking the keyboard status allows to keep the inputAccessoryView valid when still reacing the bottom of the screen.
     CGFloat bottomMargin = [self slk_appropriateBottomMargin];
     if (![self.textView isFirstResponder] || (self.keyboardHC.constant == bottomMargin && self.keyboardStatus == SLKKeyboardStatusDidHide)) {
-#if SLKBottomPanningEnabled
+/*#if SLKBottomPanningEnabled
         if ([gesture.view isEqual:self.scrollViewProxy]) {
             if (gestureVelocity.y > 0) {
                 return;
@@ -944,12 +967,12 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
         }
         
         presenting = YES;
-#else
+#else*/
         if ([gesture.view isEqual:_textInputbar] && gestureVelocity.y < 0) {
             [self presentKeyboard:YES];
         }
         return;
-#endif
+//#endif
     }
     
     switch (gesture.state) {
@@ -1016,7 +1039,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
                 [self.view layoutIfNeeded];
                 
                 // Overrides the scrollView's contentOffset to allow following the same position when dragging the keyboard
-                CGPoint offset = _scrollViewOffsetBeforeDragging;
+                /*CGPoint offset = _scrollViewOffsetBeforeDragging;
                 
                 if (self.isInverted) {
                     if (!self.scrollViewProxy.isDecelerating && self.scrollViewProxy.isTracking) {
@@ -1028,7 +1051,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
                     offset.y -= keyboardHeightDelta;
                     
                     self.scrollViewProxy.contentOffset = offset;
-                }
+                }*/
             }
             
             break;
@@ -1235,24 +1258,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     }
 }
 
-- (void)slk_adjustContentConfigurationIfNeeded
-{
-    UIEdgeInsets contentInset = self.scrollViewProxy.contentInset;
-    
-    // When inverted, we need to substract the top bars height (generally status bar + navigation bar's) to align the top of the
-    // scrollView correctly to its top edge.
-    if (self.inverted) {
-        contentInset.bottom = [self slk_topBarsHeight];
-        contentInset.top = contentInset.bottom > 0.0 ? 0.0 : contentInset.top;
-    }
-    else {
-        contentInset.bottom = 0.0;
-    }
-    
-    self.scrollViewProxy.contentInset = contentInset;
-    self.scrollViewProxy.scrollIndicatorInsets = contentInset;
-}
-
 - (void)slk_prepareForInterfaceTransitionWithDuration:(NSTimeInterval)duration
 {
     self.transitioning = YES;
@@ -1345,16 +1350,18 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     }
     
     // Programatically stops scrolling before updating the view constraints (to avoid scrolling glitch).
-    if (status == SLKKeyboardStatusWillShow) {
+    /*if (status == SLKKeyboardStatusWillShow) {
         [self.scrollViewProxy slk_stopScrolling];
-    }
+    }*/
     
     // Stores the previous keyboard height
-    CGFloat previousKeyboardHeight = self.keyboardHC.constant;
+    //CGFloat previousKeyboardHeight = self.keyboardHC.constant;
     
     // Updates the height constraints' constants
     self.keyboardHC.constant = [self slk_appropriateKeyboardHeightFromNotification:notification];
     self.scrollViewHC.constant = [self slk_appropriateScrollViewHeight];
+	
+	NSLog(@"Set scrollViewHC: %f", self.scrollViewHC.constant);
     
     // Updates and notifies about the keyboard status update
     if ([self slk_updateKeyboardStatus:status]) {
@@ -1366,7 +1373,8 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     if (![self.textView isFirstResponder] || status == SLKKeyboardStatusWillHide) {
         [self slk_hideAutoCompletionViewIfNeeded];
     }
-    
+	
+	/*
     NSInteger curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
@@ -1400,6 +1408,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     else {
         animations();
     }
+	*/
 }
 
 - (void)slk_didShowOrHideKeyboard:(NSNotification *)notification
@@ -2096,7 +2105,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 #pragma mark - UIScrollViewDelegate Methods
 
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+/*- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
     if (!self.scrollViewProxy.scrollsToTop || self.keyboardStatus == SLKKeyboardStatusWillShow) {
         return NO;
@@ -2109,7 +2118,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     else {
         return YES;
     }
-}
+}*/
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {

@@ -12,6 +12,8 @@
 
 #import "SLKUIConstants.h"
 
+#import "ChatRoomCollectionViewController.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -40,6 +42,9 @@ typedef NS_ENUM(NSUInteger, SLKKeyboardStatus) {
 NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <SLKTextViewDelegate, UITableViewDelegate, UITableViewDataSource,
                                                                                 UICollectionViewDelegate, UICollectionViewDataSource,
                                                                                 UIGestureRecognizerDelegate, UIAlertViewDelegate>
+
+/** RingMail */
+@property (nonatomic, retain) ChatRoomCollectionViewController* chatRoom;
 
 /** The main table view managed by the controller object. Created by default initializing with -init or initWithNibName:bundle: */
 @property (nonatomic, readonly) UITableView *_Nullable tableView;
@@ -574,7 +579,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <
 - (BOOL)textView:(SLKTextView *)textView shouldInsertSuffixForFormattingWithSymbol:(NSString *)symbol prefixRange:(NSRange)prefixRange NS_REQUIRES_SUPER;
 
 /** UIScrollViewDelegate */
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView NS_REQUIRES_SUPER;
+//- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView NS_REQUIRES_SUPER;
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate NS_REQUIRES_SUPER;
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView NS_REQUIRES_SUPER;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView NS_REQUIRES_SUPER;
