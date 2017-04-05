@@ -59,7 +59,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rt-2P-RyV">
-                    <rect key="frame" x="120" y="37" width="175" height="21"/>
+                    <rect key="frame" x="120" y="37" width="175.33333333333331" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="175" id="Ct6-hP-FF7"/>
                         <constraint firstAttribute="height" constant="21" id="Fns-t7-EwN"/>
@@ -79,7 +79,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="83b-0d-TgV">
-                    <rect key="frame" x="122" y="63" width="170" height="29"/>
+                    <rect key="frame" x="122" y="63" width="170.33333333333331" height="29"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="PyR-M1-2vv"/>
                     </constraints>

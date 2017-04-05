@@ -99,7 +99,6 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     NSAssert(count >= 1, @"Count should be a positive integer");
     NSMutableArray *_cards = [NSMutableArray new];
     NSInteger added = 0;
-    BOOL headerRemoveLock = 0;
     
     for (NSUInteger i = 0; i < count; i++)
     {
@@ -113,21 +112,18 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
             if (headerCardData)
             {
                 card = [[Card alloc] initWithData:@{
-                    @"type": @"hashtag_directory_header",
+                    @"type": headerCardData[@"header_type"],
                     @"text": @"",
                     @"header_img_url": headerCardData[@"header_img_url"],
                     @"header_img_ht": headerCardData[@"header_img_ht"],
+                    @"name": headerCardData[@"name"],
+                    @"parent_name": headerCardData[@"parent_name"],
+                    @"parent2parent_name": headerCardData[@"parent2parent_name"],
                     } header:@NO];
+                
+                [_cards addObject:card];
+                added++;
             }
-            else
-            {
-                card = [[Card alloc] initWithData:@{
-                    @"type": @"hashtag_directory_header",
-                    @"text": @"",
-                    } header:@NO];
-            }
-            [_cards addObject:card];
-            added++;
         }
         else
         {
@@ -138,13 +134,6 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
                 NSMutableDictionary *cardData = [NSMutableDictionary dictionaryWithDictionary:itemData];
                 if (itemData != nil)
                 {
-                    if (([[cardData objectForKey:@"type"] isEqual: @"hashtag_category_header"]) && !headerRemoveLock)
-                    {
-                        [_cards removeObjectAtIndex:0];
-                        headerRemoveLock = 1;
-                    }
-                    
-                    // Todo: translate to name
                     Card *card = [[Card alloc] initWithData:cardData header:[NSNumber numberWithBool:0]];
                     [_cards addObject:card];
                     added++;

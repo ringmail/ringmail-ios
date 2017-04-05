@@ -30,34 +30,19 @@
 
 @synthesize cardData;
 
-UIImage* getImageDir(float*);
-CKComponent* hashtagDirHeaderImgComponent(float*, UIImage*);
+CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float*, NSDictionary*);
 
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     float screenWidth = [[UIScreen mainScreen] bounds].size.width;
     
-    if ([[data objectForKey:@"text"] isEqual:@"blankTopInset"])
-    {
-        HashtagDirectoryHeaderCardComponent *c = [super newWithComponent:
-        [CKStackLayoutComponent newWithView:{} size:{.width=screenWidth, .height=12} style:{
-            .direction = CKStackLayoutDirectionVertical,
-        }
-        children:{}]
-        ];
-        
-        [c setCardData:data];
-         return c;
-    }
-
-//    UIImage* headerImg = getImageDir(&screenWidth);
     NSString* hdht = data[@"header_img_ht"];
     
     HashtagDirectoryHeaderCardComponent *c = [super newWithComponent:
-        [CKStackLayoutComponent newWithView:{} size:{.width=screenWidth} style:{
-			.direction = CKStackLayoutDirectionVertical,
-		}
+        [CKStackLayoutComponent newWithView:{}
+        size:{.width=screenWidth}
+        style:{.direction = CKStackLayoutDirectionVertical,}
 		children:{
             {[CKInsetComponent
                  newWithInsets:{.top = 0, .bottom = 0}
@@ -71,16 +56,16 @@ CKComponent* hashtagDirHeaderImgComponent(float*, UIImage*);
                         {[CKNetworkImageComponent newWithURL:data[@"header_img_url"]
                             imageDownloader:context.imageDownloader
                             scenePath:nil size:{ screenWidth, [hdht floatValue] } options:{} attributes:{}]},
-//                        {hashtagDirHeaderImgComponent(&screenWidth,headerImg)},
             			{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
             		}]
             ]},
+            {hashtagDirHeaderLabelComponent(&screenWidth,data)},
             {[CKInsetComponent
                newWithInsets:{.left = 20, .right = 20}
                component:
                     [CKLabelComponent
                      newWithLabelAttributes:{
-                         .string = data[@"text"],
+                         .string = @"",
                          .font = [UIFont fontWithName:@"SFUIText-Bold" size:19],
                          .alignment = NSTextAlignmentLeft,
                          .color = [UIColor colorWithHex:@"#222222"],
@@ -99,34 +84,108 @@ CKComponent* hashtagDirHeaderImgComponent(float*, UIImage*);
 }
 
 
-UIImage* getImageDir(float* wIn)
+CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary * data)
 {
-    UIImage* tmpImg;
-    
-    if (*wIn == 320)
-        tmpImg = [UIImage imageNamed:@"explore_banner_ip5p@2x.png"];
-    else if (*wIn == 375)
-        tmpImg = [UIImage imageNamed:@"explore_banner_ip6-7s@2x.png"];
-    else if (*wIn == 414)
-        tmpImg = [UIImage imageNamed:@"explore_banner_ip6-7p@3x.png"];
-    
-    return tmpImg;
-}
-
-
-CKComponent* hashtagDirHeaderImgComponent(float* wIn, UIImage* iIn)
-{
-    return
-    [
-     CKComponent newWithView:{
-         [UIImageView class],
+    if (![[data objectForKey:@"parent2parent_name"] isEqual: @""]  && ![[data objectForKey:@"parent_name"] isEqual: @""] )
+    {
+        return
+        [
+            CKStackLayoutComponent newWithView:
+            {
+                 [UIView class],
+                 {
+                     {@selector(setBackgroundColor:), [UIColor whiteColor]},
+                     {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+                     {@selector(setClipsToBounds:), @YES},
+                 }
+            }
+            size:{.width=*wIn}
+            style:{.direction = CKStackLayoutDirectionVertical,}
+            children:{
+                {[CKInsetComponent
+                newWithInsets:{.left = 20, .right = 0, .top = 23, .bottom = 8}
+                component:
+                    [CKLabelComponent
+                    newWithLabelAttributes:{
+                       .string = [data objectForKey:@"parent_name"],
+                       .font = [UIFont fontWithName:@"SFUIText-SemiBold" size:24],
+                       .alignment = NSTextAlignmentLeft,
+                       .color = [UIColor colorWithHex:@"#213E87"],
+                    }
+                    viewAttributes:{
+                       {@selector(setBackgroundColor:), [UIColor clearColor]},
+                       {@selector(setUserInteractionEnabled:), @NO},
+                    }
+                    size:{.width=*wIn}]
+                ]},
+                {[CKInsetComponent
+                  newWithInsets:{.left = 20, .right = 0, .top = 0, .bottom = 23}
+                  component:
+                    [CKLabelComponent newWithLabelAttributes:{
+                        .string = [data objectForKey:@"parent2parent_name"],
+                        .color = [UIColor colorWithHex:@"#222222"],
+                        .font = [UIFont fontWithName:@"SFUIText-Light" size:19],
+                        .alignment = NSTextAlignmentLeft,
+                    }
+                    viewAttributes:{
+                       {@selector(setBackgroundColor:), [UIColor clearColor]},
+                       {@selector(setUserInteractionEnabled:), @NO},
+                    }
+                    size:{.width = *wIn}]
+                ]},
+            }
+        ];
+    }
+    else if ([[data objectForKey:@"parent2parent_name"] isEqual: @""] && ![[data objectForKey:@"parent_name"] isEqual: @""])
+        return
+        [
+         CKStackLayoutComponent newWithView:
          {
-             {@selector(setImage:), iIn},
-             {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+             [UIView class],
+             {
+                 {@selector(setBackgroundColor:), [UIColor whiteColor]},
+                 {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+                 {@selector(setClipsToBounds:), @YES},
+             }
          }
-     }
-     size:{*wIn, *wIn / (iIn.size.width/iIn.size.height)}
-     ];
+         size:{.width=*wIn}
+         style:{.direction = CKStackLayoutDirectionVertical,}
+         children:{
+             {[CKInsetComponent
+               newWithInsets:{.left = 20, .right = 0, .top = 23, .bottom = 8}
+               component:
+               [CKLabelComponent
+                newWithLabelAttributes:{
+                    .string = [data objectForKey:@"parent_name"],
+                    .font = [UIFont fontWithName:@"SFUIText-SemiBold" size:24],
+                    .alignment = NSTextAlignmentLeft,
+                    .color = [UIColor colorWithHex:@"#213E87"],
+                }
+                viewAttributes:{
+                    {@selector(setBackgroundColor:), [UIColor clearColor]},
+                    {@selector(setUserInteractionEnabled:), @NO},
+                }
+                size:{.width=*wIn}]
+               ]},
+             {[CKInsetComponent
+               newWithInsets:{.left = 20, .right = 0, .top = 0, .bottom = 23}
+               component:
+               [CKLabelComponent newWithLabelAttributes:{
+                 .string = @"",
+                 .color = [UIColor colorWithHex:@"#222222"],
+                 .font = [UIFont fontWithName:@"SFUIText-Light" size:19],
+                 .alignment = NSTextAlignmentLeft,
+             }
+                                         viewAttributes:{
+                                             {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                             {@selector(setUserInteractionEnabled:), @NO},
+                                         }
+                                                   size:{.width = *wIn}]
+               ]},
+         }
+         ];
+    else
+        return 0;
 }
-
+    
 @end

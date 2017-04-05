@@ -20,6 +20,7 @@
 @property (nonatomic, strong) IBOutlet UIButton* searchButton;
 @property (nonatomic, strong) IBOutlet UIImageView* rocketButtonImg;
 @property (nonatomic, weak) IBOutlet RgSearchBackgroundView* background;
+@property (nonatomic, strong) IBOutlet UILabel* addressLabel;
 
 @property (nonatomic, assign) BOOL visible;
 @property (nonatomic, strong) NSString* placeHolder;
