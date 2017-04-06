@@ -297,7 +297,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             }];
         }
     }
-
+    
 	// Animation
 	if (animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
 		CATransition *trans = [CATransition animation];
@@ -774,6 +774,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                   domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                     [RgManager updateCredentials:res];
                 }
+                
                 else
                 {
                     NSString* err = [res objectForKey:@"error"];
@@ -1016,6 +1017,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 		}
 	}
 	return YES;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 @end

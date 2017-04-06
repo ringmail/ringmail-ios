@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="HelveticaNeueLTStd-Cn.otf">
             <string>HelveticaNeueLTStd-Cn</string>
+        </array>
+        <array key="SFUIText-Medium.ttf">
+            <string>SFUIText-Medium</string>
+        </array>
+        <array key="SFUIText-Regular.ttf">
+            <string>SFUIText-Regular</string>
+        </array>
+        <array key="SFUIText-Semibold.ttf">
+            <string>SFUIText-Semibold</string>
         </array>
     </customFonts>
     <objects>
@@ -33,81 +44,86 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="EiF-9j-acu" userLabel="Background View">
-                    <frame key="frameInset" minY="50"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="617"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.94509803920000002" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_wizard_background.png" id="aEm-6E-Ggl">
-                    <frame key="frameInset" minY="50" width="720" height="1000"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="login_background.png" id="aEm-6E-Ggl">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="36" userLabel="createAccountButton" customClass="UILinphoneButton">
-                    <frame key="frameInset" minX="10.13%" minY="290" width="79.73%" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="36" userLabel="createAccountButton">
+                    <rect key="frame" x="30" y="530" width="315" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Create linphone.org account">
                         <bool key="isElement" value="YES"/>
                     </accessibility>
-                    <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Create New Account" backgroundImage="button_background_default.png">
-                        <color key="titleColor" red="0.28619974851608276" green="0.32144349813461304" blue="0.35980013012886047" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="16"/>
+                    <state key="normal" title="Create New Account" backgroundImage="login_button.png">
+                        <color key="titleColor" red="0.32549019607843138" green="0.16078431372549018" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="highlighted" backgroundImage="button_background_over.png">
+                    <state key="highlighted" backgroundImage="login_button.png">
                         <color key="titleColor" red="0.67030966281890869" green="0.71867996454238892" blue="0.75078284740447998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="onCreateAccountClick:" destination="-1" eventType="touchUpInside" id="42"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="38" userLabel="connectAccountButton" customClass="UILinphoneButton">
-                    <frame key="frameInset" minX="10.13%" minY="220" width="79.73%" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="38" userLabel="connectAccountButton">
+                    <rect key="frame" x="30" y="430" width="315" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Sign in linphone.org account">
                         <bool key="isElement" value="YES"/>
                     </accessibility>
-                    <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Sign In" backgroundImage="button_background_default.png">
-                        <color key="titleColor" red="0.28619974851608276" green="0.32144349813461304" blue="0.35980013012886047" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="16"/>
+                    <state key="normal" title="Sign In" backgroundImage="login_button.png">
+                        <color key="titleColor" red="0.32549019607843138" green="0.16078431372549018" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="highlighted" backgroundImage="button_background_over.png">
+                    <state key="highlighted" backgroundImage="login_button.png">
                         <color key="titleColor" red="0.67030966281890869" green="0.71867996454238892" blue="0.75078284740447998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="onConnectLinphoneAccountClick:" destination="-1" eventType="touchUpInside" id="JTf-u3-Kbe"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" id="Dwh-EC-cWK" userLabel="RingMail Header">
-                    <frame key="frameInset" height="50"/>
+                <view hidden="YES" contentMode="scaleToFill" id="Dwh-EC-cWK" userLabel="RingMail Header">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo.png" id="e1d-e7-llo">
-                            <frame key="frameInset" width="124" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CoJ-bM-Eah">
+                    <rect key="frame" x="50" y="504" width="275" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="16"/>
+                    <color key="textColor" red="0.32549019610000002" green="0.16078431369999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="120" y="232"/>
+            <point key="canvasLocation" x="28.5" y="231.5"/>
         </view>
         <view contentMode="scaleToFill" id="44" userLabel="createAccountView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="I2S-1h-THL" userLabel="Background View">
-                    <frame key="frameInset" minY="50"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="617"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_wizard_background.png" id="bMH-4f-3ar">
-                            <frame key="frameInset" width="720" height="1000"/>
+                            <rect key="frame" x="0.0" y="0.0" width="720" height="1000"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="404" contentMode="left" misplaced="YES" text="Invalid character:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="uHm-NE-GLV" userLabel="invalid_char_error">
-                            <frame key="frameInset" minX="40" minY="326" height="25" maxX="40"/>
+                            <rect key="frame" x="40" y="326" width="295" height="25"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="18"/>
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -117,11 +133,11 @@
                     <color key="backgroundColor" red="0.90196078430000004" green="0.94509803920000002" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="YFB-hb-g17" userLabel="Message Header">
-                    <frame key="frameInset" minY="50" height="50"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="RingMail Registration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="lcg-EC-wtD" userLabel="title">
-                            <frame key="frameInset" minX="0.0%" minY="4" width="100.00%" height="100.00%"/>
+                            <rect key="frame" x="0.0" y="4" width="375" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
@@ -134,11 +150,11 @@
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" misplaced="YES" id="duw-Fv-to7" userLabel="Input Fields">
-                    <frame key="frameInset" minY="100" height="200"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="200"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" adjustsFontSizeToFit="NO" minimumFontSize="10" id="NwJ-ZF-DUs" userLabel="firstNameField">
-                            <frame key="frameInset" minX="2.93%" minY="14" width="43.73%" height="26"/>
+                            <rect key="frame" x="11" y="14" width="164" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
@@ -148,7 +164,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" adjustsFontSizeToFit="NO" minimumFontSize="10" id="2GS-DO-8qn" userLabel="lastNameField">
-                            <frame key="frameInset" minX="53.60%" minY="14" width="43.73%" height="26"/>
+                            <rect key="frame" x="201" y="14" width="164" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
@@ -158,7 +174,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" adjustsFontSizeToFit="NO" minimumFontSize="10" id="74" userLabel="usernameField">
-                            <frame key="frameInset" minX="2.93%" minY="64" width="79.73%" height="26"/>
+                            <rect key="frame" x="11" y="64" width="299" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Username"/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
@@ -168,7 +184,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" adjustsFontSizeToFit="NO" minimumFontSize="10" id="6Nk-qg-7op" userLabel="phoneField">
-                            <frame key="frameInset" minX="2.93%" minY="116" width="79.73%" height="26"/>
+                            <rect key="frame" x="11" y="116" width="299" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
@@ -178,7 +194,7 @@
                             </connections>
                         </textField>
                         <textField hidden="YES" opaque="NO" clipsSubviews="YES" tag="106" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#Hashtag" adjustsFontSizeToFit="NO" minimumFontSize="10" id="mcH-ve-6cy" userLabel="hashtagField">
-                            <frame key="frameInset" minX="2.93%" minY="164" width="79.73%" height="26"/>
+                            <rect key="frame" x="11" y="164" width="299" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
@@ -188,7 +204,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="104" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" adjustsFontSizeToFit="NO" minimumFontSize="10" id="75" userLabel="passwordField">
-                            <frame key="frameInset" minX="2.93%" minY="166" width="79.73%" height="26"/>
+                            <rect key="frame" x="11" y="166" width="299" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
@@ -201,32 +217,32 @@
                     <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="vcN-YF-eey" userLabel="Separator">
-                    <frame key="frameInset" minY="150" height="1"/>
+                    <rect key="frame" x="0.0" y="150" width="375" height="1"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="ejN-y0-5Nc" userLabel="Vertical Separator">
-                    <frame key="frameInset" minX="160" minY="100" width="1" height="50"/>
+                    <rect key="frame" x="160" y="100" width="1" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="CTR-0w-8L1" userLabel="Separator">
-                    <frame key="frameInset" minY="200" height="1"/>
+                    <rect key="frame" x="0.0" y="200" width="375" height="1"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="sx9-hp-pm1" userLabel="Separator">
-                    <frame key="frameInset" minY="250" height="1"/>
+                    <rect key="frame" x="0.0" y="250" width="375" height="1"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="5iB-RV-qcc" userLabel="Separator">
-                    <frame key="frameInset" minY="300" height="1"/>
+                    <rect key="frame" x="0.0" y="300" width="375" height="1"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="77" userLabel="registerButton" customClass="UILinphoneButton">
-                    <frame key="frameInset" minX="10.13%" minY="320" width="79.73%" height="50"/>
+                    <rect key="frame" x="38" y="320" width="299" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Register"/>
                     <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
@@ -243,11 +259,11 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" id="cfp-p7-u6n" userLabel="RingMail Header">
-                    <frame key="frameInset" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo.png" id="5Ra-gK-xdN">
-                            <frame key="frameInset" width="124" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
@@ -255,92 +271,104 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="835" y="232"/>
+            <point key="canvasLocation" x="857" y="232"/>
         </view>
         <view contentMode="scaleToFill" id="52" userLabel="connectAccountView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="6fk-t1-GpE" userLabel="Background View">
-                    <frame key="frameInset"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.94509803920000002" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_wizard_background.png" id="zJ4-nl-YLx">
-                    <frame key="frameInset" minY="50" width="720" height="1000"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background_signin.png" id="zJ4-nl-YLx">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <view contentMode="scaleToFill" id="vpx-Ec-ffh" userLabel="RingMail Header">
-                    <frame key="frameInset" height="50"/>
+                <view hidden="YES" contentMode="scaleToFill" id="vpx-Ec-ffh" userLabel="RingMail Header">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo.png" id="TW7-H6-GXK">
-                            <frame key="frameInset" width="124" height="50"/>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo.png" id="TW7-H6-GXK">
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <view contentMode="scaleToFill" id="xKv-nB-M5I" userLabel="Message Header">
-                    <frame key="frameInset" minY="50" height="50"/>
+                <view contentMode="scaleToFill" misplaced="YES" id="xKv-nB-M5I" userLabel="Message Header">
+                    <rect key="frame" x="0.0" y="70" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign In to RingMail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="122" userLabel="title">
-                            <frame key="frameInset" minX="0.0%" minY="4" width="100.00%" height="100.00%"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="122" userLabel="title">
+                            <rect key="frame" x="0.0" y="4" width="375" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
-                            <color key="textColor" red="0.20000000298023224" green="0.21176470816135406" blue="0.18431372940540314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="37"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <size key="shadowOffset" width="-1" height="-1"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="acg-rh-qay" userLabel="Input Fields">
-                    <frame key="frameInset" minY="100" height="100"/>
+                <view contentMode="scaleToFill" misplaced="YES" id="acg-rh-qay" userLabel="Input Fields">
+                    <rect key="frame" x="30" y="340" width="315" height="150"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" adjustsFontSizeToFit="NO" minimumFontSize="10" id="68" userLabel="usernameField">
-                            <frame key="frameInset" minX="2.93%" minY="14.00%" width="79.73%" height="26.00%"/>
+                        <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="68" userLabel="usernameField">
+                            <rect key="frame" x="0.0" y="30" width="315" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.52156862745098043" green="0.38823529411764707" blue="0.40784313725490196" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Username"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="81"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" adjustsFontSizeToFit="NO" minimumFontSize="10" id="66" userLabel="passwordField">
-                            <frame key="frameInset" minX="2.93%" minY="64.00%" width="79.73%" height="26.00%"/>
+                        <textField opaque="NO" clipsSubviews="YES" tag="104" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="66" userLabel="passwordField">
+                            <rect key="frame" x="0.0" y="118" width="315" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.52156862745098043" green="0.38823529411764707" blue="0.40784313725490196" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Password"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="85"/>
                             </connections>
                         </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aKO-q9-8Xd">
+                            <rect key="frame" x="98" y="88" width="120" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KYi-xW-OLY">
+                            <rect key="frame" x="98" y="0.0" width="120" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="DIN-Td-K83" userLabel="Separator">
-                    <frame key="frameInset" minY="150" height="1"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="64" userLabel="signInButton">
-                    <frame key="frameInset" minX="10.13%" minY="220" width="79.73%" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="64" userLabel="signInButton">
+                    <rect key="frame" x="30" y="520" width="315" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Sign in"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Sign In" backgroundImage="button_background_default.png">
-                        <color key="titleColor" red="0.28619974851608276" green="0.32144349813461304" blue="0.35980013012886047" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="16"/>
+                    <state key="normal" title="Sign In" backgroundImage="login_button.png">
+                        <color key="titleColor" red="0.32549019610000002" green="0.16078431369999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="highlighted" backgroundImage="button_background_over.png">
+                    <state key="highlighted" backgroundImage="login_button.png">
                         <color key="titleColor" red="0.67030966281890869" green="0.71867996454238892" blue="0.75078284740447998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
@@ -349,29 +377,29 @@
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="477" y="232"/>
+            <point key="canvasLocation" x="441.5" y="231.5"/>
         </view>
         <view contentMode="scaleToFill" id="WO6-VD-Rqp" userLabel="validateAccountView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="qBy-RO-xci" userLabel="Background View">
-                    <frame key="frameInset" minY="50"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="617"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_wizard_background.png" id="WgS-ZE-rse">
-                            <frame key="frameInset" width="720" height="1000"/>
+                            <rect key="frame" x="0.0" y="0.0" width="720" height="1000"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.94509803920000002" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="38A-gY-KVI" userLabel="Message Header">
-                    <frame key="frameInset" minY="50" height="50"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Confirm Email Verification" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Nv8-5W-CEn" userLabel="title">
-                            <frame key="frameInset" minX="0.0%" minY="4" width="100.00%" height="100.00%"/>
+                            <rect key="frame" x="0.0" y="4" width="375" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
@@ -384,11 +412,11 @@
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="77v-fS-57Z" userLabel="Input Fields">
-                    <frame key="frameInset" minY="100" height="50"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="veQ-cL-vQ5" userLabel="ringmailEmail">
-                            <frame key="frameInset" minX="0.0%" minY="4" width="100.00%" height="100.00%"/>
+                            <rect key="frame" x="0.0" y="4" width="375" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
@@ -400,7 +428,7 @@
                     <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="200" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="65x-Jk-Sle" userLabel="label">
-                    <frame key="frameInset" minX="10" minY="150" height="65" maxX="10"/>
+                    <rect key="frame" x="10" y="150" width="355" height="65"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <string key="text">Check your email for a message from RingMail.
 You are required to verifiy your email address to sign in.</string>
@@ -408,18 +436,18 @@ You are required to verifiy your email address to sign in.</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="DNm-BF-egb" userLabel="RingMail Header">
-                    <frame key="frameInset" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo.png" id="qsU-Cm-was">
-                            <frame key="frameInset" width="124" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="ZbJ-4M-CE9" userLabel="resendButton" customClass="UILinphoneButton">
-                    <frame key="frameInset" minX="9.60%" minY="290" width="79.73%" height="50"/>
+                    <rect key="frame" x="36" y="290" width="299" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Check validation"/>
                     <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
@@ -436,7 +464,7 @@ You are required to verifiy your email address to sign in.</string>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="FtO-fm-u5q" userLabel="checkValidationButton" customClass="UILinphoneButton">
-                    <frame key="frameInset" minX="9.60%" minY="220" width="79.73%" height="50"/>
+                    <rect key="frame" x="36" y="220" width="299" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Check validation"/>
                     <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
@@ -454,29 +482,29 @@ You are required to verifiy your email address to sign in.</string>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="1196" y="232"/>
+            <point key="canvasLocation" x="1276" y="232"/>
         </view>
         <view contentMode="scaleToFill" id="101" userLabel="validatePhoneView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="fpe-Ux-b5g" userLabel="Background View">
-                    <frame key="frameInset" minY="50"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="617"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_wizard_background.png" id="aeL-bH-l5W">
-                            <frame key="frameInset" width="720" height="1000"/>
+                            <rect key="frame" x="0.0" y="0.0" width="720" height="1000"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.94509803920000002" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="29f-XU-HUY" userLabel="Message Header">
-                    <frame key="frameInset" minY="50" height="50"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Check Phone Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="j1p-dh-H4B" userLabel="title">
-                            <frame key="frameInset" minX="0.0%" minY="4" width="100.00%" height="100.00%"/>
+                            <rect key="frame" x="0.0" y="4" width="375" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
@@ -489,11 +517,11 @@ You are required to verifiy your email address to sign in.</string>
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="hKE-Fn-CdF" userLabel="Input Fields">
-                    <frame key="frameInset" minY="100" height="100"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="100"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="n99-Nc-sLf" userLabel="ringmailEmail">
-                            <frame key="frameInset" minX="0.0%" minY="4" width="100.00%" height="47.92%"/>
+                            <rect key="frame" x="0.0" y="4" width="375" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
@@ -502,7 +530,7 @@ You are required to verifiy your email address to sign in.</string>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Code" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="cA2-Fq-qu1" userLabel="usernameField">
-                            <frame key="frameInset" minX="10" minY="64.00%" height="26.00%" maxX="10"/>
+                            <rect key="frame" x="10" y="64" width="355" height="26"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Username"/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="20"/>
@@ -515,7 +543,7 @@ You are required to verifiy your email address to sign in.</string>
                     <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Guq-Lj-Mza" userLabel="resendButton" customClass="UILinphoneButton">
-                    <frame key="frameInset" minX="9.60%" minY="340" width="79.73%" height="50"/>
+                    <rect key="frame" x="36" y="340" width="299" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Check validation"/>
                     <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
@@ -532,24 +560,24 @@ You are required to verifiy your email address to sign in.</string>
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="200" contentMode="left" text="Please enter the code we sent you via SMS." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="105" userLabel="label">
-                    <frame key="frameInset" minX="10" minY="200" width="310" height="65"/>
+                    <rect key="frame" x="10" y="200" width="310" height="65"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="16"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="cMf-9f-uWe" userLabel="RingMail Header">
-                    <frame key="frameInset" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo.png" id="dSZ-5Q-5z5">
-                            <frame key="frameInset" width="124" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="zWV-cG-I0O" userLabel="checkValidationButton" customClass="UILinphoneButton">
-                    <frame key="frameInset" minX="9.60%" minY="270" width="79.73%" height="50"/>
+                    <rect key="frame" x="36" y="270" width="299" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Check validation"/>
                     <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="22"/>
@@ -566,19 +594,19 @@ You are required to verifiy your email address to sign in.</string>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" id="kTK-Z6-ynD" userLabel="Separator">
-                    <frame key="frameInset" minY="150" height="1"/>
+                    <rect key="frame" x="0.0" y="150" width="375" height="1"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.88627451660000001" green="0.89411765340000005" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="1582" y="232"/>
+            <point key="canvasLocation" x="1699" y="232"/>
         </view>
         <visualEffectView opaque="NO" contentMode="scaleToFill" id="W2W-QO-Iyu">
             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Iuw-Ac-Bjk">
-                <frame key="frameInset"/>
+                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             </view>
             <blurEffect style="light"/>
@@ -586,8 +614,11 @@ You are required to verifiy your email address to sign in.</string>
         </visualEffectView>
     </objects>
     <resources>
+        <image name="background_signin.png" width="375" height="667"/>
         <image name="button_background_default.png" width="550" height="101"/>
         <image name="button_background_over.png" width="550" height="101"/>
+        <image name="login_background.png" width="375" height="667"/>
+        <image name="login_button.png" width="314" height="45"/>
         <image name="ringmail_logo.png" width="124" height="50"/>
         <image name="ringmail_wizard_background.png" width="720" height="1000"/>
     </resources>
