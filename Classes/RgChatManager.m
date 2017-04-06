@@ -1333,10 +1333,15 @@
 
 - (NSArray *)dbGetMessages:(NSNumber *)session
 {
-    return [self dbGetMessages:(NSNumber *)session uuid:nil];
+    return [self dbGetMessages:(NSNumber *)session uuid:nil last:nil];
 }
 
-- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid;
+- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid
+{
+    return [self dbGetMessages:(NSNumber *)session uuid:uuid last:nil];
+}
+
+- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid last:(NSNumber*)last
 {
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
@@ -1349,7 +1354,14 @@
         }
         else
         {
-            rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type, msg_uuid FROM chat WHERE session_id = ? ORDER BY rowid DESC LIMIT 50", session];
+			if (last)
+			{
+				rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type, msg_uuid FROM chat WHERE session_id = ? AND rowid > ? ORDER BY rowid ASC", session, last]; // Return in order received (no limit)
+			}
+			else
+			{
+				rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type, msg_uuid FROM chat WHERE session_id = ? ORDER BY rowid DESC LIMIT 50", session];
+			}
         }
         while ([rs next])
         {

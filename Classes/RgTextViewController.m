@@ -54,9 +54,8 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 @implementation RgTextViewController
 @synthesize chatRoom = _chatRoom;
-@synthesize tableView = _tableView;
+@synthesize backgroundImageView = _backgroundImageView;
 @synthesize collectionView = _collectionView;
-@synthesize scrollView = _scrollView;
 @synthesize typingIndicatorProxyView = _typingIndicatorProxyView;
 @synthesize textInputbar = _textInputbar;
 @synthesize autoCompletionView = _autoCompletionView;
@@ -66,29 +65,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 #pragma mark - Initializer
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    return [self initWithTableViewStyle:UITableViewStylePlain];
-}
-
-- (instancetype)init
-{
-    return [self initWithTableViewStyle:UITableViewStylePlain];
-}
-
-- (instancetype)initWithTableViewStyle:(UITableViewStyle)style
-{
-    NSAssert([self class] != [RgTextViewController class], @"Oops! You must subclass RgTextViewController.");
-    NSAssert(style == UITableViewStylePlain || style == UITableViewStyleGrouped, @"Oops! You must pass a valid UITableViewStyle.");
-
-    if (self = [super initWithNibName:nil bundle:nil])
-    {
-        self.scrollViewProxy = [self tableViewWithStyle:style];
-        [self slk_commonInit];
-    }
-    return self;
-}
-
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
 {
     NSAssert([self class] != [RgTextViewController class], @"Oops! You must subclass RgTextViewController.");
@@ -97,44 +73,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     if (self = [super initWithNibName:nil bundle:nil])
     {
         self.scrollViewProxy = [self collectionViewWithLayout:layout];
-        [self slk_commonInit];
-    }
-    return self;
-}
-
-- (instancetype)initWithScrollView:(UIScrollView *)scrollView
-{
-    NSAssert([self class] != [RgTextViewController class], @"Oops! You must subclass RgTextViewController.");
-    NSAssert([scrollView isKindOfClass:[UIScrollView class]], @"Oops! You must pass a valid UIScrollView object.");
-
-    if (self = [super initWithNibName:nil bundle:nil])
-    {
-        _scrollView = scrollView;
-        _scrollView.translatesAutoresizingMaskIntoConstraints = NO; // Makes sure the scrollView plays nice with auto-layout
-        
-        self.scrollViewProxy = _scrollView;
-        [self slk_commonInit];
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)decoder
-{
-    NSAssert([self class] != [RgTextViewController class], @"Oops! You must subclass RgTextViewController.");
-    NSAssert([decoder isKindOfClass:[NSCoder class]], @"Oops! You must pass a valid decoder object.");
-
-    if (self = [super initWithCoder:decoder])
-    {
-        UITableViewStyle tableViewStyle = [[self class] tableViewStyleForCoder:decoder];
-        UICollectionViewLayout *collectionViewLayout = [[self class] collectionViewLayoutForCoder:decoder];
-        
-        if ([collectionViewLayout isKindOfClass:[UICollectionViewLayout class]]) {
-            self.scrollViewProxy = [self collectionViewWithLayout:collectionViewLayout];
-        }
-        else {
-            self.scrollViewProxy = [self tableViewWithStyle:tableViewStyle];
-        }
-        
         [self slk_commonInit];
     }
     return self;
@@ -153,6 +91,10 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.extendedLayoutIncludesOpaqueBars = YES;
+	
+	UIImage *bgImage = [UIImage imageNamed:@"ringmail_chat_background.png"];
+	UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
+	self.backgroundImageView = bgImageView;
 }
 
 
@@ -166,7 +108,8 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+	
+    [self.view addSubview:self.backgroundImageView];
     [self.view addSubview:self.scrollViewProxy];
     [self.view addSubview:self.autoCompletionView];
     [self.view addSubview:self.typingIndicatorProxyView];
@@ -236,27 +179,9 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 #pragma mark - Getters
 
-+ (UITableViewStyle)tableViewStyleForCoder:(NSCoder *)decoder
-{
-    return UITableViewStylePlain;
-}
-
 + (UICollectionViewLayout *)collectionViewLayoutForCoder:(NSCoder *)decoder
 {
     return nil;
-}
-
-- (UITableView *)tableViewWithStyle:(UITableViewStyle)style
-{
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
-        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
-        _tableView.scrollsToTop = YES;
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        _tableView.clipsToBounds = NO;
-    }
-    return _tableView;
 }
 
 - (UICollectionView *)collectionViewWithLayout:(UICollectionViewLayout *)layout
@@ -267,19 +192,12 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     	NSLog(@"%@", messages);
     		
         ChatRoomCollectionViewController *mainController = [[ChatRoomCollectionViewController alloc] initWithCollectionViewLayout:layout chatThreadID:threadID elements:messages];
-        
         [[mainController collectionView] setBounces:YES];
         [[mainController collectionView] setAlwaysBounceVertical:YES];
-        
-        //CGRect r = mainView.frame;
-        //r.origin.y = 0;
-        //[mainController.view setFrame:r];
-        //[mainView addSubview:mainController.view];
-        //[self addChildViewController:mainController];
-        //[mainController didMoveToParentViewController:self];
         _chatRoom = mainController;
         _collectionView = (UICollectionView*)mainController.collectionView;
 		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+        _collectionView.backgroundColor = [UIColor clearColor];
 	
         /*_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor whiteColor];
@@ -546,14 +464,13 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
         return;
     }
     
-/*    _singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slk_didTapScrollView:)];
+    _singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slk_didTapScrollView:)];
     _singleTapGesture.delegate = self;
-    [_singleTapGesture requireGestureRecognizerToFail:scrollView.panGestureRecognizer];
-    
-    [scrollView addGestureRecognizer:self.singleTapGesture];
-    
-    [scrollView.panGestureRecognizer addTarget:self action:@selector(slk_didPanTextInputBar:)]; */
-    
+    [_singleTapGesture requireGestureRecognizerToFail:_collectionView.panGestureRecognizer];
+    [_collectionView addGestureRecognizer:self.singleTapGesture];
+	
+    //[scrollView.panGestureRecognizer addTarget:self action:@selector(slk_didPanTextInputBar:)];
+	
     _scrollViewProxy = scrollView;
 }
 
@@ -2089,20 +2006,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     return nil;
 }
 
-
-#pragma mark - UICollectionViewDataSource Methods
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section;
-{
-    return 0;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return nil;
-}
-
-
 #pragma mark - UIScrollViewDelegate Methods
 
 /*- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
@@ -2285,6 +2188,11 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter addObserver:self selector:@selector(cacheTextView) name:UIApplicationWillTerminateNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(cacheTextView) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(cacheTextView) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+	
+	// RingMail
+	[notificationCenter addObserver:self selector:@selector(chatReceivedEvent:) name:kRgTextReceived object:nil];
+    [notificationCenter addObserver:self selector:@selector(chatSentEvent:) name:kRgTextSent object:nil];
+    [notificationCenter addObserver:self selector:@selector(chatUpdateEvent:) name:kRgTextUpdate object:nil];
 }
 
 - (void)slk_unregisterNotifications
@@ -2318,6 +2226,11 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
     [notificationCenter removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
     [notificationCenter removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+	
+	// RingMail
+	[notificationCenter removeObserver:self name:kRgTextReceived object:nil];
+    [notificationCenter removeObserver:self name:kRgTextSent object:nil];
+    [notificationCenter removeObserver:self name:kRgTextUpdate object:nil];
 }
 
 
@@ -2372,15 +2285,9 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 {
     [self slk_unregisterNotifications];
 
-    _tableView.delegate = nil;
-    _tableView.dataSource = nil;
-    _tableView = nil;
-    
     _collectionView.delegate = nil;
     _collectionView.dataSource = nil;
     _collectionView = nil;
-    
-    _scrollView = nil;
     
     _autoCompletionView.delegate = nil;
     _autoCompletionView.dataSource = nil;
@@ -2403,6 +2310,30 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     _typingIndicatorViewHC = nil;
     _autoCompletionViewHC = nil;
     _keyboardHC = nil;
+	
+	_chatRoom = nil;
+	_backgroundImageView = nil;
+}
+
+#pragma mark - RingMail Chat Update Events
+
+- (void)chatReceivedEvent:(NSNotification*)event
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSDictionary* info = event.userInfo;
+	if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
+	{
+	}
+}
+
+- (void)chatSentEvent:(NSNotification*)event
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)chatUpdateEvent:(NSNotification*)event
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

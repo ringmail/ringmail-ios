@@ -40,20 +40,15 @@ typedef NS_ENUM(NSUInteger, SLKKeyboardStatus) {
 
 /** @name A drop-in UIViewController subclass with a growing text input view and other useful messaging features. */
 NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <SLKTextViewDelegate, UITableViewDelegate, UITableViewDataSource,
-                                                                                UICollectionViewDelegate, UICollectionViewDataSource,
+                                                                                UICollectionViewDelegate,
                                                                                 UIGestureRecognizerDelegate, UIAlertViewDelegate>
 
 /** RingMail */
 @property (nonatomic, retain) ChatRoomCollectionViewController* chatRoom;
-
-/** The main table view managed by the controller object. Created by default initializing with -init or initWithNibName:bundle: */
-@property (nonatomic, readonly) UITableView *_Nullable tableView;
+@property (nonatomic, retain) UIImageView* backgroundImageView;
 
 /** The main collection view managed by the controller object. Not nil if the controller is initialised with -initWithCollectionViewLayout: */
 @property (nonatomic, readonly) UICollectionView *_Nullable collectionView;
-
-/** The main scroll view managed by the controller object. Not nil if the controller is initialised with -initWithScrollView: */
-@property (nonatomic, readonly) UIScrollView *_Nullable scrollView;
 
 /** The bottom toolbar containing a text view and buttons. */
 @property (nonatomic, readonly) SLKTextInputbar *textInputbar;
@@ -126,15 +121,6 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <
 ///------------------------------------------------
 
 /**
- Initializes a text view controller to manage a table view of a given style.
- If you use the standard -init method, a table view with plain style will be created.
- 
- @param style A constant that specifies the style of main table view that the controller object is to manage (UITableViewStylePlain or UITableViewStyleGrouped).
- @return An initialized RgTextViewController object or nil if the object could not be created.
- */
-- (instancetype)initWithTableViewStyle:(UITableViewStyle)style;
-
-/**
  Initializes a collection view controller and configures the collection view with the provided layout.
  If you use the standard -init method, a table view with plain style will be created.
  
@@ -142,42 +128,6 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <
  @return An initialized RgTextViewController object or nil if the object could not be created.
  */
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout;
-
-/**
- Initializes a text view controller to manage an arbitraty scroll view. The caller is responsible for configuration of the scroll view, including wiring the delegate.
- 
- @param a UISCrollView to be used as the main content area.
- @return An initialized RgTextViewController object or nil if the object could not be created.
- */
-- (instancetype)initWithScrollView:(UIScrollView *)scrollView;
-
-/**
- Initializes either a table or collection view controller.
- You must override either +tableViewStyleForCoder: or +collectionViewLayoutForCoder: to define witch view to be layed out.
- 
- @param decoder An unarchiver object.
- @return An initialized RgTextViewController object or nil if the object could not be created.
- */
-- (instancetype)initWithCoder:(NSCoder *)decoder;
-
-/**
- Returns the tableView style to be configured when using Interface Builder. Default is UITableViewStylePlain.
- You must override this method if you want to configure a tableView.
- 
- @param decoder An unarchiver object.
- @return The tableView style to be used in the new instantiated tableView.
- */
-+ (UITableViewStyle)tableViewStyleForCoder:(NSCoder *)decoder;
-
-/**
- Returns the tableView style to be configured when using Interface Builder. Default is nil.
- You must override this method if you want to configure a collectionView.
- 
- @param decoder An unarchiver object.
- @return The collectionView style to be used in the new instantiated collectionView.
- */
-+ (UICollectionViewLayout *)collectionViewLayoutForCoder:(NSCoder *)decoder;
-
 
 #pragma mark - Keyboard Handling
 ///------------------------------------------------

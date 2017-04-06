@@ -30,7 +30,7 @@
 			attributes:@{
 				NSFontAttributeName: [UIFont systemFontOfSize:14],
 			} context:nil];
-		NSLog(@"Bounds: %f %f", bounds.size.width, bounds.size.height);
+		//NSLog(@"Bounds: %f %f", bounds.size.width, bounds.size.height);
 		
 		// Draw bubble
 		CGSize size = CGSizeMake((int)bounds.size.width + 20, (int)bounds.size.height + 16 + 10);
@@ -97,7 +97,6 @@
         		}]
     		]}
 		}];
-		NSLog(@"res: %@", res);
 	}
 	else
 	{
@@ -112,7 +111,7 @@
 			attributes:@{
 				NSFontAttributeName: [UIFont systemFontOfSize:14],
 			} context:nil];
-		NSLog(@"Bounds: %f %f", bounds.size.width, bounds.size.height);
+		//NSLog(@"Bounds: %f %f", bounds.size.width, bounds.size.height);
 		
 		// Draw bubble
 		CGSize size = CGSizeMake((int)bounds.size.width + 20, (int)bounds.size.height + 16 + 10);
@@ -226,7 +225,6 @@
         		}]
     		]}
 		}];
-		NSLog(@"res: %@", res);
 	}
 	ChatElementComponent* c = [super newWithComponent:res];
 	if (c)

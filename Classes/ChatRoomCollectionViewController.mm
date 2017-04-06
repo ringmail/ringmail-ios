@@ -5,26 +5,27 @@
 #import "ChatElementContext.h"
 #import "ChatElementComponent.h"
 #import "ChatRoomCollectionViewController.h"
-#import "ChatRoomModelController.h"
-#import "ChatElementPage.h"
 
 @interface ChatRoomCollectionViewController () <CKComponentProvider, UICollectionViewDelegateFlowLayout>
 @end
 
 @implementation ChatRoomCollectionViewController
 {
-    CKCollectionViewDataSource *_dataSource;
-    ChatRoomModelController *_modelController;
+    NSMutableArray *_elements;
+	NSNumber *_mainCount;
+	CKCollectionViewDataSource *_dataSource;
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
 }
 
-static NSInteger const pageSize = 50;
+@synthesize chatThreadID;
 
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID elements:(NSArray*)elems
 {
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleWidthAndHeight];
-        _modelController = [[ChatRoomModelController alloc] initWithID:threadID elements:elems];
+		_elements = [NSMutableArray arrayWithArray:elems];
+		_mainCount = [NSNumber numberWithInteger:0];
+		self.chatThreadID = threadID;
     }
     return self;
 }
@@ -53,26 +54,26 @@ static NSInteger const pageSize = 50;
 		CKArrayControllerSections sections;
 		sections.insert(0);
 		[_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
-		[self _enqueuePage:[_modelController fetchNewChatElementPageWithCount:pageSize]];
+		
+		// Generate the initial changeset
+		CKArrayControllerInputItems items;
+		NSInteger added = 0;
+    	for (NSUInteger i = 0; i < [_elements count]; i++)
+        {
+    		NSInteger mainIndex = [_mainCount intValue] + i;
+    		if ([_elements count] > mainIndex)
+    		{
+    			ChatElement* item = [[ChatElement alloc] initWithData:[_elements objectAtIndex:mainIndex]];
+				items.insert([NSIndexPath indexPathForRow:mainIndex inSection:0], item);
+    			added++;
+    		}
+    	}
+		if (added > 0)
+		{
+			[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+			_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
+		}
 	});
-}
-
-- (void)_enqueuePage:(ChatElementPage *)favsPage
-{
-    NSArray *favs = favsPage.elements;
-    NSInteger position = favsPage.position;
-    
-    // Convert the array of cards to a valid changeset
-    BOOL hasitems = NO;
-    CKArrayControllerInputItems items;
-    for (NSInteger i = 0; i < [favs count]; i++) {
-        items.insert([NSIndexPath indexPathForRow:position + i inSection:0], favs[i]);
-        hasitems = YES;
-    }
-    if (hasitems)
-    {
-        [_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
-    }
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -131,5 +132,37 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 }
 
 */
+
+#pragma mark - Update events
+
+- (void)appendMessages:(NSArray*)msgs
+{
+			// Generate the initial changeset
+	for (NSDictionary* i in msgs)
+	{
+		[_elements addObject:i];
+	}
+	CKArrayControllerInputItems items;
+	NSInteger added = 0;
+	for (NSUInteger i = [_mainCount intValue]; i < [_elements count]; i++)
+    {
+		NSInteger mainIndex = [_mainCount intValue] + i;
+		if ([_elements count] > mainIndex)
+		{
+			ChatElement* item = [[ChatElement alloc] initWithData:[_elements objectAtIndex:mainIndex]];
+			items.insert([NSIndexPath indexPathForRow:mainIndex inSection:0], item);
+			added++;
+		}
+	}
+	if (added > 0)
+	{
+		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+		_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
+	}
+}
+
+- (void)updateMessage
+{
+}
 
 @end

@@ -19,8 +19,6 @@
 
 @interface MessageViewController ()
 
-@property (nonatomic, strong) NSMutableArray *messages;
-
 @property (nonatomic, strong) NSArray *users;
 @property (nonatomic, strong) NSArray *channels;
 @property (nonatomic, strong) NSArray *emojis;
@@ -92,7 +90,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)commonInit
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:UIContentSizeCategoryDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textInputbarDidMove:) name:SLKTextInputbarDidMoveNotification object:nil];
     
     // Register a SLKTextView subclass, if you need any special appearance and/or behavior customisation.
@@ -110,10 +107,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Example's configuration
-    [self configureDataSource];
-    [self configureActionItems];
     
     // SLKTVC's configuration
     self.bounces = YES;
@@ -155,18 +148,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.typingIndicatorView.canResignByTouch = YES;
 #endif
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[MessageTableViewCell class] forCellReuseIdentifier:MessengerCellIdentifier];
-    
     [self.autoCompletionView registerClass:[MessageTableViewCell class] forCellReuseIdentifier:AutoCompletionCellIdentifier];
-    [self registerPrefixesForAutoCompletion:@[@"@", @"#", @":", @"+:", @"/"]];
-    
-    [self.textView registerMarkdownFormattingSymbol:@"*" withTitle:@"Bold"];
+    //[self registerPrefixesForAutoCompletion:@[@"@", @"#", @":", @"+:", @"/"]];
+	
+    /*[self.textView registerMarkdownFormattingSymbol:@"*" withTitle:@"Bold"];
     [self.textView registerMarkdownFormattingSymbol:@"_" withTitle:@"Italics"];
     [self.textView registerMarkdownFormattingSymbol:@"~" withTitle:@"Strike"];
     [self.textView registerMarkdownFormattingSymbol:@"`" withTitle:@"Code"];
     [self.textView registerMarkdownFormattingSymbol:@"```" withTitle:@"Preformatted"];
-    [self.textView registerMarkdownFormattingSymbol:@">" withTitle:@"Quote"];
+    [self.textView registerMarkdownFormattingSymbol:@">" withTitle:@"Quote"];*/
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -177,62 +167,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-}
-
-
-#pragma mark - Example's Configuration
-
-- (void)configureDataSource
-{
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    
-    for (int i = 0; i < 100; i++) {
-        NSInteger words = (arc4random() % 40)+1;
-        
-        Message *message = [Message new];
-        message.username = [LoremIpsum name];
-        message.text = [LoremIpsum wordsWithNumber:words];
-        [array addObject:message];
-    }
-    
-    NSArray *reversed = [[array reverseObjectEnumerator] allObjects];
-    
-    self.messages = [[NSMutableArray alloc] initWithArray:reversed];
-    
-    self.users = @[@"Allen", @"Anna", @"Alicia", @"Arnold", @"Armando", @"Antonio", @"Brad", @"Catalaya", @"Christoph", @"Emerson", @"Eric", @"Everyone", @"Steve"];
-    self.channels = @[@"General", @"Random", @"iOS", @"Bugs", @"Sports", @"Android", @"UI", @"SSB"];
-    self.emojis = @[@"-1", @"m", @"man", @"machine", @"block-a", @"block-b", @"bowtie", @"boar", @"boat", @"book", @"bookmark", @"neckbeard", @"metal", @"fu", @"feelsgood"];
-    self.commands = @[@"msg", @"call", @"text", @"skype", @"kick", @"invite"];
-}
-
-- (void)configureActionItems
-{
-    UIBarButtonItem *arrowItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icn_arrow_down"]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(hideOrShowTextInputbar:)];
-    
-    UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icn_editing"]
-                                                                 style:UIBarButtonItemStylePlain
-                                                                target:self
-                                                                action:@selector(editRandomMessage:)];
-    
-    UIBarButtonItem *typeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icn_typing"]
-                                                                 style:UIBarButtonItemStylePlain
-                                                                target:self
-                                                                action:@selector(simulateUserTyping:)];
-    
-    UIBarButtonItem *appendItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icn_append"]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(fillWithText:)];
-    
-    UIBarButtonItem *pipItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icn_pic"]
-                                                                style:UIBarButtonItemStylePlain
-                                                               target:self
-                                                               action:@selector(togglePIPWindow:)];
-    
-    self.navigationItem.rightBarButtonItems = @[arrowItem, pipItem, editItem, appendItem, typeItem];
 }
 
 
@@ -283,70 +217,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.typingIndicatorView insertUsername:[LoremIpsum name]];
 #endif
     }
-}
-
-- (void)didLongPressCell:(UIGestureRecognizer *)gesture
-{
-    if (gesture.state != UIGestureRecognizerStateBegan) {
-        return;
-    }
-
-#ifdef __IPHONE_8_0
-    if (SLK_IS_IOS8_AND_HIGHER && [UIAlertController class]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        alertController.modalPresentationStyle = UIModalPresentationPopover;
-        alertController.popoverPresentationController.sourceView = gesture.view.superview;
-        alertController.popoverPresentationController.sourceRect = gesture.view.frame;
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"Edit Message" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self editCellMessage:gesture];
-        }]];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:NULL]];
-        
-        [self.navigationController presentViewController:alertController animated:YES completion:nil];
-    }
-    else {
-        [self editCellMessage:gesture];
-    }
-#else
-    [self editCellMessage:gesture];
-#endif
-}
-
-- (void)editCellMessage:(UIGestureRecognizer *)gesture
-{
-    MessageTableViewCell *cell = (MessageTableViewCell *)gesture.view;
-    
-    self.editingMessage = self.messages[cell.indexPath.row];
-    
-    [self editText:self.editingMessage.text];
-    
-    [self.tableView scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-}
-
-- (void)editRandomMessage:(id)sender
-{
-    int sentences = (arc4random() % 10);
-    if (sentences <= 1) sentences = 1;
-    
-    [self editText:[LoremIpsum sentencesWithNumber:sentences]];
-}
-
-- (void)editLastMessage:(id)sender
-{
-    if (self.textView.text.length > 0) {
-        return;
-    }
-    
-    NSInteger lastSectionIndex = [self.tableView numberOfSections]-1;
-    NSInteger lastRowIndex = [self.tableView numberOfRowsInSection:lastSectionIndex]-1;
-    
-    Message *lastMessage = [self.messages objectAtIndex:lastRowIndex];
-    
-    [self editText:lastMessage.text];
-    
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:lastRowIndex inSection:lastSectionIndex] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (void)togglePIPWindow:(id)sender
@@ -466,38 +336,26 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     // This little trick validates any pending auto-correction or auto-spelling just after hitting the 'Send' button
     [self.textView refreshFirstResponder];
-    
-    Message *message = [Message new];
-    message.username = [LoremIpsum name];
-    message.text = [self.textView.text copy];
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    UITableViewRowAnimation rowAnimation = self.inverted ? UITableViewRowAnimationBottom : UITableViewRowAnimationTop;
-    UITableViewScrollPosition scrollPosition = self.inverted ? UITableViewScrollPositionBottom : UITableViewScrollPositionTop;
-    
-    [self.tableView beginUpdates];
-    [self.messages insertObject:message atIndex:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:rowAnimation];
-    [self.tableView endUpdates];
-    
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:scrollPosition animated:YES];
-    
-    // Fixes the cell from blinking (because of the transform, when using translucent cells)
-    // See https://github.com/slackhq/SlackTextViewController/issues/94#issuecomment-69929927
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+	
+	// Send message!
+	NSString *text = [self.textView.text copy];
+	NSLog(@"Send Message: %@", text);
+	
+    RgChatManager* mgr = [[LinphoneManager instance] chatManager];
+	NSNumber *threadID = [[LinphoneManager instance] chatSession];
+	NSDictionary *sdata = [mgr dbGetSessionData:threadID];
+	NSString *origTo = NILIFNULL(sdata[@"session_to"]);
+    NSString *uuid = [mgr sendMessageTo:sdata[@"session_tag"] from:origTo body:text contact:NILIFNULL(sdata[@"contact_id"])];
+	NSLog(@"Sent Message UUID: %@", uuid);
+	
+	NSDictionary *dict = @{
+        @"session":threadID
+    };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextSent object:self userInfo:dict];
+
     [super didPressRightButton:sender];
 }
 
-- (void)didPressArrowKey:(UIKeyCommand *)keyCommand
-{
-    if ([keyCommand.input isEqualToString:UIKeyInputUpArrow] && self.textView.text.length == 0) {
-        [self editLastMessage:nil];
-    }
-    else {
-        [super didPressArrowKey:keyCommand];
-    }
-}
 
 - (NSString *)keyForTextCaching
 {
@@ -528,7 +386,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     // Notifies the view controller when tapped on the right "Accept" button for commiting the edited text
     self.editingMessage.text = [self.textView.text copy];
     
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
     
     [super didCommitTextEditing:sender];
 }
@@ -662,46 +520,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([tableView isEqual:self.tableView]) {
-        return self.messages.count;
-    }
-    else {
-        return self.searchResult.count;
-    }
+    return self.searchResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([tableView isEqual:self.tableView]) {
-        return [self messageCellForRowAtIndexPath:indexPath];
-    }
-    else {
-        return [self autoCompletionCellForRowAtIndexPath:indexPath];
-    }
-}
-
-- (MessageTableViewCell *)messageCellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MessageTableViewCell *cell = (MessageTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:MessengerCellIdentifier];
-    
-    if (cell.gestureRecognizers.count == 0) {
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didLongPressCell:)];
-        [cell addGestureRecognizer:longPress];
-    }
-    
-    Message *message = self.messages[indexPath.row];
-    
-    cell.titleLabel.text = message.username;
-    cell.bodyLabel.text = message.text;
-    
-    cell.indexPath = indexPath;
-    cell.usedForMessage = YES;
-    
-    // Cells must inherit the table view's transform
-    // This is very important, since the main table view may be inverted
-    cell.transform = self.tableView.transform;
-    
-    return cell;
+    return [self autoCompletionCellForRowAtIndexPath:indexPath];
 }
 
 - (MessageTableViewCell *)autoCompletionCellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -726,43 +550,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([tableView isEqual:self.tableView]) {
-        Message *message = self.messages[indexPath.row];
-        
-        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-        paragraphStyle.alignment = NSTextAlignmentLeft;
-        
-        CGFloat pointSize = [MessageTableViewCell defaultFontSize];
-        
-        NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:pointSize],
-                                     NSParagraphStyleAttributeName: paragraphStyle};
-        
-        CGFloat width = CGRectGetWidth(tableView.frame)-kMessageTableViewCellAvatarHeight;
-        width -= 25.0;
-        
-        CGRect titleBounds = [message.username boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
-        CGRect bodyBounds = [message.text boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
-        
-        if (message.text.length == 0) {
-            return 0.0;
-        }
-        
-        CGFloat height = CGRectGetHeight(titleBounds);
-        height += CGRectGetHeight(bodyBounds);
-        height += 40.0;
-        
-        if (height < kMessageTableViewCellMinimumHeight) {
-            height = kMessageTableViewCellMinimumHeight;
-        }
-        
-        return height;
-    }
-    else {
-        return kMessageTableViewCellMinimumHeight;
-    }
+    return kMessageTableViewCellMinimumHeight;
 }
-
 
 #pragma mark - UITableViewDelegate Methods
 

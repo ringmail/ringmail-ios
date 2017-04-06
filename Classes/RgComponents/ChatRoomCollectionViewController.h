@@ -13,7 +13,11 @@
 
 @interface ChatRoomCollectionViewController : UICollectionViewController
 
+@property (nonatomic, strong) NSNumber* chatThreadID;
+
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID elements:(NSArray*)elems;
+
+- (void)appendMessages:(NSArray*)msgs;
 
 @end
 

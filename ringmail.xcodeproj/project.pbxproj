@@ -751,12 +751,8 @@
 		C4AB19F81E8D9B8400C7A754 /* ChatElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB19F61E8D9B8400C7A754 /* ChatElement.m */; };
 		C4AB19FB1E8D9BB600C7A754 /* ChatElementContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB19FA1E8D9BB600C7A754 /* ChatElementContext.m */; };
 		C4AB19FC1E8D9BB600C7A754 /* ChatElementContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB19FA1E8D9BB600C7A754 /* ChatElementContext.m */; };
-		C4AB19FF1E8D9C6000C7A754 /* ChatElementPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB19FE1E8D9C6000C7A754 /* ChatElementPage.m */; };
-		C4AB1A001E8D9C6000C7A754 /* ChatElementPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB19FE1E8D9C6000C7A754 /* ChatElementPage.m */; };
 		C4AB1A031E8D9C9400C7A754 /* ChatElementComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */; };
 		C4AB1A041E8D9C9400C7A754 /* ChatElementComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */; };
-		C4AB1A071E8D9CE300C7A754 /* ChatRoomModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A061E8D9CE300C7A754 /* ChatRoomModelController.m */; };
-		C4AB1A081E8D9CE300C7A754 /* ChatRoomModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A061E8D9CE300C7A754 /* ChatRoomModelController.m */; };
 		C4AB1A0B1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */; };
 		C4AB1A0C1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */; };
 		C4AB1A0F1E8DC8C700C7A754 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A0E1E8DC8C700C7A754 /* ChatViewController.m */; };
@@ -3047,12 +3043,8 @@
 		C4AB19F61E8D9B8400C7A754 /* ChatElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatElement.m; sourceTree = "<group>"; };
 		C4AB19F91E8D9BA600C7A754 /* ChatElementContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatElementContext.h; path = RgComponents/ChatElementContext.h; sourceTree = "<group>"; };
 		C4AB19FA1E8D9BB600C7A754 /* ChatElementContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatElementContext.m; sourceTree = "<group>"; };
-		C4AB19FD1E8D9C3800C7A754 /* ChatElementPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatElementPage.h; path = RgComponents/ChatElementPage.h; sourceTree = "<group>"; };
-		C4AB19FE1E8D9C6000C7A754 /* ChatElementPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatElementPage.m; sourceTree = "<group>"; };
 		C4AB1A011E8D9C7300C7A754 /* ChatElementComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatElementComponent.h; path = RgComponents/ChatElementComponent.h; sourceTree = "<group>"; };
 		C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatElementComponent.mm; sourceTree = "<group>"; };
-		C4AB1A051E8D9CD800C7A754 /* ChatRoomModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatRoomModelController.h; path = RgComponents/ChatRoomModelController.h; sourceTree = "<group>"; };
-		C4AB1A061E8D9CE300C7A754 /* ChatRoomModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRoomModelController.m; sourceTree = "<group>"; };
 		C4AB1A091E8D9CFD00C7A754 /* ChatRoomCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatRoomCollectionViewController.h; path = RgComponents/ChatRoomCollectionViewController.h; sourceTree = "<group>"; };
 		C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatRoomCollectionViewController.mm; sourceTree = "<group>"; };
 		C4AB1A0D1E8DC8BE00C7A754 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -4548,12 +4540,8 @@
 				C4AB19F61E8D9B8400C7A754 /* ChatElement.m */,
 				C4AB19F91E8D9BA600C7A754 /* ChatElementContext.h */,
 				C4AB19FA1E8D9BB600C7A754 /* ChatElementContext.m */,
-				C4AB19FD1E8D9C3800C7A754 /* ChatElementPage.h */,
-				C4AB19FE1E8D9C6000C7A754 /* ChatElementPage.m */,
 				C4AB1A011E8D9C7300C7A754 /* ChatElementComponent.h */,
 				C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */,
-				C4AB1A051E8D9CD800C7A754 /* ChatRoomModelController.h */,
-				C4AB1A061E8D9CE300C7A754 /* ChatRoomModelController.m */,
 				C4AB1A091E8D9CFD00C7A754 /* ChatRoomCollectionViewController.h */,
 				C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */,
 			);
@@ -7801,7 +7789,6 @@
 				C4AB19F71E8D9B8400C7A754 /* ChatElement.m in Sources */,
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				C44A40FA1E70E415000F3E24 /* CLColorPickerView.m in Sources */,
-				C4AB19FF1E8D9C6000C7A754 /* ChatElementPage.m in Sources */,
 				C450DBB71C70FFB00053592E /* MainCollectionViewController.mm in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
 				C4E1CB3D1E6E20F100698166 /* ViewUtils.m in Sources */,
@@ -7809,7 +7796,6 @@
 				63B81A101B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C42C0D661CAEDAA800AD5A91 /* RgCallComponent.mm in Sources */,
 				C4A929181E9428BE00993A5C /* Message.m in Sources */,
-				C4AB1A071E8D9CE300C7A754 /* ChatRoomModelController.m in Sources */,
 				C44A40F01E70E415000F3E24 /* CLFilterTool.m in Sources */,
 				C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */,
 				C4FD78781CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm in Sources */,
@@ -8027,7 +8013,6 @@
 				C4AB19F81E8D9B8400C7A754 /* ChatElement.m in Sources */,
 				C4AC2ADE1D3963FA003B6232 /* UIAddressTextField.m in Sources */,
 				C44A40FB1E70E415000F3E24 /* CLColorPickerView.m in Sources */,
-				C4AB1A001E8D9C6000C7A754 /* ChatElementPage.m in Sources */,
 				C4AC2ADF1D3963FA003B6232 /* MainCollectionViewController.mm in Sources */,
 				C4AC2AE01D3963FA003B6232 /* SettingsViewController.m in Sources */,
 				C4E1CB3E1E6E20F100698166 /* ViewUtils.m in Sources */,
@@ -8035,7 +8020,6 @@
 				C4AC2AE21D3963FA003B6232 /* RgCallComponent.mm in Sources */,
 				C4AC2AE41D3963FA003B6232 /* NSObject+NSPerformSelector.m in Sources */,
 				C4A929191E9428BE00993A5C /* Message.m in Sources */,
-				C4AB1A081E8D9CE300C7A754 /* ChatRoomModelController.m in Sources */,
 				C44A40F11E70E415000F3E24 /* CLFilterTool.m in Sources */,
 				C4AC2AE51D3963FA003B6232 /* HashtagCategoryHeaderComponent.mm in Sources */,
 				C4AC2AE61D3963FA003B6232 /* TPKeyboardAvoidingCollectionView.m in Sources */,
