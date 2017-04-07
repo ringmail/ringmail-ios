@@ -32,5 +32,6 @@ target 'RingMail-Dev' do
 #  pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x' 
   pod 'Colours'
   pod 'SDWebImage', :git => 'https://github.com/rs/SDWebImage.git', :tag => '3.8.2'
+  pod 'Google/SignIn'
 end
 

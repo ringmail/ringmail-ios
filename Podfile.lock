@@ -27,9 +27,43 @@ PODS:
   - ComponentKit (0.15.1)
   - CRMediaPickerController (0.0.1)
   - DXTableViewModel (0.1.0)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.5.2):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.9)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
+  - Google/SignIn (3.0.3):
+    - Google/Core
+    - GoogleSignIn (~> 4.0)
+  - GoogleSignIn (4.0.2):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMOAuth2 (1.1.4):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.9):
+    - GTMSessionFetcher/Full (= 1.1.9)
+  - GTMSessionFetcher/Core (1.1.9)
+  - GTMSessionFetcher/Full (1.1.9):
+    - GTMSessionFetcher/Core (= 1.1.9)
   - JSQMessagesViewController (7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -63,6 +97,7 @@ DEPENDENCIES:
   - CRMediaPickerController
   - DXTableViewModel (~> 0.1.0)
   - FMDB
+  - Google/SignIn
   - JSQMessagesViewController (from `git@nova1.revalead.com:dyl/ringmail-ios-jsqmessages.git`, branch `ringmail`)
   - libPhoneNumber-iOS (~> 0.8)
   - NSHash (~> 1.0.2)
@@ -106,7 +141,7 @@ CHECKOUT OPTIONS:
     :commit: 7d98f1c9c8a3217584fd797771dae199cb8eeb65
     :git: https://github.com/nixonnixon/UIImage-Categories.git
   XMPPFramework:
-    :commit: 8e58862248731924632a7090e77d9ed7619821f7
+    :commit: 6cdd8d3180c36fb5a28a660078ec6672a1771942
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 SPEC CHECKSUMS:
@@ -117,7 +152,15 @@ SPEC CHECKSUMS:
   ComponentKit: beef88630f344efb8344fe40fc6fc7c1732b68c8
   CRMediaPickerController: 65e1f968dea26a7759bb1fb4a1518f5b8cd6fba9
   DXTableViewModel: 27583f277f94e3ad5ffb0575cd84c39918319aa6
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
@@ -135,6 +178,6 @@ SPEC CHECKSUMS:
   UIImage-Categories: b9d2ff50c2250ea007f150c2427ff230b5a4789b
   XMPPFramework: 544da7ab3faf7005de303708630a4e9741efb907
 
-PODFILE CHECKSUM: 2e34e327762247fbf26dab2ecf2299d41e713a8d
+PODFILE CHECKSUM: 39834b21b6484113f3a5db0e05cc1280f30a3972
 
 COCOAPODS: 1.0.1

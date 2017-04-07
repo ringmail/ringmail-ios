@@ -62,6 +62,8 @@ typedef enum _ViewElement {
 @synthesize verifyEmailLabel;
 @synthesize verifyPhoneLabel;
 
+//@synthesize signInButton;
+
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -130,6 +132,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[viewTapGestureRecognizer setCancelsTouchesInView:FALSE];
 	[viewTapGestureRecognizer setDelegate:self];
 	[contentView addGestureRecognizer:viewTapGestureRecognizer];
+    
+    [GIDSignIn sharedInstance].uiDelegate = self;
+    [self.signInButton setStyle:kGIDSignInButtonStyleWide];
 
 }
 
@@ -486,11 +491,11 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
         else if (textField.tag == ViewElement_Username)
         {
-            next = [WizardViewController findTextField:ViewElement_Phone view:contentView];
-        }
-        else if (textField.tag == ViewElement_Phone)
-        {
             next = [WizardViewController findTextField:ViewElement_Password view:contentView];
+        }
+        else if (textField.tag == ViewElement_Password)
+        {
+            next = [WizardViewController findTextField:ViewElement_Phone view:contentView];
         }
     }
     else if (currentView == connectAccountView)
@@ -1019,8 +1024,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 	return YES;
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
+#pragma mark - Google Sign-In
+
+- (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
+    //    [myActivityIndicator stopAnimating];
+}
+
+- (void)signIn:(GIDSignIn *)signIn
+presentViewController:(UIViewController *)viewController {
+    [self.view.window.rootViewController presentViewController:viewController animated:YES completion:nil];
+//    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (void)signIn:(GIDSignIn *)signIn
+dismissViewController:(UIViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

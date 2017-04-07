@@ -231,6 +231,15 @@
 	}
 	/*if (bgStartId != UIBackgroundTaskInvalid)
 		[[UIApplication sharedApplication] endBackgroundTask:bgStartId];*/
+    
+    
+    // Google Sign-In
+    NSError* configureError;
+    [[GGLContext sharedInstance] configureWithError: &configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    
+    [GIDSignIn sharedInstance].delegate = self;
+    [[GIDSignIn sharedInstance] signInSilently];
 
 	return YES;
 }
@@ -503,6 +512,132 @@
 
 - (void)application:(UIApplication *)application didUpdateUserActivity:(NSUserActivity *)userActivity {
 
+}
+
+#pragma mark - openURL
+
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary *)options {
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+}
+
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:sourceApplication
+                                      annotation:annotation];
+}
+
+#pragma mark - Google Sign-In
+
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    // Perform any operations on signed in user here.
+    NSString *userId = user.userID;                  // For client-side use only!
+    NSString *idToken = user.authentication.idToken; // Safe to send to the server
+    NSString *fullName = user.profile.name;
+    NSString *givenName = user.profile.givenName;
+    NSString *familyName = user.profile.familyName;
+    NSString *email = user.profile.email;
+    
+    NSLog(@"Google userId: %@", userId);
+    NSLog(@"Google email: %@", email);
+    NSLog(@"Google idToken: %@", idToken);
+    
+    NSLog(@"Google givenName: %@", givenName);
+    NSLog(@"Google familyName: %@", familyName);
+    NSLog(@"Google fullName: %@", fullName);
+    
+    if (user.profile.hasImage)
+    {
+        NSLog(@"Google hasImage");
+        NSURL *url = [user.profile imageURLWithDimension:100];
+        NSLog(@"Google url : %@",url);
+    }
+    else
+        NSLog(@"Google noImage");
+    
+    NSLog(@"Google error: %ld", (long)error.code);
+    
+    NSLog(@"Google currentUser: %@", [GIDSignIn sharedInstance].currentUser);
+    NSString *cemail = [GIDSignIn sharedInstance].currentUser.profile.email;
+    NSLog(@"Google currentUser email: %@", cemail);
+    
+    if (userId)
+    {
+        [[RgNetwork instance] loginGoogle:idToken callback:^(NSURLSessionTask *operation, id responseObject) {
+            NSDictionary* res = responseObject;
+            NSString *ok = [res objectForKey:@"result"];
+            if (ok != nil && [ok isEqualToString:@"ok"])
+            {
+    //            // Store login and password
+    //            LevelDB* cfg = [RgManager configDatabase];
+    //            [cfg setObject:username forKey:@"ringmail_login"];
+    //            [cfg setObject:password forKey:@"ringmail_password"];
+    //            [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
+    //            [cfg setObject:@"1" forKey:@"ringmail_verify_phone"];
+    //            [cfg setObject:[res objectForKey:@"phone"] forKey:@"ringmail_phone"];
+    //            NSLog(@"RingMail Logged In - Config: %@", cfg);
+    //            [[LinphoneManager instance] setRingLogin:username];
+    //            [[LinphoneManager instance] startLinphoneCore];
+    //            [self reset];
+    //            [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
+    //            [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
+    //                          domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
+    //            [RgManager updateCredentials:res];
+            }
+            else
+            {
+                NSString* err = [res objectForKey:@"error"];
+                if (err != nil)
+                {
+                    NSLog(@"RingMail API Error: %@", err);
+    //                if ([err isEqualToString:@"verify"])
+    //                {
+    //                    LevelDB* cfg = [RgManager configDatabase];
+    //                    [cfg setObject:username forKey:@"ringmail_login"];
+    //                    [cfg setObject:password forKey:@"ringmail_password"];
+    //                    [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
+    //                    [self changeView:validateAccountView back:FALSE animation:TRUE];
+    //                }
+    //                else if ([err isEqualToString:@"credentials"])
+    //                {
+    //                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In Failure", nil)
+    //                                                                    message:@"Invalid email and password combination."
+    //                                                                   delegate:nil
+    //                                                          cancelButtonTitle:@"OK"
+    //                                                          otherButtonTitles:nil];
+    //                    [alert show];
+    //                }
+                }
+            }
+        }
+        failure:^(NSURLSessionTask *operation, NSError *error) {
+            LOGI(@"Login failure network error");
+            
+    //            DTAlertView *alert = [[DTAlertView alloc]
+    //                                  initWithTitle:NSLocalizedString(@"Network Error", nil)
+    //                                  message:@"Please try again later"];
+    //            [alert addCancelButtonWithTitle:NSLocalizedString(@"Close", nil)
+    //                                      block:^{
+    //                                          [waitView setHidden:true];
+    //                                      }];
+    //            [alert show];
+        }];
+    }
+}
+
+- (void)signIn:(GIDSignIn *)signIn
+didDisconnectWithUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    // Perform any operations when the user disconnects from app here.
 }
 
 @end
