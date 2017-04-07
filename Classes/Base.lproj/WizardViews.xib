@@ -134,73 +134,109 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="NwJ-ZF-DUs" userLabel="firstNameField">
-                            <rect key="frame" x="30" y="14" width="140" height="26"/>
+                            <rect key="frame" x="30" y="14" width="140" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="OaP-Xe-1f5"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="2GS-DO-8qn" userLabel="lastNameField">
-                            <rect key="frame" x="205" y="14" width="140" height="26"/>
+                            <rect key="frame" x="205" y="14" width="140" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="eaV-r7-uwM"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="74" userLabel="usernameField">
-                            <rect key="frame" x="30" y="80" width="315" height="26"/>
+                            <rect key="frame" x="30" y="80" width="315" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Username"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="80"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="6Nk-qg-7op" userLabel="phoneField">
-                            <rect key="frame" x="30" y="200" width="315" height="26"/>
+                            <rect key="frame" x="30" y="200" width="315" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="WAW-VG-nS8"/>
                             </connections>
                         </textField>
                         <textField hidden="YES" opaque="NO" clipsSubviews="YES" tag="106" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="mcH-ve-6cy" userLabel="hashtagField">
-                            <rect key="frame" x="30" y="140" width="315" height="26"/>
+                            <rect key="frame" x="30" y="140" width="315" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="GGP-oP-SuZ"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="104" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="75" userLabel="passwordField">
-                            <rect key="frame" x="30" y="140" width="315" height="26"/>
+                            <rect key="frame" x="30" y="140" width="315" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Password "/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="82"/>
                             </connections>
@@ -308,23 +344,35 @@
                         <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="68" userLabel="usernameField">
                             <rect key="frame" x="0.0" y="30" width="315" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.52156862745098043" green="0.38823529411764707" blue="0.40784313725490196" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.66666666666666663" green="0.49803921568627452" blue="0.52156862745098043" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Username"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="81"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" tag="104" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="66" userLabel="passwordField">
-                            <rect key="frame" x="0.0" y="118" width="315" height="30"/>
+                            <rect key="frame" x="0.0" y="118" width="315" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.52156862745098043" green="0.38823529411764707" blue="0.40784313725490196" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.66666666666666663" green="0.49803921568627452" blue="0.52156862745098043" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration" label="Password"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="85"/>
                             </connections>
@@ -429,14 +477,20 @@
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="@ringmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="sN7-WO-hH8" userLabel="ringmailEmail">
-                    <rect key="frame" x="30" y="234" width="315" height="26"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="30" y="234" width="315" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masktToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="200" contentMode="left" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="65x-Jk-Sle" userLabel="label">
                     <rect key="frame" x="30" y="267" width="315" height="65"/>
@@ -513,30 +567,42 @@ You are required to verifiy your email address to sign in.</string>
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="n99-Nc-sLf" userLabel="ringmailEmail">
-                    <rect key="frame" x="30" y="210" width="315" height="26"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="30" y="210" width="315" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="18"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GuH-b4-G7a">
-                    <rect key="frame" x="30" y="251" width="315" height="26"/>
+                    <rect key="frame" x="30" y="251" width="315" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" tag="105" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="cA2-Fq-qu1" userLabel="usernameField">
-                    <rect key="frame" x="30" y="275" width="315" height="26"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.52156862749999999" green="0.38823529410000002" blue="0.40784313729999999" alpha="0.34000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="30" y="275" width="315" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.66666666669999997" green="0.49803921569999998" blue="0.52156862749999999" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" label="Username"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="delegate" destination="-1" id="gQu-58-2zK"/>
                     </connections>
