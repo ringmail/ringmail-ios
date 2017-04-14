@@ -564,6 +564,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = false;
             passwordLabel.hidden = false;
             _googleSignUpButton.hidden = false;
+            [[GIDSignIn sharedInstance] signOut];
         }
         
 		UIView *view = [historyViews lastObject];
