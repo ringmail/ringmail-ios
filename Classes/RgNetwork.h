@@ -20,7 +20,7 @@ typedef void (^RgConversation)(NSString *to);
 
 + (RgNetwork *)instance;
 - (void)login:(NSString*)login password:(NSString*)password callback:(RgNetworkCallback)callback failure:(RgNetworkError)failure;
-- (void)loginGoogle:(NSString*)idToken callback:(RgNetworkCallback)callback failure:(RgNetworkError)failure;
+- (void)loginGoogle:(NSString*)login idToken:(NSString*)idToken callback:(RgNetworkCallback)callback failure:(RgNetworkError)failure;
 - (void)verifyPhone:(NSString*)code callback:(RgNetworkCallback)callback;
 - (void)registerPushToken;
 

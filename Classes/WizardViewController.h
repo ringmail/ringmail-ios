@@ -26,6 +26,7 @@
 #import "NBPhoneNumberUtil.h"
 #import "NBPhoneNumber.h"
 #import <Google/SignIn.h>
+#include <stdlib.h>
 
 @interface WizardViewController : TPMultiLayoutViewController
 <UITextFieldDelegate,
@@ -69,7 +70,10 @@
 @property (nonatomic, strong) IBOutlet UILabel *verifyEmailLabel;
 @property (nonatomic, strong) IBOutlet UILabel *verifyPhoneLabel;
 
-@property(weak, nonatomic) IBOutlet GIDSignInButton *signInButton;
+@property (nonatomic, strong) IBOutlet UILabel *passwordLabel;
+
+@property(weak, nonatomic) IBOutlet GIDSignInButton *googleSignInButton;
+@property(weak, nonatomic) IBOutlet GIDSignInButton *googleSignUpButton;
 
 - (void)reset;
 - (void)startWizard;
@@ -85,5 +89,7 @@
 - (IBAction)onResendPhoneClick:(id)sender;
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
+
+- (void)googleSignInVerifedEvent:(NSNotification *)notif;
 
 @end

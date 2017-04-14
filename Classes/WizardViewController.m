@@ -62,7 +62,8 @@ typedef enum _ViewElement {
 @synthesize verifyEmailLabel;
 @synthesize verifyPhoneLabel;
 
-//@synthesize signInButton;
+@synthesize passwordLabel;
+
 
 #pragma mark - Lifecycle Functions
 
@@ -110,20 +111,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(registrationUpdateEvent:)
-												 name:kLinphoneRegistrationUpdate
-											   object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(attemptVerify:)
-												 name:kRgAttemptVerify
-											   object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+//	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -134,8 +126,32 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[contentView addGestureRecognizer:viewTapGestureRecognizer];
     
     [GIDSignIn sharedInstance].uiDelegate = self;
-    [self.signInButton setStyle:kGIDSignInButtonStyleWide];
+    [self.googleSignInButton setStyle:kGIDSignInButtonStyleWide];
+    [self.googleSignUpButton setStyle:kGIDSignInButtonStyleWide];
+    
+//    [[GIDSignIn sharedInstance] signOut];  //mrkbxt
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(registrationUpdateEvent:)
+                                                 name:kLinphoneRegistrationUpdate
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(attemptVerify:)
+                                                 name:kRgAttemptVerify
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(googleSignInVerifedEvent:)
+                                                 name:@"googleSignInVerifed"
+                                               object:nil];
+}
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneRegistrationUpdate object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgAttemptVerify object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInVerifed" object:nil];
 }
 
 #pragma mark -
@@ -276,7 +292,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (view == validateAccountView)
     {
         LevelDB* cfg = [RgManager configDatabase];
-        [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
+        
+        NSString *email_gid = [[cfg objectForKey:@"ringmail_login"] stringByMatching:@"(.*)_gid" capture:1];
+        
+        if (email_gid)
+            [verifyEmailLabel setText:email_gid];
+        else
+            [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
     }
     else if (view == validatePhoneView)
     {
@@ -399,7 +421,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	LinphoneAuthInfo *info = linphone_auth_info_new([username UTF8String], NULL, [password UTF8String], NULL, NULL,
 													linphone_proxy_config_get_domain(proxyCfg));
-
+    
 	[self setDefaultSettings:proxyCfg];
 
 	[self clearProxyConfig];
@@ -534,6 +556,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onBackClick:(id)sender {
 	if ([historyViews count] > 0) {
+        
+        if (currentView == createAccountView)
+        {
+            [WizardViewController cleanTextField:createAccountView];
+            [WizardViewController findTextField:ViewElement_Username view:contentView].userInteractionEnabled = true;
+            [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = false;
+            passwordLabel.hidden = false;
+            _googleSignUpButton.hidden = false;
+        }
+        
 		UIView *view = [historyViews lastObject];
 		[historyViews removeLastObject];
 		[self changeView:view back:TRUE animation:TRUE];
@@ -779,7 +811,6 @@ static UICompositeViewDescription *compositeDescription = nil;
                                   domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                     [RgManager updateCredentials:res];
                 }
-                
                 else
                 {
                     NSString* err = [res objectForKey:@"error"];
@@ -891,7 +922,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *hashtag = @""; // mrkbxt_edit:  passing empty string for hashtag on register.
 //    NSString *hashtag = [WizardViewController findTextField:ViewElement_Hashtag view:contentView].text;
 	//NSString *password2 = [WizardViewController findTextField:ViewElement_Password2 view:contentView].text;
-
+    
     // TODO: Re-download this data if it is missing
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithDictionary:@{
         @"first_name": firstname,
@@ -1030,15 +1061,107 @@ static UICompositeViewDescription *compositeDescription = nil;
     //    [myActivityIndicator stopAnimating];
 }
 
-- (void)signIn:(GIDSignIn *)signIn
-presentViewController:(UIViewController *)viewController {
-    [self.view.window.rootViewController presentViewController:viewController animated:YES completion:nil];
-//    [self presentViewController:viewController animated:YES completion:nil];
+- (void)signIn:(GIDSignIn *)signIn presentViewController:(UIViewController *)viewController {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"googleSignInStart" object:self userInfo:@{@"vc": viewController}];
 }
 
-- (void)signIn:(GIDSignIn *)signIn
-dismissViewController:(UIViewController *)viewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)signIn:(GIDSignIn *)signIn dismissViewController:(UIViewController *)viewController {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"googleSignInComplete" object:self userInfo:nil];
+}
+
+- (void)googleSignInVerifedEvent:(NSNotification *)notif
+{
+    GIDGoogleUser *obj = notif.object;
+//    NSString *userId = obj.userID;
+    NSString *idToken = obj.authentication.idToken;
+    NSString *login = [NSString stringWithFormat:@"%@%@", obj.profile.email, @"_gid"];
+    
+    if (currentView == connectAccountView)
+    {
+        [[RgNetwork instance] loginGoogle:login idToken:idToken callback:^(NSURLSessionTask *operation, id responseObject) {
+            NSDictionary* res = responseObject;
+            NSString *ok = [res objectForKey:@"result"];
+            if (ok != nil && [ok isEqualToString:@"ok"])
+            {
+                // Store login and password
+                LevelDB* cfg = [RgManager configDatabase];
+                [cfg setObject:login forKey:@"ringmail_login"];
+                [cfg setObject:idToken forKey:@"ringmail_password"];
+                [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
+                [cfg setObject:@"1" forKey:@"ringmail_verify_phone"];
+                [cfg setObject:[res objectForKey:@"phone"] forKey:@"ringmail_phone"];
+                NSLog(@"RingMail Logged In - Config: %@", cfg);
+                [[LinphoneManager instance] setRingLogin:login];
+                [[LinphoneManager instance] startLinphoneCore];
+                [self reset];
+                [self loadWizardConfig:@"wizard_linphone_ringmail.rc"];
+                [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
+                              domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
+                [RgManager updateCredentials:res];
+                
+                [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
+            }
+            else
+            {
+                NSString* err = [res objectForKey:@"error"];
+                if (err != nil)
+                {
+                    NSLog(@"RingMail API Error: %@", err);
+                    if ([err isEqualToString:@"verify"])
+                    {
+                        LevelDB* cfg = [RgManager configDatabase];
+                        [cfg setObject:login forKey:@"ringmail_login"];
+                        [cfg setObject:idToken forKey:@"ringmail_password"];
+                        [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
+                        [self changeView:validateAccountView back:FALSE animation:TRUE];
+                    }
+                    else if ([err isEqualToString:@"credentials"])
+                    {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In Failure", nil)
+                                                                        message:@"Please complete registration. A phone number is required."
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                    }
+                }
+            }
+        }
+        failure:^(NSURLSessionTask *operation, NSError *error) {
+            LOGI(@"Login failure network error");
+            
+            DTAlertView *alert = [[DTAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Network Error", nil)
+                                  message:@"Please try again later"];
+            [alert addCancelButtonWithTitle:NSLocalizedString(@"Close", nil)
+                                      block:^{
+                                          [waitView setHidden:true];
+                                      }];
+            [alert show];
+            
+        }];
+        
+    }
+    else if (currentView == createAccountView)
+    {
+        [WizardViewController findTextField:ViewElement_Username view:contentView].text = obj.profile.email;
+        [WizardViewController findTextField:ViewElement_Username view:contentView].userInteractionEnabled = false;
+        
+        [WizardViewController findTextField:ViewElement_FirstName view:contentView].text = obj.profile.givenName;
+        [WizardViewController findTextField:ViewElement_LastName view:contentView].text = obj.profile.familyName;
+        
+        NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        NSMutableString *randomString = [NSMutableString stringWithCapacity: 64];
+        for (int i = 0; i < 64; i++) {
+            [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+        }
+//        NSLog(@"%@",randomString);
+        
+        [WizardViewController findTextField:ViewElement_Password view:contentView].text = randomString;
+        [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = true;
+        passwordLabel.hidden = true;
+        _googleSignUpButton.hidden = true;
+    }
 }
 
 @end

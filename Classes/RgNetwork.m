@@ -68,7 +68,7 @@ static RgNetwork* theRgNetwork = nil;
     [manager POST:postUrl parameters:parameters progress:nil success:callback failure:failure];
 }
 
-- (void)loginGoogle:(NSString*)idToken callback:(RgNetworkCallback)callback failure:(RgNetworkError)failure
+- (void)loginGoogle:(NSString*)login idToken:(NSString*)idToken callback:(RgNetworkCallback)callback failure:(RgNetworkError)failure
 {
     NSLog(@"RingMail: Google Login Request");
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -76,13 +76,14 @@ static RgNetwork* theRgNetwork = nil;
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     LevelDB* cfg = [RgManager configDatabase];
     NSDictionary *parameters = @{
+                                 @"login": login,
                                  @"idToken": idToken,
                                  @"device": [cfg objectForKey:@"ringmail_device_uuid"],
                                  @"version": [info objectForKey:@"CFBundleShortVersionString"],
                                  @"build": [info objectForKey:@"CFBundleVersion"],
                                  @"timestamp": [NSString stringWithFormat:@"%s %s", __DATE__, __TIME__],
                                  };
-    NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/login/google", self.networkHost];
+    NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/login", self.networkHost];
     [manager POST:postUrl parameters:parameters progress:nil success:callback failure:failure];
 }
 
