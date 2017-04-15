@@ -1336,6 +1336,11 @@
     return [self dbGetMessages:(NSNumber *)session uuid:nil last:nil];
 }
 
+- (NSArray *)dbGetMessages:(NSNumber *)session last:(NSNumber*)last
+{
+    return [self dbGetMessages:(NSNumber *)session uuid:nil last:last];
+}
+
 - (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid
 {
     return [self dbGetMessages:(NSNumber *)session uuid:uuid last:nil];

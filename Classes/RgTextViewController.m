@@ -241,6 +241,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     if (!_textInputbar) {
         _textInputbar = [[SLKTextInputbar alloc] initWithTextViewClass:self.textViewClass];
         _textInputbar.translatesAutoresizingMaskIntoConstraints = NO;
+		[_textInputbar textView].layer.cornerRadius = 17.0;
         
         [_textInputbar.leftButton addTarget:self action:@selector(didPressLeftButton:) forControlEvents:UIControlEventTouchUpInside];
         [_textInputbar.rightButton addTarget:self action:@selector(didPressRightButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -1371,7 +1372,12 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
             [self slk_processTextForAutoCompletion];
         });
     }
-    
+	
+	if (status == SLKKeyboardStatusDidShow)
+	{
+		[self.chatRoom scrollToBottom:NO];
+	}
+	
     // Very important to invalidate this flag after the keyboard is dismissed or presented, to start with a clean state next time.
     self.movingKeyboard = NO;
 }
@@ -2323,12 +2329,24 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 	NSDictionary* info = event.userInfo;
 	if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
 	{
+		NSNumber* threadID = [[LinphoneManager instance] chatSession];
+       	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID last:_chatRoom.lastMessageID];
+    	NSLog(@"%@", messages);
+		[_chatRoom appendMessages:messages];
 	}
 }
 
 - (void)chatSentEvent:(NSNotification*)event
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSDictionary* info = event.userInfo;
+	if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
+	{
+	    NSNumber* threadID = [[LinphoneManager instance] chatSession];
+       	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID last:_chatRoom.lastMessageID];
+    	NSLog(@"%@", messages);
+		[_chatRoom appendMessages:messages];
+	}
 }
 
 - (void)chatUpdateEvent:(NSNotification*)event

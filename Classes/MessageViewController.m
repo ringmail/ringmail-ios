@@ -11,6 +11,7 @@
 #import "MessageTextView.h"
 #import "TypingIndicatorView.h"
 #import "Message.h"
+#import "UIColor+Hex.h"
 
 #import <LoremIpsum/LoremIpsum.h>
 
@@ -43,14 +44,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 		compositeDescription = [[UICompositeViewDescription alloc] init:@"Message"
 																content:@"MessageViewController"
 															   stateBar:@"UIStateBar"
-														stateBarEnabled:true
+														stateBarEnabled:YES
                                                                  navBar:@"UINavBar"
 																 tabBar:@"UIMainBar"
-                                                          navBarEnabled:true
-														  tabBarEnabled:false
-															 fullscreen:false
+                                                          navBarEnabled:YES
+														  tabBarEnabled:YES
+															 fullscreen:NO
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true
+														   portraitMode:YES
                                                                 segLeft:@"All"
                                                                segRight:@"Missed"];
 		compositeDescription.darkBackground = true;
@@ -107,20 +108,22 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+	
     // SLKTVC's configuration
     self.bounces = YES;
     self.shakeToClearEnabled = YES;
     self.keyboardPanningEnabled = YES;
-    self.shouldScrollToBottomAfterKeyboardShows = NO;
     self.inverted = YES;
     
     //[self.leftButton setImage:[UIImage imageNamed:@"icn_upload"] forState:UIControlStateNormal];
-    //[self.leftButton setTintColor:[UIColor grayColor]];
-	[self.leftButton setTitle:NSLocalizedString(@"Add", nil) forState:UIControlStateNormal];
+	[self.leftButton setTitle:@"" forState:UIControlStateNormal];
+    [self.leftButton setTintColor:[UIColor colorWithHex:@"#818181"]];
+	[self.leftButton setImage:[UIImage imageNamed:@"ringmail_chat_attach"] forState:UIControlStateNormal];
 	
-    [self.rightButton setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
-    
+    //[self.rightButton setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
+	[self.rightButton setTitle:@"" forState:UIControlStateNormal];
+	[self.rightButton setBackgroundImage:[UIImage imageNamed:@"ringmail_chat_send"] forState:UIControlStateNormal];
+	
     self.textInputbar.autoHideRightButton = YES;
     self.textInputbar.maxCharCount = 256;
     self.textInputbar.counterStyle = SLKCounterStyleSplit;
@@ -182,6 +185,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self setTextInputbarHidden:hide animated:YES];
     
     [buttonItem setImage:image];
+
 }
 
 - (void)fillWithText:(id)sender

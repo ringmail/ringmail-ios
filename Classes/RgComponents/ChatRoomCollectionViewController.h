@@ -14,9 +14,11 @@
 @interface ChatRoomCollectionViewController : UICollectionViewController
 
 @property (nonatomic, strong) NSNumber* chatThreadID;
+@property (nonatomic, strong) NSNumber* lastMessageID;
 
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID elements:(NSArray*)elems;
 
+- (void)scrollToBottom:(BOOL)animate;
 - (void)appendMessages:(NSArray*)msgs;
 
 @end

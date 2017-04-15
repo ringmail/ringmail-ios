@@ -18,13 +18,19 @@
 }
 
 @synthesize chatThreadID;
+@synthesize lastMessageID;
 
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID elements:(NSArray*)elems
 {
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleWidthAndHeight];
-		_elements = [NSMutableArray arrayWithArray:elems];
+		_elements = [NSMutableArray array];
+		for (NSDictionary* i in elems)
+		{
+			[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:i]];
+		}
 		_mainCount = [NSNumber numberWithInteger:0];
+		self.lastMessageID = nil;
 		self.chatThreadID = threadID;
     }
     return self;
@@ -58,20 +64,32 @@
 		// Generate the initial changeset
 		CKArrayControllerInputItems items;
 		NSInteger added = 0;
-    	for (NSUInteger i = 0; i < [_elements count]; i++)
+		NSInteger count = [_elements count];
+    	for (NSUInteger i = 0; i < count; i++)
         {
-    		NSInteger mainIndex = [_mainCount intValue] + i;
-    		if ([_elements count] > mainIndex)
-    		{
-    			ChatElement* item = [[ChatElement alloc] initWithData:[_elements objectAtIndex:mainIndex]];
-				items.insert([NSIndexPath indexPathForRow:mainIndex inSection:0], item);
-    			added++;
-    		}
+			if (i == 0)
+			{
+				_elements[i][@"first_element"] = @YES;
+			}
+			if (i == count - 1)
+			{
+				_elements[i][@"last_element"] = @YES;
+			}
+			lastMessageID = [_elements[i][@"id"] copy];
+			ChatElement* item = [[ChatElement alloc] initWithData:[_elements objectAtIndex:i]];
+			items.insert([NSIndexPath indexPathForRow:i inSection:0], item);
+			added++;
     	}
 		if (added > 0)
 		{
-			[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
 			_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
+			__block NSInteger lastIndex = [_mainCount intValue] - 1;
+			self.collectionView.hidden = YES;
+			[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i){
+				NSLog(@"Enqueue batch complete! Last item: %ld", lastIndex);
+				[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+				self.collectionView.hidden = NO;
+			}];
 		}
 	});
 }
@@ -133,32 +151,65 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 
 */
 
-#pragma mark - Update events
+#pragma mark - RingMail
+
+- (void)scrollToBottom:(BOOL)animate
+{
+	NSInteger lastIndex = [_mainCount intValue] - 1;
+	[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:animate];
+}
 
 - (void)appendMessages:(NSArray*)msgs
 {
-			// Generate the initial changeset
-	for (NSDictionary* i in msgs)
+	if ([msgs count] == 0)
 	{
-		[_elements addObject:i];
+		return; // no messages
 	}
-	CKArrayControllerInputItems items;
-	NSInteger added = 0;
-	for (NSUInteger i = [_mainCount intValue]; i < [_elements count]; i++)
-    {
-		NSInteger mainIndex = [_mainCount intValue] + i;
-		if ([_elements count] > mainIndex)
+	
+	// Generate the additional changeset
+	dispatch_async(dispatch_get_main_queue(), ^{
+    	CKArrayControllerInputItems items;
+		
+		// remove last_element tag
+		NSInteger count = [_elements count];
+		if (count > 0)
 		{
-			ChatElement* item = [[ChatElement alloc] initWithData:[_elements objectAtIndex:mainIndex]];
-			items.insert([NSIndexPath indexPathForRow:mainIndex inSection:0], item);
-			added++;
+			NSInteger last = count - 1;
+    		NSMutableDictionary *lastData = _elements[last];
+    		[lastData removeObjectForKey:@"last_element"];
+    		ChatElement* lastItem = [[ChatElement alloc] initWithData:lastData];
+    		items.update([NSIndexPath indexPathForRow:last inSection:0], lastItem);
 		}
-	}
-	if (added > 0)
-	{
-		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
-		_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
-	}
+	
+    	for (NSDictionary* i in msgs)
+    	{
+    		[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:i]];
+    	}
+		
+		// add new items
+    	NSInteger added = 0;
+    	NSInteger start = [_mainCount intValue];
+		count = [_elements count];
+    	for (NSInteger i = start; i < count; i++)
+        {
+			if (i == count - 1)
+			{
+				_elements[i][@"last_element"] = @YES;
+			}
+			lastMessageID = [_elements[i][@"id"] copy];
+			ChatElement* item = [[ChatElement alloc] initWithData:[_elements objectAtIndex:i]];
+			items.insert([NSIndexPath indexPathForRow:i inSection:0], item);
+			added++;
+    	}
+    	if (added > 0)
+    	{
+    		_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
+    		__block NSInteger lastIndex = [_mainCount intValue] - 1;
+    		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i){
+    			[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+    		}];
+    	}
+	});
 }
 
 - (void)updateMessage

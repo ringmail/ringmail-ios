@@ -55,8 +55,8 @@
 - (NSDictionary*)dbGetSessionData:(NSNumber*)rowid;
 - (NSArray *)dbGetSessions;
 - (NSArray *)dbGetMessages:(NSNumber *)session;
+- (NSArray *)dbGetMessages:(NSNumber *)session last:(NSNumber*)last;
 - (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid;
-- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid last:(NSNumber*)last;
 - (NSString *)dbGetMessageStatusByUUID:(NSString*)uuid;
 - (void)dbInsertMessage:(NSNumber *)session type:(NSString *)type data:(NSDictionary*)params uuid:(NSString*)uuid inbound:(BOOL)inbound url:(NSString*)msgUrl;
 - (NSNumber *)dbGetSessionUnread;

@@ -7,6 +7,7 @@
 //
 
 #import "MessageTextView.h"
+#import "UIColor+Hex.h"
 
 @implementation MessageTextView
 
@@ -28,7 +29,7 @@
     self.placeholderColor = [UIColor lightGrayColor];
     self.pastableMediaTypes = SLKPastableMediaTypeAll;
     
-    self.layer.borderColor = [UIColor colorWithRed:217.0/255.0 green:217.0/255.0 blue:217.0/255.0 alpha:1.0].CGColor;
+    self.layer.borderColor = [UIColor colorWithHex:@"#BEBEBE"].CGColor;
 }
 
 @end

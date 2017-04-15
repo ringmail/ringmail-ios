@@ -20,7 +20,7 @@
 	if ([data[@"direction"] isEqualToString:@"inbound"])
 	{
 	    NSDictionary *attrsDictionary = @{
-            NSFontAttributeName: [UIFont systemFontOfSize:14],
+            NSFontAttributeName: [UIFont systemFontOfSize:15],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#222222"],
         };
 		NSString* msg = data[@"body"];
@@ -28,15 +28,20 @@
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
 			attributes:@{
-				NSFontAttributeName: [UIFont systemFontOfSize:14],
+				NSFontAttributeName: [UIFont systemFontOfSize:15],
 			} context:nil];
+		
+		int msgHeight = (int)bounds.size.height;
+		int msgWidth = (int)bounds.size.width;
+		msgHeight += 1;
+		msgWidth += 1;
 		//NSLog(@"Bounds: %f %f", bounds.size.width, bounds.size.height);
 		
 		// Draw bubble
-		CGSize size = CGSizeMake((int)bounds.size.width + 20, (int)bounds.size.height + 16 + 10);
+		CGSize size = CGSizeMake((int)msgWidth + 20, (int)msgHeight + 16 + 10);
 		CGSize scaledSize = CGSizeMake((int)size.width * scale, (int)size.height * scale);
 		
-		CGSize boxSize = CGSizeMake((int)bounds.size.width + 20, (int)bounds.size.height + 16);
+		CGSize boxSize = CGSizeMake((int)msgWidth + 20, (int)msgHeight + 16);
 		CGSize boxScaledSize = CGSizeMake((int)boxSize.width * scale, (int)boxSize.height * scale);
 		
         UIGraphicsBeginImageContext(scaledSize);
@@ -61,10 +66,6 @@
 		
         UIImage *bubbleImage=UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-		
-		int msgHeight = (int)(bounds.size.height + 0.5);
-		int msgWidth = (int)(bounds.size.width + 0.5);
-		msgHeight += 1;
 		
 		res = [CKStackLayoutComponent newWithView:{} size:{
 			.width = width,
@@ -101,7 +102,7 @@
 	else
 	{
 	    NSDictionary *attrsDictionary = @{
-            NSFontAttributeName: [UIFont systemFontOfSize:14],
+            NSFontAttributeName: [UIFont systemFontOfSize:15],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#FFFFFF"],
         };
 		NSString* msg = data[@"body"];
@@ -109,15 +110,21 @@
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
 			attributes:@{
-				NSFontAttributeName: [UIFont systemFontOfSize:14],
+				NSFontAttributeName: [UIFont systemFontOfSize:15],
 			} context:nil];
-		//NSLog(@"Bounds: %f %f", bounds.size.width, bounds.size.height);
+					
+		int msgHeight = (int)bounds.size.height;
+		int msgWidth = (int)bounds.size.width;
+		msgHeight += 1;
+		msgWidth += 1;
+		
+		//NSLog(@"Bounds: %f %f", bounds.size.width, msgHeight);
 		
 		// Draw bubble
-		CGSize size = CGSizeMake((int)bounds.size.width + 20, (int)bounds.size.height + 16 + 10);
+		CGSize size = CGSizeMake((int)msgWidth + 20, (int)msgHeight + 16 + 10);
 		CGSize scaledSize = CGSizeMake((int)size.width * scale, (int)size.height * scale);
 		
-		CGSize boxSize = CGSizeMake((int)bounds.size.width + 20, (int)bounds.size.height + 16);
+		CGSize boxSize = CGSizeMake((int)msgWidth + 20, (int)msgHeight + 16);
 		CGSize boxScaledSize = CGSizeMake((int)boxSize.width * scale, (int)boxSize.height * scale);
 		
         UIGraphicsBeginImageContext(scaledSize);
@@ -187,11 +194,7 @@
     		CGImageGetDataProvider(maskRef), NULL, false);
     	CGImageRef masked = CGImageCreateWithMask([gradientImage CGImage], mask);
     	UIImage *bubbleImage = [UIImage imageWithCGImage:masked];
-		
-		int msgHeight = (int)(bounds.size.height + 0.5);
-		int msgWidth = (int)(bounds.size.width + 0.5);
-		msgHeight += 1;
-		
+
 		res = [CKStackLayoutComponent newWithView:{} size:{
 			.width = width,
 		} style: {
@@ -225,6 +228,14 @@
         		}]
     		]}
 		}];
+	}
+	if (data[@"first_element"])
+	{
+		res = [CKInsetComponent newWithInsets:{.top = 20, .bottom = 0, .left = 0, .right = 0} component:res];
+	}
+	if (data[@"last_element"])
+	{
+		res = [CKInsetComponent newWithInsets:{.top = 0, .bottom = 20, .left = 0, .right = 0} component:res];
 	}
 	ChatElementComponent* c = [super newWithComponent:res];
 	if (c)
