@@ -5,6 +5,7 @@
 
 #import "UIResponder+SLKAdditions.h"
 #import "SLKUIConstants.h"
+#import "UIColor+Hex.h"
 
 /** Feature flagged while waiting to implement a more reliable technique. */
 #define SLKBottomPanningEnabled 0
@@ -241,8 +242,12 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     if (!_textInputbar) {
         _textInputbar = [[SLKTextInputbar alloc] initWithTextViewClass:self.textViewClass];
         _textInputbar.translatesAutoresizingMaskIntoConstraints = NO;
-		[_textInputbar textView].layer.cornerRadius = 17.0;
-        
+		_textInputbar.clipsToBounds = YES;
+		_textInputbar.backgroundColor = [UIColor whiteColor];
+		_textInputbar.textView.layer.cornerRadius = 17.0f;
+		_textInputbar.textView.layer.borderWidth = 1.0f;
+		_textInputbar.textView.layer.borderColor = [UIColor colorWithHex:@"#BEBEBE"].CGColor;
+		
         [_textInputbar.leftButton addTarget:self action:@selector(didPressLeftButton:) forControlEvents:UIControlEventTouchUpInside];
         [_textInputbar.rightButton addTarget:self action:@selector(didPressRightButton:) forControlEvents:UIControlEventTouchUpInside];
         [_textInputbar.editorLeftButton addTarget:self action:@selector(didCancelTextEditing:) forControlEvents:UIControlEventTouchUpInside];

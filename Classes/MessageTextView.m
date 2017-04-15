@@ -28,8 +28,6 @@
     self.placeholder = NSLocalizedString(@"Message", nil);
     self.placeholderColor = [UIColor lightGrayColor];
     self.pastableMediaTypes = SLKPastableMediaTypeAll;
-    
-    self.layer.borderColor = [UIColor colorWithHex:@"#BEBEBE"].CGColor;
 }
 
 @end
