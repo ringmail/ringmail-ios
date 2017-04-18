@@ -33,6 +33,14 @@ extern NSString *const kRgContactRefresh;
 extern NSString *const kRgSelf;
 extern NSString *const kRgSelfName;
 
+extern NSString *const kRgNavBarViewChange;
+extern NSString *const kRgHashtagDirectoryUpdatePath;
+extern NSString *const kRgSegmentControl;
+extern NSString *const kRgCurrentLocation;
+extern NSString *const kRgGoogleSignInStart;
+extern NSString *const kRgGoogleSignInComplete;
+extern NSString *const kRgGoogleSignInVerifed;
+
 
 @interface RgManager : NSObject
 

@@ -32,6 +32,14 @@ NSString *const kRgContactRefresh = @"kRgContactRefresh";
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
 
+NSString *const kRgNavBarViewChange = @"kRgNavBarViewChange";
+NSString *const kRgHashtagDirectoryUpdatePath = @"kRgHashtagDirectoryUpdatePath";
+NSString *const kRgSegmentControl = @"kRgSegmentControl";
+NSString *const kRgCurrentLocation = @"kRgCurrentLocation";
+NSString *const kRgGoogleSignInStart = @"kRgGoogleSignInStart";
+NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
+NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
+
 static LevelDB* theConfigDatabase = nil;
 
 @implementation RgManager

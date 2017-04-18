@@ -115,7 +115,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSegControl)
-                                                 name:@"RgSegmentControl"
+                                                 name:kRgSegmentControl
                                                object:nil];
     
 	// technically not needed, but older versions of linphone had this button
@@ -166,7 +166,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
-    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
+    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
 
 }
 
@@ -178,8 +178,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 //	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil]; //mrkbxt - commented out to allow maincollectionview update after phone call.
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
     /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
-    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
+    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
     
     self.visible = NO;
 }
@@ -528,7 +528,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object  change:(NSDictionary *)change context:(void *)context
 {
-    if([keyPath isEqualToString:@"currentLocation"])
+    if([keyPath isEqualToString:kRgCurrentLocation])
         [[RgLocationManager sharedInstance] stopUpdatingLocation];
 }
 

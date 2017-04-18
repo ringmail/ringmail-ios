@@ -143,7 +143,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(googleSignInVerifedEvent:)
-                                                 name:@"googleSignInVerifed"
+                                                 name:kRgGoogleSignInVerifed
                                                object:nil];
 }
 
@@ -151,7 +151,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneRegistrationUpdate object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgAttemptVerify object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInVerifed" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInVerifed object:nil];
 }
 
 #pragma mark -
@@ -1063,11 +1063,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)signIn:(GIDSignIn *)signIn presentViewController:(UIViewController *)viewController {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"googleSignInStart" object:self userInfo:@{@"vc": viewController}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgGoogleSignInStart object:self userInfo:@{@"vc": viewController}];
 }
 
 - (void)signIn:(GIDSignIn *)signIn dismissViewController:(UIViewController *)viewController {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"googleSignInComplete" object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgGoogleSignInComplete object:self userInfo:nil];
 }
 
 - (void)googleSignInVerifedEvent:(NSNotification *)notif

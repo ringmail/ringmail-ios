@@ -50,14 +50,14 @@ int backState = 0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateLabelsBtns:)
-                                                 name:@"navBarViewChange"
+                                                 name:kRgNavBarViewChange
                                                object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"navBarViewChange" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgNavBarViewChange object:nil];
     
 }
 
@@ -98,7 +98,7 @@ int backState = 0;
     double segFrameHeight = 27;
     double segFrameWidth = 170;
     double segXShifted = segFrame.origin.x;
-
+    
     if (widthIn == 320) {
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_5_blue@2x.jpg"];
         segFrameHeight = 24;
@@ -215,7 +215,7 @@ int backState = 0;
 #pragma mark - Action Functions
 
 - (IBAction)onBackClick:(id)event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{@"category_id": @"0",}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{@"category_id": @"0",}];
 }
 
 
@@ -225,7 +225,7 @@ int backState = 0;
     
     NSDictionary* dict = [NSDictionary dictionaryWithObject: [NSString stringWithFormat: @"%ld", s.selectedSegmentIndex] forKey:@"segIndex"];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgSegmentControl" object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSegmentControl object:nil userInfo:dict];
     
 }
 

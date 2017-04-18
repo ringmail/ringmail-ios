@@ -211,12 +211,12 @@ static RootViewManager *rootViewManagerInstance = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleGoogleSignInStartEvent:)
-                                                 name:@"googleSignInStart"
+                                                 name:kRgGoogleSignInStart
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleGoogleSignInCompleteEvent)
-                                                 name:@"googleSignInComplete"
+                                                 name:kRgGoogleSignInComplete
                                                object:nil];
     
 	[self.view addSubview:mainViewController.view];
@@ -225,8 +225,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInStart" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInComplete" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInStart object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInComplete object:nil];
 }
 
 
@@ -552,7 +552,7 @@ static RootViewManager *rootViewManagerInstance = nil;
     dict[@"header"] = vc.name;
     dict[@"lSeg"] = vc.segLeft;
     dict[@"rSeg"] = vc.segRight;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarViewChange" object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:nil userInfo:dict];
 }
 
 - (void)fullScreen:(BOOL)enabled {
