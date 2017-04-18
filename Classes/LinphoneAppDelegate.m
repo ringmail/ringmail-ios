@@ -231,6 +231,15 @@
 	}
 	/*if (bgStartId != UIBackgroundTaskInvalid)
 		[[UIApplication sharedApplication] endBackgroundTask:bgStartId];*/
+    
+    
+    // Google Sign-In
+    NSError* configureError;
+    [[GGLContext sharedInstance] configureWithError: &configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    
+    [GIDSignIn sharedInstance].delegate = self;
+    [[GIDSignIn sharedInstance] signInSilently];
 
 	return YES;
 }
@@ -250,6 +259,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+        
 	LOGI(@"%@ - url = %ld", NSStringFromSelector(_cmd), [url absoluteString]);
 	NSString *scheme = [[url scheme] lowercaseString];
 	if ([scheme isEqualToString:@"ring"] || [scheme isEqualToString:@"ringdev"])
@@ -503,6 +513,43 @@
 
 - (void)application:(UIApplication *)application didUpdateUserActivity:(NSUserActivity *)userActivity {
 
+}
+
+#pragma mark - openURL
+
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary *)options {
+    NSLog(@"openURL: %@", url);
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+}
+
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:sourceApplication
+                                      annotation:annotation];
+}
+
+#pragma mark - Google Sign-In
+
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    
+    if (user.userID && user.authentication.idToken)
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"googleSignInVerifed" object:user userInfo:nil];
+}
+
+- (void)signIn:(GIDSignIn *)signIn
+didDisconnectWithUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    // Perform any operations when the user disconnects from app here.
 }
 
 @end

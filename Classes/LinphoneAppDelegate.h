@@ -23,7 +23,9 @@
 
 #import "LinphoneCoreSettingsStore.h"
 
-@interface LinphoneAppDelegate : NSObject <UIApplicationDelegate,UIAlertViewDelegate,PKPushRegistryDelegate> {
+#import <Google/SignIn.h>
+
+@interface LinphoneAppDelegate : NSObject <UIApplicationDelegate,UIAlertViewDelegate,PKPushRegistryDelegate, GIDSignInDelegate> {
     @private
 	UIBackgroundTaskIdentifier bgStartId;
     BOOL startedInBackground;

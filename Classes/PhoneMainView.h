@@ -98,4 +98,9 @@
 
 - (void)promptNewOrEdit:(NSString *)address;
 
+- (void)handleGoogleSignInStartEvent:(NSNotification *) notification;;
+- (void)handleGoogleSignInCompleteEvent;
+
+
+
 @end

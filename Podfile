@@ -36,5 +36,6 @@ target 'RingMail-Dev' do
   pod 'SlackTextViewController'
   pod 'LoremIpsum'
 #  pod 'FCUUID'  # Later :)
+  pod 'Google/SignIn'
 end
 

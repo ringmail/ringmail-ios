@@ -209,9 +209,28 @@ static RootViewManager *rootViewManagerInstance = nil;
 											 selector:@selector(batteryLevelChanged:)
 												 name:UIDeviceBatteryLevelDidChangeNotification
 											   object:nil];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleGoogleSignInStartEvent:)
+                                                 name:@"googleSignInStart"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleGoogleSignInCompleteEvent)
+                                                 name:@"googleSignInComplete"
+                                               object:nil];
+    
 	[self.view addSubview:mainViewController.view];
 }
+
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInStart" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInComplete" object:nil];
+}
+
+
 
 - (void)setVolumeHidden:(BOOL)hidden {
 	// sometimes when placing a call, the volume view will appear. Inserting a
@@ -804,6 +823,21 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 - (void)incomingCallDeclined:(LinphoneCall *)call {
 	linphone_core_terminate_call([LinphoneManager getLc], call);
+}
+
+
+#pragma mark - Google Sign in
+
+- (void)handleGoogleSignInStartEvent:(NSNotification *) notification {
+    
+    NSDictionary* userInfo = notification.userInfo;
+    UIViewController* vc = (UIViewController*)userInfo[@"vc"];
+    
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)handleGoogleSignInCompleteEvent {
+     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
