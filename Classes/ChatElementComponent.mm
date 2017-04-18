@@ -11,7 +11,7 @@
 	NSDictionary* data = elem.data;
 	CKComponentScope scope(self, data[@"uuid"]);
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-	
+	CGFloat fontSize = 16;
 	CGFloat scale = [UIScreen mainScreen].scale;
 	
 	int maxBubbleWidth = (int)((width - (12 * scale)) / 3) * 2;
@@ -20,7 +20,7 @@
 	if ([data[@"direction"] isEqualToString:@"inbound"])
 	{
 	    NSDictionary *attrsDictionary = @{
-            NSFontAttributeName: [UIFont systemFontOfSize:15],
+            NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#222222"],
         };
 		NSString* msg = data[@"body"];
@@ -28,7 +28,7 @@
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
 			attributes:@{
-				NSFontAttributeName: [UIFont systemFontOfSize:15],
+				NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
 			} context:nil];
 		
 		int msgHeight = (int)bounds.size.height;
@@ -102,7 +102,7 @@
 	else
 	{
 	    NSDictionary *attrsDictionary = @{
-            NSFontAttributeName: [UIFont systemFontOfSize:15],
+            NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#FFFFFF"],
         };
 		NSString* msg = data[@"body"];
@@ -110,7 +110,7 @@
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
 			attributes:@{
-				NSFontAttributeName: [UIFont systemFontOfSize:15],
+				NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
 			} context:nil];
 					
 		int msgHeight = (int)bounds.size.height;

@@ -45,10 +45,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"MessageViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:YES
-                                                                 navBar:@"UINavBar"
-																 tabBar:@"UIMainBar"
+                                                                 navBar:@"UIChatNavBar"
+																 tabBar:nil
                                                           navBarEnabled:YES
-														  tabBarEnabled:YES
+														  tabBarEnabled:NO
 															 fullscreen:NO
 														  landscapeMode:[LinphoneManager runningOnIpad]
 														   portraitMode:YES

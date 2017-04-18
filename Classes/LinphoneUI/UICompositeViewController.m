@@ -636,6 +636,11 @@
         tabFrame.origin.y = viewFrame.size.height - tabFrame.size.height;
         tabFrame.size.width = viewFrame.size.width;
 	}
+	else
+	{
+		tabFrame.origin.y = viewFrame.size.height;
+		tabFrame.size.height = 0;
+	}
     
     // Resize NavBar (top bar)
     CGRect navFrame = navBarView.frame;

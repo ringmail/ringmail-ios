@@ -247,6 +247,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 		_textInputbar.textView.layer.cornerRadius = 17.0f;
 		_textInputbar.textView.layer.borderWidth = 1.0f;
 		_textInputbar.textView.layer.borderColor = [UIColor colorWithHex:@"#BEBEBE"].CGColor;
+		_textInputbar.textView.font = [UIFont systemFontOfSize:16.0];
 		
         [_textInputbar.leftButton addTarget:self action:@selector(didPressLeftButton:) forControlEvents:UIControlEventTouchUpInside];
         [_textInputbar.rightButton addTarget:self action:@selector(didPressRightButton:) forControlEvents:UIControlEventTouchUpInside];

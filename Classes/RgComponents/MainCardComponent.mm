@@ -36,15 +36,20 @@
     NSLocale *locale = [NSLocale currentLocale];
     [dateFormatter setLocale:locale];
     [dateFormatter setDoesRelativeDateFormatting:YES];
-    
-    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-    latest = [dateFormatter stringFromDate:dateLatest];
-    
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
-    latest = [latest stringByAppendingString:@": "];
-    latest = [latest stringByAppendingString:[dateFormatter stringFromDate:dateLatest]];
+	
+	BOOL today = [[NSCalendar currentCalendar] isDateInToday:dateLatest];
+	if (today)
+	{
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+        latest = [dateFormatter stringFromDate:dateLatest];
+	}
+	else
+	{
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        latest = [dateFormatter stringFromDate:dateLatest];
+	}
 	
 	NSString *msg = @"";
 	BOOL append_duration = NO;
@@ -52,14 +57,6 @@
 	if ([[data objectForKey:@"last_event"] isEqualToString:@"chat"] && (![[data objectForKey:@"last_message"] isEqual:[NSNull null]]))
 	{
 		msg = [data objectForKey:@"last_message"];
-		if ([[data objectForKey:@"msg_inbound"] boolValue])
-		{
-			latest = [NSString stringWithFormat:@"Received %@", latest];
-		}
-		else
-		{
-			latest = [NSString stringWithFormat:@"Sent %@", latest];
-		}
 		if ([data[@"msg_type"] isEqualToString:@"image/png"])
 		{
 			NSLog(@"Image message: %@", data);
@@ -79,13 +76,11 @@
 				msg = @"Call ";
 				append_duration = YES;
 			}
-			latest = [NSString stringWithFormat:@"Inbound %@", latest];
 		}
 		else
 		{
 			msg = @"Call ";
 			append_duration = YES;
-			latest = [NSString stringWithFormat:@"Outbound %@", latest];
 		}
 	}
 	else
@@ -255,7 +250,7 @@
                     ]},
                     {[CKInsetComponent newWithInsets:{.left = 6, .right = 20, .top = 3, .bottom = 0} component:
                         [CKLabelComponent newWithLabelAttributes:{
-    							.string = @"TODAY >",
+    							.string = latest,
     							.font = [UIFont systemFontOfSize:9 weight:UIFontWeightBold],
     							.alignment = NSTextAlignmentLeft,
     						}
@@ -331,7 +326,7 @@
                 ]},
                 {[CKInsetComponent newWithInsets:{.left = 6, .right = 20, .top = 3, .bottom = 0} component:
                     [CKLabelComponent newWithLabelAttributes:{
-							.string = @"TODAY >",
+							.string = latest,
 							.font = [UIFont systemFontOfSize:9 weight:UIFontWeightBold],
 							.alignment = NSTextAlignmentLeft,
 						}

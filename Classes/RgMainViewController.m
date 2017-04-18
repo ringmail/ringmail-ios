@@ -49,6 +49,7 @@
 @synthesize sendViewController;
 @synthesize backgroundImageView;
 @synthesize sendInfo;
+@synthesize isEditing;
 
 #pragma mark - Lifecycle Functions
 
@@ -60,6 +61,7 @@
 		self->sendInfo = [NSMutableDictionary dictionaryWithDictionary:@{
 			@"media": [self getMediaThumbnails:[self getLatestMedia]],
 		}];
+		self->isEditing = FALSE;
 	}
 	return self;
 }
@@ -123,6 +125,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:@"RgSegmentControl"
                                                object:nil];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+	
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
 	// xcode would result in the callbutton being disabled all the time.
@@ -183,6 +188,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
     /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+	
     [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
     
     self.visible = NO;
@@ -522,6 +530,32 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     if([keyPath isEqualToString:@"currentLocation"])
         [[RgLocationManager sharedInstance] stopUpdatingLocation];
+}
+
+#pragma mark - Keyboard Events
+
+- (void)keyboardWillShow:(NSNotification*)event
+{
+	self.isEditing = YES;
+}
+
+- (void)keyboardWillHide:(NSNotification*)event
+{
+	self.isEditing = NO;
+}
+
+#pragma mark - Tap Recognizer
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	if (self.isEditing)
+	{
+        UITouch *touch = [touches anyObject];
+        if (![touch.view isMemberOfClass:[UITextField class]])
+    	{
+    		[touch.view endEditing:YES];
+        }
+	}
 }
 
 #pragma mark - Photos & Videos

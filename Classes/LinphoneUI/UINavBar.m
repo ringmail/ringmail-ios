@@ -18,7 +18,7 @@ static NSString *const kAppearAnimation = @"appear";
 static NSString *const kDisappearAnimation = @"disappear";
 
 typedef enum {
-    Ring, Explore, Recents, Contacts, Settings, HTagCard
+    Ring, Explore, Recents, Contacts, Settings, HTagCard, Chat
 } NavView;
 
 int backState = 0;
