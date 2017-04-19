@@ -239,7 +239,6 @@
     NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
     
     [GIDSignIn sharedInstance].delegate = self;
-    [[GIDSignIn sharedInstance] signInSilently];
 
 	return YES;
 }

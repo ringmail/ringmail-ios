@@ -129,7 +129,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.googleSignInButton setStyle:kGIDSignInButtonStyleWide];
     [self.googleSignUpButton setStyle:kGIDSignInButtonStyleWide];
     
-//    [[GIDSignIn sharedInstance] signOut];  //mrkbxt
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(registrationUpdateEvent:)
@@ -293,12 +292,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     {
         LevelDB* cfg = [RgManager configDatabase];
         
-        NSString *email_gid = [[cfg objectForKey:@"ringmail_login"] stringByMatching:@"(.*)_gid" capture:1];
-        
-        if (email_gid)
-            [verifyEmailLabel setText:email_gid];
-        else
-            [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
+        [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
     }
     else if (view == validatePhoneView)
     {
@@ -1075,7 +1069,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     GIDGoogleUser *obj = notif.object;
 //    NSString *userId = obj.userID;
     NSString *idToken = obj.authentication.idToken;
-    NSString *login = [NSString stringWithFormat:@"%@%@", obj.profile.email, @"_gid"];
+    NSString *login = [NSString stringWithFormat:@"%@", obj.profile.email];
     
     if (currentView == connectAccountView)
     {
@@ -1087,10 +1081,12 @@ static UICompositeViewDescription *compositeDescription = nil;
                 // Store login and password
                 LevelDB* cfg = [RgManager configDatabase];
                 [cfg setObject:login forKey:@"ringmail_login"];
-                [cfg setObject:idToken forKey:@"ringmail_password"];
                 [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
                 [cfg setObject:@"1" forKey:@"ringmail_verify_phone"];
                 [cfg setObject:[res objectForKey:@"phone"] forKey:@"ringmail_phone"];
+                NSString *newPW = [res objectForKey:@"ringmail_password"];
+                if ([newPW length] != 0)
+                    [cfg setObject:newPW forKey:@"ringmail_password"];
                 NSLog(@"RingMail Logged In - Config: %@", cfg);
                 [[LinphoneManager instance] setRingLogin:login];
                 [[LinphoneManager instance] startLinphoneCore];
@@ -1112,7 +1108,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                     {
                         LevelDB* cfg = [RgManager configDatabase];
                         [cfg setObject:login forKey:@"ringmail_login"];
-                        [cfg setObject:idToken forKey:@"ringmail_password"];
+                        [cfg setObject:@"" forKey:@"ringmail_password"];
                         [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
                         [self changeView:validateAccountView back:FALSE animation:TRUE];
                     }

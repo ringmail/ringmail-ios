@@ -492,6 +492,7 @@ static LevelDB* theConfigDatabase = nil;
     LevelDB* cfg = [RgManager configDatabase];
     NSString* login = [cfg objectForKey:@"ringmail_login"];
     NSString* password = [cfg objectForKey:@"ringmail_password"];
+    
     if (
         login != nil && (! [login isEqualToString:@""]) &&
         password != nil && (! [password isEqualToString:@""])

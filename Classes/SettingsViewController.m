@@ -351,12 +351,7 @@
     if ([viewController.title isEqualToString:@"Settings"])
     {
         NSString *ringLogin = [[LinphoneManager instance] ringLogin];
-        
-        NSString *email_gid = [ringLogin stringByMatching:@"(.*)_gid" capture:1];
-        
-        if (email_gid)
-            ringLogin = email_gid;
-        
+                
         NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
         if (! [bundleIdentifier isEqualToString:@"com.ringmail.phone"])
         {
