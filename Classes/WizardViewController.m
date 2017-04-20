@@ -1054,6 +1054,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
     //    [myActivityIndicator stopAnimating];
+    [waitView setHidden:FALSE];
 }
 
 - (void)signIn:(GIDSignIn *)signIn presentViewController:(UIViewController *)viewController {
@@ -1096,6 +1097,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                               domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                 [RgManager updateCredentials:res];
                 
+                [waitView setHidden:TRUE];
                 [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
             }
             else
