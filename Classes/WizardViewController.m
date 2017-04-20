@@ -1121,6 +1121,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                        delegate:nil
                                                               cancelButtonTitle:@"OK"
                                                               otherButtonTitles:nil];
+                        [waitView setHidden:TRUE];
                         [alert show];
                     }
                 }
@@ -1136,6 +1137,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                       block:^{
                                           [waitView setHidden:true];
                                       }];
+            [waitView setHidden:TRUE];
             [alert show];
             
         }];
@@ -1143,6 +1145,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     else if (currentView == createAccountView)
     {
+        [waitView setHidden:TRUE];
+        
         [WizardViewController findTextField:ViewElement_Username view:contentView].text = obj.profile.email;
         [WizardViewController findTextField:ViewElement_Username view:contentView].userInteractionEnabled = false;
         
