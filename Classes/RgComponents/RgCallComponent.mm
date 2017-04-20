@@ -115,7 +115,7 @@ static RgCallDuration* globalDuration = nil;
 					]},
 				}]},
 				{[CKStackLayoutComponent newWithView:{} size:{
-					.height = 24,
+					.height = 40,
 				} style:{
 					.direction = CKStackLayoutDirectionHorizontal,
 					.alignItems = CKStackLayoutAlignItemsStretch
@@ -155,14 +155,6 @@ static RgCallDuration* globalDuration = nil;
                                                ]},
                     } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onToggleNumberPad:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
                       ]},
-                    {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-					{[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
-						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-							{UIControlStateNormal,[UIImage imageNamed:(
-								[[call.data objectForKey:@"mute"] boolValue]
-							) ? @"icon_mute_call-x.png" : @"icon_mute_call.png"]},
-						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onMutePressed:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
-					]},
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 					{[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
 						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
@@ -171,6 +163,14 @@ static RgCallDuration* globalDuration = nil;
 							) ? @"icon_speaker_call-x.png" : @"icon_speaker_call.png"]},
 						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onSpeakerPressed:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
 					]},
+                    {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+                    {[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
+                      [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                        {UIControlStateNormal,[UIImage imageNamed:(
+                                                                   [[call.data objectForKey:@"mute"] boolValue]
+                                                                   ) ? @"icon_mute_call-x.png" : @"icon_mute_call.png"]},
+                    } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onMutePressed:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
+                      ]},
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 				}]},
 //                {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
