@@ -18,6 +18,10 @@ static RgCallDuration* globalDuration = nil;
 
 + (instancetype)newWithCall:(RgCall *)call context:(RgCallContext *)context
 {
+    // mrkbxt - modified newWIthcall signature (call to call2) and RGMainViewController's viewDidAppear to force change to this view
+//    NSDictionary *testData = @{@"address": @"", @"label": @"Testy Tester", @"height": @"0", @"video": @"0", @"dialpad": @"0", @"mute": @"0", @"speaker": @"0"};
+//    RgCall *call = [[RgCall alloc] initWithData:testData];
+    
 	NSLog(@"Call Data: %@", [call data]);
 	CKComponentScope scope(self);
 	if (! [call.data objectForKey:@"address"])
@@ -37,67 +41,58 @@ static RgCallDuration* globalDuration = nil;
 			}
 			children:{
 				// Header
-				{[CKStackLayoutComponent newWithView:{
-					[UIView class],
-					{
-						{@selector(setBackgroundColor:), [UIColor colorWithHex:@"#F4F4F4"]},
-					}
-				} size:{
-					.height = 50
-				} style:{
-					.direction = CKStackLayoutDirectionHorizontal,
-					.alignItems = CKStackLayoutAlignItemsStretch
-				}
-				children:{
-					{[CKInsetComponent newWithInsets:{.top = INFINITY, .left = 8, .bottom = INFINITY} component:
-						[CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_incall-arrow"]]
-					]},
-					{
-						.flexGrow = YES,
-						.component = [CKInsetComponent newWithInsets:{.top = INFINITY, .left = 4, .bottom = INFINITY} component:
-							[CKInsetComponent newWithInsets:{.top = 4} component:
-								[CKLabelComponent newWithLabelAttributes:{
-									.string = [call.data objectForKey:@"address"],
-									.font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18],
-								}
-								viewAttributes:{
-									{@selector(setBackgroundColor:), [UIColor clearColor]},
-									{@selector(setUserInteractionEnabled:), @NO},
-								}
-								size:{}]
-							]
-						]
-					},
-					{[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY, .right = 16} component:
-                        [CKLabelComponent newWithLabelAttributes:{
-							.string = ([call.data[@"video"] boolValue]) ? @"Video" : @"Call",
-							.font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20],
-							.alignment = NSTextAlignmentRight,
-						}
-						viewAttributes:{
-							{@selector(setBackgroundColor:), [UIColor clearColor]},
-							{@selector(setUserInteractionEnabled:), @NO},
-						}
-						size:{}]
-					]},
-				}]},
+//				{[CKStackLayoutComponent newWithView:{
+//					[UIView class],
+//					{
+//						{@selector(setBackgroundColor:), [UIColor colorWithHex:@"#F4F4F4"]},
+//					}
+//				} size:{
+//					.height = 50
+//				} style:{
+//					.direction = CKStackLayoutDirectionHorizontal,
+//					.alignItems = CKStackLayoutAlignItemsStretch
+//				}
+//				children:{
+//					{[CKInsetComponent newWithInsets:{.top = INFINITY, .left = 8, .bottom = INFINITY} component:
+//						[CKImageComponent newWithImage:[UIImage imageNamed:@"ringmail_incall-arrow"]]
+//					]},
+//					{
+//						.flexGrow = YES,
+//						.component = [CKInsetComponent newWithInsets:{.top = INFINITY, .left = 4, .bottom = INFINITY} component:
+//							[CKInsetComponent newWithInsets:{.top = 4} component:
+//								[CKLabelComponent newWithLabelAttributes:{
+//									.string = [call.data objectForKey:@"address"],
+//									.font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18],
+//								}
+//								viewAttributes:{
+//									{@selector(setBackgroundColor:), [UIColor clearColor]},
+//									{@selector(setUserInteractionEnabled:), @NO},
+//								}
+//								size:{}]
+//							]
+//						]
+//					},
+//					{[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY, .right = 16} component:
+//                        [CKLabelComponent newWithLabelAttributes:{
+//							.string = ([call.data[@"video"] boolValue]) ? @"Video" : @"Call",
+//							.font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:20],
+//							.alignment = NSTextAlignmentRight,
+//						}
+//						viewAttributes:{
+//							{@selector(setBackgroundColor:), [UIColor clearColor]},
+//							{@selector(setUserInteractionEnabled:), @NO},
+//						}
+//						size:{}]
+//					]},
+//				}]},
 				// Call Details
 				{[CKStackLayoutComponent newWithView:{} size:{
-					.height = 50
+					.height = 70
 				} style:{
 					.direction = CKStackLayoutDirectionHorizontal,
 					.alignItems = CKStackLayoutAlignItemsStretch
 				}
-				children:{
-					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-					{[CKInsetComponent newWithInsets:{.right = 6, .top = INFINITY, .bottom = INFINITY} component:
-						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-							{UIControlStateNormal,[UIImage imageNamed:
-								[[call.data objectForKey:@"dialpad"] boolValue] ? @"ringmail_incall-dialpad.png" : @"ringmail_incall-dialpad-pressed.png"
-							]},
-						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onToggleNumberPad:) size:{} attributes:{} accessibilityConfiguration:{}]
-					]},
-				}]},
+				children:{}]},
 				{[CKStackLayoutComponent newWithView:{} size:{
 					.height = 40,
 				} style:{
@@ -108,7 +103,8 @@ static RgCallDuration* globalDuration = nil;
 					{.flexGrow = YES, .component = [CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
 						[CKLabelComponent newWithLabelAttributes:{
 							.string = [call.data objectForKey:@"label"],
-							.font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:24],
+							.font = [UIFont fontWithName:@"SFUIText-Regular" size:33],
+                            .color = [UIColor colorWithHex:@"#ffffff"],
 							.alignment = NSTextAlignmentCenter,
 						}
 						viewAttributes:{
@@ -130,7 +126,7 @@ static RgCallDuration* globalDuration = nil;
 					]},
 				}]},
 				{[CKStackLayoutComponent newWithView:{} size:{
-					.height = 180
+					.height = 200
 				} style:{
 					.direction = CKStackLayoutDirectionHorizontal,
 					.alignItems = CKStackLayoutAlignItemsStretch
@@ -152,11 +148,19 @@ static RgCallDuration* globalDuration = nil;
 				}
 				children:{
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+                    {[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
+                      [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                        {UIControlStateNormal,[UIImage imageNamed:
+                                               [[call.data objectForKey:@"dialpad"] boolValue] ? @"icon_dialpad_call-x.png" : @"icon_dialpad_call.png"
+                                               ]},
+                    } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onToggleNumberPad:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
+                      ]},
+                    {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 					{[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
 						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
 							{UIControlStateNormal,[UIImage imageNamed:(
 								[[call.data objectForKey:@"mute"] boolValue]
-							) ? @"ringmail_mic-x.png" : @"ringmail_mic.png"]},
+							) ? @"icon_mute_call-x.png" : @"icon_mute_call.png"]},
 						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onMutePressed:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
 					]},
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
@@ -164,14 +168,66 @@ static RgCallDuration* globalDuration = nil;
 						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
 							{UIControlStateNormal,[UIImage imageNamed:(
 								[[call.data objectForKey:@"speaker"] boolValue]
-							) ? @"ringmail_speaker.png" : @"ringmail_speaker-x.png"]},
+							) ? @"icon_speaker_call-x.png" : @"icon_speaker_call.png"]},
 						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onSpeakerPressed:) size:{.height = 75, .width = 75} attributes:{} accessibilityConfiguration:{}]
 					]},
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 				}]},
+//                {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+                {[CKStackLayoutComponent newWithView:{} size:{
+                    .height = 40
+                } style:{
+                    .direction = CKStackLayoutDirectionHorizontal,
+                    .alignItems = CKStackLayoutAlignItemsStretch
+                }
+                children:{
+                    {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+                    {[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
+                      [CKLabelComponent newWithLabelAttributes:{
+                            .string = @"Dial Pad",
+                            .font = [UIFont fontWithName:@"SFUIText-Medium" size:14],
+                            .color = [UIColor colorWithHex:@"#ffffff"],
+                            .alignment = NSTextAlignmentCenter,
+                        }
+                        viewAttributes:{
+                            {@selector(setBackgroundColor:), [UIColor clearColor]},
+                            {@selector(setUserInteractionEnabled:), @NO},
+                        }
+                        size:{.width = 75}]
+                      ]},
+                    {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+                    {[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
+                      [CKLabelComponent newWithLabelAttributes:{
+                            .string = @"Speaker",
+                            .font = [UIFont fontWithName:@"SFUIText-Medium" size:14],
+                            .color = [UIColor colorWithHex:@"#ffffff"],
+                            .alignment = NSTextAlignmentCenter,
+                        }
+                        viewAttributes:{
+                            {@selector(setBackgroundColor:), [UIColor clearColor]},
+                            {@selector(setUserInteractionEnabled:), @NO},
+                        }
+                        size:{.width = 75}]
+                      ]},
+                    {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+                    {[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
+                      [CKLabelComponent newWithLabelAttributes:{
+                            .string = @"Mute",
+                            .font = [UIFont fontWithName:@"SFUIText-Medium" size:14],
+                            .color = [UIColor colorWithHex:@"#ffffff"],
+                            .alignment = NSTextAlignmentCenter,
+                        }
+                        viewAttributes:{
+                            {@selector(setBackgroundColor:), [UIColor clearColor]},
+                            {@selector(setUserInteractionEnabled:), @NO},
+                        }
+                        size:{.width = 75}]
+                      ]},
+                    {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+                }]},
 				{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 				{[CKStackLayoutComponent newWithView:{} size:{
-					.height = 100
+					.height = 60
 				} style:{
 					.direction = CKStackLayoutDirectionHorizontal,
 					.alignItems = CKStackLayoutAlignItemsStretch
@@ -180,18 +236,24 @@ static RgCallDuration* globalDuration = nil;
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 					{[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
 						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-							{UIControlStateNormal,[UIImage imageNamed:@"ringmail_endcall.png"]},
+							{UIControlStateNormal,[UIImage imageNamed:@"button_hangup_call.png"]},
 						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(onHangupPressed:) size:{} attributes:{} accessibilityConfiguration:{}]
 					]},
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 				}]},
+                {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+                {[CKStackLayoutComponent newWithView:{} size:{
+                    .height = 35
+                } style:{
+                    .direction = CKStackLayoutDirectionHorizontal,
+                    .alignItems = CKStackLayoutAlignItemsStretch
+                }
+                children:{}]},
 			}]
-			background:[CKComponent newWithView:{
-				[UIView class],
-				{
-					{@selector(setBackgroundColor:), [UIColor colorWithHex:@"#e2e4e7"]},
-				}
-			} size:{}]
+			background:
+         [CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
+          [CKImageComponent newWithImage:[UIImage imageNamed:@"background_call.png"]]
+          ]
 		]
 	];
     return c;
