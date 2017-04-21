@@ -1088,7 +1088,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 NSString *newPW = [res objectForKey:@"ringmail_password"];
                 if ([newPW length] != 0)
                     [cfg setObject:newPW forKey:@"ringmail_password"];
-                NSLog(@"RingMail Logged In - Config: %@", cfg);
+                 NSLog(@"RingMail Logged In - Config: %@", cfg);
                 [[LinphoneManager instance] setRingLogin:login];
                 [[LinphoneManager instance] startLinphoneCore];
                 [self reset];
@@ -1141,7 +1141,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [alert show];
             
         }];
-        
+    
     }
     else if (currentView == createAccountView)
     {
@@ -1156,7 +1156,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         NSMutableString *randomString = [NSMutableString stringWithCapacity: 64];
         for (int i = 0; i < 64; i++) {
-            [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+            [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform(4294967291) % [letters length]]];
         }
 //        NSLog(@"%@",randomString);
         
