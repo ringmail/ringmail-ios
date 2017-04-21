@@ -40,6 +40,7 @@ extern NSString *const kRgCurrentLocation;
 extern NSString *const kRgGoogleSignInStart;
 extern NSString *const kRgGoogleSignInComplete;
 extern NSString *const kRgGoogleSignInVerifed;
+extern NSString *const kRgGoogleSignInError;
 
 
 @interface RgManager : NSObject

@@ -91,5 +91,6 @@
 - (IBAction)onRegisterClick:(id)sender;
 
 - (void)googleSignInVerifedEvent:(NSNotification *)notif;
+- (void)googleSignInErrorEvent:(NSNotification *)notif;
 
 @end

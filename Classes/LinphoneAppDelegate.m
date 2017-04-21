@@ -543,6 +543,8 @@ didSignInForUser:(GIDGoogleUser *)user
     
     if (user.userID && user.authentication.idToken)
         [[NSNotificationCenter defaultCenter] postNotificationName:kRgGoogleSignInVerifed object:user userInfo:nil];
+    else if (error)
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgGoogleSignInError object:user userInfo:nil];
 }
 
 - (void)signIn:(GIDSignIn *)signIn

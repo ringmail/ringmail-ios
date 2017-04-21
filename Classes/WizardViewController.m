@@ -144,6 +144,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(googleSignInVerifedEvent:)
                                                  name:kRgGoogleSignInVerifed
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(googleSignInErrorEvent:)
+                                                 name:kRgGoogleSignInError
+                                               object:nil];
 }
 
 - (void)viewDidUnload {
@@ -151,6 +155,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneRegistrationUpdate object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgAttemptVerify object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInVerifed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInError object:nil];
 }
 
 #pragma mark -
@@ -1158,13 +1163,18 @@ static UICompositeViewDescription *compositeDescription = nil;
         for (int i = 0; i < 64; i++) {
             [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform(4294967291) % [letters length]]];
         }
-//        NSLog(@"%@",randomString);
+//        NSLog(@"random: %@",randomString);
         
         [WizardViewController findTextField:ViewElement_Password view:contentView].text = randomString;
         [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = true;
         passwordLabel.hidden = true;
         _googleSignUpButton.hidden = true;
     }
+}
+
+- (void)googleSignInErrorEvent:(NSNotification *)notif
+{
+    [waitView setHidden:TRUE];
 }
 
 @end

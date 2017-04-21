@@ -39,6 +39,7 @@ NSString *const kRgCurrentLocation = @"kRgCurrentLocation";
 NSString *const kRgGoogleSignInStart = @"kRgGoogleSignInStart";
 NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
 NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
+NSString *const kRgGoogleSignInError = @"kRgGoogleSignInError";
 
 static LevelDB* theConfigDatabase = nil;
 
