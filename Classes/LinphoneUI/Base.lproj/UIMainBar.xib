@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -159,7 +159,7 @@
                     </connections>
                 </button>
                 <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37" userLabel="chatNotificationView">
-                    <rect key="frame" x="227.5" y="4" width="21" height="21"/>
+                    <rect key="frame" x="134.5" y="-10" width="21" height="21"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="chatNotificationImage">
                             <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
@@ -205,11 +205,11 @@
                 <constraint firstItem="9" firstAttribute="leading" secondItem="8" secondAttribute="trailing" id="RgZ-mV-2JP"/>
                 <constraint firstItem="7" firstAttribute="width" secondItem="5" secondAttribute="width" id="btW-Sz-eAg"/>
                 <constraint firstItem="9" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="cSF-e7-od4"/>
-                <constraint firstItem="7" firstAttribute="top" secondItem="37" secondAttribute="bottom" constant="-25" id="h7J-0H-Hrh"/>
+                <constraint firstItem="37" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" constant="-10" id="fnS-3q-aCo"/>
                 <constraint firstItem="5" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="hII-WP-dg2"/>
                 <constraint firstItem="5" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="l2M-G1-gRS"/>
+                <constraint firstItem="37" firstAttribute="top" secondItem="6" secondAttribute="top" constant="-10" id="mYA-0V-WJC"/>
                 <constraint firstItem="8" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="qLk-is-ybi"/>
-                <constraint firstItem="37" firstAttribute="leading" secondItem="7" secondAttribute="trailing" constant="-21" id="xxW-58-vlL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
