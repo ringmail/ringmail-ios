@@ -46,6 +46,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <
 /** RingMail */
 @property (nonatomic, retain) ChatRoomCollectionViewController* chatRoom;
 @property (nonatomic, retain) UIImageView* backgroundImageView;
+@property (nonatomic, retain) UICollectionViewLayout* currentLayout;
 
 /** The main collection view managed by the controller object. Not nil if the controller is initialised with -initWithCollectionViewLayout: */
 @property (nonatomic, readonly) UICollectionView *_Nullable collectionView;

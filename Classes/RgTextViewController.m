@@ -63,6 +63,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 @synthesize autoCompleting = _autoCompleting;
 @synthesize scrollViewProxy = _scrollViewProxy;
 @synthesize presentedInPopover = _presentedInPopover;
+@synthesize currentLayout = _currentLayout;
 
 #pragma mark - Initializer
 
@@ -73,6 +74,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
     if (self = [super initWithNibName:nil bundle:nil])
     {
+		self.currentLayout = layout;
         self.scrollViewProxy = [self collectionViewWithLayout:layout];
         [self slk_commonInit];
     }
@@ -127,6 +129,30 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+	
+	NSNumber* threadID = [[LinphoneManager instance] chatSession];
+	if (! [threadID isEqualToNumber:self.chatRoom.chatThreadID])
+	{
+		NSLog(@"%s Change chat room", __PRETTY_FUNCTION__);
+		[_chatRoom removeFromParentViewController];
+		_chatRoom = nil;
+		[_scrollViewProxy removeFromSuperview];
+		_scrollViewProxy = nil;
+		_collectionView = nil;
+		[self setScrollViewProxy:[self collectionViewWithLayout:_currentLayout]];
+		
+		CGFloat height = [self slk_appropriateScrollViewHeight];
+		CGRect scrollFrame = [_scrollViewProxy frame];
+		scrollFrame.size.height = height;
+		[_scrollViewProxy setFrame:scrollFrame];
+		
+		[self.view insertSubview:_scrollViewProxy belowSubview:self.autoCompletionView];
+    	[self addChildViewController:_chatRoom];
+        [_chatRoom didMoveToParentViewController:self];
+		
+		[NSLayoutConstraint deactivateConstraints:self.view.constraints];
+		[self slk_setupViewConstraints];
+	}
     
     // Invalidates this flag when the view appears
     self.textView.didNotResignFirstResponder = NO;
@@ -2131,7 +2157,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     
     [super updateViewConstraints];
 }
-
 
 #pragma mark - Keyboard Command registration
 
