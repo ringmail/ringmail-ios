@@ -656,8 +656,9 @@
     }
     else
     {
-        int origin = IPHONE_STATUSBAR_HEIGHT;
-        contentFrame.origin.y = origin;
+//        int origin = IPHONE_STATUSBAR_HEIGHT;
+//        contentFrame.origin.y = origin;
+         contentFrame.origin.y = 0;
        	contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
     }
     if (currentViewDescription.fullscreen) {
@@ -668,7 +669,7 @@
         navFrame.origin.y = viewFrame.size.height;
 		tabFrame.origin.y = viewFrame.size.height;
 	}
-
+    
 	// Set frames
 	[contentView setFrame:contentFrame];
 	[self.contentViewController.view setFrame:[contentView bounds]];
