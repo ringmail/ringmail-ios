@@ -24,6 +24,7 @@
 #import "TPMultiLayoutViewController.h"
 
 #import "UINavBar.h"
+#import "UIChatNavBar.h"
 
 @interface UICompositeViewDescription: NSObject{
 }

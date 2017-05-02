@@ -25,12 +25,15 @@
 #import "RegexKitLite/RegexKitLite.h"
 #import "NBPhoneNumberUtil.h"
 #import "NBPhoneNumber.h"
+#import <Google/SignIn.h>
+#include <stdlib.h>
 
 @interface WizardViewController : TPMultiLayoutViewController
 <UITextFieldDelegate,
     UICompositeViewDelegate,
     UIGestureRecognizerDelegate,
-    UIAlertViewDelegate>
+    UIAlertViewDelegate,
+    GIDSignInUIDelegate>
 {
     @private
     UITextField *activeTextField;
@@ -67,6 +70,11 @@
 @property (nonatomic, strong) IBOutlet UILabel *verifyEmailLabel;
 @property (nonatomic, strong) IBOutlet UILabel *verifyPhoneLabel;
 
+@property (nonatomic, strong) IBOutlet UILabel *passwordLabel;
+
+@property(weak, nonatomic) IBOutlet GIDSignInButton *googleSignInButton;
+@property(weak, nonatomic) IBOutlet GIDSignInButton *googleSignUpButton;
+
 - (void)reset;
 - (void)startWizard;
 - (void)fillDefaultValues;
@@ -81,5 +89,7 @@
 - (IBAction)onResendPhoneClick:(id)sender;
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
+
+- (void)googleSignInVerifedEvent:(NSNotification *)notif;
 
 @end

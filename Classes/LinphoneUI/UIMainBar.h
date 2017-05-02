@@ -23,21 +23,21 @@
 @interface UIMainBar : TPMultiLayoutViewController {
 }
 
-@property (nonatomic, strong) IBOutlet UIButton* historyButton;
-@property (nonatomic, strong) IBOutlet UIButton* contactsButton;
-@property (nonatomic, strong) IBOutlet UIButton* dialerButton;
-@property (nonatomic, strong) IBOutlet UIButton* settingsButton;
 @property (nonatomic, strong) IBOutlet UIButton* hashtagButton;
+@property (nonatomic, strong) IBOutlet UIButton* messagesButton;
+@property (nonatomic, strong) IBOutlet UIButton* ringmailButton;
+@property (nonatomic, strong) IBOutlet UIButton* contactsButton;
+@property (nonatomic, strong) IBOutlet UIButton* settingsButton;
 @property (nonatomic, strong) IBOutlet UIView *chatNotificationView;
 @property (nonatomic, strong) IBOutlet UILabel *chatNotificationLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *logoView;
 @property (nonatomic, strong) IBOutlet UIImageView* background;
 
--(IBAction) onHistoryClick: (id) event;
+-(IBAction) onExploreClick: (id) event;
+-(IBAction) onMessagesClick: (id) event;
+-(IBAction) onRingMailClick: (id) event;
 -(IBAction) onContactsClick: (id) event;
--(IBAction) onDialerClick: (id) event;
 -(IBAction) onSettingsClick: (id) event;
--(IBAction) onHashtagClick: (id) event;
 
 - (void)setInstance:(int)widthIn;
 

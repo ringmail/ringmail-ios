@@ -27,11 +27,13 @@
 
 /* These imports are here so that we can import PhoneMainView.h without bothering to import all the rest of the view headers */
 
+#import "ChatViewController.h"
+#import "MessageViewController.h"
 #import "IncomingCallViewController.h"
-#import "ChatRoomViewController.h"
+#import "ChatRoomViewController.h" // Remove soon!
 #import "RgMainViewController.h"
 #import "RgHashtagDirectoryViewController.h"
-#import "RgFavoriteViewController.h"
+#import "MessagesViewController.h"
 #import "ContactsViewController.h"
 #import "ContactDetailsViewController.h"
 #import "ContactDetailsLabelViewController.h"
@@ -95,5 +97,10 @@
 + (PhoneMainView*) instance;
 
 - (void)promptNewOrEdit:(NSString *)address;
+
+- (void)handleGoogleSignInStartEvent:(NSNotification *) notification;;
+- (void)handleGoogleSignInCompleteEvent;
+
+
 
 @end

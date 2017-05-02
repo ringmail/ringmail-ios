@@ -22,6 +22,7 @@
 #import "UICompositeViewController.h"
 #import "IASKAppSettingsViewController.h"
 #import "LinphoneCoreSettingsStore.h"
+#import <Google/SignIn.h>
 
 @interface SettingsViewController: UIViewController<IASKSettingsDelegate, UICompositeViewDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
 	@private

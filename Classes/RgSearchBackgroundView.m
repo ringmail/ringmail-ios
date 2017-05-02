@@ -57,11 +57,11 @@
     colorspace = CGColorSpaceCreateDeviceRGB();
 
     gradient = CGGradientCreateWithColors(colorspace,(CFArrayRef)colors, locations);
-
+    
     CGPoint startPoint, endPoint;
     startPoint.x = 0.0;
     startPoint.y = 0.0;
-
+    
     endPoint.x = rect.size.width;
     endPoint.y = 0.0;
 

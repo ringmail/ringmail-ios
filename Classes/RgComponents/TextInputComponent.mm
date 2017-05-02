@@ -69,4 +69,15 @@
 @end
 
 @implementation TextInputView
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self isFirstResponder] && [touch view] != self) {
+        [self endEditing:YES];
+    }
+    [super touchesBegan:touches withEvent:event];
+}
+
 @end

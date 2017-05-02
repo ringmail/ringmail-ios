@@ -20,6 +20,7 @@
 @synthesize placeHolder;
 @synthesize rocketButtonImg;
 @synthesize background;
+@synthesize addressLabel;
 
 bool animInactive = YES;
 
@@ -58,16 +59,8 @@ bool animInactive = YES;
     
     [callButton setEnabled:TRUE];
     
-    NSAttributedString *placeHolderString = [[NSAttributedString alloc] initWithString:placeHolder
-        attributes:@{
-                     NSForegroundColorAttributeName:[UIColor colorWithHex:@"#222222"],
-                     NSFontAttributeName:[UIFont fontWithName:@"SFUIText-Light" size:16]
-                     }];
-    addressField.attributedPlaceholder = placeHolderString;
-    addressField.font = [UIFont fontWithName:@"SFUIText-Light" size:16];
-    addressField.textColor = [UIColor colorWithHex:@"#222222"];
-    addressField.text = @"";
-    addressField.layer.opacity = 0.0;
+    addressLabel.layer.opacity = 0.0;
+    addressLabel.text = placeHolder;
     
     animInactive = YES;
 }
@@ -109,18 +102,11 @@ bool animInactive = YES;
     
     if (!addressActive && addressEmpty)
         [self animateRocket:YES];
-    else if (addressActive && addressEmpty)
-    {
-        [addressField resignFirstResponder];
-        addressField.layer.opacity = 0.0;
-    }
     else
     {
-        [self animateRocket:NO];
-        [goButton sendActionsForControlEvents:UIControlEventTouchUpInside];
         [addressField resignFirstResponder];
+        addressLabel.layer.opacity = 0.0;
         [addressField setText:@""];
-        addressField.layer.opacity = 0.0;
     }
 }
 
@@ -135,35 +121,58 @@ bool animInactive = YES;
         [background setNeedsDisplay];
         
         rocketButtonImg.hidden = YES;
-        addressField.hidden = NO;
-        addressField.layer.opacity = 0.0;
+        addressLabel.layer.opacity = 0.0;
         
-        CGFloat addressX = addressField.layer.position.x;
+        CGFloat addressX = addressLabel.layer.position.x;
         
         UIImageView *rocketAnimImg =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,50,50)];
         rocketAnimImg.image=[UIImage imageNamed:@"hashtag_rocket_icon_blue.png"];
         [self.view addSubview:rocketAnimImg];
         
-        
         [CATransaction begin];
-        
         [CATransaction setCompletionBlock:^{
             
             [CATransaction begin];
-            
             [CATransaction setCompletionBlock:^{
                 [rocketAnimImg.layer removeAllAnimations];
                 [rocketAnimImg removeFromSuperview];
-                [addressField.layer removeAllAnimations];
-                rocketButtonImg.hidden = NO;
-                background.sepLineVisible = YES;
-                [background setNeedsDisplay];
+                [addressLabel.layer removeAllAnimations];
                 animInactive = YES;
-                if (activeAddress)
-                {
-                    addressField.layer.opacity = 1.0;
-                    [addressField becomeFirstResponder];
-                }
+                addressLabel.layer.opacity = 0.0;
+            }];
+            
+            if (activeAddress)
+            {
+                CABasicAnimation *animation6a = [CABasicAnimation animation];
+                animation6a.keyPath = @"opacity";
+                animation6a.toValue = @1;
+                animation6a.toValue = @0;
+                animation6a.beginTime = CACurrentMediaTime() + 2.0f;
+                animation6a.duration = 0.75f;
+                animation6a.fillMode = kCAFillModeForwards;
+                animation6a.removedOnCompletion = NO;
+                animation6a.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+                [addressLabel.layer addAnimation:animation6a forKey:@"text_disappear"];
+                
+                CABasicAnimation *animation6b = [CABasicAnimation animation];
+                animation6b.keyPath = @"position.x";
+                animation6b.fromValue = [NSNumber numberWithFloat:addressX];
+                animation6b.toValue = [NSNumber numberWithFloat:addressX + 50];
+                animation6b.beginTime = CACurrentMediaTime() + 2.0f;
+                animation6b.duration = 0.75f;
+                animation6b.fillMode = kCAFillModeForwards;
+                animation6b.removedOnCompletion = NO;
+                animation6b.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+                [addressLabel.layer addAnimation:animation6b forKey:@"text_slide_out"];
+            }
+            
+            [CATransaction commit];
+            
+            [CATransaction begin];
+            [CATransaction setCompletionBlock:^{
+                    rocketButtonImg.hidden = NO;
+                    background.sepLineVisible = YES;
+                    [background setNeedsDisplay];
             }];
             
             CABasicAnimation *animation4 = [CABasicAnimation animation];
@@ -235,7 +244,7 @@ bool animInactive = YES;
             animation3a.fillMode = kCAFillModeForwards;
             animation3a.removedOnCompletion = NO;
             animation3a.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-            [addressField.layer addAnimation:animation3a forKey:@"text_appear"];
+            [addressLabel.layer addAnimation:animation3a forKey:@"text_appear"];
             
             CABasicAnimation *animation3b = [CABasicAnimation animation];
             animation3b.keyPath = @"position.x";
@@ -246,7 +255,7 @@ bool animInactive = YES;
             animation3b.fillMode = kCAFillModeForwards;
             animation3b.removedOnCompletion = NO;
             animation3b.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-            [addressField.layer addAnimation:animation3b forKey:@"text_slide"];
+            [addressLabel.layer addAnimation:animation3b forKey:@"text_slide"];
         }
         
         [CATransaction commit];
@@ -264,10 +273,8 @@ bool animInactive = YES;
     
     UITouch *touch = [[event allTouches] anyObject];
     if ([[touch.view class] isSubclassOfClass:[RgSearchBackgroundView class]]) {
-        if(![addressField isFirstResponder])
-            [self animateRocket:YES];
-    }
     
+    }
 }
 
 
@@ -277,7 +284,7 @@ bool animInactive = YES;
 {
     [self.view endEditing:YES];
     [addressField setText:@""];
-    addressField.layer.opacity = 0.0;
+    [addressField resignFirstResponder];
 }
 
 
@@ -295,7 +302,6 @@ bool animInactive = YES;
         }
         [addressField resignFirstResponder];
         [addressField setText:@""];
-        addressField.layer.opacity = 0.0;
     }
     return YES;
 }

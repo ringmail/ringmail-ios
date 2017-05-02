@@ -29,11 +29,11 @@ extern NSString *const kRgLaunchBrowser;
 extern NSString *const kRgToggleNumberPad;
 extern NSString *const kRgCallRefresh;
 extern NSString *const kRgContactRefresh;
-extern NSString *const kRgSendComponentReset;
-
 extern NSString *const kRgSelf;
 extern NSString *const kRgSelfName;
-
+extern NSString *const kRgSendComponentReset;
+extern NSString *const kRgSendComponentAddMedia;
+extern NSString *const kRgSendComponentRemoveMedia;
 
 @interface RgManager : NSObject
 

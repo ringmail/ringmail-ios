@@ -18,7 +18,6 @@
     (UIViewController *)__responder; \
 })
 
-
 @interface FavoritesBarComponent ()
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
@@ -69,11 +68,34 @@
 		[parent addChildViewController:favController];
 		[favController didMoveToParentViewController:parent];
 		sv.componentViewController = favController;
+		[[favController collectionView] setAlwaysBounceHorizontal:YES];
 	}
 	else
 	{
 		component.favoritesCollection = sv.componentViewController; // Keep the same controller on rebuild
 	}
+}
+
+- (void)didMount {
+	[super didMount];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)didUnmount {
+	[super didUnmount];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)keyboardDidShow:(NSNotification *)notif {
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	[self.view setUserInteractionEnabled:NO];
+}
+
+- (void)keyboardDidHide:(NSNotification *)notif {
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	[self.view setUserInteractionEnabled:YES];
 }
 
 @end

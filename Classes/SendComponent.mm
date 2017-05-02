@@ -10,35 +10,26 @@
 #import "TextInputComponent.h"
 #import "SendToInputComponent.h"
 #import "FavoritesBarComponent.h"
+#import "MediaBarComponent.h"
 
 #import "UIColor+Hex.h"
 
 @implementation SendComponent
 
-+ (id)initialState
+/*+ (id)initialState
 {
-	return [NSMutableDictionary dictionaryWithDictionary:@{
-		@"enable_send": @NO,
-	}];
-}
+	return [NSMutableDictionary dictionaryWithDictionary:@{}];
+}*/
 
 + (instancetype)newWithSend:(Send *)send context:(SendContext *)context
 {
-	NSLog(@"Send Data: %@", [send data]);
 	CKComponentScope scope(self);
-	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+	//NSMutableDictionary* currentState = scope.state();
+	//NSLog(@"Send State: %@", currentState);
 	
-	NSMutableDictionary* currentState = scope.state();
-	NSString *sendButtonImageName;
-	if ([currentState[@"enable_send"] boolValue])
-	{
-		sendButtonImageName = @"arrow_pressed.png";
-	}
-	else
-	{
-		sendButtonImageName = @"arrow_normal.png";
-	}
-	NSLog(@"State: %@", currentState);
+	//NSLog(@"Send Data: %@", [send data]);
+	
+	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     SendComponent *c = [super newWithView:{} component:
 		[CKInsetComponent newWithInsets:{.top = 12, .bottom = 0, .left = 0, .right = 0} component:
 			[CKStackLayoutComponent newWithView:{} size:{} style:{
@@ -60,9 +51,13 @@
 					   .alignItems = CKStackLayoutAlignItemsStretch
 					}
 					children:{
-						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button1_camera.png"]]},
+						{[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+							{UIControlStateNormal,[UIImage imageNamed:@"ringpanel_button1_camera.png"]},
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(showPhotoCamera:) size:{} attributes:{} accessibilityConfiguration:{}]},
 						{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
-						{[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_button2_video.png"]]},
+						{[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+							{UIControlStateNormal,[UIImage imageNamed:@"ringpanel_button2_video.png"]},
+						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(showVideoCamera:) size:{} attributes:{} accessibilityConfiguration:{}]},
 						{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 						{[CKButtonComponent newWithTitles:{} titleColors:{} images:{
 							{UIControlStateNormal,[UIImage imageNamed:@"ringpanel_button3_moments.png"]},
@@ -127,16 +122,17 @@
 							}
 							size:{.height = 15, .width = width}]
 						]},
-						{[CKComponent newWithView:{
+						{[MediaBarComponent newWithMedia:[send data][@"media"] size:{.height = 71, .width = width}]},
+						/*{[CKComponent newWithView:{
 							[UIView class],
 							{
 								{@selector(setBackgroundColor:), [UIColor colorWithHex:@"#CCCCCC"]},
 							}
-						} size:{.height = 71, .width = width}]},
-						{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 0, .right = 0} component:
+						} size:{.height = 71, .width = width}]},*/
+						/*{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 0, .right = 0} component:
 							[CKLabelComponent newWithLabelAttributes:{
 								.string = @"10 Photos, 5 Videos",
-								.font = [UIFont systemFontOfSize:9],
+								.font = [UIFont systemFontOfSize:10],
 								.alignment = NSTextAlignmentCenter,
 							}
 							viewAttributes:{
@@ -144,7 +140,7 @@
 								{@selector(setUserInteractionEnabled:), @NO},
 							}
 							size:{.width = width}]
-						]},
+						]},*/
 					}]
 				},
 			}]

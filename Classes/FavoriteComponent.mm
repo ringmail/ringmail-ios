@@ -2,6 +2,9 @@
 #import "FavoriteContext.h"
 #import "FavoriteComponent.h"
 
+#import "UIImage+RoundedCorner.h"
+#import "UIImage+Resize.h"
+
 @implementation FavoriteComponent
 
 + (instancetype)newWithFavorite:(Favorite *)fav context:(FavoriteContext *)context
@@ -12,19 +15,15 @@
 static CKComponent *favoriteComponent(Favorite *fav, FavoriteContext *context)
 {
     NSString* name = [fav.data objectForKey:@"name"];
+    UIImage *cardImage = [fav.data objectForKey:@"image"];
+    cardImage = [cardImage thumbnailImage:96 transparentBorder:0 cornerRadius:48 interpolationQuality:kCGInterpolationHigh];
 	return [CKStackLayoutComponent newWithView:{} size:{ .height = 76, .width = 80} style:{
 		.direction = CKStackLayoutDirectionVertical,
 		.alignItems = CKStackLayoutAlignItemsStart
 	}
 	children:{
 		{[CKInsetComponent newWithInsets:{.top = 4, .left = INFINITY, .bottom = 0, .right = INFINITY} component:
-			[CKComponent newWithView:{
-				[UIView class],
-				{
-					{@selector(setBackgroundColor:), [UIColor grayColor]},
-					{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @24.0}
-				}
-			} size:{.height = 48, .width = 48}]
+			[CKImageComponent newWithImage:cardImage size:{.height = 48, .width = 48}]
 		]},
 		{[CKInsetComponent newWithInsets:{.top = 4, .left = INFINITY, .bottom = 0, .right = INFINITY} component:
 			[CKLabelComponent newWithLabelAttributes:{

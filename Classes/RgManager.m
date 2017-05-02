@@ -28,12 +28,14 @@ NSString *const kRgLaunchBrowser = @"kRgLaunchBrowser";
 NSString *const kRgToggleNumberPad = @"kRgToggleNumberPad";
 NSString *const kRgCallRefresh = @"kRgCallRefresh";
 NSString *const kRgContactRefresh = @"kRgContactRefresh";
+NSString *const kRgSelf = @"self";
+NSString *const kRgSelfName = @"Self";
 
 // New skin
 NSString *const kRgSendComponentReset = @"kRgSendComponentReset";
+NSString *const kRgSendComponentAddMedia = @"kRgSendComponentAddMedia";
+NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
 
-NSString *const kRgSelf = @"self";
-NSString *const kRgSelfName = @"Self";
 
 static LevelDB* theConfigDatabase = nil;
 
@@ -48,7 +50,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"www-mb.ringxml.com";
+        return @"www-mf.ringxml.com";
     }
 }
 

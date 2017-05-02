@@ -21,7 +21,6 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "RgMainViewController.h"
-#import "RgScanViewController.h"
 #import "RgInCallViewController.h"
 #import "DTAlertView.h"
 #import "LinphoneManager.h"
@@ -38,6 +37,7 @@
 @interface RgMainViewController()
 @property BOOL isSearchBarVisible;
 @property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@property (nonatomic, retain) IBOutlet SendViewController* sendViewController;
 @end
 
 @implementation RgMainViewController
@@ -48,13 +48,20 @@
 @synthesize needsRefresh;
 @synthesize sendViewController;
 @synthesize backgroundImageView;
+@synthesize sendInfo;
+@synthesize isEditing;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
+	NSLog(@"RgMainViewController init");
 	self = [super initWithNibName:@"RgMainViewController" bundle:[NSBundle mainBundle]];
 	if (self) {
 		self->transferMode = FALSE;
+		self->sendInfo = [NSMutableDictionary dictionaryWithDictionary:@{
+			@"media": [self getMediaThumbnails:[self getLatestMedia]],
+		}];
+		self->isEditing = FALSE;
 	}
 	return self;
 }
@@ -93,6 +100,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
+	NSLog(@"RgMainViewController viewWillAppear");
 
 	// Set observer
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -115,7 +124,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleSegControl)
                                                  name:@"RgSegmentControl"
                                                object:nil];
-    
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+	
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
 	// xcode would result in the callbutton being disabled all the time.
@@ -157,6 +169,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[RgLocationManager sharedInstance] startUpdatingLocation];
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
 
+	// TODO: fix updating when there are new photos or videos (PHPhoto​Library​Change​Observer)
+	// Code below does NOT work
+	/*NSArray* update = [self getLatestMedia];
+	if ([self hasNewMedia:update current:sendInfo[@"media"]])
+	{
+		sendInfo[@"media"] = [self getMediaThumbnails:update];
+		[sendViewController setSendInfo:sendInfo];
+		[sendViewController updateSend];
+	}*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -167,6 +188,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
     /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+	
     [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
     
     self.visible = NO;
@@ -174,6 +198,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
+    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+    self.isSearchBarVisible = YES;
+    [self addChildViewController:self.searchBarViewController];
+    [self.view addSubview:self.searchBarViewController.view];
+    
     int width = [UIScreen mainScreen].applicationFrame.size.width;
     if (width == 320) {
 		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
@@ -191,21 +222,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
     
-	/*
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [flowLayout setMinimumInteritemSpacing:0];
-    [flowLayout setMinimumLineSpacing:0];
-
-	CGRect r = mainView.frame;
-    r.origin.y = 0;
-    [mainController.view setFrame:r];
-    [mainView addSubview:mainController.view];
-    [self addChildViewController:mainController];
-    [mainController didMoveToParentViewController:self];
-    mainViewController = mainController;
-	*/
-    [self setNeedsRefresh:NO];
+    [self setNeedsRefresh:NO]; // Remove this?
     
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
@@ -252,7 +269,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleUserActivity)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
+	
+	[sendViewController setSendInfo:sendInfo];
 }
 
 - (void)viewDidUnload {
@@ -457,17 +475,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-
-/*- (IBAction)onScan:(id)sender {
-    RgScanViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgScanViewController compositeViewDescription] push:TRUE], RgScanViewController);
-    if (controller != nil)
-    {
-        [controller beginScan];
-    }
-}*/
-
-
-
 - (void)handleUserActivity {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -523,6 +530,131 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     if([keyPath isEqualToString:@"currentLocation"])
         [[RgLocationManager sharedInstance] stopUpdatingLocation];
+}
+
+#pragma mark - Keyboard Events
+
+- (void)keyboardWillShow:(NSNotification*)event
+{
+	self.isEditing = YES;
+}
+
+- (void)keyboardWillHide:(NSNotification*)event
+{
+	self.isEditing = NO;
+}
+
+#pragma mark - Tap Recognizer
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	if (self.isEditing)
+	{
+        UITouch *touch = [touches anyObject];
+        if (![touch.view isMemberOfClass:[UITextField class]])
+    	{
+    		[touch.view endEditing:YES];
+        }
+	}
+}
+
+#pragma mark - Photos & Videos
+
+- (BOOL)hasNewMedia:(NSArray*)media current:(NSArray*)prev
+{
+	if ([prev count] == 0)
+	{
+		if ([media count] > 0)
+		{
+			return YES;
+		}
+		else
+		{
+			return NO;
+		}
+	}
+	else if ([media count] > 0 && [prev count] > 0)
+	{
+		NSString* item1 = [(PHAsset*)media[0][@"asset"] localIdentifier];
+		NSString* item2 = [(PHAsset*)prev[0][@"asset"] localIdentifier];
+		if ([item1 isEqualToString:item2])
+		{
+			return NO;
+		}
+		else
+		{
+			return YES;
+		}
+	}
+	else
+	{
+		return NO; // Both empty
+	}
+}
+
+- (NSArray*)getLatestMedia
+{
+    // load recent media
+    int max = 25;
+    int count = 0;
+    NSMutableArray *assets = [NSMutableArray new];
+    PHFetchOptions *mainopts = [[PHFetchOptions alloc] init];
+    mainopts.sortDescriptors = @[
+    	[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO],
+    ];
+    PHFetchResult *collects = [PHAssetCollection fetchMomentsWithOptions:mainopts];
+    for (PHAssetCollection *collection in collects)
+    {
+    	//NSLog(@"Collection(%@): %@", collection.localizedTitle, collection);
+    	PHFetchOptions *opts = [[PHFetchOptions alloc] init];
+    	opts.fetchLimit = max;
+    	opts.sortDescriptors = @[
+    		[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO],
+        ];
+    	PHFetchResult *fr = [PHAsset fetchAssetsInAssetCollection:collection options:opts];
+        for (PHAsset *asset in fr)
+    	{
+    		if (count < max)
+    		{
+    			[assets addObject:@{@"asset": asset}];
+    			count++;
+    		}
+        }
+    	if (count == max)
+    	{
+    		break;
+    	}
+    }
+    [assets sortUsingComparator:^NSComparisonResult(NSDictionary* obj1, NSDictionary* obj2) {
+    	return [[(PHAsset*)obj2[@"asset"] creationDate] compare:[(PHAsset*)obj1[@"asset"] creationDate]];
+    }];
+    //NSLog(@"Latest Media: %@", assets);
+	return assets;
+}
+
+- (NSArray*)getMediaThumbnails:(NSArray*)media
+{
+	__block NSMutableArray* res = [NSMutableArray new];
+	PHImageManager* imageManager = [PHImageManager defaultManager];
+	PHImageRequestOptions* opts = [PHImageRequestOptions new];
+	opts.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+	opts.resizeMode = PHImageRequestOptionsResizeModeExact;
+	opts.synchronous = YES;
+	for (NSDictionary* item in media)
+	{
+		[imageManager requestImageForAsset:item[@"asset"] targetSize:CGSizeMake(142, 142) contentMode:PHImageContentModeAspectFill options:opts resultHandler:^(UIImage* image, NSDictionary* info){
+			[res addObject:@{
+				@"asset": item[@"asset"],
+				@"thumbnail": image,
+			}];
+		}];
+	}
+	return res;
+}
+
+- (void)addMedia:(NSDictionary*)param
+{
+	[sendViewController addMedia:param];
 }
 
 @end

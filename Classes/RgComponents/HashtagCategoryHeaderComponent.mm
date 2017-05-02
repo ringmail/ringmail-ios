@@ -15,14 +15,14 @@
 
 @synthesize cardData;
 
-CKComponent* hashtagCatDirHeaderImgComponent(float*, UIImage*);
 CKInsetComponent* hashtagCatDirHeaderLabelComponent(float*, NSDictionary*);
 
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
 {
     float screenWidth = [[UIScreen mainScreen] bounds].size.width;
-    UIImage* headerImg = getImage(&screenWidth);
+    
+    NSString* hdht = data[@"header_img_ht"];
     
     HashtagCategoryHeaderComponent *c = [super newWithComponent:
         [CKInsetComponent
@@ -32,10 +32,12 @@ CKInsetComponent* hashtagCatDirHeaderLabelComponent(float*, NSDictionary*);
             [UIView class],{
                 {@selector(setBackgroundColor:), [UIColor whiteColor]},
             }}
-            size:{.width = screenWidth, .height=(headerImg.size.height + 106)}
+            size:{.width = screenWidth}
             style:{}
             children:{
-                {hashtagCatDirHeaderImgComponent(&screenWidth,headerImg)},
+                {[CKNetworkImageComponent newWithURL:data[@"header_img_url"]
+                                     imageDownloader:context.imageDownloader
+                                           scenePath:nil size:{ screenWidth, [hdht floatValue] } options:{} attributes:{}]},
                 {hashtagCatDirHeaderLabelComponent(&screenWidth,data)},
             }
         ]]];
@@ -46,43 +48,12 @@ CKInsetComponent* hashtagCatDirHeaderLabelComponent(float*, NSDictionary*);
 }
 
 
-UIImage* getImage(float* wIn)
-{
-    UIImage* tmpImg;
-    
-    if (*wIn == 320)
-        tmpImg = [UIImage imageNamed:@"explore_hashtag_category_sample_banner1_ip5@2x.jpg"];
-    else if (*wIn == 375)
-        tmpImg = [UIImage imageNamed:@"explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg"];
-    else if (*wIn == 414)
-        tmpImg = [UIImage imageNamed:@"explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg"];
-    
-    return tmpImg;
-}
-
-
-CKComponent* hashtagCatDirHeaderImgComponent(float* wIn, UIImage* iIn)
-{
-    return
-    [
-        CKComponent newWithView:{
-            [UIImageView class],
-            {
-                {@selector(setImage:), iIn},
-                {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-            }
-        }
-        size:{*wIn, *wIn / (iIn.size.width/iIn.size.height)}
-    ];
-}
-
-
 CKInsetComponent* hashtagCatDirHeaderLabelComponent(float* wIn, NSDictionary * data)
 {
     return
     [
         CKInsetComponent
-        newWithInsets:{.left = 20, .right = 0, .top = 23, .bottom = 0}
+        newWithInsets:{.left = 20, .right = 0, .top = 23, .bottom = 23}
         component:
             [CKStackLayoutComponent
             newWithView:{}
@@ -101,7 +72,7 @@ CKInsetComponent* hashtagCatDirHeaderLabelComponent(float* wIn, NSDictionary * d
                     }
                     size:{.width = *wIn}]},
                 {[CKLabelComponent newWithLabelAttributes:{
-                    .string = [data objectForKey:@"name"],
+                    .string = [data objectForKey:@"parent_name"],
                     .color = [UIColor colorWithHex:@"#222222"],
                     .font = [UIFont fontWithName:@"SFUIText-Light" size:19],
                     .alignment = NSTextAlignmentLeft,
@@ -114,29 +85,5 @@ CKInsetComponent* hashtagCatDirHeaderLabelComponent(float* wIn, NSDictionary * d
             }]
     ];
 }
-
-
-static CKComponent *lineComponent()
-{
-    return [CKComponent
-            newWithView:{
-                [UIView class],
-                {
-                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#d4d5d7"]},
-                }
-            }
-            size:{.height = 1 / [UIScreen mainScreen].scale}];
-}
-
-// mrkbxt
-//- (void)actionBack:(CKButtonComponent *)sender
-//{
-//    //Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
-//    //[card showMessages];
-//    NSLog(@"Selected: %@", [[self cardData] objectForKey:@"id"]);
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{
-//        @"category_id": @"0",
-//    }];
-//}
 
 @end

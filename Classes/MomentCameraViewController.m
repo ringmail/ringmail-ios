@@ -161,6 +161,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+	NSLog(@"%s", __PRETTY_FUNCTION__);
     [super viewWillAppear:animated];
 	
     // start the camera
@@ -208,12 +209,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
 		if(!error) {
 			//NSLog(@"Image captured!!!!");
-			//[[PhoneMainView instance] setMomentImage:image];
 			MomentEditViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:NO], MomentEditViewController);
+			[ctl setEditMode:RgSendMediaEditModeMoment];
 			[ctl editImage:image];
-			//[editor setImage:image];
-			//ImageViewController *imageVC = [[ImageViewController alloc] initWithImage:image];
-			//[weakSelf presentViewController:imageVC animated:NO completion:nil];
 		}
 		else {
 			NSLog(@"An error has occured: %@", error);
