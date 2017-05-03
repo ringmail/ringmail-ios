@@ -115,6 +115,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 											   object:nil];
     
     
+    
     /*[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(removeCard:)
                                                  name:@"RgMainCardRemove"
@@ -197,12 +198,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
     [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 	
-    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
-    
     self.visible = NO;
 }
 
