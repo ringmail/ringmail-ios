@@ -28,7 +28,6 @@ NSString *const kRgLaunchBrowser = @"kRgLaunchBrowser";
 NSString *const kRgToggleNumberPad = @"kRgToggleNumberPad";
 NSString *const kRgCallRefresh = @"kRgCallRefresh";
 NSString *const kRgContactRefresh = @"kRgContactRefresh";
-
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
 
@@ -40,6 +39,11 @@ NSString *const kRgGoogleSignInStart = @"kRgGoogleSignInStart";
 NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
 NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
 NSString *const kRgGoogleSignInError = @"kRgGoogleSignInError";
+
+// New skin
+NSString *const kRgSendComponentReset = @"kRgSendComponentReset";
+NSString *const kRgSendComponentAddMedia = @"kRgSendComponentAddMedia";
+NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
 
 static LevelDB* theConfigDatabase = nil;
 
@@ -213,29 +217,26 @@ static LevelDB* theConfigDatabase = nil;
 
 + (void)startHashtag:(NSString*)address
 {
-    [[RgNetwork instance] lookupHashtag:@{
-                                          @"hashtag": address,
-                                          } callback:^(NSURLSessionTask *operation, id responseObject) {
-                                              NSDictionary* res = responseObject;
-                                              NSString *ok = [res objectForKey:@"result"];
-                                              if ([ok isEqualToString:@"ok"])
-                                              {
-                                                  RgChatManager *cmgr = [[LinphoneManager instance] chatManager];
-                                                  NSDictionary *sessionData = [cmgr dbGetSessionID:address to:nil contact:nil uuid:nil];
-                                                  [cmgr dbInsertCall:@{
-                                                                       @"sip": @"",
-                                                                       @"address": address,
-                                                                       @"state": [NSNumber numberWithInt:0],
-                                                                       @"inbound": [NSNumber numberWithBool:NO],
-                                                                       @"img_path": [res objectForKey:@"img_path"],
-                                                                       @"avatar_img": [res objectForKey:@"avatar_img"],
-                                                                       } session:sessionData[@"id"]];
-                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
-                                                                                                                                                     @"address": [res objectForKey:@"target"],
-                                                                                                                                                     }];
-                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
-                                              }
-                                          }];
+    [[RgNetwork instance] lookupHashtag:@{ @"hashtag": address } callback:^(NSURLSessionTask *operation, id responseObject) {
+        NSDictionary* res = responseObject;
+        NSString *ok = [res objectForKey:@"result"];
+        if ([ok isEqualToString:@"ok"])
+        {
+            /* Do not add hashtags to call log
+              RgChatManager *cmgr = [[LinphoneManager instance] chatManager];
+              NSDictionary *sessionData = [cmgr dbGetSessionID:address to:nil contact:nil uuid:nil];
+              [cmgr dbInsertCall:@{
+                               @"sip": @"",
+                               @"address": address,
+                               @"state": [NSNumber numberWithInt:0],
+                               @"inbound": [NSNumber numberWithBool:NO],
+                               } session:sessionData[@"id"]]; */
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
+                @"address": [res objectForKey:@"target"],
+            }];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+        }
+    }];
 }
 
 + (NSString*)pushToken:(NSData*)tokenData
@@ -639,7 +640,6 @@ static LevelDB* theConfigDatabase = nil;
     else
     {
         mgr.chatManager = [[RgChatManager alloc] init];
-        [RgManager setupDefaultHashtags:cfg];
     }
     NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
     if (chatPass != nil && ! [chatPass isEqualToString:@""])
@@ -656,7 +656,6 @@ static LevelDB* theConfigDatabase = nil;
     if (mgr.chatManager == nil)
     {
         mgr.chatManager = [[RgChatManager alloc] init];
-        [RgManager setupDefaultHashtags:cfg];
     }
     if ([[mgr.chatManager xmppStream] isDisconnected])
     {
@@ -665,29 +664,6 @@ static LevelDB* theConfigDatabase = nil;
         {
             [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
         }
-    }
-}
-
-+ (void)setupDefaultHashtags:(LevelDB*)cfg
-{
-    // Setup default hashtags
-    if (cfg[@"ringmail_hashtags"] != nil)
-    {
-        LinphoneManager* mgr = [LinphoneManager instance];
-        NSArray *ht = (NSArray*)cfg[@"ringmail_hashtags"];
-        for (NSString *tag in [[ht reverseObjectEnumerator] allObjects])
-        {
-            NSDictionary *rec = [mgr.chatManager dbGetSessionID:tag to:nil contact:nil uuid:nil];
-            [mgr.chatManager dbInsertCall:@{
-                                            @"sip": @"",
-                                            @"address": tag,
-                                            @"state": [NSNumber numberWithInt:0],
-                                            @"inbound": [NSNumber numberWithBool:NO],
-                                            } session:rec[@"id"]];
-            //NSLog(@"Default Hashtag: %@ - %@", tag, rec);
-        }
-        [cfg removeObjectForKey:@"ringmail_hashtags"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
     }
 }
 

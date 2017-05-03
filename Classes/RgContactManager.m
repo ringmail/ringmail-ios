@@ -443,20 +443,28 @@
             [cur setObject:@(1) forKey:match];
         }
         [rs close];
+		//NSLog(@"Current: %@", cur);
         
+        NSMutableDictionary *seen = [NSMutableDictionary dictionary];
         for (NSString *newMatch in rgMatches)
         {
 			if ([cur objectForKey:newMatch] != nil) // Found
 			{
+                //NSLog(@"RingMail: Contact Already Found: %@", newMatch);
 				[cur removeObjectForKey:newMatch];
 			}
 			else
 			{
-                //NSLog(@"RingMail: Contact Activate: %@", newMatch);
-                [db executeUpdate:@"INSERT INTO contact_match (item_hash) VALUES (?)", newMatch];
+                //NSLog(@"RingMail: Contact Activate 1: %@", newMatch);
+				if (seen[newMatch] == nil)
+				{
+					//NSLog(@"RingMail: Contact Activate 2: %@", newMatch);
+					[db executeUpdate:@"INSERT INTO contact_match (item_hash) VALUES (?)", newMatch];
+				}
 			}
+			seen[newMatch] = @1;
         }
-        
+		
         // Purge contacts that are no longer RingMail users :(
         [cur enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             //NSLog(@"RingMail: Contact Deactivate: %@", key);

@@ -22,8 +22,6 @@
 
 @implementation CardComponent
 
-
-
 + (instancetype)newWithCard:(Card *)card context:(CardContext *)context
 {
    return [super newWithComponent:cardComponent(card, context)];

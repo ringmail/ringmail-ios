@@ -24,6 +24,8 @@
 
 static CKComponent *headerComponent(NSString *header, CardContext *context)
 {
+    return [CKComponent newWithView:{} size:{.height = 10}];
+/*
     return [CKInsetComponent
     // Left and right inset of 30pts; centered vertically:
     newWithInsets:{.top = 10, .bottom = 8}
@@ -41,6 +43,7 @@ static CKComponent *headerComponent(NSString *header, CardContext *context)
          }
          size:{}]
     ];
+*/
 }
 
 @end

@@ -18,10 +18,9 @@
  */       
 
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 
 #import "UICompositeViewController.h"
-#import "MainCollectionViewController.h"
-
 #import "UICamSwitch.h"
 #import "UICallButton.h"
 #import "UIMessageButton.h"
@@ -32,18 +31,16 @@
 
 - (void)handleUserActivity;
 - (void)handleSegControl;
+- (void)addMedia:(NSDictionary*)param;
 
-@property (nonatomic, assign) BOOL transferMode;
-
-@property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* videoPreview;
 @property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
-//@property (nonatomic, strong) IBOutlet RgMainTableViewController* tableController;
-//@property (nonatomic, strong) IBOutlet MainCollectionViewController* mainController;
-@property (nonatomic, strong) IBOutlet UIView* mainView;
-@property (nonatomic, retain) MainCollectionViewController* mainViewController;
+@property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
+@property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, assign) BOOL needsRefresh;
 @property (nonatomic, assign) BOOL visible;
+@property (nonatomic, assign) BOOL transferMode;
+@property (nonatomic, strong) NSMutableDictionary* sendInfo;
 
 - (IBAction)onAddContactClick: (id) event;
 

@@ -18,7 +18,7 @@
  */
 
 #import "PhoneMainView.h"
-#import "linphoneAppDelegate.h"
+#import "LinphoneAppDelegate.h"
 #import "AddressBook/ABPerson.h"
 
 #import "CoreTelephony/CTCallCenter.h"

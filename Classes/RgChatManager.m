@@ -287,7 +287,7 @@
     return messageID;
 }
 
-- (void)sendMessageTo:(NSString*)to from:(NSString*)origTo image:(UIImage*)image contact:(NSNumber*)contact
+- (NSString*)sendMessageTo:(NSString*)to from:(NSString*)origTo image:(UIImage*)image contact:(NSNumber*)contact
 {
     NSDate *now = [NSDate date];
     NSString *msgTo = [RgManager addressToXMPP:to];
@@ -332,6 +332,7 @@
             [[self xmppStream] sendElement:message];
         }
     }];
+    return messageID;
 }
 
 /*- (NSString *)sendPingTo:(NSString*)to reply:(NSString*)reply
@@ -748,7 +749,7 @@
 	{
 		dbPath = @"ringmail_dev";
 	}
-    dbPath = [dbPath stringByAppendingString:@"_v1.2.12.db"];
+    dbPath = [dbPath stringByAppendingString:@"_v1.2.13.db"];
     return dbPath;
 }
 
@@ -1000,7 +1001,7 @@
                 @"table": @"session",
                 @"insert": @{
                     @"session_tag": from,
-					@"session_to": [NSString stringWithString:to],
+					@"session_to": to,
                     @"contact_id": (contact != nil) ? contact : [NSNull null],
                     @"session_md5": [[NSString stringWithFormat:@"%@:%@", from, to] md5HexDigest],
                     @"unread": @0,
@@ -1332,10 +1333,20 @@
 
 - (NSArray *)dbGetMessages:(NSNumber *)session
 {
-    return [self dbGetMessages:(NSNumber *)session uuid:nil];
+    return [self dbGetMessages:(NSNumber *)session uuid:nil last:nil];
 }
 
-- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid;
+- (NSArray *)dbGetMessages:(NSNumber *)session last:(NSNumber*)last
+{
+    return [self dbGetMessages:(NSNumber *)session uuid:nil last:last];
+}
+
+- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid
+{
+    return [self dbGetMessages:(NSNumber *)session uuid:uuid last:nil];
+}
+
+- (NSArray *)dbGetMessages:(NSNumber *)session uuid:(NSString*)uuid last:(NSNumber*)last
 {
     FMDatabaseQueue *dbq = [self database];
     __block NSMutableArray *result = [NSMutableArray array];
@@ -1348,7 +1359,14 @@
         }
         else
         {
-            rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type, msg_uuid FROM chat WHERE session_id = ? ORDER BY rowid DESC LIMIT 50", session];
+			if (last)
+			{
+				rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type, msg_uuid FROM chat WHERE session_id = ? AND rowid > ? ORDER BY rowid ASC", session, last]; // Return in order received (no limit)
+			}
+			else
+			{
+				rs = [db executeQuery:@"SELECT rowid, msg_body, STRFTIME('%s', msg_time), msg_inbound, msg_type, msg_uuid FROM chat WHERE session_id = ? ORDER BY rowid DESC LIMIT 50", session];
+			}
         }
         while ([rs next])
         {

@@ -603,7 +603,7 @@
 		if (currentViewDescription.fullscreen != [fullscreen boolValue]) {
 			currentViewDescription.fullscreen = [fullscreen boolValue];
 			[[UIApplication sharedApplication] setStatusBarHidden:currentViewDescription.fullscreen
-													withAnimation:UIStatusBarAnimationSlide];
+													withAnimation:UIStatusBarAnimationNone];
 		} else {
 			fullscreen = nil; // No change = No Update
 		}
@@ -636,6 +636,11 @@
         tabFrame.origin.y = viewFrame.size.height - tabFrame.size.height;
         tabFrame.size.width = viewFrame.size.width;
 	}
+	else
+	{
+		tabFrame.origin.y = viewFrame.size.height;
+		tabFrame.size.height = 0;
+	}
     
     // Resize NavBar (top bar)
     CGRect navFrame = navBarView.frame;
@@ -658,7 +663,7 @@
     {
 //        int origin = IPHONE_STATUSBAR_HEIGHT;
 //        contentFrame.origin.y = origin;
-         contentFrame.origin.y = 0;
+        contentFrame.origin.y = 0;
        	contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
     }
     if (currentViewDescription.fullscreen) {

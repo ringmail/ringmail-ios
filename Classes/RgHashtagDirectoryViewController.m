@@ -20,7 +20,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "RgScanViewController.h"
 #import "RgHashtagDirectoryViewController.h"
 #import "HashtagModelController.h"
 #import "DTAlertView.h"

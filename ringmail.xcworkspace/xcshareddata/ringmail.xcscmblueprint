@@ -4,17 +4,19 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "10265E242415D473A6A613214DB7AC3EE3D43F93" : 0,
     "3D679A1D13C8459F44D2BD0010941A301CB66DE2" : 0,
     "B9A509D4F3D25560F565CB53A09A75E2140C5232" : 0,
     "0D7533C70B3E77874DB4DC9E2131A9B1895C2C86" : 0,
-    "10265E242415D473A6A613214DB7AC3EE3D43F93" : 0
+    "7E3BF325ACA24920B64880B6AEE703826780C2BC" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A06139E2-0827-4055-91F0-5E64E379E150",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "10265E242415D473A6A613214DB7AC3EE3D43F93" : "linphone-iphone\/Classes\/KIF\/",
     "3D679A1D13C8459F44D2BD0010941A301CB66DE2" : "polarssl\/",
-    "B9A509D4F3D25560F565CB53A09A75E2140C5232" : "linphone-iphonesubmodules\/linphone",
+    "B9A509D4F3D25560F565CB53A09A75E2140C5232" : "linphone-iphone\/submodules\/linphone\/",
     "0D7533C70B3E77874DB4DC9E2131A9B1895C2C86" : "linphone-iphone\/",
-    "10265E242415D473A6A613214DB7AC3EE3D43F93" : "linphone-iphone\/Classes\/KIF\/"
+    "7E3BF325ACA24920B64880B6AEE703826780C2BC" : "linphone-iphone\/Classes\/Utils\/CLImageEditor\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ringmail",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -34,6 +36,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/git.linphone.org\/polarssl.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3D679A1D13C8459F44D2BD0010941A301CB66DE2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "nova1.revalead.com:ringmail\/climageeditor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7E3BF325ACA24920B64880B6AEE703826780C2BC"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/git.linphone.org\/linphone",

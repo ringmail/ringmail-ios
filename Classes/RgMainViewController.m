@@ -20,7 +20,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "RgScanViewController.h"
 #import "RgMainViewController.h"
 #import "RgInCallViewController.h"
 #import "DTAlertView.h"
@@ -28,6 +27,7 @@
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "UIColor+Hex.h"
+#import "SendViewController.h"
 
 #include "linphone/linphonecore.h"
 
@@ -37,26 +37,31 @@
 @interface RgMainViewController()
 @property BOOL isSearchBarVisible;
 @property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@property (nonatomic, retain) IBOutlet SendViewController* sendViewController;
 @end
 
 @implementation RgMainViewController
 
 @synthesize transferMode;
-@synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
-//@synthesize mainController;
-@synthesize mainView;
-@synthesize mainViewController;
 @synthesize needsRefresh;
-
+@synthesize sendViewController;
+@synthesize backgroundImageView;
+@synthesize sendInfo;
+@synthesize isEditing;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
+	NSLog(@"RgMainViewController init");
 	self = [super initWithNibName:@"RgMainViewController" bundle:[NSBundle mainBundle]];
 	if (self) {
 		self->transferMode = FALSE;
+		self->sendInfo = [NSMutableDictionary dictionaryWithDictionary:@{
+			@"media": [self getMediaThumbnails:[self getLatestMedia]],
+		}];
+		self->isEditing = FALSE;
 	}
 	return self;
 }
@@ -95,6 +100,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
+	NSLog(@"RgMainViewController viewWillAppear");
 
 	// Set observer
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -117,7 +124,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleSegControl)
                                                  name:kRgSegmentControl
                                                object:nil];
-    
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+	
 	// technically not needed, but older versions of linphone had this button
 	// disabled by default. In this case, updating by pushing a new version with
 	// xcode would result in the callbutton being disabled all the time.
@@ -144,22 +154,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     				linphone_core_enable_video_preview(lc, TRUE);
     			}
 
-    			[backgroundView setHidden:FALSE];
     			[videoCameraSwitch setHidden:FALSE];
     		} else {
     			linphone_core_set_native_preview_window_id(lc, NULL);
     			linphone_core_enable_video_preview(lc, FALSE);
-    			[backgroundView setHidden:TRUE];
     			[videoCameraSwitch setHidden:TRUE];
     		}
     	}
-    }
-    
-    if ([self needsRefresh])
-    {
-        LOGI(@"RingMail: Updating Main Card List 1");
-        [mainViewController updateCollection];
-        [self setNeedsRefresh:NO];
     }
     
     self.visible = YES;
@@ -168,6 +169,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[RgLocationManager sharedInstance] startUpdatingLocation];
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
 
+	// TODO: fix updating when there are new photos or videos (PHPhoto​Library​Change​Observer)
+	// Code below does NOT work
+	/*NSArray* update = [self getLatestMedia];
+	if ([self hasNewMedia:update current:sendInfo[@"media"]])
+	{
+		sendInfo[@"media"] = [self getMediaThumbnails:update];
+		[sendViewController setSendInfo:sendInfo];
+		[sendViewController updateSend];
+	}*/
 }
 
 // mrkbxt  // test incallview
@@ -183,8 +193,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 //	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil]; //mrkbxt - commented out to allow maincollectionview update after phone call.
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCoreUpdate object:nil];
     /*[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgMainCardRemove" object:nil];*/
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
     [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+	
+    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
     
     self.visible = NO;
 }
@@ -198,24 +215,24 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
     
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [flowLayout setMinimumInteritemSpacing:0];
-    [flowLayout setMinimumLineSpacing:0];
+    int width = [UIScreen mainScreen].applicationFrame.size.width;
+    if (width == 320) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
+    }
+    else if (width == 375) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];
+    }
+    else if (width == 414) {
+		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
+    }
+
+    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
+    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+    self.isSearchBarVisible = YES;
+    [self addChildViewController:self.searchBarViewController];
+    [self.view addSubview:self.searchBarViewController.view];
     
-    MainCollectionViewController *mainController = [[MainCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
-    
-    [[mainController collectionView] setBounces:YES];
-    [[mainController collectionView] setAlwaysBounceVertical:YES];
-    
-    CGRect r = mainView.frame;
-    r.origin.y = 0;
-    [mainController.view setFrame:r];
-    [mainView addSubview:mainController.view];
-    [self addChildViewController:mainController];
-    [mainController didMoveToParentViewController:self];
-    mainViewController = mainController;
-    [self setNeedsRefresh:NO];
+    [self setNeedsRefresh:NO]; // Remove this?
     
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
@@ -262,7 +279,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(handleUserActivity)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
+	
+	[sendViewController setSendInfo:sendInfo];
 }
 
 - (void)viewDidUnload {
@@ -312,11 +330,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 		LinphoneCore *lc = [LinphoneManager getLc];
 		if (linphone_core_video_enabled(lc) && linphone_core_video_preview_enabled(lc)) {
 			linphone_core_set_native_preview_window_id(lc, (__bridge void *)(videoPreview));
-			[backgroundView setHidden:FALSE];
 			[videoCameraSwitch setHidden:FALSE];
 		} else {
 			linphone_core_set_native_preview_window_id(lc, NULL);
-			[backgroundView setHidden:TRUE];
 			[videoCameraSwitch setHidden:TRUE];
 		}
 	}
@@ -327,7 +343,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (self.visible)
     {
         LOGI(@"RingMail: Updating Main Card List 2");
-        [mainViewController updateCollection];
+        //[mainViewController updateCollection];
     }
     else
     {
@@ -337,7 +353,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)removeCard:(NSNotification *)notif {
 	[[[LinphoneManager instance] chatManager] dbHideSession:notif.userInfo[@"id"]];
-	[mainViewController updateCollection];
+	//[mainViewController updateCollection];
 }
 
 #pragma mark - Debug Functions
@@ -469,17 +485,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-
-- (IBAction)onScan:(id)sender {
-    RgScanViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgScanViewController compositeViewDescription] push:TRUE], RgScanViewController);
-    if (controller != nil)
-    {
-        [controller beginScan];
-    }
-}
-
-
-
 - (void)handleUserActivity {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -535,6 +540,131 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     if([keyPath isEqualToString:kRgCurrentLocation])
         [[RgLocationManager sharedInstance] stopUpdatingLocation];
+}
+
+#pragma mark - Keyboard Events
+
+- (void)keyboardWillShow:(NSNotification*)event
+{
+	self.isEditing = YES;
+}
+
+- (void)keyboardWillHide:(NSNotification*)event
+{
+	self.isEditing = NO;
+}
+
+#pragma mark - Tap Recognizer
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	if (self.isEditing)
+	{
+        UITouch *touch = [touches anyObject];
+        if (![touch.view isMemberOfClass:[UITextField class]])
+    	{
+    		[touch.view endEditing:YES];
+        }
+	}
+}
+
+#pragma mark - Photos & Videos
+
+- (BOOL)hasNewMedia:(NSArray*)media current:(NSArray*)prev
+{
+	if ([prev count] == 0)
+	{
+		if ([media count] > 0)
+		{
+			return YES;
+		}
+		else
+		{
+			return NO;
+		}
+	}
+	else if ([media count] > 0 && [prev count] > 0)
+	{
+		NSString* item1 = [(PHAsset*)media[0][@"asset"] localIdentifier];
+		NSString* item2 = [(PHAsset*)prev[0][@"asset"] localIdentifier];
+		if ([item1 isEqualToString:item2])
+		{
+			return NO;
+		}
+		else
+		{
+			return YES;
+		}
+	}
+	else
+	{
+		return NO; // Both empty
+	}
+}
+
+- (NSArray*)getLatestMedia
+{
+    // load recent media
+    int max = 25;
+    int count = 0;
+    NSMutableArray *assets = [NSMutableArray new];
+    PHFetchOptions *mainopts = [[PHFetchOptions alloc] init];
+    mainopts.sortDescriptors = @[
+    	[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO],
+    ];
+    PHFetchResult *collects = [PHAssetCollection fetchMomentsWithOptions:mainopts];
+    for (PHAssetCollection *collection in collects)
+    {
+    	//NSLog(@"Collection(%@): %@", collection.localizedTitle, collection);
+    	PHFetchOptions *opts = [[PHFetchOptions alloc] init];
+    	opts.fetchLimit = max;
+    	opts.sortDescriptors = @[
+    		[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO],
+        ];
+    	PHFetchResult *fr = [PHAsset fetchAssetsInAssetCollection:collection options:opts];
+        for (PHAsset *asset in fr)
+    	{
+    		if (count < max)
+    		{
+    			[assets addObject:@{@"asset": asset}];
+    			count++;
+    		}
+        }
+    	if (count == max)
+    	{
+    		break;
+    	}
+    }
+    [assets sortUsingComparator:^NSComparisonResult(NSDictionary* obj1, NSDictionary* obj2) {
+    	return [[(PHAsset*)obj2[@"asset"] creationDate] compare:[(PHAsset*)obj1[@"asset"] creationDate]];
+    }];
+    //NSLog(@"Latest Media: %@", assets);
+	return assets;
+}
+
+- (NSArray*)getMediaThumbnails:(NSArray*)media
+{
+	__block NSMutableArray* res = [NSMutableArray new];
+	PHImageManager* imageManager = [PHImageManager defaultManager];
+	PHImageRequestOptions* opts = [PHImageRequestOptions new];
+	opts.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+	opts.resizeMode = PHImageRequestOptionsResizeModeExact;
+	opts.synchronous = YES;
+	for (NSDictionary* item in media)
+	{
+		[imageManager requestImageForAsset:item[@"asset"] targetSize:CGSizeMake(142, 142) contentMode:PHImageContentModeAspectFill options:opts resultHandler:^(UIImage* image, NSDictionary* info){
+			[res addObject:@{
+				@"asset": item[@"asset"],
+				@"thumbnail": image,
+			}];
+		}];
+	}
+	return res;
+}
+
+- (void)addMedia:(NSDictionary*)param
+{
+	[sendViewController addMedia:param];
 }
 
 @end

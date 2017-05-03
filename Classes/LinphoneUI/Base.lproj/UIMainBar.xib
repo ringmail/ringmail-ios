@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -19,11 +19,11 @@
                 <outlet property="chatNotificationLabel" destination="38" id="40"/>
                 <outlet property="chatNotificationView" destination="37" id="41"/>
                 <outlet property="contactsButton" destination="8" id="27"/>
-                <outlet property="dialerButton" destination="7" id="12"/>
                 <outlet property="hashtagButton" destination="5" id="lDT-P2-haw"/>
-                <outlet property="historyButton" destination="6" id="13"/>
                 <outlet property="logoView" destination="pkJ-2Y-4Pr" id="GhF-hx-8sn"/>
+                <outlet property="messagesButton" destination="6" id="wyh-Bo-dMb"/>
                 <outlet property="portraitView" destination="3" id="43"/>
+                <outlet property="ringmailButton" destination="7" id="WAS-gj-gzq"/>
                 <outlet property="settingsButton" destination="9" id="29"/>
                 <outlet property="view" destination="3" id="14"/>
             </connections>
@@ -63,10 +63,10 @@
                         <color key="titleColor" red="0.12941176469999999" green="0.24313725489999999" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="onHashtagClick:" destination="-1" eventType="touchUpInside" id="itT-Ar-Shm"/>
+                        <action selector="onExploreClick:" destination="-1" eventType="touchUpInside" id="3iu-Ze-IV5"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="history">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="messages">
                     <rect key="frame" x="83" y="0.0" width="82.5" height="50"/>
                     <accessibility key="accessibilityConfiguration" label="History"/>
                     <constraints>
@@ -74,7 +74,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="10"/>
                     <inset key="titleEdgeInsets" minX="-83" minY="35" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Recents" image="tabs_recents_normal.png">
+                    <state key="normal" title="Messages" image="tabs_recents_normal.png">
                         <color key="titleColor" red="0.25882352939999997" green="0.55294117649999996" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -85,10 +85,10 @@
                         <color key="titleColor" red="0.12941176469999999" green="0.24313725489999999" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="22"/>
+                        <action selector="onMessagesClick:" destination="-1" eventType="touchUpInside" id="RzX-iq-9NM"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="dialer">
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="ringmail">
                     <rect key="frame" x="165.5" y="0.0" width="83" height="50"/>
                     <accessibility key="accessibilityConfiguration" label="Dialer"/>
                     <constraints>
@@ -96,7 +96,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="10"/>
                     <inset key="titleEdgeInsets" minX="-83" minY="35" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Ring" image="tabs_ring_normal.png">
+                    <state key="normal" title="RingMail" image="tabs_ring_normal.png">
                         <color key="titleColor" red="0.25882352941176467" green="0.55294117647058827" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -111,7 +111,7 @@
                         <color key="titleColor" red="0.12941176469999999" green="0.24313725489999999" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
+                        <action selector="onRingMailClick:" destination="-1" eventType="touchUpInside" id="1ZF-qG-dUg"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="contacts">
@@ -159,7 +159,7 @@
                     </connections>
                 </button>
                 <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37" userLabel="chatNotificationView">
-                    <rect key="frame" x="227.5" y="4" width="21" height="21"/>
+                    <rect key="frame" x="134.5" y="-10" width="21" height="21"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="39" userLabel="chatNotificationImage">
                             <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
@@ -205,15 +205,15 @@
                 <constraint firstItem="9" firstAttribute="leading" secondItem="8" secondAttribute="trailing" id="RgZ-mV-2JP"/>
                 <constraint firstItem="7" firstAttribute="width" secondItem="5" secondAttribute="width" id="btW-Sz-eAg"/>
                 <constraint firstItem="9" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="cSF-e7-od4"/>
-                <constraint firstItem="7" firstAttribute="top" secondItem="37" secondAttribute="bottom" constant="-25" id="h7J-0H-Hrh"/>
+                <constraint firstItem="37" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" constant="-10" id="fnS-3q-aCo"/>
                 <constraint firstItem="5" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="hII-WP-dg2"/>
                 <constraint firstItem="5" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="l2M-G1-gRS"/>
+                <constraint firstItem="37" firstAttribute="top" secondItem="6" secondAttribute="top" constant="-10" id="mYA-0V-WJC"/>
                 <constraint firstItem="8" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="qLk-is-ybi"/>
-                <constraint firstItem="37" firstAttribute="leading" secondItem="7" secondAttribute="trailing" constant="-21" id="xxW-58-vlL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="846.5" y="353"/>
+            <point key="canvasLocation" x="748" y="327"/>
         </view>
     </objects>
     <resources>
