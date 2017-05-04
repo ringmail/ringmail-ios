@@ -88,6 +88,13 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wi-Mz-eMg" customClass="RgModalButtonView">
                                     <rect key="frame" x="0.0" y="0.0" width="345" height="55"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_text_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="NJd-K0-TzT">
+                                            <rect key="frame" x="297" y="16" width="28" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="Xz6-tN-KiX"/>
+                                                <constraint firstAttribute="width" constant="28" id="ogN-YB-87h"/>
+                                            </constraints>
+                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srk-Yg-MqC">
                                             <rect key="frame" x="0.0" y="5" width="345" height="46"/>
                                             <constraints>
@@ -102,13 +109,6 @@
                                                 <action selector="onText:" destination="-1" eventType="touchUpInside" id="uXn-Z7-2KX"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_text_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="NJd-K0-TzT">
-                                            <rect key="frame" x="297" y="16" width="28" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="Xz6-tN-KiX"/>
-                                                <constraint firstAttribute="width" constant="28" id="ogN-YB-87h"/>
-                                            </constraints>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -121,7 +121,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Jq-jn-yUe" customClass="RgModalButtonView">
-                                    <rect key="frame" x="0.0" y="58.5" width="345" height="55"/>
+                                    <rect key="frame" x="0.0" y="59" width="345" height="55"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-JL-wg7">
                                             <rect key="frame" x="0.0" y="5" width="345" height="46"/>

@@ -238,7 +238,7 @@ static RootViewManager *rootViewManagerInstance = nil;
     optionsModalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
     optionsModalBG = [[UIView alloc] initWithFrame:self.view.frame];
-    [optionsModalBG setBackgroundColor:[UIColor colorWithHex:@"#212121" alpha:0.55f]];
+    [optionsModalBG setBackgroundColor:[UIColor colorWithHex:@"#212121" alpha:0.65f]];
     optionsModalBG.hidden = YES;
     [self.view addSubview:optionsModalBG];
     
