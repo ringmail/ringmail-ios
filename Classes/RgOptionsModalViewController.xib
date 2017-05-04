@@ -37,17 +37,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRc-hY-zGQ">
-                    <rect key="frame" x="15" y="229" width="345" height="348"/>
+                    <rect key="frame" x="15" y="237" width="345" height="340"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_unknown_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="bLL-8E-49G">
-                            <rect key="frame" x="20" y="20" width="75" height="75"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="75" id="1Ek-2v-H4n"/>
-                                <constraint firstAttribute="height" constant="75" id="kZp-AQ-evo"/>
-                            </constraints>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First LastName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTl-QU-YQh">
-                            <rect key="frame" x="20" y="110" width="305" height="24"/>
+                            <rect key="frame" x="20" y="90" width="305" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="tSS-xM-DGg"/>
                             </constraints>
@@ -56,7 +49,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="555-555-5555" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j96-Ls-EEv">
-                            <rect key="frame" x="20" y="149" width="305" height="12"/>
+                            <rect key="frame" x="20" y="129" width="305" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="EVS-1u-DBg"/>
                             </constraints>
@@ -65,7 +58,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKP-ye-6BE">
-                            <rect key="frame" x="235" y="40" width="70" height="35"/>
+                            <rect key="frame" x="235" y="30" width="70" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="ISV-On-8hH"/>
                                 <constraint firstAttribute="width" constant="70" id="f0n-fF-pn9"/>
@@ -75,7 +68,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bue-3V-2mk">
-                            <rect key="frame" x="235" y="40" width="90" height="35"/>
+                            <rect key="frame" x="235" y="30" width="90" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="90" id="6kd-y8-42O"/>
                                 <constraint firstAttribute="height" constant="35" id="gSt-Gm-0nq"/>
@@ -90,7 +83,7 @@
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="jHe-J9-MeQ">
-                            <rect key="frame" x="0.0" y="183" width="345" height="165"/>
+                            <rect key="frame" x="0.0" y="163" width="345" height="172"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wi-Mz-eMg" customClass="RgModalButtonView">
                                     <rect key="frame" x="0.0" y="0.0" width="345" height="55"/>
@@ -109,11 +102,11 @@
                                                 <action selector="onText:" destination="-1" eventType="touchUpInside" id="uXn-Z7-2KX"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJd-K0-TzT">
-                                            <rect key="frame" x="285" y="8" width="40" height="40"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_text_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="NJd-K0-TzT">
+                                            <rect key="frame" x="297" y="16" width="28" height="24"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="Xz6-tN-KiX"/>
-                                                <constraint firstAttribute="width" constant="40" id="ogN-YB-87h"/>
+                                                <constraint firstAttribute="height" constant="24" id="Xz6-tN-KiX"/>
+                                                <constraint firstAttribute="width" constant="28" id="ogN-YB-87h"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -128,7 +121,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Jq-jn-yUe" customClass="RgModalButtonView">
-                                    <rect key="frame" x="0.0" y="55" width="345" height="55"/>
+                                    <rect key="frame" x="0.0" y="58.5" width="345" height="55"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-JL-wg7">
                                             <rect key="frame" x="0.0" y="5" width="345" height="46"/>
@@ -144,11 +137,11 @@
                                                 <action selector="onCall:" destination="-1" eventType="touchUpInside" id="BS2-oq-bQQ"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTd-av-QTU">
-                                            <rect key="frame" x="285" y="8" width="40" height="40"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_phone_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="DTd-av-QTU">
+                                            <rect key="frame" x="297" y="16" width="28" height="24"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="FOS-Dn-oFg"/>
-                                                <constraint firstAttribute="height" constant="40" id="K0g-Nu-hHV"/>
+                                                <constraint firstAttribute="width" constant="28" id="FOS-Dn-oFg"/>
+                                                <constraint firstAttribute="height" constant="24" id="K0g-Nu-hHV"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -163,7 +156,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qVG-eS-uoZ" customClass="RgModalButtonView">
-                                    <rect key="frame" x="0.0" y="110" width="345" height="55"/>
+                                    <rect key="frame" x="0.0" y="117" width="345" height="55"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-Xa-Pz2">
                                             <rect key="frame" x="0.0" y="5" width="345" height="46"/>
@@ -179,11 +172,11 @@
                                                 <action selector="onVideoChat:" destination="-1" eventType="touchUpInside" id="UMh-Or-gk4"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ncA-c9-22X">
-                                            <rect key="frame" x="285" y="8" width="40" height="40"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_normal_vid.png" translatesAutoresizingMaskIntoConstraints="NO" id="ncA-c9-22X">
+                                            <rect key="frame" x="297" y="16" width="28" height="24"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="006-Vu-tiG"/>
-                                                <constraint firstAttribute="height" constant="40" id="cDG-bd-Jd5"/>
+                                                <constraint firstAttribute="width" constant="28" id="006-Vu-tiG"/>
+                                                <constraint firstAttribute="height" constant="24" id="cDG-bd-Jd5"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -199,6 +192,13 @@
                                 </view>
                             </subviews>
                         </stackView>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="bLL-8E-49G">
+                            <rect key="frame" x="20" y="20" width="55" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="55" id="1Ek-2v-H4n"/>
+                                <constraint firstAttribute="height" constant="55" id="kZp-AQ-evo"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -208,7 +208,7 @@
                         <constraint firstAttribute="trailing" secondItem="kTl-QU-YQh" secondAttribute="trailing" constant="20" id="JRv-gh-ajU"/>
                         <constraint firstItem="kTl-QU-YQh" firstAttribute="top" secondItem="bLL-8E-49G" secondAttribute="bottom" constant="15" id="Lpi-es-Btx"/>
                         <constraint firstItem="jHe-J9-MeQ" firstAttribute="top" secondItem="j96-Ls-EEv" secondAttribute="bottom" constant="22" id="MIh-Xi-KIO"/>
-                        <constraint firstAttribute="bottom" secondItem="jHe-J9-MeQ" secondAttribute="bottom" id="Pem-dY-yvX"/>
+                        <constraint firstAttribute="bottom" secondItem="jHe-J9-MeQ" secondAttribute="bottom" constant="5" id="Pem-dY-yvX"/>
                         <constraint firstAttribute="trailing" secondItem="bue-3V-2mk" secondAttribute="trailing" constant="20" id="b83-Xd-hxE"/>
                         <constraint firstItem="jHe-J9-MeQ" firstAttribute="leading" secondItem="mRc-hY-zGQ" secondAttribute="leading" id="cOA-SC-JLM"/>
                         <constraint firstItem="bLL-8E-49G" firstAttribute="top" secondItem="mRc-hY-zGQ" secondAttribute="top" constant="20" id="dmn-w8-uRl"/>
@@ -217,7 +217,7 @@
                         <constraint firstItem="bLL-8E-49G" firstAttribute="leading" secondItem="mRc-hY-zGQ" secondAttribute="leading" constant="20" id="j5z-Oe-Ad8"/>
                         <constraint firstAttribute="trailing" secondItem="j96-Ls-EEv" secondAttribute="trailing" constant="20" id="mny-Ia-6Ck"/>
                         <constraint firstItem="j96-Ls-EEv" firstAttribute="leading" secondItem="kTl-QU-YQh" secondAttribute="leading" id="nuo-sH-zrc"/>
-                        <constraint firstAttribute="height" constant="348" id="xcq-4s-zgB"/>
+                        <constraint firstAttribute="height" constant="340" id="xcq-4s-zgB"/>
                         <constraint firstItem="kTl-QU-YQh" firstAttribute="leading" secondItem="bLL-8E-49G" secondAttribute="leading" id="yLg-YR-MGE"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -273,6 +273,9 @@
         </view>
     </objects>
     <resources>
-        <image name="avatar_unknown_small.png" width="131" height="131"/>
+        <image name="modal_icon_normal.png" width="54" height="54"/>
+        <image name="modal_icon_normal_vid.png" width="27" height="17"/>
+        <image name="modal_icon_phone_normal.png" width="27" height="27"/>
+        <image name="modal_icon_text_normal.png" width="27" height="24"/>
     </resources>
 </document>

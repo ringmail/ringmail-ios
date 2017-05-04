@@ -197,6 +197,14 @@
 		4DCEA6891EBAA62A00E6760D /* RgOptionsModalViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA6841EBAA5C200E6760D /* RgOptionsModalViewController.xib */; };
 		4DCEA68C1EBBBB0C00E6760D /* RgModalButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA68B1EBBBB0C00E6760D /* RgModalButtonView.m */; };
 		4DCEA68D1EBBBB0C00E6760D /* RgModalButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA68B1EBBBB0C00E6760D /* RgModalButtonView.m */; };
+		4DCEA6921EBBE92F00E6760D /* modal_icon_normal_vid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA68E1EBBE92F00E6760D /* modal_icon_normal_vid@2x.png */; };
+		4DCEA6931EBBE92F00E6760D /* modal_icon_normal_vid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA68E1EBBE92F00E6760D /* modal_icon_normal_vid@2x.png */; };
+		4DCEA6941EBBE92F00E6760D /* modal_icon_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA68F1EBBE92F00E6760D /* modal_icon_normal@2x.png */; };
+		4DCEA6951EBBE92F00E6760D /* modal_icon_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA68F1EBBE92F00E6760D /* modal_icon_normal@2x.png */; };
+		4DCEA6961EBBE92F00E6760D /* modal_icon_phone_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA6901EBBE92F00E6760D /* modal_icon_phone_normal@2x.png */; };
+		4DCEA6971EBBE92F00E6760D /* modal_icon_phone_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA6901EBBE92F00E6760D /* modal_icon_phone_normal@2x.png */; };
+		4DCEA6981EBBE92F00E6760D /* modal_icon_text_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA6911EBBE92F00E6760D /* modal_icon_text_normal@2x.png */; };
+		4DCEA6991EBBE92F00E6760D /* modal_icon_text_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA6911EBBE92F00E6760D /* modal_icon_text_normal@2x.png */; };
 		4DDB8CF61D9444BC00F5FD71 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */; };
 		4DDB8CF71D9444BC00F5FD71 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */; };
 		4DDB8CF81D9444BC00F5FD71 /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF11D9444BB00F5FD71 /* libresolv.9.dylib */; };
@@ -2495,6 +2503,10 @@
 		4DCEA6841EBAA5C200E6760D /* RgOptionsModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgOptionsModalViewController.xib; sourceTree = "<group>"; };
 		4DCEA68A1EBBBB0C00E6760D /* RgModalButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgModalButtonView.h; sourceTree = "<group>"; };
 		4DCEA68B1EBBBB0C00E6760D /* RgModalButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgModalButtonView.m; sourceTree = "<group>"; };
+		4DCEA68E1EBBE92F00E6760D /* modal_icon_normal_vid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modal_icon_normal_vid@2x.png"; sourceTree = "<group>"; };
+		4DCEA68F1EBBE92F00E6760D /* modal_icon_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modal_icon_normal@2x.png"; sourceTree = "<group>"; };
+		4DCEA6901EBBE92F00E6760D /* modal_icon_phone_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modal_icon_phone_normal@2x.png"; sourceTree = "<group>"; };
+		4DCEA6911EBBE92F00E6760D /* modal_icon_text_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modal_icon_text_normal@2x.png"; sourceTree = "<group>"; };
 		4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
 		4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
 		4DDB8CF11D9444BB00F5FD71 /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = ../../../usr/lib/libresolv.9.dylib; sourceTree = "<group>"; };
@@ -4989,6 +5001,10 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4DCEA68E1EBBE92F00E6760D /* modal_icon_normal_vid@2x.png */,
+				4DCEA68F1EBBE92F00E6760D /* modal_icon_normal@2x.png */,
+				4DCEA6901EBBE92F00E6760D /* modal_icon_phone_normal@2x.png */,
+				4DCEA6911EBBE92F00E6760D /* modal_icon_text_normal@2x.png */,
 				4D4544CE1EA81A2E007AFB71 /* icon_dialpad_call-x@2x.png */,
 				4D4544CF1EA81A2E007AFB71 /* icon_dialpad_call@2x.png */,
 				4D4544D01EA81A2E007AFB71 /* icon_mute_call-x@2x.png */,
@@ -6061,6 +6077,7 @@
 				4D9684DA1E4B9185008464B7 /* header_navigation_arrow@3x.png in Resources */,
 				4DF6134F1E5CD6B7005624D2 /* tabs_ring_pressed@3x.png in Resources */,
 				D3F83F2A158205A100336684 /* video_on_over.png in Resources */,
+				4DCEA6921EBBE92F00E6760D /* modal_icon_normal_vid@2x.png in Resources */,
 				D3F83F441582223B00336684 /* numpad_zero_default.png in Resources */,
 				C444F3D31C92240300134788 /* menu-more@2x.png in Resources */,
 				D3F83F461582223B00336684 /* numpad_zero_over.png in Resources */,
@@ -6265,6 +6282,7 @@
 				D3D6A3A2159B0EEF005F692C /* add_call_over.png in Resources */,
 				D3D6A3AB159B0EFE005F692C /* security_ko.png in Resources */,
 				C444F3DE1C92240300134788 /* menu-hash.png in Resources */,
+				4DCEA6941EBBE92F00E6760D /* modal_icon_normal@2x.png in Resources */,
 				D3D6A3AD159B0EFE005F692C /* security_pending.png in Resources */,
 				4D9684CD1E456638008464B7 /* hashtag_rocket_icon@3x.png in Resources */,
 				D3D6A3AF159B0EFE005F692C /* security_ok.png in Resources */,
@@ -6351,7 +6369,9 @@
 				D3128FF115AABE4E00A2147A /* contact_back_over.png in Resources */,
 				C444F3C91C92240300134788 /* menu-more_active@3x.png in Resources */,
 				C444F3F81C9235DC00134788 /* phone@3x.png in Resources */,
+				4DCEA6961EBBE92F00E6760D /* modal_icon_phone_normal@2x.png in Resources */,
 				D3128FF315AABE4E00A2147A /* contact_edit_default.png in Resources */,
+				4DCEA6981EBBE92F00E6760D /* modal_icon_text_normal@2x.png in Resources */,
 				C4BC492C1BF9474000826264 /* RgChatQuestionSelect.xib in Resources */,
 				4D4544C01EA80618007AFB71 /* button_hangup_call@2x.png in Resources */,
 				D3128FF515AABE4E00A2147A /* contact_edit_over.png in Resources */,
@@ -6900,6 +6920,7 @@
 				C4AC27DE1D3963FA003B6232 /* menu-home.png in Resources */,
 				C4AC27DF1D3963FA003B6232 /* ringmail_edit-pressed@2x.png in Resources */,
 				C4AC27E01D3963FA003B6232 /* numpad_one_voicemail_over.png in Resources */,
+				4DCEA6971EBBE92F00E6760D /* modal_icon_phone_normal@2x.png in Resources */,
 				C470BF901E68C834009968E2 /* ringpanel_button1_camera@2x.png in Resources */,
 				C4AC27E11D3963FA003B6232 /* contacts_default.png in Resources */,
 				C470BF941E68C834009968E2 /* ringpanel_button3_moments@2x.png in Resources */,
@@ -6970,6 +6991,7 @@
 				C470BF811E68C7E6009968E2 /* arrow_normal@2x.png in Resources */,
 				C4AC28191D3963FA003B6232 /* ringmail_speaker.png in Resources */,
 				C4AC281A1D3963FA003B6232 /* numpad_six_over.png in Resources */,
+				4DCEA6951EBBE92F00E6760D /* modal_icon_normal@2x.png in Resources */,
 				4D4544DB1EA81A2E007AFB71 /* icon_mute_call@2x.png in Resources */,
 				C4AC281B1D3963FA003B6232 /* numpad_seven_default.png in Resources */,
 				C4AC281C1D3963FA003B6232 /* ringmail_chat_back@3x.png in Resources */,
@@ -7213,6 +7235,7 @@
 				C4AC28E61D3963FA003B6232 /* menu-hash_active.png in Resources */,
 				C4AC28E71D3963FA003B6232 /* chat_send_over.png in Resources */,
 				C4AC28E81D3963FA003B6232 /* ping_out_receive.wav in Resources */,
+				4DCEA6931EBBE92F00E6760D /* modal_icon_normal_vid@2x.png in Resources */,
 				C4AC28E91D3963FA003B6232 /* chat_send_disabled.png in Resources */,
 				C4AC28EB1D3963FA003B6232 /* chat_bubble_outgoing.png in Resources */,
 				C4AC28EC1D3963FA003B6232 /* chat_bubble_incoming.png in Resources */,
@@ -7612,6 +7635,7 @@
 				C4AC2A461D3963FA003B6232 /* setup_welcome_logo~ipad.png in Resources */,
 				C4AC2A471D3963FA003B6232 /* RgInCallViewController.xib in Resources */,
 				C4E1CB511E6E281E00698166 /* camera-switch.png in Resources */,
+				4DCEA6991EBBE92F00E6760D /* modal_icon_text_normal@2x.png in Resources */,
 				C4AC2A481D3963FA003B6232 /* chat_progressbar_background.png in Resources */,
 				C4AC2A491D3963FA003B6232 /* ringmail_chat_back@2x.png in Resources */,
 				C4AC2A4A1D3963FA003B6232 /* setup_back_default_landscape~ipad.png in Resources */,
