@@ -40,6 +40,9 @@ NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
 NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
 NSString *const kRgGoogleSignInError = @"kRgGoogleSignInError";
 
+NSString *const kRgPresentOptionsModal = @"kRgPresentOptionsModal";
+NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
+
 // New skin
 NSString *const kRgSendComponentReset = @"kRgSendComponentReset";
 NSString *const kRgSendComponentAddMedia = @"kRgSendComponentAddMedia";

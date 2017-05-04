@@ -15,6 +15,7 @@
 @synthesize addressField;
 @synthesize callButton;
 @synthesize goButton;
+@synthesize triangleButton;
 @synthesize messageButton;
 @synthesize searchButton;
 @synthesize placeHolder;
@@ -77,20 +78,23 @@ bool animInactive = YES;
         NSString* addr = [addressField text];
         if ([[addr substringToIndex:1] isEqualToString:@"#"])
         {
-            messageButton.hidden = YES;
-            callButton.hidden = YES;
+            triangleButton.hidden = YES;
+//            messageButton.hidden = YES;
+//            callButton.hidden = YES;
             goButton.hidden = NO;
         }
         else
         {
-            messageButton.hidden = NO;
-            callButton.hidden = NO;
-            goButton.hidden = YES;
+            triangleButton.hidden = NO;
+//            messageButton.hidden = NO;
+//            callButton.hidden = NO;
+//            goButton.hidden = YES;
         }
     } else {
         messageButton.hidden = YES;
         callButton.hidden = YES;
         goButton.hidden = YES;
+        triangleButton.hidden = YES;
     }
 }
 
@@ -108,6 +112,10 @@ bool animInactive = YES;
         addressLabel.layer.opacity = 0.0;
         [addressField setText:@""];
     }
+}
+
+- (IBAction)onTriangleButton:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:nil];
 }
 
 

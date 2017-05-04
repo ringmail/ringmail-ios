@@ -12,6 +12,7 @@
 #import "SendComponent.h"
 #import "RgManager.h"
 
+
 @interface SendViewController () <CKComponentProvider, CKComponentHostingViewDelegate>
 
 @end
@@ -77,6 +78,7 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSend) name:kRgSendComponentReset object:nil];
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {

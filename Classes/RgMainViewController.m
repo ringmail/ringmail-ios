@@ -34,6 +34,7 @@
 #import "RgLocationManager.h"
 #import "RgSearchBarViewController.h"
 
+
 @interface RgMainViewController()
 @property BOOL isSearchBarVisible;
 @property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
@@ -185,6 +186,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 //-(void)viewDidAppear:(BOOL)animated {
 //    [[PhoneMainView instance] changeCurrentView:[RgInCallViewController compositeViewDescription] push:TRUE];
 //}
+
 
 
 - (void)viewWillDisappear:(BOOL)animated {

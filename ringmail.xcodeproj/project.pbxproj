@@ -190,6 +190,13 @@
 		4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B031E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
 		4DAA6B041E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
+		4DCEA6851EBAA5C200E6760D /* RgOptionsModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA6831EBAA5C200E6760D /* RgOptionsModalViewController.m */; };
+		4DCEA6861EBAA5C200E6760D /* RgOptionsModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA6841EBAA5C200E6760D /* RgOptionsModalViewController.xib */; };
+		4DCEA6871EBAA60000E6760D /* RgOptionsModalViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA6821EBAA5C200E6760D /* RgOptionsModalViewController.h */; };
+		4DCEA6881EBAA60000E6760D /* RgOptionsModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA6831EBAA5C200E6760D /* RgOptionsModalViewController.m */; };
+		4DCEA6891EBAA62A00E6760D /* RgOptionsModalViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA6841EBAA5C200E6760D /* RgOptionsModalViewController.xib */; };
+		4DCEA68C1EBBBB0C00E6760D /* RgModalButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA68B1EBBBB0C00E6760D /* RgModalButtonView.m */; };
+		4DCEA68D1EBBBB0C00E6760D /* RgModalButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA68B1EBBBB0C00E6760D /* RgModalButtonView.m */; };
 		4DDB8CF61D9444BC00F5FD71 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */; };
 		4DDB8CF71D9444BC00F5FD71 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */; };
 		4DDB8CF81D9444BC00F5FD71 /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB8CF11D9444BB00F5FD71 /* libresolv.9.dylib */; };
@@ -2483,6 +2490,11 @@
 		4DAA6AFE1E6E16C700D9DE84 /* RgSearchBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgSearchBarViewController.h; sourceTree = "<group>"; };
 		4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgSearchBarViewController.m; sourceTree = "<group>"; };
 		4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgSearchBarViewController.xib; sourceTree = "<group>"; };
+		4DCEA6821EBAA5C200E6760D /* RgOptionsModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgOptionsModalViewController.h; sourceTree = "<group>"; };
+		4DCEA6831EBAA5C200E6760D /* RgOptionsModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgOptionsModalViewController.m; sourceTree = "<group>"; };
+		4DCEA6841EBAA5C200E6760D /* RgOptionsModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgOptionsModalViewController.xib; sourceTree = "<group>"; };
+		4DCEA68A1EBBBB0C00E6760D /* RgModalButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgModalButtonView.h; sourceTree = "<group>"; };
+		4DCEA68B1EBBBB0C00E6760D /* RgModalButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgModalButtonView.m; sourceTree = "<group>"; };
 		4DDB8CEF1D9444BB00F5FD71 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
 		4DDB8CF01D9444BB00F5FD71 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
 		4DDB8CF11D9444BB00F5FD71 /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = ../../../usr/lib/libresolv.9.dylib; sourceTree = "<group>"; };
@@ -3982,6 +3994,11 @@
 				C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */,
 				C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */,
 				C4AA1A211C71314E003F86FD /* RgMainViewController.xib */,
+				4DCEA6821EBAA5C200E6760D /* RgOptionsModalViewController.h */,
+				4DCEA6831EBAA5C200E6760D /* RgOptionsModalViewController.m */,
+				4DCEA6841EBAA5C200E6760D /* RgOptionsModalViewController.xib */,
+				4DCEA68A1EBBBB0C00E6760D /* RgModalButtonView.h */,
+				4DCEA68B1EBBBB0C00E6760D /* RgModalButtonView.m */,
 				4DAA6AFE1E6E16C700D9DE84 /* RgSearchBarViewController.h */,
 				4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */,
 				4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */,
@@ -6810,6 +6827,7 @@
 				1599105F16F746B2007BF52B /* route_phone_off_over_landscape.png in Resources */,
 				1599106116F746B2007BF52B /* route_phone_on_default_landscape.png in Resources */,
 				C48D3C0F1D0276FE00FAC3A6 /* call_in.wav in Resources */,
+				4DCEA6861EBAA5C200E6760D /* RgOptionsModalViewController.xib in Resources */,
 				4D4544D41EA81A2E007AFB71 /* icon_dialpad_call-x@2x.png in Resources */,
 				1599106316F746B2007BF52B /* route_speaker_off_default_landscape.png in Resources */,
 				4D9684D01E456641008464B7 /* hashtag_rocket_icon@2x.png in Resources */,
@@ -7846,6 +7864,7 @@
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
 				C44A40DC1E70E415000F3E24 /* CLBloomEffect.m in Sources */,
 				C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */,
+				4DCEA68C1EBBBB0C00E6760D /* RgModalButtonView.m in Sources */,
 				D3ED3E871586291E006C0DE4 /* UIMainBar.m in Sources */,
 				C476A7131CF254F100CA3772 /* HashtagCardComponent.mm in Sources */,
 				C42B72151CA22EDB0020A57F /* InteractiveCardComponent.mm in Sources */,
@@ -7940,6 +7959,7 @@
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				C470BF781E68C540009968E2 /* SendToInputComponent.mm in Sources */,
 				C44A410C1E70E416000F3E24 /* UIView+Frame.m in Sources */,
+				4DCEA6851EBAA5C200E6760D /* RgOptionsModalViewController.m in Sources */,
 				C4BC49361BF9477B00826264 /* RgChatQuestionSelect.m in Sources */,
 				C48C10891E81AB0B0094F1F3 /* Media.m in Sources */,
 				C40F0E821C928C8A0011F8B6 /* RgChatBubbleFactory.m in Sources */,
@@ -8041,6 +8061,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DCEA6891EBAA62A00E6760D /* RgOptionsModalViewController.xib in Sources */,
+				4DCEA6871EBAA60000E6760D /* RgOptionsModalViewController.h in Sources */,
+				4DCEA6881EBAA60000E6760D /* RgOptionsModalViewController.m in Sources */,
 				C44A40FD1E70E415000F3E24 /* CLImageEditorTheme+Private.m in Sources */,
 				C4AC2AAD1D3963FA003B6232 /* MainCardComponentController.mm in Sources */,
 				C4AC2AAE1D3963FA003B6232 /* TPKeyboardAvoidingTableView.m in Sources */,
@@ -8192,6 +8215,7 @@
 				C4AC2B251D3963FA003B6232 /* IASKSettingsReader.m in Sources */,
 				C4AC2B261D3963FA003B6232 /* IASKSettingsStore.m in Sources */,
 				C4AC2B271D3963FA003B6232 /* IASKSettingsStoreFile.m in Sources */,
+				4DCEA68D1EBBBB0C00E6760D /* RgModalButtonView.m in Sources */,
 				C44A40E11E70E415000F3E24 /* CLHighlightShadowEffect.m in Sources */,
 				C4AC2B281D3963FA003B6232 /* IASKSettingsStoreUserDefaults.m in Sources */,
 				C4593A5E1E6A4A89001C3BDD /* FavoritesBarComponent.mm in Sources */,

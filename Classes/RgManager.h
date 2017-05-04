@@ -45,6 +45,9 @@ extern NSString *const kRgSendComponentReset;
 extern NSString *const kRgSendComponentAddMedia;
 extern NSString *const kRgSendComponentRemoveMedia;
 
+extern NSString *const kRgPresentOptionsModal;
+extern NSString *const kRgDismissOptionsModal;
+
 @interface RgManager : NSObject
 
 + (NSString*)ringmailHost;

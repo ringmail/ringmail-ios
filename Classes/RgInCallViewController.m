@@ -292,7 +292,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 			}
 		}
 	}
-
+    
 	// Update table
 	//[callTableView reloadData];
 
