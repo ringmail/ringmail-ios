@@ -16,11 +16,11 @@
 
 static RgCallDuration* globalDuration = nil;
 
-+ (instancetype)newWithCall:(RgCall *)call context:(RgCallContext *)context
++ (instancetype)newWithCall:(RgCall *)call2 context:(RgCallContext *)context
 {
     // mrkbxt - modified newWIthcall signature (call to call2) and RGMainViewController's viewDidAppear to force change to this view
-//    NSDictionary *testData = @{@"address": @"", @"label": @"Testy Tester", @"height": @"0", @"video": @"0", @"dialpad": @"0", @"mute": @"0", @"speaker": @"0"};
-//    RgCall *call = [[RgCall alloc] initWithData:testData];
+    NSDictionary *testData = @{@"address": @"", @"label": @"Testy Tester", @"height": @"0", @"video": @"0", @"dialpad": @"0", @"mute": @"0", @"speaker": @"0"};
+    RgCall *call = [[RgCall alloc] initWithData:testData];
     
 	NSLog(@"Call Data: %@", [call data]);
 	CKComponentScope scope(self);

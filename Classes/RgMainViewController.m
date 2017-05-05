@@ -183,9 +183,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 // mrkbxt  // test incallview
-//-(void)viewDidAppear:(BOOL)animated {
-//    [[PhoneMainView instance] changeCurrentView:[RgInCallViewController compositeViewDescription] push:TRUE];
-//}
+-(void)viewDidAppear:(BOOL)animated {
+    [[PhoneMainView instance] changeCurrentView:[RgInCallViewController compositeViewDescription] push:TRUE];
+}
 
 
 

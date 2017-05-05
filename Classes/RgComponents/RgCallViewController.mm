@@ -121,7 +121,6 @@ static RgCallDuration* globalDuration = nil;
     return MIN(statusBarSize.width, statusBarSize.height);
 }
 
-
 + (void)setDurationLabel:(RgCallDuration*)label
 {
 	globalDuration = label;

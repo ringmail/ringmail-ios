@@ -67,6 +67,7 @@
 @synthesize zeroButton;
 @synthesize sharpButton;
 
+
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -598,6 +599,14 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRgCallRefresh object:nil];
 }
+
+
+- (IBAction)onHideButton:(id)sender
+{
+    NSLog(@"onHideButton");
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgToggleNumberPad object:nil];
+}
+
 
 - (void)callRefreshTimer
 {
