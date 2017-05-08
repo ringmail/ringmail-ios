@@ -19,6 +19,6 @@
  */
 @interface RgCallComponent : CKCompositeComponent
 
-+ (instancetype)newWithCall:(RgCall *)call2 context:(RgCallContext *)context;
++ (instancetype)newWithCall:(RgCall *)call context:(RgCallContext *)context;
 
 @end
