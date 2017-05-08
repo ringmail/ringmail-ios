@@ -38,18 +38,19 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_navigation_tabs_blue.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="38p-KF-uvZ" userLabel="background">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaF-kH-DJ7">
-                    <rect key="frame" x="0.0" y="0.0" width="31" height="95"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaF-kH-DJ7">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="95"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="Wes-gi-fQW"/>
+                        <constraint firstAttribute="width" constant="50" id="Wes-gi-fQW"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="22"/>
+                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <connections>
                         <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="5hP-B9-FvU"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTS-UH-a3H" userLabel="Left">
-                    <rect key="frame" x="30" y="37" width="50" height="21"/>
+                    <rect key="frame" x="50" y="37" width="50" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="VRR-2T-QTT"/>
                         <constraint firstAttribute="height" constant="21" id="mjl-sZ-gf4"/>
