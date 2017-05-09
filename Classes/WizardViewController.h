@@ -52,7 +52,7 @@
 
 @property (nonatomic, strong) IBOutlet UIView *waitView;
 
-@property (nonatomic, strong) IBOutlet UIButton *backButton;
+@property (nonatomic, strong) IBOutlet UIButton *backButtonWiz;
 @property (nonatomic, strong) IBOutlet UIButton *createAccountButton;
 @property (nonatomic, strong) IBOutlet UIButton *connectAccountButton;
 @property (nonatomic, strong) IBOutlet UIButton *externalAccountButton;

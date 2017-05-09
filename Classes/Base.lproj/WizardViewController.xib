@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="HelveticaNeueLTStd-Cn.otf">
-            <string>HelveticaNeueLTStd-Cn</string>
-        </mutableArray>
+        <array key="fontawesome-webfont.ttf">
+            <string>FontAwesome</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardViewController">
             <connections>
-                <outlet property="backButton" destination="17" id="27"/>
+                <outlet property="backButtonWiz" destination="17" id="MNq-lq-bQK"/>
                 <outlet property="contentView" destination="98" id="99"/>
                 <outlet property="portraitView" destination="12" id="117"/>
                 <outlet property="view" destination="12" id="20"/>
@@ -27,32 +30,29 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" id="98" userLabel="contentView" customClass="TPKeyboardAvoidingScrollView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </scrollView>
-                <view tag="2" contentMode="scaleToFill" id="14" userLabel="tabBar">
-                    <rect key="frame" x="0.0" y="383" width="320" height="77"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button hidden="YES" opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="17" userLabel="backButton">
-                            <rect key="frame" x="199" y="0.0" width="160" height="77"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <button hidden="YES" opaque="NO" tag="5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="17" userLabel="backButton">
+                            <rect key="frame" x="0.0" y="20" width="75" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label=""/>
-                            <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="16"/>
-                            <inset key="contentEdgeInsets" minX="0.0" minY="16" maxX="0.0" maxY="0.0"/>
-                            <inset key="titleEdgeInsets" minX="10" minY="35" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Back" backgroundImage="setup_back_over.png">
-                                <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="22"/>
+                            <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="disabled" backgroundImage="setup_back_disabled.png"/>
-                            <state key="highlighted" backgroundImage="setup_back_default.png">
-                                <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
                             <connections>
                                 <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="23"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.65490196078431373" green="0.14901960784313725" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                </scrollView>
+                <view tag="2" contentMode="scaleToFill" id="14" userLabel="tabBar">
+                    <rect key="frame" x="0.0" y="383" width="320" height="77"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view hidden="YES" tag="6" contentMode="scaleToFill" id="91" userLabel="waitView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
@@ -63,18 +63,21 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="323" y="390"/>
         </view>
     </objects>
     <resources>
-        <image name="setup_back_default.png" width="320" height="154"/>
         <image name="setup_back_disabled.png" width="320" height="154"/>
-        <image name="setup_back_over.png" width="320" height="154"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

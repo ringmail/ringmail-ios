@@ -50,7 +50,7 @@ typedef enum _ViewElement {
 @synthesize validatePhoneView;
 @synthesize waitView;
 
-@synthesize backButton;
+@synthesize backButtonWiz;
 @synthesize createAccountButton;
 @synthesize connectAccountButton;
 @synthesize remoteProvisioningButton;
@@ -128,6 +128,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [GIDSignIn sharedInstance].uiDelegate = self;
     [self.googleSignInButton setStyle:kGIDSignInButtonStyleWide];
     [self.googleSignUpButton setStyle:kGIDSignInButtonStyleWide];
+    
+    [backButtonWiz setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -286,11 +288,11 @@ static UICompositeViewDescription *compositeDescription = nil;
         view == validatePhoneView ||
         view == choiceView
     ) {
-		[backButton setEnabled:FALSE];
-        [backButton setHidden:TRUE];
+		[backButtonWiz setEnabled:FALSE];
+        [backButtonWiz setHidden:TRUE];
 	} else {
-		[backButton setEnabled:TRUE];
-        [backButton setHidden:FALSE];
+		[backButtonWiz setEnabled:TRUE];
+        [backButtonWiz setHidden:FALSE];
 	}
     
     if (view == validateAccountView)
@@ -568,19 +570,19 @@ static UICompositeViewDescription *compositeDescription = nil;
         
 		UIView *view = [historyViews lastObject];
 		[historyViews removeLastObject];
-		[self changeView:view back:TRUE animation:TRUE];
+		[self changeView:view back:TRUE animation:FALSE];
 	}
 }
 
 - (IBAction)onCreateAccountClick:(id)sender {
 	nextView = createAccountView;
-    [self changeView:nextView back:false animation:TRUE];
+    [self changeView:nextView back:false animation:FALSE];
     nextView = nil;
 }
 
 - (IBAction)onConnectLinphoneAccountClick:(id)sender {
 	nextView = connectAccountView;
-    [self changeView:nextView back:false animation:TRUE];
+    [self changeView:nextView back:false animation:FALSE];
     nextView = nil;
 }
 
@@ -658,7 +660,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             else
             {
                 // Go To Next View
-                [self changeView:validatePhoneView back:false animation:TRUE];
+                [self changeView:validatePhoneView back:false animation:FALSE];
             }
         }
     }
@@ -823,7 +825,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                             [cfg setObject:username forKey:@"ringmail_login"];
                             [cfg setObject:password forKey:@"ringmail_password"];
                             [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
-                            [self changeView:validateAccountView back:FALSE animation:TRUE];
+                            [self changeView:validateAccountView back:FALSE animation:FALSE];
                         }
                         else if ([err isEqualToString:@"credentials"])
                         {
@@ -950,7 +952,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [cfg setObject:@"" forKey:@"ringmail_chat_password"];
                 [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
                 [cfg setObject:@"0" forKey:@"ringmail_verify_phone"];
-                [self changeView:validateAccountView back:FALSE animation:TRUE];
+                [self changeView:validateAccountView back:FALSE animation:FALSE];
             }
             else
             {
@@ -1117,7 +1119,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                         [cfg setObject:login forKey:@"ringmail_login"];
                         [cfg setObject:@"" forKey:@"ringmail_password"];
                         [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
-                        [self changeView:validateAccountView back:FALSE animation:TRUE];
+                        [self changeView:validateAccountView back:FALSE animation:FALSE];
                     }
                     else if ([err isEqualToString:@"credentials"])
                     {
