@@ -20,12 +20,14 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 @synthesize mainList;
 @synthesize mainCount;
 @synthesize mainPath;
+@synthesize mainHeader;
 
 - (instancetype)init
 {
     if (self = [super init]) {
         mainCount = [NSNumber numberWithInteger:0];
         mainList = nil;
+		mainHeader = nil;
     }
     return self;
 }
@@ -74,23 +76,24 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 - (void)fetchPageWithCount:(NSInteger)count screenWidth:(NSString*)screenWidth caller:(HashtagCollectionViewController*)caller
 {
     [caller.waitDelegate showWaiting];
-    [[RgNetwork instance] businessCategoryDirectory:@{
-         @"parent": mainPath,
-         @"screenWidth": screenWidth,
-         } success:^(NSURLSessionTask *operation, id responseObject) {
-             [caller.waitDelegate hideWaiting];
-             NSDictionary* res = responseObject;
-             NSLog(@"API Response: %@", res);
-             NSString *ok = [res objectForKey:@"result"];
-             if (ok != nil && [ok isEqualToString:@"ok"])
-             {
-                 mainList = res[@"directory"];
-             }
-             [caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
-         } failure:^(NSURLSessionTask *operation, NSError *error) {
-             [caller.waitDelegate hideWaiting];
-             NSLog(@"RingMail API Error: %@", [error localizedDescription]);
-         }];
+    [[RgNetwork instance] hashtagDirectory:@{
+        @"category_id": mainPath,
+        @"screen_width": screenWidth,
+    } success:^(NSURLSessionTask *operation, id responseObject) {
+        [caller.waitDelegate hideWaiting];
+        NSDictionary* res = responseObject;
+        NSLog(@"API Response: %@", res);
+        NSString *ok = [res objectForKey:@"result"];
+        if (ok != nil && [ok isEqualToString:@"ok"])
+        {
+            mainList = res[@"directory"];
+			mainHeader = res[@"header"];
+        }
+        [caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        [caller.waitDelegate hideWaiting];
+        NSLog(@"RingMail API Error: %@", [error localizedDescription]);
+    }];
 }
 
 
@@ -104,23 +107,18 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     {
         if ([mainCount intValue] == 0 && i == 0)
         {
-            NSDictionary* tempGroup = mainList[0];
-            NSArray* firstGroupItems = tempGroup[@"group"];
-            NSDictionary* headerCardData = firstGroupItems[0];
-            Card *card;
-            
-            if (headerCardData)
+            if (mainHeader)
             {
-                card = [[Card alloc] initWithData:@{
-                    @"type": headerCardData[@"header_type"],
+                Card* card = [[Card alloc] initWithData:@{
+                    @"type": mainHeader[@"type"],
                     @"text": @"",
-                    @"header_img_url": headerCardData[@"header_img_url"],
-                    @"header_img_ht": headerCardData[@"header_img_ht"],
-                    @"name": headerCardData[@"name"],
-                    @"parent_name": headerCardData[@"parent_name"],
-                    @"parent2parent_name": headerCardData[@"parent2parent_name"],
-                    } header:@NO];
-                
+                    @"header_img_url": mainHeader[@"image_url"],
+                    @"header_img_ht": mainHeader[@"image_height"],
+                    //@"name": mainHeader[@"category_name"],
+                    //@"parent_name": mainHeader[@"parent_name"],
+                    @"parent_name": mainHeader[@"category_name"],
+                    @"parent2parent_name": mainHeader[@"top_name"],
+                } header:@NO];
                 [_cards addObject:card];
                 added++;
             }
