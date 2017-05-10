@@ -114,10 +114,8 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
                     @"text": @"",
                     @"header_img_url": mainHeader[@"image_url"],
                     @"header_img_ht": mainHeader[@"image_height"],
-                    //@"name": mainHeader[@"category_name"],
-                    //@"parent_name": mainHeader[@"parent_name"],
-                    @"parent_name": mainHeader[@"category_name"],
-                    @"parent2parent_name": mainHeader[@"top_name"],
+                    @"category_name": mainHeader[@"category_name"],
+                    @"parent_name": mainHeader[@"parent_name"],
                 } header:@NO];
                 [_cards addObject:card];
                 added++;

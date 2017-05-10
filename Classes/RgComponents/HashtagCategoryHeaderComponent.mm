@@ -61,7 +61,7 @@ CKInsetComponent* hashtagCatDirHeaderLabelComponent(float* wIn, NSDictionary * d
             style:{.spacing = 8}
             children:{
                 {[CKLabelComponent newWithLabelAttributes:{
-                    .string = [data objectForKey:@"name"],
+                    .string = [data objectForKey:@"category_name"],
                     .color = [UIColor colorWithHex:@"#213E87"],
                     .font = [UIFont fontWithName:@"SFUIText-SemiBold" size:24],
                     .alignment = NSTextAlignmentLeft,

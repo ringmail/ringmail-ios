@@ -137,11 +137,13 @@
                                                               .string = [data objectForKey:@"label"],
                                                               .font = [UIFont fontWithName:@"SFUIText-Medium" size:17],
                                                               .color = [UIColor colorWithHex:@"#33362f"],
+															  .lineBreakMode = NSLineBreakByTruncatingTail,
+															  .maximumNumberOfLines = 1
                                                           }
                                                           viewAttributes:{
                                                               {@selector(setBackgroundColor:), [UIColor clearColor]},
                                                               {@selector(setUserInteractionEnabled:), @NO},
-                                                          }
+														}
                                                           size:{.width = labelWidth}]
                                                 ]
                                             }
