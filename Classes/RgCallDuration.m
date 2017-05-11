@@ -16,7 +16,8 @@
 {
 	if (self = [super initWithFrame:rect])
 	{
-		[self setFont:[UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:14]];
+		[self setFont:[UIFont fontWithName:@"SFUIText-Regular" size:14]];
+        [self setTextColor:[UIColor whiteColor]];
 		[self setTextAlignment:NSTextAlignmentCenter];
 		[self setText:@"00:00:00"];
 	}

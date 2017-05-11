@@ -31,11 +31,22 @@ NSString *const kRgContactRefresh = @"kRgContactRefresh";
 NSString *const kRgSelf = @"self";
 NSString *const kRgSelfName = @"Self";
 
+NSString *const kRgNavBarViewChange = @"kRgNavBarViewChange";
+NSString *const kRgHashtagDirectoryUpdatePath = @"kRgHashtagDirectoryUpdatePath";
+NSString *const kRgSegmentControl = @"kRgSegmentControl";
+NSString *const kRgCurrentLocation = @"kRgCurrentLocation";
+NSString *const kRgGoogleSignInStart = @"kRgGoogleSignInStart";
+NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
+NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
+NSString *const kRgGoogleSignInError = @"kRgGoogleSignInError";
+
+NSString *const kRgPresentOptionsModal = @"kRgPresentOptionsModal";
+NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
+
 // New skin
 NSString *const kRgSendComponentReset = @"kRgSendComponentReset";
 NSString *const kRgSendComponentAddMedia = @"kRgSendComponentAddMedia";
 NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
-
 
 static LevelDB* theConfigDatabase = nil;
 
@@ -50,7 +61,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"www-mf.ringxml.com";
+        return @"www-mb.ringxml.com";
     }
 }
 
@@ -63,7 +74,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"sip-mf.ringxml.com";
+        return @"sip-mb.ringxml.com";
     }
 }
 
@@ -486,6 +497,7 @@ static LevelDB* theConfigDatabase = nil;
     LevelDB* cfg = [RgManager configDatabase];
     NSString* login = [cfg objectForKey:@"ringmail_login"];
     NSString* password = [cfg objectForKey:@"ringmail_password"];
+    
     if (
         login != nil && (! [login isEqualToString:@""]) &&
         password != nil && (! [password isEqualToString:@""])

@@ -67,4 +67,6 @@
 + (int)callCount:(LinphoneCore *)lc;
 + (LinphoneCall *)retrieveCallAtIndex:(NSInteger)index;
 
+- (IBAction)onHideButton:(id)sender;
+
 @end

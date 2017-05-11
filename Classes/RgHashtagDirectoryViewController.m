@@ -94,12 +94,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSegControl:)
-                                                 name:@"RgSegmentControl"
+                                                 name:kRgSegmentControl
                                                object:nil];
     
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
-    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:@"currentLocation" options:NSKeyValueObservingOptionNew context:nil];
+    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
     
     
     
@@ -115,8 +115,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
-    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:@"currentLocation" context:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
+    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
 }
 
 - (void)viewDidLoad {
@@ -130,7 +130,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updatePathEvent:)
-                                                 name:@"RgHashtagDirectoryUpdatePath"
+                                                 name:kRgHashtagDirectoryUpdatePath
                                                object:nil];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -178,7 +178,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgHashtagDirectoryUpdatePath" object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgHashtagDirectoryUpdatePath object:nil];
 }
 
 #pragma mark - Event Functions
@@ -207,7 +207,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         if ([path isEqual:@"0"])
         {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"1",}];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarViewChange" object:self userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:self userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
         }
     }
     else
@@ -277,7 +277,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object  change:(NSDictionary *)change context:(void *)context
 {
-    if([keyPath isEqualToString:@"currentLocation"])
+    if([keyPath isEqualToString:kRgCurrentLocation])
         [[RgLocationManager sharedInstance] stopUpdatingLocation];
 }
 

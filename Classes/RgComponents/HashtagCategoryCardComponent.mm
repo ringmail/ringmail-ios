@@ -21,6 +21,8 @@
 
 #import "RgCustomView.h"
 
+#import "RgManager.h"
+
 @implementation HashtagCategoryCardComponent
 
 @synthesize cardData;
@@ -112,7 +114,7 @@ CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary* data)
     //Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     //[card showMessages];
 //    NSLog(@"Selected: %@", [[self cardData] objectForKey:@"name"]);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"RgHashtagDirectoryUpdatePath" object:self userInfo:@{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{
         @"category_id":[[self cardData] objectForKey:@"id"]
     }];
     
@@ -120,7 +122,7 @@ CKInsetComponent* hashtagCatInsetLabelComponent(NSDictionary* data)
     dict[@"header"] = @"Hashtag Card";
     dict[@"lSeg"] = @"";
     dict[@"rSeg"] = @"";
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarViewChange" object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:nil userInfo:dict];
 }
 
 

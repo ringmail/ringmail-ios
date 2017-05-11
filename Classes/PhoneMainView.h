@@ -45,6 +45,8 @@
 #import "RgWebViewDelegate.h"
 #import "RgInCallViewController.h"
 
+#import "RgOptionsModalViewController.h"
+
 @class PhoneMainView;
 
 @interface RootViewManager : NSObject
@@ -74,6 +76,9 @@
 @property (nonatomic, strong) RgWebViewDelegate* webDelegate;
 @property (nonatomic, strong) UIImage* momentImage;
 
+@property (nonatomic, strong) RgOptionsModalViewController *optionsModalViewController;
+@property (nonatomic, strong) UIView *optionsModalBG;
+
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView;
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView push:(BOOL)push;
 - (UIViewController*)popCurrentView;
@@ -101,6 +106,8 @@
 - (void)handleGoogleSignInStartEvent:(NSNotification *) notification;;
 - (void)handleGoogleSignInCompleteEvent;
 
+- (void)presentOptionsModal;
+- (void)dismissOptionsModal;
 
 
 @end

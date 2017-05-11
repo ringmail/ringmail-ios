@@ -23,6 +23,7 @@
                 <outlet property="messageButton" destination="PN7-h9-doW" id="qtv-Ye-u8q"/>
                 <outlet property="rocketButtonImg" destination="IoP-Qu-KM5" id="j45-qY-Y6l"/>
                 <outlet property="searchButton" destination="0Pt-s7-ZsF" id="gIU-RN-LBl"/>
+                <outlet property="triangleButton" destination="Q0l-nI-7oQ" id="PQD-Sj-8kb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -64,7 +65,7 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5K-dj-8Ti">
-                    <rect key="frame" x="56" y="15" width="252" height="20"/>
+                    <rect key="frame" x="56" y="15.5" width="252" height="19"/>
                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
                     <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -91,6 +92,14 @@
                     <state key="normal" image="ringpage.png"/>
                     <connections>
                         <outlet property="addressField" destination="IhO-DS-dM9" id="NXX-kQ-eLf"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0l-nI-7oQ">
+                    <rect key="frame" x="267" y="11" width="32" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="ringmail_triangle_green.png"/>
+                    <connections>
+                        <action selector="onTriangleButton:" destination="-1" eventType="touchUpInside" id="eGw-DV-Toy"/>
                     </connections>
                 </button>
             </subviews>
@@ -122,6 +131,7 @@
         <image name="hashtag_rocket_icon_blue.png" width="53" height="53"/>
         <image name="phone.png" width="30" height="30"/>
         <image name="quote.png" width="30" height="30"/>
+        <image name="ringmail_triangle_green.png" width="32" height="28"/>
         <image name="ringpage.png" width="30" height="30"/>
     </resources>
 </document>

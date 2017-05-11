@@ -31,6 +31,7 @@
 #import "DTActionSheet.h"
 #import "RegexKitLite/RegexKitLite.h"
 
+
 static RootViewManager *rootViewManagerInstance = nil;
 
 @interface SVModalWebViewController ()
@@ -136,6 +137,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 @synthesize volumeView;
 @synthesize webDelegate;
 @synthesize momentImage;
+@synthesize optionsModalViewController;
+@synthesize optionsModalBG;
 
 #pragma mark - Lifecycle Functions
 
@@ -212,24 +215,54 @@ static RootViewManager *rootViewManagerInstance = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleGoogleSignInStartEvent:)
-                                                 name:@"googleSignInStart"
+                                                 name:kRgGoogleSignInStart
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleGoogleSignInCompleteEvent)
-                                                 name:@"googleSignInComplete"
+                                                 name:kRgGoogleSignInComplete
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(presentOptionsModal)
+                                                 name:kRgPresentOptionsModal
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(dismissOptionsModal)
+                                                 name:kRgDismissOptionsModal
                                                object:nil];
     
 	[self.view addSubview:mainViewController.view];
+    
+    optionsModalViewController = [[RgOptionsModalViewController alloc]init];
+    optionsModalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    
+    optionsModalBG = [[UIView alloc] initWithFrame:self.view.frame];
+    [optionsModalBG setBackgroundColor:[UIColor colorWithHex:@"#212121" alpha:0.65f]];
+    optionsModalBG.hidden = YES;
+    [self.view addSubview:optionsModalBG];
+    
 }
 
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInStart" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInComplete" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInStart object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInComplete object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgPresentOptionsModal object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgDismissOptionsModal object:nil];
 }
 
+
+#pragma mark - Options Model Functions
+- (void)presentOptionsModal {
+    optionsModalBG.hidden = NO;
+    [self presentViewController:optionsModalViewController animated:YES completion:nil];
+}
+
+- (void)dismissOptionsModal {
+    optionsModalBG.hidden = YES;
+}
 
 
 - (void)setVolumeHidden:(BOOL)hidden {
@@ -553,7 +586,7 @@ static RootViewManager *rootViewManagerInstance = nil;
     dict[@"header"] = vc.name;
     dict[@"lSeg"] = vc.segLeft;
     dict[@"rSeg"] = vc.segRight;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarViewChange" object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:nil userInfo:dict];
 }
 
 - (void)fullScreen:(BOOL)enabled {

@@ -136,7 +136,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
 }
 
 - (void)relayoutTableView {
@@ -181,7 +181,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSegControl)
-                                                 name:@"RgSegmentControl"
+                                                 name:kRgSegmentControl
                                                object:nil];
 
 }

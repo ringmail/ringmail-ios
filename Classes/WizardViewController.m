@@ -50,7 +50,7 @@ typedef enum _ViewElement {
 @synthesize validatePhoneView;
 @synthesize waitView;
 
-@synthesize backButton;
+@synthesize backButtonWiz;
 @synthesize createAccountButton;
 @synthesize connectAccountButton;
 @synthesize remoteProvisioningButton;
@@ -120,7 +120,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-
+    
 	[viewTapGestureRecognizer setCancelsTouchesInView:FALSE];
 	[viewTapGestureRecognizer setDelegate:self];
 	[contentView addGestureRecognizer:viewTapGestureRecognizer];
@@ -129,7 +129,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.googleSignInButton setStyle:kGIDSignInButtonStyleWide];
     [self.googleSignUpButton setStyle:kGIDSignInButtonStyleWide];
     
-//    [[GIDSignIn sharedInstance] signOut];  //mrkbxt
+    [backButtonWiz setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(registrationUpdateEvent:)
@@ -143,7 +144,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(googleSignInVerifedEvent:)
-                                                 name:@"googleSignInVerifed"
+                                                 name:kRgGoogleSignInVerifed
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(googleSignInErrorEvent:)
+                                                 name:kRgGoogleSignInError
                                                object:nil];
 }
 
@@ -151,7 +156,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneRegistrationUpdate object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgAttemptVerify object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"googleSignInVerifed" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInVerifed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInError object:nil];
 }
 
 #pragma mark -
@@ -282,23 +288,18 @@ static UICompositeViewDescription *compositeDescription = nil;
         view == validatePhoneView ||
         view == choiceView
     ) {
-		[backButton setEnabled:FALSE];
-        [backButton setHidden:TRUE];
+		[backButtonWiz setEnabled:FALSE];
+        [backButtonWiz setHidden:TRUE];
 	} else {
-		[backButton setEnabled:TRUE];
-        [backButton setHidden:FALSE];
+		[backButtonWiz setEnabled:TRUE];
+        [backButtonWiz setHidden:FALSE];
 	}
     
     if (view == validateAccountView)
     {
         LevelDB* cfg = [RgManager configDatabase];
         
-        NSString *email_gid = [[cfg objectForKey:@"ringmail_login"] stringByMatching:@"(.*)_gid" capture:1];
-        
-        if (email_gid)
-            [verifyEmailLabel setText:email_gid];
-        else
-            [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
+        [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
     }
     else if (view == validatePhoneView)
     {
@@ -569,19 +570,19 @@ static UICompositeViewDescription *compositeDescription = nil;
         
 		UIView *view = [historyViews lastObject];
 		[historyViews removeLastObject];
-		[self changeView:view back:TRUE animation:TRUE];
+		[self changeView:view back:TRUE animation:FALSE];
 	}
 }
 
 - (IBAction)onCreateAccountClick:(id)sender {
 	nextView = createAccountView;
-    [self changeView:nextView back:false animation:TRUE];
+    [self changeView:nextView back:false animation:FALSE];
     nextView = nil;
 }
 
 - (IBAction)onConnectLinphoneAccountClick:(id)sender {
 	nextView = connectAccountView;
-    [self changeView:nextView back:false animation:TRUE];
+    [self changeView:nextView back:false animation:FALSE];
     nextView = nil;
 }
 
@@ -659,7 +660,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             else
             {
                 // Go To Next View
-                [self changeView:validatePhoneView back:false animation:TRUE];
+                [self changeView:validatePhoneView back:false animation:FALSE];
             }
         }
     }
@@ -824,7 +825,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                             [cfg setObject:username forKey:@"ringmail_login"];
                             [cfg setObject:password forKey:@"ringmail_password"];
                             [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
-                            [self changeView:validateAccountView back:FALSE animation:TRUE];
+                            [self changeView:validateAccountView back:FALSE animation:FALSE];
                         }
                         else if ([err isEqualToString:@"credentials"])
                         {
@@ -951,7 +952,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [cfg setObject:@"" forKey:@"ringmail_chat_password"];
                 [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
                 [cfg setObject:@"0" forKey:@"ringmail_verify_phone"];
-                [self changeView:validateAccountView back:FALSE animation:TRUE];
+                [self changeView:validateAccountView back:FALSE animation:FALSE];
             }
             else
             {
@@ -1060,14 +1061,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
     //    [myActivityIndicator stopAnimating];
+    [waitView setHidden:FALSE];
 }
 
 - (void)signIn:(GIDSignIn *)signIn presentViewController:(UIViewController *)viewController {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"googleSignInStart" object:self userInfo:@{@"vc": viewController}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgGoogleSignInStart object:self userInfo:@{@"vc": viewController}];
 }
 
 - (void)signIn:(GIDSignIn *)signIn dismissViewController:(UIViewController *)viewController {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"googleSignInComplete" object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgGoogleSignInComplete object:self userInfo:nil];
 }
 
 - (void)googleSignInVerifedEvent:(NSNotification *)notif
@@ -1075,7 +1077,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     GIDGoogleUser *obj = notif.object;
 //    NSString *userId = obj.userID;
     NSString *idToken = obj.authentication.idToken;
-    NSString *login = [NSString stringWithFormat:@"%@%@", obj.profile.email, @"_gid"];
+    NSString *login = [NSString stringWithFormat:@"%@", obj.profile.email];
     
     if (currentView == connectAccountView)
     {
@@ -1087,11 +1089,13 @@ static UICompositeViewDescription *compositeDescription = nil;
                 // Store login and password
                 LevelDB* cfg = [RgManager configDatabase];
                 [cfg setObject:login forKey:@"ringmail_login"];
-                [cfg setObject:idToken forKey:@"ringmail_password"];
                 [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
                 [cfg setObject:@"1" forKey:@"ringmail_verify_phone"];
                 [cfg setObject:[res objectForKey:@"phone"] forKey:@"ringmail_phone"];
-                NSLog(@"RingMail Logged In - Config: %@", cfg);
+                NSString *newPW = [res objectForKey:@"ringmail_password"];
+                if ([newPW length] != 0)
+                    [cfg setObject:newPW forKey:@"ringmail_password"];
+                 NSLog(@"RingMail Logged In - Config: %@", cfg);
                 [[LinphoneManager instance] setRingLogin:login];
                 [[LinphoneManager instance] startLinphoneCore];
                 [self reset];
@@ -1100,6 +1104,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                               domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                 [RgManager updateCredentials:res];
                 
+                [waitView setHidden:TRUE];
                 [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
             }
             else
@@ -1112,9 +1117,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                     {
                         LevelDB* cfg = [RgManager configDatabase];
                         [cfg setObject:login forKey:@"ringmail_login"];
-                        [cfg setObject:idToken forKey:@"ringmail_password"];
+                        [cfg setObject:@"" forKey:@"ringmail_password"];
                         [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
-                        [self changeView:validateAccountView back:FALSE animation:TRUE];
+                        [self changeView:validateAccountView back:FALSE animation:FALSE];
                     }
                     else if ([err isEqualToString:@"credentials"])
                     {
@@ -1123,6 +1128,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                        delegate:nil
                                                               cancelButtonTitle:@"OK"
                                                               otherButtonTitles:nil];
+                        [waitView setHidden:TRUE];
                         [alert show];
                     }
                 }
@@ -1138,13 +1144,16 @@ static UICompositeViewDescription *compositeDescription = nil;
                                       block:^{
                                           [waitView setHidden:true];
                                       }];
+            [waitView setHidden:TRUE];
             [alert show];
             
         }];
-        
+    
     }
     else if (currentView == createAccountView)
     {
+        [waitView setHidden:TRUE];
+        
         [WizardViewController findTextField:ViewElement_Username view:contentView].text = obj.profile.email;
         [WizardViewController findTextField:ViewElement_Username view:contentView].userInteractionEnabled = false;
         
@@ -1154,15 +1163,20 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         NSMutableString *randomString = [NSMutableString stringWithCapacity: 64];
         for (int i = 0; i < 64; i++) {
-            [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+            [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform(4294967291) % [letters length]]];
         }
-//        NSLog(@"%@",randomString);
+//        NSLog(@"random: %@",randomString);
         
         [WizardViewController findTextField:ViewElement_Password view:contentView].text = randomString;
         [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = true;
         passwordLabel.hidden = true;
         _googleSignUpButton.hidden = true;
     }
+}
+
+- (void)googleSignInErrorEvent:(NSNotification *)notif
+{
+    [waitView setHidden:TRUE];
 }
 
 @end

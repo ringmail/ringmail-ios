@@ -239,7 +239,6 @@
     NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
     
     [GIDSignIn sharedInstance].delegate = self;
-    [[GIDSignIn sharedInstance] signInSilently];
 
 	return YES;
 }
@@ -520,7 +519,7 @@
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary *)options {
-    NSLog(@"openURL: %@", url);
+//    NSLog(@"openURL: %@", url);
     return [[GIDSignIn sharedInstance] handleURL:url
                                sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
                                       annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
@@ -543,7 +542,9 @@ didSignInForUser:(GIDGoogleUser *)user
      withError:(NSError *)error {
     
     if (user.userID && user.authentication.idToken)
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"googleSignInVerifed" object:user userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgGoogleSignInVerifed object:user userInfo:nil];
+    else if (error)
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgGoogleSignInError object:user userInfo:nil];
 }
 
 - (void)signIn:(GIDSignIn *)signIn

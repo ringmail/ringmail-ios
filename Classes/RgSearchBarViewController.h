@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UITextField* addressField;
 @property (nonatomic, strong) IBOutlet UICallButton* callButton;
 @property (nonatomic, strong) IBOutlet UICallButton* goButton;
+@property (nonatomic, strong) IBOutlet UIButton* triangleButton;
 @property (nonatomic, strong) IBOutlet UIMessageButton* messageButton;
 @property (nonatomic, strong) IBOutlet UIButton* searchButton;
 @property (nonatomic, strong) IBOutlet UIImageView* rocketButtonImg;
@@ -30,5 +31,7 @@
 - (id)initWithPlaceHolder:(NSString *)placeHolder;
 - (void)setAddress:(NSString*)address;
 - (void)dismissKeyboard:(id)sender;
+
+- (IBAction)onTriangleButton:(id)sender;
 
 @end

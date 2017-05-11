@@ -87,7 +87,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSegControl)
-                                                 name:@"RgSegmentControl"
+                                                 name:kRgSegmentControl
                                                object:nil];
 	
     if ([self needsRefresh])
@@ -104,7 +104,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.visible = NO;
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RgSegmentControl" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
 }
 
 - (void)viewDidLoad {

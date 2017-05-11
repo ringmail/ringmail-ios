@@ -52,7 +52,8 @@ static RgCallDuration* globalDuration = nil;
 {
 	if (_hostView == nil)
 	{
-		CGFloat ht = [[UIScreen mainScreen] bounds].size.height - [self statusBarHeight];
+//		CGFloat ht = [[UIScreen mainScreen] bounds].size.height - [self statusBarHeight];
+        CGFloat ht = [[UIScreen mainScreen] bounds].size.height;
 		_sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
 		_hostView = [[CKComponentHostingView alloc] initWithComponentProvider:[self class] sizeRangeProvider:_sizeRangeProvider];
 		_hostView.delegate = self;
@@ -100,7 +101,8 @@ static RgCallDuration* globalDuration = nil;
 {
 	if (_hostView != nil)
 	{
-		CGFloat ht = [[UIScreen mainScreen] bounds].size.height - [self statusBarHeight];
+//		CGFloat ht = [[UIScreen mainScreen] bounds].size.height - [self statusBarHeight];
+        CGFloat ht = [[UIScreen mainScreen] bounds].size.height;
 		NSMutableDictionary* dt = [NSMutableDictionary dictionaryWithDictionary:data];
 		[dt setObject:[NSNumber numberWithFloat:ht] forKey:@"height"];
 		RgCall *call = [[RgCall alloc] initWithData:dt];
@@ -118,7 +120,6 @@ static RgCallDuration* globalDuration = nil;
     CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
     return MIN(statusBarSize.width, statusBarSize.height);
 }
-
 
 + (void)setDurationLabel:(RgCallDuration*)label
 {
