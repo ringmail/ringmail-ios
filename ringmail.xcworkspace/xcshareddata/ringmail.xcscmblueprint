@@ -15,7 +15,7 @@
     "10265E242415D473A6A613214DB7AC3EE3D43F93" : "linphone-iphone\/Classes\/KIF\/",
     "3D679A1D13C8459F44D2BD0010941A301CB66DE2" : "polarssl\/",
     "B9A509D4F3D25560F565CB53A09A75E2140C5232" : "linphone-iphone\/submodules\/linphone\/",
-    "0D7533C70B3E77874DB4DC9E2131A9B1895C2C86" : "linphone-iphone\/",
+    "0D7533C70B3E77874DB4DC9E2131A9B1895C2C86" : "ringmail-ios_xcode8\/",
     "7E3BF325ACA24920B64880B6AEE703826780C2BC" : "linphone-iphone\/Classes\/Utils\/CLImageEditor\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ringmail",
