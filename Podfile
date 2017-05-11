@@ -38,6 +38,5 @@ target 'RingMail-Dev' do
   pod 'LoremIpsum'
 #  pod 'FCUUID'  # Later :)
   pod 'Google/SignIn'
-  pod 'CLImageEditor/AllTools'
 end
 
