@@ -81,12 +81,16 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
              [caller.waitDelegate hideWaiting];
              NSDictionary* res = responseObject;
              NSLog(@"API Response: %@", res);
-             NSString *ok = [res objectForKey:@"result"];
-             if (ok != nil && [ok isEqualToString:@"ok"])
+             NSString *resultValue = [res objectForKey:@"result"];
+             if (resultValue != nil && [resultValue isEqualToString:@"ok"])
              {
                  mainList = res[@"directory"];
+                 [caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
              }
-             [caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
+             else if (resultValue != nil && [resultValue isEqualToString:@"Unauthorized"])
+             {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:kRgUserUnauthorized object:nil userInfo:nil];
+             }
          } failure:^(NSURLSessionTask *operation, NSError *error) {
              [caller.waitDelegate hideWaiting];
              NSLog(@"RingMail API Error: %@", [error localizedDescription]);

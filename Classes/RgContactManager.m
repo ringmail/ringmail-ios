@@ -356,6 +356,10 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
             }
         }
+        else if ([ok isEqualToString:@"Unauthorized"])
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgUserUnauthorized object:nil userInfo:nil];
+        }
         else
         {
             NSLog(@"RingMail API Error: %@", @"Update contacts failed");

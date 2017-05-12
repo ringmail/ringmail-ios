@@ -33,12 +33,14 @@ NSString *const kRgSelfName = @"Self";
 
 NSString *const kRgNavBarViewChange = @"kRgNavBarViewChange";
 NSString *const kRgHashtagDirectoryUpdatePath = @"kRgHashtagDirectoryUpdatePath";
+NSString *const kRgHashtagDirectoryRefreshPath = @"kRgHashtagDirectoryRefreshPath";
 NSString *const kRgSegmentControl = @"kRgSegmentControl";
 NSString *const kRgCurrentLocation = @"kRgCurrentLocation";
 NSString *const kRgGoogleSignInStart = @"kRgGoogleSignInStart";
 NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
 NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
 NSString *const kRgGoogleSignInError = @"kRgGoogleSignInError";
+NSString *const kRgUserUnauthorized = @"kRgUserUnauthorized";
 
 NSString *const kRgPresentOptionsModal = @"kRgPresentOptionsModal";
 NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
@@ -238,6 +240,10 @@ static LevelDB* theConfigDatabase = nil;
                 @"address": [res objectForKey:@"target"],
             }];
             [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+        }
+        else if ([ok isEqualToString:@"Unauthorized"])
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgUserUnauthorized object:nil userInfo:nil];
         }
     }];
 }

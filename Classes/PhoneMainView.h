@@ -47,6 +47,8 @@
 
 #import "RgOptionsModalViewController.h"
 
+#import <Google/SignIn.h>
+
 @class PhoneMainView;
 
 @interface RootViewManager : NSObject

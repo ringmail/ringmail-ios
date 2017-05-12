@@ -294,6 +294,10 @@
 		4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B031E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
 		4DAA6B041E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
+		4DC8861B1EC63F6000CF226A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC8861A1EC63F6000CF226A /* Roboto-Medium.ttf */; };
+		4DC8861C1EC63F6000CF226A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC8861A1EC63F6000CF226A /* Roboto-Medium.ttf */; };
+		4DC886221EC6503600CF226A /* google_signin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DC886211EC6503600CF226A /* google_signin@2x.png */; };
+		4DC886231EC6503600CF226A /* google_signin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DC886211EC6503600CF226A /* google_signin@2x.png */; };
 		4DCEA6851EBAA5C200E6760D /* RgOptionsModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA6831EBAA5C200E6760D /* RgOptionsModalViewController.m */; };
 		4DCEA6861EBAA5C200E6760D /* RgOptionsModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCEA6841EBAA5C200E6760D /* RgOptionsModalViewController.xib */; };
 		4DCEA6871EBAA60000E6760D /* RgOptionsModalViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEA6821EBAA5C200E6760D /* RgOptionsModalViewController.h */; };
@@ -2550,6 +2554,8 @@
 		4DAA6AFE1E6E16C700D9DE84 /* RgSearchBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgSearchBarViewController.h; sourceTree = "<group>"; };
 		4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgSearchBarViewController.m; sourceTree = "<group>"; };
 		4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgSearchBarViewController.xib; sourceTree = "<group>"; };
+		4DC8861A1EC63F6000CF226A /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "Resources/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		4DC886211EC6503600CF226A /* google_signin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "google_signin@2x.png"; path = "Resources/google_signin@2x.png"; sourceTree = "<group>"; };
 		4DCEA6821EBAA5C200E6760D /* RgOptionsModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgOptionsModalViewController.h; sourceTree = "<group>"; };
 		4DCEA6831EBAA5C200E6760D /* RgOptionsModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgOptionsModalViewController.m; sourceTree = "<group>"; };
 		4DCEA6841EBAA5C200E6760D /* RgOptionsModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgOptionsModalViewController.xib; sourceTree = "<group>"; };
@@ -4611,6 +4617,7 @@
 		C41D67E41CA74B0900D7BA72 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				4DC8861A1EC63F6000CF226A /* Roboto-Medium.ttf */,
 				4D33F80F1EC4DA5A00D913A7 /* SFUIText-Bold.ttf */,
 				4D33F8101EC4DA5A00D913A7 /* SFUIText-Light.ttf */,
 				4D33F8111EC4DA5A00D913A7 /* SFUIText-Medium.ttf */,
@@ -5000,6 +5007,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4DC886211EC6503600CF226A /* google_signin@2x.png */,
 				4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */,
 				4D33F6EA1EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */,
 				4D33F6EB1EC4D5C200D913A7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */,
@@ -6178,6 +6186,7 @@
 				D354981015875608000081D8 /* contacts_add_default.png in Resources */,
 				D354981215875608000081D8 /* contacts_add_over.png in Resources */,
 				C42C0DCD1CAEE9D100AD5A91 /* ringmail_mic-x.png in Resources */,
+				4DC886221EC6503600CF226A /* google_signin@2x.png in Resources */,
 				D354981A15876FE7000081D8 /* list_details_default.png in Resources */,
 				C4AA1A2B1C72D3CB003F86FD /* ringmail_card_chat.png in Resources */,
 				F0C1F9131A28781F009402C9 /* corner-right-top.png in Resources */,
@@ -6310,6 +6319,7 @@
 				D3211BC2159CBFD70098460B /* back_over.png in Resources */,
 				D3C714B3159DB84400705B8E /* hold.wav in Resources */,
 				D377BBFA15A19DA6002B696B /* video_on_disabled.png in Resources */,
+				4DC8861B1EC63F6000CF226A /* Roboto-Medium.ttf in Resources */,
 				D37B96B715A1A6F20005CCD2 /* call_state_delete_default.png in Resources */,
 				D37B96B915A1A6F20005CCD2 /* call_state_delete_over.png in Resources */,
 				D3C2814B15A2D38D0098AA42 /* dialer_selected.png in Resources */,
@@ -7229,6 +7239,7 @@
 				C4AC28E81D3963FA003B6232 /* ping_out_receive.wav in Resources */,
 				C4AC28E91D3963FA003B6232 /* chat_send_disabled.png in Resources */,
 				C4AC28EB1D3963FA003B6232 /* chat_bubble_outgoing.png in Resources */,
+				4DC8861C1EC63F6000CF226A /* Roboto-Medium.ttf in Resources */,
 				C4AC28EC1D3963FA003B6232 /* chat_bubble_incoming.png in Resources */,
 				C4AC28ED1D3963FA003B6232 /* numpad_one_voicemail_default.png in Resources */,
 				C4AC28EE1D3963FA003B6232 /* corner-left-bottom.png in Resources */,
@@ -7304,6 +7315,7 @@
 				C4AC292B1D3963FA003B6232 /* chat_in_view.caf in Resources */,
 				4D33F7D61EC4D5C400D913A7 /* tabs_recents_normal@3x.png in Resources */,
 				C4AC292C1D3963FA003B6232 /* conference_default_landscape.png in Resources */,
+				4DC886231EC6503600CF226A /* google_signin@2x.png in Resources */,
 				C4AC292D1D3963FA003B6232 /* conference_over_landscape.png in Resources */,
 				C4AC292E1D3963FA003B6232 /* dialer_alt_back_default_landscape.png in Resources */,
 				C4AC292F1D3963FA003B6232 /* dialer_alt_back_over_landscape.png in Resources */,

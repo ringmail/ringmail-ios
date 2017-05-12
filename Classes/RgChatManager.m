@@ -331,6 +331,10 @@
             [message addChild:imageAttach];
             [[self xmppStream] sendElement:message];
         }
+        else if ([ok isEqualToString:@"Unauthorized"])
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgUserUnauthorized object:nil userInfo:nil];
+        }
     }];
     return messageID;
 }

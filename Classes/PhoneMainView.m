@@ -222,6 +222,11 @@ static RootViewManager *rootViewManagerInstance = nil;
                                              selector:@selector(handleGoogleSignInCompleteEvent)
                                                  name:kRgGoogleSignInComplete
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(goToWizard)
+                                                 name:kRgUserUnauthorized
+                                               object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(presentOptionsModal)
@@ -249,6 +254,7 @@ static RootViewManager *rootViewManagerInstance = nil;
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInStart object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgGoogleSignInComplete object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgUserUnauthorized object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgPresentOptionsModal object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgDismissOptionsModal object:nil];
 }
@@ -466,6 +472,22 @@ static RootViewManager *rootViewManagerInstance = nil;
     else
     {
    		NSLog(@"RingMail: No RingPage address for hashtag");
+    }
+}
+
+- (void)goToWizard {
+    
+    [[GIDSignIn sharedInstance] signOut];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{@"category_id": @"0",}];
+    
+    WizardViewController *controller =
+    DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]],
+                 WizardViewController);
+    if (controller != nil) {
+        [RgManager reset];
+        [controller reset];
+        [controller startWizard];
     }
 }
 

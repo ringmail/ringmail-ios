@@ -75,6 +75,8 @@
 @property(weak, nonatomic) IBOutlet GIDSignInButton *googleSignInButton;
 @property(weak, nonatomic) IBOutlet GIDSignInButton *googleSignUpButton;
 
+@property(weak, nonatomic) IBOutlet UIButton *googleSignUpButtonCustom;
+
 - (void)reset;
 - (void)startWizard;
 - (void)fillDefaultValues;
@@ -89,6 +91,8 @@
 - (IBAction)onResendPhoneClick:(id)sender;
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
+
+- (IBAction)onGoogleSignInCustomClick:(id)sender;
 
 - (void)googleSignInVerifedEvent:(NSNotification *)notif;
 - (void)googleSignInErrorEvent:(NSNotification *)notif;

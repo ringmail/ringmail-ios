@@ -126,8 +126,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[contentView addGestureRecognizer:viewTapGestureRecognizer];
     
     [GIDSignIn sharedInstance].uiDelegate = self;
-    [self.googleSignInButton setStyle:kGIDSignInButtonStyleWide];
-    [self.googleSignUpButton setStyle:kGIDSignInButtonStyleWide];
+//    [self.googleSignInButton setStyle:kGIDSignInButtonStyleWide];
+//    [self.googleSignUpButton setStyle:kGIDSignInButtonStyleWide];
     
     [backButtonWiz setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
     
@@ -564,7 +564,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [WizardViewController findTextField:ViewElement_Username view:contentView].userInteractionEnabled = true;
             [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = false;
             passwordLabel.hidden = false;
-            _googleSignUpButton.hidden = false;
+            _googleSignUpButtonCustom.hidden = false;
             [[GIDSignIn sharedInstance] signOut];
         }
         
@@ -1059,6 +1059,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Google Sign-In
 
+
+- (IBAction)onGoogleSignInCustomClick:(id)sender
+{
+    [[GIDSignIn sharedInstance] signIn];
+}
+
+
 - (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
     //    [myActivityIndicator stopAnimating];
     [waitView setHidden:FALSE];
@@ -1106,6 +1113,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 
                 [waitView setHidden:TRUE];
                 [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryRefreshPath object:nil userInfo:nil];
             }
             else
             {
@@ -1170,7 +1178,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [WizardViewController findTextField:ViewElement_Password view:contentView].text = randomString;
         [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = true;
         passwordLabel.hidden = true;
-        _googleSignUpButton.hidden = true;
+        _googleSignUpButtonCustom.hidden = true;
     }
 }
 

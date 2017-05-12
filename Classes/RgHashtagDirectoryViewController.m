@@ -33,6 +33,7 @@
 #import "RgLocationManager.h"
 #import "RgSearchBarViewController.h"
 
+
 @interface RgHashtagDirectoryViewController()
 @property BOOL isSearchBarVisible;
 @property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
@@ -97,18 +98,17 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kRgSegmentControl
                                                object:nil];
     
+    
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
     
     
-    
-//    if ([self needsRefresh])
-//    {
-//        LOGI(@"RingMail: Updating Hashtag Card List 1");
-//        [mainViewController updateCollection];
-//        [self setNeedsRefresh:NO];
-//    }
+    if ([self needsRefresh])
+    {
+        [self updatePath:@"0"];
+        [self setNeedsRefresh:NO];
+    }
     
 }
 
@@ -131,6 +131,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updatePathEvent:)
                                                  name:kRgHashtagDirectoryUpdatePath
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshPathEvent:)
+                                                 name:kRgHashtagDirectoryRefreshPath
                                                object:nil];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -179,6 +184,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidUnload {
 	[super viewDidUnload];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgHashtagDirectoryUpdatePath object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgHashtagDirectoryRefreshPath object:nil];
+    
 }
 
 #pragma mark - Event Functions
@@ -187,6 +194,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     [self updatePath:[notif.userInfo objectForKey:@"category_id"]];
 }
+
+- (void)refreshPathEvent:(NSNotification *)notif
+{
+    [self setNeedsRefresh:YES];
+}
+
 
 - (void)updatePath:(NSString*)newPath
 {
@@ -202,12 +215,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     else if ([newPath isEqual:@"0"])
     {
-        [categoryStack removeLastObject];
-        path = [categoryStack lastObject];
-        if ([path isEqual:@"0"])
+        if (![[categoryStack lastObject] isEqual:@"0"])
         {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UICompositeVCNavBarHeight" object:nil userInfo:@{@"segContState": @"1",}];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:self userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
+            [categoryStack removeLastObject];
+            path = [categoryStack lastObject];
+            if ([path isEqual:@"0"])
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:self userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
         }
     }
     else
