@@ -1086,9 +1086,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *idToken = obj.authentication.idToken;
     NSString *login = [NSString stringWithFormat:@"%@", obj.profile.email];
     
+    NSString *accessToken = obj.authentication.accessToken;
+    
     if (currentView == connectAccountView)
     {
-        [[RgNetwork instance] loginGoogle:login idToken:idToken callback:^(NSURLSessionTask *operation, id responseObject) {
+        [[RgNetwork instance] loginGoogle:login idToken:idToken accessToken:accessToken callback:^(NSURLSessionTask *operation, id responseObject) {
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
             if (ok != nil && [ok isEqualToString:@"ok"])
