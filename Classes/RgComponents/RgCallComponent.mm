@@ -183,7 +183,7 @@ static RgCallDuration* globalDuration = nil;
                     {.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
                     {[CKInsetComponent newWithInsets:{.top = INFINITY, .bottom = INFINITY} component:
                       [CKLabelComponent newWithLabelAttributes:{
-                            .string = @"Dial Pad",
+                            .string = @"Dialpad",
                             .font = [UIFont fontWithName:@"SFUIText-Medium" size:14],
                             .color = [UIColor colorWithHex:@"#ffffff"],
                             .alignment = NSTextAlignmentCenter,

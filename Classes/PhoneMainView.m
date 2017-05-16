@@ -383,7 +383,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		state != LinphoneCallError && state != LinphoneCallEnd) {
 		return;
 	}
-
+    
 	switch (state) {
 	case LinphoneCallIncomingReceived:
 	case LinphoneCallIncomingEarlyMedia: {
@@ -820,7 +820,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 			}
 			AudioServicesPlaySystemSound(lm.sounds.vibrate);
             if (controller != nil) {
-                [controller setCall:call];
+                [controller setCall:call test:NO];
                 [controller setDelegate:self];
             }
 		}

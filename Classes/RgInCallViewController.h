@@ -50,6 +50,9 @@
 @property (nonatomic, strong) NSMutableDictionary* callData;
 
 @property (nonatomic, strong) IBOutlet UIView* padView;
+@property (nonatomic, strong) IBOutlet UIView* backView;
+@property (nonatomic, strong) IBOutlet UIButton* backButton;
+
 @property (nonatomic, retain) NSNumber* padActive;
 @property (nonatomic, strong) IBOutlet UIDigitButton* oneButton;
 @property (nonatomic, strong) IBOutlet UIDigitButton* twoButton;

@@ -167,10 +167,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Property Functions
 
-- (void)setCall:(LinphoneCall *)acall {
-	call = acall;
-	[self update];
-	[self callUpdate:call state:linphone_call_get_state(call)];
+- (void)setCall:(LinphoneCall *)acall test:(BOOL)test {
+    
+    if (test)
+    {
+        callData = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                   @"address": @"test@test.com",
+                                                                   @"label": @"Testy Tester",
+                                                                   @"video": @"0"
+                                                                   }];
+        [callViewController updateCall:callData];
+    } else {
+        call = acall;
+        [self update];
+        [self callUpdate:call state:linphone_call_get_state(call)];
+    }
 }
 
 #pragma mark - TPMultiLayoutViewController Functions

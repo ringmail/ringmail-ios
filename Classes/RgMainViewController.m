@@ -182,10 +182,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}*/
 }
 
-// mrkbxt  // test incallview
-//-(void)viewDidAppear:(BOOL)animated {
+// mrkbxt  // test incallview  (also rgcallcomponent call mod)
+-(void)viewDidAppear:(BOOL)animated {
 //    [[PhoneMainView instance] changeCurrentView:[RgInCallViewController compositeViewDescription] push:TRUE];
-//}
+
+//    IncomingCallViewController *controller = nil;
+//    controller = DYNAMIC_CAST(
+//                          [[PhoneMainView instance] changeCurrentView:[IncomingCallViewController compositeViewDescription] push:TRUE],
+//                          IncomingCallViewController);
+//    if (controller != nil) {
+//        [controller setCall:nil test:YES];
+//    }
+}
 
 
 

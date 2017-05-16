@@ -24,11 +24,11 @@
 
 - (void)viewDidLoad
 {
-	CGFloat ht = [[UIScreen mainScreen] bounds].size.height - [self statusBarHeight];
+//	CGFloat ht = [[UIScreen mainScreen] bounds].size.height - [self statusBarHeight];
 	_sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
 	_hostView = [[CKComponentHostingView alloc] initWithComponentProvider:[self class] sizeRangeProvider:_sizeRangeProvider];
 	_hostView.delegate = self;
-	_hostView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, ht);
+	_hostView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 	RgCallContext *context = [[RgCallContext alloc] initWithImages:[NSMutableDictionary dictionary]];
 	[_hostView updateContext:context mode:CKUpdateModeSynchronous];
 	[self.view addSubview:_hostView];

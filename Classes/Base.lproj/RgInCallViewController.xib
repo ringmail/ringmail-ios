@@ -14,12 +14,17 @@
         <array key="SFUIText-Regular.ttf">
             <string>SFUIText-Regular</string>
         </array>
+        <array key="fontawesome-webfont.ttf">
+            <string>FontAwesome</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgInCallViewController">
             <connections>
                 <outlet property="addressLabel" destination="aZm-w5-eC5" id="X3o-kP-tw6"/>
                 <outlet property="avatarImage" destination="bfV-j2-2fI" id="jMg-s2-KNg"/>
+                <outlet property="backButton" destination="LfP-DY-dOL" id="nrQ-Ro-9ow"/>
+                <outlet property="backView" destination="O46-Vs-QCl" id="TVD-Dh-6Aq"/>
                 <outlet property="callViewController" destination="0hY-va-cZu" id="GOg-S7-M9M"/>
                 <outlet property="eightButton" destination="rjt-LI-8K5" id="8Qh-yX-IAB"/>
                 <outlet property="fiveButton" destination="Zsd-D0-RgV" id="lWN-tz-Gpk"/>
@@ -192,11 +197,19 @@
                             <state key="selected" backgroundImage="dialpad_icon_selected.png"/>
                             <state key="highlighted" backgroundImage="dialpad_icon_pressed.png"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LfP-DY-dOL">
-                            <rect key="frame" x="250" y="330" width="50" height="50"/>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" misplaced="YES" id="O46-Vs-QCl">
+                    <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LfP-DY-dOL">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                            <state key="normal" title="Hide">
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="22"/>
+                            <inset key="titleEdgeInsets" minX="14" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -204,7 +217,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" id="126" userLabel="video">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>

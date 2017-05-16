@@ -283,6 +283,10 @@
 		4D3D66AE1E453BB500C2BCE3 /* UINavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D66B01E453BB500C2BCE3 /* UINavBar.xib */; };
 		4D42B2621ECA7B3600C221AE /* login_google_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */; };
 		4D42B2631ECA7B3600C221AE /* login_google_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */; };
+		4D4970141ECB8BFF00076090 /* decline_button_incoming_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970121ECB8BFF00076090 /* decline_button_incoming_screen@2x.png */; };
+		4D4970151ECB8BFF00076090 /* decline_button_incoming_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970121ECB8BFF00076090 /* decline_button_incoming_screen@2x.png */; };
+		4D4970161ECB8BFF00076090 /* answer_button_Incoming_call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970131ECB8BFF00076090 /* answer_button_Incoming_call@2x.png */; };
+		4D4970171ECB8BFF00076090 /* answer_button_Incoming_call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970131ECB8BFF00076090 /* answer_button_Incoming_call@2x.png */; };
 		4D4C6B6A1E5297B900602945 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */; };
 		4D5111521DAD8ADC00695DD5 /* IntentContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */; };
 		4D5251BF1E6645C20064F955 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5251BE1E6645C20064F955 /* CoreLocation.framework */; };
@@ -2541,6 +2545,8 @@
 		4D3D66A71E453AE900C2BCE3 /* UINavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavBar.m; sourceTree = "<group>"; };
 		4D3D66AF1E453BB500C2BCE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UINavBar.xib; sourceTree = "<group>"; };
 		4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login_google_button@2x.png"; path = "Resources/login_google_button@2x.png"; sourceTree = "<group>"; };
+		4D4970121ECB8BFF00076090 /* decline_button_incoming_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "decline_button_incoming_screen@2x.png"; path = "Resources/decline_button_incoming_screen@2x.png"; sourceTree = "<group>"; };
+		4D4970131ECB8BFF00076090 /* answer_button_Incoming_call@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "answer_button_Incoming_call@2x.png"; path = "Resources/answer_button_Incoming_call@2x.png"; sourceTree = "<group>"; };
 		4D5111501DAD8AA600695DD5 /* IntentContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntentContactManager.h; sourceTree = "<group>"; };
 		4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntentContactHandler.m; sourceTree = "<group>"; };
 		4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RingMail-Dev.entitlements"; sourceTree = "<group>"; };
@@ -5010,6 +5016,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4D4970121ECB8BFF00076090 /* decline_button_incoming_screen@2x.png */,
+				4D4970131ECB8BFF00076090 /* answer_button_Incoming_call@2x.png */,
 				4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */,
 				4DC886211EC6503600CF226A /* google_signin@2x.png */,
 				4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */,
@@ -6462,6 +6470,7 @@
 				D3C31A5015BD8DED008ED271 /* options_add_disabled_landscape.png in Resources */,
 				D3C31A5215BD8DED008ED271 /* options_add_over_landscape.png in Resources */,
 				D3C31A5415BD8DED008ED271 /* options_default_landscape.png in Resources */,
+				4D4970161ECB8BFF00076090 /* answer_button_Incoming_call@2x.png in Resources */,
 				D3C31A5615BD8DED008ED271 /* options_disabled_landscape.png in Resources */,
 				D3C31A5815BD8DED008ED271 /* options_over_landscape.png in Resources */,
 				D3C31A5A15BD8DED008ED271 /* options_selected_landscape.png in Resources */,
@@ -6490,6 +6499,7 @@
 				D3C31A8415BD8DED008ED271 /* video_on_disabled_landscape.png in Resources */,
 				4D33F7C51EC4D5C400D913A7 /* tabs_explore_pressed_5@2x.png in Resources */,
 				C43DA5871D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */,
+				4D4970141ECB8BFF00076090 /* decline_button_incoming_screen@2x.png in Resources */,
 				D3C31A8615BD8DED008ED271 /* video_on_over_landscape.png in Resources */,
 				4D33F75D1EC4D5C400D913A7 /* background_signin@2x.png in Resources */,
 				D3A74E5915C68162001500B9 /* toolsbar_background.png in Resources */,
@@ -7472,6 +7482,7 @@
 				C4AC29A61D3963FA003B6232 /* options_transfer_over~ipad.png in Resources */,
 				C4AC29A71D3963FA003B6232 /* ringmail_edit-cancel-pressed@2x.png in Resources */,
 				4D33F7821EC4D5C400D913A7 /* header_navigation_arrow@2x.png in Resources */,
+				4D4970151ECB8BFF00076090 /* decline_button_incoming_screen@2x.png in Resources */,
 				C43354D71E8EEFD000748F4C /* ringmail_chat_background@2x.png in Resources */,
 				C4AC29A81D3963FA003B6232 /* ringmail_endcall@2x.png in Resources */,
 				C4AC29A91D3963FA003B6232 /* search@3x.png in Resources */,
@@ -7739,6 +7750,7 @@
 				C4AC2A8F1D3963FA003B6232 /* RgHashtagDirectoryViewController.xib in Resources */,
 				C4AC2A901D3963FA003B6232 /* routes_over.png in Resources */,
 				C4AC2A911D3963FA003B6232 /* routes_selected.png in Resources */,
+				4D4970171ECB8BFF00076090 /* answer_button_Incoming_call@2x.png in Resources */,
 				C4AC2A921D3963FA003B6232 /* route_bluetooth_off_default_landscape.png in Resources */,
 				C4AC2A931D3963FA003B6232 /* route_bluetooth_off_disabled_landscape.png in Resources */,
 				C4AC2A941D3963FA003B6232 /* ringpage@2x.png in Resources */,

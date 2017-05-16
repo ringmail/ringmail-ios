@@ -53,6 +53,7 @@
 @synthesize callViewController;
 
 @synthesize padView;
+@synthesize backView;
 @synthesize padActive;
 @synthesize oneButton;
 @synthesize twoButton;
@@ -66,6 +67,7 @@
 @synthesize starButton;
 @synthesize zeroButton;
 @synthesize sharpButton;
+@synthesize backButton;
 
 
 #pragma mark - Lifecycle Functions
@@ -173,6 +175,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[singleFingerTap setEnabled:TRUE];
 	
 	[padView setHidden:YES];
+    [backView setHidden:YES];
 	padActive = @NO;
 }
 
@@ -226,6 +229,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[starButton setDtmf:true];
 	[sharpButton setDigit:'#'];
 	[sharpButton setDtmf:true];
+    
+    [backButton setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload {
@@ -582,8 +587,10 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		padActive = @YES;
 		[padView setAlpha:0.0f];
 		[padView setHidden:NO];
+        [backView setHidden:NO];
 		[UIView animateWithDuration:0.5f animations:^{
 			[padView setAlpha:1.0f];
+            [backView setAlpha:1.0f];
 		} completion:^(BOOL finished) {
 		}];
 
@@ -593,8 +600,11 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		padActive = @NO;
 		[UIView animateWithDuration:0.5f animations:^{
 			[padView setAlpha:0.0f];
+            [backView setAlpha:0.0f];
 		} completion:^(BOOL finished) {
 			[padView setHidden:YES];
+            [backView setHidden:YES];
+            
 		}];
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRgCallRefresh object:nil];
@@ -603,7 +613,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 
 - (IBAction)onHideButton:(id)sender
 {
-    NSLog(@"onHideButton");
     [[NSNotificationCenter defaultCenter] postNotificationName:kRgToggleNumberPad object:nil];
 }
 

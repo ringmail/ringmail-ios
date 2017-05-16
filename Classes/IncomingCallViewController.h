@@ -35,6 +35,8 @@
 @interface IncomingCallViewController : TPMultiLayoutViewController <UICompositeViewDelegate> {
 }
 
+- (void)setCall:(LinphoneCall *)acall test:(BOOL)test;
+
 @property (nonatomic, assign) LinphoneCall* call;
 @property (nonatomic, strong) id<IncomingCallViewDelegate> delegate;
 
