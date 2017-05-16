@@ -72,10 +72,6 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *passwordLabel;
 
-@property(weak, nonatomic) IBOutlet GIDSignInButton *googleSignInButton;
-@property(weak, nonatomic) IBOutlet GIDSignInButton *googleSignUpButton;
-
-@property(weak, nonatomic) IBOutlet UIButton *googleSignUpButtonCustom;
 
 - (void)reset;
 - (void)startWizard;

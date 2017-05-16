@@ -281,6 +281,8 @@
 		4D3D66AA1E453AE900C2BCE3 /* UINavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D66A71E453AE900C2BCE3 /* UINavBar.m */; };
 		4D3D66AD1E453BB500C2BCE3 /* UINavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D66B01E453BB500C2BCE3 /* UINavBar.xib */; };
 		4D3D66AE1E453BB500C2BCE3 /* UINavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D66B01E453BB500C2BCE3 /* UINavBar.xib */; };
+		4D42B2621ECA7B3600C221AE /* login_google_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */; };
+		4D42B2631ECA7B3600C221AE /* login_google_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */; };
 		4D4C6B6A1E5297B900602945 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */; };
 		4D5111521DAD8ADC00695DD5 /* IntentContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */; };
 		4D5251BF1E6645C20064F955 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5251BE1E6645C20064F955 /* CoreLocation.framework */; };
@@ -2538,6 +2540,7 @@
 		4D3D66A61E453AE900C2BCE3 /* UINavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavBar.h; sourceTree = "<group>"; };
 		4D3D66A71E453AE900C2BCE3 /* UINavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavBar.m; sourceTree = "<group>"; };
 		4D3D66AF1E453BB500C2BCE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UINavBar.xib; sourceTree = "<group>"; };
+		4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login_google_button@2x.png"; path = "Resources/login_google_button@2x.png"; sourceTree = "<group>"; };
 		4D5111501DAD8AA600695DD5 /* IntentContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntentContactManager.h; sourceTree = "<group>"; };
 		4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntentContactHandler.m; sourceTree = "<group>"; };
 		4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RingMail-Dev.entitlements"; sourceTree = "<group>"; };
@@ -5007,6 +5010,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */,
 				4DC886211EC6503600CF226A /* google_signin@2x.png */,
 				4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */,
 				4D33F6EA1EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */,
@@ -6829,6 +6833,7 @@
 				15AF3C5C16F37A3E00FC52EC /* route_bluetooth_on_default.png in Resources */,
 				F0938159188E629800A55DFA /* iTunesArtwork in Resources */,
 				15AF3C6C16F37A4A00FC52EC /* route_phone_off_default.png in Resources */,
+				4D42B2621ECA7B3600C221AE /* login_google_button@2x.png in Resources */,
 				C48D3C041D0276FE00FAC3A6 /* call_in.caf in Resources */,
 				4D33F7E11EC4D5C400D913A7 /* tabs_recents_selected@3x.png in Resources */,
 				4D33F8051EC4D5C500D913A7 /* tabs_settings_selected@3x.png in Resources */,
@@ -7676,6 +7681,7 @@
 				C4AC2A631D3963FA003B6232 /* button_background_over.9@2x.png in Resources */,
 				C4AC2A641D3963FA003B6232 /* ringmail_incoming_reject.png in Resources */,
 				C4AC2A651D3963FA003B6232 /* field_background.9.png in Resources */,
+				4D42B2631ECA7B3600C221AE /* login_google_button@2x.png in Resources */,
 				C4AC2A661D3963FA003B6232 /* button_background_default.9.png in Resources */,
 				C4AC2A671D3963FA003B6232 /* button_background_over.9.png in Resources */,
 				C4AC2A681D3963FA003B6232 /* linphone_logo.png in Resources */,

@@ -31,7 +31,6 @@
                 <outlet property="createAccountButton" destination="36" id="135"/>
                 <outlet property="createAccountUsername" destination="74" id="ptL-W1-8vl"/>
                 <outlet property="createAccountView" destination="44" id="70"/>
-                <outlet property="googleSignUpButtonCustom" destination="kAE-Yy-gKn" id="gQu-v7-WQS"/>
                 <outlet property="passwordLabel" destination="Ies-50-mWg" id="Qq7-0d-UD4"/>
                 <outlet property="registerButton" destination="77" id="A9h-Es-kxv"/>
                 <outlet property="validateAccountView" destination="WO6-VD-Rqp" id="aZA-DN-GJI"/>
@@ -79,7 +78,7 @@
                         <bool key="isElement" value="YES"/>
                     </accessibility>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="16"/>
-                    <state key="normal" title="Sign In" backgroundImage="login_button.png">
+                    <state key="normal" title="Sign In With Email" backgroundImage="login_button.png">
                         <color key="titleColor" red="0.32549019607843138" green="0.16078431372549018" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -98,16 +97,16 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" misplaced="YES" id="OBW-ar-tG9" customClass="GIDSignInButton">
-                    <rect key="frame" x="30" y="558" width="315" height="48"/>
+                    <rect key="frame" x="30" y="548" width="315" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="XEs-B4-P2y" userLabel="signInButton">
-                    <rect key="frame" x="30" y="560" width="315" height="45"/>
+                    <rect key="frame" x="30" y="550" width="315" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Sign in"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="16"/>
-                    <state key="normal" title="Sign In With Google" backgroundImage="google_signin.png">
+                    <state key="normal" title="Sign In With Google" backgroundImage="login_google_button.png">
                         <color key="titleColor" red="0.32549019610000002" green="0.16078431369999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -144,27 +143,6 @@
                             <nil key="highlightedColor"/>
                             <size key="shadowOffset" width="-1" height="-1"/>
                         </label>
-                        <view hidden="YES" contentMode="scaleToFill" misplaced="YES" id="Lyg-QF-1Ou" customClass="GIDSignInButton">
-                            <rect key="frame" x="30" y="559" width="315" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="kAE-Yy-gKn" userLabel="registerButton">
-                            <rect key="frame" x="30" y="560" width="315" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Register"/>
-                            <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="16"/>
-                            <state key="normal" title="Sign Up With Google" backgroundImage="google_signin.png">
-                                <color key="titleColor" red="0.32549019610000002" green="0.16078431369999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="button_background_over.png">
-                                <color key="titleColor" red="0.67030966280000004" green="0.71867996450000005" blue="0.75078284740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onGoogleSignInCustomClick:" destination="-1" eventType="touchUpInside" id="6vm-gG-1gE"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.32549019610000002" green="0.16078431369999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
@@ -285,7 +263,7 @@
                             </connections>
                         </textField>
                         <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="404" contentMode="left" misplaced="YES" text="Invalid character:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="uHm-NE-GLV" userLabel="invalid_char_error">
-                            <rect key="frame" x="40" y="395" width="295" height="25"/>
+                            <rect key="frame" x="40" y="264" width="295" height="25"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeueLTStd-Cn" family="Helvetica Neue LT Std" pointSize="18"/>
@@ -331,7 +309,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="77" userLabel="registerButton">
-                    <rect key="frame" x="30" y="490" width="315" height="45"/>
+                    <rect key="frame" x="30" y="550" width="315" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Register"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="16"/>
@@ -381,7 +359,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" misplaced="YES" id="acg-rh-qay" userLabel="Input Fields">
-                    <rect key="frame" x="30" y="315" width="315" height="150"/>
+                    <rect key="frame" x="30" y="330" width="315" height="150"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="10" id="68" userLabel="usernameField">
@@ -438,7 +416,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="64" userLabel="signInButton">
-                    <rect key="frame" x="30" y="490" width="315" height="45"/>
+                    <rect key="frame" x="30" y="550" width="315" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Sign in"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="16"/>
@@ -684,10 +662,10 @@ You are required to verifiy your email address to sign in.</string>
         <image name="background_plain.png" width="375" height="667"/>
         <image name="background_signin.png" width="375" height="667"/>
         <image name="button_background_over.png" width="550" height="101"/>
-        <image name="google_signin.png" width="314" height="45"/>
         <image name="login3_logo.png" width="95" height="39"/>
         <image name="login_background.png" width="375" height="667"/>
         <image name="login_button.png" width="314" height="45"/>
+        <image name="login_google_button.png" width="314" height="45"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

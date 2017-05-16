@@ -564,7 +564,6 @@ static UICompositeViewDescription *compositeDescription = nil;
             [WizardViewController findTextField:ViewElement_Username view:contentView].userInteractionEnabled = true;
             [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = false;
             passwordLabel.hidden = false;
-            _googleSignUpButtonCustom.hidden = false;
             [[GIDSignIn sharedInstance] signOut];
         }
         
@@ -1081,6 +1080,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)googleSignInVerifedEvent:(NSNotification *)notif
 {
+    
     GIDGoogleUser *obj = notif.object;
 //    NSString *userId = obj.userID;
     NSString *idToken = obj.authentication.idToken;
@@ -1088,9 +1088,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     NSString *accessToken = obj.authentication.accessToken;
     
-    if (currentView == connectAccountView)
+    if (currentView == choiceView)
     {
         [[RgNetwork instance] loginGoogle:login idToken:idToken accessToken:accessToken callback:^(NSURLSessionTask *operation, id responseObject) {
+            
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
             if (ok != nil && [ok isEqualToString:@"ok"])
@@ -1131,6 +1132,29 @@ static UICompositeViewDescription *compositeDescription = nil;
                         [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
                         [self changeView:validateAccountView back:FALSE animation:FALSE];
                     }
+                    else if ([err isEqualToString:@"register"])
+                    {
+                        [waitView setHidden:TRUE];
+                        
+                        [WizardViewController findTextField:ViewElement_Username view:createAccountView].text = obj.profile.email;
+                        [WizardViewController findTextField:ViewElement_Username view:createAccountView].userInteractionEnabled = false;
+                        
+                        [WizardViewController findTextField:ViewElement_FirstName view:createAccountView].text = obj.profile.givenName;
+                        [WizardViewController findTextField:ViewElement_LastName view:createAccountView].text = obj.profile.familyName;
+                        
+                        NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                        NSMutableString *randomString = [NSMutableString stringWithCapacity: 64];
+                        for (int i = 0; i < 64; i++) {
+                            [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform(4294967291) % [letters length]]];
+                        }
+                        
+                        [WizardViewController findTextField:ViewElement_Password view:createAccountView].text = randomString;
+                        [WizardViewController findTextField:ViewElement_Password view:createAccountView].hidden = true;
+                        
+                        passwordLabel.hidden = true;
+                        
+                        [self changeView:createAccountView back:FALSE animation:FALSE];
+                    }
                     else if ([err isEqualToString:@"credentials"])
                     {
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In Failure", nil)
@@ -1160,33 +1184,12 @@ static UICompositeViewDescription *compositeDescription = nil;
         }];
     
     }
-    else if (currentView == createAccountView)
-    {
-        [waitView setHidden:TRUE];
-        
-        [WizardViewController findTextField:ViewElement_Username view:contentView].text = obj.profile.email;
-        [WizardViewController findTextField:ViewElement_Username view:contentView].userInteractionEnabled = false;
-        
-        [WizardViewController findTextField:ViewElement_FirstName view:contentView].text = obj.profile.givenName;
-        [WizardViewController findTextField:ViewElement_LastName view:contentView].text = obj.profile.familyName;
-        
-        NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        NSMutableString *randomString = [NSMutableString stringWithCapacity: 64];
-        for (int i = 0; i < 64; i++) {
-            [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform(4294967291) % [letters length]]];
-        }
-//        NSLog(@"random: %@",randomString);
-        
-        [WizardViewController findTextField:ViewElement_Password view:contentView].text = randomString;
-        [WizardViewController findTextField:ViewElement_Password view:contentView].hidden = true;
-        passwordLabel.hidden = true;
-        _googleSignUpButtonCustom.hidden = true;
-    }
 }
 
 - (void)googleSignInErrorEvent:(NSNotification *)notif
 {
     [waitView setHidden:TRUE];
 }
+
 
 @end

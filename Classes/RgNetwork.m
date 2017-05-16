@@ -78,7 +78,7 @@ static RgNetwork* theRgNetwork = nil;
     NSDictionary *parameters = @{
                                  @"login": login,
                                  @"idToken": idToken,
-                                 @"accessToken":accessToken,
+                                 @"accessToken": accessToken,
                                  @"device": [cfg objectForKey:@"ringmail_device_uuid"],
                                  @"version": [info objectForKey:@"CFBundleShortVersionString"],
                                  @"build": [info objectForKey:@"CFBundleVersion"],
