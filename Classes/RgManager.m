@@ -61,7 +61,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"www-mb.ringxml.com";
+        return @"www-mf.ringxml.com";
     }
 }
 
@@ -74,7 +74,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"sip-mb.ringxml.com";
+        return @"sip-mf.ringxml.com";
     }
 }
 
@@ -188,7 +188,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address to:nil contact:contactNum uuid:nil];
     [lm setChatSession:sessionData[@"id"]];
-    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+    [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
 }
 
 + (void)startMessageMD5
@@ -205,13 +205,13 @@ static LevelDB* theConfigDatabase = nil;
                 UICompositeViewDescription* curView = [[PhoneMainView instance] topView];
                 if ((curView == nil) || (!
                                          ( // If not in the same chat room already
-                                          [curView equal:[ChatRoomViewController compositeViewDescription]] &&
+                                          [curView equal:[MessageViewController compositeViewDescription]] &&
                                           [lm chatSession] != nil &&
                                           [chat isEqualToNumber:[lm chatSession]]
                                           )
                                          )) {
                     [lm setChatSession:chat];
-                    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+                    [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
                 }
             }
         }

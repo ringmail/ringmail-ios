@@ -30,7 +30,6 @@
 #import "ChatViewController.h"
 #import "MessageViewController.h"
 #import "IncomingCallViewController.h"
-#import "ChatRoomViewController.h" // Remove soon!
 #import "RgMainViewController.h"
 #import "RgHashtagDirectoryViewController.h"
 #import "MessagesViewController.h"
@@ -103,11 +102,11 @@
 
 - (void)promptNewOrEdit:(NSString *)address;
 
-- (void)handleGoogleSignInStartEvent:(NSNotification *) notification;;
+- (void)handleGoogleSignInStartEvent:(NSNotification *) notification;
 - (void)handleGoogleSignInCompleteEvent;
 
-- (void)presentOptionsModal;
-- (void)dismissOptionsModal;
+- (void)presentOptionsModal:(NSNotification *) notification;
+- (void)dismissOptionsModal:(NSNotification *) notification;
 
 
 @end

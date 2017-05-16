@@ -156,7 +156,10 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 - (void)scrollToBottom:(BOOL)animate
 {
 	NSInteger lastIndex = [_mainCount intValue] - 1;
-	[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:animate];
+	if (lastIndex >= 0)
+	{
+		[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:animate];
+	}
 }
 
 - (void)appendMessages:(NSArray*)msgs

@@ -363,7 +363,7 @@
 		NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
 		NSNumber *session = sessionData[@"id"];
         [lm setChatSession:session];
-        [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+        [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
     }
 }
 

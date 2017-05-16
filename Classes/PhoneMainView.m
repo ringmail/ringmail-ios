@@ -224,26 +224,21 @@ static RootViewManager *rootViewManagerInstance = nil;
                                                object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(presentOptionsModal)
+                                             selector:@selector(presentOptionsModal:)
                                                  name:kRgPresentOptionsModal
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(dismissOptionsModal)
+                                             selector:@selector(dismissOptionsModal:)
                                                  name:kRgDismissOptionsModal
                                                object:nil];
     
 	[self.view addSubview:mainViewController.view];
-    
-    optionsModalViewController = [[RgOptionsModalViewController alloc]init];
-    optionsModalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    
+	
     optionsModalBG = [[UIView alloc] initWithFrame:self.view.frame];
     [optionsModalBG setBackgroundColor:[UIColor colorWithHex:@"#212121" alpha:0.65f]];
     optionsModalBG.hidden = YES;
     [self.view addSubview:optionsModalBG];
-    
 }
-
 
 - (void)viewDidUnload {
     [super viewDidUnload];
@@ -253,17 +248,51 @@ static RootViewManager *rootViewManagerInstance = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgDismissOptionsModal object:nil];
 }
 
-
 #pragma mark - Options Model Functions
-- (void)presentOptionsModal {
+- (void)presentOptionsModal:(NSNotification *)notif
+{
+	// TODO: check for domain, domains are not contacts...
+	NSString *address = notif.userInfo[@"address"];
+	
+    // Contact ID lookup attemp
+	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+	UIImage *customImage = nil;
+	NSString *name = [address copy];
+	NSString *addr = @"New Contact";
+	NSNumber *contactNew = @YES;
+	NSNumber *contactId = nil;
+	if (contact)
+	{
+        //LOGI(@"RingMail: Matched contact for options modal");
+		customImage = [FastAddressBook getContactImage:contact thumbnail:true];
+        name = [FastAddressBook getContactDisplayName:contact];
+		addr = [address copy];
+		contactNew = @NO;
+		contactId = [[[LinphoneManager instance] fastAddressBook] getContactId:contact];
+	}
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{
+		@"name": name,
+		@"address": addr,
+		@"new": contactNew,
+	}];
+	if (customImage)
+	{
+		params[@"image"] = customImage;
+	}
+	if (contactId)
+	{
+		params[@"contact_id"] = contactId;
+	}
     optionsModalBG.hidden = NO;
+    optionsModalViewController = [[RgOptionsModalViewController alloc] initWithData:params];
+    optionsModalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [self presentViewController:optionsModalViewController animated:YES completion:nil];
 }
 
-- (void)dismissOptionsModal {
+- (void)dismissOptionsModal:(NSNotification *)notif
+{
     optionsModalBG.hidden = YES;
 }
-
 
 - (void)setVolumeHidden:(BOOL)hidden {
 	// sometimes when placing a call, the volume view will appear. Inserting a

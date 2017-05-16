@@ -3,7 +3,7 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "RgManager.h"
-#import "ChatRoomViewController.h"
+#import "MessageViewController.h"
 #import "PhotoCameraViewController.h"
 #import "VideoCameraViewController.h"
 #import "MomentCameraViewController.h"
@@ -62,7 +62,7 @@
     	[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:nil];
 		NSDictionary *sessionData = [mgr dbGetSessionID:to to:nil contact:nil uuid:nil];
 		[[LinphoneManager instance] setChatSession:sessionData[@"id"]];
-		[[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+		[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
 	}
 }
 

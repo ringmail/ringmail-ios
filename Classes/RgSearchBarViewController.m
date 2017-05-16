@@ -13,10 +13,8 @@
 @implementation RgSearchBarViewController
 
 @synthesize addressField;
-@synthesize callButton;
 @synthesize goButton;
 @synthesize triangleButton;
-@synthesize messageButton;
 @synthesize searchButton;
 @synthesize placeHolder;
 @synthesize rocketButtonImg;
@@ -40,15 +38,15 @@ bool animInactive = YES;
     return self;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.clipsToBounds = YES;
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissOptionsModal:) name:kRgDismissOptionsModal object:nil];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgDismissOptionsModal object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,9 +55,7 @@ bool animInactive = YES;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [callButton setEnabled:TRUE];
-    
+	
     addressLabel.layer.opacity = 0.0;
     addressLabel.text = placeHolder;
     
@@ -71,6 +67,13 @@ bool animInactive = YES;
     
 }
 
+- (void)dismissOptionsModal:(NSNotification *)notif
+{
+    if ([notif.userInfo[@"clear"] boolValue])
+	{
+		[addressField setText:@""];
+	}
+}
 
 - (IBAction)onAddressChange:(id)sender {
     
@@ -79,28 +82,24 @@ bool animInactive = YES;
         if ([[addr substringToIndex:1] isEqualToString:@"#"])
         {
             triangleButton.hidden = YES;
-//            messageButton.hidden = YES;
-//            callButton.hidden = YES;
             goButton.hidden = NO;
         }
         else
         {
             triangleButton.hidden = NO;
-//            messageButton.hidden = NO;
-//            callButton.hidden = NO;
-//            goButton.hidden = YES;
+            goButton.hidden = YES;
         }
-    } else {
-        messageButton.hidden = YES;
-        callButton.hidden = YES;
+    }
+	else
+	{
         goButton.hidden = YES;
         triangleButton.hidden = YES;
     }
 }
 
 
-- (IBAction)onSearch:(id)sender {
-    
+- (IBAction)onSearch:(id)sender
+{
     bool addressActive = [addressField isFirstResponder];
     bool addressEmpty = [addressField.text isEqual:@""];
     
@@ -114,10 +113,12 @@ bool animInactive = YES;
     }
 }
 
-- (IBAction)onTriangleButton:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:nil];
+- (IBAction)onTriangleButton:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:@{
+		@"address": addressField.text,
+	}];
 }
-
 
 -(void)animateRocket:(bool)activeAddress
 {
@@ -132,9 +133,9 @@ bool animInactive = YES;
         addressLabel.layer.opacity = 0.0;
         
         CGFloat addressX = addressLabel.layer.position.x;
-        
-        UIImageView *rocketAnimImg =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,50,50)];
-        rocketAnimImg.image=[UIImage imageNamed:@"hashtag_rocket_icon_blue.png"];
+		
+        UIImageView *rocketAnimImg = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,50,50)];
+        rocketAnimImg.image = [UIImage imageNamed:@"hashtag_rocket_icon_blue.png"];
         [self.view addSubview:rocketAnimImg];
         
         [CATransaction begin];
@@ -209,9 +210,8 @@ bool animInactive = YES;
             animation5.fillMode = kCAFillModeForwards;
             animation5.removedOnCompletion = NO;
             [rocketAnimImg.layer addAnimation:animation5 forKey:@"reverse_rotate_return"];
-            
+			
             [CATransaction commit];
-            
         }];
         
         CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
@@ -230,7 +230,6 @@ bool animInactive = YES;
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
         [rocketAnimImg.layer addAnimation:animation forKey:@"liftoff"];
-        
         
         CABasicAnimation *animation2 = [CABasicAnimation animation];
         animation2.keyPath = @"position.x";
@@ -281,10 +280,9 @@ bool animInactive = YES;
     
     UITouch *touch = [[event allTouches] anyObject];
     if ([[touch.view class] isSubclassOfClass:[RgSearchBackgroundView class]]) {
-    
+		// ???
     }
 }
-
 
 #pragma mark - Text Field Functions
 

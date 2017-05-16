@@ -507,7 +507,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         {
             NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactID uuid:nil];
             [[LinphoneManager instance] setChatSession:sessionData[@"id"]];
-            [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+            [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
         }
     }
     
