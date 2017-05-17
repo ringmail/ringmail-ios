@@ -26,6 +26,7 @@
 
 @synthesize firstNameLabel;
 @synthesize lastNameLabel;
+@synthesize contactLabel;
 @synthesize avatarImage;
 @synthesize rgImage;
 @synthesize contact;
@@ -77,13 +78,18 @@
 
 	NSString *lLastName = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
 	NSString *lLocalizedLastName = [FastAddressBook localizedLabel:lLastName];
-
+    
+    ABMultiValueRef emails = ABRecordCopyValue(contact, kABPersonEmailProperty);
+    CFStringRef email = ABMultiValueCopyValueAtIndex(emails, 0);
+    NSString *lLocalizedEmail = [FastAddressBook localizedLabel:CFBridgingRelease(email)];
+    
 	NSString *lOrganization = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonOrganizationProperty));
 	NSString *lLocalizedOrganization = [FastAddressBook localizedLabel:lOrganization];
 
 	[firstNameLabel setText:lLocalizedFirstName];
 	[lastNameLabel setText:lLocalizedLastName];
-
+    [contactLabel setText:lLocalizedEmail];
+    
 	if (
         (lLocalizedFirstName == nil && lLocalizedLastName == nil) ||
         ([lLocalizedFirstName isEqualToString:@""] && [lLocalizedLastName isEqualToString:@""])

@@ -287,6 +287,10 @@
 		4D4970151ECB8BFF00076090 /* decline_button_incoming_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970121ECB8BFF00076090 /* decline_button_incoming_screen@2x.png */; };
 		4D4970161ECB8BFF00076090 /* answer_button_Incoming_call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970131ECB8BFF00076090 /* answer_button_Incoming_call@2x.png */; };
 		4D4970171ECB8BFF00076090 /* answer_button_Incoming_call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970131ECB8BFF00076090 /* answer_button_Incoming_call@2x.png */; };
+		4D49701B1ECCF19200076090 /* icon_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970191ECCF19200076090 /* icon_plus@2x.png */; };
+		4D49701C1ECCF19200076090 /* icon_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4970191ECCF19200076090 /* icon_plus@2x.png */; };
+		4D49701D1ECCF19200076090 /* background_contacts_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D49701A1ECCF19200076090 /* background_contacts_header@2x.png */; };
+		4D49701E1ECCF19200076090 /* background_contacts_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D49701A1ECCF19200076090 /* background_contacts_header@2x.png */; };
 		4D4C6B6A1E5297B900602945 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */; };
 		4D5111521DAD8ADC00695DD5 /* IntentContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */; };
 		4D5251BF1E6645C20064F955 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5251BE1E6645C20064F955 /* CoreLocation.framework */; };
@@ -2547,6 +2551,8 @@
 		4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login_google_button@2x.png"; path = "Resources/login_google_button@2x.png"; sourceTree = "<group>"; };
 		4D4970121ECB8BFF00076090 /* decline_button_incoming_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "decline_button_incoming_screen@2x.png"; path = "Resources/decline_button_incoming_screen@2x.png"; sourceTree = "<group>"; };
 		4D4970131ECB8BFF00076090 /* answer_button_Incoming_call@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "answer_button_Incoming_call@2x.png"; path = "Resources/answer_button_Incoming_call@2x.png"; sourceTree = "<group>"; };
+		4D4970191ECCF19200076090 /* icon_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_plus@2x.png"; path = "Resources/icon_plus@2x.png"; sourceTree = "<group>"; };
+		4D49701A1ECCF19200076090 /* background_contacts_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background_contacts_header@2x.png"; path = "Resources/background_contacts_header@2x.png"; sourceTree = "<group>"; };
 		4D5111501DAD8AA600695DD5 /* IntentContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntentContactManager.h; sourceTree = "<group>"; };
 		4D5111511DAD8ADC00695DD5 /* IntentContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntentContactHandler.m; sourceTree = "<group>"; };
 		4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RingMail-Dev.entitlements"; sourceTree = "<group>"; };
@@ -5016,6 +5022,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4D4970191ECCF19200076090 /* icon_plus@2x.png */,
+				4D49701A1ECCF19200076090 /* background_contacts_header@2x.png */,
 				4D4970121ECB8BFF00076090 /* decline_button_incoming_screen@2x.png */,
 				4D4970131ECB8BFF00076090 /* answer_button_Incoming_call@2x.png */,
 				4D42B2611ECA7B3600C221AE /* login_google_button@2x.png */,
@@ -6294,6 +6302,7 @@
 				D3F26BFC15987083005F9CAB /* header_incoming.png in Resources */,
 				639CEB031A1DF4EB004DE38F /* UICompositeViewController.xib in Resources */,
 				D31B4B281598A390002E6C72 /* avatar_unknown.png in Resources */,
+				4D49701D1ECCF19200076090 /* background_contacts_header@2x.png in Resources */,
 				C444F3C81C92240300134788 /* menu-more_active.png in Resources */,
 				4D33F7E31EC4D5C400D913A7 /* tabs_ring_normal_5@2x.png in Resources */,
 				D31B4B2A1598A390002E6C72 /* avatar_unknown_small.png in Resources */,
@@ -6759,6 +6768,7 @@
 				C444F3E01C92240300134788 /* menu-more.png in Resources */,
 				D3F5F8FF1609A86700D3DA1A /* chat_photo_over.png in Resources */,
 				4D33F7A91EC4D5C400D913A7 /* tabs_background@2x.png in Resources */,
+				4D49701B1ECCF19200076090 /* icon_plus@2x.png in Resources */,
 				D3F5F9071609A86700D3DA1A /* history_delete_default.png in Resources */,
 				D3F5F9091609A86700D3DA1A /* history_delete_over.png in Resources */,
 				D3F5F90B1609A86700D3DA1A /* logo_linphone_trame_background.png in Resources */,
@@ -7376,6 +7386,7 @@
 				C4AC29501D3963FA003B6232 /* speaker_on_over_landscape.png in Resources */,
 				C4AC29511D3963FA003B6232 /* statebar_background_landscape.png in Resources */,
 				C4AC29521D3963FA003B6232 /* video_off_default_landscape.png in Resources */,
+				4D49701E1ECCF19200076090 /* background_contacts_header@2x.png in Resources */,
 				C4AC29531D3963FA003B6232 /* video_off_disabled_landscape.png in Resources */,
 				C4AC29541D3963FA003B6232 /* video_off_over_landscape.png in Resources */,
 				4D33F75C1EC4D5C400D913A7 /* background_plain@2x.png in Resources */,
@@ -7619,6 +7630,7 @@
 				C4AC2A221D3963FA003B6232 /* chat_message_not_delivered.png in Resources */,
 				C4AC2A231D3963FA003B6232 /* chat_message_inprogress.png in Resources */,
 				C4AC2A241D3963FA003B6232 /* ImageViewController.xib in Resources */,
+				4D49701C1ECCF19200076090 /* icon_plus@2x.png in Resources */,
 				C4AC2A271D3963FA003B6232 /* menu-contact_active@2x.png in Resources */,
 				4D33F8041EC4D5C400D913A7 /* tabs_settings_selected@2x.png in Resources */,
 				C4AC2A281D3963FA003B6232 /* background_alt.png in Resources */,

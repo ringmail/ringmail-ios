@@ -168,8 +168,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin |
     UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     
-    self.tableView.sectionIndexColor = [UIColor colorWithHex:@"#0077c2"];
-    self.tableView.sectionIndexBackgroundColor = [UIColor colorWithHex:@"#F4F4F4"];
+    self.tableView.sectionIndexColor = [UIColor colorWithHex:@"#0A60FF"];
+    self.tableView.sectionIndexBackgroundColor = [UIColor colorWithHex:@"#FFFFFF"];
     
     [self.view addSubview:tableView];
     [self update];

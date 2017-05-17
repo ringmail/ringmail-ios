@@ -26,6 +26,7 @@
 
 @property (nonatomic, strong) IBOutlet UILabel* firstNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel* lastNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel* contactLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImage;
 @property (nonatomic, strong) IBOutlet UIImageView *rgImage;
 @property (nonatomic, assign) ABRecordRef contact;

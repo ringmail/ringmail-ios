@@ -324,8 +324,11 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    [header.textLabel setTextColor:[UIColor colorWithHex:@"#33362f"]];
-    header.contentView.backgroundColor = [UIColor colorWithHex:@"#F4F4F4"];
+    [header.textLabel setTextColor:[UIColor colorWithHex:@"#222222"]];
+    [header.textLabel setFont:[UIFont fontWithName:@"SFUIText-Bold" size:20]];
+    header.contentView.backgroundColor = [UIColor colorWithHex:@"#FFFFFF"];
+    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_contacts_header.png"]];
+    [header.contentView addSubview:imageView];
 }
 
 @end
