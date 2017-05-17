@@ -20,9 +20,33 @@
 	
 	UIImage* mainImage = [context getImageByID:data[@"id"] key:@"msg_data" size:CGSizeMake(maxBubbleWidth, maxBubbleHeight)];
 
-	//if ([data[@"direction"] isEqualToString:@"inbound"])
-	if (0)
+	if ([data[@"direction"] isEqualToString:@"inbound"])
 	{
+		res = [CKStackLayoutComponent newWithView:{} size:{
+			.width = width,
+		} style: {
+			.direction = CKStackLayoutDirectionHorizontal,
+			.alignItems = CKStackLayoutAlignItemsStart,
+		} children:{
+    		{[CKInsetComponent newWithInsets:{.top = 3, .left = 12, .bottom = 3, .right = (width - maxBubbleWidth) + 12} component:
+    			[CKStackLayoutComponent newWithView:{} size:{
+    				.width = maxBubbleWidth,
+    			} style: {
+    				.direction = CKStackLayoutDirectionHorizontal,
+    				.alignItems = CKStackLayoutAlignItemsStart,
+    			} children:{
+					{[CKCompositeComponent newWithView:{
+						[UIView class],
+						{
+    						{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @15.0},
+                            {@selector(setClipsToBounds:), @YES},
+						}
+					} component:
+						[CKImageComponent newWithImage:mainImage]
+					]}
+        		}]
+    		]}
+		}];
 	}
 	else
 	{
@@ -44,7 +68,7 @@
 					{[CKCompositeComponent newWithView:{
 						[UIView class],
 						{
-    						{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @10.0},
+    						{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @15.0},
                             {@selector(setClipsToBounds:), @YES},
 						}
 					} component:
