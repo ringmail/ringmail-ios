@@ -19,7 +19,6 @@ target 'RingMail-Dev' do
   pod 'FMDB'
   pod 'Objective-LevelDB'
   pod "AFNetworking", '~> 3.0'
-  pod 'NYXImagesKit'
   pod 'DXTableViewModel',  '~> 0.1.0'
   pod 'libPhoneNumber-iOS', '~> 0.8'
   pod 'NSHash', '~> 1.0.2'

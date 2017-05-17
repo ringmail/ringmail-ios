@@ -3,9 +3,9 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "DTActionSheet.h"
-#import "NYXImagesKit/NYXImagesKit.h"
 #import "RgChatQuestionSelect.h"
 #import "JSQMessagesCollectionViewFlowLayout.h"
+#import "UIImage+Scale.h"
 
 
 @implementation RgMessagesViewController
@@ -201,7 +201,7 @@
     }*/
 	
 	image = [self normalizedImage:image];
-    UIImage *imageSized = [image scaleToFitSize:(CGSize){3264, 3264}];
+    UIImage *imageSized = [image scaleImageToSize:(CGSize){3264, 3264}];
     
     RgChatManager* mgr = [[LinphoneManager instance] chatManager];
 	NSDictionary *sdata = [mgr dbGetSessionData:_chatSession];

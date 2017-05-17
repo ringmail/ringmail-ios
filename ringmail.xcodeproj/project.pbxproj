@@ -699,6 +699,8 @@
 		C473F87A1ECCDB41008B548B /* ChatElementTextComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C473F8781ECCDB41008B548B /* ChatElementTextComponent.mm */; };
 		C473F87D1ECCDED8008B548B /* ChatElementImageComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */; };
 		C473F87E1ECCDED8008B548B /* ChatElementImageComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */; };
+		C473F8801ECD0770008B548B /* UIImage+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = C473F87F1ECD0770008B548B /* UIImage+Scale.m */; };
+		C473F8811ECD0770008B548B /* UIImage+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = C473F87F1ECD0770008B548B /* UIImage+Scale.m */; };
 		C476A7071CF24DFE00CA3772 /* ringpage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7041CF24DFE00CA3772 /* ringpage@3x.png */; };
 		C476A7081CF24DFE00CA3772 /* ringpage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7051CF24DFE00CA3772 /* ringpage@2x.png */; };
 		C476A7091CF24DFE00CA3772 /* ringpage.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7061CF24DFE00CA3772 /* ringpage.png */; };
@@ -1607,7 +1609,6 @@
 		C4AC2B281D3963FA003B6232 /* IASKSettingsStoreUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FD815C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m */; };
 		C4AC2B291D3963FA003B6232 /* IASKSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDA15C2894A005BE9BC /* IASKSpecifier.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		C4AC2B2A1D3963FA003B6232 /* IASKPSSliderSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDD15C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m */; };
-		C4AC2B2B1D3963FA003B6232 /* RgCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */; };
 		C4AC2B2C1D3963FA003B6232 /* HashtagCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B71FD1CA22DD50020A57F /* HashtagCollectionViewController.mm */; };
 		C4AC2B2D1D3963FA003B6232 /* CardModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72061CA22EDB0020A57F /* CardModelController.m */; };
 		C4AC2B2E1D3963FA003B6232 /* IASKPSTextFieldSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDF15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
@@ -1695,7 +1696,6 @@
 		C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E985C91BAF98E200939A55 /* UIMessageButton.m */; };
 		C4FD784C1CF932950066BDB1 /* UIColor+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD784B1CF932950066BDB1 /* UIColor+Name.m */; };
 		C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */; };
-		C4FD785C1CF93EF20066BDB1 /* RgCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */; };
 		C4FD785E1CF9429C0066BDB1 /* pattern_wov.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD785D1CF9429C0066BDB1 /* pattern_wov.png */; };
 		C4FD78641CF9477C0066BDB1 /* pattern_upfeathers.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD785F1CF9477C0066BDB1 /* pattern_upfeathers.png */; };
 		C4FD78651CF9477C0066BDB1 /* pattern_swirl_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD78601CF9477C0066BDB1 /* pattern_swirl_pattern.png */; };
@@ -3016,6 +3016,8 @@
 		C473F8781ECCDB41008B548B /* ChatElementTextComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatElementTextComponent.mm; sourceTree = "<group>"; };
 		C473F87B1ECCDEC9008B548B /* ChatElementImageComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatElementImageComponent.h; path = RgComponents/ChatElementImageComponent.h; sourceTree = "<group>"; };
 		C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatElementImageComponent.mm; sourceTree = "<group>"; };
+		C473F87F1ECD0770008B548B /* UIImage+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Scale.m"; path = "Utils/UIImage+Scale.m"; sourceTree = "<group>"; };
+		C473F8841ECD07AF008B548B /* UIImage+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Scale.h"; sourceTree = "<group>"; };
 		C476A7041CF24DFE00CA3772 /* ringpage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpage@3x.png"; path = "Resources/ringpage@3x.png"; sourceTree = "<group>"; };
 		C476A7051CF24DFE00CA3772 /* ringpage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpage@2x.png"; path = "Resources/ringpage@2x.png"; sourceTree = "<group>"; };
 		C476A7061CF24DFE00CA3772 /* ringpage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringpage.png; path = Resources/ringpage.png; sourceTree = "<group>"; };
@@ -3161,8 +3163,6 @@
 		C4FD78561CF935CF0066BDB1 /* UIColor+Name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIColor+Name.h"; path = "Utils/UIColor+Name.h"; sourceTree = "<group>"; };
 		C4FD78571CF939330066BDB1 /* NSObject+NSPerformSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+NSPerformSelector.h"; path = "Utils/NSObject+NSPerformSelector.h"; sourceTree = "<group>"; };
 		C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+NSPerformSelector.m"; path = "Utils/NSObject+NSPerformSelector.m"; sourceTree = "<group>"; };
-		C4FD785A1CF93EF20066BDB1 /* RgCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgCustomView.h; sourceTree = "<group>"; };
-		C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgCustomView.m; sourceTree = "<group>"; };
 		C4FD785D1CF9429C0066BDB1 /* pattern_wov.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pattern_wov.png; path = Resources/pattern_wov.png; sourceTree = "<group>"; };
 		C4FD785F1CF9477C0066BDB1 /* pattern_upfeathers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pattern_upfeathers.png; path = Resources/pattern_upfeathers.png; sourceTree = "<group>"; };
 		C4FD78601CF9477C0066BDB1 /* pattern_swirl_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pattern_swirl_pattern.png; path = Resources/pattern_swirl_pattern.png; sourceTree = "<group>"; };
@@ -4023,8 +4023,6 @@
 				4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */,
 				4D9684D21E48F4AA008464B7 /* RgSearchBackgroundView.h */,
 				4D9684D31E48F4AA008464B7 /* RgSearchBackgroundView.m */,
-				C4FD785A1CF93EF20066BDB1 /* RgCustomView.h */,
-				C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */,
 				C42C0DD31CAF2D9600AD5A91 /* RgCallDuration.h */,
 				C42C0DD41CAF2D9600AD5A91 /* RgCallDuration.m */,
 				C42C0D501CAECA1500AD5A91 /* RgInCallViewController.h */,
@@ -4861,6 +4859,8 @@
 				C4FD78551CF935C60066BDB1 /* UIColor+Hex.h */,
 				C4FD784B1CF932950066BDB1 /* UIColor+Name.m */,
 				C4FD78561CF935CF0066BDB1 /* UIColor+Name.h */,
+				C473F87F1ECD0770008B548B /* UIImage+Scale.m */,
+				C473F8841ECD07AF008B548B /* UIImage+Scale.h */,
 				C4FD78571CF939330066BDB1 /* NSObject+NSPerformSelector.h */,
 				C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */,
 				C45CFFDB1D8B34F900BEF75F /* IAWCKImageDownloader.h */,
@@ -7948,6 +7948,7 @@
 				C44A40D81E70E415000F3E24 /* CLClippingTool.m in Sources */,
 				C48C10911E81AB4A0094F1F3 /* MediaPage.m in Sources */,
 				C4AB19FB1E8D9BB600C7A754 /* ChatElementContext.m in Sources */,
+				C473F8801ECD0770008B548B /* UIImage+Scale.m in Sources */,
 				C4FE4C701CCD9CA4006A6C94 /* FavoriteModelController.m in Sources */,
 				D3F26BF115986B73005F9CAB /* IncomingCallViewController.m in Sources */,
 				C44A410A1E70E415000F3E24 /* UIImage+Utility.m in Sources */,
@@ -8040,7 +8041,6 @@
 				C48DA1E11E846A44007CBCFB /* BaseCameraViewController.m in Sources */,
 				4D9684D41E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
-				C4FD785C1CF93EF20066BDB1 /* RgCustomView.m in Sources */,
 				C4AB1A0B1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm in Sources */,
 				C42B71FE1CA22DD50020A57F /* HashtagCollectionViewController.mm in Sources */,
 				C4A853D91E660E1000FEAFB0 /* Send.m in Sources */,
@@ -8215,6 +8215,7 @@
 				C44A40CF1E70E415000F3E24 /* CLImageEditor.m in Sources */,
 				C4AC2B0F1D3963FA003B6232 /* Utils.m in Sources */,
 				C4AC2B101D3963FA003B6232 /* TPMultiLayoutViewController.m in Sources */,
+				C473F8811ECD0770008B548B /* UIImage+Scale.m in Sources */,
 				C44A40ED1E70E415000F3E24 /* CLEffectTool.m in Sources */,
 				C4AC2B111D3963FA003B6232 /* DCRoundSwitch.m in Sources */,
 				C4AC2B121D3963FA003B6232 /* DCRoundSwitchKnobLayer.m in Sources */,
@@ -8265,7 +8266,6 @@
 				C44A40DF1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
 				C48DA1E21E846A44007CBCFB /* BaseCameraViewController.m in Sources */,
 				4D9684D51E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
-				C4AC2B2B1D3963FA003B6232 /* RgCustomView.m in Sources */,
 				C4AC2B2C1D3963FA003B6232 /* HashtagCollectionViewController.mm in Sources */,
 				C4AB1A0C1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm in Sources */,
 				C4AC2B2D1D3963FA003B6232 /* CardModelController.m in Sources */,
