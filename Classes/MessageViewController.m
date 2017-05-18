@@ -10,7 +10,6 @@
 #import "MessageTableViewCell.h"
 #import "MessageTextView.h"
 #import "TypingIndicatorView.h"
-#import "Message.h"
 #import "UIColor+Hex.h"
 
 #import <LoremIpsum/LoremIpsum.h>
@@ -28,8 +27,6 @@
 @property (nonatomic, strong) NSArray *searchResult;
 
 @property (nonatomic, strong) UIWindow *pipWindow;
-
-@property (nonatomic, weak) Message *editingMessage;
 
 @end
 
@@ -388,8 +385,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)didCommitTextEditing:(id)sender
 {
     // Notifies the view controller when tapped on the right "Accept" button for commiting the edited text
-    self.editingMessage.text = [self.textView.text copy];
-    
+    //self.editingMessage.text = [self.textView.text copy];
     //[self.tableView reloadData];
     
     [super didCommitTextEditing:sender];
