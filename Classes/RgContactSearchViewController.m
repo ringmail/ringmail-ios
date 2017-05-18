@@ -45,10 +45,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, 20, 0);
-}
-
 #pragma mark - Text Field Functions
 
 -(void)dismissKeyboard:(id)sender
