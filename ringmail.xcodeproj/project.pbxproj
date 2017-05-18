@@ -74,6 +74,12 @@
 		4D000B131DA7045000D606EC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D000B111DA7045000D606EC /* MainInterface.storyboard */; };
 		4D000B171DA7045000D606EC /* RingMailIntentsExtensionUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D000B0A1DA7045000D606EC /* RingMailIntentsExtensionUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4D000B1A1DA7045000D606EC /* RingMailIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D000B001DA7044F00D606EC /* RingMailIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D039A9F1ECE2F080091F8EF /* RgContactSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D039A9D1ECE2F080091F8EF /* RgContactSearchViewController.m */; };
+		4D039AA01ECE2F080091F8EF /* RgContactSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D039A9D1ECE2F080091F8EF /* RgContactSearchViewController.m */; };
+		4D039AA11ECE2F080091F8EF /* RgContactSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D039A9E1ECE2F080091F8EF /* RgContactSearchViewController.xib */; };
+		4D039AA21ECE2F080091F8EF /* RgContactSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D039A9E1ECE2F080091F8EF /* RgContactSearchViewController.xib */; };
+		4D039AA41ECE322A0091F8EF /* icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D039AA31ECE322A0091F8EF /* icon_search@2x.png */; };
+		4D039AA51ECE322A0091F8EF /* icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D039AA31ECE322A0091F8EF /* icon_search@2x.png */; };
 		4D33F7491EC4D5C400D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */; };
 		4D33F74A1EC4D5C400D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */; };
 		4D33F74B1EC4D5C400D913A7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F6EA1EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */; };
@@ -2443,6 +2449,10 @@
 		4D000B0F1DA7045000D606EC /* IntentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntentViewController.m; sourceTree = "<group>"; };
 		4D000B121DA7045000D606EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4D000B141DA7045000D606EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D039A9C1ECE2F070091F8EF /* RgContactSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgContactSearchViewController.h; sourceTree = "<group>"; };
+		4D039A9D1ECE2F080091F8EF /* RgContactSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgContactSearchViewController.m; sourceTree = "<group>"; };
+		4D039A9E1ECE2F080091F8EF /* RgContactSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgContactSearchViewController.xib; sourceTree = "<group>"; };
+		4D039AA31ECE322A0091F8EF /* icon_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_search@2x.png"; path = "Resources/icon_search@2x.png"; sourceTree = "<group>"; };
 		4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "explore_hashtag_category_sample_banner1_ip5@2x.jpg"; path = "Resources/explore_hashtag_category_sample_banner1_ip5@2x.jpg"; sourceTree = "<group>"; };
 		4D33F6EA1EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg"; path = "Resources/explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg"; sourceTree = "<group>"; };
 		4D33F6EB1EC4D5C200D913A7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg"; path = "Resources/explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg"; sourceTree = "<group>"; };
@@ -4036,6 +4046,9 @@
 				4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */,
 				4D9684D21E48F4AA008464B7 /* RgSearchBackgroundView.h */,
 				4D9684D31E48F4AA008464B7 /* RgSearchBackgroundView.m */,
+				4D039A9C1ECE2F070091F8EF /* RgContactSearchViewController.h */,
+				4D039A9D1ECE2F080091F8EF /* RgContactSearchViewController.m */,
+				4D039A9E1ECE2F080091F8EF /* RgContactSearchViewController.xib */,
 				C4FD785A1CF93EF20066BDB1 /* RgCustomView.h */,
 				C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */,
 				C42C0DD31CAF2D9600AD5A91 /* RgCallDuration.h */,
@@ -5022,6 +5035,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4D039AA31ECE322A0091F8EF /* icon_search@2x.png */,
 				4D4970191ECCF19200076090 /* icon_plus@2x.png */,
 				4D49701A1ECCF19200076090 /* background_contacts_header@2x.png */,
 				4D4970121ECB8BFF00076090 /* decline_button_incoming_screen@2x.png */,
@@ -6177,6 +6191,7 @@
 				C42C0DC31CAEE9D100AD5A91 /* ringmail_incall-dialpad@3x.png in Resources */,
 				D3ED3E7415861ABD006C0DE4 /* call_over.png in Resources */,
 				D3ED3E7815861B1B006C0DE4 /* backspace_default.png in Resources */,
+				4D039AA11ECE2F080091F8EF /* RgContactSearchViewController.xib in Resources */,
 				C444F3CC1C92240300134788 /* menu-contact@3x.png in Resources */,
 				D3ED3E7A15861B1B006C0DE4 /* backspace_over.png in Resources */,
 				C476A7071CF24DFE00CA3772 /* ringpage@3x.png in Resources */,
@@ -6494,6 +6509,7 @@
 				D3C31A6A15BD8DED008ED271 /* speaker_off_default_landscape.png in Resources */,
 				D3C31A6C15BD8DED008ED271 /* speaker_off_disabled_landscape.png in Resources */,
 				D3C31A6E15BD8DED008ED271 /* speaker_off_over_landscape.png in Resources */,
+				4D039AA41ECE322A0091F8EF /* icon_search@2x.png in Resources */,
 				D3C31A7015BD8DED008ED271 /* speaker_on_default_landscape.png in Resources */,
 				D3C31A7215BD8DED008ED271 /* speaker_on_disabled_landscape.png in Resources */,
 				D3C31A7415BD8DED008ED271 /* speaker_on_over_landscape.png in Resources */,
@@ -7069,6 +7085,7 @@
 				C470BF891E68C7E6009968E2 /* user_icon_normal@2x.png in Resources */,
 				C45CFFF71D8B600A00BEF75F /* ringmail_astronaut.png in Resources */,
 				C4AC28411D3963FA003B6232 /* ringmail_chat_back.png in Resources */,
+				4D039AA51ECE322A0091F8EF /* icon_search@2x.png in Resources */,
 				4D33F7F21EC4D5C400D913A7 /* tabs_ring_selected@2x.png in Resources */,
 				4D33F76A1EC4D5C400D913A7 /* explore_background_ip6-7p@3x.png in Resources */,
 				C4AC28421D3963FA003B6232 /* history_all_default.png in Resources */,
@@ -7284,6 +7301,7 @@
 				C4AC28F91D3963FA003B6232 /* contact_back_default.png in Resources */,
 				C4AC28FA1D3963FA003B6232 /* contact_back_over.png in Resources */,
 				C4AC28FB1D3963FA003B6232 /* menu-more_active@3x.png in Resources */,
+				4D039AA21ECE2F080091F8EF /* RgContactSearchViewController.xib in Resources */,
 				C4AC28FC1D3963FA003B6232 /* phone@3x.png in Resources */,
 				C4AC28FD1D3963FA003B6232 /* contact_edit_default.png in Resources */,
 				C4AC28FE1D3963FA003B6232 /* RgChatQuestionSelect.xib in Resources */,
@@ -7914,6 +7932,7 @@
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
 				2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */,
 				C44A41001E70E415000F3E24 /* CLToolbarMenuItem.m in Sources */,
+				4D039A9F1ECE2F080091F8EF /* RgContactSearchViewController.m in Sources */,
 				C48C10991E81AB820094F1F3 /* MediaModelController.m in Sources */,
 				C44A41021E70E415000F3E24 /* UIView+CLImageToolInfo.m in Sources */,
 				2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */,
@@ -8127,6 +8146,7 @@
 			files = (
 				4DCEA6891EBAA62A00E6760D /* RgOptionsModalViewController.xib in Sources */,
 				4DCEA6871EBAA60000E6760D /* RgOptionsModalViewController.h in Sources */,
+				4D039AA01ECE2F080091F8EF /* RgContactSearchViewController.m in Sources */,
 				4DCEA6881EBAA60000E6760D /* RgOptionsModalViewController.m in Sources */,
 				C44A40FD1E70E415000F3E24 /* CLImageEditorTheme+Private.m in Sources */,
 				C4AC2AAD1D3963FA003B6232 /* MainCardComponentController.mm in Sources */,

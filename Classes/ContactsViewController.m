@@ -24,7 +24,7 @@
 
 #import <AddressBook/ABPerson.h>
 
-#import "RgSearchBarViewController.h"
+#import "RgContactSearchViewController.h"
 
 @implementation ContactSelection
 
@@ -84,7 +84,7 @@ static NSString *sNameOrEmailFilter;
 
 @interface ContactsViewController()
 @property BOOL isSearchBarVisible;
-@property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
+@property (strong, nonatomic) RgContactSearchViewController *searchBarViewController;
 @end
 
 
@@ -210,7 +210,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad {
 	[super viewDidLoad];
     
-    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Contact Name"];
+    self.searchBarViewController = [[RgContactSearchViewController alloc] init];
     self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
     self.isSearchBarVisible = YES;
     [self addChildViewController:self.searchBarViewController];

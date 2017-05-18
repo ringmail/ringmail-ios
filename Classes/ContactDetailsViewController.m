@@ -258,7 +258,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"ContactDetails"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"Contact Details"
 																content:@"ContactDetailsViewController"
 															   stateBar:nil
 														stateBarEnabled:false

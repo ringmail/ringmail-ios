@@ -18,7 +18,7 @@ static NSString *const kAppearAnimation = @"appear";
 static NSString *const kDisappearAnimation = @"disappear";
 
 typedef enum {
-    Ring, Explore, Recents, Contacts, Settings, HTagCard, Chat
+    Ring, Explore, Recents, Contacts, ContactDetails, Settings, HTagCard, Chat
 } NavView;
 
 int backState = 0;
@@ -171,6 +171,7 @@ int backState = 0;
             [segmentButton setHidden:NO];
             break;
         case Contacts:
+        case ContactDetails:
         case Settings:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
@@ -197,6 +198,7 @@ int backState = 0;
         @"Explore": @(Explore),
         @"Recent Activity": @(Recents),
         @"Contacts": @(Contacts),
+        @"Contact Details": @(ContactDetails),
         @"Settings": @(Settings),
         @"Hashtag Card": @(HTagCard),
     };
