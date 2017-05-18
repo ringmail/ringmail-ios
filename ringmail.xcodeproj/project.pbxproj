@@ -786,8 +786,6 @@
 		C4A929151E9428BE00993A5C /* MessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A9290A1E9428BE00993A5C /* MessageTextView.m */; };
 		C4A929161E9428BE00993A5C /* TypingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A9290C1E9428BE00993A5C /* TypingIndicatorView.m */; };
 		C4A929171E9428BE00993A5C /* TypingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A9290C1E9428BE00993A5C /* TypingIndicatorView.m */; };
-		C4A929181E9428BE00993A5C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A9290E1E9428BE00993A5C /* Message.m */; };
-		C4A929191E9428BE00993A5C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A9290E1E9428BE00993A5C /* Message.m */; };
 		C4AA1A221C71314E003F86FD /* RgMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4AA1A211C71314E003F86FD /* RgMainViewController.xib */; };
 		C4AA1A291C72D3CB003F86FD /* ringmail_card_video.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AA1A261C72D3CB003F86FD /* ringmail_card_video.png */; };
 		C4AA1A2A1C72D3CB003F86FD /* ringmail_card_call.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AA1A271C72D3CB003F86FD /* ringmail_card_call.png */; };
@@ -3099,8 +3097,6 @@
 		C4A9290A1E9428BE00993A5C /* MessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTextView.m; sourceTree = "<group>"; };
 		C4A9290B1E9428BE00993A5C /* TypingIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypingIndicatorView.h; sourceTree = "<group>"; };
 		C4A9290C1E9428BE00993A5C /* TypingIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypingIndicatorView.m; sourceTree = "<group>"; };
-		C4A9290D1E9428BE00993A5C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		C4A9290E1E9428BE00993A5C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		C4A9290F1E9428BE00993A5C /* Bridge-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		C4AA1A211C71314E003F86FD /* RgMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgMainViewController.xib; sourceTree = "<group>"; };
 		C4AA1A261C72D3CB003F86FD /* ringmail_card_video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_card_video.png; path = Resources/ringmail_card_video.png; sourceTree = "<group>"; };
@@ -3992,7 +3988,7 @@
 			isa = PBXGroup;
 			children = (
 				C4A929041E94288E00993A5C /* ChatRoom */,
-				C4108ED91C6FF1F2008EFDEC /* RgComponents */,
+				C4108ED91C6FF1F2008EFDEC /* CKComponents */,
 				C4D999501B96910A003CC323 /* RgManager.h */,
 				C4D999511B96910A003CC323 /* RgManager.m */,
 				C422AD301B99F1A900D1F1CD /* RgNetwork.h */,
@@ -4505,117 +4501,16 @@
 			path = Utils/TPKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
-		C4108ED91C6FF1F2008EFDEC /* RgComponents */ = {
+		C4108ED91C6FF1F2008EFDEC /* CKComponents */ = {
 			isa = PBXGroup;
 			children = (
-				C42B71FF1CA22EDB0020A57F /* Card.h */,
-				C42B72001CA22EDB0020A57F /* Card.m */,
-				C42B72011CA22EDB0020A57F /* CardComponent.h */,
-				C42B72021CA22EDB0020A57F /* CardComponent.mm */,
-				C42B72031CA22EDB0020A57F /* CardContext.h */,
-				C42B72041CA22EDB0020A57F /* CardContext.m */,
-				C42B72051CA22EDB0020A57F /* CardModelController.h */,
-				C42B72061CA22EDB0020A57F /* CardModelController.m */,
-				C42B72071CA22EDB0020A57F /* CardsPage.h */,
-				C42B72081CA22EDB0020A57F /* CardsPage.m */,
-				C42B72091CA22EDB0020A57F /* HeaderComponent.h */,
-				C42B720A1CA22EDB0020A57F /* HeaderComponent.mm */,
-				C42B720B1CA22EDB0020A57F /* InteractiveCardComponent.h */,
-				C42B720C1CA22EDB0020A57F /* InteractiveCardComponent.mm */,
-				C42B720D1CA22EDB0020A57F /* MainCardComponent.h */,
-				C42B720E1CA22EDB0020A57F /* MainCardComponent.mm */,
-				C41D67EA1CA8C33A00D7BA72 /* MainCardComponentController.h */,
-				C4FE7FF81CA8C3C10099D048 /* MainCardComponentController.mm */,
-				C450DBBD1C70FFC80053592E /* MainCollectionViewController.h */,
-				C450DBB61C70FFB00053592E /* MainCollectionViewController.mm */,
-				C48C107F1E81AB010094F1F3 /* Media.h */,
-				C48C10881E81AB0B0094F1F3 /* Media.m */,
-				C48C108B1E81AB190094F1F3 /* MediaContext.h */,
-				C48C108C1E81AB230094F1F3 /* MediaContext.m */,
-				C48C108F1E81AB410094F1F3 /* MediaPage.h */,
-				C48C10901E81AB4A0094F1F3 /* MediaPage.m */,
-				C48C10931E81AB5A0094F1F3 /* MediaComponent.h */,
-				C48C10941E81AB6B0094F1F3 /* MediaComponent.mm */,
-				C48C10971E81AB790094F1F3 /* MediaModelController.h */,
-				C48C10981E81AB820094F1F3 /* MediaModelController.m */,
-				C48C109B1E81AB920094F1F3 /* MediaCollectionViewController.h */,
-				C48C109C1E81AB9D0094F1F3 /* MediaCollectionViewController.mm */,
-				C48C109F1E81ABB50094F1F3 /* MediaBarComponent.h */,
-				C48C10A01E81ABC00094F1F3 /* MediaBarComponent.mm */,
-				C4593A431E6A379D001C3BDD /* Favorite.h */,
-				C4593A4C1E6A37A8001C3BDD /* Favorite.m */,
-				C4593A531E6A3EB4001C3BDD /* FavoriteContext.h */,
-				C4593A541E6A3EBF001C3BDD /* FavoriteContext.m */,
-				C4593A4F1E6A37BE001C3BDD /* FavoritesPage.h */,
-				C4593A501E6A37D0001C3BDD /* FavoritesPage.m */,
-				C4593A571E6A406B001C3BDD /* FavoriteComponent.h */,
-				C4593A581E6A4086001C3BDD /* FavoriteComponent.mm */,
-				C4FE4C6D1CCD9CA4006A6C94 /* FavoriteModelController.h */,
-				C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */,
-				C4FE4C6B1CCD9CA4006A6C94 /* FavoriteCollectionViewController.h */,
-				C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */,
-				C4593A5B1E6A4A7A001C3BDD /* FavoritesBarComponent.h */,
-				C4593A5C1E6A4A89001C3BDD /* FavoritesBarComponent.mm */,
-				C476A7111CF254F100CA3772 /* HashtagCardComponent.h */,
-				C476A7121CF254F100CA3772 /* HashtagCardComponent.mm */,
-				C43F65D11D5309CB004CEC70 /* HashtagCardComponentController.h */,
-				C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */,
-				C4FD78731CFB70520066BDB1 /* HashtagCategoryCardComponent.h */,
-				C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */,
-				C41276951D68BE550065E3FF /* HashtagCategoryGroupCardComponent.h */,
-				C41276921D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm */,
-				C4FD78761CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.h */,
-				C4FD78771CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm */,
-				C45CFFE91D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.h */,
-				C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */,
-				C42B72171CA2313D0020A57F /* HashtagModelController.h */,
-				C42B72181CA2313D0020A57F /* HashtagModelController.m */,
-				C42B71FC1CA22DD50020A57F /* HashtagCollectionViewController.h */,
-				C42B71FD1CA22DD50020A57F /* HashtagCollectionViewController.mm */,
-				C42C0D561CAED5F200AD5A91 /* RgCall.h */,
-				C42C0D5F1CAEDA4100AD5A91 /* RgCall.m */,
-				C42C0D621CAEDA5A00AD5A91 /* RgCallContext.h */,
-				C42C0D5C1CAED86800AD5A91 /* RgCallContext.m */,
-				C42C0D641CAEDAA800AD5A91 /* RgCallComponent.h */,
-				C42C0D651CAEDAA800AD5A91 /* RgCallComponent.mm */,
-				C42C0D611CAEDA5300AD5A91 /* RgCallViewController.h */,
-				C42C0D531CAED35B00AD5A91 /* RgCallViewController.mm */,
-				C42C0DE01CB1692C00AD5A91 /* RgIncomingCallComponent.h */,
-				C42C0DD91CB1691E00AD5A91 /* RgIncomingCallComponent.mm */,
-				C42C0DE31CB169E400AD5A91 /* RgIncomingCallViewController.h */,
-				C42C0DE11CB169DB00AD5A91 /* RgIncomingCallViewController.mm */,
-				C4A853DB1E660E1800FEAFB0 /* Send.h */,
-				C4A853D81E660E1000FEAFB0 /* Send.m */,
-				C4A853DD1E660E3000FEAFB0 /* SendContext.h */,
-				C4A853DE1E660E3A00FEAFB0 /* SendContext.m */,
-				C4A853E41E66116700FEAFB0 /* SendComponent.h */,
-				C4A853E11E66115C00FEAFB0 /* SendComponent.mm */,
-				C470BF951E68DD55009968E2 /* SendComponentController.h */,
-				C470BF961E68DD69009968E2 /* SendComponentController.mm */,
-				C48AE3CA1E6DCF4500F3C9B1 /* SendCardComponent.h */,
-				C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */,
-				C45285161E8341BD00ED669D /* SendCardComponentController.h */,
-				C452851D1E83455800ED669D /* SendCardComponentController.mm */,
-				C4A853CC1E660D7800FEAFB0 /* SendViewController.h */,
-				C4A853D51E660D9000FEAFB0 /* SendViewController.mm */,
-				C470BF6E1E68C532009968E2 /* SendToInputComponent.h */,
-				C470BF771E68C540009968E2 /* SendToInputComponent.mm */,
-				C445D1BF1E6778210037A9DE /* TextInputComponent.h */,
-				C445D1C01E6778220037A9DE /* TextInputComponent.mm */,
-				C4AB19ED1E8D9B7800C7A754 /* ChatElement.h */,
-				C4AB19F61E8D9B8400C7A754 /* ChatElement.m */,
-				C4AB19F91E8D9BA600C7A754 /* ChatElementContext.h */,
-				C4AB19FA1E8D9BB600C7A754 /* ChatElementContext.m */,
-				C4AB1A011E8D9C7300C7A754 /* ChatElementComponent.h */,
-				C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */,
-				C473F86F1ECCDB23008B548B /* ChatElementTextComponent.h */,
-				C473F8781ECCDB41008B548B /* ChatElementTextComponent.mm */,
-				C473F87B1ECCDEC9008B548B /* ChatElementImageComponent.h */,
-				C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */,
-				C4AB1A091E8D9CFD00C7A754 /* ChatRoomCollectionViewController.h */,
-				C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */,
+				C45B93161ECE2CAF00974011 /* InCall */,
+				C45B93121ECE2C3400974011 /* HashtagDirectory */,
+				C45B93091ECE2BF900974011 /* ChatRoom */,
+				C45B93151ECE2C6200974011 /* MessageList */,
+				C45B93141ECE2C6000974011 /* SendPanel */,
 			);
-			name = RgComponents;
+			name = CKComponents;
 			sourceTree = "<group>";
 		};
 		C41D67E41CA74B0900D7BA72 /* Fonts */ = {
@@ -4813,6 +4708,147 @@
 			path = CLStickerTool;
 			sourceTree = "<group>";
 		};
+		C45B93091ECE2BF900974011 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				C4AB19ED1E8D9B7800C7A754 /* ChatElement.h */,
+				C4AB19F61E8D9B8400C7A754 /* ChatElement.m */,
+				C4AB19F91E8D9BA600C7A754 /* ChatElementContext.h */,
+				C4AB19FA1E8D9BB600C7A754 /* ChatElementContext.m */,
+				C4AB1A011E8D9C7300C7A754 /* ChatElementComponent.h */,
+				C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */,
+				C473F86F1ECCDB23008B548B /* ChatElementTextComponent.h */,
+				C473F8781ECCDB41008B548B /* ChatElementTextComponent.mm */,
+				C473F87B1ECCDEC9008B548B /* ChatElementImageComponent.h */,
+				C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */,
+				C4AB1A091E8D9CFD00C7A754 /* ChatRoomCollectionViewController.h */,
+				C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */,
+			);
+			name = ChatRoom;
+			sourceTree = "<group>";
+		};
+		C45B93121ECE2C3400974011 /* HashtagDirectory */ = {
+			isa = PBXGroup;
+			children = (
+				C476A7111CF254F100CA3772 /* HashtagCardComponent.h */,
+				C476A7121CF254F100CA3772 /* HashtagCardComponent.mm */,
+				C43F65D11D5309CB004CEC70 /* HashtagCardComponentController.h */,
+				C43F65D21D5309CB004CEC70 /* HashtagCardComponentController.mm */,
+				C4FD78731CFB70520066BDB1 /* HashtagCategoryCardComponent.h */,
+				C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */,
+				C41276951D68BE550065E3FF /* HashtagCategoryGroupCardComponent.h */,
+				C41276921D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm */,
+				C4FD78761CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.h */,
+				C4FD78771CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm */,
+				C45CFFE91D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.h */,
+				C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */,
+				C42B72171CA2313D0020A57F /* HashtagModelController.h */,
+				C42B72181CA2313D0020A57F /* HashtagModelController.m */,
+				C42B71FC1CA22DD50020A57F /* HashtagCollectionViewController.h */,
+				C42B71FD1CA22DD50020A57F /* HashtagCollectionViewController.mm */,
+			);
+			name = HashtagDirectory;
+			sourceTree = "<group>";
+		};
+		C45B93141ECE2C6000974011 /* SendPanel */ = {
+			isa = PBXGroup;
+			children = (
+				C4A853DB1E660E1800FEAFB0 /* Send.h */,
+				C4A853D81E660E1000FEAFB0 /* Send.m */,
+				C4A853DD1E660E3000FEAFB0 /* SendContext.h */,
+				C4A853DE1E660E3A00FEAFB0 /* SendContext.m */,
+				C4A853E41E66116700FEAFB0 /* SendComponent.h */,
+				C4A853E11E66115C00FEAFB0 /* SendComponent.mm */,
+				C470BF951E68DD55009968E2 /* SendComponentController.h */,
+				C470BF961E68DD69009968E2 /* SendComponentController.mm */,
+				C48AE3CA1E6DCF4500F3C9B1 /* SendCardComponent.h */,
+				C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */,
+				C45285161E8341BD00ED669D /* SendCardComponentController.h */,
+				C452851D1E83455800ED669D /* SendCardComponentController.mm */,
+				C4A853CC1E660D7800FEAFB0 /* SendViewController.h */,
+				C4A853D51E660D9000FEAFB0 /* SendViewController.mm */,
+				C470BF6E1E68C532009968E2 /* SendToInputComponent.h */,
+				C470BF771E68C540009968E2 /* SendToInputComponent.mm */,
+				C445D1BF1E6778210037A9DE /* TextInputComponent.h */,
+				C445D1C01E6778220037A9DE /* TextInputComponent.mm */,
+				C4593A431E6A379D001C3BDD /* Favorite.h */,
+				C4593A4C1E6A37A8001C3BDD /* Favorite.m */,
+				C4593A531E6A3EB4001C3BDD /* FavoriteContext.h */,
+				C4593A541E6A3EBF001C3BDD /* FavoriteContext.m */,
+				C4593A4F1E6A37BE001C3BDD /* FavoritesPage.h */,
+				C4593A501E6A37D0001C3BDD /* FavoritesPage.m */,
+				C4593A571E6A406B001C3BDD /* FavoriteComponent.h */,
+				C4593A581E6A4086001C3BDD /* FavoriteComponent.mm */,
+				C4FE4C6D1CCD9CA4006A6C94 /* FavoriteModelController.h */,
+				C4FE4C6E1CCD9CA4006A6C94 /* FavoriteModelController.m */,
+				C4FE4C6B1CCD9CA4006A6C94 /* FavoriteCollectionViewController.h */,
+				C4FE4C6C1CCD9CA4006A6C94 /* FavoriteCollectionViewController.mm */,
+				C4593A5B1E6A4A7A001C3BDD /* FavoritesBarComponent.h */,
+				C4593A5C1E6A4A89001C3BDD /* FavoritesBarComponent.mm */,
+				C48C107F1E81AB010094F1F3 /* Media.h */,
+				C48C10881E81AB0B0094F1F3 /* Media.m */,
+				C48C108B1E81AB190094F1F3 /* MediaContext.h */,
+				C48C108C1E81AB230094F1F3 /* MediaContext.m */,
+				C48C108F1E81AB410094F1F3 /* MediaPage.h */,
+				C48C10901E81AB4A0094F1F3 /* MediaPage.m */,
+				C48C10931E81AB5A0094F1F3 /* MediaComponent.h */,
+				C48C10941E81AB6B0094F1F3 /* MediaComponent.mm */,
+				C48C10971E81AB790094F1F3 /* MediaModelController.h */,
+				C48C10981E81AB820094F1F3 /* MediaModelController.m */,
+				C48C109B1E81AB920094F1F3 /* MediaCollectionViewController.h */,
+				C48C109C1E81AB9D0094F1F3 /* MediaCollectionViewController.mm */,
+				C48C109F1E81ABB50094F1F3 /* MediaBarComponent.h */,
+				C48C10A01E81ABC00094F1F3 /* MediaBarComponent.mm */,
+			);
+			name = SendPanel;
+			sourceTree = "<group>";
+		};
+		C45B93151ECE2C6200974011 /* MessageList */ = {
+			isa = PBXGroup;
+			children = (
+				C42B71FF1CA22EDB0020A57F /* Card.h */,
+				C42B72001CA22EDB0020A57F /* Card.m */,
+				C42B72011CA22EDB0020A57F /* CardComponent.h */,
+				C42B72021CA22EDB0020A57F /* CardComponent.mm */,
+				C42B72031CA22EDB0020A57F /* CardContext.h */,
+				C42B72041CA22EDB0020A57F /* CardContext.m */,
+				C42B72051CA22EDB0020A57F /* CardModelController.h */,
+				C42B72061CA22EDB0020A57F /* CardModelController.m */,
+				C42B72071CA22EDB0020A57F /* CardsPage.h */,
+				C42B72081CA22EDB0020A57F /* CardsPage.m */,
+				C42B72091CA22EDB0020A57F /* HeaderComponent.h */,
+				C42B720A1CA22EDB0020A57F /* HeaderComponent.mm */,
+				C42B720B1CA22EDB0020A57F /* InteractiveCardComponent.h */,
+				C42B720C1CA22EDB0020A57F /* InteractiveCardComponent.mm */,
+				C42B720D1CA22EDB0020A57F /* MainCardComponent.h */,
+				C42B720E1CA22EDB0020A57F /* MainCardComponent.mm */,
+				C41D67EA1CA8C33A00D7BA72 /* MainCardComponentController.h */,
+				C4FE7FF81CA8C3C10099D048 /* MainCardComponentController.mm */,
+				C450DBBD1C70FFC80053592E /* MainCollectionViewController.h */,
+				C450DBB61C70FFB00053592E /* MainCollectionViewController.mm */,
+			);
+			name = MessageList;
+			sourceTree = "<group>";
+		};
+		C45B93161ECE2CAF00974011 /* InCall */ = {
+			isa = PBXGroup;
+			children = (
+				C42C0D561CAED5F200AD5A91 /* RgCall.h */,
+				C42C0D5F1CAEDA4100AD5A91 /* RgCall.m */,
+				C42C0D621CAEDA5A00AD5A91 /* RgCallContext.h */,
+				C42C0D5C1CAED86800AD5A91 /* RgCallContext.m */,
+				C42C0D641CAEDAA800AD5A91 /* RgCallComponent.h */,
+				C42C0D651CAEDAA800AD5A91 /* RgCallComponent.mm */,
+				C42C0D611CAEDA5300AD5A91 /* RgCallViewController.h */,
+				C42C0D531CAED35B00AD5A91 /* RgCallViewController.mm */,
+				C42C0DE01CB1692C00AD5A91 /* RgIncomingCallComponent.h */,
+				C42C0DD91CB1691E00AD5A91 /* RgIncomingCallComponent.mm */,
+				C42C0DE31CB169E400AD5A91 /* RgIncomingCallViewController.h */,
+				C42C0DE11CB169DB00AD5A91 /* RgIncomingCallViewController.mm */,
+			);
+			name = InCall;
+			sourceTree = "<group>";
+		};
 		C4A929041E94288E00993A5C /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -4826,8 +4862,6 @@
 				C4A9290A1E9428BE00993A5C /* MessageTextView.m */,
 				C4A9290B1E9428BE00993A5C /* TypingIndicatorView.h */,
 				C4A9290C1E9428BE00993A5C /* TypingIndicatorView.m */,
-				C4A9290D1E9428BE00993A5C /* Message.h */,
-				C4A9290E1E9428BE00993A5C /* Message.m */,
 				C4A9290F1E9428BE00993A5C /* Bridge-Header.h */,
 			);
 			name = ChatRoom;
@@ -7931,7 +7965,6 @@
 				C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */,
 				63B81A101B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C42C0D661CAEDAA800AD5A91 /* RgCallComponent.mm in Sources */,
-				C4A929181E9428BE00993A5C /* Message.m in Sources */,
 				C44A40F01E70E415000F3E24 /* CLFilterTool.m in Sources */,
 				C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */,
 				C4FD78781CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm in Sources */,
@@ -8157,7 +8190,6 @@
 				C4AC2AE11D3963FA003B6232 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C4AC2AE21D3963FA003B6232 /* RgCallComponent.mm in Sources */,
 				C4AC2AE41D3963FA003B6232 /* NSObject+NSPerformSelector.m in Sources */,
-				C4A929191E9428BE00993A5C /* Message.m in Sources */,
 				C44A40F11E70E415000F3E24 /* CLFilterTool.m in Sources */,
 				C4AC2AE51D3963FA003B6232 /* HashtagCategoryHeaderComponent.mm in Sources */,
 				C473F87E1ECCDED8008B548B /* ChatElementImageComponent.mm in Sources */,
