@@ -661,6 +661,20 @@
 		C459A44D1CC870B600CFFF30 /* ringmail_favorite-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A4471CC870B600CFFF30 /* ringmail_favorite-pressed.png */; };
 		C459A44E1CC870B600CFFF30 /* ringmail_favorite-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A4481CC870B600CFFF30 /* ringmail_favorite-pressed@2x.png */; };
 		C459A44F1CC870B600CFFF30 /* ringmail_favorite-pressed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C459A4491CC870B600CFFF30 /* ringmail_favorite-pressed@3x.png */; };
+		C45B93241ECE398300974011 /* RKCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B93231ECE398300974011 /* RKCommunicator.m */; };
+		C45B93251ECE398300974011 /* RKCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B93231ECE398300974011 /* RKCommunicator.m */; };
+		C45B93281ECE39A200974011 /* RKAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B93271ECE39A200974011 /* RKAddress.m */; };
+		C45B93291ECE39A200974011 /* RKAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B93271ECE39A200974011 /* RKAddress.m */; };
+		C45B93301ECE4E5E00974011 /* RKMessageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B932F1ECE4E5E00974011 /* RKMessageStore.m */; };
+		C45B93311ECE4E5E00974011 /* RKMessageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B932F1ECE4E5E00974011 /* RKMessageStore.m */; };
+		C45B93341ECE4EA700974011 /* RKThread.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B93331ECE4EA700974011 /* RKThread.m */; };
+		C45B93351ECE4EA700974011 /* RKThread.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B93331ECE4EA700974011 /* RKThread.m */; };
+		C45B933C1ECE4ECA00974011 /* RKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B933B1ECE4ECA00974011 /* RKMessage.m */; };
+		C45B933D1ECE4ECA00974011 /* RKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B933B1ECE4ECA00974011 /* RKMessage.m */; };
+		C45B93401ECE4EF200974011 /* RKItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B933F1ECE4EF200974011 /* RKItem.m */; };
+		C45B93411ECE4EF200974011 /* RKItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B933F1ECE4EF200974011 /* RKItem.m */; };
+		C45B93441ECE4F5C00974011 /* RKContact.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B93431ECE4F5C00974011 /* RKContact.m */; };
+		C45B93451ECE4F5C00974011 /* RKContact.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B93431ECE4F5C00974011 /* RKContact.m */; };
 		C45CFFDD1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */; };
 		C45CFFDE1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */; };
 		C45CFFEB1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */; };
@@ -2974,6 +2988,20 @@
 		C459A4471CC870B600CFFF30 /* ringmail_favorite-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_favorite-pressed.png"; path = "Resources/ringmail_favorite-pressed.png"; sourceTree = "<group>"; };
 		C459A4481CC870B600CFFF30 /* ringmail_favorite-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_favorite-pressed@2x.png"; path = "Resources/ringmail_favorite-pressed@2x.png"; sourceTree = "<group>"; };
 		C459A4491CC870B600CFFF30 /* ringmail_favorite-pressed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_favorite-pressed@3x.png"; path = "Resources/ringmail_favorite-pressed@3x.png"; sourceTree = "<group>"; };
+		C45B93221ECE398300974011 /* RKCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKCommunicator.h; path = RingKit/RKCommunicator.h; sourceTree = "<group>"; };
+		C45B93231ECE398300974011 /* RKCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKCommunicator.m; path = RingKit/RKCommunicator.m; sourceTree = "<group>"; };
+		C45B93261ECE39A200974011 /* RKAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKAddress.h; path = RingKit/RKAddress.h; sourceTree = "<group>"; };
+		C45B93271ECE39A200974011 /* RKAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKAddress.m; path = RingKit/RKAddress.m; sourceTree = "<group>"; };
+		C45B932E1ECE4E5E00974011 /* RKMessageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKMessageStore.h; path = RingKit/RKMessageStore.h; sourceTree = "<group>"; };
+		C45B932F1ECE4E5E00974011 /* RKMessageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKMessageStore.m; path = RingKit/RKMessageStore.m; sourceTree = "<group>"; };
+		C45B93321ECE4EA700974011 /* RKThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKThread.h; path = RingKit/RKThread.h; sourceTree = "<group>"; };
+		C45B93331ECE4EA700974011 /* RKThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKThread.m; path = RingKit/RKThread.m; sourceTree = "<group>"; };
+		C45B933A1ECE4ECA00974011 /* RKMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKMessage.h; path = RingKit/RKMessage.h; sourceTree = "<group>"; };
+		C45B933B1ECE4ECA00974011 /* RKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKMessage.m; path = RingKit/RKMessage.m; sourceTree = "<group>"; };
+		C45B933E1ECE4EF200974011 /* RKItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKItem.h; path = RingKit/RKItem.h; sourceTree = "<group>"; };
+		C45B933F1ECE4EF200974011 /* RKItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKItem.m; path = RingKit/RKItem.m; sourceTree = "<group>"; };
+		C45B93421ECE4F5C00974011 /* RKContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKContact.h; path = RingKit/RKContact.h; sourceTree = "<group>"; };
+		C45B93431ECE4F5C00974011 /* RKContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKContact.m; path = RingKit/RKContact.m; sourceTree = "<group>"; };
 		C45CFFDB1D8B34F900BEF75F /* IAWCKImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAWCKImageDownloader.h; path = Utils/IAWCKImageDownloader.h; sourceTree = "<group>"; };
 		C45CFFDC1D8B34F900BEF75F /* IAWCKImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IAWCKImageDownloader.m; path = Utils/IAWCKImageDownloader.m; sourceTree = "<group>"; };
 		C45CFFE91D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagDirectoryHeaderCardComponent.h; path = RgComponents/HashtagDirectoryHeaderCardComponent.h; sourceTree = "<group>"; };
@@ -3964,6 +3992,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C45B93191ECE37C500974011 /* RingKit */,
 				C4A929041E94288E00993A5C /* ChatRoom */,
 				C4108ED91C6FF1F2008EFDEC /* CKComponents */,
 				C4D999501B96910A003CC323 /* RgManager.h */,
@@ -4815,6 +4844,27 @@
 				C42C0DE11CB169DB00AD5A91 /* RgIncomingCallViewController.mm */,
 			);
 			name = InCall;
+			sourceTree = "<group>";
+		};
+		C45B93191ECE37C500974011 /* RingKit */ = {
+			isa = PBXGroup;
+			children = (
+				C45B93261ECE39A200974011 /* RKAddress.h */,
+				C45B93271ECE39A200974011 /* RKAddress.m */,
+				C45B93421ECE4F5C00974011 /* RKContact.h */,
+				C45B93431ECE4F5C00974011 /* RKContact.m */,
+				C45B93321ECE4EA700974011 /* RKThread.h */,
+				C45B93331ECE4EA700974011 /* RKThread.m */,
+				C45B933E1ECE4EF200974011 /* RKItem.h */,
+				C45B933F1ECE4EF200974011 /* RKItem.m */,
+				C45B933A1ECE4ECA00974011 /* RKMessage.h */,
+				C45B933B1ECE4ECA00974011 /* RKMessage.m */,
+				C45B93221ECE398300974011 /* RKCommunicator.h */,
+				C45B93231ECE398300974011 /* RKCommunicator.m */,
+				C45B932E1ECE4E5E00974011 /* RKMessageStore.h */,
+				C45B932F1ECE4E5E00974011 /* RKMessageStore.m */,
+			);
+			name = RingKit;
 			sourceTree = "<group>";
 		};
 		C4A929041E94288E00993A5C /* ChatRoom */ = {
@@ -7873,6 +7923,7 @@
 			files = (
 				C44A40FC1E70E415000F3E24 /* CLImageEditorTheme+Private.m in Sources */,
 				C4FE7FF91CA8CEED0099D048 /* MainCardComponentController.mm in Sources */,
+				C45B933C1ECE4ECA00974011 /* RKMessage.m in Sources */,
 				63B81A0F1B57DA33009604A6 /* TPKeyboardAvoidingTableView.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				C445D1C11E6778220037A9DE /* TextInputComponent.mm in Sources */,
@@ -7997,9 +8048,11 @@
 				C4BC49361BF9477B00826264 /* RgChatQuestionSelect.m in Sources */,
 				C48C10891E81AB0B0094F1F3 /* Media.m in Sources */,
 				C42C0D521CAECA1500AD5A91 /* RgInCallViewController.m in Sources */,
+				C45B93301ECE4E5E00974011 /* RKMessageStore.m in Sources */,
 				C4D999521B96910A003CC323 /* RgManager.m in Sources */,
 				C4E1CB351E6E1A2400698166 /* MomentCameraViewController.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
+				C45B93341ECE4EA700974011 /* RKThread.m in Sources */,
 				C44A40D21E70E415000F3E24 /* CLImageToolInfo.m in Sources */,
 				C4FE4C791CCDA03F006A6C94 /* MessagesViewController.m in Sources */,
 				C42C0D5D1CAED86800AD5A91 /* RgCallContext.m in Sources */,
@@ -8033,6 +8086,7 @@
 				C44A41161E7335CD000F3E24 /* CLEmoticonTool.m in Sources */,
 				C48C108D1E81AB230094F1F3 /* MediaContext.m in Sources */,
 				C44A40DE1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
+				C45B93441ECE4F5C00974011 /* RKContact.m in Sources */,
 				C48DA1E11E846A44007CBCFB /* BaseCameraViewController.m in Sources */,
 				4D9684D41E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
@@ -8048,6 +8102,7 @@
 				C48C10A71E81CCC40094F1F3 /* MediaAssetProvider.m in Sources */,
 				D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */,
 				C44A40E41E70E415000F3E24 /* CLPixellateEffect.m in Sources */,
+				C45B93241ECE398300974011 /* RKCommunicator.m in Sources */,
 				D380800215C2894A005BE9BC /* IASKTextField.m in Sources */,
 				D380801315C299D0005BE9BC /* ColorSpaceUtilites.m in Sources */,
 				C44A41081E70E415000F3E24 /* UIDevice+SystemVersion.m in Sources */,
@@ -8058,6 +8113,7 @@
 				C48DA1CF1E845484007CBCFB /* PhotoCameraViewController.m in Sources */,
 				C44A41061E70E415000F3E24 /* CLSplineInterpolator.m in Sources */,
 				D37EE162160377D7003608A6 /* DTActionSheet.m in Sources */,
+				C45B93401ECE4EF200974011 /* RKItem.m in Sources */,
 				C402BF031C2623E10076B60C /* UIImage+operation.m in Sources */,
 				D35E91F4160CA10B0023116B /* UILinphoneTextField.m in Sources */,
 				C44A40D41E70E415000F3E24 /* CLAdjustmentTool.m in Sources */,
@@ -8065,6 +8121,7 @@
 				C4A929161E9428BE00993A5C /* TypingIndicatorView.m in Sources */,
 				D35E91F8160CA4FF0023116B /* UILinphoneButton.m in Sources */,
 				D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */,
+				C45B93281ECE39A200974011 /* RKAddress.m in Sources */,
 				C44A40FE1E70E415000F3E24 /* CLImageToolInfo+Private.m in Sources */,
 				D37E3ECD1619C27A0087659A /* CAAnimation+Blocks.m in Sources */,
 			);
@@ -8099,6 +8156,7 @@
 				C4AC2AAE1D3963FA003B6232 /* TPKeyboardAvoidingTableView.m in Sources */,
 				C4AC2AAF1D3963FA003B6232 /* main.m in Sources */,
 				C445D1C21E6778220037A9DE /* TextInputComponent.mm in Sources */,
+				C45B933D1ECE4ECA00974011 /* RKMessage.m in Sources */,
 				C4AC2AB01D3963FA003B6232 /* LinphoneAppDelegate.m in Sources */,
 				C44A40E91E70E415000F3E24 /* CLSpotEffect.m in Sources */,
 				C4AC2AB31D3963FA003B6232 /* RgCallDuration.m in Sources */,
@@ -8132,6 +8190,7 @@
 				4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */,
 				C41276941D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */,
 				C4AC2AD11D3963FA003B6232 /* CardComponent.mm in Sources */,
+				C45B93451ECE4F5C00974011 /* RKContact.m in Sources */,
 				C4AC2AD21D3963FA003B6232 /* OrderedDictionary.m in Sources */,
 				4D3D66AA1E453AE900C2BCE3 /* UINavBar.m in Sources */,
 				C4AC2AD31D3963FA003B6232 /* RgCallViewController.mm in Sources */,
@@ -8148,6 +8207,7 @@
 				C4AC2ADF1D3963FA003B6232 /* MainCollectionViewController.mm in Sources */,
 				C4AC2AE01D3963FA003B6232 /* SettingsViewController.m in Sources */,
 				C4E1CB3E1E6E20F100698166 /* ViewUtils.m in Sources */,
+				C45B93311ECE4E5E00974011 /* RKMessageStore.m in Sources */,
 				C4AC2AE11D3963FA003B6232 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C4AC2AE21D3963FA003B6232 /* RgCallComponent.mm in Sources */,
 				C4AC2AE41D3963FA003B6232 /* NSObject+NSPerformSelector.m in Sources */,
@@ -8174,7 +8234,9 @@
 				C470BF981E68DD69009968E2 /* SendComponentController.mm in Sources */,
 				C4AC2AF51D3963FA003B6232 /* CardContext.m in Sources */,
 				C4AB1A041E8D9C9400C7A754 /* ChatElementComponent.mm in Sources */,
+				C45B93351ECE4EA700974011 /* RKThread.m in Sources */,
 				C44A40F51E70E415000F3E24 /* CLRotateTool.m in Sources */,
+				C45B93411ECE4EF200974011 /* RKItem.m in Sources */,
 				C449E3CB1E945550008510AB /* RgTextViewController.m in Sources */,
 				C45CFFDE1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */,
 				C4AC2AF61D3963FA003B6232 /* UITransparentView.m in Sources */,
@@ -8252,7 +8314,9 @@
 				C44A40D11E70E415000F3E24 /* CLImageEditorTheme.m in Sources */,
 				C4AC2B2A1D3963FA003B6232 /* IASKPSSliderSpecifierViewCell.m in Sources */,
 				C44A41171E7335CD000F3E24 /* CLEmoticonTool.m in Sources */,
+				C45B93291ECE39A200974011 /* RKAddress.m in Sources */,
 				C48C108E1E81AB230094F1F3 /* MediaContext.m in Sources */,
+				C45B93251ECE398300974011 /* RKCommunicator.m in Sources */,
 				C44A40DF1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
 				C48DA1E21E846A44007CBCFB /* BaseCameraViewController.m in Sources */,
 				4D9684D51E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
