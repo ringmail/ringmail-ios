@@ -118,13 +118,12 @@
 	[addressList addObject:address];
 }
 
-- setPrimaryAddress:(RKAddress*)address
+- (void)setPrimaryAddress:(RKAddress*)address
 {
 	BOOL foundPrimary = NO;
 	for (id i in addressList)
 	{
-		[item.addressList addObject:i];
-		if (i == item.primaryAddress)
+		if (i == address)
 		{
 			foundPrimary = YES;
 		}

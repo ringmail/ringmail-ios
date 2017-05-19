@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class RKThread;
+
 @interface RKItem : NSObject
+
+@property (nonatomic, strong) RKThread* thread;
 
 @end

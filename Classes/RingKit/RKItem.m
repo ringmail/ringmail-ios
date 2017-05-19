@@ -10,4 +10,6 @@
 
 @implementation RKItem
 
+@synthesize thread;
+
 @end

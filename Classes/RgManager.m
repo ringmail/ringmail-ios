@@ -13,6 +13,8 @@
 #import "RgNetwork.h"
 #import "RgChatManager.h"
 
+#import "RKMessageStore.h"
+
 /* RingMail */
 
 NSString *const kRgTextReceived = @"RgTextReceived";
@@ -649,7 +651,9 @@ static LevelDB* theConfigDatabase = nil;
     {
         [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
     }
-    
+	
+	// TODO: Move this
+	[RKMessageStore sharedInstance];
 }
 
 + (void)chatEnsureConnection

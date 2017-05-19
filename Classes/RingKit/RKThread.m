@@ -10,4 +10,6 @@
 
 @implementation RKThread
 
+@synthesize threadId;
+
 @end
