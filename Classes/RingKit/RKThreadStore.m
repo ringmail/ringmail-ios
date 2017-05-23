@@ -271,7 +271,7 @@
 	//NSLog(@"%s: address:%@ originalTo:%@ contactId:%@ uuid:%@", __PRETTY_FUNCTION__, remoteAddress.address, origTo, ctid, uuid);
     __block RKThread* result = nil;
 	__block NSString* from = remoteAddress.address;
-	__block NSString* originalTo = (origTo) ? origTo.address : @"";
+	__block NSString* originalTo = (origTo != nil) ? origTo.address : @"";
 	__block NSNumber* contactId = ctid;
 	__block BOOL found = NO;
 	__block NSNumber *curId = nil;

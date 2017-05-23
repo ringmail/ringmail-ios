@@ -328,14 +328,13 @@
     {
 //        BOOL update = NO;
 //        BOOL refresh = YES;
-//        NSString *uuid = [[xmppMessage attributeForName:@"id"] stringValue];
+        NSString *uuid = [[xmppMessage attributeForName:@"id"] stringValue];
         if ([xmppMessage isMessageWithBody])
         {
-//            NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
             NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
-//            NSString *chatFrom = [RgManager addressFromXMPP:from];
-//			NSString *origTo = [[xmppMessage attributeForName:@"original-to"] stringValue];
-//            NSString *threadId = [[[xmppMessage attributeForName:@"uuid"] stringValue] lowercaseString];
+            NSString *chatFrom = [RgManager addressFromXMPP:from];
+			RKAddress *fromAddress = [RKAddress newWithAddress:chatFrom];
+			
             NSString *contactStr = [[xmppMessage attributeForName:@"contact"] stringValue];
 			NSNumber *contactId = nil;
 			if (contactStr != nil)
@@ -349,12 +348,29 @@
 					}
 				}
 			}
+            NSString *threadUuid = [[[xmppMessage attributeForName:@"uuid"] stringValue] lowercaseString];
+			NSString *origTo = [[xmppMessage attributeForName:@"original-to"] stringValue];
+			RKAddress *originalTo = nil;
+			if (origTo != nil)
+			{
+				originalTo = [RKAddress newWithAddress:origTo];
+			}
+			RKThread* thread = [[RKThreadStore sharedInstance] getThreadByAddress:fromAddress orignalTo:originalTo contactId:contactId uuid:threadUuid];
             NSDate *timestamp = [NSDate parse:[[xmppMessage attributeForName:@"timestamp"] stringValue]];
             if (timestamp == nil)
             {
                 timestamp = [NSDate date];
             }
-			
+            NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
+			RKMessage *message = [RKMessage newWithData:@{
+				@"thread": thread,
+				@"uuid": uuid,
+				@"timestamp": timestamp,
+				@"direction": [NSNumber numberWithInteger:RKItemDirectionInbound],
+				@"body": body,
+				@"deliveryStatus": @"received",
+			}];
+			[[RKCommunicator sharedInstance] didReceiveMessage:message];
 			
 			/*
             NSXMLElement *attach = [xmppMessage elementForName:@"attachment"];
@@ -485,8 +501,8 @@
             }
         }
     }
-
 }
+
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
 {
     NSLog(@"%@: %@ - %@\nType: %@\nShow: %@\nStatus: %@", THIS_FILE, THIS_METHOD, [presence from], [presence type], [presence show],[presence status]);

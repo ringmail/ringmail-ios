@@ -18,4 +18,7 @@
 
 + (instancetype)sharedInstance;
 
+- (void)sendMessage:(RKMessage*)message;
+- (void)didReceiveMessage:(RKMessage*)message;
+
 @end
