@@ -12,8 +12,7 @@
 #import "RgManager.h"
 #import "RgNetwork.h"
 #import "RgChatManager.h"
-
-#import "RKThreadStore.h"
+#import "RingKit.h"
 
 /* RingMail */
 
@@ -649,11 +648,9 @@ static LevelDB* theConfigDatabase = nil;
     NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
     if (chatPass != nil && ! [chatPass isEqualToString:@""])
     {
-        [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
+        //[mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
+        [[RKCommunicator sharedInstance].adapterXMPP connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
     }
-	
-	// TODO: Move this
-	[RKThreadStore sharedInstance];
 }
 
 + (void)chatEnsureConnection

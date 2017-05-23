@@ -11,12 +11,15 @@
 
 @implementation RKCommunicator
 
+@synthesize adapterXMPP;
+
 + (instancetype)sharedInstance
 {
     static RKCommunicator *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 		sharedInstance = [[RKCommunicator alloc] init];
+		sharedInstance.adapterXMPP = [[RKAdapterXMPP alloc] init];
     });
     return sharedInstance;
 }
@@ -25,10 +28,15 @@
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store insertItem:message];
+	// TODO: Deliver message
+	// TODO: Notify observers
 }
 
 - (void)didReceiveMessage:(RKMessage*)message
 {
+	RKThreadStore* store = [RKThreadStore sharedInstance];
+	[store insertItem:message];
+	// TODO: Notify observers
 }
 
 @end

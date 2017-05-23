@@ -206,7 +206,7 @@
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
-            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			RKAddress* addr = [RKAddress newWithAddress:row[@"address"]];
 			NSMutableDictionary* ctdata = [NSMutableDictionary dictionaryWithDictionary:@{
 				@"addressList": @[addr],
@@ -268,7 +268,7 @@
 
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid
 {
-	NSLog(@"%s: address:%@ originalTo:%@ contactId:%@ uuid:%@", __PRETTY_FUNCTION__, remoteAddress.address, origTo, ctid, uuid);
+	//NSLog(@"%s: address:%@ originalTo:%@ contactId:%@ uuid:%@", __PRETTY_FUNCTION__, remoteAddress.address, origTo, ctid, uuid);
     __block RKThread* result = nil;
 	__block NSString* from = remoteAddress.address;
 	__block NSString* originalTo = (origTo) ? origTo.address : @"";

@@ -683,6 +683,8 @@
 		C45CFFF71D8B600A00BEF75F /* ringmail_astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF41D8B600A00BEF75F /* ringmail_astronaut.png */; };
 		C45CFFF81D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */; };
 		C45CFFF91D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */; };
+		C4600C181ED4F61C00C1C964 /* RKAdapterXMPP.m in Sources */ = {isa = PBXBuildFile; fileRef = C4600C171ED4F61C00C1C964 /* RKAdapterXMPP.m */; };
+		C4600C191ED4F61C00C1C964 /* RKAdapterXMPP.m in Sources */ = {isa = PBXBuildFile; fileRef = C4600C171ED4F61C00C1C964 /* RKAdapterXMPP.m */; };
 		C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C46997AC1BC19168007B3658 /* incall_buttons_background.png */; };
 		C470BF781E68C540009968E2 /* SendToInputComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C470BF771E68C540009968E2 /* SendToInputComponent.mm */; };
 		C470BF791E68C540009968E2 /* SendToInputComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C470BF771E68C540009968E2 /* SendToInputComponent.mm */; };
@@ -3008,6 +3010,8 @@
 		C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HashtagDirectoryHeaderCardComponent.mm; path = RgComponents/HashtagDirectoryHeaderCardComponent.mm; sourceTree = "<group>"; };
 		C45CFFF41D8B600A00BEF75F /* ringmail_astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_astronaut.png; path = Resources/ringmail_astronaut.png; sourceTree = "<group>"; };
 		C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_astronaut@2x.png"; path = "Resources/ringmail_astronaut@2x.png"; sourceTree = "<group>"; };
+		C4600C171ED4F61C00C1C964 /* RKAdapterXMPP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKAdapterXMPP.m; path = RingKit/RKAdapterXMPP.m; sourceTree = "<group>"; };
+		C4600C1A1ED4F64800C1C964 /* RKAdapterXMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKAdapterXMPP.h; path = RingKit/RKAdapterXMPP.h; sourceTree = "<group>"; };
 		C46997AC1BC19168007B3658 /* incall_buttons_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incall_buttons_background.png; path = Resources/incall_buttons_background.png; sourceTree = "<group>"; };
 		C470BF6E1E68C532009968E2 /* SendToInputComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendToInputComponent.h; path = RgComponents/SendToInputComponent.h; sourceTree = "<group>"; };
 		C470BF771E68C540009968E2 /* SendToInputComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SendToInputComponent.mm; sourceTree = "<group>"; };
@@ -4864,6 +4868,8 @@
 				C45B93231ECE398300974011 /* RKCommunicator.m */,
 				C45B932E1ECE4E5E00974011 /* RKThreadStore.h */,
 				C45B932F1ECE4E5E00974011 /* RKThreadStore.m */,
+				C4600C1A1ED4F64800C1C964 /* RKAdapterXMPP.h */,
+				C4600C171ED4F61C00C1C964 /* RKAdapterXMPP.m */,
 				C4C5283C1ED3B17D0081214C /* RingKit.h */,
 			);
 			name = RingKit;
@@ -7948,6 +7954,7 @@
 				C42C0DDA1CB1691E00AD5A91 /* RgIncomingCallComponent.mm in Sources */,
 				34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */,
 				C44A40F81E70E415000F3E24 /* CLCircleView.m in Sources */,
+				C4600C181ED4F61C00C1C964 /* RKAdapterXMPP.m in Sources */,
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
 				C44A40DC1E70E415000F3E24 /* CLBloomEffect.m in Sources */,
 				C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */,
@@ -8347,6 +8354,7 @@
 				C4AC2B3F1D3963FA003B6232 /* DTActionSheet.m in Sources */,
 				C4AC2B401D3963FA003B6232 /* UIImage+operation.m in Sources */,
 				C473F87A1ECCDB41008B548B /* ChatElementTextComponent.mm in Sources */,
+				C4600C191ED4F61C00C1C964 /* RKAdapterXMPP.m in Sources */,
 				C4AC2B411D3963FA003B6232 /* UILinphoneTextField.m in Sources */,
 				C44A40D51E70E415000F3E24 /* CLAdjustmentTool.m in Sources */,
 				C4AC2B421D3963FA003B6232 /* UIColor+Hex.m in Sources */,

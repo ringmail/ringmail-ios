@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #import "RKThreadStore.h"
+#import "RKAdapterXMPP.h"
 #import "RKMessage.h"
 
 @interface RKCommunicator : NSObject
+
+@property (nonatomic, strong) RKAdapterXMPP* adapterXMPP;
 
 + (instancetype)sharedInstance;
 
