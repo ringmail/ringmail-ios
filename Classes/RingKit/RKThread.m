@@ -6,6 +6,7 @@
 //
 //
 
+#import "Utils.h"
 #import "RKAddress.h"
 #import "RKContact.h"
 #import "RKThread.h"
@@ -56,6 +57,23 @@
 		item.uuid = [[[NSUUID UUID] UUIDString] lowercaseString];
 	}
 	return item;
+}
+
+- (NSString*)description
+{
+	NSDictionary* input = @{
+		@"threadId": NULLIFNIL(self.threadId),
+		@"remoteAddress": self.remoteAddress,
+		@"originalTo": NULLIFNIL(self.originalTo),
+		@"contact": NULLIFNIL(self.contact),
+		@"uuid": self.uuid
+	};
+    NSMutableString *data = [[NSMutableString alloc] init];
+    for (NSString *k in input.allKeys)
+	{
+        [data appendFormat:@" %@:%@", k, input[k]];
+	}
+	return [NSString stringWithFormat:@"<RKThread:%p {%@ }>", self, data];
 }
 
 @end

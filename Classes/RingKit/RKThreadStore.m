@@ -180,42 +180,109 @@
 	__block NSMutableArray *result = [NSMutableArray array];
 	[[self dbqueue] inDatabase:^(FMDatabase *db) {
 		FMResultSet *rs = [db executeQuery:@""
-            "SELECT l.thread_id, l.address, l.item_id, ti.ts_created, m.id, m.msg_body, m.msg_type, c.id, c.call_sip, c.call_duration"
+            "SELECT "
+				"l.thread_id AS thread_id, "
+				"l.address AS address, "
+				"l.contact_id AS contact_id, "
+				"l.original_to AS original_to, "
+				"l.uuid AS uuid, "
+				"ti.ts_created AS ts_created, "
+				"m.id AS message_id, "
+				"m.msg_body AS msg_body, "
+				"m.msg_type AS msg_type, "
+				"c.id AS call_id, "
+				"c.call_sip AS call_sip, "
+				"c.call_duration AS call_duration "
             "FROM ("
-            	"SELECT t.id AS thread_id, address, (SELECT i.id FROM rk_thread_item i WHERE i.thread_id=t.id ORDER BY i.id DESC LIMIT 1) as item_id"
-            	"ORDER BY item_id DESC"
-            ") AS l,"
-            "JOIN rk_thread_item ti ON ti.id = l.item_id"
-            "LEFT JOIN rk_message m ON m.id=ti.message_id"
-            "LEFT JOIN rk_call c ON c.id=ti.call_id"
-            "ORDER BY t.item_id DESC"
+				"SELECT t.id AS thread_id, t.address, t.contact_id, t.original_to, t.uuid, "
+				"(SELECT i.id FROM rk_thread_item i WHERE i.thread_id=t.id ORDER BY i.id DESC LIMIT 1) as item_id "
+                "FROM rk_thread t"
+            ") AS l "
+            "LEFT JOIN rk_thread_item ti ON ti.id = l.item_id "
+            "LEFT JOIN rk_message m ON m.id=ti.message_id "
+            "LEFT JOIN rk_call c ON c.id=ti.call_id "
+            "ORDER BY l.item_id DESC, l.thread_id DESC"
 		];
 		while ([rs next])
         {
-            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, [rs resultDictionary]);
+			NSDictionary* row = [rs resultDictionary];
+            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+			RKAddress* addr = [RKAddress newWithAddress:row[@"address"]];
+			NSMutableDictionary* ctdata = [NSMutableDictionary dictionaryWithDictionary:@{
+				@"addressList": @[addr],
+			}];
+			if (NILIFNULL(row[@"contact_id"]) != nil)
+			{
+				ctdata[@"contactId"] = row[@"contact_id"];
+			}
+			RKContact* ct = [RKContact newWithData:ctdata];
+			NSMutableDictionary* thrdata = [NSMutableDictionary dictionaryWithDictionary:@{
+				@"threadId": row[@"thread_id"],
+				@"remoteAddress": addr,
+				@"contact": ct,
+				@"uuid": row[@"uuid"],
+			}];
+			if (! [row[@"original_to"] isEqualToString:@""])
+			{
+				thrdata[@"originalTo"] = row[@"original_to"];
+			}
+			RKThread* thr = [RKThread newWithData:thrdata];
+			NSString* itemType = @"none";
+			NSDictionary* detail = @{};
+			if (NILIFNULL(row[@"message_id"]) != nil)
+			{
+				itemType = @"message";
+				detail = @{
+					@"id": row[@"message_id"],
+					@"body": row[@"msg_body"],
+					@"type": row[@"msg_type"],
+				};
+			}
+			else if (NILIFNULL(row[@"call_id"]) != nil)
+			{
+				itemType = @"call";
+				detail = @{
+					@"id": row[@"call_id"],
+					@"sip": row[@"call_sip"],
+					@"duration": row[@"call_duration"],
+				};
+			}
+			NSDictionary* res = @{
+				@"thread": thr,
+				@"type": itemType,
+				@"detail": detail,
+			};
+			[result addObject:res];
 		}
 		[rs close];
 	}];
-	//[[self dbqueue] close];
 	return result;
 }
 
-- (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contact:(RKContact*)ct uuid:(NSString*)uuid
+- (NSArray*)listThreadItems
 {
-	NSLog(@"%s: address:'%@' originalTo:'%@' contact:%@ uuid:'%@'", __PRETTY_FUNCTION__, remoteAddress.address, origTo, ((ct && ct.contactId) ? ct.contactId : @"none"), uuid);
+	__block NSMutableArray *result = [NSMutableArray array];
+	
+	return result;
+}
+
+- (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid
+{
+	NSLog(@"%s: address:%@ originalTo:%@ contactId:%@ uuid:%@", __PRETTY_FUNCTION__, remoteAddress.address, origTo, ctid, uuid);
     __block RKThread* result = nil;
 	__block NSString* from = remoteAddress.address;
 	__block NSString* originalTo = (origTo) ? origTo.address : @"";
-	__block RKContact* contact = ct;
+	__block NSNumber* contactId = ctid;
 	__block BOOL found = NO;
 	__block NSNumber *curId = nil;
 	__block NSString *curUUID = nil;
 	__block NSString *curAddress = nil;
 	__block NSNumber *curContact = nil;
+	__block NSString *curOrigTo = @"";
     [[self dbqueue] inDatabase:^(FMDatabase *db) {
 		if (uuid)
 		{
-            FMResultSet *rs1 = [db executeQuery:@"SELECT id, uuid, address, contact_id FROM rk_thread WHERE uuid = ? COLLATE NOCASE", uuid];
+            FMResultSet *rs1 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE uuid = ? COLLATE NOCASE", uuid];
     		if ([rs1 next])
     		{
 				NSLog(@"Found uuid");
@@ -223,13 +290,14 @@
 				curUUID = [rs1 stringForColumnIndex:1];
 				curAddress = [rs1 stringForColumnIndex:2];
 				curContact = [NSNumber numberWithLong:[rs1 longForColumnIndex:3]];
+				curOrigTo = [rs1 stringForColumnIndex:4];
                 found = YES;
     		}
     		[rs1 close];
 		}
-		if ((! found) && contact)
+		if ((! found) && (contactId != nil))
 		{
-            FMResultSet *rs2 = [db executeQuery:@"SELECT id, uuid, address, contact_id FROM rk_thread WHERE contact_id = ? COLLATE NOCASE", contact.contactId];
+            FMResultSet *rs2 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE contact_id = ? COLLATE NOCASE", contactId];
     		if ([rs2 next])
     		{
 				NSLog(@"Found contact_id");
@@ -237,13 +305,14 @@
 				curUUID = [rs2 stringForColumnIndex:1];
 				curAddress = [rs2 stringForColumnIndex:2];
 				curContact = [NSNumber numberWithLong:[rs2 longForColumnIndex:3]];
+				curOrigTo = [rs2 stringForColumnIndex:4];
                 found = YES;
     		}
     		[rs2 close];
 		}
 		if (! found)
 		{
-            FMResultSet *rs3 = [db executeQuery:@"SELECT id, uuid, address, contact_id FROM rk_thread WHERE address = ? COLLATE NOCASE AND original_to = ? COLLATE NOCASE", from, originalTo];
+            FMResultSet *rs3 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE address = ? COLLATE NOCASE AND original_to = ? COLLATE NOCASE", from, originalTo];
             if ([rs3 next])
             {
 				NSLog(@"Found address, originalTo");
@@ -251,6 +320,7 @@
 				curUUID = [rs3 stringForColumnIndex:1];
 				curAddress = [rs3 stringForColumnIndex:2];
 				curContact = [NSNumber numberWithLong:[rs3 longForColumnIndex:3]];
+				curOrigTo = [rs3 stringForColumnIndex:4];
                 found = YES;
             }
 			[rs3 close];
@@ -258,6 +328,15 @@
 	}];
 	if (found)
 	{
+		NSMutableDictionary* params = [NSMutableDictionary dictionary];
+		params[@"remoteAddress"] = remoteAddress;
+		params[@"threadId"] = curId;
+		params[@"uuid"] = curUUID;
+		if (! [curOrigTo isEqualToString:@""])
+		{
+			params[@"originalTo"] = [RKAddress newWithAddress:curOrigTo];
+		}
+		
 		// Check for any needed updates
 		BOOL update = NO;
 		NSMutableDictionary *updates = [NSMutableDictionary dictionary];
@@ -267,21 +346,30 @@
 			{
 				updates[@"uuid"] = uuid; // New UUID from server
 				update = YES;
+				params[@"uuid"] = uuid;
 			}
 		}
-		if (contact && contact.contactId)
+		if (contactId != nil)
 		{
-			if (! [contact.contactId isEqualToNumber:curContact])
+			if (! [contactId isEqualToNumber:curContact])
 			{
-				updates[@"contact_id"] = contact.contactId;
+				updates[@"contact_id"] = contactId;
 				update = YES;
 			}
+			params[@"contact"] = [RKContact newWithData:@{@"contactId": contactId, @"addressList": @[remoteAddress]}];
 		}
-		else if (! [curContact isKindOfClass:[NSNull class]]) // Clear out contact (require match on server-side)
+		else
 		{
-			updates[@"contact_id"] = [NSNull null];
-			update = YES;
-			contact = nil;
+			if (! [curContact isKindOfClass:[NSNull class]]) // Input contact nil but database not so clear out contact (require match on server-side)
+    		{
+    			updates[@"contact_id"] = [NSNull null];
+    			update = YES;
+				params[@"contact"] = [RKContact newWithData:@{@"addressList": @[remoteAddress]}];
+    		}
+			else
+			{
+				params[@"contact"] = [RKContact newWithData:@{@"contactId": curContact, @"addressList": @[remoteAddress]}];
+			}
 		}
 		if (! [from isEqualToString:curAddress])
 		{
@@ -300,20 +388,6 @@
                 }];
 			}];
 		}
-		NSMutableDictionary* params = [NSMutableDictionary dictionary];
-		params[@"remoteAddress"] = remoteAddress;
-		if (origTo)
-		{
-			params[@"originalTo"] = origTo;
-		}
-		if (uuid)
-		{
-			params[@"uuid"] = uuid;
-		}
-		if (contact)
-		{
-			params[@"contact"] = contact;
-		}
 		result = [RKThread newWithData:params];
 	}
 	else // Create new thread
@@ -329,9 +403,13 @@
 		{
 			params[@"uuid"] = uuid;
 		}
-		if (contact)
+		if (contactId != nil)
 		{
-			params[@"contact"] = contact;
+			params[@"contact"] = [RKContact newWithData:@{@"contactId": contactId, @"addressList": @[remoteAddress]}];
+		}
+		else
+		{
+			params[@"contact"] = [RKContact newWithData:@{@"addressList": @[remoteAddress]}];
 		}
 		result = [RKThread newWithData:params];
 		[self insertThread:result];

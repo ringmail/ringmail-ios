@@ -23,12 +23,12 @@
 	if (param[@"primaryAddress"])
 	{
 		NSAssert([param[@"primaryAddress"] isKindOfClass:[RKAddress class]], @"primaryAddress is not RKAddress object");
-		item.primaryAddress = param[@"primaryAddress"];
+		item->primaryAddress = param[@"primaryAddress"];
 	}
 	else if ([param[@"addressList"] count] > 0)
 	{
 		NSAssert([param[@"addressList"][0] isKindOfClass:[RKAddress class]], @"addressList element is not RKAddress object");
-		item.primaryAddress = item.addressList[0];
+		item->primaryAddress = param[@"addressList"][0];
 	}
 	if (param[@"contactId"])
 	{
@@ -87,6 +87,20 @@
     	}
 	}
 	return [RKContact newWithData:param];
+}
+
+- (NSString*)description
+{
+	NSDictionary* input = @{
+		@"contactId": NULLIFNIL(self.contactId),
+		@"primaryAddress": [NSString stringWithFormat:@"<RKAddress: %p>", self.primaryAddress],
+	};
+    NSMutableString *data = [[NSMutableString alloc] init];
+    for (NSString *k in input.allKeys)
+	{
+        [data appendFormat:@" %@:%@", k, input[k]];
+	}
+	return [NSString stringWithFormat:@"<RKContact: %p {%@ }>", self, data];
 }
 
 - (void)readContactDetails

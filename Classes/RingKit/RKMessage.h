@@ -12,6 +12,8 @@
 
 @interface RKMessage : RKItem
 
++ (instancetype)newWithData:(NSDictionary*)param;
+
 - (instancetype)initWithData:(NSDictionary*)param;
 - (void)insertItem:(NoteDatabase*)ndb;
 

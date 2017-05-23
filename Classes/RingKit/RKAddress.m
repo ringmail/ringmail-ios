@@ -6,8 +6,9 @@
 //
 //
 
-#import "RKAddress.h"
+#import "Utils.h"
 #import "RegexKitLite/RegexKitLite.h"
+#import "RKAddress.h"
 
 @implementation RKAddress
 
@@ -83,6 +84,29 @@
         return YES;
     }
     return NO;
+}
+
+- (NSString*)description
+{
+	NSMutableDictionary* input = [NSMutableDictionary dictionaryWithDictionary:@{
+		@"address": self.address,
+		@"displayName": NULLIFNIL(self.displayName),
+		@"avatarImage": NULLIFNIL(self.avatarImage),
+	}];
+	if (self.contact != nil)
+	{
+		input[@"contact"] = [NSString stringWithFormat:@"<RKContact: %p>", self.contact];
+	}
+	else
+	{
+		input[@"contact"] = [NSNull null];
+	}
+    NSMutableString *data = [[NSMutableString alloc] init];
+    for (NSString *k in input.allKeys)
+	{
+        [data appendFormat:@" %@:%@", k, input[k]];
+	}
+	return [NSString stringWithFormat:@"<RKAddress: %p {%@ }>", self, data];
 }
 
 - (RKAddressType)getAddressType

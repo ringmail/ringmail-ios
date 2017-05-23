@@ -14,6 +14,11 @@
 @synthesize body;
 @synthesize deliveryStatus;
 
++ (instancetype)newWithData:(NSDictionary*)param
+{
+	return [[RKMessage alloc] initWithData:param];
+}
+
 - (instancetype)initWithData:(NSDictionary*)param
 {
 	self = [super initWithData:param];
@@ -39,6 +44,7 @@
 	[ndb set:@{
 		@"table": @"rk_message",
 		@"insert": @{
+			@"thread_id": self.thread.threadId,
 			@"msg_type": @"text/plain",
 			@"msg_time": [[self timestamp] strftime],
 			@"msg_status": [self deliveryStatus],

@@ -49,6 +49,10 @@
     		NSAssert([param[@"direction"] isKindOfClass:[NSNumber class]], @"direction is not NSNumber object");
 			[self setDirection:[param[@"direction"] integerValue]];
 		}
+		else
+		{
+			[self setDirection:RKItemDirectionOutbound];
+		}
 	}
 	return self;
 }

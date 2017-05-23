@@ -1580,13 +1580,23 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	
 	//RingKit Testing...
 	
-	NSLog(@"%s: RingKit 0", __PRETTY_FUNCTION__);
+	NSLog(@"%s: RingKit Start", __PRETTY_FUNCTION__);
 	RKThreadStore* store = [RKThreadStore sharedInstance];
-	NSLog(@"%s: RingKit 1", __PRETTY_FUNCTION__);
 	RKAddress* addr = [RKAddress newWithAddress:@"mike@dyl.com"];
-	NSLog(@"%s: RingKit 2", __PRETTY_FUNCTION__);
-	RKThread* thread1 = [store getThreadByAddress:addr orignalTo:nil contact:nil uuid:nil];
+	RKContact* ct = [RKContact newByMatchingAddress:addr];
+	NSLog(@"%s: RingKit Contact: %@", __PRETTY_FUNCTION__, ct);
+	RKThread* thread1 = [store getThreadByAddress:addr orignalTo:nil contactId:ct.contactId uuid:nil];
 	NSLog(@"%s: RingKit Thread: %@", __PRETTY_FUNCTION__, thread1);
+	
+	RKMessage* msg1 = [RKMessage newWithData:@{
+		@"thread": thread1,
+		@"body": @"Hello World!",
+		@"deliveryStatus": @"sending",
+	}];
+	NSLog(@"%s: RingKit Message: %@", __PRETTY_FUNCTION__, msg1);
+	[store insertItem:msg1];
+	
+	NSLog(@"%s: List Threads: %@", __PRETTY_FUNCTION__, [store listThreads]);
 }
 
 - (void)beginInterruption {

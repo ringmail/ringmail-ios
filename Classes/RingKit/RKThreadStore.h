@@ -9,6 +9,7 @@
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 #import "FMResultSet.h"
+#import "Utils.h"
 
 #import <Foundation/Foundation.h>
 
@@ -27,6 +28,6 @@
 - (void)setupTables;
 - (void)insertItem:(RKItem*)item;
 - (NSArray*)listThreads;
-- (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contact:(RKContact*)contact uuid:(NSString*)uuid;
+- (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 
 @end
