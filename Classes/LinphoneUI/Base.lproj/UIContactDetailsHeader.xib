@@ -57,14 +57,14 @@
                             </connections>
                         </tableView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_unknown_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="2bV-0i-7mI" userLabel="avatarEditImage">
-                            <rect key="frame" x="20" y="55" width="80" height="80"/>
+                            <rect key="frame" x="5" y="75" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="WFI-dz-fkw"/>
                                 <constraint firstAttribute="width" constant="80" id="d1J-tT-dEb"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22" userLabel="avatarButton">
-                            <rect key="frame" x="20" y="55" width="80" height="80"/>
+                            <rect key="frame" x="5" y="75" width="80" height="80"/>
                             <accessibility key="accessibilityConfiguration" label="Contact avatar">
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
@@ -87,10 +87,10 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="15" firstAttribute="leading" secondItem="22" secondAttribute="trailing" id="YmM-Op-Qw8"/>
-                        <constraint firstItem="2bV-0i-7mI" firstAttribute="top" secondItem="15" secondAttribute="top" constant="10" id="cBG-yq-V3E"/>
-                        <constraint firstItem="15" firstAttribute="leading" secondItem="2bV-0i-7mI" secondAttribute="trailing" id="nvy-hC-2NJ"/>
-                        <constraint firstItem="22" firstAttribute="top" secondItem="15" secondAttribute="top" constant="10" id="qYA-m7-9lv"/>
+                        <constraint firstItem="15" firstAttribute="leading" secondItem="22" secondAttribute="trailing" constant="15" id="YmM-Op-Qw8"/>
+                        <constraint firstItem="2bV-0i-7mI" firstAttribute="top" secondItem="15" secondAttribute="top" constant="30" id="cBG-yq-V3E"/>
+                        <constraint firstItem="15" firstAttribute="leading" secondItem="2bV-0i-7mI" secondAttribute="trailing" constant="15" id="nvy-hC-2NJ"/>
+                        <constraint firstItem="22" firstAttribute="top" secondItem="15" secondAttribute="top" constant="30" id="qYA-m7-9lv"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12" userLabel="normalView">
@@ -114,14 +114,14 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Contact1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="addressLabel">
-                            <rect key="frame" x="110.5" y="137" width="99.5" height="27.5"/>
+                            <rect key="frame" x="108" y="137" width="104" height="29"/>
                             <accessibility key="accessibilityConfiguration" label="Contact name"/>
-                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="23"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="24"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEM-vL-GAO" userLabel="Invite">
-                            <rect key="frame" x="77" y="189.5" width="166" height="40"/>
+                            <rect key="frame" x="77" y="191" width="166" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="3zv-cU-cZm"/>
                             </constraints>

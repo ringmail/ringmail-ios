@@ -44,14 +44,16 @@
         
 		[self.contentView addSubview:detailTextField];
 
-		// a vertical separator that will come between the text and detailed text
-//		UIView *v = [[UIView alloc] initWithFrame:CGRectMake(80, 5, 1, 34)];
-//		[v setBackgroundColor:[UIColor lightGrayColor]];
-//		[v setHidden:TRUE];
+		// a separator
+		UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+		[v setBackgroundColor:[UIColor lightGrayColor]];
+		[v setHidden:TRUE];
 
-//		self.verticalSep = v;
-//
-//		[self.contentView addSubview:verticalSep];
+		self.verticalSep = v;
+
+		[self.contentView addSubview:verticalSep];
+        
+        
 	}
 	return self;
 }
@@ -60,7 +62,7 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-
+    
 	CGRect detailEditFrame;
 	detailEditFrame.origin.x = 15;
 	detailEditFrame.origin.y = 15;
@@ -73,12 +75,14 @@
 		leftLabelFrame.size.width -= 10;
         leftLabelFrame.origin.y = 4;
 		[self.textLabel setFrame:leftLabelFrame];
-
-		// place separator between left text and detailed text
-//		CGRect separatorFrame = [self.verticalSep frame];
-//		separatorFrame.origin.x = leftLabelFrame.size.width + leftLabelFrame.origin.x + 8;
-//		[self.verticalSep setFrame:separatorFrame];
-//		[self.verticalSep setHidden:FALSE];
+        
+		// place separator
+		CGRect separatorFrame = [self.verticalSep frame];
+		separatorFrame.origin.x = self.frame.origin.x + 15;
+        separatorFrame.origin.y = self.frame.size.height - 1;
+        separatorFrame.size.width = self.frame.size.width - 30;
+		[self.verticalSep setFrame:separatorFrame];
+		[self.verticalSep setHidden:FALSE];
 	}
 
 	// put the detailed text edit view at the correct position

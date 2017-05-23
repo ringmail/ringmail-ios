@@ -693,11 +693,11 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	if ([[self getSectionData:section] count] == 0)
 		return nil;
 
-	if (contactSections[section] == ContactSections_Number) {
-		return NSLocalizedString(@"Phone numbers", nil);
-	} else if (contactSections[section] == ContactSections_Email) {
-		return NSLocalizedString(@"Email addresses", nil);
-	}
+//	if (contactSections[section] == ContactSections_Number) {
+//		return NSLocalizedString(@"Phone numbers", nil);
+//	} else if (contactSections[section] == ContactSections_Email) {
+//		return NSLocalizedString(@"Email addresses", nil);
+//	}
 	return nil;
 }
 
@@ -709,13 +709,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == ContactSections_None) {
 		return [UIContactDetailsHeader height:[headerController isEditing] member:self.member];
-	} else {
-		// Hide section if nothing in it
-		if ([[self getSectionData:section] count] > 0)
-			return 30;
-		else
+	} else if (section == ContactSections_Email) {
+//		// Hide section if nothing in it
+//		if ([[self getSectionData:section] count] > 0)
+			return 10;
+    } else
 			return 0.000001f; // Hack UITableView = 0
-	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -728,7 +727,8 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	} else if (section == ContactSections_None) {
 		return 0.000001f; // Hack UITableView = 0
 	}
-	return 10.0f;
+//	return 10.0f;
+    return 0.000001f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
