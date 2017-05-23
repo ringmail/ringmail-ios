@@ -226,6 +226,9 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	//					  forState:(UIControlStateDisabled | UIControlStateSelected)];
 
 	//[LinphoneUtils buttonFixStates:editButton];
+    
+    [cancelButton setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
+    [backButton setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
 
 	[tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
 	[tableController.tableView setBackgroundView:nil];					 // Can't do it in Xib: issue with ios4
@@ -262,7 +265,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 																content:@"ContactDetailsViewController"
 															   stateBar:nil
 														stateBarEnabled:false
-                                                                 navBar:@"UINavBar"
+                                                                 navBar:nil
 																 tabBar:@"UIMainBar"
                                                           navBarEnabled:true
 														  tabBarEnabled:true

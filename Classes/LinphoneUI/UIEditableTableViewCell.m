@@ -34,21 +34,24 @@
 		[tf setClearButtonMode:UITextFieldViewModeWhileEditing];
 		[tf setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
 		self.detailTextField = tf;
-
-		UIFont *font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:18];
-		[self.textLabel setFont:font];
+        
+		UIFont *font = [UIFont fontWithName:@"SFUIText-Regular" size:18];
+        UIFont *font2 = [UIFont fontWithName:@"SFUIText-Bold" size:12];
+        
+		[self.textLabel setFont:font2];
 		[self.detailTextLabel setFont:font];
 		[self.detailTextField setFont:font];
+        
 		[self.contentView addSubview:detailTextField];
 
 		// a vertical separator that will come between the text and detailed text
-		UIView *v = [[UIView alloc] initWithFrame:CGRectMake(80, 5, 1, 34)];
-		[v setBackgroundColor:[UIColor lightGrayColor]];
-		[v setHidden:TRUE];
+//		UIView *v = [[UIView alloc] initWithFrame:CGRectMake(80, 5, 1, 34)];
+//		[v setBackgroundColor:[UIColor lightGrayColor]];
+//		[v setHidden:TRUE];
 
-		self.verticalSep = v;
-
-		[self.contentView addSubview:verticalSep];
+//		self.verticalSep = v;
+//
+//		[self.contentView addSubview:verticalSep];
 	}
 	return self;
 }
@@ -60,22 +63,22 @@
 
 	CGRect detailEditFrame;
 	detailEditFrame.origin.x = 15;
-	detailEditFrame.origin.y = 2;
-	detailEditFrame.size.height = 44;
+	detailEditFrame.origin.y = 15;
+	detailEditFrame.size.height = 20;
 
 	if ([[self.textLabel text] length] != 0) {
-		detailEditFrame.origin.x += [self.textLabel frame].size.width + 8;
-
-		// shrink left text width by 10px
+        detailEditFrame.origin.y = 22;
+//		// shrink left text width by 10px
 		CGRect leftLabelFrame = [self.textLabel frame];
 		leftLabelFrame.size.width -= 10;
+        leftLabelFrame.origin.y = 4;
 		[self.textLabel setFrame:leftLabelFrame];
 
 		// place separator between left text and detailed text
-		CGRect separatorFrame = [self.verticalSep frame];
-		separatorFrame.origin.x = leftLabelFrame.size.width + leftLabelFrame.origin.x + 8;
-		[self.verticalSep setFrame:separatorFrame];
-		[self.verticalSep setHidden:FALSE];
+//		CGRect separatorFrame = [self.verticalSep frame];
+//		separatorFrame.origin.x = leftLabelFrame.size.width + leftLabelFrame.origin.x + 8;
+//		[self.verticalSep setFrame:separatorFrame];
+//		[self.verticalSep setHidden:FALSE];
 	}
 
 	// put the detailed text edit view at the correct position
@@ -89,7 +92,9 @@
 	[self.textLabel setFrame:labelFrame];
 	
 	CGRect textFrame = [self.detailTextLabel frame];
-	textFrame.origin.y += 2;
+	textFrame.origin.y = 22;
+    textFrame.origin.x = 15;
+    textFrame.size.height = 20;
 	[self.detailTextLabel setFrame:textFrame];
 }
 

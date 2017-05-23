@@ -485,6 +485,8 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		CFRelease(lMap);
 	}
 	[cell.textLabel setText:label];
+    [cell.textLabel setTextColor:[UIColor blackColor]];
+    cell.textAlignment = NSTextAlignmentLeft;
 	[cell.detailTextLabel setText:value];
 	[cell.detailTextField setText:value];
 	if (contactSections[[indexPath section]] == ContactSections_Number) {
@@ -699,6 +701,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	return nil;
 }
 
+
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	return nil;
 }
@@ -709,7 +712,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	} else {
 		// Hide section if nothing in it
 		if ([[self getSectionData:section] count] > 0)
-			return 22;
+			return 30;
 		else
 			return 0.000001f; // Hack UITableView = 0
 	}
@@ -726,6 +729,11 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		return 0.000001f; // Hack UITableView = 0
 	}
 	return 10.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
 }
 
 #pragma mark - ContactDetailsLabelDelegate Functions

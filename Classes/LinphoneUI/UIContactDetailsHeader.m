@@ -178,11 +178,11 @@
 {
 	if (editing)
 	{
-		return 160.0f;
+		return 280.0f;
 	}
 	else
 	{
-        return 200.0f;
+        return 280.0f;
 		/*if (member)
 		{
 			return 200.0f;
@@ -247,17 +247,20 @@
 		[cell.detailTextField setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		[cell.detailTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
 		[cell.detailTextField setKeyboardType:UIKeyboardTypeDefault];
-		[cell setBackgroundColor:[UIColor whiteColor]];
+		[cell setBackgroundColor:[UIColor clearColor]];
 	}
 
 	// setup placeholder
 	ABPropertyID property = [[propertyList objectAtIndex:[indexPath row]] intValue];
 	if (property == kABPersonFirstNameProperty) {
 		[cell.detailTextField setPlaceholder:NSLocalizedString(@"First Name", nil)];
+        [cell.detailTextField setTextColor:[UIColor whiteColor]];
 	} else if (property == kABPersonLastNameProperty) {
 		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Last Name", nil)];
+        [cell.detailTextField setTextColor:[UIColor whiteColor]];
 	} else if (property == kABPersonOrganizationProperty) {
 		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Company", nil)];
+        [cell.detailTextField setTextColor:[UIColor whiteColor]];
 	}
 
 	[cell.detailTextField setKeyboardType:UIKeyboardTypeDefault];
