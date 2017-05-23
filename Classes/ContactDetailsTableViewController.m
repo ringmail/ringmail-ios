@@ -427,6 +427,11 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	[self addEntry:[self tableView] section:i animated:FALSE value:address];
 }
 
+-(NSString*) capFirstLtr:(NSString *)sIn
+{
+    return [NSString stringWithFormat:@"%@%@",[[sIn substringToIndex:1] capitalizedString],[sIn substringFromIndex:1]];
+}
+
 #pragma mark - UITableViewDataSource Functions
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -446,7 +451,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		[cell.detailTextField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		[cell.detailTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
 		[cell setBackgroundColor:[UIColor whiteColor]];
-
+        
 		// Background View
 		UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
 		cell.selectedBackgroundView = selectedBackgroundView;
@@ -459,7 +464,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	NSString *value = @"";
 	// default label is our app name
 	NSString *label = [FastAddressBook localizedLabel:[labelArray objectAtIndex:0]];
-
+    
 	if (contactSections[[indexPath section]] == ContactSections_Number) {
 		ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
 		NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
@@ -484,7 +489,10 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		}
 		CFRelease(lMap);
 	}
-	[cell.textLabel setText:label];
+    
+    NSString *capLabel = [self capFirstLtr:label];
+    
+	[cell.textLabel setText:capLabel];
     [cell.textLabel setTextColor:[UIColor blackColor]];
     cell.textAlignment = NSTextAlignmentLeft;
 	[cell.detailTextLabel setText:value];
