@@ -7,9 +7,7 @@
 //
 
 #import "RKCommunicator.h"
-#import "RKMessageStore.h"
 
-@class RKMessage;
 
 @implementation RKCommunicator
 
@@ -25,7 +23,8 @@
 
 - (void)sendMessage:(RKMessage*)message
 {
-	[RKMessageStore sharedInstance];
+	RKThreadStore* store = [RKThreadStore sharedInstance];
+	[store insertItem:message];
 }
 
 - (void)didReceiveMessage:(RKMessage*)message

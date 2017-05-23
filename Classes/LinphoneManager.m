@@ -45,6 +45,8 @@
 #import "RgManager.h"
 #import "RegexKitLite/RegexKitLite.h"
 
+#import "RingKit.h"
+
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
 static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
@@ -1575,6 +1577,16 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
             [RgManager chatConnect];
         }
     }
+	
+	//RingKit Testing...
+	
+	NSLog(@"%s: RingKit 0", __PRETTY_FUNCTION__);
+	RKThreadStore* store = [RKThreadStore sharedInstance];
+	NSLog(@"%s: RingKit 1", __PRETTY_FUNCTION__);
+	RKAddress* addr = [RKAddress newWithAddress:@"mike@dyl.com"];
+	NSLog(@"%s: RingKit 2", __PRETTY_FUNCTION__);
+	RKThread* thread1 = [store getThreadByAddress:addr orignalTo:nil contact:nil uuid:nil];
+	NSLog(@"%s: RingKit Thread: %@", __PRETTY_FUNCTION__, thread1);
 }
 
 - (void)beginInterruption {

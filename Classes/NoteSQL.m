@@ -201,6 +201,11 @@
     return nil;
 }
 
+- (NSNumber*)lastInsertId
+{
+	return [NSNumber numberWithLongLong:[database lastInsertRowId]];
+}
+
 @end
 
 @implementation NoteRow
@@ -274,6 +279,7 @@
 
 @implementation NSDate (Strftime)
 
+// GMT built-in
 - (NSString*)strftime:(NSString*)format
 {
     NSDate *date = [NSDate date];

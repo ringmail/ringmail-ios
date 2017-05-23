@@ -35,6 +35,13 @@
 	return item;
 }
 
++ (instancetype)newWithAddress:(NSString*)addr
+{
+	return [RKAddress newWithData:@{
+		@"address": addr,
+	}];
+}
+
 + (BOOL)validEmailAddress:(NSString *)checkString
 {
     // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/

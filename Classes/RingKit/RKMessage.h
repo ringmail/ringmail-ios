@@ -12,4 +12,10 @@
 
 @interface RKMessage : RKItem
 
+- (instancetype)initWithData:(NSDictionary*)param;
+- (void)insertItem:(NoteDatabase*)ndb;
+
+@property (nonatomic, strong) NSString* body;
+@property (nonatomic, strong) NSString* deliveryStatus;
+
 @end

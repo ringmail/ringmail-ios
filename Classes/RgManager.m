@@ -13,7 +13,7 @@
 #import "RgNetwork.h"
 #import "RgChatManager.h"
 
-#import "RKMessageStore.h"
+#import "RKThreadStore.h"
 
 /* RingMail */
 
@@ -653,7 +653,7 @@ static LevelDB* theConfigDatabase = nil;
     }
 	
 	// TODO: Move this
-	[RKMessageStore sharedInstance];
+	[RKThreadStore sharedInstance];
 }
 
 + (void)chatEnsureConnection

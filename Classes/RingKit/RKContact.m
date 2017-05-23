@@ -41,6 +41,10 @@
 	}
 	BOOL foundPrimary = NO;
 	item.addressList = [NSMutableArray array];
+	if ([param[@"addressList"] count] == 0)
+	{
+		foundPrimary = YES;
+	}
 	for (id i in param[@"addressList"])
 	{
 		NSAssert([i isKindOfClass:[RKAddress class]], @"addressList element is not RKAddress object");
@@ -56,6 +60,13 @@
 	}
 	NSAssert(foundPrimary, @"primaryAddress is not a member of addressList");
 	return item;
+}
+
++ (instancetype)newWithContactId:(NSNumber*)ct
+{
+	return [RKContact newWithData:@{
+		@"contactId": ct,
+	}];
 }
 
 + (instancetype)newByMatchingAddress:(RKAddress*)address

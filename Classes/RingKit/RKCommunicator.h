@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import "RKThreadStore.h"
+#import "RKMessage.h"
+
 @interface RKCommunicator : NSObject
 
 + (instancetype)sharedInstance;

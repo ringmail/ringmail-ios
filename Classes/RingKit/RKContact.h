@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray* addressList;
 @property (nonatomic, strong) RKAddress* primaryAddress;
 
++ (instancetype)newWithContactId:(NSNumber*)ct;
 + (instancetype)newWithData:(NSDictionary*)param;
 + (instancetype)newByMatchingAddress:(RKAddress*)address;
 
