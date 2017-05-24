@@ -1,16 +1,15 @@
 #import <Foundation/Foundation.h>
 
-@interface CardsPage : NSObject
+@interface MessageThreadPage : NSObject
 
-@property (nonatomic, readonly, strong) NSArray *cards;
+@property (nonatomic, readonly, strong) NSArray *threads;
 @property (nonatomic, readonly, assign) NSInteger position;
 
-- (instancetype)initWithCards:(NSArray *)cards
-                      position:(NSInteger)position;
+- (instancetype)initWithMessageThreads:(NSArray *)cards position:(NSInteger)position;
 
 @end
 
-@protocol CardPageLoading <NSObject>
+@protocol MessageThreadPageLoading <NSObject>
 
 - (void)showWaiting;
 - (void)hideWaiting;

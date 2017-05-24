@@ -1,22 +1,14 @@
-//
-//  MainCollectionViewController.h
-//  ringmail
-//
-//  Created by Mike Frager on 2/14/16.
-//
-//
-
 #ifndef MainCollectionViewController_h
 #define MainCollectionViewController_h
 
 #import <UIKit/UIKit.h>
-#import "CardModelController.h"
+#import "MessageListModelController.h"
 
-@interface MainCollectionViewController : UICollectionViewController
+@interface MessageListViewController : UICollectionViewController
 
 - (void)updateCollection;
-- (void)removeCard:(NSNumber*)index;
+- (void)removeMessageThread:(NSNumber*)index;
 
 @end
 
-#endif /* MainCollectionViewController_h */
+#endif

@@ -13,24 +13,28 @@
 #import "MessageThread.h"
 #import "MessageThreadContext.h"
 #import "MessageThreadComponent.h"
+#import "RingKit.h"
+#import "UIImage+Scale.h"
 //#import "MessageThreadComponentController.h"
 
-#import "UIImage+RoundedCorner.h"
-#import "UIImage+Resize.h"
 #import "UIColor+Hex.h"
 
 @implementation MessageThreadComponent
 
-@synthesize cardData;
+@synthesize currentThread;
 
 + (instancetype)newWithMessageThread:(MessageThread *)msg context:(MessageThreadContext *)context
 {
-	//NSLog(@"Component Data: %@", msg.data);
-    CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
+	NSLog(@"Component Data: %@", msg.data);
+	NSDictionary* data = msg.data;
+	RKThread* thread = data[@"thread"];
+    CKComponentScope scope(self, thread.threadId);
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
 	
-    UIImage *cardImage = [data objectForKey:@"image"];
-    cardImage = [cardImage thumbnailImage:92 transparentBorder:0 cornerRadius:46 interpolationQuality:kCGInterpolationHigh];
+	// TODO: Use correct image
+    UIImage *cardImage = [context imageNamed:@"avatar_unknown_small.png"];
+	cardImage = [cardImage scaleImageToSize:CGSizeMake(46.0f, 46.0f)];
+    //cardImage = [cardImage thumbnailImage:92 transparentBorder:0 cornerRadius:46 interpolationQuality:kCGInterpolationHigh];
 
     NSString *latest;
     NSDate *dateLatest = [data objectForKey:@"timestamp"];
@@ -171,7 +175,7 @@
                 } children:{
                     {[CKInsetComponent newWithInsets:{.left = 20, .right = INFINITY, .top = 16, .bottom = 0} component:
 						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-							{UIControlStateNormal,[UIImage imageNamed:@"ringmail_triangle_grey.png"]},
+							{UIControlStateNormal, [context imageNamed:@"ringmail_triangle_grey.png"]},
 						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionButton:) size:{} attributes:{} accessibilityConfiguration:{}]
                     ]},
                     {[CKInsetComponent newWithInsets:{.left = 6, .right = 20, .top = 3, .bottom = 0} component:
@@ -200,15 +204,15 @@
                     .alignItems = CKStackLayoutAlignItemsStart
                 } children:{
 					{[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-						{UIControlStateNormal,[UIImage imageNamed:@"ringmail_action_call_normal.png"]},
+						{UIControlStateNormal, [context imageNamed:@"ringmail_action_call_normal.png"]},
 					} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionCall:) size:{.height=39, .width=87} attributes:{} accessibilityConfiguration:{}]},
 					{[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 0, .bottom = 0} component:
 						[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-							{UIControlStateNormal,[UIImage imageNamed:@"ringmail_action_video_normal.png"]},
+							{UIControlStateNormal, [context imageNamed:@"ringmail_action_video_normal.png"]},
 						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionVideo:) size:{.height=39, .width=87} attributes:{} accessibilityConfiguration:{}]
 					]},
 					{[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-						{UIControlStateNormal,[UIImage imageNamed:@"ringmail_action_text_normal.png"]},
+						{UIControlStateNormal, [context imageNamed:@"ringmail_action_text_normal.png"]},
 					} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionChat:) size:{.height=39, .width=87} attributes:{} accessibilityConfiguration:{}]},
 				}]
 			]},
@@ -247,7 +251,7 @@
             } children:{
                 {[CKInsetComponent newWithInsets:{.left = 20, .right = INFINITY, .top = 16, .bottom = 0} component:
 					[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-							{UIControlStateNormal,[UIImage imageNamed:@"ringmail_triangle_green.png"]},
+							{UIControlStateNormal, [context imageNamed:@"ringmail_triangle_green.png"]},
 						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionButton:) size:{} attributes:{} accessibilityConfiguration:{}]
                 ]},
                 {[CKInsetComponent newWithInsets:{.left = 6, .right = 20, .top = 3, .bottom = 0} component:
@@ -281,7 +285,7 @@
             ]
         ]
     ];
-    [c setCardData:data];
+    [c setCurrentThread:msg];
     return c;
 }
 
@@ -292,47 +296,59 @@
 
 - (void)actionButton:(CKButtonComponent *)sender
 {
-	NSLog(@"Action Button 1");
+	//NSLog(@"Action Button 1");
 	[self updateState:^(id oldState){
-		NSLog(@"Action Button 2");
+		//NSLog(@"Action Button 2");
 		NSNumber* st = oldState;
 		st = [NSNumber numberWithBool:(! [st boolValue])];
 		return st;
-	}mode:CKUpdateModeAsynchronous];
+	} mode:CKUpdateModeAsynchronous];
 }
 
 - (void)actionChat:(CKButtonComponent *)sender
 {
+/*
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     [card showMessages];
+*/
 }
 
 - (void)actionCall:(CKButtonComponent *)sender
 {
+/*
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     [card startCall:NO];
+*/
 }
 
 - (void)actionVideo:(CKButtonComponent *)sender
 {
+/*
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     [card startCall:YES];
+*/
 }
 
 - (void)actionContact:(CKButtonComponent *)sender
 {
+/*
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
     [card gotoContact];
+*/
 }
 
-static void setupSwipeLeftRecognizer(UIGestureRecognizer* recognizer) {
+/*
+static void setupSwipeLeftRecognizer(UIGestureRecognizer* recognizer)
+{
     UISwipeGestureRecognizer* sw = (UISwipeGestureRecognizer*)recognizer;
     [sw setDirection:UISwipeGestureRecognizerDirectionLeft];
 }
 
-static void setupSwipeRightRecognizer(UIGestureRecognizer* recognizer) {
+static void setupSwipeRightRecognizer(UIGestureRecognizer* recognizer)
+{
     UISwipeGestureRecognizer* sw = (UISwipeGestureRecognizer*)recognizer;
     [sw setDirection:UISwipeGestureRecognizerDirectionRight];
 }
+*/
 
 @end

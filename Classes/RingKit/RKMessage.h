@@ -17,6 +17,7 @@
 - (instancetype)initWithData:(NSDictionary*)param;
 - (void)insertItem:(NoteDatabase*)ndb;
 
+@property (nonatomic, strong) NSNumber* messageId;
 @property (nonatomic, strong) NSString* body;
 @property (nonatomic, strong) NSString* deliveryStatus;
 

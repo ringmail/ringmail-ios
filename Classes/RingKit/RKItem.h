@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, RKItemDirection) {
 
 @interface RKItem : NSObject
 
-@property (nonatomic, strong) NSNumber* itemId; // Refers to the detail record (ie. rk_message.id) not the rk_thread_item record id
+@property (nonatomic, strong) NSNumber* itemId; // Refers to the rk_thread_item record id
 @property (nonatomic, strong) RKThread* thread;
 @property (nonatomic, strong) NSString* uuid;
 @property (nonatomic, strong) NSDate* timestamp;

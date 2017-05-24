@@ -5,7 +5,7 @@
 
 @interface MessageThreadComponent : CKCompositeComponent
 
-@property NSMutableDictionary *removeButtons;
+@property (nonatomic, strong) MessageThread* currentThread;
 
 + (instancetype)newWithMessageThread:(MessageThread *)thr context:(MessageThreadContext *)context;
 

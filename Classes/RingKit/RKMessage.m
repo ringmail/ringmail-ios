@@ -12,6 +12,7 @@
 
 @implementation RKMessage
 
+@synthesize messageId;
 @synthesize body;
 @synthesize deliveryStatus;
 
@@ -25,6 +26,15 @@
 	self = [super initWithData:param];
 	if (self)
 	{
+		if (param[@"messageId"])
+        {
+            NSAssert([param[@"messageId"] isKindOfClass:[NSNumber class]], @"messageId is not NSNumber object");
+            [self setMessageId:param[@"messageId"]];
+        }
+		else
+		{
+			self->messageId = nil;
+		}
 		if (param[@"body"])
     	{
     		NSAssert([param[@"body"] isKindOfClass:[NSString class]], @"body is not NSString object");
@@ -42,7 +52,8 @@
 - (NSString*)description
 {
 	NSDictionary* input = @{
-		@"messageId": NULLIFNIL(self.itemId),
+		@"itemId": NULLIFNIL(self.itemId),
+		@"messageId": NULLIFNIL(self.messageId),
 		@"thread": [NSString stringWithFormat:@"<RKThread: %p>", self.thread],
 		@"uuid": self.uuid,
 		@"inbound": [NSNumber numberWithInteger:self.direction],
@@ -74,6 +85,7 @@
 		},
 	}];
 	NSNumber* detailId = [ndb lastInsertId];
+	self.messageId = detailId;
 	[ndb set:@{
 		@"table": @"rk_thread_item",
 		@"insert": @{
@@ -82,7 +94,7 @@
 			@"ts_created": [[self timestamp] strftime],
 		},
 	}];
-	self.itemId = detailId;
+	self.itemId = [ndb lastInsertId];
 }
 
 @end
