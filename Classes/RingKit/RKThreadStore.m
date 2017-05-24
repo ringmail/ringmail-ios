@@ -190,6 +190,7 @@
 				"m.id AS message_id, "
 				"m.msg_body AS msg_body, "
 				"m.msg_type AS msg_type, "
+				"m.msg_inbound AS msg_inbound, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
 				"c.call_duration AS call_duration "
@@ -236,6 +237,7 @@
 					@"id": row[@"message_id"],
 					@"body": row[@"msg_body"],
 					@"type": row[@"msg_type"],
+					@"direction": row[@"msg_inbound"],
 				};
 			}
 			else if (NILIFNULL(row[@"call_id"]) != nil)
@@ -251,6 +253,7 @@
 				@"thread": thr,
 				@"type": itemType,
 				@"detail": detail,
+				@"timestamp": [NSDate parse:row[@"ts_created"]],
 			};
 			[result addObject:res];
 		}
@@ -259,10 +262,54 @@
 	return result;
 }
 
-- (NSArray*)listThreadItems
+- (NSArray*)listThreadItems:(RKThread*)thread
 {
+	NSAssert(thread.threadId != nil, @"Undefined thread id");
 	__block NSMutableArray *result = [NSMutableArray array];
-	
+	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+		FMResultSet *rs = [db executeQuery:@""
+            "SELECT "
+				"ti.ts_created AS ts_created, "
+				"m.id AS message_id, "
+				"m.msg_body AS msg_body, "
+				"m.msg_type AS msg_type, "
+				"m.msg_inbound AS msg_inbound, "
+				"m.msg_uuid AS msg_uuid, "
+				"m.msg_status AS msg_status, "
+				"c.id AS call_id, "
+				"c.call_sip AS call_sip, "
+				"c.call_duration AS call_duration "
+            "FROM rk_thread_item ti "
+            "LEFT JOIN rk_message m ON m.id=ti.message_id "
+            "LEFT JOIN rk_call c ON c.id=ti.call_id "
+			"WHERE ti.thread_id=? "
+            "ORDER BY ti.id ASC",
+			thread.threadId
+		];
+		while ([rs next])
+        {
+			NSDictionary* row = [rs resultDictionary];
+            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+			if (NILIFNULL(row[@"message_id"]) != nil)
+			{
+				RKMessage* msg = [RKMessage newWithData:@{
+					@"itemId": row[@"message_id"],
+					@"thread": thread,
+					@"uuid": row[@"msg_uuid"],
+					@"timestamp": [NSDate parse:row[@"ts_created"]],
+					@"direction": row[@"msg_inbound"],
+					@"body": row[@"msg_body"],
+					@"deliveryStatus": row[@"msg_status"],
+				}];
+				[result addObject:msg];
+			}
+			else if (NILIFNULL(row[@"call_id"]) != nil)
+			{
+				NSLog(@"Call Item: %@", row);
+			}
+		}
+		[rs close];
+	}];
 	return result;
 }
 

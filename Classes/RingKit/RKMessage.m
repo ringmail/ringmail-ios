@@ -8,6 +8,7 @@
 
 #import "RKMessage.h"
 #import "RKThread.h"
+#import "Utils.h"
 
 @implementation RKMessage
 
@@ -38,6 +39,25 @@
 	return self;
 }
 
+- (NSString*)description
+{
+	NSDictionary* input = @{
+		@"messageId": NULLIFNIL(self.itemId),
+		@"thread": [NSString stringWithFormat:@"<RKThread: %p>", self.thread],
+		@"uuid": self.uuid,
+		@"inbound": [NSNumber numberWithInteger:self.direction],
+		@"timestamp": self.timestamp,
+		@"body": self.body,
+		@"deliveryStatus": self.deliveryStatus,
+	};
+    NSMutableString *data = [[NSMutableString alloc] init];
+    for (NSString *k in input.allKeys)
+	{
+        [data appendFormat:@" %@:%@", k, input[k]];
+	}
+	return [NSString stringWithFormat:@"<RKMessage:%p {%@ }>", self, data];
+}
+
 - (void)insertItem:(NoteDatabase*)ndb
 {
 	NSAssert(self.thread.threadId, @"thread id required");
@@ -62,6 +82,7 @@
 			@"ts_created": [[self timestamp] strftime],
 		},
 	}];
+	self.itemId = detailId;
 }
 
 @end

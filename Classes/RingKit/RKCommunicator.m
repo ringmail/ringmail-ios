@@ -39,4 +39,19 @@
 	// TODO: Notify observers
 }
 
+- (NSArray*)listThreads
+{
+	return [[RKThreadStore sharedInstance] listThreads];
+}
+
+- (NSArray*)listThreadItems:(RKThread*)thread;
+{
+	return [[RKThreadStore sharedInstance] listThreadItems:thread];
+}
+
+- (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
+{
+	return [[RKThreadStore sharedInstance] getThreadByAddress:remoteAddress orignalTo:origTo contactId:ctid uuid:uuid];
+}
+
 @end

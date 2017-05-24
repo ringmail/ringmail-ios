@@ -355,7 +355,7 @@
 			{
 				originalTo = [RKAddress newWithAddress:origTo];
 			}
-			RKThread* thread = [[RKThreadStore sharedInstance] getThreadByAddress:fromAddress orignalTo:originalTo contactId:contactId uuid:threadUuid];
+			RKThread* thread = [[RKCommunicator sharedInstance] getThreadByAddress:fromAddress orignalTo:originalTo contactId:contactId uuid:threadUuid];
             NSDate *timestamp = [NSDate parse:[[xmppMessage attributeForName:@"timestamp"] stringValue]];
             if (timestamp == nil)
             {

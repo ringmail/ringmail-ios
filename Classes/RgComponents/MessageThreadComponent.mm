@@ -10,23 +10,25 @@
  */
 
 #import "CKComponentSubclass.h"
-#import "MainCardComponent.h"
-#import "MainCardComponentController.h"
-#import "Card.h"
-#import "CardContext.h"
+#import "MessageThread.h"
+#import "MessageThreadContext.h"
+#import "MessageThreadComponent.h"
+//#import "MessageThreadComponentController.h"
 
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
 #import "UIColor+Hex.h"
 
-@implementation MainCardComponent
+@implementation MessageThreadComponent
 
 @synthesize cardData;
 
-+ (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
++ (instancetype)newWithMessageThread:(MessageThread *)msg context:(MessageThreadContext *)context
 {
+	//NSLog(@"Component Data: %@", msg.data);
     CKComponentScope scope(self, [data objectForKey:@"session_tag"]);
-	//NSLog(@"Component Data: %@", data);
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+	
     UIImage *cardImage = [data objectForKey:@"image"];
     cardImage = [cardImage thumbnailImage:92 transparentBorder:0 cornerRadius:46 interpolationQuality:kCGInterpolationHigh];
 
@@ -100,84 +102,8 @@
     };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 
-    // Cheat and get a width constraint for the card text box
-    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-    
-    //if ([[data objectForKey:@"unread"] integerValue] > 0)
 	
-	/*CKComponentViewConfiguration scfg;
-	if (data[@"removable"])
-	{
-		scfg = {
-    	    [UIView class],
-            {
-                {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeLeftRecognizer, NSSelectorFromString(@"didSwipeLeft:gesture:"), {})},
-                {CKComponentGestureAttribute([UISwipeGestureRecognizer class], &setupSwipeRightRecognizer, NSSelectorFromString(@"didSwipeRight:gesture:"), {})},
-            }
-	 	};
-	}
-	else
-	{
-		scfg = {
-			[UIView class],
-			{}
-		};
-	}*/
-    
-	/*std::vector<CKStackLayoutComponentChild> body = {};
-	if (! [latest isEqualToString:@""])
-	{
-		CKComponent *bodyItem;
-		if (has_media)
-		{
-			UIImage *thumb = [context chatImage:data[@"msg_uuid"] key:@"msg_thumbnail"];
-			bodyItem = [CKStackLayoutComponent newWithView:{} size:{} style:{
-                .direction = CKStackLayoutDirectionHorizontal,
-                .alignItems = CKStackLayoutAlignItemsStretch
-            } children:{
-                {[CKImageComponent newWithImage:thumb size:{.height=thumb.size.height, .width=thumb.size.width}]},
-                {
-					.flexGrow = YES,
-                }
-            }];
-		}
-		else
-		{
-			bodyItem = [CKTextComponent
-			  newWithTextAttributes:{
-				  .attributedString = attrString,
-				  .lineBreakMode = NSLineBreakByWordWrapping,
-			  }
-			  viewAttributes:{
-				  {@selector(setBackgroundColor:), [UIColor clearColor]},
-				  {@selector(setUserInteractionEnabled:), @NO},
-			  }
-			  options:{}
-			  size:{.width = textWidth}];
-		}
-		body = {
-		   {[CKInsetComponent
-			 newWithInsets:{.left = 20, .right = 0, .top = 15, .bottom = 0}
-			 component:
-			 [CKLabelComponent
-			  newWithLabelAttributes:{
-				  .string = latest,
-				  .font = [UIFont fontWithName:@"HelveticaNeueLTStd-Cn" size:14],
-				  .color = [UIColor colorWithHex:@"#70726d"],
-			  }
-			  viewAttributes:{
-				  {@selector(setBackgroundColor:), [UIColor clearColor]},
-				  {@selector(setUserInteractionEnabled:), @NO},
-			  }
-			  size:{}]
-			 ]},
-		   {[CKInsetComponent
-			 newWithInsets:{.left = 20, .right = 0, .top = 12, .bottom = 15}
-			 component:bodyItem]
-			 }
-		};
-	}*/
-    
+	
     CKComponent* body = nil;
 	body = [CKStackLayoutComponent newWithView:{} size:{.width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/), .height = 62} style:{
         .direction = CKStackLayoutDirectionVertical,
@@ -340,7 +266,7 @@
         }];
     }
 
-    MainCardComponent *c = [super newWithView:{} component:
+    MessageThreadComponent *c = [super newWithView:{} component:
         [CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 2, .bottom = 2} component:
             [CKBackgroundLayoutComponent newWithComponent:card background:
                 [CKComponent newWithView:{

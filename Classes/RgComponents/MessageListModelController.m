@@ -9,29 +9,28 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "CardModelController.h"
+#import "MessageThreadModelController.h"
 
 #import <UIKit/UIColor.h>
 
-#import "Card.h"
-#import "CardsPage.h"
+#import "MessageThread.h"
+#import "MessageThreadPage.h"
 #import "LinphoneManager.h"
+#import "RingKit.h"
 
-@implementation CardModelController
+@implementation MessageThreadModelController
 {
   NSInteger _numberOfObjects;
 }
 
 @synthesize mainList;
 @synthesize mainCount;
-@synthesize header;
 
 - (instancetype)init
 {
     if (self = [super init]) {
-        mainCount = [NSNumber numberWithInteger:0];
-        mainList = nil;
-		header = nil;
+        mainList = [[RKCommunicator sharedInstance] listThreads];
+        mainCount = [NSNumber numberWithInteger:0]; // Counter as items are added to the UI
     }
     return self;
 }
@@ -39,12 +38,12 @@
 - (NSArray *)readMainList
 {
     NSArray* list = [[[LinphoneManager instance] chatManager] dbGetMainList];
-    return [self buildCards:list];
+    return [self buildMessageThreads:list];
 }
 
-- (NSArray *)buildCards:(NSArray*)list
+- (NSArray *)buildMessageThreads:(NSArray*)list
 {
-	//NSLog(@"Card Data: %@", list);
+	//NSLog(@"MessageThread Data: %@", list);
     NSMutableArray *list2 = [NSMutableArray array];
     int item = 0;
 	UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
@@ -153,46 +152,24 @@
     return list2;
 }
 
-- (CardsPage *)fetchNewCardsPageWithCount:(NSInteger)count
+- (MessageThreadPage *)fetchNewPageWithCount:(NSInteger)count
 {
     NSAssert(count >= 1, @"Count should be a positive integer");
-    if (mainList == nil)
-    {
-        mainList = [self readMainList];
-    }
-    NSMutableArray *_cards = [NSMutableArray new];
+    NSMutableArray *cards = [NSMutableArray new];
     NSInteger added = 0;
     for (NSUInteger i = 0; i < count; i++)
     {
-        if (header && [mainCount intValue] == 0 && i == 0)
+        NSInteger mainIndex = [mainCount integerValue] + i;
+        if ([mainList count] > mainIndex)
         {
-            NSNumber *headerCell = [NSNumber numberWithBool:1];
-            Card *card = [[Card alloc] initWithData:@{@"text": header}
-                                             header:headerCell];
-            [_cards addObject:card];
+            MessageThread *card = [[MessageThread alloc] initWithData:mainList[mainIndex]];
+            [cards addObject:card];
             added++;
         }
-        else
-        {
-            NSInteger mainIndex = [mainCount intValue] + i - ((header) ? 1 : 0);
-            if ([mainList count] > mainIndex)
-            {
-                NSDictionary *itemData = mainList[mainIndex];
-                if (itemData != nil)
-                {
-                    // Todo: translate to name
-                    Card *card = [[Card alloc] initWithData:itemData
-                                            header:[NSNumber numberWithBool:0]];
-                    [_cards addObject:card];
-                    added++;
-                }
-            }
-        }
     }
-    CardsPage *cardsPage = [[CardsPage alloc] initWithCards:_cards
-                                                     position:[mainCount integerValue]];
+    MessageThreadPage *page = [[MessageThreadPage alloc] initWithMessageThreads:cards position:[mainCount integerValue]];
     mainCount = [NSNumber numberWithInteger:[mainCount integerValue] + added];
-    return cardsPage;
+    return page;
 }
 
 @end

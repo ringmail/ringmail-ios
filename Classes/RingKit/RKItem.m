@@ -12,6 +12,7 @@
 @implementation RKItem
 
 @synthesize thread;
+@synthesize itemId;
 @synthesize uuid;
 @synthesize timestamp;
 @synthesize direction;
@@ -26,6 +27,15 @@
             NSAssert([param[@"thread"] isKindOfClass:[RKThread class]], @"thread is not RKThread object");
             [self setThread:param[@"thread"]];
         }
+		if (param[@"itemId"])
+        {
+            NSAssert([param[@"itemId"] isKindOfClass:[NSNumber class]], @"itemId is not NSNumber object");
+            [self setItemId:param[@"itemId"]];
+        }
+		else
+		{
+			self->itemId = nil;
+		}
 		if (param[@"uuid"])
     	{
     		NSAssert([param[@"uuid"] isKindOfClass:[NSString class]], @"uuid is not NSString object");

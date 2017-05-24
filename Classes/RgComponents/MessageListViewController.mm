@@ -10,7 +10,6 @@
 #import <ComponentKit/ComponentKit.h>
 #import "UIColor+Hex.h"
 #import "MainCollectionViewController.h"
-#import "InteractiveCardComponent.h"
 #import "CardModelController.h"
 #import "Card.h"
 #import "CardContext.h"
@@ -33,7 +32,6 @@ static NSInteger const pageSize = 10;
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
         _cardModelController = [[CardModelController alloc] init];
-		[_cardModelController setHeader:@""];
         //self.title = @"Wilde Guess";
         //self.navigationItem.prompt = @"Tap to reveal which cards are from Oscar Wilde";
     }
@@ -223,9 +221,7 @@ static NSInteger const pageSize = 10;
 
 + (CKComponent *)componentForModel:(Card *)card context:(CardContext *)context
 {
-    return [InteractiveCardComponent
-            newWithCard:card
-            context:context];
+    return [MainCardComponent newWithCard:card context:context];
 }
 
 #pragma mark - UIScrollViewDelegate

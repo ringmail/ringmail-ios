@@ -9,10 +9,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "CardContext.h"
+#import "MessageThreadContext.h"
 #import "LinphoneManager.h"
 
-@implementation CardContext
+@implementation MessageThreadContext
 {
   NSMutableDictionary *_images;
 }

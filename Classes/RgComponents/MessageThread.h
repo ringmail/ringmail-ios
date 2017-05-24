@@ -9,16 +9,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <ComponentKit/ComponentKit.h>
+#import <Foundation/Foundation.h>
 
-@class Card;
-@class CardContext;
+@interface MessageThread : NSObject
 
-/**
- A QuoteComponent formats a quote based on the quote style.
- */
-@interface CardComponent : CKCompositeComponent
+@property (nonatomic, readonly, copy) NSDictionary *data;
 
-+ (instancetype)newWithCard:(Card *)card context:(CardContext *)context;
+- (instancetype)initWithData:(NSDictionary *)data;
 
 @end

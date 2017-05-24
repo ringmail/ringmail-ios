@@ -9,20 +9,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
+#import "MessageThread.h"
 
-@interface Card : NSObject
-
-@property (nonatomic, readonly, copy) NSNumber *header;
-@property (nonatomic, readonly, copy) NSDictionary *data;
+@implementation MessageThread
 
 - (instancetype)initWithData:(NSDictionary *)data
-                      header:(NSNumber *)header;
-
-- (NSNumber*)sessionId;
-- (void)showMessages;
-- (void)startCall:(BOOL)video;
-- (void)gotoContact;
-- (void)gotoHashtag;
+{
+    if (self = [super init])
+	{
+		_data = [data copy];
+    }
+    return self;
+}
 
 @end

@@ -28,6 +28,7 @@
 - (void)setupTables;
 - (void)insertItem:(RKItem*)item;
 - (NSArray*)listThreads;
+- (NSArray*)listThreadItems:(RKThread*)thread;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 
 @end

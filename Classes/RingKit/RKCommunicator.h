@@ -20,5 +20,8 @@
 
 - (void)sendMessage:(RKMessage*)message;
 - (void)didReceiveMessage:(RKMessage*)message;
+- (NSArray*)listThreads;
+- (NSArray*)listThreadItems:(RKThread*)thread;
+- (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 
 @end
