@@ -403,6 +403,10 @@
 		4DE427D21ECFA27A00872002 /* message_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DE427BF1ECFA27A00872002 /* message_selected.png */; };
 		4DE427D31ECFA27A00872002 /* background_contact_details@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DE427C01ECFA27A00872002 /* background_contact_details@2x.png */; };
 		4DE427D41ECFA27A00872002 /* background_contact_details@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DE427C01ECFA27A00872002 /* background_contact_details@2x.png */; };
+		4DE427D91ED62E4100872002 /* UIContactDetailsOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE427D71ED62E3D00872002 /* UIContactDetailsOptions.m */; };
+		4DE427DA1ED62E4700872002 /* UIContactDetailsOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE427D71ED62E3D00872002 /* UIContactDetailsOptions.m */; };
+		4DE427DB1ED62E4700872002 /* UIContactDetailsOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */; };
+		4DE427DC1ED62E4700872002 /* UIContactDetailsOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */; };
 		57F005C415EE2CCF00914747 /* linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C315EE2CCF00914747 /* linphonerc */; };
 		57F005C815EE2D9200914747 /* linphonerc-factory in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C615EE2D9200914747 /* linphonerc-factory */; };
 		57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C715EE2D9200914747 /* linphonerc-factory~ipad */; };
@@ -2678,6 +2682,9 @@
 		4DE427BE1ECFA27A00872002 /* message_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = message_pressed.png; path = Resources/message_pressed.png; sourceTree = "<group>"; };
 		4DE427BF1ECFA27A00872002 /* message_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = message_selected.png; path = Resources/message_selected.png; sourceTree = "<group>"; };
 		4DE427C01ECFA27A00872002 /* background_contact_details@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background_contact_details@2x.png"; path = "Resources/background_contact_details@2x.png"; sourceTree = "<group>"; };
+		4DE427D61ED62E3C00872002 /* UIContactDetailsOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIContactDetailsOptions.h; sourceTree = "<group>"; };
+		4DE427D71ED62E3D00872002 /* UIContactDetailsOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIContactDetailsOptions.m; sourceTree = "<group>"; };
+		4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIContactDetailsOptions.xib; sourceTree = "<group>"; };
 		57F005C315EE2CCF00914747 /* linphonerc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = linphonerc; path = Resources/linphonerc; sourceTree = "<group>"; };
 		57F005C615EE2D9200914747 /* linphonerc-factory */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linphonerc-factory"; path = "Resources/linphonerc-factory"; sourceTree = "<group>"; };
 		57F005C715EE2D9200914747 /* linphonerc-factory~ipad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linphonerc-factory~ipad"; path = "Resources/linphonerc-factory~ipad"; sourceTree = "<group>"; };
@@ -4221,6 +4228,9 @@
 				D37C639215AADDAE009D0BAC /* UIContactDetailsHeader.h */,
 				D37C639315AADDAE009D0BAC /* UIContactDetailsHeader.m */,
 				D381881815FE3F7F00C3EDCA /* UIContactDetailsHeader.xib */,
+				4DE427D61ED62E3C00872002 /* UIContactDetailsOptions.h */,
+				4DE427D71ED62E3D00872002 /* UIContactDetailsOptions.m */,
+				4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */,
 				2248E90C12F7E4CF00220D9C /* UIDigitButton.h */,
 				2248E90D12F7E4CF00220D9C /* UIDigitButton.m */,
 				631C4FAF19D2A8F2004BFE77 /* UIDigitButtonLongPlus.h */,
@@ -6140,6 +6150,7 @@
 				C44A40CC1E70E415000F3E24 /* CLImageEditor.bundle in Resources */,
 				C4FD78711CF94EEE0066BDB1 /* ringmail_forward@2x.png in Resources */,
 				C4E1CB4A1E6E281E00698166 /* camera-cancel@3x.png in Resources */,
+				4DE427DB1ED62E4700872002 /* UIContactDetailsOptions.xib in Resources */,
 				D3F83F10158205A100336684 /* micro_on_default.png in Resources */,
 				C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */,
 				D3F83F12158205A100336684 /* micro_on_over.png in Resources */,
@@ -7151,6 +7162,7 @@
 				4D33F7CE1EC4D5C400D913A7 /* tabs_explore_selected@2x.png in Resources */,
 				C4AC28481D3963FA003B6232 /* ringmail_contact_small.png in Resources */,
 				C4AC284A1D3963FA003B6232 /* ContactsViewController.xib in Resources */,
+				4DE427DC1ED62E4700872002 /* UIContactDetailsOptions.xib in Resources */,
 				C4AC284B1D3963FA003B6232 /* contacts_all_selected.png in Resources */,
 				C4AC284C1D3963FA003B6232 /* contacts_all_default.png in Resources */,
 				C4AC284D1D3963FA003B6232 /* bubble_ringmail_blue@2x.png in Resources */,
@@ -8033,6 +8045,7 @@
 				C4AB19F71E8D9B8400C7A754 /* ChatElement.m in Sources */,
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				C44A40FA1E70E415000F3E24 /* CLColorPickerView.m in Sources */,
+				4DE427D91ED62E4100872002 /* UIContactDetailsOptions.m in Sources */,
 				C450DBB71C70FFB00053592E /* MainCollectionViewController.mm in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
 				C4E1CB3D1E6E20F100698166 /* ViewUtils.m in Sources */,
@@ -8204,6 +8217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DE427DA1ED62E4700872002 /* UIContactDetailsOptions.m in Sources */,
 				4DCEA6891EBAA62A00E6760D /* RgOptionsModalViewController.xib in Sources */,
 				4DCEA6871EBAA60000E6760D /* RgOptionsModalViewController.h in Sources */,
 				4D039AA01ECE2F080091F8EF /* RgContactSearchViewController.m in Sources */,

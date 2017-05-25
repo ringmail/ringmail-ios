@@ -40,7 +40,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13" userLabel="editView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_contact_details.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bp2-Lt-MWh">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bp2-Lt-MWh">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -96,7 +96,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12" userLabel="normalView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_contact_details.png" translatesAutoresizingMaskIntoConstraints="NO" id="shs-TF-YDP">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="shs-TF-YDP">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -226,7 +226,6 @@
     </objects>
     <resources>
         <image name="avatar_unknown_small.png" width="131" height="131"/>
-        <image name="background_contact_details.png" width="375" height="280"/>
         <image name="message_normal.png" width="84" height="84"/>
         <image name="message_selected.png" width="84" height="84"/>
         <image name="phone_normal.png" width="84" height="84"/>

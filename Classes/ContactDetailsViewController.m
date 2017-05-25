@@ -28,6 +28,7 @@
 @synthesize editButton;
 @synthesize backButton;
 @synthesize cancelButton;
+@synthesize background;
 
 static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 

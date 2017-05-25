@@ -19,6 +19,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactDetailsViewController">
             <connections>
                 <outlet property="backButton" destination="9" id="50"/>
+                <outlet property="background" destination="MP2-rA-ag5" id="2RY-rJ-CyT"/>
                 <outlet property="cancelButton" destination="47" id="51"/>
                 <outlet property="editButton" destination="8" id="31"/>
                 <outlet property="tableController" destination="20" id="27"/>
@@ -27,14 +28,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background_contact_details.png" id="MP2-rA-ag5">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="46" sectionHeaderHeight="18" sectionFooterHeight="18" id="19" userLabel="tableView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="667"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                     <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                     <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                     <connections>
@@ -42,14 +46,14 @@
                         <outlet property="delegate" destination="20" id="29"/>
                     </connections>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="All Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BBO-UF-MnX">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BBO-UF-MnX">
                     <rect key="frame" x="28" y="30" width="94" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="9" userLabel="backButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="9" userLabel="backButton">
                     <rect key="frame" x="0.0" y="15" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Back"/>
@@ -62,7 +66,7 @@
                         <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="10"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8" userLabel="editButton" customClass="UIToggleButton">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8" userLabel="editButton" customClass="UIToggleButton">
                     <rect key="frame" x="270" y="15" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Edit"/>
@@ -75,7 +79,7 @@
                         <action selector="onEditClick:" destination="-1" eventType="touchUpInside" id="30"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="47" userLabel="cancelButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="47" userLabel="cancelButton">
                     <rect key="frame" x="0.0" y="15" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Cancel"/>
@@ -92,10 +96,10 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="500" y="467"/>
+            <point key="canvasLocation" x="904" y="53.5"/>
         </view>
         <tableViewController id="20" userLabel="tableController" customClass="ContactDetailsTableViewController">
             <extendedEdge key="edgesForExtendedLayout"/>
@@ -103,6 +107,7 @@
                 <outlet property="contactDetailsDelegate" destination="-1" id="53"/>
                 <outlet property="footerController" destination="57" id="59"/>
                 <outlet property="headerController" destination="58" id="60"/>
+                <outlet property="optionsController" destination="Gdw-8d-VFb" id="vgj-bz-5mf"/>
                 <outlet property="view" destination="19" id="26"/>
             </connections>
         </tableViewController>
@@ -118,7 +123,14 @@
                 <outlet property="contactDetailsDelegate" destination="-1" id="62"/>
             </connections>
         </viewController>
+        <viewController nibName="UIContactDetailsOptions" id="Gdw-8d-VFb" userLabel="optionsController" customClass="UIContactDetailsOptions">
+            <extendedEdge key="edgesForExtendedLayout"/>
+            <point key="canvasLocation" x="-358" y="-672"/>
+        </viewController>
     </objects>
+    <resources>
+        <image name="background_contact_details.png" width="375" height="280"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

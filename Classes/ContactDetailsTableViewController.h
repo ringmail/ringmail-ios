@@ -25,12 +25,14 @@
 #import "ContactDetailsLabelViewController.h"
 #import "UIContactDetailsHeader.h"
 #import "UIContactDetailsFooter.h"
+#import "UIContactDetailsOptions.h"
 
 typedef enum _ContactSections {
     ContactSections_None = 0,
     ContactSections_Email,
     ContactSections_Number,
     ContactSections_Sip,
+    ContactSections_Options,
     ContactSections_MAX
 } ContactSections_e;
 
@@ -45,6 +47,7 @@ typedef enum _ContactSections {
 @property (nonatomic, strong) IBOutlet id<ContactDetailsDelegate> contactDetailsDelegate;
 @property (nonatomic, strong) IBOutlet UIContactDetailsHeader *headerController;
 @property (nonatomic, strong) IBOutlet UIContactDetailsFooter *footerController;
+@property (nonatomic, strong) IBOutlet UIContactDetailsOptions *optionsController;
 @property (nonatomic) BOOL member; // RingMail member
 
 - (BOOL)isValid;

@@ -50,10 +50,11 @@
 
 @implementation ContactDetailsTableViewController
 
-static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSections_None, ContactSections_Email, ContactSections_Number};
+static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSections_None, ContactSections_Email, ContactSections_Number, ContactSections_Options};
 
 @synthesize footerController;
 @synthesize headerController;
+@synthesize optionsController;
 @synthesize contactDetailsDelegate;
 @synthesize contact;
 
@@ -104,6 +105,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	[super viewDidLoad];
 	[headerController view]; // Force view load
 	[footerController view]; // Force view load
+    [optionsController view]; // Force view load
     
 	self.tableView.accessibilityIdentifier = @"Contact numbers table";
     
@@ -227,7 +229,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 			entry = [[Entry alloc] initWithData:index];
 		}
 		CFRelease(lMap);
-
+        
 		/*check if message type is kept or not*/
 		lcMap = ABRecordCopyValue(contact, kABPersonInstantMessageProperty);
 		lMap = ABMultiValueCreateMutableCopy(lcMap);
@@ -612,6 +614,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	}
 }
 
+
 #pragma mark - Mail Compose Delegate Functions
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller
@@ -682,14 +685,16 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	if (section == ContactSections_None) {
 		return [headerController view];
-	} else {
+	} else if (section == ContactSections_Options) {
+        return [optionsController view];
+    } else {
 		return nil;
 	}
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	if (section == (ContactSections_MAX - 1)) {
+	if (section == (ContactSections_MAX - 2)) {
 		if (ABRecordGetRecordID(contact) != kABRecordInvalidID) {
 			return [footerController view];
 		}
@@ -717,7 +722,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == ContactSections_None) {
 		return [UIContactDetailsHeader height:[headerController isEditing] member:self.member];
-	} else if (section == ContactSections_Email) {
+	} else if (section == ContactSections_Options) {
+        return [UIContactDetailsOptions height];
+    } else if (section == ContactSections_Email) {
 //		// Hide section if nothing in it
 //		if ([[self getSectionData:section] count] > 0)
 			return 10;
@@ -726,7 +733,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	if (section == (ContactSections_MAX - 1)) {
+	if (section == (ContactSections_MAX - 2)) {
 		if (ABRecordGetRecordID(contact) != kABRecordInvalidID) {
 			return [UIContactDetailsFooter height:[footerController isEditing]];
 		} else {
