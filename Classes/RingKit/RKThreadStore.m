@@ -208,15 +208,19 @@
         {
 			NSDictionary* row = [rs resultDictionary];
             //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+			RKContact* ct;
 			RKAddress* addr = [RKAddress newWithAddress:row[@"address"]];
-			NSMutableDictionary* ctdata = [NSMutableDictionary dictionaryWithDictionary:@{
-				@"addressList": @[addr],
-			}];
 			if (NILIFNULL(row[@"contact_id"]) != nil)
 			{
-				ctdata[@"contactId"] = row[@"contact_id"];
+				ct = [RKContact newWithData:@{
+					@"contactId": row[@"contact_id"],
+    				@"addressList": @[addr],
+				}];
 			}
-			RKContact* ct = [RKContact newWithData:ctdata];
+			else
+			{
+				ct = [RKContact newByMatchingAddress:addr];
+			}
 			NSMutableDictionary* thrdata = [NSMutableDictionary dictionaryWithDictionary:@{
 				@"threadId": row[@"thread_id"],
 				@"remoteAddress": addr,

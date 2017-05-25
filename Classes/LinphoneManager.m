@@ -1581,10 +1581,10 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	//RingKit Testing...
 	
 	NSLog(@"%s: RingKit Start", __PRETTY_FUNCTION__);
-	RKThreadStore* store = [RKThreadStore sharedInstance];
-	NSArray* threadList = [store listThreads];
+	RKCommunicator* comm = [RKCommunicator sharedInstance];
+	NSArray* threadList = [comm listThreads];
 	NSLog(@"%s: List Threads: %@", __PRETTY_FUNCTION__, threadList);
-	NSArray* itemList = [store listThreadItems:threadList[0][@"thread"]];
+	NSArray* itemList = [comm listThreadItems:threadList[0][@"thread"]];
 	NSLog(@"%s: List Thread #1: %@", __PRETTY_FUNCTION__, itemList);
 }
 

@@ -12,6 +12,7 @@
 #import "RgManager.h"
 #import "RgNetwork.h"
 #import "RgChatManager.h"
+#import "RKAdapterXMPP.h"
 #import "RingKit.h"
 
 /* RingMail */

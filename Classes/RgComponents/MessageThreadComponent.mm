@@ -23,10 +23,10 @@
 
 @synthesize currentThread;
 
-+ (instancetype)newWithMessageThread:(MessageThread *)msg context:(MessageThreadContext *)context
++ (instancetype)newWithMessageThread:(MessageThread *)itemThread context:(MessageThreadContext *)context
 {
-	NSLog(@"Component Data: %@", msg.data);
-	NSDictionary* data = msg.data;
+	NSLog(@"Component Data: %@", itemThread.data);
+	NSDictionary* data = itemThread.data;
 	RKThread* thread = data[@"thread"];
     CKComponentScope scope(self, thread.threadId);
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
@@ -37,12 +37,11 @@
     //cardImage = [cardImage thumbnailImage:92 transparentBorder:0 cornerRadius:46 interpolationQuality:kCGInterpolationHigh];
 
     NSString *latest;
-    NSDate *dateLatest = [data objectForKey:@"timestamp"];
+    NSDate *dateLatest = data[@"timestamp"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSLocale *locale = [NSLocale currentLocale];
     [dateFormatter setLocale:locale];
     [dateFormatter setDoesRelativeDateFormatting:YES];
-	
 	BOOL today = [[NSCalendar currentCalendar] isDateInToday:dateLatest];
 	if (today)
 	{
@@ -57,56 +56,12 @@
         latest = [dateFormatter stringFromDate:dateLatest];
 	}
 	
-	NSString *msg = @"";
-	BOOL append_duration = NO;
-	BOOL has_media = NO;
-	if ([[data objectForKey:@"last_event"] isEqualToString:@"chat"] && (![[data objectForKey:@"last_message"] isEqual:[NSNull null]]))
-	{
-		msg = [data objectForKey:@"last_message"];
-		if ([data[@"msg_type"] isEqualToString:@"image/png"])
-		{
-			NSLog(@"Image message: %@", data);
-			has_media = YES;
-		}
-	}
-	else if (! [[data objectForKey:@"call_time"] isEqual:[NSNull null]])
-	{
-		if ([[data objectForKey:@"call_inbound"] boolValue])
-		{
-			if ([[data objectForKey:@"call_status"] isEqualToString:@"missed"])
-			{
-				msg = @"Missed Call";
-			}
-			else
-			{
-				msg = @"Call ";
-				append_duration = YES;
-			}
-		}
-		else
-		{
-			msg = @"Call ";
-			append_duration = YES;
-		}
-	}
-	else
-	{
-		latest = @"";
-		// blank
-	}
-	
-	if (append_duration && [[data objectForKey:@"call_status"] isEqualToString:@"success"])
-	{
-		msg = [msg stringByAppendingString:[data objectForKey:@"call_duration"]];
-	}
-    
+	NSString *msg = data[@"detail"][@"body"];
     NSDictionary *attrsDictionary = @{
         NSFontAttributeName: [UIFont systemFontOfSize:14],
         NSForegroundColorAttributeName: [UIColor colorWithHex:@"#353535"],
     };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
-
-	
 	
     CKComponent* body = nil;
 	body = [CKStackLayoutComponent newWithView:{} size:{.width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/), .height = 62} style:{
@@ -115,7 +70,7 @@
     } children:{
         {[CKInsetComponent newWithInsets:{.left = 0, .right = 4, .top = 4, .bottom = 0} component:
             [CKLabelComponent newWithLabelAttributes:{
-				.string = [data objectForKey:@"label"],
+				.string = thread.remoteAddress.displayName,
 				.font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold],
 				.alignment = NSTextAlignmentLeft,
                 .color = [UIColor colorWithHex:@"#222222"],
@@ -157,7 +112,13 @@
 				} children:{
 					// Icon
 					{[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 8, .bottom = 8} component:
-						[CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]
+						[CKCompositeComponent newWithView:{
+                            [UIView class],
+                            {
+                                {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @23.0},
+                                {@selector(setClipsToBounds:), @YES}
+                            }
+						} component:[CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]]
 					]},
 					// Name & message
 					{body},
@@ -233,7 +194,13 @@
             } children:{
                 // Icon
                 {[CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 8, .bottom = 8} component:
-                    [CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]
+                    [CKCompositeComponent newWithView:{
+                        [UIView class],
+                        {
+                            {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @23.0},
+                            {@selector(setClipsToBounds:), @YES}
+                        }
+					} component:[CKImageComponent newWithImage:cardImage size:{.height = 46, .width = 46}]]
                 ]},
                 // Name & message
                 {body},
@@ -269,23 +236,25 @@
             }]}
         }];
     }
-
-    MessageThreadComponent *c = [super newWithView:{} component:
-        [CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 2, .bottom = 2} component:
-            [CKBackgroundLayoutComponent newWithComponent:card background:
-                [CKComponent newWithView:{
-                    [UIView class],
-                    {
-                        {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#F7F7F7"]},
-                        {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-                        {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @10.0},
-                        {@selector(setClipsToBounds:), @YES}
-                    }
-                } size:{}]
-            ]
+	card = [CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 2, .bottom = 2} component:
+        [CKBackgroundLayoutComponent newWithComponent:card background:
+            [CKComponent newWithView:{
+                [UIView class],
+                {
+                    {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#F7F7F7"]},
+                    {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+                    {CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @10.0},
+                    {@selector(setClipsToBounds:), @YES}
+                }
+            } size:{}]
         ]
     ];
-    [c setCurrentThread:msg];
+	if ([data[@"index"] integerValue] == 0)
+	{
+		card = [CKInsetComponent newWithInsets:{.left = 0, .right = 0, .top = 8, .bottom = 0} component:card];
+	}
+    MessageThreadComponent *c = [super newWithView:{} component:card];
+    [c setCurrentThread:itemThread];
     return c;
 }
 

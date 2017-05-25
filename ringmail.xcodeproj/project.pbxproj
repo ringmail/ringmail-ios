@@ -422,6 +422,18 @@
 		C42B72131CA22EDB0020A57F /* MessageThreadPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72081CA22EDB0020A57F /* MessageThreadPage.m */; };
 		C42B72161CA22EDB0020A57F /* MessageThreadComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B720E1CA22EDB0020A57F /* MessageThreadComponent.mm */; };
 		C42B72191CA2313D0020A57F /* HashtagModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72181CA2313D0020A57F /* HashtagModelController.m */; };
+		C42BD4111ED64204009B324D /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4101ED64204009B324D /* CardsPage.m */; };
+		C42BD4121ED64204009B324D /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4101ED64204009B324D /* CardsPage.m */; };
+		C42BD4151ED642A4009B324D /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4141ED642A4009B324D /* Card.m */; };
+		C42BD4161ED642A4009B324D /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4141ED642A4009B324D /* Card.m */; };
+		C42BD4191ED642C8009B324D /* CardContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4181ED642C8009B324D /* CardContext.m */; };
+		C42BD41A1ED642C8009B324D /* CardContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4181ED642C8009B324D /* CardContext.m */; };
+		C42BD41D1ED644B3009B324D /* InteractiveCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42BD41C1ED644B3009B324D /* InteractiveCardComponent.mm */; };
+		C42BD41E1ED644B3009B324D /* InteractiveCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42BD41C1ED644B3009B324D /* InteractiveCardComponent.mm */; };
+		C42BD4211ED64574009B324D /* CardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4201ED64574009B324D /* CardComponent.mm */; };
+		C42BD4221ED64574009B324D /* CardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4201ED64574009B324D /* CardComponent.mm */; };
+		C42BD4251ED64608009B324D /* HeaderComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4241ED64608009B324D /* HeaderComponent.mm */; };
+		C42BD4261ED64608009B324D /* HeaderComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4241ED64608009B324D /* HeaderComponent.mm */; };
 		C42C0D4A1CAEC9DE00AD5A91 /* RgInCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42C0D481CAEC9DE00AD5A91 /* RgInCallViewController.xib */; };
 		C42C0D521CAECA1500AD5A91 /* RgInCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42C0D511CAECA1500AD5A91 /* RgInCallViewController.m */; };
 		C42C0D541CAED35B00AD5A91 /* RgCallViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42C0D531CAED35B00AD5A91 /* RgCallViewController.mm */; };
@@ -2744,6 +2756,18 @@
 		C42B720E1CA22EDB0020A57F /* MessageThreadComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MessageThreadComponent.mm; path = RgComponents/MessageThreadComponent.mm; sourceTree = "<group>"; };
 		C42B72171CA2313D0020A57F /* HashtagModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagModelController.h; path = RgComponents/HashtagModelController.h; sourceTree = "<group>"; };
 		C42B72181CA2313D0020A57F /* HashtagModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HashtagModelController.m; path = RgComponents/HashtagModelController.m; sourceTree = "<group>"; };
+		C42BD40F1ED64204009B324D /* CardsPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardsPage.h; path = RgComponents/CardsPage.h; sourceTree = "<group>"; };
+		C42BD4101ED64204009B324D /* CardsPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardsPage.m; path = RgComponents/CardsPage.m; sourceTree = "<group>"; };
+		C42BD4131ED642A4009B324D /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = RgComponents/Card.h; sourceTree = "<group>"; };
+		C42BD4141ED642A4009B324D /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = RgComponents/Card.m; sourceTree = "<group>"; };
+		C42BD4171ED642C8009B324D /* CardContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardContext.h; path = RgComponents/CardContext.h; sourceTree = "<group>"; };
+		C42BD4181ED642C8009B324D /* CardContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardContext.m; path = RgComponents/CardContext.m; sourceTree = "<group>"; };
+		C42BD41B1ED644B3009B324D /* InteractiveCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteractiveCardComponent.h; path = RgComponents/InteractiveCardComponent.h; sourceTree = "<group>"; };
+		C42BD41C1ED644B3009B324D /* InteractiveCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = InteractiveCardComponent.mm; path = RgComponents/InteractiveCardComponent.mm; sourceTree = "<group>"; };
+		C42BD41F1ED64574009B324D /* CardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardComponent.h; path = RgComponents/CardComponent.h; sourceTree = "<group>"; };
+		C42BD4201ED64574009B324D /* CardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CardComponent.mm; path = RgComponents/CardComponent.mm; sourceTree = "<group>"; };
+		C42BD4231ED64608009B324D /* HeaderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderComponent.h; path = RgComponents/HeaderComponent.h; sourceTree = "<group>"; };
+		C42BD4241ED64608009B324D /* HeaderComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HeaderComponent.mm; path = RgComponents/HeaderComponent.mm; sourceTree = "<group>"; };
 		C42C0D491CAEC9DE00AD5A91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RgInCallViewController.xib; sourceTree = "<group>"; };
 		C42C0D501CAECA1500AD5A91 /* RgInCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgInCallViewController.h; sourceTree = "<group>"; };
 		C42C0D511CAECA1500AD5A91 /* RgInCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgInCallViewController.m; sourceTree = "<group>"; };
@@ -4720,6 +4744,18 @@
 		C45B93121ECE2C3400974011 /* HashtagDirectory */ = {
 			isa = PBXGroup;
 			children = (
+				C42BD4131ED642A4009B324D /* Card.h */,
+				C42BD4141ED642A4009B324D /* Card.m */,
+				C42BD40F1ED64204009B324D /* CardsPage.h */,
+				C42BD4101ED64204009B324D /* CardsPage.m */,
+				C42BD4171ED642C8009B324D /* CardContext.h */,
+				C42BD4181ED642C8009B324D /* CardContext.m */,
+				C42BD41F1ED64574009B324D /* CardComponent.h */,
+				C42BD4201ED64574009B324D /* CardComponent.mm */,
+				C42BD4231ED64608009B324D /* HeaderComponent.h */,
+				C42BD4241ED64608009B324D /* HeaderComponent.mm */,
+				C42BD41B1ED644B3009B324D /* InteractiveCardComponent.h */,
+				C42BD41C1ED644B3009B324D /* InteractiveCardComponent.mm */,
 				C476A7111CF254F100CA3772 /* HashtagCardComponent.h */,
 				C476A7121CF254F100CA3772 /* HashtagCardComponent.mm */,
 				C43F65D11D5309CB004CEC70 /* HashtagCardComponentController.h */,
@@ -7925,6 +7961,7 @@
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
 				2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */,
 				C44A41001E70E415000F3E24 /* CLToolbarMenuItem.m in Sources */,
+				C42BD41D1ED644B3009B324D /* InteractiveCardComponent.mm in Sources */,
 				C48C10991E81AB820094F1F3 /* MediaModelController.m in Sources */,
 				C44A41021E70E415000F3E24 /* UIView+CLImageToolInfo.m in Sources */,
 				2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */,
@@ -7964,6 +8001,7 @@
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				C44A40FA1E70E415000F3E24 /* CLColorPickerView.m in Sources */,
 				C450DBB71C70FFB00053592E /* MessageListViewController.mm in Sources */,
+				C42BD4251ED64608009B324D /* HeaderComponent.mm in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
 				C4E1CB3D1E6E20F100698166 /* ViewUtils.m in Sources */,
 				C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */,
@@ -8023,6 +8061,7 @@
 				F066515517F9A02E0064280C /* UITransparentTVCell.m in Sources */,
 				C48DA1DD1E8454FA007CBCFB /* VideoCameraViewController.m in Sources */,
 				C4A929141E9428BE00993A5C /* MessageTextView.m in Sources */,
+				C42BD4111ED64204009B324D /* CardsPage.m in Sources */,
 				C44A40CE1E70E415000F3E24 /* CLImageEditor.m in Sources */,
 				D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */,
 				D35860D615B549B500513429 /* Utils.m in Sources */,
@@ -8048,6 +8087,7 @@
 				C42C0D601CAEDA4100AD5A91 /* RgCall.m in Sources */,
 				C4FD784C1CF932950066BDB1 /* UIColor+Name.m in Sources */,
 				C4593A591E6A4086001C3BDD /* FavoriteComponent.mm in Sources */,
+				C42BD4151ED642A4009B324D /* Card.m in Sources */,
 				C4A853E21E66115C00FEAFB0 /* SendComponent.mm in Sources */,
 				C4E1CB561E6E3EAD00698166 /* MomentEditViewController.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
@@ -8072,6 +8112,7 @@
 				C44A40D01E70E415000F3E24 /* CLImageEditorTheme.m in Sources */,
 				D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */,
 				C44A41161E7335CD000F3E24 /* CLEmoticonTool.m in Sources */,
+				C42BD4191ED642C8009B324D /* CardContext.m in Sources */,
 				C48C108D1E81AB230094F1F3 /* MediaContext.m in Sources */,
 				C44A40DE1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
 				C45B93441ECE4F5C00974011 /* RKContact.m in Sources */,
@@ -8098,6 +8139,7 @@
 				C4593A511E6A37D0001C3BDD /* FavoritesPage.m in Sources */,
 				C44A40EA1E70E415000F3E24 /* CLEffectBase.m in Sources */,
 				22405F001601C19200B92522 /* ImageViewController.m in Sources */,
+				C42BD4211ED64574009B324D /* CardComponent.mm in Sources */,
 				C48DA1CF1E845484007CBCFB /* PhotoCameraViewController.m in Sources */,
 				C44A41061E70E415000F3E24 /* CLSplineInterpolator.m in Sources */,
 				D37EE162160377D7003608A6 /* DTActionSheet.m in Sources */,
@@ -8184,6 +8226,7 @@
 				C48C10961E81AB6B0094F1F3 /* MediaComponent.mm in Sources */,
 				C4AC2AD71D3963FA003B6232 /* RgChatQuestionTable.m in Sources */,
 				C4AC2AD81D3963FA003B6232 /* MessageThreadPage.m in Sources */,
+				C42BD4121ED64204009B324D /* CardsPage.m in Sources */,
 				C4AC2ADB1D3963FA003B6232 /* UILongTouchButton.m in Sources */,
 				C4AC2ADD1D3963FA003B6232 /* RgChatManager.m in Sources */,
 				C4AB19F81E8D9B8400C7A754 /* ChatElement.m in Sources */,
@@ -8202,6 +8245,7 @@
 				C4AC2AE61D3963FA003B6232 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				C4AC2AE71D3963FA003B6232 /* LinphoneCoreSettingsStore.m in Sources */,
 				C4AC2AE81D3963FA003B6232 /* RgChatQuestionInputCell.m in Sources */,
+				C42BD41A1ED642C8009B324D /* CardContext.m in Sources */,
 				C4AC2AE91D3963FA003B6232 /* DTAlertView.m in Sources */,
 				C4AC2AEA1D3963FA003B6232 /* MessageThreadComponent.mm in Sources */,
 				C4AC2AEB1D3963FA003B6232 /* UIMessageButton.m in Sources */,
@@ -8235,6 +8279,7 @@
 				C4AC2AFF1D3963FA003B6232 /* RgIncomingCallViewController.mm in Sources */,
 				C4AC2B001D3963FA003B6232 /* ContactDetailsViewController.m in Sources */,
 				C4AC2B011D3963FA003B6232 /* UIContactDetailsHeader.m in Sources */,
+				C42BD4221ED64574009B324D /* CardComponent.mm in Sources */,
 				C4AC2B021D3963FA003B6232 /* NoteSQL.m in Sources */,
 				C4AC2B031D3963FA003B6232 /* RgMainViewController.m in Sources */,
 				C452851F1E83455800ED669D /* SendCardComponentController.mm in Sources */,
@@ -8275,12 +8320,14 @@
 				C4AC2B201D3963FA003B6232 /* DCRoundSwitchToggleLayer.m in Sources */,
 				C4593A5A1E6A4086001C3BDD /* FavoriteComponent.mm in Sources */,
 				C4A853E31E66115C00FEAFB0 /* SendComponent.mm in Sources */,
+				C42BD4161ED642A4009B324D /* Card.m in Sources */,
 				C4E1CB571E6E3EAD00698166 /* MomentEditViewController.m in Sources */,
 				C4AC2B211D3963FA003B6232 /* IASKAppSettingsViewController.m in Sources */,
 				C4AB1A101E8DC8C700C7A754 /* ChatViewController.m in Sources */,
 				C44A40E31E70E415000F3E24 /* CLHueEffect.m in Sources */,
 				C4AC2B221D3963FA003B6232 /* FavoriteCollectionViewController.mm in Sources */,
 				C44A410F1E70E416000F3E24 /* _CLImageEditorViewController.m in Sources */,
+				C42BD4261ED64608009B324D /* HeaderComponent.mm in Sources */,
 				C44A40DB1E70E415000F3E24 /* CLDrawTool.m in Sources */,
 				C4A929111E9428BE00993A5C /* MessageViewController.m in Sources */,
 				C4AC2B231D3963FA003B6232 /* IASKAppSettingsWebViewController.m in Sources */,
@@ -8336,6 +8383,7 @@
 				C4AC2B421D3963FA003B6232 /* UIColor+Hex.m in Sources */,
 				C4A929171E9428BE00993A5C /* TypingIndicatorView.m in Sources */,
 				C4AC2B431D3963FA003B6232 /* UILinphoneButton.m in Sources */,
+				C42BD41E1ED644B3009B324D /* InteractiveCardComponent.mm in Sources */,
 				C4AC2B441D3963FA003B6232 /* UILoadingImageView.m in Sources */,
 				C44A40FF1E70E415000F3E24 /* CLImageToolInfo+Private.m in Sources */,
 				C4AC2B451D3963FA003B6232 /* CAAnimation+Blocks.m in Sources */,

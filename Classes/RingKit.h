@@ -15,6 +15,5 @@
 #import "RKItem.h"
 #import "RKMessage.h"
 #import "RKCommunicator.h"
-#import "RKThreadStore.h"
 
 #endif /* RingKit_h */

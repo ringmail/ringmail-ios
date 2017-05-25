@@ -9,7 +9,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "MessageThreadModelController.h"
+#import "MessageListModelController.h"
 
 #import <UIKit/UIColor.h>
 
@@ -18,7 +18,7 @@
 #import "LinphoneManager.h"
 #import "RingKit.h"
 
-@implementation MessageThreadModelController
+@implementation MessageListModelController
 
 @synthesize mainList;
 @synthesize mainCount;
@@ -43,7 +43,9 @@
         NSInteger mainIndex = [mainCount integerValue] + i;
         if ([mainList count] > mainIndex)
         {
-            MessageThread *card = [[MessageThread alloc] initWithData:mainList[mainIndex]];
+			NSMutableDictionary* dt = [NSMutableDictionary dictionaryWithDictionary:mainList[mainIndex]];
+			dt[@"index"] = [NSNumber numberWithInteger:mainIndex];
+            MessageThread *card = [[MessageThread alloc] initWithData:dt];
             [cards addObject:card];
             added++;
         }
