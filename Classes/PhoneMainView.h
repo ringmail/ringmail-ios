@@ -27,7 +27,6 @@
 
 /* These imports are here so that we can import PhoneMainView.h without bothering to import all the rest of the view headers */
 
-#import "ChatViewController.h"
 #import "MessageViewController.h"
 #import "IncomingCallViewController.h"
 #import "RgMainViewController.h"

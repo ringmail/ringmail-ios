@@ -3,13 +3,15 @@
 #import "ChatElementTextComponent.h"
 
 #import "UIColor+Hex.h"
+#import "RingKit.h"
 
 @implementation ChatElementTextComponent
 
 + (instancetype)newWithChatElement:(ChatElement *)elem context:(ChatElementContext *)context
 {
 	NSDictionary* data = elem.data;
-	CKComponentScope scope(self, data[@"uuid"]);
+	RKMessage* message = data[@"item"];
+	CKComponentScope scope(self, message.uuid);
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
 	CGFloat fontSize = 16;
 	CGFloat scale = [UIScreen mainScreen].scale;
@@ -23,7 +25,7 @@
             NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#222222"],
         };
-		NSString* msg = data[@"body"];
+		NSString* msg = message.body;
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
@@ -105,7 +107,7 @@
             NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#FFFFFF"],
         };
-		NSString* msg = data[@"body"];
+		NSString* msg = message.body;
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)

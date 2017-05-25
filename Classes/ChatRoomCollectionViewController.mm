@@ -17,21 +17,17 @@
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
 }
 
-@synthesize chatThreadID;
+@synthesize chatThread;
 @synthesize lastMessageID;
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID elements:(NSArray*)elems
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThread:(RKThread*)thread
 {
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleWidthAndHeight];
 		_elements = [NSMutableArray array];
-		for (NSDictionary* i in elems)
-		{
-			[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:i]];
-		}
 		_mainCount = [NSNumber numberWithInteger:0];
 		self.lastMessageID = nil;
-		self.chatThreadID = threadID;
+		self.chatThread = thread;
     }
     return self;
 }
@@ -39,59 +35,65 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+	
+	NSArray *elems = [[RKCommunicator sharedInstance] listThreadItems:chatThread];
+	for (NSDictionary* i in elems)
+	{
+		[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:@{
+			@"item": i,
+		}]];
+	}
+	
     // Preload images for the component context that need to be used in component preparation. Components preparation
     // happens on background threads but +[UIImage imageNamed:] is not thread safe and needs to be called on the main
     // thread. The preloaded images are then cached on the component context for use inside components.
 	
 	//NSMutableDictionary *images = [NSMutableDictionary dictionaryWithDictionary:@{}];
 	
-	dispatch_async(dispatch_get_main_queue(), ^{
-		self.collectionView.backgroundColor = [UIColor clearColor];
-		self.collectionView.delegate = self;
-		
-		ChatElementContext *context = [[ChatElementContext alloc] init];
-		_dataSource = [[CKCollectionViewDataSource alloc] initWithCollectionView:self.collectionView
-													 supplementaryViewDataSource:nil
-															   componentProvider:[self class]
-																		 context:context
-													   cellConfigurationFunction:nil];
-		// Insert the initial section
-		CKArrayControllerSections sections;
-		sections.insert(0);
-		[_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
-		
-		// Generate the initial changeset
-		CKArrayControllerInputItems items;
-		NSInteger added = 0;
-		NSInteger count = [_elements count];
-    	for (NSUInteger i = 0; i < count; i++)
-        {
-			if (i == 0)
-			{
-				_elements[i][@"first_element"] = @YES;
-			}
-			if (i == count - 1)
-			{
-				_elements[i][@"last_element"] = @YES;
-			}
-			lastMessageID = [_elements[i][@"id"] copy];
-			ChatElement* item = [[ChatElement alloc] initWithData:[_elements objectAtIndex:i]];
-			items.insert([NSIndexPath indexPathForRow:i inSection:0], item);
-			added++;
-    	}
-		if (added > 0)
+	self.collectionView.backgroundColor = [UIColor clearColor];
+	self.collectionView.delegate = self;
+	
+	ChatElementContext *context = [[ChatElementContext alloc] init];
+	_dataSource = [[CKCollectionViewDataSource alloc] initWithCollectionView:self.collectionView
+												 supplementaryViewDataSource:nil
+														   componentProvider:[self class]
+																	 context:context
+												   cellConfigurationFunction:nil];
+	// Insert the initial section
+	CKArrayControllerSections sections;
+	sections.insert(0);
+	[_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
+	
+	// Generate the initial changeset
+	CKArrayControllerInputItems items;
+	NSInteger added = 0;
+	NSInteger count = [_elements count];
+	for (NSUInteger i = 0; i < count; i++)
+    {
+		if (i == 0)
 		{
-			_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
-			__block NSInteger lastIndex = [_mainCount intValue] - 1;
-			self.collectionView.hidden = YES;
-			[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i){
-				NSLog(@"Enqueue batch complete! Last item: %ld", lastIndex);
-				[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-				self.collectionView.hidden = NO;
-			}];
+			_elements[i][@"first_element"] = @YES;
 		}
-	});
+		if (i == count - 1)
+		{
+			_elements[i][@"last_element"] = @YES;
+		}
+		lastMessageID = [[_elements[i][@"item"] itemId] copy];
+		ChatElement* item = [[ChatElement alloc] initWithData:[_elements objectAtIndex:i]];
+		items.insert([NSIndexPath indexPathForRow:i inSection:0], item);
+		added++;
+	}
+	if (added > 0)
+	{
+		_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
+		__block NSInteger lastIndex = [_mainCount intValue] - 1;
+		self.collectionView.hidden = YES;
+		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i){
+			NSLog(@"Enqueue batch complete! Last item: %ld", lastIndex);
+			[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+			self.collectionView.hidden = NO;
+		}];
+	}
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

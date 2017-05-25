@@ -65,7 +65,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
     self = [super initWithCollectionViewLayout:flowLayout];
-    //self = [super initWithTableViewStyle:UITableViewStylePlain];
     if (self) {
         [self commonInit];
     }

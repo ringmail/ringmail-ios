@@ -788,6 +788,8 @@
 		C49744311C7C0A7400AD43A1 /* ringmail_input_call.png in Resources */ = {isa = PBXBuildFile; fileRef = C497442F1C7C0A7400AD43A1 /* ringmail_input_call.png */; };
 		C49744321C7C0A7400AD43A1 /* ringmail_input_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = C49744301C7C0A7400AD43A1 /* ringmail_input_chat.png */; };
 		C497443C1C7C153100AD43A1 /* red_disk.svg in Resources */ = {isa = PBXBuildFile; fileRef = C497443B1C7C153100AD43A1 /* red_disk.svg */; };
+		C498DE021ED7626800242330 /* RgViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C498DE011ED7626800242330 /* RgViewDelegate.m */; };
+		C498DE031ED7626800242330 /* RgViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C498DE011ED7626800242330 /* RgViewDelegate.m */; };
 		C4A76E6D1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */; };
 		C4A76E6E1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */; };
 		C4A76E6F1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6C1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png */; };
@@ -821,10 +823,6 @@
 		C4AB1A041E8D9C9400C7A754 /* ChatElementComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */; };
 		C4AB1A0B1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */; };
 		C4AB1A0C1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */; };
-		C4AB1A0F1E8DC8C700C7A754 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A0E1E8DC8C700C7A754 /* ChatViewController.m */; };
-		C4AB1A101E8DC8C700C7A754 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AB1A0E1E8DC8C700C7A754 /* ChatViewController.m */; };
-		C4AB1A121E8DC8D000C7A754 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4AB1A111E8DC8D000C7A754 /* ChatViewController.xib */; };
-		C4AB1A131E8DC8D000C7A754 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4AB1A111E8DC8D000C7A754 /* ChatViewController.xib */; };
 		C4AC27C91D384AA0003B6232 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4AC27C81D384AA0003B6232 /* SVWebViewController.bundle */; };
 		C4AC27D11D3963FA003B6232 /* HelveticaNeueLTStd-Cn.otf in Resources */ = {isa = PBXBuildFile; fileRef = C41D67E51CA74B2F00D7BA72 /* HelveticaNeueLTStd-Cn.otf */; };
 		C4AC27D21D3963FA003B6232 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = C425095A1C27D62B00BEC5DE /* tessdata */; };
@@ -3107,6 +3105,8 @@
 		C497442F1C7C0A7400AD43A1 /* ringmail_input_call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_input_call.png; path = Resources/ringmail_input_call.png; sourceTree = "<group>"; };
 		C49744301C7C0A7400AD43A1 /* ringmail_input_chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_input_chat.png; path = Resources/ringmail_input_chat.png; sourceTree = "<group>"; };
 		C497443B1C7C153100AD43A1 /* red_disk.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = red_disk.svg; path = Resources/red_disk.svg; sourceTree = "<group>"; };
+		C498DE001ED7626800242330 /* RgViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgViewDelegate.h; sourceTree = "<group>"; };
+		C498DE011ED7626800242330 /* RgViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgViewDelegate.m; sourceTree = "<group>"; };
 		C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_triangle_green@2x.png"; path = "Resources/ringmail_triangle_green@2x.png"; sourceTree = "<group>"; };
 		C4A76E6C1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_triangle_grey@2x.png"; path = "Resources/ringmail_triangle_grey@2x.png"; sourceTree = "<group>"; };
 		C4A853CC1E660D7800FEAFB0 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendViewController.h; path = RgComponents/SendViewController.h; sourceTree = "<group>"; };
@@ -3138,9 +3138,6 @@
 		C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatElementComponent.mm; sourceTree = "<group>"; };
 		C4AB1A091E8D9CFD00C7A754 /* ChatRoomCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatRoomCollectionViewController.h; path = RgComponents/ChatRoomCollectionViewController.h; sourceTree = "<group>"; };
 		C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatRoomCollectionViewController.mm; sourceTree = "<group>"; };
-		C4AB1A0D1E8DC8BE00C7A754 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		C4AB1A0E1E8DC8C700C7A754 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
-		C4AB1A111E8DC8D000C7A754 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
 		C4AC27C81D384AA0003B6232 /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVWebViewController.bundle; path = Pods/SVWebViewController/SVWebViewController/SVWebViewController.bundle; sourceTree = "<group>"; };
 		C4AC2B951D3963FA003B6232 /* RingMail-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RingMail-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4AC2B971D397107003B6232 /* ringmail_dev_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_dev_logo.png; path = Resources/ringmail_dev_logo.png; sourceTree = "<group>"; };
@@ -4016,6 +4013,8 @@
 				C4D999511B96910A003CC323 /* RgManager.m */,
 				C422AD301B99F1A900D1F1CD /* RgNetwork.h */,
 				C422AD311B99F1A900D1F1CD /* RgNetwork.m */,
+				C498DE001ED7626800242330 /* RgViewDelegate.h */,
+				C498DE011ED7626800242330 /* RgViewDelegate.m */,
 				4D5251C21E6756EA0064F955 /* RgLocationManager.h */,
 				4D5251C31E6756EA0064F955 /* RgLocationManager.m */,
 				C41B95251C10E0A900253BB7 /* RgContactManager.h */,
@@ -4026,9 +4025,6 @@
 				C4FE4C761CCDA03F006A6C94 /* MessagesViewController.h */,
 				C4FE4C781CCDA03F006A6C94 /* MessagesViewController.xib */,
 				C4FE4C771CCDA03F006A6C94 /* MessagesViewController.m */,
-				C4AB1A0D1E8DC8BE00C7A754 /* ChatViewController.h */,
-				C4AB1A0E1E8DC8C700C7A754 /* ChatViewController.m */,
-				C4AB1A111E8DC8D000C7A754 /* ChatViewController.xib */,
 				C41EF30E1B8BCFD40085E75B /* RgMainViewController.h */,
 				C41EF30F1B8BCFD40085E75B /* RgMainViewController.m */,
 				C4AA1A211C71314E003F86FD /* RgMainViewController.xib */,
@@ -6560,7 +6556,6 @@
 				C4A76E6D1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */,
 				C482E46E1EA19612000E7BE5 /* ringmail_chat_send@2x.png in Resources */,
 				D3C31A8215BD8DED008ED271 /* video_on_default_landscape.png in Resources */,
-				C4AB1A121E8DC8D000C7A754 /* ChatViewController.xib in Resources */,
 				D3C31A8415BD8DED008ED271 /* video_on_disabled_landscape.png in Resources */,
 				4D33F7C51EC4D5C400D913A7 /* tabs_explore_pressed_5@2x.png in Resources */,
 				C43DA5871D81E9F0007E20A2 /* RingMail-Dev-Info.plist in Resources */,
@@ -7775,7 +7770,6 @@
 				C4A76E701E776AF100DD17F2 /* ringmail_triangle_grey@2x.png in Resources */,
 				C4AC2A761D3963FA003B6232 /* decline_default~ipad.png in Resources */,
 				C470BF871E68C7E6009968E2 /* plus_icon_pressed@2x.png in Resources */,
-				C4AB1A131E8DC8D000C7A754 /* ChatViewController.xib in Resources */,
 				C4AC2A771D3963FA003B6232 /* decline_over_landscape~ipad.png in Resources */,
 				C4AC2A781D3963FA003B6232 /* decline_over~ipad.png in Resources */,
 				C4E1CB3A1E6E1A8400698166 /* MomentCameraViewController.xib in Resources */,
@@ -8037,6 +8031,7 @@
 				D32460E6159D9AAD00BA7F3A /* UITransparentView.m in Sources */,
 				D32B9DFC15A2F131000B6DEC /* FastAddressBook.m in Sources */,
 				C48AE3D41E6DCF5100F3C9B1 /* SendCardComponent.mm in Sources */,
+				C498DE021ED7626800242330 /* RgViewDelegate.m in Sources */,
 				D350F20E15A43BB100149E54 /* WizardViewController.m in Sources */,
 				C4B9B9D61BB9BEDF00677220 /* RgWebViewDelegate.m in Sources */,
 				C4A853DF1E660E3A00FEAFB0 /* SendContext.m in Sources */,
@@ -8091,7 +8086,6 @@
 				C4A853E21E66115C00FEAFB0 /* SendComponent.mm in Sources */,
 				C4E1CB561E6E3EAD00698166 /* MomentEditViewController.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
-				C4AB1A0F1E8DC8C700C7A754 /* ChatViewController.m in Sources */,
 				C44A40E21E70E415000F3E24 /* CLHueEffect.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				C44A410E1E70E416000F3E24 /* _CLImageEditorViewController.m in Sources */,
@@ -8323,7 +8317,6 @@
 				C42BD4161ED642A4009B324D /* Card.m in Sources */,
 				C4E1CB571E6E3EAD00698166 /* MomentEditViewController.m in Sources */,
 				C4AC2B211D3963FA003B6232 /* IASKAppSettingsViewController.m in Sources */,
-				C4AB1A101E8DC8C700C7A754 /* ChatViewController.m in Sources */,
 				C44A40E31E70E415000F3E24 /* CLHueEffect.m in Sources */,
 				C4AC2B221D3963FA003B6232 /* FavoriteCollectionViewController.mm in Sources */,
 				C44A410F1E70E416000F3E24 /* _CLImageEditorViewController.m in Sources */,
@@ -8354,6 +8347,7 @@
 				4D9684D51E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
 				C4AC2B2C1D3963FA003B6232 /* HashtagCollectionViewController.mm in Sources */,
 				C4AB1A0C1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm in Sources */,
+				C498DE031ED7626800242330 /* RgViewDelegate.m in Sources */,
 				C4AC2B2D1D3963FA003B6232 /* MessageListModelController.m in Sources */,
 				C4A853DA1E660E1000FEAFB0 /* Send.m in Sources */,
 				C4AC2B2E1D3963FA003B6232 /* IASKPSTextFieldSpecifierViewCell.m in Sources */,

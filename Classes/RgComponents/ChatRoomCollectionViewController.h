@@ -10,13 +10,14 @@
 #define ChatRoomCollectionViewController_h
 
 #import <UIKit/UIKit.h>
+#import "RingKit.h"
 
 @interface ChatRoomCollectionViewController : UICollectionViewController
 
-@property (nonatomic, strong) NSNumber* chatThreadID;
+@property (nonatomic, strong) RKThread* chatThread;
 @property (nonatomic, strong) NSNumber* lastMessageID;
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThreadID:(NSNumber*)threadID elements:(NSArray*)elems;
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThread:(RKThread*)chatThread;
 
 - (void)scrollToBottom:(BOOL)animate;
 - (void)appendMessages:(NSArray*)msgs;

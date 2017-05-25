@@ -276,10 +276,7 @@
 
 - (void)actionChat:(CKButtonComponent *)sender
 {
-/*
-    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
-    [card showMessages];
-*/
+	[[RKCommunicator sharedInstance] startMessageView:self.currentThread.data[@"thread"]];
 }
 
 - (void)actionCall:(CKButtonComponent *)sender

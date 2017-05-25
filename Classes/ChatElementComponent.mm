@@ -15,7 +15,8 @@
 
 static CKComponent *chatComponent(ChatElement *elem, ChatElementContext *context)
 {
-	NSDictionary* data = elem.data;
+	return [ChatElementTextComponent newWithChatElement:elem context:context];
+	/*NSDictionary* data = elem.data;
 	NSLog(@"%@", data);
 	if (
 		[data[@"type"] isEqualToString:@"image/png"] ||
@@ -26,7 +27,7 @@ static CKComponent *chatComponent(ChatElement *elem, ChatElementContext *context
 	else // Text component
 	{
 		return [ChatElementTextComponent newWithChatElement:elem context:context];
-	}
+	}*/
 }
 
 @end

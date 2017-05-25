@@ -55,6 +55,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 @implementation RgTextViewController
 @synthesize chatRoom = _chatRoom;
+@synthesize chatThread = _chatThread;
 @synthesize backgroundImageView = _backgroundImageView;
 @synthesize collectionView = _collectionView;
 @synthesize typingIndicatorProxyView = _typingIndicatorProxyView;
@@ -75,6 +76,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     if (self = [super initWithNibName:nil bundle:nil])
     {
 		self.currentLayout = layout;
+		self.chatThread = [[RKCommunicator sharedInstance] currentThread];
         self.scrollViewProxy = [self collectionViewWithLayout:layout];
         [self slk_commonInit];
     }
@@ -118,19 +120,19 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [self.view addSubview:self.typingIndicatorProxyView];
     [self.view addSubview:self.textInputbar];
 	
+    [self slk_setupViewConstraints];
+    [self slk_registerKeyCommands];
+	
 	[self addChildViewController:_chatRoom];
     [_chatRoom didMoveToParentViewController:self];
-    
-    [self slk_setupViewConstraints];
-    
-    [self slk_registerKeyCommands];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 	
-	NSNumber* threadID = [[LinphoneManager instance] chatSession];
+	//TODO: Refresh collection data instead of recreating the container
+	/*NSNumber* threadID = [[LinphoneManager instance] chatSession];
 	if (! [threadID isEqualToNumber:self.chatRoom.chatThreadID])
 	{
 		NSLog(@"%s Change chat room", __PRETTY_FUNCTION__);
@@ -152,7 +154,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 		
 		[NSLayoutConstraint deactivateConstraints:self.view.constraints];
 		[self slk_setupViewConstraints];
-	}
+	}*/
     
     // Invalidates this flag when the view appears
     self.textView.didNotResignFirstResponder = NO;
@@ -214,11 +216,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (UICollectionView *)collectionViewWithLayout:(UICollectionViewLayout *)layout
 {
     if (!_collectionView) {
-    	NSNumber* threadID = [[LinphoneManager instance] chatSession];
-       	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID];
-    	NSLog(@"%@", messages);
-    		
-        ChatRoomCollectionViewController *mainController = [[ChatRoomCollectionViewController alloc] initWithCollectionViewLayout:layout chatThreadID:threadID elements:messages];
+        ChatRoomCollectionViewController *mainController = [[ChatRoomCollectionViewController alloc] initWithCollectionViewLayout:layout chatThread:_chatThread];
         [[mainController collectionView] setBounces:YES];
         [[mainController collectionView] setAlwaysBounceVertical:YES];
         _chatRoom = mainController;
@@ -479,6 +477,12 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 
 #pragma mark - Setters
+
+- (void)setChatThread:(RKThread *)chatThread
+{
+	self->_chatThread = chatThread;
+	
+}
 
 - (void)setEdgesForExtendedLayout:(UIRectEdge)rectEdge
 {
@@ -2357,27 +2361,27 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (void)chatReceivedEvent:(NSNotification*)event
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSDictionary* info = event.userInfo;
-	if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
+	//NSDictionary* info = event.userInfo;
+	/*if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
 	{
 		NSNumber* threadID = [[LinphoneManager instance] chatSession];
        	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID last:_chatRoom.lastMessageID];
     	NSLog(@"%@", messages);
 		[_chatRoom appendMessages:messages];
-	}
+	}*/
 }
 
 - (void)chatSentEvent:(NSNotification*)event
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSDictionary* info = event.userInfo;
-	if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
+	//NSDictionary* info = event.userInfo;
+	/*if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
 	{
 	    NSNumber* threadID = [[LinphoneManager instance] chatSession];
        	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID last:_chatRoom.lastMessageID];
     	NSLog(@"%@", messages);
 		[_chatRoom appendMessages:messages];
-	}
+	}*/
 }
 
 - (void)chatUpdateEvent:(NSNotification*)event
