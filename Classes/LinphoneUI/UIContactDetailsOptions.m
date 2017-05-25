@@ -18,7 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, self.view.frame.size.height - 1, self.view.frame.size.width - 30, 1)];
+    lineView.backgroundColor = [UIColor lightGrayColor];
+    [inviteButton addSubview:lineView];
+    [shareContactButton addSubview:lineView];
+    [shareLocationButton addSubview:lineView];
 }
 
 - (void)didReceiveMemoryWarning {

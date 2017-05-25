@@ -687,6 +687,10 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		return [headerController view];
 	} else if (section == ContactSections_Options) {
         return [optionsController view];
+    } else if (section == (ContactSections_MAX - (ContactSections_MAX - 1))) {
+        UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10)];
+        tmp.backgroundColor = UIColor.whiteColor;
+        return tmp;
     } else {
 		return nil;
 	}
@@ -724,12 +728,10 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		return [UIContactDetailsHeader height:[headerController isEditing] member:self.member];
 	} else if (section == ContactSections_Options) {
         return [UIContactDetailsOptions height];
-    } else if (section == ContactSections_Email) {
-//		// Hide section if nothing in it
-//		if ([[self getSectionData:section] count] > 0)
-			return 10;
+    } else if (section == (ContactSections_MAX - (ContactSections_MAX - 1))) {
+        return 10;
     } else
-			return 0.000001f; // Hack UITableView = 0
+        return 0.000001f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
