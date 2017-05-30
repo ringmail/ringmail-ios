@@ -41,19 +41,15 @@
     [shareContactButton addSubview:lineView2];
     [shareLocationButton addSubview:lineView3];
     
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
-    [[RgLocationManager sharedInstance] startUpdatingLocation];
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
 }
 
-
 - (void)viewDidAppear:(BOOL)animated
-{    
-//    rgMember = TRUE;
+{
+//    rgMember = TRUE;  // test
+    
+    [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
+    [[RgLocationManager sharedInstance] startUpdatingLocation];
     
     shareLocationButton.hidden = TRUE;
     
@@ -70,8 +66,7 @@
 }
 
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void) viewDidUnload {
     [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
 }
 
@@ -113,10 +108,8 @@
     if([keyPath isEqualToString:kRgCurrentLocation]) {
         [[RgLocationManager sharedInstance] stopUpdatingLocation];
         
-        if (rgMember) {
+        if (rgMember)
             shareLocationButton.hidden = FALSE;
-            NSLog(@"stopUpdatingLocation");
-        }
     }
 }
 
