@@ -191,7 +191,7 @@
     status = [stream authenticateWithPassword:chatPassword error:&error];
 }
 
-- (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword
+- (BOOL)connectWithJID:(NSString*)myJID password:(NSString*)myPassword
 {
     NSLog(@"%s: %@", __PRETTY_FUNCTION__, myJID);
 	self.replyTo = [myJID stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLUserAllowedCharacterSet];
@@ -237,6 +237,11 @@
     //NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self goOffline];
     [self.xmppStream disconnect];
+}
+
+- (void)sendMessage:(NSXMLElement*)msg
+{
+	[self.xmppStream sendElement:msg];
 }
 
 #pragma mark Chat actions

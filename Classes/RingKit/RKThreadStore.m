@@ -268,11 +268,17 @@
 
 - (NSArray*)listThreadItems:(RKThread*)thread
 {
+	return [self listThreadItems:thread lastItemId:nil];
+}
+
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId
+{
 	NSAssert(thread.threadId != nil, @"Undefined thread id");
 	__block NSMutableArray *result = [NSMutableArray array];
 	[[self dbqueue] inDatabase:^(FMDatabase *db) {
-		FMResultSet *rs = [db executeQuery:@""
+		NSString *sql = @""
             "SELECT "
+				"ti.id AS item_id, "
 				"ti.ts_created AS ts_created, "
 				"m.id AS message_id, "
 				"m.msg_body AS msg_body, "
@@ -285,11 +291,26 @@
 				"c.call_duration AS call_duration "
             "FROM rk_thread_item ti "
             "LEFT JOIN rk_message m ON m.id=ti.message_id "
-            "LEFT JOIN rk_call c ON c.id=ti.call_id "
-			"WHERE ti.thread_id=? "
-            "ORDER BY ti.id ASC",
-			thread.threadId
-		];
+            "LEFT JOIN rk_call c ON c.id=ti.call_id ";
+		FMResultSet *rs;
+		if (lastItemId != nil)
+		{
+    		sql = [sql stringByAppendingString:@""
+    			"WHERE ti.thread_id=? "
+    			"AND ti.id > ? "
+				"ORDER BY ti.id ASC"
+			];
+			NSLog(@"SQL: %@", sql);
+			rs = [db executeQuery:sql, thread.threadId, lastItemId];
+		}
+		else
+		{
+    		sql = [sql stringByAppendingString:@""
+    			"WHERE ti.thread_id=? "
+				"ORDER BY ti.id ASC"
+			];
+			rs = [db executeQuery:sql, thread.threadId];
+		}
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
@@ -297,7 +318,8 @@
 			if (NILIFNULL(row[@"message_id"]) != nil)
 			{
 				RKMessage* msg = [RKMessage newWithData:@{
-					@"itemId": row[@"message_id"],
+					@"itemId": row[@"item_id"],
+					@"messageId": row[@"message_id"],
 					@"thread": thread,
 					@"uuid": row[@"msg_uuid"],
 					@"timestamp": [NSDate parse:row[@"ts_created"]],

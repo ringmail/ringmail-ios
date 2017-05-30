@@ -16,6 +16,7 @@
 
 - (instancetype)initWithData:(NSDictionary*)param;
 - (void)insertItem:(NoteDatabase*)ndb;
+- (void)prepareMessage:(void (^)(NSObject* xml))send;
 
 @property (nonatomic, strong) NSNumber* messageId;
 @property (nonatomic, strong) NSString* body;

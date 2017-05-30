@@ -6,9 +6,12 @@
 //
 //
 
+#import "RKAddress.h"
 #import "RKMessage.h"
 #import "RKThread.h"
 #import "Utils.h"
+#import "NSXMLElement+XMPP.h"
+#import "RgManager.h"
 
 @implementation RKMessage
 
@@ -95,6 +98,34 @@
 		},
 	}];
 	self.itemId = [ndb lastInsertId];
+}
+
+- (void)prepareMessage:(void (^)(NSObject* xml))send
+{
+	NSString *msgTo = [RgManager addressToXMPP:self.thread.remoteAddress.address];
+    NSXMLElement *bodytag = [NSXMLElement elementWithName:@"body"];
+    [bodytag setStringValue:self.body];
+    NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+    [message addAttributeWithName:@"id" stringValue:self.uuid];
+    [message addAttributeWithName:@"conversation" stringValue:self.thread.uuid];
+    [message addAttributeWithName:@"type" stringValue:@"chat"];
+    [message addAttributeWithName:@"timestamp" stringValue:[self.timestamp strftime]];
+    [message addAttributeWithName:@"to" stringValue:msgTo];
+	if (self.thread.originalTo != nil)
+	{
+		[message addAttributeWithName:@"reply-to" stringValue:self.thread.originalTo.address];
+	}
+	/*if (contact != nil)
+	{
+		// TODO: something different than a "reply-to" attribute
+		[message addAttributeWithName:@"reply-to" stringValue:self.replyTo];
+	}*/
+    /*if (reply)
+    {
+       [message addAttributeWithName:@"reply" stringValue:reply];
+    }*/
+    [message addChild:bodytag];
+	send(message);
 }
 
 @end

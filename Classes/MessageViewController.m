@@ -11,6 +11,7 @@
 #import "MessageTextView.h"
 #import "TypingIndicatorView.h"
 #import "UIColor+Hex.h"
+#import "RingKit.h"
 
 #import <LoremIpsum/LoremIpsum.h>
 
@@ -339,23 +340,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 	
 	// Send message!
 	NSString *text = [self.textView.text copy];
-	NSLog(@"Send Message: %@", text);
-	
-    RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-	NSNumber *threadID = [[LinphoneManager instance] chatSession];
-	NSDictionary *sdata = [mgr dbGetSessionData:threadID];
-	NSString *origTo = NILIFNULL(sdata[@"session_to"]);
-    NSString *uuid = [mgr sendMessageTo:sdata[@"session_tag"] from:origTo body:text contact:NILIFNULL(sdata[@"contact_id"])];
-	NSLog(@"Sent Message UUID: %@", uuid);
-	
-	NSDictionary *dict = @{
-        @"session":threadID
-    };
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextSent object:self userInfo:dict];
-
+	//NSLog(@"Send Message: %@", text);
+	RKCommunicator* comm = [RKCommunicator sharedInstance];
+	RKMessage* message = [RKMessage newWithData:@{
+		@"thread": [comm currentThread],
+		@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+		@"body": text,
+		@"deliveryStatus": @"sending",
+	}];
+	[comm sendMessage:message];
     [super didPressRightButton:sender];
 }
-
 
 - (NSString *)keyForTextCaching
 {

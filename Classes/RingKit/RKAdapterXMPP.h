@@ -35,5 +35,6 @@
 - (BOOL)connectWithJID:(NSString*)myJID password:(NSString*)myPassword;
 - (BOOL)isConnected;
 - (void)disconnect;
+- (void)sendMessage:(NSXMLElement*)msg;
 
 @end

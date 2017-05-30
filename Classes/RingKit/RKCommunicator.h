@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kRKMessageSent;
+extern NSString *const kRKMessageReceived;
+extern NSString *const kRKMessageUpdated;
+
 @protocol RKCommunicatorViewDelegate <NSObject>
 @optional
 
@@ -37,6 +41,7 @@
 
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 
 - (void)startMessageView:(RKThread*)thread;

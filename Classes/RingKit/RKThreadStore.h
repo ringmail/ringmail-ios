@@ -29,6 +29,7 @@
 - (void)insertItem:(RKItem*)item;
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 
 @end

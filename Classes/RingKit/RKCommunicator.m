@@ -13,6 +13,12 @@
 #import "RKMessage.h"
 #import "RKThread.h"
 
+#import "NSXMLElement+XMPP.h"
+
+NSString *const kRKMessageSent = @"RKMessageSent";
+NSString *const kRKMessageReceived = @"RKMessageReceived";
+NSString *const kRKMessageUpdated = @"RKMessageUpdated";
+
 @implementation RKCommunicator
 
 @synthesize adapterXMPP;
@@ -35,15 +41,21 @@
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store insertItem:message];
-	// TODO: Deliver message
-	// TODO: Notify observers
+	[message prepareMessage:^(NSObject* xml) {
+		[adapterXMPP sendMessage:(NSXMLElement*)xml];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageSent object:self userInfo:@{
+			@"message": message,
+		}];
+	}];
 }
 
 - (void)didReceiveMessage:(RKMessage*)message
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store insertItem:message];
-	// TODO: Notify observers
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageReceived object:self userInfo:@{
+		@"message": message,
+	}];
 }
 
 - (NSArray*)listThreads
@@ -54,6 +66,11 @@
 - (NSArray*)listThreadItems:(RKThread*)thread;
 {
 	return [[RKThreadStore sharedInstance] listThreadItems:thread];
+}
+
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId
+{
+	return [[RKThreadStore sharedInstance] listThreadItems:thread lastItemId:lastItemId];
 }
 
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
