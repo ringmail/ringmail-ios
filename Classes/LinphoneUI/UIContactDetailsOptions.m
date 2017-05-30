@@ -77,7 +77,7 @@
 
 - (IBAction)onActionInvite:(id)event {
     NSLog(@"onActionInvite");
-//        [[[LinphoneManager instance] contactManager] inviteToRingMail:contact];
+    [[[LinphoneManager instance] contactManager] inviteToRingMail:contact];
 }
 
 - (IBAction)onActionShareContact:(id)event {
