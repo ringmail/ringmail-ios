@@ -24,7 +24,6 @@
                 <outlet property="callButton" destination="BWx-aW-PFf" id="OqS-jV-daJ"/>
                 <outlet property="chatButton" destination="F6z-Sd-uf3" id="dsx-Hl-7wg"/>
                 <outlet property="editView" destination="13" id="16"/>
-                <outlet property="favoriteButton" destination="sAs-m8-olx" id="AbH-cE-F4j"/>
                 <outlet property="normalView" destination="12" id="17"/>
                 <outlet property="rgInvite" destination="iEM-vL-GAO" id="9Sy-8x-eOH"/>
                 <outlet property="tableView" destination="15" id="20"/>
@@ -137,8 +136,8 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6z-Sd-uf3" userLabel="ChatButton">
                                     <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="45" id="GYe-v4-6sh"/>
-                                        <constraint firstAttribute="width" constant="45" id="rq9-cl-Uvy"/>
+                                        <constraint firstAttribute="height" priority="999" constant="45" id="GYe-v4-6sh"/>
+                                        <constraint firstAttribute="width" priority="999" constant="45" id="rq9-cl-Uvy"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="70" maxX="0.0" maxY="0.0"/>
@@ -152,8 +151,8 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWx-aW-PFf" userLabel="CallButton">
                                     <rect key="frame" x="75" y="0.0" width="45" height="45"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="45" id="I0J-Cn-cqv"/>
-                                        <constraint firstAttribute="width" constant="45" id="yfo-1g-fJE"/>
+                                        <constraint firstAttribute="height" priority="999" constant="45" id="I0J-Cn-cqv"/>
+                                        <constraint firstAttribute="width" priority="999" constant="45" id="yfo-1g-fJE"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="70" maxX="0.0" maxY="0.0"/>
@@ -167,8 +166,8 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFT-px-iZV" userLabel="VideoButton">
                                     <rect key="frame" x="150" y="0.0" width="45" height="45"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="45" id="7Z4-0f-NPi"/>
-                                        <constraint firstAttribute="width" constant="45" id="gfa-fg-ED4"/>
+                                        <constraint firstAttribute="height" priority="999" constant="45" id="7Z4-0f-NPi"/>
+                                        <constraint firstAttribute="width" priority="999" constant="45" id="gfa-fg-ED4"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="70" maxX="0.0" maxY="0.0"/>
@@ -181,17 +180,6 @@
                                 </button>
                             </subviews>
                         </stackView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAs-m8-olx" userLabel="FavoriteButton">
-                            <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="45" id="LTZ-iG-z8v"/>
-                                <constraint firstAttribute="width" constant="45" id="Re7-i1-SoL"/>
-                            </constraints>
-                            <state key="normal" image="ringmail_favorite.png"/>
-                            <connections>
-                                <action selector="onActionFavorite:" destination="-1" eventType="touchUpInside" id="ymn-BE-gCb"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -231,7 +219,6 @@
         <image name="phone_normal.png" width="84" height="84"/>
         <image name="phone_pressed.png" width="84" height="84"/>
         <image name="phone_selected.png" width="84" height="84"/>
-        <image name="ringmail_favorite.png" width="30" height="30"/>
         <image name="video_normal.png" width="84" height="84"/>
         <image name="video_pressed.png" width="84" height="84"/>
         <image name="video_selected.png" width="84" height="84"/>

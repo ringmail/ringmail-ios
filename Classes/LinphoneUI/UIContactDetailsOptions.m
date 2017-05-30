@@ -8,6 +8,7 @@
 
 #import "UIContactDetailsOptions.h"
 #import "PhoneMainView.h"
+#import "RgLocationManager.h"
 
 
 @implementation UIContactDetailsOptions
@@ -42,21 +43,36 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
+    [[RgLocationManager sharedInstance] startUpdatingLocation];
+    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated
-{
+{    
+//    rgMember = TRUE;
+    
+    shareLocationButton.hidden = TRUE;
+    
     if (rgMember)
     {
         inviteButton.hidden = TRUE;
         shareContactButton.hidden = FALSE;
-        shareLocationButton.hidden = FALSE;
     }
     else
     {
         inviteButton.hidden = FALSE;
         shareContactButton.hidden = TRUE;
-        shareLocationButton.hidden = TRUE;
     }
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
 }
 
 
@@ -73,6 +89,7 @@
         return 230;
 }
 
+
 #pragma mark - Action Functions
 
 - (IBAction)onActionInvite:(id)event {
@@ -87,5 +104,21 @@
 - (IBAction)onActionShareLocation:(id)event {
     NSLog(@"onActionShareLocation");
 }
+
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object  change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:kRgCurrentLocation]) {
+        [[RgLocationManager sharedInstance] stopUpdatingLocation];
+        
+        if (rgMember) {
+            shareLocationButton.hidden = FALSE;
+            NSLog(@"stopUpdatingLocation");
+        }
+    }
+}
+
 
 @end
