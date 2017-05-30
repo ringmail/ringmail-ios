@@ -123,7 +123,7 @@
 	lastNameFrame.origin.x = firstNameFrame.origin.x + firstNameFrame.size.width;
 	if (firstNameFrame.size.width)
 		lastNameFrame.origin.x += 5;
-
+    
 	[firstNameLabel setFrame:firstNameFrame];
 	[lastNameLabel setFrame:lastNameFrame];
 }

@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBook/AddressBook.h>
 
 @interface UIContactDetailsOptions : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIButton *inviteButton;
 @property (nonatomic, strong) IBOutlet UIButton *shareContactButton;
 @property (nonatomic, strong) IBOutlet UIButton *shareLocationButton;
+
+@property (nonatomic, assign) ABRecordRef contact;
+@property (nonatomic) BOOL rgMember;
 
 - (IBAction)onActionInvite:(id)event;
 - (IBAction)onActionShareContact:(id)event;

@@ -410,9 +410,11 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	contact = acontact;
 	NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
     self.member = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
-	[self loadData];
-	[headerController setRgMember:self.member];
-	[headerController setContact:contact];
+    [self loadData];
+    [headerController setRgMember:self.member];
+    [headerController setContact:contact];
+    [optionsController setRgMember:self.member];
+    [optionsController setContact:contact];
 }
 
 - (void)addPhoneField:(NSString *)number {
@@ -459,7 +461,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		cell.selectedBackgroundView = selectedBackgroundView;
 		[selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
 	}
-
+    
 	NSMutableArray *sectionDict = [self getSectionData:[indexPath section]];
 	Entry *entry = [sectionDict objectAtIndex:[indexPath row]];
 
