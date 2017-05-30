@@ -1,5 +1,6 @@
 #import "Send.h"
 
+#import "RingKit.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "RgManager.h"
@@ -26,6 +27,19 @@
 	if ([msgdata[@"to"] length] > 0)
 	{
 		NSLog(@"sendMessage:%@", msgdata);
+		RKCommunicator* comm = [RKCommunicator sharedInstance];
+		RKAddress* address = [RKAddress newWithAddress:msgdata[@"to"]];
+		RKThread* thread = [comm getThreadByAddress:address];
+		RKMessage* message = [RKMessage newWithData:@{
+			@"thread": thread,
+			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+			@"body": msgdata[@"message"],
+			@"deliveryStatus": @"sending",
+		}];
+		[comm sendMessage:message];
+		[comm startMessageView:thread];
+		
+		/*
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
     	NSString* to = msgdata[@"to"];
 		if ([msgdata[@"message"] length] > 0)
@@ -63,6 +77,7 @@
 		NSDictionary *sessionData = [mgr dbGetSessionID:to to:nil contact:nil uuid:nil];
 		[[LinphoneManager instance] setChatSession:sessionData[@"id"]];
 		[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
+		*/
 	}
 }
 

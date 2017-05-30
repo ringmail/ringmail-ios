@@ -18,6 +18,7 @@
 NSString *const kRKMessageSent = @"RKMessageSent";
 NSString *const kRKMessageReceived = @"RKMessageReceived";
 NSString *const kRKMessageUpdated = @"RKMessageUpdated";
+NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
 
 @implementation RKCommunicator
 
@@ -73,6 +74,12 @@ NSString *const kRKMessageUpdated = @"RKMessageUpdated";
 	return [[RKThreadStore sharedInstance] listThreadItems:thread lastItemId:lastItemId];
 }
 
+- (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;
+{
+	RKContact* contact = [RKContact newByMatchingAddress:remoteAddress];
+	return [[RKThreadStore sharedInstance] getThreadByAddress:remoteAddress orignalTo:nil contactId:contact.contactId uuid:nil];
+}
+
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 {
 	return [[RKThreadStore sharedInstance] getThreadByAddress:remoteAddress orignalTo:origTo contactId:ctid uuid:uuid];
@@ -81,6 +88,9 @@ NSString *const kRKMessageUpdated = @"RKMessageUpdated";
 - (void)startMessageView:(RKThread*)thread
 {
 	[self setCurrentThread:thread];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageViewChanged object:self userInfo:@{
+		@"thread": thread,
+	}];	
 	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showMessageView)])
 	{
 		[self.viewDelegate showMessageView];

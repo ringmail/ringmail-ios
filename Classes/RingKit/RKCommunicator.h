@@ -11,6 +11,7 @@
 extern NSString *const kRKMessageSent;
 extern NSString *const kRKMessageReceived;
 extern NSString *const kRKMessageUpdated;
+extern NSString *const kRKMessageViewChanged;
 
 @protocol RKCommunicatorViewDelegate <NSObject>
 @optional
@@ -42,6 +43,7 @@ extern NSString *const kRKMessageUpdated;
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
 - (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
+- (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 
 - (void)startMessageView:(RKThread*)thread;

@@ -2234,6 +2234,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter addObserver:self selector:@selector(chatSentEvent:) name:kRKMessageSent object:nil];
 	[notificationCenter addObserver:self selector:@selector(chatReceivedEvent:) name:kRKMessageReceived object:nil];
     [notificationCenter addObserver:self selector:@selector(chatUpdateEvent:) name:kRKMessageUpdated object:nil];
+    [notificationCenter addObserver:self selector:@selector(chatRoomChange:) name:kRKMessageViewChanged object:nil];
 }
 
 - (void)slk_unregisterNotifications
@@ -2272,8 +2273,8 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 	[notificationCenter removeObserver:self name:kRKMessageSent object:nil];
     [notificationCenter removeObserver:self name:kRKMessageReceived object:nil];
     [notificationCenter removeObserver:self name:kRKMessageUpdated object:nil];
+    [notificationCenter removeObserver:self name:kRKMessageViewChanged object:nil];
 }
-
 
 #pragma mark - View Auto-Rotation
 
@@ -2385,6 +2386,41 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (void)chatUpdateEvent:(NSNotification*)event
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)chatRoomChange:(NSNotification*)event
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSDictionary* info = event.userInfo;
+	RKThread* inputThread = info[@"thread"];
+	RKThread* chatThread = [_chatRoom chatThread];
+	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
+	{
+		NSLog(@"Same Chat Room");
+	}
+	else
+	{
+		NSLog(@"New Chat Room: %@", inputThread.threadId);
+		_chatThread = inputThread;
+		[_chatRoom removeFromParentViewController];
+		_chatRoom = nil;
+		[_scrollViewProxy removeFromSuperview];
+		_scrollViewProxy = nil;
+		_collectionView = nil;
+		[self setScrollViewProxy:[self collectionViewWithLayout:_currentLayout]];
+		
+		CGFloat height = [self slk_appropriateScrollViewHeight];
+		CGRect scrollFrame = [_scrollViewProxy frame];
+		scrollFrame.size.height = height;
+		[_scrollViewProxy setFrame:scrollFrame];
+		
+		[self.view insertSubview:_scrollViewProxy belowSubview:self.autoCompletionView];
+    	[self addChildViewController:_chatRoom];
+        [_chatRoom didMoveToParentViewController:self];
+		
+		[NSLayoutConstraint deactivateConstraints:self.view.constraints];
+		[self slk_setupViewConstraints];
+	}
 }
 
 @end
