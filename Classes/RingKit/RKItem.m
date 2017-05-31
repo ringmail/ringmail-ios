@@ -72,4 +72,9 @@
     NSAssert(FALSE, @"Override this method: %s", __PRETTY_FUNCTION__);
 }
 
+- (void)updateItem:(NoteDatabase*)ndb
+{
+    NSAssert(FALSE, @"Override this method: %s", __PRETTY_FUNCTION__);
+}
+
 @end

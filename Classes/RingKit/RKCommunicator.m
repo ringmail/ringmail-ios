@@ -71,6 +71,8 @@ NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
 
 - (void)didUpdateCall:(RKCall*)call
 {
+	RKThreadStore* store = [RKThreadStore sharedInstance];
+	[store updateItem:call];
 }
 
 - (NSArray*)listThreads

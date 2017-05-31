@@ -142,6 +142,13 @@
 	}];
 }
 
+- (void)updateItem:(RKItem*)item
+{
+	[self dbBlock:^(NoteDatabase *ndb) {
+		[item updateItem:ndb];
+	}];
+}
+
 - (void)insertThread:(RKThread*)thread
 {
 	if (thread.threadId == nil)
@@ -502,7 +509,7 @@
 	[[self dbqueue] inDatabase:^(FMDatabase *db) {
 		FMResultSet *rs = [db executeQuery:@""
             "SELECT "
-				"t.thread_id AS thread_id, "
+				"t.id AS thread_id, "
 				"t.address AS address, "
 				"t.contact_id AS contact_id, "
 				"t.original_to AS original_to, "
@@ -516,16 +523,16 @@
 				"c.call_result AS call_result, "
 				"c.call_time AS call_time, "
 				"c.call_uuid AS call_uuid "
-            "FROM rk_call c ",
-            "JOIN rk_thread t ON t.id = c.thread_id "
-            "JOIN rk_thread_item ti ON ti.call_id = c.id "
-			"WHERE c.sip = ? ",
+            "FROM rk_call c, rk_thread t, rk_thread_item ti "
+			"WHERE c.call_sip = ? "
+            "AND t.id = c.thread_id "
+            "AND ti.call_id = c.id",
 			sip
 		];
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
-            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			RKContact* ct;
 			RKAddress* addr = [RKAddress newWithString:row[@"address"]];
 			if (NILIFNULL(row[@"contact_id"]) != nil)
@@ -555,7 +562,7 @@
 				@"thread": thr,
 				@"itemId": row[@"item_id"],
 				@"callId": row[@"call_id"],
-				@"direction": row[@"direction"],
+				@"direction": row[@"call_inbound"],
 				@"sipId": row[@"call_sip"],
 				@"timestamp": [NSDate parse:row[@"call_time"]],
 				@"duration": row[@"call_duration"],

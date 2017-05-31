@@ -614,38 +614,30 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 				RKCommunicator* comm = [RKCommunicator sharedInstance];
 				RKCall* rcall = [comm getCallBySipId:sip];
 				NSLog(@"%s: RKCall: %@", __PRETTY_FUNCTION__, rcall);
-				
-				NSMutableDictionary *updates = [NSMutableDictionary dictionaryWithDictionary:@{
-                    @"sip": sip,
-                    @"state": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],
-				}];
+				rcall.callStatus = [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding];
 				if (state == LinphoneCallEnd || state == LinphoneCallError)
 				{
 					LinphoneCallLog *log = linphone_call_get_call_log(call);
-					NSString *status;
 					int sts = linphone_call_log_get_status(log);
     				if (sts == LinphoneCallSuccess)
     				{
-    					status = @"success";
-    					NSNumber *duration = [NSNumber numberWithInt:linphone_call_log_get_duration(log)];
-    					[updates setObject:duration forKey:@"duration"];
+    					rcall.callResult = @"success";
+    					rcall.duration = [NSNumber numberWithInt:linphone_call_log_get_duration(log)];
         			}
     				else if (sts == LinphoneCallMissed)
     				{
-    					status = @"missed";
+    					rcall.callResult = @"missed";
     				}
     				else if (sts == LinphoneCallAborted)
     				{
-    					status = @"aborted";
+    					rcall.callResult = @"aborted";
     				}
     				else if (sts == LinphoneCallDeclined)
     				{
-    					status = @"declined";
+    					rcall.callResult = @"declined";
     				}
-					[updates setObject:status forKey:@"status"];
-					LOGI(@"RingMail Call Ended With Status: %@", status);
 				}
-    			[[self chatManager] dbUpdateCall:updates];
+				[comm didUpdateCall:rcall];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
             }
         }

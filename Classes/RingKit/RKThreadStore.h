@@ -28,6 +28,7 @@
 - (void)setupDatabase;
 - (void)setupTables;
 - (void)insertItem:(RKItem*)item;
+- (void)updateItem:(RKItem*)item;
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
 - (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
