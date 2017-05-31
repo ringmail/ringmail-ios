@@ -422,6 +422,8 @@
 		C42B72131CA22EDB0020A57F /* MessageThreadPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72081CA22EDB0020A57F /* MessageThreadPage.m */; };
 		C42B72161CA22EDB0020A57F /* MessageThreadComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C42B720E1CA22EDB0020A57F /* MessageThreadComponent.mm */; };
 		C42B72191CA2313D0020A57F /* HashtagModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72181CA2313D0020A57F /* HashtagModelController.m */; };
+		C42B84431EDE68CB00EB9C7F /* RKMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */; };
+		C42B84441EDE68CB00EB9C7F /* RKMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */; };
 		C42BD4111ED64204009B324D /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4101ED64204009B324D /* CardsPage.m */; };
 		C42BD4121ED64204009B324D /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4101ED64204009B324D /* CardsPage.m */; };
 		C42BD4151ED642A4009B324D /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4141ED642A4009B324D /* Card.m */; };
@@ -2754,6 +2756,8 @@
 		C42B720E1CA22EDB0020A57F /* MessageThreadComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MessageThreadComponent.mm; path = RgComponents/MessageThreadComponent.mm; sourceTree = "<group>"; };
 		C42B72171CA2313D0020A57F /* HashtagModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagModelController.h; path = RgComponents/HashtagModelController.h; sourceTree = "<group>"; };
 		C42B72181CA2313D0020A57F /* HashtagModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HashtagModelController.m; path = RgComponents/HashtagModelController.m; sourceTree = "<group>"; };
+		C42B84391EDE68B600EB9C7F /* RKMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKMediaMessage.h; path = RingKit/RKMediaMessage.h; sourceTree = "<group>"; };
+		C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKMediaMessage.m; path = RingKit/RKMediaMessage.m; sourceTree = "<group>"; };
 		C42BD40F1ED64204009B324D /* CardsPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardsPage.h; path = RgComponents/CardsPage.h; sourceTree = "<group>"; };
 		C42BD4101ED64204009B324D /* CardsPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardsPage.m; path = RgComponents/CardsPage.m; sourceTree = "<group>"; };
 		C42BD4131ED642A4009B324D /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = RgComponents/Card.h; sourceTree = "<group>"; };
@@ -4878,6 +4882,8 @@
 				C45B933F1ECE4EF200974011 /* RKItem.m */,
 				C45B933A1ECE4ECA00974011 /* RKMessage.h */,
 				C45B933B1ECE4ECA00974011 /* RKMessage.m */,
+				C42B84391EDE68B600EB9C7F /* RKMediaMessage.h */,
+				C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */,
 				C45B93221ECE398300974011 /* RKCommunicator.h */,
 				C45B93231ECE398300974011 /* RKCommunicator.m */,
 				C45B932E1ECE4E5E00974011 /* RKThreadStore.h */,
@@ -8146,6 +8152,7 @@
 				D35E91F8160CA4FF0023116B /* UILinphoneButton.m in Sources */,
 				D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */,
 				C45B93281ECE39A200974011 /* RKAddress.m in Sources */,
+				C42B84431EDE68CB00EB9C7F /* RKMediaMessage.m in Sources */,
 				C44A40FE1E70E415000F3E24 /* CLImageToolInfo+Private.m in Sources */,
 				D37E3ECD1619C27A0087659A /* CAAnimation+Blocks.m in Sources */,
 			);
@@ -8355,6 +8362,7 @@
 				C4AC2B301D3963FA003B6232 /* NSString+MD5.m in Sources */,
 				C4AC2B341D3963FA003B6232 /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
 				C4AC2B351D3963FA003B6232 /* IASKSlider.m in Sources */,
+				C42B84441EDE68CB00EB9C7F /* RKMediaMessage.m in Sources */,
 				C48C10A21E81ABC00094F1F3 /* MediaBarComponent.mm in Sources */,
 				C48C10A81E81CCC40094F1F3 /* MediaAssetProvider.m in Sources */,
 				C4AC2B361D3963FA003B6232 /* IASKSwitch.m in Sources */,
