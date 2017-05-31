@@ -56,7 +56,15 @@
         latest = [dateFormatter stringFromDate:dateLatest];
 	}
 	
-	NSString *msg = data[@"detail"][@"body"];
+	NSString *msg;
+	if ([data[@"type"] isEqualToString:@"message"])
+	{
+		msg = data[@"detail"][@"body"];
+	}
+	if ([data[@"type"] isEqualToString:@"call"])
+	{
+		msg = @"[Call]";
+	}
     NSDictionary *attrsDictionary = @{
         NSFontAttributeName: [UIFont systemFontOfSize:14],
         NSForegroundColorAttributeName: [UIColor colorWithHex:@"#353535"],

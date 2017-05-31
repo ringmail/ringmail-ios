@@ -13,6 +13,7 @@
 #import "RKContact.h"
 #import "RKThread.h"
 #import "RKItem.h"
+#import "RKCall.h"
 #import "RKMessage.h"
 #import "RKCommunicator.h"
 

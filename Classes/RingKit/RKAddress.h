@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, RKAddressType) {
 @property (nonatomic, weak) RKContact* contact;
 
 + (instancetype)newWithData:(NSDictionary*)param;
-+ (instancetype)newWithAddress:(NSString*)addr;
++ (instancetype)newWithString:(NSString*)addr;
 + (BOOL)validEmailAddress:(NSString *)checkString;
 + (BOOL)validAddress:(NSString*)address;
 

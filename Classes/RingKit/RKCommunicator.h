@@ -27,6 +27,7 @@ extern NSString *const kRKMessageViewChanged;
 @class RKAddress;
 @class RKContact;
 @class RKThread;
+@class RKCall;
 @class RKMessage;
 
 @interface RKCommunicator : NSObject
@@ -40,11 +41,16 @@ extern NSString *const kRKMessageViewChanged;
 - (void)sendMessage:(RKMessage*)message;
 - (void)didReceiveMessage:(RKMessage*)message;
 
+//- (void)startCall:(RKCall*)call;
+- (void)didBeginCall:(RKCall*)call;
+- (void)didUpdateCall:(RKCall*)call;
+
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
 - (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
+- (RKCall*)getCallBySipId:(NSString*)sip;
 
 - (void)startMessageView:(RKThread*)thread;
 //- (void)startCallView:(RKAddress*)address;

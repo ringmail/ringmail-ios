@@ -338,7 +338,7 @@
         {
             NSString *from = [[xmppMessage attributeForName:@"from"] stringValue];
             NSString *chatFrom = [RgManager addressFromXMPP:from];
-			RKAddress *fromAddress = [RKAddress newWithAddress:chatFrom];
+			RKAddress *fromAddress = [RKAddress newWithString:chatFrom];
 			
             NSString *contactStr = [[xmppMessage attributeForName:@"contact"] stringValue];
 			NSNumber *contactId = nil;
@@ -358,7 +358,7 @@
 			RKAddress *originalTo = nil;
 			if (origTo != nil)
 			{
-				originalTo = [RKAddress newWithAddress:origTo];
+				originalTo = [RKAddress newWithString:origTo];
 			}
 			RKThread* thread = [[RKCommunicator sharedInstance] getThreadByAddress:fromAddress orignalTo:originalTo contactId:contactId uuid:threadUuid];
             NSDate *timestamp = [NSDate parse:[[xmppMessage attributeForName:@"timestamp"] stringValue]];

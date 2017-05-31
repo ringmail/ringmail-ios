@@ -424,6 +424,8 @@
 		C42B72191CA2313D0020A57F /* HashtagModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B72181CA2313D0020A57F /* HashtagModelController.m */; };
 		C42B84431EDE68CB00EB9C7F /* RKMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */; };
 		C42B84441EDE68CB00EB9C7F /* RKMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */; };
+		C42B84471EDF4C8E00EB9C7F /* RKCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B84461EDF4C8E00EB9C7F /* RKCall.m */; };
+		C42B84481EDF4C8E00EB9C7F /* RKCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B84461EDF4C8E00EB9C7F /* RKCall.m */; };
 		C42BD4111ED64204009B324D /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4101ED64204009B324D /* CardsPage.m */; };
 		C42BD4121ED64204009B324D /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4101ED64204009B324D /* CardsPage.m */; };
 		C42BD4151ED642A4009B324D /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4141ED642A4009B324D /* Card.m */; };
@@ -2758,6 +2760,8 @@
 		C42B72181CA2313D0020A57F /* HashtagModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HashtagModelController.m; path = RgComponents/HashtagModelController.m; sourceTree = "<group>"; };
 		C42B84391EDE68B600EB9C7F /* RKMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKMediaMessage.h; path = RingKit/RKMediaMessage.h; sourceTree = "<group>"; };
 		C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKMediaMessage.m; path = RingKit/RKMediaMessage.m; sourceTree = "<group>"; };
+		C42B84451EDF4C6A00EB9C7F /* RKCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKCall.h; path = RingKit/RKCall.h; sourceTree = "<group>"; };
+		C42B84461EDF4C8E00EB9C7F /* RKCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKCall.m; path = RingKit/RKCall.m; sourceTree = "<group>"; };
 		C42BD40F1ED64204009B324D /* CardsPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardsPage.h; path = RgComponents/CardsPage.h; sourceTree = "<group>"; };
 		C42BD4101ED64204009B324D /* CardsPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardsPage.m; path = RgComponents/CardsPage.m; sourceTree = "<group>"; };
 		C42BD4131ED642A4009B324D /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = RgComponents/Card.h; sourceTree = "<group>"; };
@@ -4880,6 +4884,8 @@
 				C45B93331ECE4EA700974011 /* RKThread.m */,
 				C45B933E1ECE4EF200974011 /* RKItem.h */,
 				C45B933F1ECE4EF200974011 /* RKItem.m */,
+				C42B84451EDF4C6A00EB9C7F /* RKCall.h */,
+				C42B84461EDF4C8E00EB9C7F /* RKCall.m */,
 				C45B933A1ECE4ECA00974011 /* RKMessage.h */,
 				C45B933B1ECE4ECA00974011 /* RKMessage.m */,
 				C42B84391EDE68B600EB9C7F /* RKMediaMessage.h */,
@@ -8116,6 +8122,7 @@
 				C48C108D1E81AB230094F1F3 /* MediaContext.m in Sources */,
 				C44A40DE1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
 				C45B93441ECE4F5C00974011 /* RKContact.m in Sources */,
+				C42B84471EDF4C8E00EB9C7F /* RKCall.m in Sources */,
 				C48DA1E11E846A44007CBCFB /* BaseCameraViewController.m in Sources */,
 				4D9684D41E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
@@ -8317,6 +8324,7 @@
 				C4AC2B191D3963FA003B6232 /* RgCallContext.m in Sources */,
 				C4AC2B1A1D3963FA003B6232 /* MessageThread.m in Sources */,
 				C4AC2B1B1D3963FA003B6232 /* RgCall.m in Sources */,
+				C42B84481EDF4C8E00EB9C7F /* RKCall.m in Sources */,
 				C4AC2B1D1D3963FA003B6232 /* UIColor+Name.m in Sources */,
 				C4AC2B201D3963FA003B6232 /* DCRoundSwitchToggleLayer.m in Sources */,
 				C4593A5A1E6A4086001C3BDD /* FavoriteComponent.mm in Sources */,

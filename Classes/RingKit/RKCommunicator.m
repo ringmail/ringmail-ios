@@ -10,6 +10,7 @@
 #import "RKThreadStore.h"
 #import "RKAdapterXMPP.h"
 #import "RKContact.h"
+#import "RKCall.h"
 #import "RKMessage.h"
 #import "RKThread.h"
 
@@ -59,6 +60,19 @@ NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
 	}];
 }
 
+- (void)didBeginCall:(RKCall*)call
+{
+	RKThreadStore* store = [RKThreadStore sharedInstance];
+	[store insertItem:call];
+//	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallBegin object:self userInfo:@{
+//		@"call": call,
+//	}];
+}
+
+- (void)didUpdateCall:(RKCall*)call
+{
+}
+
 - (NSArray*)listThreads
 {
 	return [[RKThreadStore sharedInstance] listThreads];
@@ -83,6 +97,11 @@ NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 {
 	return [[RKThreadStore sharedInstance] getThreadByAddress:remoteAddress orignalTo:origTo contactId:ctid uuid:uuid];
+}
+
+- (RKCall*)getCallBySipId:(NSString*)sip
+{
+	return [[RKThreadStore sharedInstance] getCallBySipId:sip];
 }
 
 - (void)startMessageView:(RKThread*)thread

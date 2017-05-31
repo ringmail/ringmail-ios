@@ -227,15 +227,6 @@ static LevelDB* theConfigDatabase = nil;
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])
         {
-            /* Do not add hashtags to call log
-              RgChatManager *cmgr = [[LinphoneManager instance] chatManager];
-              NSDictionary *sessionData = [cmgr dbGetSessionID:address to:nil contact:nil uuid:nil];
-              [cmgr dbInsertCall:@{
-                               @"sip": @"",
-                               @"address": address,
-                               @"state": [NSNumber numberWithInt:0],
-                               @"inbound": [NSNumber numberWithBool:NO],
-                               } session:sessionData[@"id"]]; */
             [[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
                 @"address": [res objectForKey:@"target"],
             }];

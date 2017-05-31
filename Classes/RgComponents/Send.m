@@ -28,7 +28,7 @@
 	{
 		NSLog(@"sendMessage:%@", msgdata);
 		RKCommunicator* comm = [RKCommunicator sharedInstance];
-		RKAddress* address = [RKAddress newWithAddress:msgdata[@"to"]];
+		RKAddress* address = [RKAddress newWithString:msgdata[@"to"]];
 		RKThread* thread = [comm getThreadByAddress:address];
 		RKMessage* message = [RKMessage newWithData:@{
 			@"thread": thread,

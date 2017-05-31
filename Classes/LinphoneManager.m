@@ -436,19 +436,16 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 	}
 
 	const LinphoneAddress *addr = linphone_call_get_remote_address(call);
-	NSString *address = nil;
+	NSString *callAddress = nil;
 	if (addr != NULL) {
 		// contact name
 		char *lAddress = linphone_address_as_string_uri_only(addr);
 		if (lAddress) {
-            address = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
+            callAddress = [RgManager addressFromSIP:[NSString stringWithUTF8String:lAddress]];
 			ms_free(lAddress);
 		}
 	}
-	if (address == nil) {
-		address = NSLocalizedString(@"Unknown", nil);
-	}
-    
+
 	if (state == LinphoneCallIncomingReceived) {
 
 		/*first step is to re-enable ctcall center*/
@@ -551,7 +548,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 				UILocalNotification *notification = [[UILocalNotification alloc] init];
 				notification.repeatInterval = 0;
 				notification.alertBody =
-					[NSString stringWithFormat:NSLocalizedString(@"You missed a call from %@", nil), address];
+					[NSString stringWithFormat:NSLocalizedString(@"You missed a call from %@", nil), callAddress];
 				notification.alertAction = NSLocalizedString(@"Show", nil);
 				notification.userInfo = [NSDictionary
 					dictionaryWithObject:[NSString stringWithUTF8String:linphone_call_log_get_call_id(log)]
@@ -583,7 +580,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 		[self setupGSMInteraction];
 	}
     
-    if (address != nil)
+    if (callAddress != nil)
     {
         // Update RingMail database
     	LinphoneCallLog *callLog = linphone_call_get_call_log(call);
@@ -592,26 +589,32 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
         if (callid)
         {
             sip = [NSString stringWithCString:callid encoding:NSUTF8StringEncoding];
-            //LOGI(@"RingMail Call State:[%p] %s", call, linphone_call_state_to_string(state));
+            LOGI(@"RingMail Call State:[%p] %s", call, linphone_call_state_to_string(state));
             if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingProgress)
             {
                 // New call
-                BOOL inbound = (state == LinphoneCallIncomingReceived) ? YES : NO;
-				LOGI(@"Inbound: %@", [NSNumber numberWithBool:inbound]);
-				RgChatManager *cmgr = [self chatManager];
-				NSNumber *contactNum = [data->userInfos objectForKey:@"contact"];
-				// TODO: Get UUID from server on inbound calls
-				NSDictionary *sessionData = [cmgr dbGetSessionID:address to:nil contact:contactNum uuid:nil];
-                [cmgr dbInsertCall:@{
-                       @"sip": sip,
-                       @"address": address,
-                       @"state": [NSNumber numberWithInt:state],
-                       @"inbound": [NSNumber numberWithBool:inbound],
-                } session:sessionData[@"id"]];
+				RKAddress* address = [RKAddress newWithString:callAddress];
+				RKItemDirection direction = (state == LinphoneCallIncomingReceived) ? RKItemDirectionInbound : RKItemDirectionOutbound;
+				RKCommunicator* comm = [RKCommunicator sharedInstance];
+				NSNumber *contactId = [data->userInfos objectForKey:@"contact"];
+				RKThread* thread = [comm getThreadByAddress:address orignalTo:nil contactId:contactId uuid:nil];
+				RKCall* rcall = [RKCall newWithData:@{
+					@"thread": thread,
+					@"direction": [NSNumber numberWithInteger:direction],
+					@"sipId": sip,
+					@"callStatus": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],
+					@"callResult": @"none",
+					@"duration": @0,
+				}];
+				[comm didBeginCall:rcall];
             }
             else
             {
                 // Update call
+				RKCommunicator* comm = [RKCommunicator sharedInstance];
+				RKCall* rcall = [comm getCallBySipId:sip];
+				NSLog(@"%s: RKCall: %@", __PRETTY_FUNCTION__, rcall);
+				
 				NSMutableDictionary *updates = [NSMutableDictionary dictionaryWithDictionary:@{
                     @"sip": sip,
                     @"state": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],

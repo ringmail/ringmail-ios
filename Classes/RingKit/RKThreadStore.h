@@ -17,6 +17,7 @@
 @class RKThread;
 @class RKAddress;
 @class RKContact;
+@class RKCall;
 
 @interface RKThreadStore : NSObject
 
@@ -31,5 +32,6 @@
 - (NSArray*)listThreadItems:(RKThread*)thread;
 - (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
+- (RKCall*)getCallBySipId:(NSString*)sip;
 
 @end

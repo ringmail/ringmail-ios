@@ -36,7 +36,7 @@
 	return item;
 }
 
-+ (instancetype)newWithAddress:(NSString*)addr
++ (instancetype)newWithString:(NSString*)addr
 {
 	return [RKAddress newWithData:@{
 		@"address": addr,

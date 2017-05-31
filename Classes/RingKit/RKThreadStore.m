@@ -11,6 +11,7 @@
 #import "RKThread.h"
 #import "RKContact.h"
 #import "RKItem.h"
+#import "RKCall.h"
 #import "RKMessage.h"
 
 #import "NSString+MD5.h"
@@ -83,6 +84,8 @@
                 "ts_created TEXT NOT NULL"
 			");",
             @"CREATE INDEX IF NOT EXISTS thread_id_1 ON rk_thread_item (thread_id);",
+			@"CREATE INDEX IF NOT EXISTS call_id_1 ON rk_thread_item (call_id);",
+			@"CREATE INDEX IF NOT EXISTS message_id_1 ON rk_thread_item (message_id);",
 			
             @"CREATE TABLE IF NOT EXISTS rk_message ("
                 "id INTEGER PRIMARY KEY NOT NULL, "
@@ -105,8 +108,8 @@
                 "call_duration INTEGER DEFAULT 0, "
                 "call_inbound INTEGER NOT NULL, "
                 "call_sip TEXT NOT NULL, "
-                "call_state TEXT NOT NULL, "
-                "call_status TEXT, "
+                "call_status TEXT NOT NULL DEFAULT '', "
+                "call_result TEXT NOT NULL DEFAULT '', "
                 "call_time TEXT NOT NULL, "
                 "call_uuid TEXT"
             ");",
@@ -123,7 +126,6 @@
             }
         }
     }];
-    //[[self dbqueue] close];
     NSLog(@"%s: SQL Database Ready", __PRETTY_FUNCTION__);
 }
 
@@ -138,7 +140,6 @@
 	[self dbBlock:^(NoteDatabase *ndb) {
 		[item insertItem:ndb];
 	}];
-	//[[self dbqueue] close];
 }
 
 - (void)insertThread:(RKThread*)thread
@@ -193,7 +194,9 @@
 				"m.msg_inbound AS msg_inbound, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
-				"c.call_duration AS call_duration "
+				"c.call_duration AS call_duration, "
+				"c.call_inbound AS call_inbound, "
+				"c.call_result AS call_result "
             "FROM ("
 				"SELECT t.id AS thread_id, t.address, t.contact_id, t.original_to, t.uuid, "
 				"(SELECT i.id FROM rk_thread_item i WHERE i.thread_id=t.id ORDER BY i.id DESC LIMIT 1) as item_id "
@@ -209,7 +212,7 @@
 			NSDictionary* row = [rs resultDictionary];
             //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			RKContact* ct;
-			RKAddress* addr = [RKAddress newWithAddress:row[@"address"]];
+			RKAddress* addr = [RKAddress newWithString:row[@"address"]];
 			if (NILIFNULL(row[@"contact_id"]) != nil)
 			{
 				ct = [RKContact newWithData:@{
@@ -251,6 +254,8 @@
 					@"id": row[@"call_id"],
 					@"sip": row[@"call_sip"],
 					@"duration": row[@"call_duration"],
+					@"direction": row[@"call_inbound"],
+					@"result": row[@"call_result"],
 				};
 			}
 			NSDictionary* res = @{
@@ -407,7 +412,7 @@
 		params[@"uuid"] = curUUID;
 		if (! [curOrigTo isEqualToString:@""])
 		{
-			params[@"originalTo"] = [RKAddress newWithAddress:curOrigTo];
+			params[@"originalTo"] = [RKAddress newWithString:curOrigTo];
 		}
 		
 		// Check for any needed updates
@@ -489,6 +494,78 @@
 	}
     //[[self dbqueue] close];
     return result;
+}
+
+- (RKCall*)getCallBySipId:(NSString*)sip
+{
+	__block RKCall* result = nil;
+	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+		FMResultSet *rs = [db executeQuery:@""
+            "SELECT "
+				"t.thread_id AS thread_id, "
+				"t.address AS address, "
+				"t.contact_id AS contact_id, "
+				"t.original_to AS original_to, "
+				"t.uuid AS uuid, "
+				"ti.id AS item_id, "
+				"c.id AS call_id, "
+				"c.call_duration AS call_duration, "
+				"c.call_inbound AS call_inbound, "
+				"c.call_sip AS call_sip, "
+				"c.call_status AS call_status, "
+				"c.call_result AS call_result, "
+				"c.call_time AS call_time, "
+				"c.call_uuid AS call_uuid "
+            "FROM rk_call c ",
+            "JOIN rk_thread t ON t.id = c.thread_id "
+            "JOIN rk_thread_item ti ON ti.call_id = c.id "
+			"WHERE c.sip = ? ",
+			sip
+		];
+		while ([rs next])
+        {
+			NSDictionary* row = [rs resultDictionary];
+            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+			RKContact* ct;
+			RKAddress* addr = [RKAddress newWithString:row[@"address"]];
+			if (NILIFNULL(row[@"contact_id"]) != nil)
+			{
+				ct = [RKContact newWithData:@{
+					@"contactId": row[@"contact_id"],
+    				@"addressList": @[addr],
+				}];
+			}
+			else
+			{
+				ct = [RKContact newByMatchingAddress:addr];
+			}
+			NSMutableDictionary* thrdata = [NSMutableDictionary dictionaryWithDictionary:@{
+				@"threadId": row[@"thread_id"],
+				@"remoteAddress": addr,
+				@"contact": ct,
+				@"uuid": row[@"uuid"],
+			}];
+			if (! [row[@"original_to"] isEqualToString:@""])
+			{
+				thrdata[@"originalTo"] = row[@"original_to"];
+			}
+			RKThread* thr = [RKThread newWithData:thrdata];
+			result = [RKCall newWithData:@{
+				@"uuid": row[@"call_uuid"],
+				@"thread": thr,
+				@"itemId": row[@"item_id"],
+				@"callId": row[@"call_id"],
+				@"direction": row[@"direction"],
+				@"sipId": row[@"call_sip"],
+				@"timestamp": [NSDate parse:row[@"call_time"]],
+				@"duration": row[@"call_duration"],
+				@"callResult": row[@"call_result"],
+				@"callStatus": row[@"call_status"],
+			}];
+		}
+		[rs close];
+	}];
+	return result;
 }
 
 @end
