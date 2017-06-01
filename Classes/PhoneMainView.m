@@ -462,7 +462,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 				[self changeCurrentView:[RgMainViewController compositeViewDescription]], RgMainViewController);
 			if (controller != nil) {
 //				[controller setAddress:@""];  // mrkbxt
-				[controller setTransferMode:FALSE];
 			}
 		} else {
 			[self changeCurrentView:[RgInCallViewController compositeViewDescription]];

@@ -26,22 +26,14 @@
 #import "UIMessageButton.h"
 #import "UIDigitButton.h"
 
-@interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, MFMailComposeViewControllerDelegate> {
+@interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate> {
 }
 
-- (void)handleUserActivity;
+@property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
+@property (nonatomic, strong) NSMutableDictionary* sendInfo;
+@property (nonatomic, assign) BOOL isEditing;
+
 - (void)handleSegControl;
 - (void)addMedia:(NSDictionary*)param;
-
-@property (nonatomic, strong) IBOutlet UIView* videoPreview;
-@property (nonatomic, strong) IBOutlet UICamSwitch* videoCameraSwitch;
-@property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
-@property (nonatomic, assign) BOOL isEditing;
-@property (nonatomic, assign) BOOL needsRefresh;
-@property (nonatomic, assign) BOOL visible;
-@property (nonatomic, assign) BOOL transferMode;
-@property (nonatomic, strong) NSMutableDictionary* sendInfo;
-
-- (IBAction)onAddContactClick: (id) event;
 
 @end

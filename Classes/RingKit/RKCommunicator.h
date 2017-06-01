@@ -12,6 +12,9 @@ extern NSString *const kRKMessageSent;
 extern NSString *const kRKMessageReceived;
 extern NSString *const kRKMessageUpdated;
 extern NSString *const kRKMessageViewChanged;
+extern NSString *const kRKCallBegin;
+extern NSString *const kRKCallUpdate;
+extern NSString *const kRKCallEnd;
 
 @protocol RKCommunicatorViewDelegate <NSObject>
 @optional
@@ -44,6 +47,7 @@ extern NSString *const kRKMessageViewChanged;
 //- (void)startCall:(RKCall*)call;
 - (void)didBeginCall:(RKCall*)call;
 - (void)didUpdateCall:(RKCall*)call;
+- (void)didEndCall:(RKCall*)call;
 
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;

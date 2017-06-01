@@ -627,18 +627,24 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
     				else if (sts == LinphoneCallMissed)
     				{
     					rcall.callResult = @"missed";
-    				}
+						rcall.duration = @0;
+					}
     				else if (sts == LinphoneCallAborted)
     				{
     					rcall.callResult = @"aborted";
+						rcall.duration = @0;
     				}
     				else if (sts == LinphoneCallDeclined)
     				{
     					rcall.callResult = @"declined";
+						rcall.duration = @0;
     				}
+					[comm didEndCall:rcall];
 				}
-				[comm didUpdateCall:rcall];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+				else
+				{
+					[comm didUpdateCall:rcall];
+				}
             }
         }
     }

@@ -20,6 +20,9 @@ NSString *const kRKMessageSent = @"RKMessageSent";
 NSString *const kRKMessageReceived = @"RKMessageReceived";
 NSString *const kRKMessageUpdated = @"RKMessageUpdated";
 NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
+NSString *const kRKCallBegin = @"RKCallBegin";
+NSString *const kRKCallUpdate = @"RKCallUpdate";
+NSString *const kRKCallEnd = @"RKCallEnd";
 
 @implementation RKCommunicator
 
@@ -64,15 +67,27 @@ NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store insertItem:call];
-//	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallBegin object:self userInfo:@{
-//		@"call": call,
-//	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallBegin object:self userInfo:@{
+		@"call": call,
+	}];
 }
 
 - (void)didUpdateCall:(RKCall*)call
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store updateItem:call];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallUpdate object:self userInfo:@{
+		@"call": call,
+	}];
+}
+
+- (void)didEndCall:(RKCall*)call
+{
+	RKThreadStore* store = [RKThreadStore sharedInstance];
+	[store updateItem:call];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallEnd object:self userInfo:@{
+		@"call": call,
+	}];
 }
 
 - (NSArray*)listThreads
