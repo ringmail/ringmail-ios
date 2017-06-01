@@ -16,6 +16,7 @@
 
 #import "NSXMLElement+XMPP.h"
 
+NSString *const kRKItemActivity = @"RKItemActivity";
 NSString *const kRKMessageSent = @"RKMessageSent";
 NSString *const kRKMessageReceived = @"RKMessageReceived";
 NSString *const kRKMessageUpdated = @"RKMessageUpdated";
@@ -51,6 +52,10 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 		[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageSent object:self userInfo:@{
 			@"message": message,
 		}];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
+			@"type": @"message",
+			@"message": message,
+		}];
 	}];
 }
 
@@ -59,6 +64,10 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store insertItem:message];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageReceived object:self userInfo:@{
+		@"message": message,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
+		@"type": @"message",
 		@"message": message,
 	}];
 }
@@ -70,6 +79,10 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallBegin object:self userInfo:@{
 		@"call": call,
 	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
+		@"type": @"call",
+		@"call": call,
+	}];
 }
 
 - (void)didUpdateCall:(RKCall*)call
@@ -79,6 +92,10 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallUpdate object:self userInfo:@{
 		@"call": call,
 	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
+		@"type": @"call",
+		@"call": call,
+	}];
 }
 
 - (void)didEndCall:(RKCall*)call
@@ -86,6 +103,10 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store updateItem:call];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallEnd object:self userInfo:@{
+		@"call": call,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
+		@"type": @"call",
 		@"call": call,
 	}];
 }

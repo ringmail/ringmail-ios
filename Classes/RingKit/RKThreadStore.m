@@ -105,6 +105,7 @@
 			@"CREATE TABLE IF NOT EXISTS rk_call ("
                 "id INTEGER PRIMARY KEY NOT NULL, "
                 "thread_id INTEGER NOT NULL, "
+                "call_video INTEGER DEFAULT 0, "
                 "call_duration INTEGER DEFAULT 0, "
                 "call_inbound INTEGER NOT NULL, "
                 "call_sip TEXT NOT NULL, "
@@ -202,6 +203,7 @@
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
 				"c.call_duration AS call_duration, "
+				"c.call_video AS call_video, "
 				"c.call_inbound AS call_inbound, "
 				"c.call_result AS call_result "
             "FROM ("
@@ -262,6 +264,7 @@
 					@"sip": row[@"call_sip"],
 					@"duration": row[@"call_duration"],
 					@"direction": row[@"call_inbound"],
+					@"video": row[@"call_video"],
 					@"result": row[@"call_result"],
 				};
 			}
@@ -300,7 +303,13 @@
 				"m.msg_status AS msg_status, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
-				"c.call_duration AS call_duration "
+				"c.call_duration AS call_duration, "
+				"c.call_inbound AS call_inbound, "
+				"c.call_video AS call_video, "
+				"c.call_status AS call_status, "
+				"c.call_result AS call_result, "
+				"c.call_time AS call_time, "
+				"c.call_uuid AS call_uuid "
             "FROM rk_thread_item ti "
             "LEFT JOIN rk_message m ON m.id=ti.message_id "
             "LEFT JOIN rk_call c ON c.id=ti.call_id ";
@@ -326,7 +335,7 @@
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
-            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			if (NILIFNULL(row[@"message_id"]) != nil)
 			{
 				RKMessage* msg = [RKMessage newWithData:@{
@@ -344,10 +353,25 @@
 			else if (NILIFNULL(row[@"call_id"]) != nil)
 			{
 				NSLog(@"Call Item: %@", row);
+				RKCall* call = [RKCall newWithData:@{
+    				@"uuid": row[@"call_uuid"],
+    				@"thread": thread,
+    				@"itemId": row[@"item_id"],
+    				@"callId": row[@"call_id"],
+    				@"direction": row[@"call_inbound"],
+    				@"video": row[@"call_video"],
+    				@"sipId": row[@"call_sip"],
+    				@"timestamp": [NSDate parse:row[@"call_time"]],
+    				@"duration": row[@"call_duration"],
+    				@"callResult": row[@"call_result"],
+    				@"callStatus": row[@"call_status"],
+    			}];
+				[result addObject:call];
 			}
 		}
 		[rs close];
 	}];
+	NSLog(@"%s: Thread Items: %@", __PRETTY_FUNCTION__, result);
 	return result;
 }
 
@@ -518,6 +542,7 @@
 				"c.id AS call_id, "
 				"c.call_duration AS call_duration, "
 				"c.call_inbound AS call_inbound, "
+				"c.call_video AS call_video, "
 				"c.call_sip AS call_sip, "
 				"c.call_status AS call_status, "
 				"c.call_result AS call_result, "
@@ -563,6 +588,7 @@
 				@"itemId": row[@"item_id"],
 				@"callId": row[@"call_id"],
 				@"direction": row[@"call_inbound"],
+				@"video": row[@"call_video"],
 				@"sipId": row[@"call_sip"],
 				@"timestamp": [NSDate parse:row[@"call_time"]],
 				@"duration": row[@"call_duration"],

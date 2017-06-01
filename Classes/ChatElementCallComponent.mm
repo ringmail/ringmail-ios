@@ -1,17 +1,17 @@
 #import "ChatElement.h"
 #import "ChatElementContext.h"
-#import "ChatElementTextComponent.h"
+#import "ChatElementCallComponent.h"
 
 #import "UIColor+Hex.h"
 #import "RingKit.h"
 
-@implementation ChatElementTextComponent
+@implementation ChatElementCallComponent
 
 + (instancetype)newWithChatElement:(ChatElement *)elem context:(ChatElementContext *)context
 {
 	NSDictionary* data = elem.data;
-	RKMessage* message = data[@"item"];
-	CKComponentScope scope(self, message.uuid);
+	RKCall* call = data[@"item"];
+	CKComponentScope scope(self, call.uuid);
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
 	CGFloat fontSize = 16;
 	CGFloat scale = [UIScreen mainScreen].scale;
@@ -19,13 +19,13 @@
 	int maxBubbleWidth = (int)((width - (12 * scale)) / 3) * 2;
 	
 	CKComponent* res;
-	if (message.direction == RKItemDirectionInbound)
+	if (call.direction == RKItemDirectionInbound)
 	{
 	    NSDictionary *attrsDictionary = @{
             NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#222222"],
         };
-		NSString* msg = message.body;
+		NSString* msg = [NSString stringWithFormat:@"[Call:%@] %@", call.callResult, call.duration];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
@@ -107,7 +107,7 @@
             NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#FFFFFF"],
         };
-		NSString* msg = message.body;
+		NSString* msg = [NSString stringWithFormat:@"[Call:%@] %@", call.callResult, call.duration];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
@@ -239,7 +239,7 @@
 	{
 		res = [CKInsetComponent newWithInsets:{.top = 0, .bottom = 20, .left = 0, .right = 0} component:res];
 	}
-	ChatElementTextComponent* c = [super newWithComponent:res];
+	ChatElementCallComponent* c = [super newWithComponent:res];
 	if (c)
 	{
 		c->_element = elem;

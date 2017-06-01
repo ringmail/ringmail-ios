@@ -41,7 +41,6 @@
 @synthesize mainView;
 @synthesize mainViewController;
 @synthesize backgroundImageView;
-@synthesize needsRefresh;
 
 #pragma mark - Lifecycle Functions
 
@@ -82,32 +81,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - ViewController Functions
 
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleSegControl)
-                                                 name:kRgSegmentControl
-                                               object:nil];
-	
-    if ([self needsRefresh])
-    {
-        [mainViewController updateCollection];
-        [self setNeedsRefresh:NO];
-    }
-    
-    self.visible = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-    
-    self.visible = NO;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
-}
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
 	[super viewDidLoad];
     int width = [UIScreen mainScreen].applicationFrame.size.width;
     if (width == 320) {
@@ -143,67 +118,28 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self addChildViewController:mainController];
     [mainController didMoveToParentViewController:self];
     mainViewController = mainController;
-    [self setNeedsRefresh:NO];
     
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
-    
-	// Set observer
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshEvent:)
-                                                 name:kLinphoneCallUpdate
-                                               object:nil];
-	
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshEvent:)
-                                                 name:kRgTextReceived
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshEvent:)
-                                                 name:kRgTextUpdate
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshEvent:)
-                                                 name:kRgMainRefresh
-                                               object:nil];
-	
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshEvent:)
-                                                 name:kRgFavoriteRefresh
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshEvent:)
-                                                 name:kRgContactRefresh
-                                               object:nil];
-    
 }
 
-- (void)viewDidUnload {
-	[super viewDidUnload];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextReceived object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgTextUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgMainRefresh object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgFavoriteRefresh object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgContactRefresh object:nil];
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSegControl) name:kRgSegmentControl object:nil];
+	
+    //[mainViewController updateCollection];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
 }
 
 #pragma mark - Event Functions
-
-- (void)refreshEvent:(NSNotification *)notif {
-    if (self.visible)
-    {
-        [mainViewController updateCollection];
-    }
-    else
-    {
-        [self setNeedsRefresh:YES];
-    }
-}
 
 - (void)handleSegControl {
     printf("recents segement controller hit\n");

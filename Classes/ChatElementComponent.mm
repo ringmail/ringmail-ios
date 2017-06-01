@@ -2,9 +2,11 @@
 #import "ChatElementContext.h"
 #import "ChatElementComponent.h"
 #import "ChatElementTextComponent.h"
+#import "ChatElementCallComponent.h"
 #import "ChatElementImageComponent.h"
 
 #import "UIColor+Hex.h"
+#import "RingKit.h"
 
 @implementation ChatElementComponent
 
@@ -15,19 +17,16 @@
 
 static CKComponent *chatComponent(ChatElement *elem, ChatElementContext *context)
 {
-	return [ChatElementTextComponent newWithChatElement:elem context:context];
-	/*NSDictionary* data = elem.data;
-	NSLog(@"%@", data);
-	if (
-		[data[@"type"] isEqualToString:@"image/png"] ||
-		[data[@"type"] isEqualToString:@"image/jpeg"]
-	) {
-		return [ChatElementImageComponent newWithChatElement:elem context:context];
-	}
-	else // Text component
+	NSDictionary* data = elem.data;
+	if ([data[@"item"] isKindOfClass:[RKMessage class]])
 	{
 		return [ChatElementTextComponent newWithChatElement:elem context:context];
-	}*/
+	}
+	else if ([data[@"item"] isKindOfClass:[RKCall class]])
+	{
+		return [ChatElementCallComponent newWithChatElement:elem context:context];
+	}
+	return nil;
 }
 
 @end

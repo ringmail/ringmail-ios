@@ -52,12 +52,12 @@
 	contactNew = modalData[@"new"];
 	if ([contactNew boolValue])
 	{
-		contactLabel.text = @"Add Contact";
+		contactLabel.text = @"Add To Contact";
 		numberLabel.font = [UIFont italicSystemFontOfSize:14.0f];
 	}
 	else
 	{
-		contactLabel.text = @"Contact";
+		contactLabel.text = @"View Contact";
 		numberLabel.font = [UIFont systemFontOfSize:14.0f];
 	}
 }

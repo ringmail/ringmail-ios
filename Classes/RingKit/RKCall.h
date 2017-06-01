@@ -19,5 +19,6 @@
 @property (nonatomic, strong) NSString* callStatus;
 @property (nonatomic, strong) NSString* callResult;
 @property (nonatomic, strong) NSNumber* duration;
+@property (nonatomic, strong) NSNumber* video;
 
 @end

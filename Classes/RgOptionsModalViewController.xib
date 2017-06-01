@@ -86,8 +86,78 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="jHe-J9-MeQ">
                             <rect key="frame" x="0.0" y="173" width="345" height="162"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wi-Mz-eMg" customClass="RgModalButtonView">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Jq-jn-yUe" customClass="RgModalButtonView">
                                     <rect key="frame" x="0.0" y="0.0" width="345" height="55"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-JL-wg7">
+                                            <rect key="frame" x="0.0" y="4.5" width="345" height="46"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="46" id="1o8-la-OgO"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="19"/>
+                                            <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="Call">
+                                                <color key="titleColor" red="0.20392156859999999" green="0.26274509800000001" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onCall:" destination="-1" eventType="touchUpInside" id="BS2-oq-bQQ"/>
+                                            </connections>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_phone_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="DTd-av-QTU">
+                                            <rect key="frame" x="297" y="15.5" width="28" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="28" id="FOS-Dn-oFg"/>
+                                                <constraint firstAttribute="height" constant="24" id="K0g-Nu-hHV"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="Na1-JL-wg7" firstAttribute="leading" secondItem="6Jq-jn-yUe" secondAttribute="leading" id="1mt-kd-JMB"/>
+                                        <constraint firstItem="DTd-av-QTU" firstAttribute="centerY" secondItem="6Jq-jn-yUe" secondAttribute="centerY" id="6dm-AX-iKV"/>
+                                        <constraint firstItem="Na1-JL-wg7" firstAttribute="centerY" secondItem="6Jq-jn-yUe" secondAttribute="centerY" id="mG1-oE-9SL"/>
+                                        <constraint firstAttribute="trailing" secondItem="Na1-JL-wg7" secondAttribute="trailing" id="uut-K4-37h"/>
+                                        <constraint firstAttribute="height" constant="55" id="wfI-Er-yHx"/>
+                                        <constraint firstAttribute="trailing" secondItem="DTd-av-QTU" secondAttribute="trailing" constant="20" id="y1N-L7-NYO"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVG-eS-uoZ" customClass="RgModalButtonView">
+                                    <rect key="frame" x="0.0" y="55" width="345" height="52"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-Xa-Pz2">
+                                            <rect key="frame" x="0.0" y="3" width="345" height="46"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="46" id="vps-2V-cId"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="19"/>
+                                            <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="Video Call">
+                                                <color key="titleColor" red="0.20392156859999999" green="0.26274509800000001" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onVideoChat:" destination="-1" eventType="touchUpInside" id="UMh-Or-gk4"/>
+                                            </connections>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_normal_vid.png" translatesAutoresizingMaskIntoConstraints="NO" id="ncA-c9-22X">
+                                            <rect key="frame" x="297" y="14" width="28" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="28" id="006-Vu-tiG"/>
+                                                <constraint firstAttribute="height" constant="24" id="cDG-bd-Jd5"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="oaT-Xa-Pz2" secondAttribute="trailing" id="FUM-ct-8ZJ"/>
+                                        <constraint firstAttribute="height" constant="55" id="MrB-17-sgB"/>
+                                        <constraint firstAttribute="trailing" secondItem="ncA-c9-22X" secondAttribute="trailing" constant="20" id="WLH-4Z-dAw"/>
+                                        <constraint firstItem="ncA-c9-22X" firstAttribute="centerY" secondItem="qVG-eS-uoZ" secondAttribute="centerY" id="ade-yT-rGY"/>
+                                        <constraint firstItem="oaT-Xa-Pz2" firstAttribute="centerY" secondItem="qVG-eS-uoZ" secondAttribute="centerY" id="nMY-79-dhp"/>
+                                        <constraint firstItem="oaT-Xa-Pz2" firstAttribute="leading" secondItem="qVG-eS-uoZ" secondAttribute="leading" id="uLO-OY-2Hh"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wi-Mz-eMg" customClass="RgModalButtonView">
+                                    <rect key="frame" x="0.0" y="107" width="345" height="55"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_text_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="NJd-K0-TzT">
                                             <rect key="frame" x="297" y="16" width="28" height="24"/>
@@ -119,76 +189,6 @@
                                         <constraint firstItem="Srk-Yg-MqC" firstAttribute="centerY" secondItem="5wi-Mz-eMg" secondAttribute="centerY" id="rR4-B8-J9j"/>
                                         <constraint firstItem="NJd-K0-TzT" firstAttribute="centerY" secondItem="5wi-Mz-eMg" secondAttribute="centerY" id="tvN-zj-RdM"/>
                                         <constraint firstAttribute="trailing" secondItem="Srk-Yg-MqC" secondAttribute="trailing" id="zX1-xo-KMC"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Jq-jn-yUe" customClass="RgModalButtonView">
-                                    <rect key="frame" x="0.0" y="55" width="345" height="55"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-JL-wg7">
-                                            <rect key="frame" x="0.0" y="3" width="345" height="46"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="46" id="1o8-la-OgO"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="19"/>
-                                            <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="Call">
-                                                <color key="titleColor" red="0.20392156859999999" green="0.26274509800000001" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="onCall:" destination="-1" eventType="touchUpInside" id="BS2-oq-bQQ"/>
-                                            </connections>
-                                        </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="modal_icon_phone_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="DTd-av-QTU">
-                                            <rect key="frame" x="297" y="14" width="28" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="28" id="FOS-Dn-oFg"/>
-                                                <constraint firstAttribute="height" constant="24" id="K0g-Nu-hHV"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="Na1-JL-wg7" firstAttribute="leading" secondItem="6Jq-jn-yUe" secondAttribute="leading" id="1mt-kd-JMB"/>
-                                        <constraint firstItem="DTd-av-QTU" firstAttribute="centerY" secondItem="6Jq-jn-yUe" secondAttribute="centerY" id="6dm-AX-iKV"/>
-                                        <constraint firstItem="Na1-JL-wg7" firstAttribute="centerY" secondItem="6Jq-jn-yUe" secondAttribute="centerY" id="mG1-oE-9SL"/>
-                                        <constraint firstAttribute="trailing" secondItem="Na1-JL-wg7" secondAttribute="trailing" id="uut-K4-37h"/>
-                                        <constraint firstAttribute="height" constant="55" id="wfI-Er-yHx"/>
-                                        <constraint firstAttribute="trailing" secondItem="DTd-av-QTU" secondAttribute="trailing" constant="20" id="y1N-L7-NYO"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVG-eS-uoZ" customClass="RgModalButtonView">
-                                    <rect key="frame" x="0.0" y="110" width="345" height="52"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-Xa-Pz2">
-                                            <rect key="frame" x="0.0" y="4.5" width="345" height="46"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="46" id="vps-2V-cId"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="19"/>
-                                            <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="Live Chat">
-                                                <color key="titleColor" red="0.20392156859999999" green="0.26274509800000001" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="onVideoChat:" destination="-1" eventType="touchUpInside" id="UMh-Or-gk4"/>
-                                            </connections>
-                                        </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="modal_icon_normal_vid.png" translatesAutoresizingMaskIntoConstraints="NO" id="ncA-c9-22X">
-                                            <rect key="frame" x="297" y="15.5" width="28" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="28" id="006-Vu-tiG"/>
-                                                <constraint firstAttribute="height" constant="24" id="cDG-bd-Jd5"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="oaT-Xa-Pz2" secondAttribute="trailing" id="FUM-ct-8ZJ"/>
-                                        <constraint firstAttribute="height" constant="55" id="MrB-17-sgB"/>
-                                        <constraint firstAttribute="trailing" secondItem="ncA-c9-22X" secondAttribute="trailing" constant="20" id="WLH-4Z-dAw"/>
-                                        <constraint firstItem="ncA-c9-22X" firstAttribute="centerY" secondItem="qVG-eS-uoZ" secondAttribute="centerY" id="ade-yT-rGY"/>
-                                        <constraint firstItem="oaT-Xa-Pz2" firstAttribute="centerY" secondItem="qVG-eS-uoZ" secondAttribute="centerY" id="nMY-79-dhp"/>
-                                        <constraint firstItem="oaT-Xa-Pz2" firstAttribute="leading" secondItem="qVG-eS-uoZ" secondAttribute="leading" id="uLO-OY-2Hh"/>
                                     </constraints>
                                 </view>
                             </subviews>

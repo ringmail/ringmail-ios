@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kRKItemActivity;
 extern NSString *const kRKMessageSent;
 extern NSString *const kRKMessageReceived;
 extern NSString *const kRKMessageUpdated;

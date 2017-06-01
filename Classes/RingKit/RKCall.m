@@ -19,6 +19,7 @@
 @synthesize callStatus;
 @synthesize callResult;
 @synthesize duration;
+@synthesize video;
 
 + (instancetype)newWithData:(NSDictionary*)param
 {
@@ -75,6 +76,15 @@
 		{
 			self->duration = nil;
 		}
+		if (param[@"video"])
+        {
+            NSAssert([param[@"video"] isKindOfClass:[NSNumber class]], @"video is not NSNumber object");
+            [self setVideo:param[@"video"]];
+        }
+		else
+		{
+			self->video = @NO;
+		}
 	}
 	return self;
 }
@@ -88,8 +98,10 @@
 		@"uuid": self.uuid,
 		@"inbound": [NSNumber numberWithInteger:self.direction],
 		@"timestamp": self.timestamp,
+		@"video": self.video,
 		@"sipId": NULLIFNIL(self.sipId),
 		@"callStatus": NULLIFNIL(self.callStatus),
+		@"callResult": NULLIFNIL(self.callResult),
 		@"duration": NULLIFNIL(self.duration),
 	};
     NSMutableString *data = [[NSMutableString alloc] init];
@@ -97,7 +109,7 @@
 	{
         [data appendFormat:@" %@:%@", k, input[k]];
 	}
-	return [NSString stringWithFormat:@"<RKMessage:%p {%@ }>", self, data];
+	return [NSString stringWithFormat:@"<%s: %p {%@ }>", object_getClassName(self), self, data];
 }
 
 - (void)insertItem:(NoteDatabase*)ndb

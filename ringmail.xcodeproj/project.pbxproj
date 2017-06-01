@@ -1677,6 +1677,8 @@
 		C4BC49451BF9628800826264 /* RgChatQuestionInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4BC49441BF9628800826264 /* RgChatQuestionInputCell.xib */; };
 		C4BC49481BF9726000826264 /* RgChatQuestionInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BC49471BF9726000826264 /* RgChatQuestionInputCell.m */; };
 		C4C8888A1C14FD3800FD86FC /* ringmail_contact_small.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C888891C14FD3800FD86FC /* ringmail_contact_small.png */; };
+		C4C8FE961EE0BF0C002DDB3E /* ChatElementCallComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4C8FE951EE0BF0C002DDB3E /* ChatElementCallComponent.mm */; };
+		C4C8FE971EE0BF0C002DDB3E /* ChatElementCallComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4C8FE951EE0BF0C002DDB3E /* ChatElementCallComponent.mm */; };
 		C4D0BC6B1BB4F0A400D1728A /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */; };
 		C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */; };
 		C4D7E0641BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4D7E0621BA90A7700CC5E1F /* ringmail_splashscreen_iphone6.png */; };
@@ -3163,6 +3165,8 @@
 		C4BC49471BF9726000826264 /* RgChatQuestionInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgChatQuestionInputCell.m; sourceTree = "<group>"; };
 		C4C5283C1ED3B17D0081214C /* RingKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingKit.h; sourceTree = "<group>"; };
 		C4C888891C14FD3800FD86FC /* ringmail_contact_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_contact_small.png; path = Resources/ringmail_contact_small.png; sourceTree = "<group>"; };
+		C4C8FE8C1EE0BEFD002DDB3E /* ChatElementCallComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatElementCallComponent.h; path = RgComponents/ChatElementCallComponent.h; sourceTree = "<group>"; };
+		C4C8FE951EE0BF0C002DDB3E /* ChatElementCallComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatElementCallComponent.mm; sourceTree = "<group>"; };
 		C4D0BC691BB4F0A400D1728A /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		C4D0BC6A1BB4F0A400D1728A /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		C4D7E0611BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_splashscreen_iphone5.png; path = Resources/ringmail_splashscreen_iphone5.png; sourceTree = "<group>"; };
@@ -4737,6 +4741,8 @@
 				C4AB1A021E8D9C9400C7A754 /* ChatElementComponent.mm */,
 				C473F86F1ECCDB23008B548B /* ChatElementTextComponent.h */,
 				C473F8781ECCDB41008B548B /* ChatElementTextComponent.mm */,
+				C4C8FE8C1EE0BEFD002DDB3E /* ChatElementCallComponent.h */,
+				C4C8FE951EE0BF0C002DDB3E /* ChatElementCallComponent.mm */,
 				C473F87B1ECCDEC9008B548B /* ChatElementImageComponent.h */,
 				C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */,
 				C4AB1A091E8D9CFD00C7A754 /* ChatRoomCollectionViewController.h */,
@@ -8011,6 +8017,7 @@
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
 				C4E1CB3D1E6E20F100698166 /* ViewUtils.m in Sources */,
 				C43F65D31D5309CB004CEC70 /* HashtagCardComponentController.mm in Sources */,
+				C4C8FE961EE0BF0C002DDB3E /* ChatElementCallComponent.mm in Sources */,
 				63B81A101B57DA33009604A6 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				C42C0D661CAEDAA800AD5A91 /* RgCallComponent.mm in Sources */,
 				C44A40F01E70E415000F3E24 /* CLFilterTool.m in Sources */,
@@ -8318,6 +8325,7 @@
 				C4AC2B151D3963FA003B6232 /* RgInCallViewController.m in Sources */,
 				C4AC2B161D3963FA003B6232 /* RgManager.m in Sources */,
 				C4AC2B171D3963FA003B6232 /* DCRoundSwitchOutlineLayer.m in Sources */,
+				C4C8FE971EE0BF0C002DDB3E /* ChatElementCallComponent.mm in Sources */,
 				C4E1CB361E6E1A2400698166 /* MomentCameraViewController.m in Sources */,
 				C4AC2B181D3963FA003B6232 /* MessagesViewController.m in Sources */,
 				C44A40D31E70E415000F3E24 /* CLImageToolInfo.m in Sources */,

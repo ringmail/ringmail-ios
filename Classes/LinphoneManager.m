@@ -601,18 +601,20 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 				RKCall* rcall = [RKCall newWithData:@{
 					@"thread": thread,
 					@"direction": [NSNumber numberWithInteger:direction],
+					@"video": [NSNumber numberWithBool:data->videoRequested],
 					@"sipId": sip,
 					@"callStatus": [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding],
 					@"callResult": @"none",
 					@"duration": @0,
 				}];
+				[data->userInfos setObject:rcall forKey:@"call"];
 				[comm didBeginCall:rcall];
             }
             else
             {
                 // Update call
 				RKCommunicator* comm = [RKCommunicator sharedInstance];
-				RKCall* rcall = [comm getCallBySipId:sip];
+				RKCall* rcall = [data->userInfos objectForKey:@"call"];
 				NSLog(@"%s: RKCall: %@", __PRETTY_FUNCTION__, rcall);
 				rcall.callStatus = [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding];
 				if (state == LinphoneCallEnd || state == LinphoneCallError)
@@ -1578,15 +1580,6 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
             [RgManager chatConnect];
         }
     }
-	
-	//RingKit Testing...
-	
-	NSLog(@"%s: RingKit Start", __PRETTY_FUNCTION__);
-	RKCommunicator* comm = [RKCommunicator sharedInstance];
-	NSArray* threadList = [comm listThreads];
-	NSLog(@"%s: List Threads: %@", __PRETTY_FUNCTION__, threadList);
-	NSArray* itemList = [comm listThreadItems:threadList[0][@"thread"]];
-	NSLog(@"%s: List Thread #1: %@", __PRETTY_FUNCTION__, itemList);
 }
 
 - (void)beginInterruption {

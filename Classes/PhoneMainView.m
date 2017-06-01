@@ -253,12 +253,21 @@ static RootViewManager *rootViewManagerInstance = nil;
 {
 	// TODO: check for domain, domains are not contacts...
 	NSString *address = notif.userInfo[@"address"];
+	RKAddress *raddress = [RKAddress newWithString:address];
 	
     // Contact ID lookup attemp
 	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
 	UIImage *customImage = nil;
 	NSString *name = [address copy];
-	NSString *addr = @"New Contact";
+	NSString *addr = @"New ";
+	if ([raddress isPhone])
+	{
+		addr = [addr stringByAppendingString:@"Number"];
+	}
+	else
+	{
+		addr = [addr stringByAppendingString:@"Address"];
+	}
 	NSNumber *contactNew = @YES;
 	NSNumber *contactId = nil;
 	if (contact)
