@@ -9,6 +9,7 @@
 #import "UIContactDetailsOptions.h"
 #import "PhoneMainView.h"
 #import "RgLocationManager.h"
+#import "RgNetwork.h"
 
 
 @implementation UIContactDetailsOptions
@@ -24,6 +25,7 @@
 
 @synthesize contact;
 @synthesize rgMember;
+@synthesize disableUserFeatures;
 
 
 - (void)viewDidLoad {
@@ -47,6 +49,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 //    rgMember = TRUE;  // test
+    disableUserFeatures = TRUE;  // test
     
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
@@ -63,6 +66,9 @@
         inviteButton.hidden = FALSE;
         shareContactButton.hidden = TRUE;
     }
+    
+    if (disableUserFeatures)
+        shareContactButton.hidden = TRUE;
 }
 
 
@@ -98,6 +104,42 @@
 
 - (IBAction)onActionShareLocation:(id)event {
     NSLog(@"onActionShareLocation");
+    
+//    NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
+//    NSString *lLocalizedFirstName = [FastAddressBook localizedLabel:lFirstName];
+//    
+//    NSString *lLastName = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
+//    NSString *lLocalizedLastName = [FastAddressBook localizedLabel:lLastName];
+//    
+//    ABMultiValueRef emails = ABRecordCopyValue(contact, kABPersonEmailProperty);
+//    CFStringRef email = ABMultiValueCopyValueAtIndex(emails, 0);
+//    NSString *lLocalizedEmail = [FastAddressBook localizedLabel:CFBridgingRelease(email)];
+//    
+//    NSNumber* contactNum = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
+//    NSString* contactID = [contactNum stringValue];
+//    rgMember = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
+//    
+//    NSLog(@"contact: %@, %@, %@, %@", contactID, lLocalizedFirstName, lLocalizedLastName, lLocalizedEmail);
+//    
+//    [[RgNetwork instance] shareLocation:@{
+//      @"to": @"you",
+//      @"from": @"me"
+//      } success:^(NSURLSessionTask *operation, id responseObject) {
+//          NSDictionary* res = responseObject;
+//          NSLog(@"API Response: %@", res);
+//          NSString *resultValue = [res objectForKey:@"result"];
+//          if (resultValue != nil && [resultValue isEqualToString:@"ok"])
+//          {
+//              
+//          }
+//          else if (resultValue != nil && [resultValue isEqualToString:@"Unauthorized"])
+//          {
+//              [[NSNotificationCenter defaultCenter] postNotificationName:kRgUserUnauthorized object:nil userInfo:nil];
+//          }
+//      } failure:^(NSURLSessionTask *operation, NSError *error) {
+//          
+//          NSLog(@"RingMail API Error: %@", [error localizedDescription]);
+//      }];
 }
 
 
@@ -110,6 +152,10 @@
         
         if (rgMember)
             shareLocationButton.hidden = FALSE;
+        
+        if (disableUserFeatures)
+            shareLocationButton.hidden = TRUE;
+            
     }
 }
 

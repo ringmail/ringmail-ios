@@ -157,7 +157,7 @@ static int ms_strcmpfuz(const char *fuzzy_word, const char *sentence) {
 
 				CFRelease(personEmailAddresses);
 			}
-
+            
 			if (add) {
 				NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
 				NSString *lLocalizedFirstName = [FastAddressBook localizedLabel:lFirstName];

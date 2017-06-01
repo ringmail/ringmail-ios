@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) ABRecordRef contact;
 @property (nonatomic) BOOL rgMember;
+@property (nonatomic) BOOL disableUserFeatures;
 
 - (IBAction)onActionInvite:(id)event;
 - (IBAction)onActionShareContact:(id)event;

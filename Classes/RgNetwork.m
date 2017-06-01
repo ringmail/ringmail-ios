@@ -364,4 +364,47 @@ static RgNetwork* theRgNetwork = nil;
     }
 }
 
+
+- (void)shareLocation:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        NSString *lat = [NSString stringWithFormat:@"%f", [RgLocationManager sharedInstance].currentLocation.coordinate.latitude];
+        NSString *lon = [NSString stringWithFormat:@"%f", [RgLocationManager sharedInstance].currentLocation.coordinate.longitude];
+        
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"login"] = rgLogin;
+        parameters[@"password"] = rgPass;
+        parameters[@"lat"] = lat;
+        parameters[@"lon"] = lon;
+        parameters[@"to"] = params[@"to"];
+        parameters[@"from"] = params[@"from"];
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/sharelocation", self.networkHost];
+        [manager POST:postUrl parameters:parameters progress:nil success:okay failure:fail];
+    }
+}
+
+- (void)shareContact:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail
+{
+    LevelDB* cfg = [RgManager configDatabase];
+    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
+    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
+    if (rgLogin != nil && rgPass != nil)
+    {
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"login"] = rgLogin;
+        parameters[@"password"] = rgPass;
+        parameters[@"to"] = params[@"to"];
+        parameters[@"from"] = params[@"from"];
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/sharecontact", self.networkHost];
+        [manager POST:postUrl parameters:parameters progress:nil success:okay failure:fail];
+    }
+}
+
+
 @end
