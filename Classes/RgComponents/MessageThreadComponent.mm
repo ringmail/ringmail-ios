@@ -61,9 +61,13 @@
 	{
 		msg = data[@"detail"][@"body"];
 	}
-	if ([data[@"type"] isEqualToString:@"call"])
+	else if ([data[@"type"] isEqualToString:@"call"])
 	{
 		msg = @"[Call]";
+	}
+	else if ([data[@"type"] isEqualToString:@"none"])
+	{
+		msg = @"";
 	}
     NSDictionary *attrsDictionary = @{
         NSFontAttributeName: [UIFont systemFontOfSize:14],

@@ -9,6 +9,7 @@
 #import "RKMediaMessage.h"
 #import "RKAddress.h"
 #import "RKThread.h"
+#import "RKThreadStore.h"
 
 #import "RgManager.h"
 #import "RgNetwork.h"
@@ -17,7 +18,8 @@
 
 @implementation RKMediaMessage
 
-@synthesize mediaURL;
+@synthesize remoteURL;
+@synthesize localURL;
 @synthesize mediaData;
 @synthesize mediaType;
 
@@ -31,14 +33,23 @@
 	self = [super initWithData:param];
 	if (self)
 	{
-		if (param[@"mediaURL"])
+		if (param[@"remoteURL"])
         {
-            NSAssert([param[@"mediaURL"] isKindOfClass:[NSURL class]], @"mediaURL is not NSURL object");
-            [self setMediaURL:param[@"mediaURL"]];
+            NSAssert([param[@"remoteURL"] isKindOfClass:[NSURL class]], @"remoteURL is not NSURL object");
+            [self setRemoteURL:param[@"remoteURL"]];
         }
 		else
 		{
-			self->mediaURL = nil;
+			self->remoteURL = nil;
+		}
+		if (param[@"localURL"])
+        {
+            NSAssert([param[@"localURL"] isKindOfClass:[NSURL class]], @"localURL is not NSURL object");
+            [self setLocalURL:param[@"localURL"]];
+        }
+		else
+		{
+			self->localURL = nil;
 		}
 		if (param[@"mediaData"])
         {
@@ -73,15 +84,63 @@
 		@"timestamp": self.timestamp,
 		@"body": self.body,
 		@"deliveryStatus": self.deliveryStatus,
-		@"mediaURL": NULLIFNIL(self.mediaURL),
-		@"mediaData": NULLIFNIL(self.mediaData),
+		@"remoteURL": NULLIFNIL(self.remoteURL),
+		@"localURL": NULLIFNIL(self.localURL),
+		@"mediaType": NULLIFNIL(self.mediaType),
 	};
     NSMutableString *data = [[NSMutableString alloc] init];
     for (NSString *k in input.allKeys)
 	{
         [data appendFormat:@" %@:%@", k, input[k]];
 	}
-	return [NSString stringWithFormat:@"<RKMediaMessage:%p {%@ }>", self, data];
+	return [NSString stringWithFormat:@"<%s: %p {%@ }>", object_getClassName(self), self, data];
+}
+
+- (void)insertItem:(NoteDatabase*)ndb
+{
+	NSAssert(self.thread.threadId, @"thread id required");
+	[ndb set:@{
+		@"table": @"rk_message",
+		@"insert": @{
+			@"thread_id": self.thread.threadId,
+			@"msg_type": [self mediaType],
+			@"msg_class": [NSString stringWithCString:object_getClassName(self) encoding:NSASCIIStringEncoding],
+			@"msg_time": [[self timestamp] strftime],
+			@"msg_status": [self deliveryStatus],
+			@"msg_uuid": [self uuid],
+			@"msg_inbound": [NSNumber numberWithInteger:[self direction]],
+			@"msg_body": [self body],
+			@"msg_local_url": NULLIFNIL([self localURL]),
+			@"msg_remote_url": NULLIFNIL([self remoteURL]),
+		},
+	}];
+	NSNumber* detailId = [ndb lastInsertId];
+	self.messageId = detailId;
+	[ndb set:@{
+		@"table": @"rk_thread_item",
+		@"insert": @{
+			@"thread_id": self.thread.threadId,
+			@"message_id": detailId,
+			@"ts_created": [[self timestamp] strftime],
+		},
+	}];
+	self.itemId = [ndb lastInsertId];
+}
+
+- (void)updateItem:(NoteDatabase*)ndb
+{
+	NSAssert(self.messageId, @"message id required");
+	[ndb set:@{
+		@"table": @"rk_message",
+		@"update": @{
+			@"msg_status": [self deliveryStatus],
+			@"msg_local_url": NULLIFNIL([self localURL]),
+			@"msg_remote_url": NULLIFNIL([self remoteURL]),
+		},
+		@"where": @{
+			@"id": [self messageId],
+		},
+	}];
 }
 
 - (void)uploadMedia:(void (^)(BOOL success))complete
@@ -91,7 +150,8 @@
         NSString *ok = res[@"result"];
         if ([ok isEqualToString:@"ok"])
         {
-			self.mediaURL = [NSURL URLWithString:res[@"url"]];
+			self.remoteURL = [NSURL URLWithString:res[@"url"]];
+			[[RKThreadStore sharedInstance] updateItem:self];
 			complete(TRUE);
 		}
 		else
@@ -105,46 +165,19 @@
 {
 }
 
-- (void)prepareMessage:(void (^)(NSObject* xml))send
+- (NSURL *)applicationDocumentsDirectory
 {
-	NSString *msgTo = [RgManager addressToXMPP:self.thread.remoteAddress.address];
-	
-    __block NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
-    [message addAttributeWithName:@"id" stringValue:self.uuid];
-    [message addAttributeWithName:@"conversation" stringValue:self.thread.uuid];
-    [message addAttributeWithName:@"type" stringValue:@"chat"];
-    [message addAttributeWithName:@"timestamp" stringValue:[self.timestamp strftime]];
-    [message addAttributeWithName:@"to" stringValue:msgTo];
-	if (self.thread.originalTo != nil)
-	{
-		[message addAttributeWithName:@"reply-to" stringValue:self.thread.originalTo.address];
-	}
-	
-    NSXMLElement *bodytag = [NSXMLElement elementWithName:@"body"];
-	if (self.body != nil)
-	{
-        [bodytag setStringValue:self.body];
-	}
-	else
-	{
-        [bodytag setStringValue:@""];
-	}
-    [message addChild:bodytag];
-	
-	// Media attachment upload then send
-	NSAssert(self.mediaData != nil, @"mediaData required");
-	[self uploadMedia:^(BOOL success) {
-		if (success)
-		{
-            NSXMLElement *attach = [NSXMLElement elementWithName:@"attachment"];
-            [attach addAttributeWithName:@"type" stringValue:self.mediaType];
-            [attach addAttributeWithName:@"id" stringValue:self.uuid];
-            [attach addAttributeWithName:@"url" stringValue:self.mediaURL.absoluteString];
-            [message addChild:attach];
-			
-        	send(message);
-		}
-	}];
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSURL*)documentURL
+{
+	NSString* mainUuid = [self uuid];
+	NSURL* url = [self applicationDocumentsDirectory];
+	NSString* urlStr = [url absoluteString];
+	urlStr = [urlStr stringByAppendingPathComponent:mainUuid];
+	url = [NSURL URLWithString:urlStr];
+	return url;
 }
 
 @end

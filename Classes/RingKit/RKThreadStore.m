@@ -55,10 +55,10 @@
     [[self dbqueue] inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
 			// Reset database
-            //@"DROP TABLE rk_thread;",
-            //@"DROP TABLE rk_thread_item;",
-            //@"DROP TABLE rk_message;",
-            //@"DROP TABLE rk_call;",
+            @"DROP TABLE rk_thread;",
+            @"DROP TABLE rk_thread_item;",
+            @"DROP TABLE rk_message;",
+            @"DROP TABLE rk_call;",
 			
             @"CREATE TABLE IF NOT EXISTS rk_thread ("
                 "id INTEGER PRIMARY KEY NOT NULL, "
@@ -95,10 +95,10 @@
 				"msg_inbound INTEGER NOT NULL, "
 				"msg_uuid TEXT NOT NULL, "
 				"msg_status TEXT NOT NULL DEFAULT '', "
-				"msg_data BLOB DEFAULT NULL, "
-				"msg_thumbnail BLOB DEFAULT NULL, "
 				"msg_type TEXT DEFAULT 'text/plain', "
-				"msg_url TEXT DEFAULT NULL"
+				"msg_class TEXT DEFAULT '', "
+				"msg_local_url TEXT DEFAULT NULL, "
+				"msg_remote_url TEXT DEFAULT NULL"
 			");",
             @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON rk_message (msg_uuid);",
 			
@@ -219,7 +219,7 @@
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
-            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			RKContact* ct;
 			RKAddress* addr = [RKAddress newWithString:row[@"address"]];
 			if (NILIFNULL(row[@"contact_id"]) != nil)
@@ -301,6 +301,9 @@
 				"m.msg_inbound AS msg_inbound, "
 				"m.msg_uuid AS msg_uuid, "
 				"m.msg_status AS msg_status, "
+				"m.msg_class AS msg_class, "
+				"m.msg_local_url AS msg_local_url, "
+				"m.msg_remote_url AS msg_remote_url, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
 				"c.call_duration AS call_duration, "
@@ -338,7 +341,8 @@
             NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			if (NILIFNULL(row[@"message_id"]) != nil)
 			{
-				RKMessage* msg = [RKMessage newWithData:@{
+				NSMutableDictionary* param = [NSMutableDictionary dictionaryWithDictionary:@{
+					@"class": row[@"msg_class"],
 					@"itemId": row[@"item_id"],
 					@"messageId": row[@"message_id"],
 					@"thread": thread,
@@ -347,7 +351,17 @@
 					@"direction": row[@"msg_inbound"],
 					@"body": row[@"msg_body"],
 					@"deliveryStatus": row[@"msg_status"],
+					@"mediaType": row[@"msg_type"],
 				}];
+				if (NILIFNULL(row[@"msg_local_url"]) != nil)
+				{
+					param[@"localURL"] = [NSURL URLWithString:row[@"msg_local_url"]];
+				}
+				if (NILIFNULL(row[@"msg_remote_url"]) != nil)
+				{
+					param[@"remoteURL"] = [NSURL URLWithString:row[@"msg_remote_url"]];
+				}
+				RKMessage* msg = [RKMessage newWithData:param];
 				[result addObject:msg];
 			}
 			else if (NILIFNULL(row[@"call_id"]) != nil)

@@ -44,6 +44,7 @@ extern NSString *const kRKCallEnd;
 
 - (void)sendMessage:(RKMessage*)message;
 - (void)didReceiveMessage:(RKMessage*)message;
+- (void)didUpdateMessage:(RKMessage*)message;
 
 //- (void)startCall:(RKCall*)call;
 - (void)didBeginCall:(RKCall*)call;

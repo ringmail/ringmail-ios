@@ -12,12 +12,16 @@
 
 @interface RKMediaMessage : RKMessage
 
+@property (nonatomic, strong) NSURL* localURL;
+@property (nonatomic, strong) NSURL* remoteURL;
+@property (nonatomic, strong) NSData* mediaData;
+@property (nonatomic, strong) NSString* mediaType;
+
 + (instancetype)newWithData:(NSDictionary*)param;
 
 - (instancetype)initWithData:(NSDictionary*)param;
-
-@property (nonatomic, strong) NSURL* mediaURL;
-@property (nonatomic, strong) NSData* mediaData;
-@property (nonatomic, strong) NSString* mediaType;
+- (void)uploadMedia:(void (^)(BOOL success))complete;
+- (void)downloadMedia:(void (^)(BOOL success))complete;
+- (NSURL*)documentURL;
 
 @end

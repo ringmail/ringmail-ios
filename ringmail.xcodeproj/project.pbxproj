@@ -634,6 +634,8 @@
 		C456065F1E78A27400572943 /* ringmail_action_video_presssed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45606541E78A27400572943 /* ringmail_action_video_presssed@2x.png */; };
 		C45606601E78A27400572943 /* ringmail_action_call_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45606551E78A27400572943 /* ringmail_action_call_normal@2x.png */; };
 		C45606611E78A27400572943 /* ringmail_action_call_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45606551E78A27400572943 /* ringmail_action_call_normal@2x.png */; };
+		C458B2F01EE1F72F00B2B0A4 /* RKPhotoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C458B2EF1EE1F72F00B2B0A4 /* RKPhotoMessage.m */; };
+		C458B2F11EE1F72F00B2B0A4 /* RKPhotoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C458B2EF1EE1F72F00B2B0A4 /* RKPhotoMessage.m */; };
 		C4593A4D1E6A37A8001C3BDD /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = C4593A4C1E6A37A8001C3BDD /* Favorite.m */; };
 		C4593A4E1E6A37A8001C3BDD /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = C4593A4C1E6A37A8001C3BDD /* Favorite.m */; };
 		C4593A511E6A37D0001C3BDD /* FavoritesPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C4593A501E6A37D0001C3BDD /* FavoritesPage.m */; };
@@ -2970,6 +2972,8 @@
 		C45606531E78A27400572943 /* ringmail_action_video_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_action_video_normal@2x.png"; path = "Resources/ringmail_action_video_normal@2x.png"; sourceTree = "<group>"; };
 		C45606541E78A27400572943 /* ringmail_action_video_presssed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_action_video_presssed@2x.png"; path = "Resources/ringmail_action_video_presssed@2x.png"; sourceTree = "<group>"; };
 		C45606551E78A27400572943 /* ringmail_action_call_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_action_call_normal@2x.png"; path = "Resources/ringmail_action_call_normal@2x.png"; sourceTree = "<group>"; };
+		C458B2EE1EE1F72400B2B0A4 /* RKPhotoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKPhotoMessage.h; sourceTree = "<group>"; };
+		C458B2EF1EE1F72F00B2B0A4 /* RKPhotoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKPhotoMessage.m; path = RingKit/RKPhotoMessage.m; sourceTree = "<group>"; };
 		C4593A431E6A379D001C3BDD /* Favorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Favorite.h; path = RgComponents/Favorite.h; sourceTree = "<group>"; };
 		C4593A4C1E6A37A8001C3BDD /* Favorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
 		C4593A4F1E6A37BE001C3BDD /* FavoritesPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoritesPage.h; path = RgComponents/FavoritesPage.h; sourceTree = "<group>"; };
@@ -4896,6 +4900,8 @@
 				C45B933B1ECE4ECA00974011 /* RKMessage.m */,
 				C42B84391EDE68B600EB9C7F /* RKMediaMessage.h */,
 				C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */,
+				C458B2EE1EE1F72400B2B0A4 /* RKPhotoMessage.h */,
+				C458B2EF1EE1F72F00B2B0A4 /* RKPhotoMessage.m */,
 				C45B93221ECE398300974011 /* RKCommunicator.h */,
 				C45B93231ECE398300974011 /* RKCommunicator.m */,
 				C45B932E1ECE4E5E00974011 /* RKThreadStore.h */,
@@ -8080,6 +8086,7 @@
 				D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */,
 				D35860D615B549B500513429 /* Utils.m in Sources */,
 				C44A40EC1E70E415000F3E24 /* CLEffectTool.m in Sources */,
+				C458B2F01EE1F72F00B2B0A4 /* RKPhotoMessage.m in Sources */,
 				D3F7998115BD32370018C273 /* TPMultiLayoutViewController.m in Sources */,
 				D3807FBF15C28940005BE9BC /* DCRoundSwitch.m in Sources */,
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
@@ -8312,6 +8319,7 @@
 				C48DA1DE1E8454FA007CBCFB /* VideoCameraViewController.m in Sources */,
 				C4A929151E9428BE00993A5C /* MessageTextView.m in Sources */,
 				C44A40CF1E70E415000F3E24 /* CLImageEditor.m in Sources */,
+				C458B2F11EE1F72F00B2B0A4 /* RKPhotoMessage.m in Sources */,
 				C4AC2B0F1D3963FA003B6232 /* Utils.m in Sources */,
 				C4AC2B101D3963FA003B6232 /* TPMultiLayoutViewController.m in Sources */,
 				C473F8811ECD0770008B548B /* UIImage+Scale.m in Sources */,

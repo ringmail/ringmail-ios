@@ -30,14 +30,71 @@
 		RKCommunicator* comm = [RKCommunicator sharedInstance];
 		RKAddress* address = [RKAddress newWithString:msgdata[@"to"]];
 		RKThread* thread = [comm getThreadByAddress:address];
-		RKMessage* message = [RKMessage newWithData:@{
-			@"thread": thread,
-			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-			@"body": msgdata[@"message"],
-			@"deliveryStatus": @"sending",
-		}];
-		[comm sendMessage:message];
-		[comm startMessageView:thread];
+		if (self.data[@"send_media"] != nil)
+		{
+			__block NSString* file = self.data[@"send_file"];
+			__block PHAsset* asset = self.data[@"send_asset"];
+   			__block NSData *imgData = nil;
+   			__block NSString *mediaType = nil;
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    			if (file != nil)
+    			{
+					imgData = [NSData dataWithContentsOfFile:file];
+					mediaType = @"image/png";
+    			}
+    			else if (asset != nil)
+    			{
+                	PHImageManager* imageManager = [PHImageManager defaultManager];
+                	PHImageRequestOptions* opts = [PHImageRequestOptions new];
+                	opts.resizeMode = PHImageRequestOptionsResizeModeExact;
+                	opts.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+                	opts.synchronous = YES;
+            		[imageManager requestImageDataForAsset:asset options:opts resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+    					imgData = imageData;
+            		}];
+					mediaType = @"image/png"; // TODO: customize
+    			}
+				RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
+        			@"thread": thread,
+        			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+        			@"body": msgdata[@"message"],
+        			@"deliveryStatus": @"sending",
+    				@"mediaData": imgData,
+    				@"mediaType": mediaType,
+    			}];
+				[pmsg setLocalURL:[pmsg documentURL]];
+    			if (file != nil)
+    			{
+				    if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[pmsg.localURL path] error:NULL] == NO)
+                    {
+						NSAssert(FALSE, @"File copy failure");
+                    }
+                    else
+                    {
+                        [[NSFileManager defaultManager] removeItemAtPath:file error:NULL];
+                    }
+				}
+				else if (asset != nil)
+    			{
+					UIImage *img = [UIImage imageWithData:imgData];
+					NSData *pngData = UIImagePNGRepresentation(img);
+					[pngData writeToURL:pmsg.localURL atomically:YES];
+				}
+    			NSLog(@"Photo Message: %@", pmsg);
+        		[comm sendMessage:pmsg];
+			});
+		}
+		else
+		{
+			RKMessage* message = [RKMessage newWithData:@{
+    			@"thread": thread,
+    			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+    			@"body": msgdata[@"message"],
+    			@"deliveryStatus": @"sending",
+    		}];
+    		[comm sendMessage:message];
+		}
+   		[comm startMessageView:thread];
 		
 		/*
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];

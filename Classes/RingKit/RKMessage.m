@@ -8,6 +8,7 @@
 
 #import "RKAddress.h"
 #import "RKMessage.h"
+#import "RKPhotoMessage.h"
 #import "RKThread.h"
 #import "Utils.h"
 #import "NSXMLElement+XMPP.h"
@@ -21,6 +22,17 @@
 
 + (instancetype)newWithData:(NSDictionary*)param
 {
+	if (param[@"class"] != nil && ! [param[@"class"] isEqualToString:@""])
+	{
+		if ([param[@"class"] isEqualToString:@"RKPhotoMessage"])
+		{
+			return [[RKPhotoMessage alloc] initWithData:param];
+		}
+		else
+		{
+			NSAssert(FALSE, @"Invalid message class");
+		}
+	}
 	return [[RKMessage alloc] initWithData:param];
 }
 
@@ -98,6 +110,20 @@
 		},
 	}];
 	self.itemId = [ndb lastInsertId];
+}
+
+- (void)updateItem:(NoteDatabase*)ndb
+{
+	NSAssert(self.messageId, @"message id required");
+	[ndb set:@{
+		@"table": @"rk_message",
+		@"update": @{
+			@"msg_status": [self deliveryStatus],
+		},
+		@"where": @{
+			@"id": [self messageId],
+		},
+	}];
 }
 
 - (void)prepareMessage:(void (^)(NSObject* xml))send

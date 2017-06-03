@@ -15,6 +15,8 @@
 #import "RKItem.h"
 #import "RKCall.h"
 #import "RKMessage.h"
+#import "RKMediaMessage.h"
+#import "RKPhotoMessage.h"
 #import "RKCommunicator.h"
 
 #endif /* RingKit_h */

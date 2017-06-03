@@ -106,7 +106,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	
 	// Write file
     NSString* imageUUID = [[NSUUID UUID] UUIDString];
-    __block NSString* tmpfile = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", imageUUID]];
+    __block NSString* tmpfile = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageUUID]];
     [UIImagePNGRepresentation(newImage) writeToFile:tmpfile atomically:YES];
 	
 	RgSendMediaEditMode mode = editMode;

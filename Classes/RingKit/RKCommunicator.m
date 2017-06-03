@@ -72,6 +72,12 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	}];
 }
 
+- (void)didUpdateMessage:(RKMessage*)message
+{
+	RKThreadStore* store = [RKThreadStore sharedInstance];
+	[store updateItem:message];
+}
+
 - (void)didBeginCall:(RKCall*)call
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];

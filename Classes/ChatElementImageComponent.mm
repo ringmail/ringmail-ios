@@ -2,7 +2,9 @@
 #import "ChatElementContext.h"
 #import "ChatElementImageComponent.h"
 
+#import "RingKit.h"
 #import "UIColor+Hex.h"
+#import "UIImage+Scale.h"
 
 @implementation ChatElementImageComponent
 
@@ -18,7 +20,18 @@
 	
 	CKComponent* res;
 	
-	UIImage* mainImage = [context getImageByID:data[@"id"] key:@"msg_data" size:CGSizeMake(maxBubbleWidth, maxBubbleHeight)];
+	//UIImage* mainImage = [context getImageByID:data[@"id"] key:@"msg_data" size:CGSizeMake(maxBubbleWidth, maxBubbleHeight)];
+	RKMediaMessage* message = data[@"item"];
+	if (message.mediaData == nil)
+	{
+		message.mediaData = [NSData dataWithContentsOfURL:[message localURL]];
+	}
+	UIImage* image = [UIImage imageWithData:message.mediaData];
+	CGSize maxSize = CGSizeMake(maxBubbleWidth, maxBubbleHeight);
+	if (image.size.height > maxSize.height || image.size.width > maxSize.width)
+	{
+		image = [image scaleImageToSize:maxSize];
+	}
 
 	if ([data[@"direction"] isEqualToString:@"inbound"])
 	{
@@ -42,7 +55,7 @@
                             {@selector(setClipsToBounds:), @YES},
 						}
 					} component:
-						[CKImageComponent newWithImage:mainImage]
+						[CKImageComponent newWithImage:image]
 					]}
         		}]
     		]}
@@ -72,7 +85,7 @@
                             {@selector(setClipsToBounds:), @YES},
 						}
 					} component:
-						[CKImageComponent newWithImage:mainImage]
+						[CKImageComponent newWithImage:image]
 					]}
         		}]
     		]}
