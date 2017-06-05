@@ -18,19 +18,20 @@
 static CKComponent *chatComponent(ChatElement *elem, ChatElementContext *context)
 {
 	NSDictionary* data = elem.data;
-	if ([data[@"item"] isKindOfClass:[RKMessage class]])
+	NSLog(@"Item: %@", data[@"item"]);
+	if ([data[@"item"] isKindOfClass:[RKPhotoMessage class]])
 	{
-		if ([data[@"item"] isKindOfClass:[RKPhotoMessage class]])
-		{
-			return [ChatElementImageComponent newWithChatElement:elem context:context];
-		}
-		else
-		{
-			return [ChatElementTextComponent newWithChatElement:elem context:context];
-		}
+		NSLog(@"Photo message");
+		return [ChatElementImageComponent newWithChatElement:elem context:context];
+	}
+	else if ([data[@"item"] isKindOfClass:[RKMessage class]])
+	{
+		NSLog(@"Text message");
+		return [ChatElementTextComponent newWithChatElement:elem context:context];
 	}
 	else if ([data[@"item"] isKindOfClass:[RKCall class]])
 	{
+		NSLog(@"Call item");
 		return [ChatElementCallComponent newWithChatElement:elem context:context];
 	}
 	return nil;

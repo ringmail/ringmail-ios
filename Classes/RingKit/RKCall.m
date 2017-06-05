@@ -94,6 +94,7 @@
 	NSDictionary* input = @{
 		@"itemId": NULLIFNIL(self.itemId),
 		@"callId": NULLIFNIL(self.callId),
+		@"version": self.version,
 		@"thread": [NSString stringWithFormat:@"<RKThread: %p>", self.thread],
 		@"uuid": self.uuid,
 		@"inbound": [NSNumber numberWithInteger:self.direction],

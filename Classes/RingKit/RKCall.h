@@ -7,6 +7,13 @@
 
 #import "RKItem.h"
 
+typedef NS_ENUM(NSInteger, RKCallResult) {
+	RKCallResultSuccess,
+	RKCallResultMissed,
+	RKCallResultAborted,
+	RKCallResultDeclined
+};
+
 @interface RKCall : RKItem
 
 + (instancetype)newWithData:(NSDictionary*)param;

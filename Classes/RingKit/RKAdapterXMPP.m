@@ -15,6 +15,7 @@
 #import "RKContact.h"
 #import "RKThread.h"
 #import "RKMessage.h"
+#import "RKMediaMessage.h"
 #import "RKCommunicator.h"
 
 #define THIS_METHOD NSStringFromSelector(_cmd)
@@ -311,17 +312,12 @@
     NSLog(@"%@", xmppMessage);
     if ([xmppMessage isMessageWithBody] && ![xmppMessage isErrorMessage])
     {
-        /*NSString* uuid = [[xmppMessage attributeForName:@"id"] stringValue];
-        NSNumber *session = [self dbUpdateMessageStatus:@"sent" forUUID:uuid];
-		if (session)
-		{
-            NSDictionary *dict = @{
-                                   @"session": session,
-                                   @"uuid": uuid,
-                                   @"status": @"sent",
-                                   };
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
-		}*/
+        NSString* uuid = [[xmppMessage attributeForName:@"id"] stringValue];
+		RKCommunicator* comm = [RKCommunicator sharedInstance];
+		RKMessage* message = [comm getMessageByUUID:uuid];
+		message.deliveryStatus = RKMessageStatusSent;
+		[comm didUpdateMessage:message];
+		NSLog(@"Updated message: %@", message);
     }
 }
 
@@ -367,15 +363,35 @@
                 timestamp = [NSDate date];
             }
             NSString *body = [[xmppMessage elementForName:@"body"] stringValue];
-			RKMessage *message = [RKMessage newWithData:@{
+            NSXMLElement *attach = [xmppMessage elementForName:@"attachment"];
+			NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{
 				@"thread": thread,
 				@"uuid": uuid,
 				@"timestamp": timestamp,
 				@"direction": [NSNumber numberWithInteger:RKItemDirectionInbound],
 				@"body": body,
-				@"deliveryStatus": @"received",
+				@"deliveryStatus": @(RKMessageStatusReceived)
 			}];
-			[[RKCommunicator sharedInstance] didReceiveMessage:message];
+            if (attach != nil)
+            {
+                NSString *imageUrl = [[attach attributeForName:@"url"] stringValue];
+				param[@"remoteURL"] = [NSURL URLWithString:imageUrl];
+				param[@"class"] = @"RKPhotoMessage";
+			}
+			__block RKMessage *message = [RKMessage newWithData:param];
+            if (attach != nil)
+            {
+				[(RKMediaMessage*)message downloadMedia:^(BOOL success) {
+					if (success)
+					{
+						[[RKCommunicator sharedInstance] didReceiveMessage:message];
+					}
+				}];
+			}
+			else
+			{
+				[[RKCommunicator sharedInstance] didReceiveMessage:message];
+			}
 			
 			/*
             NSXMLElement *attach = [xmppMessage elementForName:@"attachment"];
@@ -475,17 +491,12 @@
             NSXMLElement *delivered = [xmppMessage elementForName:@"received" xmlns:@"urn:xmpp:receipts"];
             if (delivered != nil) // Delivery receipt
             {
-                //NSString* uuid = [[delivered attributeForName:@"id"] stringValue];
-                /*NSNumber *session = [self dbUpdateMessageStatus:@"delivered" forUUID:uuid];
-				if (session != nil)
-				{
-                    NSDictionary *dict = @{
-                                           @"session": session,
-                                           @"uuid": uuid,
-                                           @"status": @"delivered",
-                                           };
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
-				}*/
+                NSString* uuid = [[delivered attributeForName:@"id"] stringValue];
+				RKCommunicator* comm = [RKCommunicator sharedInstance];
+        		RKMessage* message = [comm getMessageByUUID:uuid];
+        		message.deliveryStatus = RKMessageStatusDelivered;
+        		[comm didUpdateMessage:message];
+        		NSLog(@"Updated message: %@", message);
             }
         }
     }

@@ -346,7 +346,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		@"thread": [comm currentThread],
 		@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
 		@"body": text,
-		@"deliveryStatus": @"sending",
+		@"deliveryStatus": @(RKMessageStatusSending),
 	}];
 	[comm sendMessage:message];
     [super didPressRightButton:sender];

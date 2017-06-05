@@ -22,7 +22,7 @@ NSString *const kRKMessageReceived = @"RKMessageReceived";
 NSString *const kRKMessageUpdated = @"RKMessageUpdated";
 NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
 NSString *const kRKCallBegin = @"RKCallBegin";
-NSString *const kRKCallUpdate = @"RKCallUpdate";
+NSString *const kRKCallUpdated = @"RKCallUpdated";
 NSString *const kRKCallEnd = @"RKCallEnd";
 
 @implementation RKCommunicator
@@ -55,6 +55,7 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 		[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 			@"type": @"message",
 			@"message": message,
+			@"name": kRKMessageSent,
 		}];
 	}];
 }
@@ -69,6 +70,7 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"message",
 		@"message": message,
+		@"name": kRKMessageReceived,
 	}];
 }
 
@@ -76,6 +78,14 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store updateItem:message];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageUpdated object:self userInfo:@{
+		@"message": message,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
+		@"type": @"message",
+		@"message": message,
+		@"name": kRKMessageUpdated,
+	}];
 }
 
 - (void)didBeginCall:(RKCall*)call
@@ -88,6 +98,7 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"call",
 		@"call": call,
+		@"name": kRKCallBegin,
 	}];
 }
 
@@ -95,12 +106,13 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store updateItem:call];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallUpdate object:self userInfo:@{
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallUpdated object:self userInfo:@{
 		@"call": call,
 	}];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"call",
 		@"call": call,
+		@"name": kRKCallUpdated,
 	}];
 }
 
@@ -114,6 +126,7 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"call",
 		@"call": call,
+		@"name": kRKCallEnd,
 	}];
 }
 
@@ -146,6 +159,11 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 - (RKCall*)getCallBySipId:(NSString*)sip
 {
 	return [[RKThreadStore sharedInstance] getCallBySipId:sip];
+}
+
+- (RKMessage*)getMessageByUUID:(NSString*)inputUUID;
+{
+	return [[RKThreadStore sharedInstance] getMessageByUUID:inputUUID];
 }
 
 - (void)startMessageView:(RKThread*)thread

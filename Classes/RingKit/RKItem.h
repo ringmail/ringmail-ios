@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, RKItemDirection) {
 @interface RKItem : NSObject
 
 @property (nonatomic, strong) NSNumber* itemId; // Refers to the rk_thread_item record id
+@property (nonatomic, strong) NSNumber* version; // Update count
 @property (nonatomic, strong) RKThread* thread;
 @property (nonatomic, strong) NSString* uuid;
 @property (nonatomic, strong) NSDate* timestamp;
@@ -27,5 +28,6 @@ typedef NS_ENUM(NSInteger, RKItemDirection) {
 - (instancetype)initWithData:(NSDictionary*)param;
 - (void)insertItem:(NoteDatabase*)ndb;
 - (void)updateItem:(NoteDatabase*)ndb;
+- (void)updateVersion:(NoteDatabase*)ndb;
 
 @end

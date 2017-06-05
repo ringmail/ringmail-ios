@@ -16,6 +16,7 @@
 @synthesize uuid;
 @synthesize timestamp;
 @synthesize direction;
+@synthesize version;
 
 - (instancetype)initWithData:(NSDictionary*)param
 {
@@ -63,6 +64,15 @@
 		{
 			[self setDirection:RKItemDirectionOutbound];
 		}
+		if (param[@"version"])
+        {
+            NSAssert([param[@"version"] isKindOfClass:[NSNumber class]], @"veresion is not NSNumber object");
+            [self setVersion:param[@"version"]];
+        }
+		else
+		{
+			[self setVersion:@(1)];
+		}
 	}
 	return self;
 }
@@ -75,6 +85,11 @@
 - (void)updateItem:(NoteDatabase*)ndb
 {
     NSAssert(FALSE, @"Override this method: %s", __PRETTY_FUNCTION__);
+}
+
+- (void)updateVersion:(NoteDatabase*)ndb
+{
+	[[ndb database] executeUpdate:@"UPDATE rk_thread_item SET version = version + 1 WHERE id = ?" withArgumentsInArray:@[self.itemId]];
 }
 
 @end

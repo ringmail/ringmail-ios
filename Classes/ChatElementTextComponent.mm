@@ -11,6 +11,9 @@
 {
 	NSDictionary* data = elem.data;
 	RKMessage* message = data[@"item"];
+	
+	//NSLog(@"Chat Text Component - Message: %@", message);
+	
 	CKComponentScope scope(self, message.uuid);
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
 	CGFloat fontSize = 16;

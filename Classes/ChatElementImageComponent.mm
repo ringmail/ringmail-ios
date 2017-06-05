@@ -16,15 +16,17 @@
 	CGFloat scale = [UIScreen mainScreen].scale;
 	
 	int maxBubbleWidth = (int)((width - (12 * scale)) / 3) * 2;
-	int maxBubbleHeight = (int)(maxBubbleWidth * 0.5862);
+	//int maxBubbleHeight = (int)(maxBubbleWidth * 0.5862);
+	int maxBubbleHeight = (int)(maxBubbleWidth * 1.4);
 	
 	CKComponent* res;
 	
 	//UIImage* mainImage = [context getImageByID:data[@"id"] key:@"msg_data" size:CGSizeMake(maxBubbleWidth, maxBubbleHeight)];
 	RKMediaMessage* message = data[@"item"];
+	//NSLog(@"Chat Image Component - Message: %@", message);
 	if (message.mediaData == nil)
 	{
-		message.mediaData = [NSData dataWithContentsOfURL:[message localURL]];
+		message.mediaData = [NSData dataWithContentsOfURL:[message documentURL]];
 	}
 	UIImage* image = [UIImage imageWithData:message.mediaData];
 	CGSize maxSize = CGSizeMake(maxBubbleWidth, maxBubbleHeight);
@@ -33,7 +35,7 @@
 		image = [image scaleImageToSize:maxSize];
 	}
 
-	if ([data[@"direction"] isEqualToString:@"inbound"])
+	if (message.direction == RKItemDirectionInbound)
 	{
 		res = [CKStackLayoutComponent newWithView:{} size:{
 			.width = width,

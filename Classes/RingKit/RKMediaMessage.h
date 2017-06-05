@@ -12,7 +12,6 @@
 
 @interface RKMediaMessage : RKMessage
 
-@property (nonatomic, strong) NSURL* localURL;
 @property (nonatomic, strong) NSURL* remoteURL;
 @property (nonatomic, strong) NSData* mediaData;
 @property (nonatomic, strong) NSString* mediaType;

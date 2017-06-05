@@ -57,8 +57,8 @@
     	}
 		if (param[@"deliveryStatus"])
     	{
-    		NSAssert([param[@"deliveryStatus"] isKindOfClass:[NSString class]], @"deliveryStatus is not NSString object");
-    		[self setDeliveryStatus:param[@"deliveryStatus"]];
+    		NSAssert([param[@"deliveryStatus"] isKindOfClass:[NSNumber class]], @"deliveryStatus is not NSNumber object");
+    		[self setDeliveryStatus:[param[@"deliveryStatus"] integerValue]];
     	}
 	}
 	return self;
@@ -69,12 +69,13 @@
 	NSDictionary* input = @{
 		@"itemId": NULLIFNIL(self.itemId),
 		@"messageId": NULLIFNIL(self.messageId),
+		@"version": self.version,
 		@"thread": [NSString stringWithFormat:@"<RKThread: %p>", self.thread],
 		@"uuid": self.uuid,
 		@"inbound": [NSNumber numberWithInteger:self.direction],
 		@"timestamp": self.timestamp,
 		@"body": self.body,
-		@"deliveryStatus": self.deliveryStatus,
+		@"deliveryStatus": _RKMessageStatus(self.deliveryStatus),
 	};
     NSMutableString *data = [[NSMutableString alloc] init];
     for (NSString *k in input.allKeys)
@@ -93,7 +94,7 @@
 			@"thread_id": self.thread.threadId,
 			@"msg_type": @"text/plain",
 			@"msg_time": [[self timestamp] strftime],
-			@"msg_status": [self deliveryStatus],
+			@"msg_status": [NSNumber numberWithInteger:[self deliveryStatus]],
 			@"msg_uuid": [self uuid],
 			@"msg_inbound": [NSNumber numberWithInteger:[self direction]],
 			@"msg_body": [self body],
@@ -118,7 +119,7 @@
 	[ndb set:@{
 		@"table": @"rk_message",
 		@"update": @{
-			@"msg_status": [self deliveryStatus],
+			@"msg_status": [NSNumber numberWithInteger:[self deliveryStatus]],
 		},
 		@"where": @{
 			@"id": [self messageId],

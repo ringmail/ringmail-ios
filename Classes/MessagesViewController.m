@@ -122,6 +122,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMessageList:) name:kRKItemActivity object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,6 +145,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)handleSegControl {
     printf("recents segement controller hit\n");
+}
+
+- (void)updateMessageList:(NSNotification*)event
+{
+	[mainViewController updateCollection];
 }
 
 #pragma mark -

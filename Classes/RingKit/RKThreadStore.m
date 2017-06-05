@@ -55,10 +55,10 @@
     [[self dbqueue] inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
 			// Reset database
-            @"DROP TABLE rk_thread;",
-            @"DROP TABLE rk_thread_item;",
-            @"DROP TABLE rk_message;",
-            @"DROP TABLE rk_call;",
+            //@"DROP TABLE rk_thread;",
+            //@"DROP TABLE rk_thread_item;",
+            //@"DROP TABLE rk_message;",
+            //@"DROP TABLE rk_call;",
 			
             @"CREATE TABLE IF NOT EXISTS rk_thread ("
                 "id INTEGER PRIMARY KEY NOT NULL, "
@@ -81,7 +81,8 @@
 				"thread_id INTEGER NOT NULL, "
 				"message_id INTEGER NULL DEFAULT NULL, "
 				"call_id INTEGER NULL DEFAULT NULL, "
-                "ts_created TEXT NOT NULL"
+                "ts_created TEXT NOT NULL,"
+                "version INTEGER DEFAULT 1"
 			");",
             @"CREATE INDEX IF NOT EXISTS thread_id_1 ON rk_thread_item (thread_id);",
 			@"CREATE INDEX IF NOT EXISTS call_id_1 ON rk_thread_item (call_id);",
@@ -94,10 +95,9 @@
 				"msg_time TEXT NOT NULL, "
 				"msg_inbound INTEGER NOT NULL, "
 				"msg_uuid TEXT NOT NULL, "
-				"msg_status TEXT NOT NULL DEFAULT '', "
+				"msg_status INTEGER NOT NULL DEFAULT '', "
 				"msg_type TEXT DEFAULT 'text/plain', "
 				"msg_class TEXT DEFAULT '', "
-				"msg_local_url TEXT DEFAULT NULL, "
 				"msg_remote_url TEXT DEFAULT NULL"
 			");",
             @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON rk_message (msg_uuid);",
@@ -147,6 +147,7 @@
 {
 	[self dbBlock:^(NoteDatabase *ndb) {
 		[item updateItem:ndb];
+		[item updateVersion:ndb];
 	}];
 }
 
@@ -195,7 +196,9 @@
 				"l.contact_id AS contact_id, "
 				"l.original_to AS original_to, "
 				"l.uuid AS uuid, "
+				"ti.id AS item_id, "
 				"ti.ts_created AS ts_created, "
+				"ti.version AS version, "
 				"m.id AS message_id, "
 				"m.msg_body AS msg_body, "
 				"m.msg_type AS msg_type, "
@@ -219,7 +222,7 @@
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
-            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			RKContact* ct;
 			RKAddress* addr = [RKAddress newWithString:row[@"address"]];
 			if (NILIFNULL(row[@"contact_id"]) != nil)
@@ -272,6 +275,8 @@
 				@"thread": thr,
 				@"type": itemType,
 				@"detail": detail,
+				@"item_id": row[@"item_id"],
+				@"version": row[@"version"],
 				@"timestamp": [NSDate parse:row[@"ts_created"]],
 			};
 			[result addObject:res];
@@ -295,6 +300,7 @@
             "SELECT "
 				"ti.id AS item_id, "
 				"ti.ts_created AS ts_created, "
+				"ti.version AS version, "
 				"m.id AS message_id, "
 				"m.msg_body AS msg_body, "
 				"m.msg_type AS msg_type, "
@@ -302,7 +308,6 @@
 				"m.msg_uuid AS msg_uuid, "
 				"m.msg_status AS msg_status, "
 				"m.msg_class AS msg_class, "
-				"m.msg_local_url AS msg_local_url, "
 				"m.msg_remote_url AS msg_remote_url, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
@@ -338,13 +343,14 @@
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
-            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			if (NILIFNULL(row[@"message_id"]) != nil)
 			{
 				NSMutableDictionary* param = [NSMutableDictionary dictionaryWithDictionary:@{
 					@"class": row[@"msg_class"],
 					@"itemId": row[@"item_id"],
 					@"messageId": row[@"message_id"],
+					@"version": row[@"version"],
 					@"thread": thread,
 					@"uuid": row[@"msg_uuid"],
 					@"timestamp": [NSDate parse:row[@"ts_created"]],
@@ -353,10 +359,6 @@
 					@"deliveryStatus": row[@"msg_status"],
 					@"mediaType": row[@"msg_type"],
 				}];
-				if (NILIFNULL(row[@"msg_local_url"]) != nil)
-				{
-					param[@"localURL"] = [NSURL URLWithString:row[@"msg_local_url"]];
-				}
 				if (NILIFNULL(row[@"msg_remote_url"]) != nil)
 				{
 					param[@"remoteURL"] = [NSURL URLWithString:row[@"msg_remote_url"]];
@@ -366,10 +368,11 @@
 			}
 			else if (NILIFNULL(row[@"call_id"]) != nil)
 			{
-				NSLog(@"Call Item: %@", row);
+				//NSLog(@"Call Item: %@", row);
 				RKCall* call = [RKCall newWithData:@{
     				@"uuid": row[@"call_uuid"],
     				@"thread": thread,
+					@"version": row[@"version"],
     				@"itemId": row[@"item_id"],
     				@"callId": row[@"call_id"],
     				@"direction": row[@"call_inbound"],
@@ -385,7 +388,7 @@
 		}
 		[rs close];
 	}];
-	NSLog(@"%s: Thread Items: %@", __PRETTY_FUNCTION__, result);
+	//NSLog(@"%s: Thread Items: %@", __PRETTY_FUNCTION__, result);
 	return result;
 }
 
@@ -553,6 +556,7 @@
 				"t.original_to AS original_to, "
 				"t.uuid AS uuid, "
 				"ti.id AS item_id, "
+				"ti.version AS version, "
 				"c.id AS call_id, "
 				"c.call_duration AS call_duration, "
 				"c.call_inbound AS call_inbound, "
@@ -599,6 +603,7 @@
 			result = [RKCall newWithData:@{
 				@"uuid": row[@"call_uuid"],
 				@"thread": thr,
+				@"version": row[@"version"],
 				@"itemId": row[@"item_id"],
 				@"callId": row[@"call_id"],
 				@"direction": row[@"call_inbound"],
@@ -611,6 +616,86 @@
 			}];
 		}
 		[rs close];
+	}];
+	return result;
+}
+
+- (RKMessage*)getMessageByUUID:(NSString*)inputUUID
+{
+	__block RKMessage *result = nil;
+	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+		NSString *sql = @""
+            "SELECT "
+				"t.id AS thread_id, "
+				"t.address AS address, "
+				"t.contact_id AS contact_id, "
+				"t.original_to AS original_to, "
+				"t.uuid AS uuid, "
+				"ti.id AS item_id, "
+				"ti.ts_created AS ts_created, "
+				"ti.version AS version, "
+				"m.id AS message_id, "
+				"m.msg_body AS msg_body, "
+				"m.msg_type AS msg_type, "
+				"m.msg_inbound AS msg_inbound, "
+				"m.msg_uuid AS msg_uuid, "
+				"m.msg_status AS msg_status, "
+				"m.msg_class AS msg_class, "
+				"m.msg_remote_url AS msg_remote_url "
+            "FROM rk_message m, rk_thread_item ti, rk_thread t "
+            "WHERE m.id=ti.message_id AND m.thread_id = t.id "
+            "AND m.msg_uuid = ?";
+		FMResultSet *rs = [db executeQuery:sql, inputUUID];
+		while ([rs next])
+        {
+			NSDictionary* row = [rs resultDictionary];
+            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+			RKContact* ct;
+			RKAddress* addr = [RKAddress newWithString:row[@"address"]];
+			if (NILIFNULL(row[@"contact_id"]) != nil)
+			{
+				ct = [RKContact newWithData:@{
+					@"contactId": row[@"contact_id"],
+    				@"addressList": @[addr],
+				}];
+			}
+			else
+			{
+				ct = [RKContact newByMatchingAddress:addr];
+			}
+			NSMutableDictionary* thrdata = [NSMutableDictionary dictionaryWithDictionary:@{
+				@"threadId": row[@"thread_id"],
+				@"remoteAddress": addr,
+				@"contact": ct,
+				@"uuid": row[@"uuid"],
+			}];
+			if (! [row[@"original_to"] isEqualToString:@""])
+			{
+				thrdata[@"originalTo"] = row[@"original_to"];
+			}
+			RKThread* thr = [RKThread newWithData:thrdata];
+			if (NILIFNULL(row[@"message_id"]) != nil)
+			{
+				NSMutableDictionary* param = [NSMutableDictionary dictionaryWithDictionary:@{
+					@"class": row[@"msg_class"],
+					@"itemId": row[@"item_id"],
+					@"messageId": row[@"message_id"],
+					@"version": row[@"version"],
+					@"thread": thr,
+					@"uuid": row[@"msg_uuid"],
+					@"timestamp": [NSDate parse:row[@"ts_created"]],
+					@"direction": row[@"msg_inbound"],
+					@"body": row[@"msg_body"],
+					@"deliveryStatus": row[@"msg_status"],
+					@"mediaType": row[@"msg_type"],
+				}];
+				if (NILIFNULL(row[@"msg_remote_url"]) != nil)
+				{
+					param[@"remoteURL"] = [NSURL URLWithString:row[@"msg_remote_url"]];
+				}
+				result = [RKMessage newWithData:param];
+			}
+		}
 	}];
 	return result;
 }

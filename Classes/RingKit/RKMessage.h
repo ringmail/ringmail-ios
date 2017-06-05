@@ -10,6 +10,15 @@
 
 #import "RKItem.h"
 
+typedef NS_ENUM(NSInteger, RKMessageStatus) {
+	RKMessageStatusReceived,
+	RKMessageStatusSending,
+	RKMessageStatusSent,
+	RKMessageStatusDelivered
+};
+
+#define _RKMessageStatus(enum) [@[@"Received",@"Sending",@"Sent",@"Delivered"] objectAtIndex:enum]
+
 @interface RKMessage : RKItem
 
 + (instancetype)newWithData:(NSDictionary*)param;
@@ -20,6 +29,6 @@
 
 @property (nonatomic, strong) NSNumber* messageId;
 @property (nonatomic, strong) NSString* body;
-@property (nonatomic, strong) NSString* deliveryStatus;
+@property (nonatomic) RKMessageStatus deliveryStatus;
 
 @end

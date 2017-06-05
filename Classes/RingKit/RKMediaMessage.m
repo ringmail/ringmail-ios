@@ -19,7 +19,6 @@
 @implementation RKMediaMessage
 
 @synthesize remoteURL;
-@synthesize localURL;
 @synthesize mediaData;
 @synthesize mediaType;
 
@@ -41,15 +40,6 @@
 		else
 		{
 			self->remoteURL = nil;
-		}
-		if (param[@"localURL"])
-        {
-            NSAssert([param[@"localURL"] isKindOfClass:[NSURL class]], @"localURL is not NSURL object");
-            [self setLocalURL:param[@"localURL"]];
-        }
-		else
-		{
-			self->localURL = nil;
 		}
 		if (param[@"mediaData"])
         {
@@ -78,14 +68,14 @@
 	NSDictionary* input = @{
 		@"itemId": NULLIFNIL(self.itemId),
 		@"messageId": NULLIFNIL(self.messageId),
+		@"version": self.version,
 		@"thread": [NSString stringWithFormat:@"<RKThread: %p>", self.thread],
 		@"uuid": self.uuid,
 		@"inbound": [NSNumber numberWithInteger:self.direction],
 		@"timestamp": self.timestamp,
 		@"body": self.body,
-		@"deliveryStatus": self.deliveryStatus,
+		@"deliveryStatus": _RKMessageStatus(self.deliveryStatus),
 		@"remoteURL": NULLIFNIL(self.remoteURL),
-		@"localURL": NULLIFNIL(self.localURL),
 		@"mediaType": NULLIFNIL(self.mediaType),
 	};
     NSMutableString *data = [[NSMutableString alloc] init];
@@ -106,11 +96,10 @@
 			@"msg_type": [self mediaType],
 			@"msg_class": [NSString stringWithCString:object_getClassName(self) encoding:NSASCIIStringEncoding],
 			@"msg_time": [[self timestamp] strftime],
-			@"msg_status": [self deliveryStatus],
+			@"msg_status": [NSNumber numberWithInteger:[self deliveryStatus]],
 			@"msg_uuid": [self uuid],
 			@"msg_inbound": [NSNumber numberWithInteger:[self direction]],
 			@"msg_body": [self body],
-			@"msg_local_url": NULLIFNIL([self localURL]),
 			@"msg_remote_url": NULLIFNIL([self remoteURL]),
 		},
 	}];
@@ -133,8 +122,7 @@
 	[ndb set:@{
 		@"table": @"rk_message",
 		@"update": @{
-			@"msg_status": [self deliveryStatus],
-			@"msg_local_url": NULLIFNIL([self localURL]),
+			@"msg_status": [NSNumber numberWithInteger:[self deliveryStatus]],
 			@"msg_remote_url": NULLIFNIL([self remoteURL]),
 		},
 		@"where": @{
@@ -143,6 +131,7 @@
 	}];
 }
 
+// TODO: add error handlers
 - (void)uploadMedia:(void (^)(BOOL success))complete
 {
     [[RgNetwork instance] uploadImage:self.mediaData uuid:self.uuid callback:^(NSURLSessionTask *operation, id responseObject) {
@@ -161,8 +150,18 @@
 	}];
 }
 
+// TODO: add error handlers
 - (void)downloadMedia:(void (^)(BOOL success))complete
 {
+	NSAssert(self.remoteURL, @"Remote URL required");
+	NSString* imageUrl = [self.remoteURL absoluteString];
+    [[RgNetwork instance] downloadImage:imageUrl callback:^(NSURLSessionTask *operation, id responseObject) {
+        NSLog(@"%s: Download Complete", __PRETTY_FUNCTION__);
+        NSData* imageData = responseObject;
+		self.mediaType = @"image/png"; // TODO: customize
+		[imageData writeToURL:[self documentURL] atomically:YES];
+		complete(TRUE);
+    }];
 }
 
 - (NSURL *)applicationDocumentsDirectory

@@ -58,14 +58,13 @@
         			@"thread": thread,
         			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
         			@"body": msgdata[@"message"],
-        			@"deliveryStatus": @"sending",
+        			@"deliveryStatus": @(RKMessageStatusSending),
     				@"mediaData": imgData,
     				@"mediaType": mediaType,
     			}];
-				[pmsg setLocalURL:[pmsg documentURL]];
     			if (file != nil)
     			{
-				    if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[pmsg.localURL path] error:NULL] == NO)
+				    if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[[pmsg documentURL] path] error:NULL] == NO)
                     {
 						NSAssert(FALSE, @"File copy failure");
                     }
@@ -78,7 +77,7 @@
     			{
 					UIImage *img = [UIImage imageWithData:imgData];
 					NSData *pngData = UIImagePNGRepresentation(img);
-					[pngData writeToURL:pmsg.localURL atomically:YES];
+					[pngData writeToURL:[pmsg documentURL] atomically:YES];
 				}
     			NSLog(@"Photo Message: %@", pmsg);
         		[comm sendMessage:pmsg];
@@ -90,7 +89,7 @@
     			@"thread": thread,
     			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
     			@"body": msgdata[@"message"],
-    			@"deliveryStatus": @"sending",
+       			@"deliveryStatus": @(RKMessageStatusSending),
     		}];
     		[comm sendMessage:message];
 		}

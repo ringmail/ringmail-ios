@@ -14,7 +14,7 @@ extern NSString *const kRKMessageReceived;
 extern NSString *const kRKMessageUpdated;
 extern NSString *const kRKMessageViewChanged;
 extern NSString *const kRKCallBegin;
-extern NSString *const kRKCallUpdate;
+extern NSString *const kRKCallUpdated;
 extern NSString *const kRKCallEnd;
 
 @protocol RKCommunicatorViewDelegate <NSObject>
@@ -57,6 +57,7 @@ extern NSString *const kRKCallEnd;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 - (RKCall*)getCallBySipId:(NSString*)sip;
+- (RKMessage*)getMessageByUUID:(NSString*)inputUUID;
 
 - (void)startMessageView:(RKThread*)thread;
 //- (void)startCallView:(RKAddress*)address;

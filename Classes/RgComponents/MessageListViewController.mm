@@ -94,15 +94,14 @@ static NSInteger const pageSize = 10;
 
 #pragma mark - Update collection
 
-// TODO: Make this work right
 - (void)updateCollection
 {
-/*
     NSArray *current = [_cardModelController mainList];
     NSArray *newlist = [[RKCommunicator sharedInstance] listThreads];
-    
+	
     NSInteger curcount = [current count];
     NSInteger newcount = [newlist count];
+	
     // Generate changeset
     NSInteger viewcount = [[_cardModelController mainCount] integerValue];
     if (viewcount < pageSize)
@@ -110,9 +109,9 @@ static NSInteger const pageSize = 10;
         viewcount = pageSize;
     }
     __block CKArrayControllerInputItems items;
-    for (NSInteger i = 1; i < viewcount; i++)
+    for (NSInteger i = 0; i < viewcount; i++)
     {
-        NSInteger j = i - 1;
+        NSInteger j = i;
         BOOL hascur = NO;
         BOOL hasnew = NO;
         if (j < curcount)
@@ -125,26 +124,28 @@ static NSInteger const pageSize = 10;
         }
         if (hascur && hasnew)
         {
-            NSNumber* curId = [current[j] objectForKey:@"id"];
-            NSNumber* newId = [newlist[j] objectForKey:@"id"];
+            NSNumber* curId = current[j][@"item_id"];
+            NSNumber* newId = newlist[j][@"item_id"];
             if (! [curId isEqualToNumber:newId]) // item changed
             {
-                MessageThread *card = [[MessageThread alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
+                MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
                 items.update([NSIndexPath indexPathForRow:i inSection:0], card);
             }
             else
             {
-                NSDate* curDate = [current[j] objectForKey:@"timestamp"];
-                NSDate* newDate = [newlist[j] objectForKey:@"timestamp"];
-                if ([curDate compare:newDate] != NSOrderedSame)
+                NSNumber* curVer = current[j][@"version"];
+                NSNumber* newVer = newlist[j][@"version"];
+				
+                if (! [curVer isEqualToNumber:newVer])
                 {
                     // Regenerate card
-                    MessageThread *card = [[MessageThread alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
+                    MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
                     items.update([NSIndexPath indexPathForRow:i inSection:0], card);
                 }
-                else if (! [current[j][@"label"] isEqualToString:newlist[j][@"label"]])
+				// TODO: compare thread image & displayName
+                /*else if (! [current[j][@"label"] isEqualToString:newlist[j][@"label"]])
                 {
-                    MessageThread *card = [[MessageThread alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
+                    MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
                     items.update([NSIndexPath indexPathForRow:i inSection:0], card);
                 }
                 else
@@ -160,12 +161,12 @@ static NSInteger const pageSize = 10;
                             items.update([NSIndexPath indexPathForRow:i inSection:0], card);
                         }
                     }
-                }
+                }*/
             }
         }
         else if (hasnew)
         {
-            MessageThread *card = [[MessageThread alloc] initWithData:newlist[j] header:[NSNumber numberWithBool:0]];
+            MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
             items.insert([NSIndexPath indexPathForRow:i inSection:0], card);
             [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] + 1]];
             
@@ -182,7 +183,6 @@ static NSInteger const pageSize = 10;
         [_dataSource enqueueChangeset:{{}, items}
                       constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
     });
-	*/
 }
 
 - (void)removeMessageThread:(NSNumber*)index
