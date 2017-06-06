@@ -13,7 +13,6 @@
 
 #import "Card.h"
 #import "CardContext.h"
-#import "MainCardComponent.h"
 #import "HashtagCardComponent.h"
 #import "HashtagCategoryCardComponent.h"
 #import "HashtagCategoryHeaderComponent.h"
@@ -70,9 +69,7 @@ static CKComponent *cardComponent(Card *card, CardContext *context)
                       context:context];
         }
     }
-    return [MainCardComponent
-              newWithData:card.data
-              context:context];
+	return nil;
 }
 
 @end

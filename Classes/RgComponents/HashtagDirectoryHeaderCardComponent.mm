@@ -14,12 +14,8 @@
 
 #import "CardContext.h"
 
-#import "UIImage+RoundedCorner.h"
-#import "UIImage+Resize.h"
 #import "UIColor+Name.h"
 #import "UIColor+Hex.h"
-
-#import "RgCustomView.h"
 
 #import "ComponentUtilities.h"
 #import <stdlib.h>
@@ -86,7 +82,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float*, NSDictionary*);
 
 CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary * data)
 {
-    if (![[data objectForKey:@"parent2parent_name"] isEqual: @""]  && ![[data objectForKey:@"parent_name"] isEqual: @""] )
+    if (![[data objectForKey:@"parent_name"] isEqual: @""]  && ![[data objectForKey:@"category_name"] isEqual: @""] )
     {
         return
         [
@@ -107,7 +103,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary 
                 component:
                     [CKLabelComponent
                     newWithLabelAttributes:{
-                       .string = [data objectForKey:@"parent_name"],
+                       .string = [data objectForKey:@"category_name"],
                        .font = [UIFont fontWithName:@"SFUIText-SemiBold" size:24],
                        .alignment = NSTextAlignmentLeft,
                        .color = [UIColor colorWithHex:@"#213E87"],
@@ -122,7 +118,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary 
                   newWithInsets:{.left = 20, .right = 0, .top = 0, .bottom = 23}
                   component:
                     [CKLabelComponent newWithLabelAttributes:{
-                        .string = [data objectForKey:@"parent2parent_name"],
+                        .string = [data objectForKey:@"parent_name"],
                         .color = [UIColor colorWithHex:@"#222222"],
                         .font = [UIFont fontWithName:@"SFUIText-Light" size:19],
                         .alignment = NSTextAlignmentLeft,
@@ -136,7 +132,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary 
             }
         ];
     }
-    else if ([[data objectForKey:@"parent2parent_name"] isEqual: @""] && ![[data objectForKey:@"parent_name"] isEqual: @""])
+    else if ([[data objectForKey:@"parent_name"] isEqual: @""] && ![[data objectForKey:@"category_name"] isEqual: @""])
         return
         [
          CKStackLayoutComponent newWithView:
@@ -156,7 +152,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary 
                component:
                [CKLabelComponent
                 newWithLabelAttributes:{
-                    .string = [data objectForKey:@"parent_name"],
+                    .string = [data objectForKey:@"category_name"],
                     .font = [UIFont fontWithName:@"SFUIText-SemiBold" size:24],
                     .alignment = NSTextAlignmentLeft,
                     .color = [UIColor colorWithHex:@"#213E87"],

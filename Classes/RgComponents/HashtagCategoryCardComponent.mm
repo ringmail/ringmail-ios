@@ -14,12 +14,8 @@
 
 #import "CardContext.h"
 
-#import "UIImage+RoundedCorner.h"
-#import "UIImage+Resize.h"
 #import "UIColor+Name.h"
 #import "UIColor+Hex.h"
-
-#import "RgCustomView.h"
 
 #import "RgManager.h"
 

@@ -43,7 +43,7 @@
 + (void)configureStatefulView:(TextInputView *)statefulView forComponent:(TextInputComponent *)component
 {
 	statefulView.backgroundColor = [UIColor clearColor];
-	statefulView.font = [UIFont systemFontOfSize:16];
+	statefulView.font = [UIFont systemFontOfSize:18];
 	statefulView.textContainerInset = UIEdgeInsetsZero;
 	[statefulView setTag:[component.tag integerValue]];
 	component.textInputView = statefulView;

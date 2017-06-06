@@ -20,7 +20,6 @@
 #import "NSXMLElement+XEP_0335.h"
 
 #import "RegexKitLite/RegexKitLite.h"
-#import "JSQMessages.h"
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 #import "FMResultSet.h"

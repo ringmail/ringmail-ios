@@ -12,6 +12,8 @@
 #import "RgManager.h"
 #import "RgNetwork.h"
 #import "RgChatManager.h"
+#import "RKAdapterXMPP.h"
+#import "RingKit.h"
 
 /* RingMail */
 
@@ -63,7 +65,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"www-mb.ringxml.com";
+        return @"www-mf.ringxml.com";
     }
 }
 
@@ -76,7 +78,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     else
     {
-        return @"sip-mb.ringxml.com";
+        return @"sip-mf.ringxml.com";
     }
 }
 
@@ -190,7 +192,7 @@ static LevelDB* theConfigDatabase = nil;
     }
     NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address to:nil contact:contactNum uuid:nil];
     [lm setChatSession:sessionData[@"id"]];
-    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+    [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
 }
 
 + (void)startMessageMD5
@@ -207,13 +209,13 @@ static LevelDB* theConfigDatabase = nil;
                 UICompositeViewDescription* curView = [[PhoneMainView instance] topView];
                 if ((curView == nil) || (!
                                          ( // If not in the same chat room already
-                                          [curView equal:[ChatRoomViewController compositeViewDescription]] &&
+                                          [curView equal:[MessageViewController compositeViewDescription]] &&
                                           [lm chatSession] != nil &&
                                           [chat isEqualToNumber:[lm chatSession]]
                                           )
                                          )) {
                     [lm setChatSession:chat];
-                    [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+                    [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
                 }
             }
         }
@@ -227,15 +229,6 @@ static LevelDB* theConfigDatabase = nil;
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])
         {
-            /* Do not add hashtags to call log
-              RgChatManager *cmgr = [[LinphoneManager instance] chatManager];
-              NSDictionary *sessionData = [cmgr dbGetSessionID:address to:nil contact:nil uuid:nil];
-              [cmgr dbInsertCall:@{
-                               @"sip": @"",
-                               @"address": address,
-                               @"state": [NSNumber numberWithInt:0],
-                               @"inbound": [NSNumber numberWithBool:NO],
-                               } session:sessionData[@"id"]]; */
             [[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
                 @"address": [res objectForKey:@"target"],
             }];
@@ -655,9 +648,9 @@ static LevelDB* theConfigDatabase = nil;
     NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
     if (chatPass != nil && ! [chatPass isEqualToString:@""])
     {
-        [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
+        //[mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
+        [[RKCommunicator sharedInstance].adapterXMPP connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
     }
-    
 }
 
 + (void)chatEnsureConnection
@@ -673,7 +666,8 @@ static LevelDB* theConfigDatabase = nil;
         NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
         if (chatPass != nil && ! [chatPass isEqualToString:@""])
         {
-            [mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
+            //[mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
+			[[RKCommunicator sharedInstance].adapterXMPP connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
         }
     }
 }

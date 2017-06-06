@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,9 +18,7 @@
                 <outlet property="addressField" destination="IhO-DS-dM9" id="RTe-Yc-0ye"/>
                 <outlet property="addressLabel" destination="B5K-dj-8Ti" id="41K-im-kl7"/>
                 <outlet property="background" destination="Ofu-Rg-kvf" id="OAh-CF-fc6"/>
-                <outlet property="callButton" destination="Vsr-wD-qKw" id="WRY-eH-xpl"/>
                 <outlet property="goButton" destination="aDx-Np-URP" id="ShV-W2-sp1"/>
-                <outlet property="messageButton" destination="PN7-h9-doW" id="qtv-Ye-u8q"/>
                 <outlet property="rocketButtonImg" destination="IoP-Qu-KM5" id="j45-qY-Y6l"/>
                 <outlet property="searchButton" destination="0Pt-s7-ZsF" id="gIU-RN-LBl"/>
                 <outlet property="triangleButton" destination="Q0l-nI-7oQ" id="PQD-Sj-8kb"/>
@@ -53,11 +51,11 @@
                         <action selector="onSearch:" destination="-1" eventType="touchUpInside" id="JTs-ef-T08"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IhO-DS-dM9" userLabel="addressField" customClass="UIAddressTextField">
-                    <rect key="frame" x="56" y="15" width="252" height="20"/>
+                <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="IhO-DS-dM9" userLabel="addressField" customClass="UIAddressTextField">
+                    <rect key="frame" x="56" y="10.5" width="206" height="29"/>
                     <color key="tintColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                     <connections>
                         <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="DUi-I7-gQN"/>
@@ -65,27 +63,11 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5K-dj-8Ti">
-                    <rect key="frame" x="56" y="15.5" width="252" height="19"/>
+                    <rect key="frame" x="56" y="15.5" width="206" height="19"/>
                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
                     <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsr-wD-qKw" userLabel="callButton" customClass="UICallButton">
-                    <rect key="frame" x="226" y="10" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="phone.png"/>
-                    <connections>
-                        <outlet property="addressField" destination="IhO-DS-dM9" id="5bG-jx-B2C"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PN7-h9-doW" userLabel="messageButton" customClass="UIMessageButton">
-                    <rect key="frame" x="268" y="10" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="quote.png"/>
-                    <connections>
-                        <outlet property="addressField" destination="IhO-DS-dM9" id="HRA-R3-abH"/>
-                    </connections>
-                </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDx-Np-URP" userLabel="goButton" customClass="UICallButton">
                     <rect key="frame" x="268" y="10" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -94,7 +76,7 @@
                         <outlet property="addressField" destination="IhO-DS-dM9" id="NXX-kQ-eLf"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0l-nI-7oQ">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0l-nI-7oQ" userLabel="triangleButton">
                     <rect key="frame" x="267" y="11" width="32" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ringmail_triangle_green.png"/>
@@ -108,7 +90,7 @@
                 <constraint firstItem="IhO-DS-dM9" firstAttribute="leading" secondItem="IoP-Qu-KM5" secondAttribute="trailing" constant="6" id="0VT-hM-pUS"/>
                 <constraint firstItem="Ofu-Rg-kvf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7Fs-t6-RRH"/>
                 <constraint firstItem="0Pt-s7-ZsF" firstAttribute="leading" secondItem="IoP-Qu-KM5" secondAttribute="leading" id="D4Y-cj-pkv"/>
-                <constraint firstAttribute="trailing" secondItem="IhO-DS-dM9" secondAttribute="trailing" constant="12" id="GH8-tw-hTI"/>
+                <constraint firstAttribute="trailing" secondItem="IhO-DS-dM9" secondAttribute="trailing" constant="58" id="GH8-tw-hTI"/>
                 <constraint firstItem="0Pt-s7-ZsF" firstAttribute="top" secondItem="IoP-Qu-KM5" secondAttribute="top" id="JsL-7I-l8W"/>
                 <constraint firstItem="IoP-Qu-KM5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="P5l-1J-VsT"/>
                 <constraint firstItem="Ofu-Rg-kvf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QYB-ud-epR"/>
@@ -129,8 +111,6 @@
     </objects>
     <resources>
         <image name="hashtag_rocket_icon_blue.png" width="53" height="53"/>
-        <image name="phone.png" width="30" height="30"/>
-        <image name="quote.png" width="30" height="30"/>
         <image name="ringmail_triangle_green.png" width="32" height="28"/>
         <image name="ringpage.png" width="30" height="30"/>
     </resources>

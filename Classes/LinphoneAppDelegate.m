@@ -17,6 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#import "RgViewDelegate.h"
 #import "PhoneMainView.h"
 #import "LinphoneAppDelegate.h"
 #import "AddressBook/ABPerson.h"
@@ -165,7 +166,9 @@
 	return localRingNotifAction;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+	[RgViewDelegate sharedInstance];
     
     NSDictionary *activityDic = [launchOptions objectForKey:UIApplicationLaunchOptionsUserActivityDictionaryKey];
     if (activityDic) {

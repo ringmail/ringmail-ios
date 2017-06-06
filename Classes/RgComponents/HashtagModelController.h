@@ -25,6 +25,7 @@ extern NSString *const RG_HASHTAG_DIRECTORY;
 @property (nonatomic, retain) NSMutableArray *mainList;
 @property (nonatomic, retain) NSNumber *mainCount;
 @property (nonatomic, retain) NSString *mainPath;
+@property (nonatomic, retain) NSDictionary *mainHeader;
 
 /**
  Gets more page items

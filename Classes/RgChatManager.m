@@ -11,7 +11,6 @@
 #import "NSString+MD5.h"
 #import "NSXMLElement+XMPP.h"
 #import "NoteSQL.h"
-#import "NYXImagesKit/NYXImagesKit.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
 #define THIS_METHOD NSStringFromSelector(_cmd)
@@ -544,10 +543,10 @@
                     NSData* imageData = responseObject;
                     [self dbUpdateMessageData:imageData forUUID:uuid key:@"msg_data"];
 					// Create thumbnail
-					UIImage *orig = [UIImage imageWithData:imageData];
+					/*UIImage *orig = [UIImage imageWithData:imageData];
                     UIImage *thumb = [orig scaleToFitSize:(CGSize){400, 400}];
             		NSData *imgThumb = UIImagePNGRepresentation(thumb);
-                    [self dbUpdateMessageData:imgThumb forUUID:uuid key:@"msg_thumbnail"];
+                    [self dbUpdateMessageData:imgThumb forUUID:uuid key:@"msg_thumbnail"];*/
                     NSDictionary *dict = @{
                        @"session": session,
                        @"uuid": uuid,
@@ -1112,13 +1111,13 @@
     else if ([type isEqualToString:@"image/png"])
     {
         msgData = [params objectForKey:@"data"];
-        if ([msgData length] > 0)
+        /*if ([msgData length] > 0)
         {
             // Create thumbnail
     		UIImage *orig = [params objectForKey:@"image"];
             UIImage *thumb = [orig scaleToFitSize:(CGSize){400, 400}];
     		msgThumb = UIImagePNGRepresentation(thumb);
-        }
+        }*/
     }
     else if ([type isEqualToString:@"application/json"])
     {

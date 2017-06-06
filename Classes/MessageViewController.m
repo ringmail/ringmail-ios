@@ -10,8 +10,8 @@
 #import "MessageTableViewCell.h"
 #import "MessageTextView.h"
 #import "TypingIndicatorView.h"
-#import "Message.h"
 #import "UIColor+Hex.h"
+#import "RingKit.h"
 
 #import <LoremIpsum/LoremIpsum.h>
 
@@ -28,8 +28,6 @@
 @property (nonatomic, strong) NSArray *searchResult;
 
 @property (nonatomic, strong) UIWindow *pipWindow;
-
-@property (nonatomic, weak) Message *editingMessage;
 
 @end
 
@@ -68,7 +66,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
     self = [super initWithCollectionViewLayout:flowLayout];
-    //self = [super initWithTableViewStyle:UITableViewStylePlain];
     if (self) {
         [self commonInit];
     }
@@ -343,23 +340,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 	
 	// Send message!
 	NSString *text = [self.textView.text copy];
-	NSLog(@"Send Message: %@", text);
-	
-    RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-	NSNumber *threadID = [[LinphoneManager instance] chatSession];
-	NSDictionary *sdata = [mgr dbGetSessionData:threadID];
-	NSString *origTo = NILIFNULL(sdata[@"session_to"]);
-    NSString *uuid = [mgr sendMessageTo:sdata[@"session_tag"] from:origTo body:text contact:NILIFNULL(sdata[@"contact_id"])];
-	NSLog(@"Sent Message UUID: %@", uuid);
-	
-	NSDictionary *dict = @{
-        @"session":threadID
-    };
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextSent object:self userInfo:dict];
-
+	//NSLog(@"Send Message: %@", text);
+	RKCommunicator* comm = [RKCommunicator sharedInstance];
+	RKMessage* message = [RKMessage newWithData:@{
+		@"thread": [comm currentThread],
+		@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+		@"body": text,
+		@"deliveryStatus": @(RKMessageStatusSending),
+	}];
+	[comm sendMessage:message];
     [super didPressRightButton:sender];
 }
-
 
 - (NSString *)keyForTextCaching
 {
@@ -388,8 +379,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)didCommitTextEditing:(id)sender
 {
     // Notifies the view controller when tapped on the right "Accept" button for commiting the edited text
-    self.editingMessage.text = [self.textView.text copy];
-    
+    //self.editingMessage.text = [self.textView.text copy];
     //[self.tableView reloadData];
     
     [super didCommitTextEditing:sender];

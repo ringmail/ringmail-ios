@@ -1,9 +1,10 @@
 #import "Send.h"
 
+#import "RingKit.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "RgManager.h"
-#import "ChatRoomViewController.h"
+#import "MessageViewController.h"
 #import "PhotoCameraViewController.h"
 #import "VideoCameraViewController.h"
 #import "MomentCameraViewController.h"
@@ -26,6 +27,75 @@
 	if ([msgdata[@"to"] length] > 0)
 	{
 		NSLog(@"sendMessage:%@", msgdata);
+		RKCommunicator* comm = [RKCommunicator sharedInstance];
+		RKAddress* address = [RKAddress newWithString:msgdata[@"to"]];
+		RKThread* thread = [comm getThreadByAddress:address];
+		if (self.data[@"send_media"] != nil)
+		{
+			__block NSString* file = self.data[@"send_file"];
+			__block PHAsset* asset = self.data[@"send_asset"];
+   			__block NSData *imgData = nil;
+   			__block NSString *mediaType = nil;
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    			if (file != nil)
+    			{
+					imgData = [NSData dataWithContentsOfFile:file];
+					mediaType = @"image/png";
+    			}
+    			else if (asset != nil)
+    			{
+                	PHImageManager* imageManager = [PHImageManager defaultManager];
+                	PHImageRequestOptions* opts = [PHImageRequestOptions new];
+                	opts.resizeMode = PHImageRequestOptionsResizeModeExact;
+                	opts.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+                	opts.synchronous = YES;
+            		[imageManager requestImageDataForAsset:asset options:opts resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+    					imgData = imageData;
+            		}];
+					mediaType = @"image/png"; // TODO: customize
+    			}
+				RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
+        			@"thread": thread,
+        			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+        			@"body": msgdata[@"message"],
+        			@"deliveryStatus": @(RKMessageStatusSending),
+    				@"mediaData": imgData,
+    				@"mediaType": mediaType,
+    			}];
+    			if (file != nil)
+    			{
+				    if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[[pmsg documentURL] path] error:NULL] == NO)
+                    {
+						NSAssert(FALSE, @"File copy failure");
+                    }
+                    else
+                    {
+                        [[NSFileManager defaultManager] removeItemAtPath:file error:NULL];
+                    }
+				}
+				else if (asset != nil)
+    			{
+					UIImage *img = [UIImage imageWithData:imgData];
+					NSData *pngData = UIImagePNGRepresentation(img);
+					[pngData writeToURL:[pmsg documentURL] atomically:YES];
+				}
+    			NSLog(@"Photo Message: %@", pmsg);
+        		[comm sendMessage:pmsg];
+			});
+		}
+		else
+		{
+			RKMessage* message = [RKMessage newWithData:@{
+    			@"thread": thread,
+    			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+    			@"body": msgdata[@"message"],
+       			@"deliveryStatus": @(RKMessageStatusSending),
+    		}];
+    		[comm sendMessage:message];
+		}
+   		[comm startMessageView:thread];
+		
+		/*
         RgChatManager* mgr = [[LinphoneManager instance] chatManager];
     	NSString* to = msgdata[@"to"];
 		if ([msgdata[@"message"] length] > 0)
@@ -62,7 +132,8 @@
     	[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:nil];
 		NSDictionary *sessionData = [mgr dbGetSessionID:to to:nil contact:nil uuid:nil];
 		[[LinphoneManager instance] setChatSession:sessionData[@"id"]];
-		[[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+		[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
+		*/
 	}
 }
 

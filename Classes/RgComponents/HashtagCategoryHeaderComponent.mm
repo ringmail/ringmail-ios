@@ -4,12 +4,8 @@
 
 #import "CardContext.h"
 
-#import "UIImage+RoundedCorner.h"
-#import "UIImage+Resize.h"
 #import "UIColor+Name.h"
 #import "UIColor+Hex.h"
-
-#import "RgCustomView.h"
 
 @implementation HashtagCategoryHeaderComponent
 
@@ -61,7 +57,7 @@ CKInsetComponent* hashtagCatDirHeaderLabelComponent(float* wIn, NSDictionary * d
             style:{.spacing = 8}
             children:{
                 {[CKLabelComponent newWithLabelAttributes:{
-                    .string = [data objectForKey:@"name"],
+                    .string = [data objectForKey:@"category_name"],
                     .color = [UIColor colorWithHex:@"#213E87"],
                     .font = [UIFont fontWithName:@"SFUIText-SemiBold" size:24],
                     .alignment = NSTextAlignmentLeft,

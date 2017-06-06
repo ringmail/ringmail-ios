@@ -43,7 +43,7 @@
 + (void)configureStatefulView:(SendToInputView *)statefulView forComponent:(SendToInputComponent *)component
 {
 	statefulView.backgroundColor = [UIColor clearColor];
-	statefulView.font = [UIFont systemFontOfSize:16];
+	statefulView.font = [UIFont systemFontOfSize:18];
 	[statefulView setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 	[statefulView setAutocorrectionType:UITextAutocorrectionTypeNo];
 	[statefulView setKeyboardType:UIKeyboardTypeEmailAddress];

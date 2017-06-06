@@ -553,24 +553,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                                 initWithTitle:displayName
                                 message:@"Select Communication:"];
             [alert addCancelButtonWithTitle:@"Cancel" block:^{}];
-            /*[alert addButtonWithTitle:@"Message" block:^{
-                [[LinphoneManager instance] setChatTag:destPlain];
-                [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
-            }];*/
             [alert addButtonWithTitle:@"Email" block:^{
                 MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
                 controller.mailComposeDelegate = self;
                 [controller setToRecipients:[NSArray arrayWithObjects:destPlain, nil]];
                 if (controller) [[PhoneMainView instance] presentViewController:controller animated:YES completion:NULL];
             }];
-            /*[alert addButtonWithTitle:@"Call" block:^{
-                RgMainViewController *controller = DYNAMIC_CAST(
-                    [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]],
-                    RgMainViewController);
-                if (controller != nil) {
-                    [controller call:dest displayName:displayName];
-                }
-            }];*/
             [alert show];
 		}
 	} else {

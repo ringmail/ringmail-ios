@@ -11,11 +11,14 @@
 
 #import "MainCardComponentController.h"
 #import "CKComponentInternal.h"
-#import "MainCardComponent.h"
 #import "UIColor+Hex.h"
 #import "RgManager.h"
 
 @implementation MainCardComponentController
+
+// TODO: This becomes MessageThreadComponentController
+
+/*
 
 - (void)didSwipeLeft:(CKComponent *)component gesture:(UISwipeGestureRecognizer *)gesture
 {
@@ -107,6 +110,8 @@
 		@"id":[NSNumber numberWithInteger:btn.tag],
 	}];
 }
+
+*/
 
 @end
 

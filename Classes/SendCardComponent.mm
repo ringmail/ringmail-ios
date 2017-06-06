@@ -113,7 +113,7 @@
 					{[CKInsetComponent newWithInsets:{.top = 10, .bottom = 10, .left = 0, .right = 0} component:
 						[CKLabelComponent newWithLabelAttributes:{
 							.string = @"To:",
-							.font = [UIFont systemFontOfSize:16],
+							.font = [UIFont systemFontOfSize:18],
 							.alignment = NSTextAlignmentLeft,
 						}
 						viewAttributes:{
@@ -122,7 +122,7 @@
 						}
 						size:{.height = 20, .width = 30}]
 					]},
-					{[CKInsetComponent newWithInsets:{.top = 10, .bottom = 10, .left = 0, .right = 0} component:
+					{[CKInsetComponent newWithInsets:{.top = 11, .bottom = 9, .left = 0, .right = 0} component:
 						[SendToInputComponent newWithTag:[NSNumber numberWithInt:0] size:{.height = 20, .width = width - 100}]
 					]}
 				}]},

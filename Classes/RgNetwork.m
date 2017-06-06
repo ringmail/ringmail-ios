@@ -311,36 +311,19 @@ static RgNetwork* theRgNetwork = nil;
     NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
     if (rgLogin != nil && rgPass != nil)
     {
+		/* Geo coordinates */
+        NSString *lat = [NSString stringWithFormat:@"%f", [RgLocationManager sharedInstance].currentLocation.coordinate.latitude];
+        NSString *lon = [NSString stringWithFormat:@"%f", [RgLocationManager sharedInstance].currentLocation.coordinate.longitude];
+		
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 		parameters[@"login"] = rgLogin;
 		parameters[@"password"] = rgPass;
 		parameters[@"category_id"] = params[@"category_id"];
-        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/hashtag_directory", self.networkHost];
-        [manager POST:postUrl parameters:parameters progress:nil success:okay failure:fail];
-    }
-}
-
-// mrkbxt
-- (void)businessCategoryDirectory:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail
-{
-    LevelDB* cfg = [RgManager configDatabase];
-    NSString *rgLogin = [cfg objectForKey:@"ringmail_login"];
-    NSString *rgPass = [cfg objectForKey:@"ringmail_password"];
-    if (rgLogin != nil && rgPass != nil)
-    {
-        NSString *lat = [NSString stringWithFormat:@"%f", [RgLocationManager sharedInstance].currentLocation.coordinate.latitude];
-        NSString *lon = [NSString stringWithFormat:@"%f", [RgLocationManager sharedInstance].currentLocation.coordinate.longitude];
-        
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-        parameters[@"login"] = rgLogin;
-        parameters[@"password"] = rgPass;
-        parameters[@"parent"] = params[@"parent"];
         parameters[@"lat"] = lat;
         parameters[@"lon"] = lon;
-        parameters[@"width"] = params[@"screenWidth"];
-        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/business_cat_directory", self.networkHost];
+        parameters[@"width"] = params[@"screen_width"];
+        NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/hashtag_directory", self.networkHost];
         [manager POST:postUrl parameters:parameters progress:nil success:okay failure:fail];
     }
 }

@@ -55,6 +55,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 @implementation RgTextViewController
 @synthesize chatRoom = _chatRoom;
+@synthesize chatThread = _chatThread;
 @synthesize backgroundImageView = _backgroundImageView;
 @synthesize collectionView = _collectionView;
 @synthesize typingIndicatorProxyView = _typingIndicatorProxyView;
@@ -75,6 +76,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     if (self = [super initWithNibName:nil bundle:nil])
     {
 		self.currentLayout = layout;
+		self.chatThread = [[RKCommunicator sharedInstance] currentThread];
         self.scrollViewProxy = [self collectionViewWithLayout:layout];
         [self slk_commonInit];
     }
@@ -118,19 +120,19 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [self.view addSubview:self.typingIndicatorProxyView];
     [self.view addSubview:self.textInputbar];
 	
+    [self slk_setupViewConstraints];
+    [self slk_registerKeyCommands];
+	
 	[self addChildViewController:_chatRoom];
     [_chatRoom didMoveToParentViewController:self];
-    
-    [self slk_setupViewConstraints];
-    
-    [self slk_registerKeyCommands];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 	
-	NSNumber* threadID = [[LinphoneManager instance] chatSession];
+	//TODO: Refresh collection data instead of recreating the container
+	/*NSNumber* threadID = [[LinphoneManager instance] chatSession];
 	if (! [threadID isEqualToNumber:self.chatRoom.chatThreadID])
 	{
 		NSLog(@"%s Change chat room", __PRETTY_FUNCTION__);
@@ -152,7 +154,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 		
 		[NSLayoutConstraint deactivateConstraints:self.view.constraints];
 		[self slk_setupViewConstraints];
-	}
+	}*/
     
     // Invalidates this flag when the view appears
     self.textView.didNotResignFirstResponder = NO;
@@ -214,11 +216,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (UICollectionView *)collectionViewWithLayout:(UICollectionViewLayout *)layout
 {
     if (!_collectionView) {
-    	NSNumber* threadID = [[LinphoneManager instance] chatSession];
-       	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID];
-    	NSLog(@"%@", messages);
-    		
-        ChatRoomCollectionViewController *mainController = [[ChatRoomCollectionViewController alloc] initWithCollectionViewLayout:layout chatThreadID:threadID elements:messages];
+        ChatRoomCollectionViewController *mainController = [[ChatRoomCollectionViewController alloc] initWithCollectionViewLayout:layout chatThread:_chatThread];
         [[mainController collectionView] setBounces:YES];
         [[mainController collectionView] setAlwaysBounceVertical:YES];
         _chatRoom = mainController;
@@ -479,6 +477,12 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 
 #pragma mark - Setters
+
+- (void)setChatThread:(RKThread *)chatThread
+{
+	self->_chatThread = chatThread;
+	
+}
 
 - (void)setEdgesForExtendedLayout:(UIRectEdge)rectEdge
 {
@@ -2227,9 +2231,10 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter addObserver:self selector:@selector(cacheTextView) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 	
 	// RingMail
-	[notificationCenter addObserver:self selector:@selector(chatReceivedEvent:) name:kRgTextReceived object:nil];
-    [notificationCenter addObserver:self selector:@selector(chatSentEvent:) name:kRgTextSent object:nil];
-    [notificationCenter addObserver:self selector:@selector(chatUpdateEvent:) name:kRgTextUpdate object:nil];
+    [notificationCenter addObserver:self selector:@selector(chatSentEvent:) name:kRKMessageSent object:nil];
+	[notificationCenter addObserver:self selector:@selector(chatReceivedEvent:) name:kRKMessageReceived object:nil];
+    [notificationCenter addObserver:self selector:@selector(chatUpdateEvent:) name:kRKMessageUpdated object:nil];
+    [notificationCenter addObserver:self selector:@selector(chatRoomChange:) name:kRKMessageViewChanged object:nil];
 }
 
 - (void)slk_unregisterNotifications
@@ -2265,11 +2270,11 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 	
 	// RingMail
-	[notificationCenter removeObserver:self name:kRgTextReceived object:nil];
-    [notificationCenter removeObserver:self name:kRgTextSent object:nil];
-    [notificationCenter removeObserver:self name:kRgTextUpdate object:nil];
+	[notificationCenter removeObserver:self name:kRKMessageSent object:nil];
+    [notificationCenter removeObserver:self name:kRKMessageReceived object:nil];
+    [notificationCenter removeObserver:self name:kRKMessageUpdated object:nil];
+    [notificationCenter removeObserver:self name:kRKMessageViewChanged object:nil];
 }
-
 
 #pragma mark - View Auto-Rotation
 
@@ -2358,12 +2363,11 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSDictionary* info = event.userInfo;
-	if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
+	RKThread* inputThread = [info[@"message"] thread];
+	RKThread* chatThread = [_chatRoom chatThread];
+	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
 	{
-		NSNumber* threadID = [[LinphoneManager instance] chatSession];
-       	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID last:_chatRoom.lastMessageID];
-    	NSLog(@"%@", messages);
-		[_chatRoom appendMessages:messages];
+		[_chatRoom refreshMessages];
 	}
 }
 
@@ -2371,18 +2375,52 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSDictionary* info = event.userInfo;
-	if ([_chatRoom.chatThreadID isEqualToNumber:info[@"session"]])
+	RKThread* inputThread = [info[@"message"] thread];
+	RKThread* chatThread = [_chatRoom chatThread];
+	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
 	{
-	    NSNumber* threadID = [[LinphoneManager instance] chatSession];
-       	NSArray* messages = [[[LinphoneManager instance] chatManager] dbGetMessages:threadID last:_chatRoom.lastMessageID];
-    	NSLog(@"%@", messages);
-		[_chatRoom appendMessages:messages];
-	}
+		[_chatRoom refreshMessages];
+	}	
 }
 
 - (void)chatUpdateEvent:(NSNotification*)event
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)chatRoomChange:(NSNotification*)event
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSDictionary* info = event.userInfo;
+	RKThread* inputThread = info[@"thread"];
+	RKThread* chatThread = [_chatRoom chatThread];
+	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
+	{
+		NSLog(@"Same Chat Room");
+	}
+	else
+	{
+		NSLog(@"New Chat Room: %@", inputThread.threadId);
+		_chatThread = inputThread;
+		[_chatRoom removeFromParentViewController];
+		_chatRoom = nil;
+		[_scrollViewProxy removeFromSuperview];
+		_scrollViewProxy = nil;
+		_collectionView = nil;
+		[self setScrollViewProxy:[self collectionViewWithLayout:_currentLayout]];
+		
+		CGFloat height = [self slk_appropriateScrollViewHeight];
+		CGRect scrollFrame = [_scrollViewProxy frame];
+		scrollFrame.size.height = height;
+		[_scrollViewProxy setFrame:scrollFrame];
+		
+		[self.view insertSubview:_scrollViewProxy belowSubview:self.autoCompletionView];
+    	[self addChildViewController:_chatRoom];
+        [_chatRoom didMoveToParentViewController:self];
+		
+		[NSLayoutConstraint deactivateConstraints:self.view.constraints];
+		[self slk_setupViewConstraints];
+	}
 }
 
 @end

@@ -76,7 +76,7 @@
         	}
 			NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address to:nil contact:contactNum uuid:nil];
             [[LinphoneManager instance] setChatSession:sessionData[@"id"]];
-            [[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE];
+            [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
 		}
 	}
 }

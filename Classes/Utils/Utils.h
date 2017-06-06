@@ -31,6 +31,7 @@
  })
 
 #define NILIFNULL(foo) (([foo isKindOfClass:[NSNull class]]) ? nil : foo)
+#define NULLIFNIL(foo) ((foo) ? foo : [NSNull null])
 
 #import <ortp/ortp.h>
 

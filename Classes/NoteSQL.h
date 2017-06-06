@@ -37,6 +37,7 @@
 - (NoteRow*)create:(NSString*)table data:(NSDictionary*)params;
 - (NoteRow*)row:(NSString*)table id:(NSNumber*)inp;
 - (NoteRow*)row:(NSString*)table where:(NSDictionary*)params;
+- (NSNumber*)lastInsertId;
 
 
 @end
