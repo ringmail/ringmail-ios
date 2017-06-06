@@ -202,6 +202,7 @@
 				"m.id AS message_id, "
 				"m.msg_body AS msg_body, "
 				"m.msg_type AS msg_type, "
+				"m.msg_class AS msg_class, "
 				"m.msg_inbound AS msg_inbound, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
@@ -257,6 +258,7 @@
 					@"body": row[@"msg_body"],
 					@"type": row[@"msg_type"],
 					@"direction": row[@"msg_inbound"],
+					@"class": row[@"msg_class"],
 				};
 			}
 			else if (NILIFNULL(row[@"call_id"]) != nil)

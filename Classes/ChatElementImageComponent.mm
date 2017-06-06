@@ -17,7 +17,7 @@
 	
 	int maxBubbleWidth = (int)((width - (12 * scale)) / 3) * 2;
 	//int maxBubbleHeight = (int)(maxBubbleWidth * 0.5862);
-	int maxBubbleHeight = (int)(maxBubbleWidth * 1.4);
+	int maxBubbleHeight = (int)(maxBubbleWidth * 1.2);
 	
 	CKComponent* res;
 	

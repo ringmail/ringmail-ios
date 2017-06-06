@@ -56,24 +56,72 @@
         latest = [dateFormatter stringFromDate:dateLatest];
 	}
 	
+    CKComponent* lastItem = nil;
 	NSString *msg;
 	if ([data[@"type"] isEqualToString:@"message"])
 	{
-		msg = data[@"detail"][@"body"];
+		if ([data[@"detail"][@"class"] isEqualToString:@"RKPhotoMessage"])
+		{
+			msg = @"Photo";
+            NSDictionary *attrsDictionary = @{
+                NSFontAttributeName: [UIFont boldSystemFontOfSize:15],
+                NSForegroundColorAttributeName: [UIColor colorWithHex:@"#7254A3"],
+            };
+			NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
+            lastItem = [CKStackLayoutComponent newWithView:{} size:{} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStart
+            } children:{
+				{[CKInsetComponent newWithInsets:{.left = 0, .right = 0, .top = 2, .bottom = 0} component:
+					[CKImageComponent newWithImage:[context imageNamed:@"message_summary_photo_normal.png"] size:{.height = 25, .width = 27}]
+				]},
+        		{[CKInsetComponent newWithInsets:{.left = 6, .right = 0, .top = 5, .bottom = 0} component:
+    					[CKTextComponent newWithTextAttributes:{
+                        .attributedString = attrString,
+                    } viewAttributes:{
+                        {@selector(setBackgroundColor:), [UIColor clearColor]},
+                        {@selector(setUserInteractionEnabled:), @NO},
+                    } options:{} size:{}]
+				]},
+			}];
+		}
+		else
+		{
+    		msg = data[@"detail"][@"body"];
+            NSDictionary *attrsDictionary = @{
+                NSFontAttributeName: [UIFont systemFontOfSize:14],
+                NSForegroundColorAttributeName: [UIColor colorWithHex:@"#353535"],
+            };
+			NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
+    		lastItem = [CKTextComponent newWithTextAttributes:{
+                    .attributedString = attrString,
+                    .lineBreakMode = NSLineBreakByWordWrapping,
+                } viewAttributes:{
+                    {@selector(setBackgroundColor:), [UIColor clearColor]},
+                    {@selector(setUserInteractionEnabled:), @NO},
+                } options:{} size:{.height = 34, .width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/ + 4/*inset*/ )}];
+		}
 	}
 	else if ([data[@"type"] isEqualToString:@"call"])
 	{
 		msg = @"[Call]";
+		NSDictionary *attrsDictionary = @{
+            NSFontAttributeName: [UIFont systemFontOfSize:14],
+            NSForegroundColorAttributeName: [UIColor colorWithHex:@"#353535"],
+        };
+		NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
+		lastItem = [CKTextComponent newWithTextAttributes:{
+                .attributedString = attrString,
+                .lineBreakMode = NSLineBreakByWordWrapping,
+            } viewAttributes:{
+                {@selector(setBackgroundColor:), [UIColor clearColor]},
+                {@selector(setUserInteractionEnabled:), @NO},
+            } options:{} size:{.height = 34, .width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/ + 4/*inset*/ )}];
 	}
 	else if ([data[@"type"] isEqualToString:@"none"])
 	{
-		msg = @"";
+		lastItem = [CKComponent new];
 	}
-    NSDictionary *attrsDictionary = @{
-        NSFontAttributeName: [UIFont systemFontOfSize:14],
-        NSForegroundColorAttributeName: [UIColor colorWithHex:@"#353535"],
-    };
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 	
     CKComponent* body = nil;
 	body = [CKStackLayoutComponent newWithView:{} size:{.width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/), .height = 62} style:{
@@ -91,15 +139,7 @@
 				{@selector(setUserInteractionEnabled:), @NO},
 			} size:{.height = 18}]
         ]},
-        {[CKInsetComponent newWithInsets:{.left = 0, .right = 4, .top = 0, .bottom = 0} component:
-            [CKTextComponent newWithTextAttributes:{
-                .attributedString = attrString,
-                .lineBreakMode = NSLineBreakByWordWrapping,
-            } viewAttributes:{
-                {@selector(setBackgroundColor:), [UIColor clearColor]},
-                {@selector(setUserInteractionEnabled:), @NO},
-            } options:{} size:{.height = 34, .width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/ + 4/*inset*/ )}]
-        ]}
+        {[CKInsetComponent newWithInsets:{.left = 0, .right = 4, .top = 0, .bottom = 0} component:lastItem]},
     }];
 	
 	NSNumber *st = scope.state();
