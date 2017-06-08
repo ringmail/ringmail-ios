@@ -733,13 +733,13 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         return [UIContactDetailsOptions height];
     } else if (section == ContactSections_Number) {
         if ([[dataCache objectAtIndex:0] count] > 0) {
-            return 50;
+            return 40;
         } else {
             return 0.000001f;
         }
     } else if (section == ContactSections_Email) {
         if ([[dataCache objectAtIndex:1] count] > 0) {
-            return 50;
+            return 40;
         } else {
             return 0.000001f;
         }
