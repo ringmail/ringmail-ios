@@ -692,16 +692,11 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         phoneLabel.textAlignment = NSTextAlignmentLeft;
         
         if (section == ContactSections_Email)
-        {
             phoneLabel.text = NSLocalizedString(@"Email addresses", nil);
-            [tmp addSubview:phoneLabel];
-        }
         else if (section == ContactSections_Number)
-        {
             phoneLabel.text = NSLocalizedString(@"Phone numbers", nil);
-            [tmp addSubview:phoneLabel];
-        }
         
+        [tmp addSubview:phoneLabel];
         return tmp;
 	}
 }
