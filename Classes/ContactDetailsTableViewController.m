@@ -170,7 +170,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		}
 		[dataCache addObject:subArray];
 	}
-
+    
 	// Email
 	{
 		ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonEmailProperty);
@@ -674,16 +674,40 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    NSLog(@"viewForHeaderInSection:  %u", contactSections[section]);
 	if (section == ContactSections_None) {
 		return [headerController view];
 	} else if (section == ContactSections_Options) {
         return [optionsController view];
-    } else if (section == (ContactSections_MAX - (ContactSections_MAX - 1))) {
-        UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 10)];
-        tmp.backgroundColor = UIColor.whiteColor;
-        return tmp;
     } else {
-		return nil;
+        
+        UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
+        tmp.backgroundColor = UIColor.whiteColor;
+        
+        if (section == ContactSections_Email)
+        {
+            UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, self.view.bounds.size.width - 30, 20)];
+            phoneLabel.text = NSLocalizedString(@"Email addresses", nil);
+            phoneLabel.font = [UIFont fontWithName:@"SFUIText-Regular" size:18];
+            phoneLabel.numberOfLines = 1;
+            phoneLabel.backgroundColor = [UIColor clearColor];
+            phoneLabel.textColor = [UIColor blackColor];
+            phoneLabel.textAlignment = NSTextAlignmentLeft;
+            [tmp addSubview:phoneLabel];
+        }
+        else if (section == ContactSections_Number)
+        {
+            UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, self.view.bounds.size.width - 30, 20)];
+            phoneLabel.text = NSLocalizedString(@"Phone numbers", nil);
+            phoneLabel.font = [UIFont fontWithName:@"SFUIText-Regular" size:18];
+            phoneLabel.numberOfLines = 1;
+            phoneLabel.backgroundColor = [UIColor clearColor];
+            phoneLabel.textColor = [UIColor blackColor];
+            phoneLabel.textAlignment = NSTextAlignmentLeft;
+            [tmp addSubview:phoneLabel];
+        }
+        
+        return tmp;
 	}
 }
 
@@ -697,18 +721,6 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	return nil;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if ([[self getSectionData:section] count] == 0)
-		return nil;
-
-//	if (contactSections[section] == ContactSections_Number) {
-//		return NSLocalizedString(@"Phone numbers", nil);
-//	} else if (contactSections[section] == ContactSections_Email) {
-//		return NSLocalizedString(@"Email addresses", nil);
-//	}
-	return nil;
-}
-
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	return nil;
@@ -719,8 +731,18 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		return [UIContactDetailsHeader height:[headerController isEditing] member:self.member];
 	} else if (section == ContactSections_Options) {
         return [UIContactDetailsOptions height];
-    } else if (section == (ContactSections_MAX - (ContactSections_MAX - 1))) {
-        return 10;
+    } else if (section == ContactSections_Number) {
+        if ([[dataCache objectAtIndex:0] count] > 0) {
+            return 50;
+        } else {
+            return 0.000001f;
+        }
+    } else if (section == ContactSections_Email) {
+        if ([[dataCache objectAtIndex:1] count] > 0) {
+            return 50;
+        } else {
+            return 0.000001f;
+        }
     } else
         return 0.000001f;
 }

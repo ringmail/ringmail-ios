@@ -35,7 +35,7 @@
 		[tf setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
 		self.detailTextField = tf;
         
-		UIFont *font = [UIFont fontWithName:@"SFUIText-Regular" size:18];
+		UIFont *font = [UIFont fontWithName:@"SFUIText-Light" size:17];
         UIFont *font2 = [UIFont fontWithName:@"SFUIText-Bold" size:12];
         
 		[self.textLabel setFont:font2];
