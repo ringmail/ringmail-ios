@@ -674,7 +674,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSLog(@"viewForHeaderInSection:  %u", contactSections[section]);
+
 	if (section == ContactSections_None) {
 		return [headerController view];
 	} else if (section == ContactSections_Options) {
