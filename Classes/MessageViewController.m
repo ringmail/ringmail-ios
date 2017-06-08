@@ -49,9 +49,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 														  tabBarEnabled:NO
 															 fullscreen:NO
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:YES
-                                                                segLeft:@"All"
-                                                               segRight:@"Missed"];
+														   portraitMode:YES];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;

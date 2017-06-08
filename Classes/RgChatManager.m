@@ -308,7 +308,7 @@
     [message addChild:body];
     
     // TODO: send images a different way like upload/download
-    NSString *imageID = [[[self xmppStream] generateUUID] lowercaseString];
+    //NSString *imageID = [[[self xmppStream] generateUUID] lowercaseString];
     NSData *imageData = UIImagePNGRepresentation(image);
     NSMutableDictionary *messageData = [NSMutableDictionary dictionary];
     [messageData setObject:image forKey:@"image"];
@@ -317,7 +317,7 @@
     
     [self dbInsertMessage:session type:@"image/png" data:messageData uuid:messageID inbound:NO url:nil];
     //NSLog(@"RingMail: Insert Image Message");
-    [[RgNetwork instance] uploadImage:imageData uuid:imageID callback:^(NSURLSessionTask *operation, id responseObject) {
+    /*[[RgNetwork instance] uploadImage:imageData uuid:imageID callback:^(NSURLSessionTask *operation, id responseObject) {
         NSDictionary* res = responseObject;
         //NSLog(@"RingMail - Chat Upload Success: %@", res);
         NSString *ok = [res objectForKey:@"result"];
@@ -334,7 +334,7 @@
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:kRgUserUnauthorized object:nil userInfo:nil];
         }
-    }];
+    }];*/
     return messageID;
 }
 
@@ -538,21 +538,21 @@
                 refresh = NO;
                 NSString *imageUrl = [[attach attributeForName:@"url"] stringValue];
                 [self dbInsertMessage:session type:@"image/png" data:messageData uuid:uuid inbound:YES url:imageUrl];
-                [[RgNetwork instance] downloadImage:imageUrl callback:^(NSURLSessionTask *operation, id responseObject) {
+                /*[[RgNetwork instance] downloadImage:imageUrl callback:^(NSURLSessionTask *operation, id responseObject) {
                     //NSLog(@"RingMail: Chat Download Complete: %@", responseObject);
                     NSData* imageData = responseObject;
                     [self dbUpdateMessageData:imageData forUUID:uuid key:@"msg_data"];
 					// Create thumbnail
-					/*UIImage *orig = [UIImage imageWithData:imageData];
+					UIImage *orig = [UIImage imageWithData:imageData];
                     UIImage *thumb = [orig scaleToFitSize:(CGSize){400, 400}];
             		NSData *imgThumb = UIImagePNGRepresentation(thumb);
-                    [self dbUpdateMessageData:imgThumb forUUID:uuid key:@"msg_thumbnail"];*/
+                    [self dbUpdateMessageData:imgThumb forUUID:uuid key:@"msg_thumbnail"];
                     NSDictionary *dict = @{
                        @"session": session,
                        @"uuid": uuid,
                     };
                     [[NSNotificationCenter defaultCenter] postNotificationName:kRgTextUpdate object:self userInfo:dict];
-                }];
+                }];*/
             }
             else if (jsonHolder != nil)
             {

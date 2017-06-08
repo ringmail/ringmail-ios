@@ -41,12 +41,11 @@
 @property (assign) BOOL landscapeMode;
 @property (assign) BOOL portraitMode;
 @property (assign) BOOL darkBackground;
-@property (strong) NSString *segLeft;
-@property (strong) NSString *segRight;
 
 - (id)copy;
 - (BOOL)equal:(UICompositeViewDescription*) description;
-- (id)init:(NSString *)name content:(NSString *)content stateBar:(NSString*)stateBar 
+- (id)init:(NSString *)name content:(NSString *)content
+						   stateBar:(NSString*)stateBar
                         stateBarEnabled:(BOOL) stateBarEnabled
                                  navBar:(NSString*)navBar
                                  tabBar:(NSString*)tabBar
@@ -54,9 +53,7 @@
                           tabBarEnabled:(BOOL) tabBarEnabled
                              fullscreen:(BOOL) fullscreen
                           landscapeMode:(BOOL) landscapeMode
-                           portraitMode:(BOOL) portraitMode
-                                 segLeft:(NSString*)segLeft
-                                segRight:(NSString*)segRight;
+                           portraitMode:(BOOL) portraitMode;
 
 @end
 
@@ -81,7 +78,7 @@
 @property (nonatomic, strong) IBOutlet UIView* navBarView;
 
 
-- (void)changeView:(UICompositeViewDescription *)description;
+- (void)changeView:(UICompositeViewDescription *)description content:(UIViewController*)mainContent;
 - (void)setFullScreen:(BOOL) enabled;
 - (void)setStateBarHidden:(BOOL) hidden;
 - (void)setToolBarHidden:(BOOL) hidden;

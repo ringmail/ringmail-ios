@@ -643,8 +643,8 @@ static RootViewManager *rootViewManagerInstance = nil;
     printf("updating Nav Bar for: %s\n", [vc.name UTF8String]);  // mrkbxt
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     dict[@"header"] = vc.name;
-    dict[@"lSeg"] = vc.segLeft;
-    dict[@"rSeg"] = vc.segRight;
+    dict[@"lSeg"] = @"Left";
+    dict[@"rSeg"] = @"Right";
     [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:nil userInfo:dict];
 }
 
@@ -653,11 +653,22 @@ static RootViewManager *rootViewManagerInstance = nil;
 	[mainViewController setFullScreen:enabled];
 }
 
-- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view {
-	return [self changeCurrentView:view push:FALSE];
+- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view
+{
+	return [self changeCurrentView:view content:nil push:FALSE];
 }
 
-- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view push:(BOOL)push {
+- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view content:(UIViewController*)mainContent
+{
+	return [self changeCurrentView:view content:mainContent push:FALSE];
+}
+
+- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view push:(BOOL)push
+{
+	return [self changeCurrentView:view content:nil push:push];
+}
+
+- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view content:(UIViewController*)mainContent push:(BOOL)push {
 	BOOL force = push;
 	NSMutableArray *viewStack = [RootViewManager instance].viewDescriptionStack;
 	if (!push) {
@@ -665,10 +676,11 @@ static RootViewManager *rootViewManagerInstance = nil;
 		[viewStack removeAllObjects];
 	}
 	[viewStack addObject:view];
-	return [self _changeCurrentView:view transition:nil force:force];
+	return [self _changeCurrentView:view content:mainContent transition:nil force:force];
 }
 
 - (UIViewController *)_changeCurrentView:(UICompositeViewDescription *)view
+								 content:(UIViewController*)mainContent
 							  transition:(CATransition *)transition
 								   force:(BOOL)force {
 	LOGI(@"PhoneMainView: Change current view to %@", [view name]);
@@ -680,7 +692,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 
         [vc.mainViewController setViewTransition:nil];
 		[vc updateStatusBar:view];
-		[vc.mainViewController changeView:view];
+		[vc.mainViewController changeView:view content:mainContent];
 		vc->currentView = view;
         [vc updateNavBar:view];
 	}
@@ -698,7 +710,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	while ([viewStack count] > 1 && ![[viewStack lastObject] equal:view]) {
 		[viewStack removeLastObject];
 	}
-	[self _changeCurrentView:[viewStack lastObject] transition:[PhoneMainView getBackwardTransition] force:TRUE];
+	[self _changeCurrentView:[viewStack lastObject] content:nil transition:[PhoneMainView getBackwardTransition] force:TRUE];
 }
 
 - (UICompositeViewDescription *)firstView {
@@ -724,7 +736,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	NSMutableArray *viewStack = [RootViewManager instance].viewDescriptionStack;
 	if ([viewStack count] > 1) {
 		[viewStack removeLastObject];
-		[self _changeCurrentView:[viewStack lastObject] transition:[PhoneMainView getBackwardTransition] force:TRUE];
+		[self _changeCurrentView:[viewStack lastObject] content:nil transition:[PhoneMainView getBackwardTransition] force:TRUE];
 		return [mainViewController getCurrentViewController];
 	}
 	return nil;

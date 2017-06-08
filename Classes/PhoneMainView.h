@@ -80,7 +80,9 @@
 @property (nonatomic, strong) UIView *optionsModalBG;
 
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView;
-- (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView push:(BOOL)push;
+- (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView content:(UIViewController*)mainContent;
+- (UIViewController*)changeCurrentView:(UICompositeViewDescription *)view push:(BOOL)push;
+- (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView content:(UIViewController*)mainContent push:(BOOL)push;
 - (UIViewController*)popCurrentView;
 - (void)popToView:(UICompositeViewDescription *)currentView;
 - (UICompositeViewDescription *)firstView;
