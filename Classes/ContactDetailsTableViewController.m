@@ -269,6 +269,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 - (void)setSipContactEntry:(Entry *)entry withValue:(NSString *)value {
 	[self setOrCreateSipContactEntry:entry withValue:value];
 }
+
 - (void)addEntry:(UITableView *)tableview section:(NSInteger)section animated:(BOOL)animated {
 	[self addEntry:tableview section:section animated:animated value:@""];
 }
@@ -810,7 +811,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 			ABRecordSetValue(contact, property, lMap, nil);
 			CFRelease(lMap);
 		}
-
+        
 		[cell.detailTextLabel setText:value];
 	} else {
 		LOGE(@"Not valid UIEditableTableViewCell");

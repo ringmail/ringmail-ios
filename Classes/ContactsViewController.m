@@ -169,7 +169,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     
     self.tableView.sectionIndexColor = [UIColor colorWithHex:@"#0A60FF"];
-    self.tableView.sectionIndexBackgroundColor = [UIColor colorWithHex:@"#FFFFFF"];
+    self.tableView.sectionIndexBackgroundColor = [UIColor colorWithHex:@"#FFFFFF" alpha:0.33f];
+    
     
     [self.view addSubview:tableView];
     [self update];
@@ -213,6 +214,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.searchBarViewController = [[RgContactSearchViewController alloc] init];
     self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
     self.isSearchBarVisible = YES;
+    [self.searchBarViewController.searchField addTarget:self action:@selector(onSearchChange:) forControlEvents:UIControlEventEditingChanged];
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
     
@@ -384,6 +386,15 @@ replacementString:(NSString *)string {
     [self.view endEditing:YES];
 }
 
+- (IBAction)onSearchChange:(id)sender
+{
+    NSString *searchText =  [self.searchBarViewController.searchField text];
+    NSLog(@"Search: %@", searchText);
+    [ContactSelection setNameOrEmailFilter:searchText];
+    [tableController loadData];
+}
+
+
 #pragma mark - searchField delegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -393,6 +404,8 @@ replacementString:(NSString *)string {
 	[ContactSelection setNameOrEmailFilter:searchText];
 	[tableController loadData];
 }
+
+
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
 	[searchBar setShowsCancelButton:FALSE animated:TRUE];

@@ -176,7 +176,7 @@ static int ms_strcmpfuz(const char *fuzzy_word, const char *sentence) {
 				} else if (lLocalizedlOrganization.length) {
 					name = [NSString stringWithFormat:@"%@", lLocalizedlOrganization];
 				}
-
+                
 				if (name != nil && [name length] > 0) {
 					// Add the contact only if it fuzzy match filter too (if any)
 					if ([ContactSelection getNameOrEmailFilter] == nil ||

@@ -4143,8 +4143,6 @@
 				4D039A9C1ECE2F070091F8EF /* RgContactSearchViewController.h */,
 				4D039A9D1ECE2F080091F8EF /* RgContactSearchViewController.m */,
 				4D039A9E1ECE2F080091F8EF /* RgContactSearchViewController.xib */,
-				C4FD785A1CF93EF20066BDB1 /* RgCustomView.h */,
-				C4FD785B1CF93EF20066BDB1 /* RgCustomView.m */,
 				C42C0DD31CAF2D9600AD5A91 /* RgCallDuration.h */,
 				C42C0DD41CAF2D9600AD5A91 /* RgCallDuration.m */,
 				C42C0D501CAECA1500AD5A91 /* RgInCallViewController.h */,
@@ -8041,7 +8039,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		511AEDDAB089CEDE7BC4DCD2 /* [CP] Copy Pods Resources */ = {
@@ -8190,7 +8188,7 @@
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				C44A40FA1E70E415000F3E24 /* CLColorPickerView.m in Sources */,
 				4DE427D91ED62E4100872002 /* UIContactDetailsOptions.m in Sources */,
-				C450DBB71C70FFB00053592E /* MainCollectionViewController.mm in Sources */,
+				C450DBB71C70FFB00053592E /* MessageListViewController.mm in Sources */,
 				C450DBB71C70FFB00053592E /* MessageListViewController.mm in Sources */,
 				C42BD4251ED64608009B324D /* HeaderComponent.mm in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
