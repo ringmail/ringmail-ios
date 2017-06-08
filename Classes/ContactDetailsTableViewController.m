@@ -684,26 +684,21 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
         tmp.backgroundColor = UIColor.whiteColor;
         
+        UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, self.view.bounds.size.width - 30, 20)];
+        phoneLabel.font = [UIFont fontWithName:@"SFUIText-Regular" size:18];
+        phoneLabel.numberOfLines = 1;
+        phoneLabel.backgroundColor = [UIColor clearColor];
+        phoneLabel.textColor = [UIColor blackColor];
+        phoneLabel.textAlignment = NSTextAlignmentLeft;
+        
         if (section == ContactSections_Email)
         {
-            UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, self.view.bounds.size.width - 30, 20)];
             phoneLabel.text = NSLocalizedString(@"Email addresses", nil);
-            phoneLabel.font = [UIFont fontWithName:@"SFUIText-Regular" size:18];
-            phoneLabel.numberOfLines = 1;
-            phoneLabel.backgroundColor = [UIColor clearColor];
-            phoneLabel.textColor = [UIColor blackColor];
-            phoneLabel.textAlignment = NSTextAlignmentLeft;
             [tmp addSubview:phoneLabel];
         }
         else if (section == ContactSections_Number)
         {
-            UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, self.view.bounds.size.width - 30, 20)];
             phoneLabel.text = NSLocalizedString(@"Phone numbers", nil);
-            phoneLabel.font = [UIFont fontWithName:@"SFUIText-Regular" size:18];
-            phoneLabel.numberOfLines = 1;
-            phoneLabel.backgroundColor = [UIColor clearColor];
-            phoneLabel.textColor = [UIColor blackColor];
-            phoneLabel.textAlignment = NSTextAlignmentLeft;
             [tmp addSubview:phoneLabel];
         }
         
