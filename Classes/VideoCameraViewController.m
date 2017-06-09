@@ -6,7 +6,7 @@
 #import "MomentEditViewController.h"
 #import "VideoViewController.h"
 #import "RingKit.h"
-#import "AVAsset+VideoOrientation.h"
+#import "ThumbnailFactory.h"
 
 @implementation VideoCameraViewController
 
@@ -244,15 +244,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[self.camera startRecordingWithOutputUrl:outputURL didRecord:^(LLSimpleCamera *camera, NSURL *outputFileUrl, NSError *error) {
 			NSLog(@"Done Recording: %@", outputURL);
 			AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:outputURL options:nil];
-			LBVideoOrientation vidOrient = [asset videoOrientation];
-			NSLog(@"Video Orientation: %@", _LBVideoOrientation(vidOrient));
-            AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-            NSError *thumbError = NULL;
-            CMTime time = CMTimeMake(1, 1);
-            CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&thumbError];
 			CGFloat scale = [UIScreen mainScreen].scale;
-			UIImage* thumb = [UIImage imageWithCGImage:refImg scale:scale orientation:UIImageOrientationRight];
-			thumb = [self makeThumbnail:thumb size:CGSizeMake(90 * scale, 90 * scale)];
+			UIImage* thumb = [ThumbnailFactory thumbnailForVideoAsset:asset size:CGSizeMake(90 * scale, 90 * scale)];
 			RgMainViewController* ctl = DYNAMIC_CAST(
 				[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE],
 				RgMainViewController
@@ -264,30 +257,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     			@"thumbnail": thumb,
     		}];
 			//VideoViewController *vc = [[VideoViewController alloc] initWithVideoUrl:outputURL];
-			//[[PhoneMainView instance] changeCurrentView:[VideoViewController compositeViewDescription] content:vc push:FALSE];
+			//[[PhoneMainView instance] changeCurrentView:[VideoViewController compositeViewDescription] content:vc push:YES];
 		}];
     }
-}
-
-- (UIImage *)makeThumbnail:(UIImage *)inputImg size:(CGSize)size
-{
-    CGFloat scale = size.width/inputImg.size.width;
-    if ((size.height/inputImg.size.height) > scale)
-	{
-		scale = size.height/inputImg.size.height;
-	}
-    CGFloat width = inputImg.size.width * scale;
-    CGFloat height = inputImg.size.height * scale;
-    CGRect imageRect = CGRectMake((size.width - width)/2.0f,
-                                  (size.height - height)/2.0f,
-                                  width,
-                                  height);
-
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    [inputImg drawInRect:imageRect];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();    
-    UIGraphicsEndImageContext();
-    return newImage;
 }
 
 - (void)closeButtonPressed:(UIButton *)button

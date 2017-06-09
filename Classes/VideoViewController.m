@@ -78,7 +78,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
-	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE];
+	//[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE];
+	[[PhoneMainView instance] popCurrentView];
 //    AVPlayerItem *p = [notification object];
 //    [p seekToTime:kCMTimeZero];
 }

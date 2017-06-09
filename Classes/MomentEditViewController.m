@@ -114,6 +114,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     		RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE], RgMainViewController);
     		[ctl addMedia:@{
     			@"file": tmpfile,
+    			@"mediaType": @"image/png",
     			@"thumbnail": thumb,
     		}];
     	}

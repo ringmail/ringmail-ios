@@ -20,6 +20,7 @@
 #import "UIColor+Hex.h"
 #import "RgManager.h"
 
+
 @implementation SendCardComponentController
 
 @synthesize state;
@@ -125,6 +126,8 @@
 - (void)actionMediaTap:(CKButtonComponent *)sender
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
+	SendCardComponent* sc = (SendCardComponent*)self.component;
+	[sc.send showVideoMedia];
 }
 
 @end

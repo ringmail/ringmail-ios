@@ -36,6 +36,7 @@
     [message addAttributeWithName:@"id" stringValue:self.uuid];
     [message addAttributeWithName:@"conversation" stringValue:self.thread.uuid];
     [message addAttributeWithName:@"type" stringValue:@"chat"];
+    [message addAttributeWithName:@"class" stringValue:[NSString stringWithFormat:@"%s", object_getClassName(self)]];
     [message addAttributeWithName:@"timestamp" stringValue:[self.timestamp strftime]];
     [message addAttributeWithName:@"to" stringValue:msgTo];
 	if (self.thread.originalTo != nil)
@@ -55,7 +56,7 @@
     [message addChild:bodytag];
 	
 	// Media attachment upload then send
-	NSAssert(self.mediaData != nil, @"mediaData required");
+	NSAssert(self.localPath != nil, @"localPath required");
 	[self uploadMedia:^(BOOL success) {
 		if (success)
 		{
@@ -68,6 +69,35 @@
         	send(message);
 		}
 	}];
+}
+
+- (NSURL*)documentURL
+{
+	NSString* mainUuid = [self uuid];
+	NSString* otherPath = [self localPath];
+	NSURL* url = [self applicationDocumentsDirectory];
+	NSString* urlStr = [url absoluteString];
+	if (otherPath != nil)
+	{
+		urlStr = [urlStr stringByAppendingPathComponent:otherPath];
+	}
+	else
+	{
+		urlStr = [urlStr stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov", mainUuid]];
+	}
+	url = [NSURL URLWithString:urlStr];
+	return url;
+}
+
+// TODO: add error handlers
+- (void)downloadMedia:(void (^)(BOOL success))complete
+{
+	NSAssert(self.remoteURL, @"Remote URL required");
+    [[RgNetwork instance] downloadURL:[self remoteURL] destination:[self documentURL] callback:^(NSURLSessionTask *operation, id responseObject) {
+        NSLog(@"%s: Download Complete", __PRETTY_FUNCTION__);
+		self.mediaType = @"video/mp4";
+		complete(TRUE);
+    }];
 }
 
 @end

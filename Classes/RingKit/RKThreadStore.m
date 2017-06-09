@@ -98,6 +98,7 @@
 				"msg_status INTEGER NOT NULL DEFAULT '', "
 				"msg_type TEXT DEFAULT 'text/plain', "
 				"msg_class TEXT DEFAULT '', "
+				"msg_local_path TEXT DEFAULT NULL, "
 				"msg_remote_url TEXT DEFAULT NULL"
 			");",
             @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON rk_message (msg_uuid);",
@@ -311,6 +312,7 @@
 				"m.msg_status AS msg_status, "
 				"m.msg_class AS msg_class, "
 				"m.msg_remote_url AS msg_remote_url, "
+				"m.msg_local_path AS msg_local_path, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
 				"c.call_duration AS call_duration, "
@@ -364,6 +366,10 @@
 				if (NILIFNULL(row[@"msg_remote_url"]) != nil)
 				{
 					param[@"remoteURL"] = [NSURL URLWithString:row[@"msg_remote_url"]];
+				}
+				if (NILIFNULL(row[@"msg_local_path"]) != nil)
+				{
+					param[@"localPath"] = row[@"msg_local_path"];
 				}
 				RKMessage* msg = [RKMessage newWithData:param];
 				[result addObject:msg];
@@ -643,7 +649,8 @@
 				"m.msg_uuid AS msg_uuid, "
 				"m.msg_status AS msg_status, "
 				"m.msg_class AS msg_class, "
-				"m.msg_remote_url AS msg_remote_url "
+				"m.msg_remote_url AS msg_remote_url, "
+				"m.msg_local_path AS msg_local_path "
             "FROM rk_message m, rk_thread_item ti, rk_thread t "
             "WHERE m.id=ti.message_id AND m.thread_id = t.id "
             "AND m.msg_uuid = ?";
@@ -694,6 +701,10 @@
 				if (NILIFNULL(row[@"msg_remote_url"]) != nil)
 				{
 					param[@"remoteURL"] = [NSURL URLWithString:row[@"msg_remote_url"]];
+				}
+				if (NILIFNULL(row[@"msg_local_path"]) != nil)
+				{
+					param[@"localPath"] = row[@"msg_local_path"];
 				}
 				result = [RKMessage newWithData:param];
 			}

@@ -785,6 +785,14 @@
 		C473F87E1ECCDED8008B548B /* ChatElementImageComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */; };
 		C473F8801ECD0770008B548B /* UIImage+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = C473F87F1ECD0770008B548B /* UIImage+Scale.m */; };
 		C473F8811ECD0770008B548B /* UIImage+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = C473F87F1ECD0770008B548B /* UIImage+Scale.m */; };
+		C4752BA71EE9C6C2008B12F9 /* ringpanel_media_remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4752BA51EE9C6C2008B12F9 /* ringpanel_media_remove@2x.png */; };
+		C4752BA81EE9C6C2008B12F9 /* ringpanel_media_remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4752BA51EE9C6C2008B12F9 /* ringpanel_media_remove@2x.png */; };
+		C4752BA91EE9C6C2008B12F9 /* ringpanel_video_badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4752BA61EE9C6C2008B12F9 /* ringpanel_video_badge@2x.png */; };
+		C4752BAA1EE9C6C2008B12F9 /* ringpanel_video_badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4752BA61EE9C6C2008B12F9 /* ringpanel_video_badge@2x.png */; };
+		C4752BB51EE9E8F6008B12F9 /* ChatElementVideoComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4752BB41EE9E8F6008B12F9 /* ChatElementVideoComponent.mm */; };
+		C4752BB61EE9E8F6008B12F9 /* ChatElementVideoComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4752BB41EE9E8F6008B12F9 /* ChatElementVideoComponent.mm */; };
+		C4752BB91EE9EA65008B12F9 /* ThumbnailFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C4752BB81EE9EA65008B12F9 /* ThumbnailFactory.m */; };
+		C4752BBA1EE9EA65008B12F9 /* ThumbnailFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C4752BB81EE9EA65008B12F9 /* ThumbnailFactory.m */; };
 		C476A7071CF24DFE00CA3772 /* ringpage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7041CF24DFE00CA3772 /* ringpage@3x.png */; };
 		C476A7081CF24DFE00CA3772 /* ringpage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7051CF24DFE00CA3772 /* ringpage@2x.png */; };
 		C476A7091CF24DFE00CA3772 /* ringpage.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7061CF24DFE00CA3772 /* ringpage.png */; };
@@ -3148,6 +3156,12 @@
 		C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatElementImageComponent.mm; sourceTree = "<group>"; };
 		C473F87F1ECD0770008B548B /* UIImage+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Scale.m"; path = "Utils/UIImage+Scale.m"; sourceTree = "<group>"; };
 		C473F8841ECD07AF008B548B /* UIImage+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Scale.h"; sourceTree = "<group>"; };
+		C4752BA51EE9C6C2008B12F9 /* ringpanel_media_remove@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpanel_media_remove@2x.png"; path = "Resources/ringpanel_media_remove@2x.png"; sourceTree = "<group>"; };
+		C4752BA61EE9C6C2008B12F9 /* ringpanel_video_badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpanel_video_badge@2x.png"; path = "Resources/ringpanel_video_badge@2x.png"; sourceTree = "<group>"; };
+		C4752BB31EE9E8E8008B12F9 /* ChatElementVideoComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatElementVideoComponent.h; path = RgComponents/ChatElementVideoComponent.h; sourceTree = "<group>"; };
+		C4752BB41EE9E8F6008B12F9 /* ChatElementVideoComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatElementVideoComponent.mm; sourceTree = "<group>"; };
+		C4752BB71EE9EA65008B12F9 /* ThumbnailFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailFactory.h; sourceTree = "<group>"; };
+		C4752BB81EE9EA65008B12F9 /* ThumbnailFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailFactory.m; sourceTree = "<group>"; };
 		C476A7041CF24DFE00CA3772 /* ringpage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpage@3x.png"; path = "Resources/ringpage@3x.png"; sourceTree = "<group>"; };
 		C476A7051CF24DFE00CA3772 /* ringpage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringpage@2x.png"; path = "Resources/ringpage@2x.png"; sourceTree = "<group>"; };
 		C476A7061CF24DFE00CA3772 /* ringpage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringpage.png; path = Resources/ringpage.png; sourceTree = "<group>"; };
@@ -4856,6 +4870,8 @@
 				C4C8FE951EE0BF0C002DDB3E /* ChatElementCallComponent.mm */,
 				C473F87B1ECCDEC9008B548B /* ChatElementImageComponent.h */,
 				C473F87C1ECCDED8008B548B /* ChatElementImageComponent.mm */,
+				C4752BB31EE9E8E8008B12F9 /* ChatElementVideoComponent.h */,
+				C4752BB41EE9E8F6008B12F9 /* ChatElementVideoComponent.mm */,
 				C4AB1A091E8D9CFD00C7A754 /* ChatRoomCollectionViewController.h */,
 				C4AB1A0A1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm */,
 			);
@@ -5079,6 +5095,8 @@
 				C4E1CB3C1E6E20F100698166 /* ViewUtils.m */,
 				C49544761EE8CDDB00B1B302 /* AVAsset+VideoOrientation.h */,
 				C49544771EE8CDDB00B1B302 /* AVAsset+VideoOrientation.mm */,
+				C4752BB71EE9EA65008B12F9 /* ThumbnailFactory.h */,
+				C4752BB81EE9EA65008B12F9 /* ThumbnailFactory.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -5220,6 +5238,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C4752BA51EE9C6C2008B12F9 /* ringpanel_media_remove@2x.png */,
+				C4752BA61EE9C6C2008B12F9 /* ringpanel_video_badge@2x.png */,
 				4DE427B71ECFA27900872002 /* video_selected.png */,
 				4DE427B81ECFA27900872002 /* video_pressed.png */,
 				4DE427B91ECFA27900872002 /* video_normal.png */,
@@ -6616,6 +6636,7 @@
 				F0C1F9101A28781F009402C9 /* corner-left-bottom.png in Resources */,
 				D3A8BB7F15A6CC3200F96BE5 /* setup_back_disabled.png in Resources */,
 				D3A8BB8115A6CC3200F96BE5 /* setup_cancel_disabled.png in Resources */,
+				C4752BA91EE9C6C2008B12F9 /* ringpanel_video_badge@2x.png in Resources */,
 				D3A8BB8315A6CC3200F96BE5 /* setup_start_disabled.png in Resources */,
 				4D33F7DF1EC4D5C400D913A7 /* tabs_recents_selected@2x.png in Resources */,
 				D389363915A6D53200A3A3AA /* chat_bubble_incoming.9.png in Resources */,
@@ -6827,6 +6848,7 @@
 				D3A74F1C15C69392001500B9 /* options_over~ipad.png in Resources */,
 				F070E6371A2622EC00E17AFD /* incall_padding_right_landscape.png in Resources */,
 				C41EF31B1B8BD87B0085E75B /* ringmail_button1.png in Resources */,
+				C4752BA71EE9C6C2008B12F9 /* ringpanel_media_remove@2x.png in Resources */,
 				D3A74F1E15C69392001500B9 /* options_selected~ipad.png in Resources */,
 				D3A74F2015C69392001500B9 /* options_transfer_default~ipad.png in Resources */,
 				D3A74F2215C69392001500B9 /* options_transfer_disabled~ipad.png in Resources */,
@@ -7234,6 +7256,7 @@
 				C4AC280B1D3963FA003B6232 /* numpad_one_default.png in Resources */,
 				C4AC280C1D3963FA003B6232 /* numpad_one_over.png in Resources */,
 				4D33F79A1EC4D5C400D913A7 /* login_button@2x.png in Resources */,
+				C4752BA81EE9C6C2008B12F9 /* ringpanel_media_remove@2x.png in Resources */,
 				4D33F7EE1EC4D5C400D913A7 /* tabs_ring_pressed@3x.png in Resources */,
 				C4AC280D1D3963FA003B6232 /* numpad_two_default.png in Resources */,
 				C4AC280E1D3963FA003B6232 /* numpad_two_over.png in Resources */,
@@ -7724,6 +7747,7 @@
 				C4AC299C1D3963FA003B6232 /* options_add_disabled~ipad.png in Resources */,
 				C4AC299D1D3963FA003B6232 /* options_add_over~ipad.png in Resources */,
 				C4AC299E1D3963FA003B6232 /* options_default~ipad.png in Resources */,
+				C4752BAA1EE9C6C2008B12F9 /* ringpanel_video_badge@2x.png in Resources */,
 				C4AC299F1D3963FA003B6232 /* options_disabled~ipad.png in Resources */,
 				C4AC29A01D3963FA003B6232 /* options_over~ipad.png in Resources */,
 				C4AC29A11D3963FA003B6232 /* incall_padding_right_landscape.png in Resources */,
@@ -8287,6 +8311,7 @@
 				C4BC49361BF9477B00826264 /* RgChatQuestionSelect.m in Sources */,
 				C48C10891E81AB0B0094F1F3 /* Media.m in Sources */,
 				C42C0D521CAECA1500AD5A91 /* RgInCallViewController.m in Sources */,
+				C4752BB91EE9EA65008B12F9 /* ThumbnailFactory.m in Sources */,
 				C45B93301ECE4E5E00974011 /* RKThreadStore.m in Sources */,
 				C4D999521B96910A003CC323 /* RgManager.m in Sources */,
 				C4E1CB351E6E1A2400698166 /* MomentCameraViewController.m in Sources */,
@@ -8301,6 +8326,7 @@
 				C4593A591E6A4086001C3BDD /* FavoriteComponent.mm in Sources */,
 				C42BD4151ED642A4009B324D /* Card.m in Sources */,
 				C4A853E21E66115C00FEAFB0 /* SendComponent.mm in Sources */,
+				C4752BB51EE9E8F6008B12F9 /* ChatElementVideoComponent.mm in Sources */,
 				C4E1CB561E6E3EAD00698166 /* MomentEditViewController.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				C44A40E21E70E415000F3E24 /* CLHueEffect.m in Sources */,
@@ -8480,6 +8506,7 @@
 				C4AC2AF51D3963FA003B6232 /* MessageThreadContext.m in Sources */,
 				C4AB1A041E8D9C9400C7A754 /* ChatElementComponent.mm in Sources */,
 				C45B93351ECE4EA700974011 /* RKThread.m in Sources */,
+				C4752BB61EE9E8F6008B12F9 /* ChatElementVideoComponent.mm in Sources */,
 				C44A40F51E70E415000F3E24 /* CLRotateTool.m in Sources */,
 				C45B93411ECE4EF200974011 /* RKItem.m in Sources */,
 				C449E3CB1E945550008510AB /* RgTextViewController.m in Sources */,
@@ -8544,6 +8571,7 @@
 				C4E1CB571E6E3EAD00698166 /* MomentEditViewController.m in Sources */,
 				C4AC2B211D3963FA003B6232 /* IASKAppSettingsViewController.m in Sources */,
 				C44A40E31E70E415000F3E24 /* CLHueEffect.m in Sources */,
+				C4752BBA1EE9EA65008B12F9 /* ThumbnailFactory.m in Sources */,
 				C4AC2B221D3963FA003B6232 /* FavoriteCollectionViewController.mm in Sources */,
 				C44A410F1E70E416000F3E24 /* _CLImageEditorViewController.m in Sources */,
 				C49544791EE8CDDB00B1B302 /* AVAsset+VideoOrientation.mm in Sources */,

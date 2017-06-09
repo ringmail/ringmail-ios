@@ -350,6 +350,7 @@
 				}
 			}
             NSString *threadUuid = [[[xmppMessage attributeForName:@"uuid"] stringValue] lowercaseString];
+			NSString *msgClass = [[xmppMessage attributeForName:@"class"] stringValue];
 			NSString *origTo = [[xmppMessage attributeForName:@"original-to"] stringValue];
 			RKAddress *originalTo = nil;
 			if (origTo != nil)
@@ -370,13 +371,13 @@
 				@"timestamp": timestamp,
 				@"direction": [NSNumber numberWithInteger:RKItemDirectionInbound],
 				@"body": body,
-				@"deliveryStatus": @(RKMessageStatusReceived)
+				@"deliveryStatus": @(RKMessageStatusReceived),
+				@"class": msgClass
 			}];
             if (attach != nil)
             {
                 NSString *imageUrl = [[attach attributeForName:@"url"] stringValue];
 				param[@"remoteURL"] = [NSURL URLWithString:imageUrl];
-				param[@"class"] = @"RKPhotoMessage";
 			}
 			__block RKMessage *message = [RKMessage newWithData:param];
             if (attach != nil)
@@ -494,9 +495,16 @@
                 NSString* uuid = [[delivered attributeForName:@"id"] stringValue];
 				RKCommunicator* comm = [RKCommunicator sharedInstance];
         		RKMessage* message = [comm getMessageByUUID:uuid];
-        		message.deliveryStatus = RKMessageStatusDelivered;
-        		[comm didUpdateMessage:message];
-        		NSLog(@"Updated message: %@", message);
+				if (message != nil)
+				{
+            		message.deliveryStatus = RKMessageStatusDelivered;
+            		[comm didUpdateMessage:message];
+            		NSLog(@"Updated message: %@", message);
+				}
+				else
+				{
+            		NSLog(@"Message UUID not found: %@", uuid);
+				}
             }
         }
     }

@@ -7,6 +7,7 @@
 //
 
 #import "RKMediaMessage.h"
+#import "RKVideoMessage.h"
 #import "RKAddress.h"
 #import "RKThread.h"
 #import "RKThreadStore.h"
@@ -87,6 +88,7 @@
 		@"deliveryStatus": _RKMessageStatus(self.deliveryStatus),
 		@"remoteURL": NULLIFNIL(self.remoteURL),
 		@"mediaType": NULLIFNIL(self.mediaType),
+		@"localPath": NULLIFNIL(self.localPath),
 	};
     NSMutableString *data = [[NSMutableString alloc] init];
     for (NSString *k in input.allKeys)
@@ -111,6 +113,7 @@
 			@"msg_inbound": [NSNumber numberWithInteger:[self direction]],
 			@"msg_body": [self body],
 			@"msg_remote_url": NULLIFNIL([self remoteURL]),
+			@"msg_local_path": NULLIFNIL([self localPath]),
 		},
 	}];
 	NSNumber* detailId = [ndb lastInsertId];
@@ -134,6 +137,7 @@
 		@"update": @{
 			@"msg_status": [NSNumber numberWithInteger:[self deliveryStatus]],
 			@"msg_remote_url": NULLIFNIL([self remoteURL]),
+			@"msg_local_path": NULLIFNIL([self localPath]),
 		},
 		@"where": @{
 			@"id": [self messageId],
@@ -176,10 +180,12 @@
 	};
 	if (self.localPath != nil)
 	{
+		// Stream file urls
 		[[RgNetwork instance] uploadURL:[self documentURL] mimeType:ct extension:ext uuid:self.uuid callback:cb];
 	}
 	else
 	{
+		// Send entire NSData
 		[[RgNetwork instance] uploadData:self.mediaData mimeType:ct extension:ext uuid:self.uuid callback:cb];
 	}
 }
@@ -188,7 +194,7 @@
 - (void)downloadMedia:(void (^)(BOOL success))complete
 {
 	NSAssert(self.remoteURL, @"Remote URL required");
-	NSString* url = [self.remoteURL absoluteString];
+   	NSString* url = [self.remoteURL absoluteString];
     [[RgNetwork instance] downloadData:url callback:^(NSURLSessionTask *operation, id responseObject) {
         NSLog(@"%s: Download Complete", __PRETTY_FUNCTION__);
         NSData* imageData = responseObject;
@@ -205,6 +211,7 @@
 
 - (NSURL*)documentURL
 {
+	NSAssert(FALSE, @"Abstract method");
 	NSString* mainUuid = [self uuid];
 	NSString* otherPath = [self localPath];
 	NSURL* url = [self applicationDocumentsDirectory];

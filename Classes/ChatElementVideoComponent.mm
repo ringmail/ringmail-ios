@@ -1,12 +1,13 @@
 #import "ChatElement.h"
 #import "ChatElementContext.h"
-#import "ChatElementImageComponent.h"
+#import "ChatElementVideoComponent.h"
 
 #import "RingKit.h"
 #import "UIColor+Hex.h"
 #import "UIImage+Scale.h"
+#import "ThumbnailFactory.h"
 
-@implementation ChatElementImageComponent
+@implementation ChatElementVideoComponent
 
 + (instancetype)newWithChatElement:(ChatElement *)elem context:(ChatElementContext *)context
 {
@@ -16,25 +17,14 @@
 	CGFloat scale = [UIScreen mainScreen].scale;
 	
 	int maxBubbleWidth = (int)((width - (12 * scale)) / 3) * 2;
-	//int maxBubbleHeight = (int)(maxBubbleWidth * 0.5862);
-	int maxBubbleHeight = (int)(maxBubbleWidth * 1.2);
+	int maxBubbleHeight = (int)(maxBubbleWidth * 0.6);
 	
 	CKComponent* res;
 	
-	//UIImage* mainImage = [context getImageByID:data[@"id"] key:@"msg_data" size:CGSizeMake(maxBubbleWidth, maxBubbleHeight)];
-	RKPhotoMessage* message = data[@"item"];
-	//NSLog(@"Chat Image Component - Message: %@", message);
-	if (message.mediaData == nil)
-	{
-		message.mediaData = [NSData dataWithContentsOfURL:[message documentURL]];
-	}
-	UIImage* image = [UIImage imageWithData:message.mediaData];
-	CGSize maxSize = CGSizeMake(maxBubbleWidth, maxBubbleHeight);
-	if (image.size.height > maxSize.height || image.size.width > maxSize.width)
-	{
-		image = [image scaleImageToSize:maxSize];
-	}
-
+	RKVideoMessage* message = data[@"item"];
+	NSURL *mediaUrl = [message documentURL];
+	AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:mediaUrl options:nil];
+	UIImage *image = [ThumbnailFactory thumbnailForVideoAsset:asset size:CGSizeMake(maxBubbleWidth, maxBubbleHeight)];
 	if (message.direction == RKItemDirectionInbound)
 	{
 		res = [CKStackLayoutComponent newWithView:{} size:{
@@ -55,6 +45,7 @@
 						{
     						{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @15.0},
                             {@selector(setClipsToBounds:), @YES},
+							{CKComponentTapGestureAttribute(@selector(didTapVideo))},
 						}
 					} component:
 						[CKImageComponent newWithImage:image]
@@ -85,6 +76,7 @@
 						{
     						{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @15.0},
                             {@selector(setClipsToBounds:), @YES},
+							{CKComponentTapGestureAttribute(@selector(didTapVideo))},
 						}
 					} component:
 						[CKImageComponent newWithImage:image]
@@ -101,12 +93,17 @@
 	{
 		res = [CKInsetComponent newWithInsets:{.top = 0, .bottom = 20, .left = 0, .right = 0} component:res];
 	}
-	ChatElementImageComponent* c = [super newWithComponent:res];
+	ChatElementVideoComponent* c = [super newWithComponent:res];
 	if (c)
 	{
 		c->_element = elem;
 	}
 	return c;
+}
+
+- (void)didTapVideo
+{
+	[self.element showVideoMedia];
 }
 
 @end

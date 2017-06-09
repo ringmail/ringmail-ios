@@ -30,6 +30,7 @@ typedef void (^RgConversation)(NSString *to);
 - (void)registerPushTokenVoIP:(NSData*)tokenData;
 - (void)resendVerify:(NSDictionary*)params callback:(RgNetworkCallback)callback;
 - (void)uploadURL:(NSURL*)localUrl mimeType:(NSString*)ct extension:(NSString*)ext uuid:(NSString*)uuid callback:(RgNetworkCallback)callback;
+- (void)downloadURL:(NSURL*)source destination:(NSURL*)dest callback:(RgNetworkCallback)callback;
 - (void)uploadData:(NSData*)imageData mimeType:(NSString*)ct extension:(NSString*)ext uuid:(NSString*)uuid callback:(RgNetworkCallback)callback;
 - (void)downloadData:(NSString*)url callback:(RgNetworkCallback)callback;
 - (void)updateContacts:(NSDictionary*)params callback:(RgNetworkCallback)callback;

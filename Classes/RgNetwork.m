@@ -271,6 +271,27 @@ static RgNetwork* theRgNetwork = nil;
 	[uploadTask resume];
 }
 
+- (void)downloadURL:(NSURL*)source destination:(NSURL*)dest callback:(RgNetworkCallback)callback
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURLRequest *request = [NSURLRequest requestWithURL:source];
+    __block NSURLSessionDownloadTask *downloadTask;
+    downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+		NSLog(@"Download: %f", downloadProgress.fractionCompleted);
+    } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        return dest;
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        if (error) {
+            NSLog(@"Download Error: %@", [error userInfo]);
+        } else {
+			NSLog(@"Downlaod Success: %@", response);
+			callback(downloadTask, @{@"result": @"ok"});
+        }
+    }];
+    [downloadTask resume];
+}
+
 - (void)uploadData:(NSData*)imageData mimeType:(NSString*)ct extension:(NSString*)ext uuid:(NSString*)uuid callback:(RgNetworkCallback)callback
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

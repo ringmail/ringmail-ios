@@ -23,5 +23,6 @@
 - (void)uploadMedia:(void (^)(BOOL success))complete;
 - (void)downloadMedia:(void (^)(BOOL success))complete;
 - (NSURL*)documentURL;
+- (NSURL*)applicationDocumentsDirectory;
 
 @end

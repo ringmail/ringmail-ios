@@ -9,6 +9,7 @@
 #import "RKAddress.h"
 #import "RKMessage.h"
 #import "RKPhotoMessage.h"
+#import "RKVideoMessage.h"
 #import "RKThread.h"
 #import "Utils.h"
 #import "NSXMLElement+XMPP.h"
@@ -27,6 +28,14 @@
 		if ([param[@"class"] isEqualToString:@"RKPhotoMessage"])
 		{
 			return [[RKPhotoMessage alloc] initWithData:param];
+		}
+		else if ([param[@"class"] isEqualToString:@"RKVideoMessage"])
+		{
+			return [[RKVideoMessage alloc] initWithData:param];
+		}
+		else if ([param[@"class"] isEqualToString:@"RKMessage"])
+		{
+			return [[RKMessage alloc] initWithData:param];
 		}
 		else
 		{
@@ -136,6 +145,7 @@
     [message addAttributeWithName:@"id" stringValue:self.uuid];
     [message addAttributeWithName:@"conversation" stringValue:self.thread.uuid];
     [message addAttributeWithName:@"type" stringValue:@"chat"];
+	[message addAttributeWithName:@"class" stringValue:[NSString stringWithFormat:@"%s", object_getClassName(self)]];
     [message addAttributeWithName:@"timestamp" stringValue:[self.timestamp strftime]];
     [message addAttributeWithName:@"to" stringValue:msgTo];
 	if (self.thread.originalTo != nil)

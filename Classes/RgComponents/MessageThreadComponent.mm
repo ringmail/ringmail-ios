@@ -85,6 +85,31 @@
 				]},
 			}];
 		}
+		else if ([data[@"detail"][@"class"] isEqualToString:@"RKVideoMessage"])
+		{
+			msg = @"Video";
+            NSDictionary *attrsDictionary = @{
+                NSFontAttributeName: [UIFont boldSystemFontOfSize:15],
+                NSForegroundColorAttributeName: [UIColor colorWithHex:@"#7254A3"],
+            };
+			NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
+            lastItem = [CKStackLayoutComponent newWithView:{} size:{} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStart
+            } children:{
+				{[CKInsetComponent newWithInsets:{.left = 0, .right = 0, .top = 2, .bottom = 0} component:
+					[CKImageComponent newWithImage:[context imageNamed:@"message_summary_video_normal.png"] size:{.height = 25, .width = 27}]
+				]},
+        		{[CKInsetComponent newWithInsets:{.left = 6, .right = 0, .top = 5, .bottom = 0} component:
+    					[CKTextComponent newWithTextAttributes:{
+                        .attributedString = attrString,
+                    } viewAttributes:{
+                        {@selector(setBackgroundColor:), [UIColor clearColor]},
+                        {@selector(setUserInteractionEnabled:), @NO},
+                    } options:{} size:{}]
+				]},
+			}];
+		}
 		else
 		{
     		msg = data[@"detail"][@"body"];
