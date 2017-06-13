@@ -69,14 +69,29 @@
     			}
 				if (msg_image)
 				{
-    				RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
-            			@"thread": thread,
-            			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-            			@"body": msgdata[@"message"],
-            			@"deliveryStatus": @(RKMessageStatusSending),
-        				@"mediaData": imgData,
-        				@"mediaType": mediaType,
-        			}];
+      				RKMediaMessage* pmsg;
+					if (media[@"moment"] != nil)
+					{
+				        pmsg = [RKMomentMessage newWithData:@{
+                			@"thread": thread,
+                			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+                			@"body": msgdata[@"message"],
+                			@"deliveryStatus": @(RKMessageStatusSending),
+            				@"mediaData": imgData,
+            				@"mediaType": mediaType,
+            			}];	
+					}
+					else
+					{
+        				pmsg = [RKPhotoMessage newWithData:@{
+                			@"thread": thread,
+                			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+                			@"body": msgdata[@"message"],
+                			@"deliveryStatus": @(RKMessageStatusSending),
+            				@"mediaData": imgData,
+            				@"mediaType": mediaType,
+            			}];
+					}
         			if (file != nil)
         			{
     				    if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[[pmsg documentURL] path] error:NULL] == NO)

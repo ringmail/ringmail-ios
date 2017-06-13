@@ -10,6 +10,7 @@
 #import "RKMessage.h"
 #import "RKPhotoMessage.h"
 #import "RKVideoMessage.h"
+#import "RKMomentMessage.h"
 #import "RKThread.h"
 #import "Utils.h"
 #import "NSXMLElement+XMPP.h"
@@ -28,6 +29,10 @@
 		if ([param[@"class"] isEqualToString:@"RKPhotoMessage"])
 		{
 			return [[RKPhotoMessage alloc] initWithData:param];
+		}
+		else if ([param[@"class"] isEqualToString:@"RKMomentMessage"])
+		{
+			return [[RKMomentMessage alloc] initWithData:param];
 		}
 		else if ([param[@"class"] isEqualToString:@"RKVideoMessage"])
 		{

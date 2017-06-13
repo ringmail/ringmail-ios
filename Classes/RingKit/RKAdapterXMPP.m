@@ -11,6 +11,7 @@
 #import "RgNetwork.h"
 #import "NSString+MD5.h"
 #import "NSXMLElement+XMPP.h"
+#import "NSXMLElement+XEP_0335.h"
 #import "RKAddress.h"
 #import "RKContact.h"
 #import "RKThread.h"
@@ -315,9 +316,12 @@
         NSString* uuid = [[xmppMessage attributeForName:@"id"] stringValue];
 		RKCommunicator* comm = [RKCommunicator sharedInstance];
 		RKMessage* message = [comm getMessageByUUID:uuid];
-		message.deliveryStatus = RKMessageStatusSent;
-		[comm didUpdateMessage:message];
-		NSLog(@"Updated message: %@", message);
+		if (message != nil)
+		{
+    		message.deliveryStatus = RKMessageStatusSent;
+    		[comm didUpdateMessage:message];
+    		NSLog(@"Updated message: %@", message);
+		}
     }
 }
 
@@ -378,6 +382,14 @@
             {
                 NSString *imageUrl = [[attach attributeForName:@"url"] stringValue];
 				param[@"remoteURL"] = [NSURL URLWithString:imageUrl];
+			}
+			NSXMLElement *jsonHolder = [xmppMessage JSONContainer];
+			if (jsonHolder != nil)
+			{
+    		    NSData *jsonHolderData = [jsonHolder JSONContainerData];
+                NSError *jsonErr = nil;
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:jsonHolderData options:0 error:&jsonErr];
+				param[@"data"] = jsonData;
 			}
 			__block RKMessage *message = [RKMessage newWithData:param];
             if (attach != nil)

@@ -3,7 +3,7 @@
 #import "Utils.h"
 #import "PhoneMainView.h"
 #import "LLSimpleCamera.h"
-#import "MomentEditViewController.h"
+#import "ImageEditViewController.h"
 
 @implementation PhotoCameraViewController
 
@@ -207,8 +207,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
 		if(!error) {
 			//NSLog(@"Image captured!!!!");
-			MomentEditViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:NO], MomentEditViewController);
-			[ctl editImage:image];
+			ImageEditViewController* ctl = [[ImageEditViewController alloc] initWithImage:image editMode:RgSendMediaEditModeDefault];
+			[[PhoneMainView instance] changeCurrentView:[ImageEditViewController compositeViewDescription] content:ctl push:NO];
 		}
 		else {
 			NSLog(@"An error has occured: %@", error);

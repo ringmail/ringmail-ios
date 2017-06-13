@@ -7,6 +7,7 @@
 //
 
 #import "RKMediaMessage.h"
+#import "RKMomentMessage.h"
 #import "RKVideoMessage.h"
 #import "RKAddress.h"
 #import "RKThread.h"
@@ -169,8 +170,11 @@
         NSString *ok = res[@"result"];
         if ([ok isEqualToString:@"ok"])
         {
-			self.remoteURL = [NSURL URLWithString:res[@"url"]];
-			[[RKThreadStore sharedInstance] updateItem:self];
+   			self.remoteURL = [NSURL URLWithString:res[@"url"]];
+			if (! [self isKindOfClass:[RKMomentMessage class]])
+			{
+    			[[RKThreadStore sharedInstance] updateItem:self];
+			}
 			complete(TRUE);
 		}
 		else

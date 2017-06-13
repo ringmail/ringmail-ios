@@ -85,6 +85,17 @@
 				]},
 			}];
 		}
+		else if ([data[@"detail"][@"class"] isEqualToString:@"RKMomentMessage"])
+		{
+            lastItem = [CKStackLayoutComponent newWithView:{} size:{} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStart
+            } children:{
+				{[CKInsetComponent newWithInsets:{.left = 0, .right = 0, .top = 2, .bottom = 0} component:
+					[CKImageComponent newWithImage:[context imageNamed:@"message_summary_moment_normal.png"] size:{.height = 28, .width = 117}]
+				]},
+			}];
+		}
 		else if ([data[@"detail"][@"class"] isEqualToString:@"RKVideoMessage"])
 		{
 			msg = @"Video";

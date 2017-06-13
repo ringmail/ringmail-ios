@@ -74,7 +74,6 @@
 @property (weak, readonly) UICompositeViewDescription *currentView;
 @property (readonly, strong) MPVolumeView* volumeView;
 @property (nonatomic, strong) RgWebViewDelegate* webDelegate;
-@property (nonatomic, strong) UIImage* momentImage;
 
 @property (nonatomic, strong) RgOptionsModalViewController *optionsModalViewController;
 @property (nonatomic, strong) UIView *optionsModalBG;

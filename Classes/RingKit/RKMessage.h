@@ -21,14 +21,14 @@ typedef NS_ENUM(NSInteger, RKMessageStatus) {
 
 @interface RKMessage : RKItem
 
+@property (nonatomic, strong) NSNumber* messageId;
+@property (nonatomic, strong) NSString* body;
+@property (nonatomic) RKMessageStatus deliveryStatus;
+
 + (instancetype)newWithData:(NSDictionary*)param;
 
 - (instancetype)initWithData:(NSDictionary*)param;
 - (void)insertItem:(NoteDatabase*)ndb;
 - (void)prepareMessage:(void (^)(NSObject* xml))send;
-
-@property (nonatomic, strong) NSNumber* messageId;
-@property (nonatomic, strong) NSString* body;
-@property (nonatomic) RKMessageStatus deliveryStatus;
 
 @end

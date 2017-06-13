@@ -136,7 +136,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 @synthesize statusBarBG;
 @synthesize volumeView;
 @synthesize webDelegate;
-@synthesize momentImage;
 @synthesize optionsModalViewController;
 @synthesize optionsModalBG;
 

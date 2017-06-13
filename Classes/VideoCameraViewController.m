@@ -3,7 +3,6 @@
 #import "Utils.h"
 #import "PhoneMainView.h"
 #import "LLSimpleCamera.h"
-#import "MomentEditViewController.h"
 #import "VideoViewController.h"
 #import "RingKit.h"
 #import "ThumbnailFactory.h"

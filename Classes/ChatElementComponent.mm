@@ -4,6 +4,7 @@
 #import "ChatElementTextComponent.h"
 #import "ChatElementCallComponent.h"
 #import "ChatElementImageComponent.h"
+#import "ChatElementMomentComponent.h"
 #import "ChatElementVideoComponent.h"
 
 #import "UIColor+Hex.h"
@@ -24,7 +25,11 @@ static CKComponent *chatComponent(ChatElement *elem, ChatElementContext *context
 	{
 		return [ChatElementImageComponent newWithChatElement:elem context:context];
 	}
-	if ([data[@"item"] isKindOfClass:[RKVideoMessage class]])
+	else if ([data[@"item"] isKindOfClass:[RKMomentMessage class]])
+	{
+		return [ChatElementMomentComponent newWithChatElement:elem context:context];
+	}
+	else if ([data[@"item"] isKindOfClass:[RKVideoMessage class]])
 	{
 		return [ChatElementVideoComponent newWithChatElement:elem context:context];
 	}
