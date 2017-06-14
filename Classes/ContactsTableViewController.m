@@ -39,6 +39,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	addressBookMap = [[OrderedDictionary alloc] init];
 	avatarMap = [[NSMutableDictionary alloc] init];
     ringMailContacts = [NSDictionary dictionary];
+    
+    selectedContacts = [[NSMutableArray alloc] init];
 
 	addressBook = ABAddressBookCreateWithOptions(nil, nil);
 
@@ -243,13 +245,13 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 		// Background View
 		UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
 		cell.selectedBackgroundView = selectedBackgroundView;
-		[selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+		[selectedBackgroundView setBackgroundColor:[UIColor colorWithHex:@"#D3D3D3"]];  // mrkbxt
 	}
 	OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
 
 	NSString *key = [[subDic allKeys] objectAtIndex:[indexPath row]];
 	ABRecordRef contact = (__bridge ABRecordRef)([subDic objectForKey:key]);
-
+    
 	// Cached avatar
 	UIImage *image = nil;
 	id data = [avatarMap objectForKey:[NSNumber numberWithInt:ABRecordGetRecordID(contact)]];
@@ -270,21 +272,31 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         // future: cache the default image
 	}
 	[[cell avatarImage] setImage:image];
+    
+    [[cell inviteButton] setHidden:YES];  // mrkbxt
 
     NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
     if ([ringMailContacts objectForKey:[recordId stringValue]])
     {
         //NSLog(@"Found Contact: %@", recordId);
-		[[cell inviteButton] setHidden:YES];
+//		[[cell inviteButton] setHidden:YES];
         [[cell rgImage] setHidden:NO];
     }
     else
     {
-		[[cell inviteButton] setHidden:NO];
+//		[[cell inviteButton] setHidden:NO];
         [[cell rgImage] setHidden:YES];
     }
     
 	[cell setContact:contact];
+    
+     // mrkbxt
+    if([selectedContacts containsObject:indexPath]) {
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+//        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
 	return cell;
 }
 
@@ -294,10 +306,11 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 	OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
 	ABRecordRef lPerson = (__bridge ABRecordRef)([subDic objectForKey:[subDic keyAtIndex:[indexPath row]]]);
 
-	// Go to Contact details view
+//	 Go to Contact details view
 	ContactDetailsViewController *controller = DYNAMIC_CAST(
 		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
 		ContactDetailsViewController);
@@ -308,6 +321,20 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 			[controller editContact:lPerson address:[ContactSelection getAddAddress]];
 		}
 	}
+    
+// mrkbxt
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    if(cell.accessoryType == UITableViewCellAccessoryNone) {
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//        [selectedContacts addObject:indexPath];
+//    }
+//    else {
+//        cell.accessoryType = UITableViewCellAccessoryNone;
+//        [selectedContacts removeObject:indexPath];
+//    }
+//    
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 #pragma mark - UITableViewDelegate Functions

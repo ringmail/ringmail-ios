@@ -72,7 +72,7 @@
 		LOGW(@"Cannot update contact cell: null contact");
 		return;
 	}
-
+    
 	NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
 	NSString *lLocalizedFirstName = [FastAddressBook localizedLabel:lFirstName];
 
@@ -135,6 +135,12 @@
     
 	[firstNameLabel setFrame:firstNameFrame];
 	[lastNameLabel setFrame:lastNameFrame];
+    
+    // Compute RG icon position  // mrkbxt
+    CGRect rgIconFrame = [rgImage frame];
+    rgIconFrame.origin.x = lastNameLabel.frame.origin.x + lastNameLabel.frame.size.width + 8;
+    rgIconFrame.origin.y = (lastNameLabel.frame.origin.y + lastNameLabel.frame.size.height / 2) - (rgIconFrame.size.height / 2);
+    [rgImage setFrame:rgIconFrame];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
