@@ -72,7 +72,7 @@
 		{
 	 		mediaItem = [CKButtonComponent newWithTitles:{} titleColors:{} images:{
 				{UIControlStateNormal, media[@"thumbnail"]},
-			} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionMediaTap:) size:{.height = 90, .width = 90} attributes:{} accessibilityConfiguration:{}];
+			} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionImageTap:) size:{.height = 90, .width = 90} attributes:{} accessibilityConfiguration:{}];
 		}
 		sendContent.push_back(
 			{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 15, .right = 0} component:

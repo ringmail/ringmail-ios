@@ -17,5 +17,6 @@
 //- (void)showCallView;
 //- (void)showHashtagView:(NSString*)hashtag;
 //- (void)showContactView:(NSNumber*)contactId;
+- (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
 
 @end

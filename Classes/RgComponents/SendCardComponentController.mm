@@ -130,5 +130,12 @@
 	[sc.send showVideoMedia];
 }
 
+- (void)actionImageTap:(CKButtonComponent *)sender
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	SendCardComponent* sc = (SendCardComponent*)self.component;
+	[sc.send showImageMedia];
+}
+
 @end
 

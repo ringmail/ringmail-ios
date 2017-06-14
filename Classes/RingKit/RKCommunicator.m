@@ -200,4 +200,12 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	}
 }
 
+- (void)startImageView:(UIImage*)image parameters:(NSDictionary*)params
+{
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showImageView:parameters:)])
+	{
+		[self.viewDelegate showImageView:image parameters:params];
+	}
+}
+
 @end

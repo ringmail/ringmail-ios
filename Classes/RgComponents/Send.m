@@ -167,4 +167,33 @@
 	}
 }
 
+- (void)showImageMedia
+{
+	NSDictionary* media = self.data[@"send_media"];
+	if (media[@"asset"] != nil)
+	{
+    	PHImageManager* imageManager = [PHImageManager defaultManager];
+    	PHImageRequestOptions* opts = [PHImageRequestOptions new];
+		opts.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+		opts.resizeMode = PHImageRequestOptionsResizeModeExact;
+    	opts.synchronous = YES;
+		__block UIImage* res;
+		[imageManager requestImageForAsset:media[@"asset"] targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:opts resultHandler:^(UIImage* image, NSDictionary* info) {
+			res = image;
+		}];
+		[[RKCommunicator sharedInstance] startImageView:res parameters:@{}];
+	}
+	else if (media[@"file"] != nil)
+	{
+    	if (
+    		[media[@"mediaType"] isEqualToString:@"image/png"] ||
+    		[media[@"mediaType"] isEqualToString:@"image/jpeg"]
+    	) {
+    		NSURL* fileUrl = [NSURL fileURLWithPath:media[@"file"]];
+    		UIImage* img = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileUrl]];
+    		[[RKCommunicator sharedInstance] startImageView:img parameters:@{}];
+		}
+	}
+}
+
 @end

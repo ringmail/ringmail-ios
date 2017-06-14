@@ -24,6 +24,7 @@ extern NSString *const kRKCallEnd;
 //- (void)showCallView;
 - (void)showHashtagView:(NSString*)hashtag;
 - (void)showContactView:(NSNumber*)contactId;
+- (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
 
 @end
 
@@ -63,6 +64,7 @@ extern NSString *const kRKCallEnd;
 //- (void)startCallView:(RKAddress*)address;
 - (void)startContactView:(RKContact*)contact;
 - (void)startHashtagView:(NSString*)hashtag;
+- (void)startImageView:(UIImage*)image parameters:(NSDictionary*)params;
 
 @end
 

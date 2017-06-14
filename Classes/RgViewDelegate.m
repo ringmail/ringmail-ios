@@ -27,4 +27,12 @@
 	[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
 }
 
+- (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSLog(@"Image: %f, %f", image.size.height, image.size.width);
+	ImageViewController* ivc = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE], ImageViewController);
+	[ivc setImage:image];
+}
+
 @end
