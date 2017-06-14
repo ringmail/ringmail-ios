@@ -18,7 +18,7 @@ static NSString *const kAppearAnimation = @"appear";
 static NSString *const kDisappearAnimation = @"disappear";
 
 typedef enum {
-    Ring, Explore, Recents, Contacts, ContactDetails, Settings, HTagCard, Chat
+    Ring, Explore, Recents, Contacts, ContactDetails, Settings, HTagCard, Chat, ContactDetailsLabel
 } NavView;
 
 int backState = 0;
@@ -185,6 +185,12 @@ int backState = 0;
             [headerLabel setHidden:NO];
             headerLabel.text = @"Explore";
             break;
+        case ContactDetailsLabel:
+            headerLabel.text = @"Contact Details";
+            [segmentButton setEnabled:NO];
+            [segmentButton setHidden:YES];
+            [backButton setHidden:NO];
+            [backButton setEnabled:YES];
         default:
             break;
     }
@@ -201,6 +207,8 @@ int backState = 0;
         @"Contact Details": @(ContactDetails),
         @"Settings": @(Settings),
         @"Hashtag Card": @(HTagCard),
+        @"ContactDetailsLabel": @(ContactDetailsLabel)
+        
     };
     
     return [[navViews valueForKey:sIn] intValue];
@@ -217,7 +225,12 @@ int backState = 0;
 #pragma mark - Action Functions
 
 - (IBAction)onBackClick:(id)event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{@"category_id": @"0",}];
+    if ([[[PhoneMainView instance] currentView] equal:[ContactDetailsLabelViewController compositeViewDescription]]) {
+        [[PhoneMainView instance] popCurrentView];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{@"category_id": @"0",}];
+    }
 }
 
 

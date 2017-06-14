@@ -85,10 +85,19 @@
     
 	NSString *lOrganization = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonOrganizationProperty));
 	NSString *lLocalizedOrganization = [FastAddressBook localizedLabel:lOrganization];
-
+    
+    ABMultiValueRef phones = ABRecordCopyValue(contact, kABPersonPhoneProperty);
+    CFStringRef phone = ABMultiValueCopyValueAtIndex(phones, 0);
+    NSString *lLocalizedPhone = [FastAddressBook localizedLabel:CFBridgingRelease(phone)];
+    
+    
 	[firstNameLabel setText:lLocalizedFirstName];
 	[lastNameLabel setText:lLocalizedLastName];
-    [contactLabel setText:lLocalizedEmail];
+    
+    if (![lLocalizedEmail isEqual: @""])
+        [contactLabel setText:lLocalizedEmail];
+    else if (![lLocalizedPhone isEqual: @""])
+        [contactLabel setText:lLocalizedPhone];
     
 	if (
         (lLocalizedFirstName == nil && lLocalizedLastName == nil) ||
