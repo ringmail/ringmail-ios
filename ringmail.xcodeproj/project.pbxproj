@@ -868,6 +868,10 @@
 		C497443C1C7C153100AD43A1 /* red_disk.svg in Resources */ = {isa = PBXBuildFile; fileRef = C497443B1C7C153100AD43A1 /* red_disk.svg */; };
 		C498DE021ED7626800242330 /* RgViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C498DE011ED7626800242330 /* RgViewDelegate.m */; };
 		C498DE031ED7626800242330 /* RgViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C498DE011ED7626800242330 /* RgViewDelegate.m */; };
+		C4A0858B1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0858A1EF1E6710002AC16 /* ImageCountdownViewController.m */; };
+		C4A0858C1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0858A1EF1E6710002AC16 /* ImageCountdownViewController.m */; };
+		C4A0858F1EF1E6830002AC16 /* ImageCountdownViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4A0858D1EF1E6830002AC16 /* ImageCountdownViewController.xib */; };
+		C4A085901EF1E6830002AC16 /* ImageCountdownViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4A0858D1EF1E6830002AC16 /* ImageCountdownViewController.xib */; };
 		C4A76E6D1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */; };
 		C4A76E6E1E776AF100DD17F2 /* ringmail_triangle_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */; };
 		C4A76E6F1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A76E6C1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png */; };
@@ -3239,6 +3243,9 @@
 		C497443B1C7C153100AD43A1 /* red_disk.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = red_disk.svg; path = Resources/red_disk.svg; sourceTree = "<group>"; };
 		C498DE001ED7626800242330 /* RgViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgViewDelegate.h; sourceTree = "<group>"; };
 		C498DE011ED7626800242330 /* RgViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgViewDelegate.m; sourceTree = "<group>"; };
+		C4A085811EF1E6650002AC16 /* ImageCountdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCountdownViewController.h; sourceTree = "<group>"; };
+		C4A0858A1EF1E6710002AC16 /* ImageCountdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCountdownViewController.m; sourceTree = "<group>"; };
+		C4A0858E1EF1E6830002AC16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ImageCountdownViewController.xib; sourceTree = "<group>"; };
 		C4A76E6B1E776AF100DD17F2 /* ringmail_triangle_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_triangle_green@2x.png"; path = "Resources/ringmail_triangle_green@2x.png"; sourceTree = "<group>"; };
 		C4A76E6C1E776AF100DD17F2 /* ringmail_triangle_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_triangle_grey@2x.png"; path = "Resources/ringmail_triangle_grey@2x.png"; sourceTree = "<group>"; };
 		C4A853CC1E660D7800FEAFB0 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendViewController.h; path = RgComponents/SendViewController.h; sourceTree = "<group>"; };
@@ -4231,6 +4238,9 @@
 				22405EFD1601C19000B92522 /* ImageViewController.h */,
 				22405EFE1601C19100B92522 /* ImageViewController.m */,
 				D37EE11016035793003608A6 /* ImageViewController.xib */,
+				C4A085811EF1E6650002AC16 /* ImageCountdownViewController.h */,
+				C4A0858A1EF1E6710002AC16 /* ImageCountdownViewController.m */,
+				C4A0858D1EF1E6830002AC16 /* ImageCountdownViewController.xib */,
 				D3F26BEE15986B71005F9CAB /* IncomingCallViewController.h */,
 				D3F26BEF15986B71005F9CAB /* IncomingCallViewController.m */,
 				D38187DC15FE347700C3EDCA /* IncomingCallViewController.xib */,
@@ -6923,6 +6933,7 @@
 				C444F3FF1C9235DC00134788 /* camera.png in Resources */,
 				D3A74F5415C69392001500B9 /* video_on_default~ipad.png in Resources */,
 				D3A74F5615C69392001500B9 /* video_on_disabled~ipad.png in Resources */,
+				C4A0858F1EF1E6830002AC16 /* ImageCountdownViewController.xib in Resources */,
 				C45606581E78A27400572943 /* ringmail_action_text_normal@2x.png in Resources */,
 				D3A74F5815C69392001500B9 /* video_on_over~ipad.png in Resources */,
 				C4BC49451BF9628800826264 /* RgChatQuestionInputCell.xib in Resources */,
@@ -7280,6 +7291,7 @@
 				C4AC28121D3963FA003B6232 /* numpad_three_over.png in Resources */,
 				C4AC28131D3963FA003B6232 /* numpad_four_default.png in Resources */,
 				C4AC28141D3963FA003B6232 /* numpad_four_over.png in Resources */,
+				C4A085901EF1E6830002AC16 /* ImageCountdownViewController.xib in Resources */,
 				C4AC28151D3963FA003B6232 /* numpad_five_default.png in Resources */,
 				C4AC28161D3963FA003B6232 /* numpad_five_over.png in Resources */,
 				4D33F7761EC4D5C400D913A7 /* explore_hashtag_categories_rm_icon@3x.png in Resources */,
@@ -8357,6 +8369,7 @@
 				D3807FF015C2894A005BE9BC /* IASKSettingsStore.m in Sources */,
 				C44A40E01E70E415000F3E24 /* CLHighlightShadowEffect.m in Sources */,
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
+				C4A0858B1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */,
 				C4593A5D1E6A4A89001C3BDD /* FavoritesBarComponent.mm in Sources */,
 				D3807FF415C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */,
 				C4A929121E9428BE00993A5C /* MessageTableViewCell.m in Sources */,
@@ -8438,6 +8451,7 @@
 				4D039AA01ECE2F080091F8EF /* RgContactSearchViewController.m in Sources */,
 				4DCEA6881EBAA60000E6760D /* RgOptionsModalViewController.m in Sources */,
 				C44A40FD1E70E415000F3E24 /* CLImageEditorTheme+Private.m in Sources */,
+				C4A0858C1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */,
 				C4AC2AAD1D3963FA003B6232 /* MainCardComponentController.mm in Sources */,
 				C4AC2AAE1D3963FA003B6232 /* TPKeyboardAvoidingTableView.m in Sources */,
 				C4AC2AAF1D3963FA003B6232 /* main.m in Sources */,
@@ -8802,6 +8816,14 @@
 				C48DA1D91E8454E6007CBCFB /* Base */,
 			);
 			name = VideoCameraViewController.xib;
+			sourceTree = "<group>";
+		};
+		C4A0858D1EF1E6830002AC16 /* ImageCountdownViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4A0858E1EF1E6830002AC16 /* Base */,
+			);
+			name = ImageCountdownViewController.xib;
 			sourceTree = "<group>";
 		};
 		C4BC492A1BF9474000826264 /* RgChatQuestionSelect.xib */ = {

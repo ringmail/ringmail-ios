@@ -35,7 +35,7 @@
 - (void)setupDatabase
 {
 	NSString *path = @"ringmail_message_store";
-    path = [path stringByAppendingString:@"_v1.db"];
+    path = [path stringByAppendingString:@"_v0.1.db"];
 	NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
 	path = [docsPath stringByAppendingPathComponent:path];
 	[self setDbqueue:[FMDatabaseQueue databaseQueueWithPath:path]];
@@ -81,6 +81,7 @@
 				"thread_id INTEGER NOT NULL, "
 				"message_id INTEGER NULL DEFAULT NULL, "
 				"call_id INTEGER NULL DEFAULT NULL, "
+				"hidden INTEGER NOT NULL DEFAULT 0, "
                 "ts_created TEXT NOT NULL,"
                 "version INTEGER DEFAULT 1"
 			");",
@@ -213,7 +214,7 @@
 				"c.call_result AS call_result "
             "FROM ("
 				"SELECT t.id AS thread_id, t.address, t.contact_id, t.original_to, t.uuid, "
-				"(SELECT i.id FROM rk_thread_item i WHERE i.thread_id=t.id ORDER BY i.id DESC LIMIT 1) as item_id "
+				"(SELECT i.id FROM rk_thread_item i WHERE i.thread_id=t.id AND i.hidden = 0 ORDER BY i.id DESC LIMIT 1) as item_id "
                 "FROM rk_thread t"
             ") AS l "
             "LEFT JOIN rk_thread_item ti ON ti.id = l.item_id "
@@ -331,6 +332,7 @@
     		sql = [sql stringByAppendingString:@""
     			"WHERE ti.thread_id=? "
     			"AND ti.id > ? "
+    			"AND ti.hidden = 0 "
 				"ORDER BY ti.id ASC"
 			];
 			NSLog(@"SQL: %@", sql);
@@ -340,6 +342,7 @@
 		{
     		sql = [sql stringByAppendingString:@""
     			"WHERE ti.thread_id=? "
+    			"AND ti.hidden = 0 "
 				"ORDER BY ti.id ASC"
 			];
 			rs = [db executeQuery:sql, thread.threadId];
@@ -711,6 +714,22 @@
 		}
 	}];
 	return result;
+}
+
+- (void)setHidden:(BOOL)hidden forItemId:(NSNumber*)itemId
+{
+	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		[ndb set:@{
+			@"table": @"rk_thread_item",
+			@"update": @{
+				@"hidden": [NSNumber numberWithBool:hidden],
+			},
+			@"where": @{
+				@"id": itemId,
+			},
+		}];
+	}];
 }
 
 @end
