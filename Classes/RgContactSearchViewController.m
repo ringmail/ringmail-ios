@@ -50,7 +50,7 @@
 -(void)dismissKeyboard:(id)sender
 {
     [self.view endEditing:YES];
-    [searchField setText:@""];
+//    [searchField setText:@""];
     [searchField resignFirstResponder];
 }
 
@@ -63,7 +63,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == searchField) {
         [searchField resignFirstResponder];
-        [searchField setText:@""];
+//        [searchField setText:@""];
     }
     return YES;
 }
