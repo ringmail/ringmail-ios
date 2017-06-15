@@ -12,6 +12,10 @@
 @interface RgOptionsModalViewController : UIViewController
 
 @property (nonatomic, copy) NSDictionary* modalData;
+
+@property (nonatomic, strong) IBOutlet UIView* contactView;
+@property (nonatomic, strong) IBOutlet UIView* invalidView;
+
 @property (nonatomic, strong) IBOutlet UIButton* contactButton;
 @property (nonatomic, strong) IBOutlet UIImageView* avatarImg;
 @property (nonatomic, strong) IBOutlet UILabel* nameLabel;

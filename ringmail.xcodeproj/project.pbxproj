@@ -284,7 +284,6 @@
 		4D33F81B1EC4DA5A00D913A7 /* SFUIText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F8121EC4DA5A00D913A7 /* SFUIText-Regular.ttf */; };
 		4D33F81C1EC4DA5A00D913A7 /* SFUIText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F8131EC4DA5A00D913A7 /* SFUIText-Semibold.ttf */; };
 		4D33F81D1EC4DA5A00D913A7 /* SFUIText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F8131EC4DA5A00D913A7 /* SFUIText-Semibold.ttf */; };
-		4D3D66111E452AF900C2BCE3 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */; };
 		4D3D66A91E453AE900C2BCE3 /* UINavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D66A71E453AE900C2BCE3 /* UINavBar.m */; };
 		4D3D66AA1E453AE900C2BCE3 /* UINavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D66A71E453AE900C2BCE3 /* UINavBar.m */; };
 		4D3D66AD1E453BB500C2BCE3 /* UINavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D66B01E453BB500C2BCE3 /* UINavBar.xib */; };
@@ -304,6 +303,7 @@
 		4D5251BF1E6645C20064F955 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5251BE1E6645C20064F955 /* CoreLocation.framework */; };
 		4D5251C41E6756EA0064F955 /* RgLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5251C31E6756EA0064F955 /* RgLocationManager.m */; };
 		4D5251C51E6756EA0064F955 /* RgLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5251C31E6756EA0064F955 /* RgLocationManager.m */; };
+		4D6EA4581EF30A6400B254E3 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6EA4571EF30A6400B254E3 /* ComponentKit.framework */; };
 		4D9684D41E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9684D31E48F4AA008464B7 /* RgSearchBackgroundView.m */; };
 		4D9684D51E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9684D31E48F4AA008464B7 /* RgSearchBackgroundView.m */; };
 		4D985CA31E96CA7700E1CCAB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D985CA21E96CA7600E1CCAB /* GoogleService-Info.plist */; };
@@ -2628,6 +2628,7 @@
 		4D5251BE1E6645C20064F955 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4D5251C21E6756EA0064F955 /* RgLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgLocationManager.h; sourceTree = "<group>"; };
 		4D5251C31E6756EA0064F955 /* RgLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgLocationManager.m; sourceTree = "<group>"; };
+		4D6EA4571EF30A6400B254E3 /* ComponentKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComponentKit.framework; path = "../Library/Developer/Xcode/DerivedData/ringmail-fiijohizvnzsdxamyqqzvjmihcml/Build/Products/Debug-iphoneos/ComponentKit/ComponentKit.framework"; sourceTree = "<group>"; };
 		4D79B6BE1E453C1A001F4BF7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UINavBar.strings; sourceTree = "<group>"; };
 		4D79B6C01E453C56001F4BF7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/UINavBar.strings; sourceTree = "<group>"; };
 		4D79D0341DAD889D002D1894 /* NSHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSHash.framework; path = "../Library/Developer/Xcode/DerivedData/ringmail-fiijohizvnzsdxamyqqzvjmihcml/Build/Products/Debug-iphoneos/NSHash/NSHash.framework"; sourceTree = "<group>"; };
@@ -4019,10 +4020,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D6EA4581EF30A6400B254E3 /* ComponentKit.framework in Frameworks */,
 				C48C10A41E81BA470094F1F3 /* Photos.framework in Frameworks */,
 				C44A41201E73380F000F3E24 /* libstdc++.6.0.9.tbd in Frameworks */,
 				4D5251BF1E6645C20064F955 /* CoreLocation.framework in Frameworks */,
-				4D3D66111E452AF900C2BCE3 /* ComponentKit.framework in Frameworks */,
 				4DE0EB241D948CAA0009E015 /* libresolv.9.dylib in Frameworks */,
 				4DE0EB251D948CAA0009E015 /* libresolv.dylib in Frameworks */,
 				4DE0EB201D948C880009E015 /* libiconv.dylib in Frameworks */,
@@ -4401,6 +4402,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D6EA4571EF30A6400B254E3 /* ComponentKit.framework */,
 				C48C10A31E81BA470094F1F3 /* Photos.framework */,
 				C44A411F1E73380F000F3E24 /* libstdc++.6.0.9.tbd */,
 				4D5251BE1E6645C20064F955 /* CoreLocation.framework */,
@@ -9732,6 +9734,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
@@ -9799,6 +9802,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
@@ -9866,6 +9870,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
@@ -9934,6 +9939,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",

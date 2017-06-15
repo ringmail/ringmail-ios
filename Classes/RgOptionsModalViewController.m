@@ -17,6 +17,9 @@
 
 @implementation RgOptionsModalViewController
 
+@synthesize contactView;
+@synthesize invalidView;
+
 @synthesize modalData;
 @synthesize contactButton;
 @synthesize avatarImg;
@@ -40,26 +43,35 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.0]];
     [contactButton setTitle:[NSString stringWithUTF8String:"\uf054"] forState:UIControlStateNormal];
-	if (modalData[@"image"])
-	{
-		[avatarImg setImage:modalData[@"image"]];
-		avatarImg.contentMode = UIViewContentModeScaleAspectFit;
-	}
-    avatarImg.layer.cornerRadius = avatarImg.frame.size.width / 2;
-    avatarImg.clipsToBounds = true;
-    nameLabel.text = modalData[@"name"];
-    numberLabel.text = modalData[@"address"];
-	contactNew = modalData[@"new"];
-	if ([contactNew boolValue])
-	{
-		contactLabel.text = @"Add To Contact";
-		numberLabel.font = [UIFont italicSystemFontOfSize:14.0f];
-	}
-	else
-	{
-		contactLabel.text = @"View Contact";
-		numberLabel.font = [UIFont systemFontOfSize:14.0f];
-	}
+    if (modalData[@"validAddress"])
+    {
+        contactView.hidden = false;
+        invalidView.hidden = true;
+        
+        if (modalData[@"image"])
+        {
+            [avatarImg setImage:modalData[@"image"]];
+            avatarImg.contentMode = UIViewContentModeScaleAspectFit;
+        }
+        avatarImg.layer.cornerRadius = avatarImg.frame.size.width / 2;
+        avatarImg.clipsToBounds = true;
+        nameLabel.text = modalData[@"name"];
+        numberLabel.text = modalData[@"address"];
+        contactNew = modalData[@"new"];
+        if ([contactNew boolValue])
+        {
+            contactLabel.text = @"Add To Contact";
+            numberLabel.font = [UIFont italicSystemFontOfSize:14.0f];
+        }
+        else
+        {
+            contactLabel.text = @"View Contact";
+            numberLabel.font = [UIFont systemFontOfSize:14.0f];
+        }
+    } else {
+        contactView.hidden = true;
+        invalidView.hidden = false;
+    }
 }
 
 - (IBAction)onContact:(id)event

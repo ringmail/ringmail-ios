@@ -259,45 +259,54 @@ static RootViewManager *rootViewManagerInstance = nil;
 {
 	// TODO: check for domain, domains are not contacts...
 	NSString *address = notif.userInfo[@"address"];
-	RKAddress *raddress = [RKAddress newWithString:address];
 	
     // Contact ID lookup attemp
 	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
 	UIImage *customImage = nil;
 	NSString *name = [address copy];
 	NSString *addr = @"New ";
-	if ([raddress isPhone])
-	{
-		addr = [addr stringByAppendingString:@"Number"];
-	}
-	else
-	{
-		addr = [addr stringByAppendingString:@"Address"];
-	}
-	NSNumber *contactNew = @YES;
-	NSNumber *contactId = nil;
-	if (contact)
-	{
-        //LOGI(@"RingMail: Matched contact for options modal");
-		customImage = [FastAddressBook getContactImage:contact thumbnail:true];
-        name = [FastAddressBook getContactDisplayName:contact];
-		addr = [address copy];
-		contactNew = @NO;
-		contactId = [[[LinphoneManager instance] fastAddressBook] getContactId:contact];
-	}
-	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{
-		@"name": name,
-		@"address": addr,
-		@"new": contactNew,
-	}];
-	if (customImage)
-	{
-		params[@"image"] = customImage;
-	}
-	if (contactId)
-	{
-		params[@"contact_id"] = contactId;
-	}
+    
+    NSMutableDictionary *params;
+    
+    if ([RKAddress validAddress: address])
+    {
+        RKAddress *raddress = [RKAddress newWithString:address];
+        
+        if ([raddress isPhone])
+            addr = [addr stringByAppendingString:@"Number"];
+        else
+            addr = [addr stringByAppendingString:@"Address"];
+
+        NSNumber *contactNew = @YES;
+        NSNumber *contactId = nil;
+        
+        if (contact)
+        {
+            //LOGI(@"RingMail: Matched contact for options modal");
+            customImage = [FastAddressBook getContactImage:contact thumbnail:true];
+            name = [FastAddressBook getContactDisplayName:contact];
+            addr = [address copy];
+            contactNew = @NO;
+            contactId = [[[LinphoneManager instance] fastAddressBook] getContactId:contact];
+        }
+        
+        params = [NSMutableDictionary dictionaryWithDictionary:@{
+            @"name": name,
+            @"address": addr,
+            @"new": contactNew,
+            @"validAddress" : @"YES"
+        }];
+        
+        if (customImage)
+            params[@"image"] = customImage;
+        
+        if (contactId)
+            params[@"contact_id"] = contactId;
+    }
+    else {
+        params = [NSMutableDictionary dictionaryWithDictionary:@{}];
+    }
+    
     optionsModalBG.hidden = NO;
     optionsModalViewController = [[RgOptionsModalViewController alloc] initWithData:params];
     optionsModalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
@@ -684,7 +693,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		vc->currentView = view;
         [vc updateNavBar:view];
 	}
-
+    
 	//[[RootViewManager instance] setViewControllerForDescription:view];
 
 	NSDictionary *mdict = [NSMutableDictionary dictionaryWithObject:vc->currentView forKey:@"view"];
