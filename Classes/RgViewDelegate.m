@@ -32,9 +32,15 @@
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"Show Image: %f, %f", image.size.height, image.size.width);
-//	ImageViewController* ivc = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE], ImageViewController);
-//	[ivc setImage:image];
-	ImageCountdownViewController* ivc = [[ImageCountdownViewController alloc] initWithImage:image];
+	ImageViewController* ivc = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE], ImageViewController);
+	[ivc setImage:image];
+}
+
+- (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSLog(@"Show Moment Image: %f, %f", image.size.height, image.size.width);
+	ImageCountdownViewController* ivc = [[ImageCountdownViewController alloc] initWithImage:image complete:complete];
 	[[PhoneMainView instance] changeCurrentView:[ImageCountdownViewController compositeViewDescription] content:ivc push:TRUE];
 }
 

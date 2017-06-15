@@ -193,7 +193,7 @@
             } children:{
 				{[CKStackLayoutComponent newWithView:{
 					[UIView class],
-					{CKComponentTapGestureAttribute(@selector(actionChat:))}
+					{CKComponentTapGestureAttribute(@selector(actionChatOrMoment:))}
 				} size:{.width = width - 94, .height = 62} style:{
 					.direction = CKStackLayoutDirectionHorizontal,
 					.alignItems = CKStackLayoutAlignItemsStart
@@ -275,7 +275,7 @@
         } children:{
 			{[CKStackLayoutComponent newWithView:{
                 [UIView class],
-                {CKComponentTapGestureAttribute(@selector(actionChat:))}
+                {CKComponentTapGestureAttribute(@selector(actionChatOrMoment:))}
 			} size:{.width = width - 94, .height = 62} style:{
                 .direction = CKStackLayoutDirectionHorizontal,
                 .alignItems = CKStackLayoutAlignItemsStart
@@ -362,8 +362,23 @@
 	} mode:CKUpdateModeAsynchronous];
 }
 
+- (void)actionChatOrMoment:(CKButtonComponent *)sender
+{
+	NSDictionary* data = [self currentThread].data;
+	if ([data[@"detail"][@"class"] isEqualToString:@"RKMomentMessage"])
+	{
+		RKMomentMessage* mmsg = (RKMomentMessage*)[[RKCommunicator sharedInstance] getMessageByUUID:data[@"detail"][@"uuid"]];
+		[[RKCommunicator sharedInstance] startMomentView:mmsg];
+	}
+	else // Chat
+	{
+		[[RKCommunicator sharedInstance] startMessageView:self.currentThread.data[@"thread"]];
+	}
+}
+
 - (void)actionChat:(CKButtonComponent *)sender
 {
+	
 	[[RKCommunicator sharedInstance] startMessageView:self.currentThread.data[@"thread"]];
 }
 

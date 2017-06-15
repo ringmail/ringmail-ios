@@ -44,16 +44,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
 		compositeDescription = [[UICompositeViewDescription alloc] init:@"ImageCountdownView"
-																content:@"ImageCountdownViewController"
-															   stateBar:nil
-														stateBarEnabled:false
-                                                                 navBar:nil
-																 tabBar:nil
-                                                          navBarEnabled:false
-														  tabBarEnabled:false
-															 fullscreen:true
-														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true];
+				content:@"ImageCountdownViewController"
+			   stateBar:nil
+		stateBarEnabled:false
+                 navBar:nil
+				 tabBar:nil
+          navBarEnabled:false
+		  tabBarEnabled:false
+			 fullscreen:true
+		  landscapeMode:[LinphoneManager runningOnIpad]
+		   portraitMode:true];
 	}
 	return compositeDescription;
 }

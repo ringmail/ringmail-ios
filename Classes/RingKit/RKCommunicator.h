@@ -25,6 +25,7 @@ extern NSString *const kRKCallEnd;
 - (void)showHashtagView:(NSString*)hashtag;
 - (void)showContactView:(NSNumber*)contactId;
 - (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
+- (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete;
 
 @end
 
@@ -34,6 +35,7 @@ extern NSString *const kRKCallEnd;
 @class RKThread;
 @class RKCall;
 @class RKMessage;
+@class RKMomentMessage;
 
 @interface RKCommunicator : NSObject
 
@@ -61,6 +63,7 @@ extern NSString *const kRKCallEnd;
 - (RKMessage*)getMessageByUUID:(NSString*)inputUUID;
 
 - (void)startMessageView:(RKThread*)thread;
+- (void)startMomentView:(RKMomentMessage*)msg;
 //- (void)startCallView:(RKAddress*)address;
 - (void)startContactView:(RKContact*)contact;
 - (void)startHashtagView:(NSString*)hashtag;

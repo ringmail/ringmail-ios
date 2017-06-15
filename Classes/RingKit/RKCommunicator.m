@@ -182,6 +182,18 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	}
 }
 
+- (void)startMomentView:(RKMomentMessage*)message
+{
+	message.mediaData = [NSData dataWithContentsOfURL:[message documentURL]];
+	UIImage* image = [UIImage imageWithData:message.mediaData];
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showMomentView:parameters:complete:)])
+	{
+		[self.viewDelegate showMomentView:image parameters:@{} complete:^{
+			[message onComplete];
+		}];
+	}
+}
+
 - (void)startContactView:(RKContact*)contact
 {
 	NSNumber* contactId = nil;

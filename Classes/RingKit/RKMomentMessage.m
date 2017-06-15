@@ -6,9 +6,11 @@
 //
 //
 
+#import "RKCommunicator.h"
 #import "RKMomentMessage.h"
 #import "RKAddress.h"
 #import "RKThread.h"
+#import "RKThreadStore.h"
 
 #import "RgManager.h"
 #import "RgNetwork.h"
@@ -96,6 +98,20 @@
 	urlStr = [urlStr stringByAppendingPathComponent:mainUuid];
 	url = [NSURL URLWithString:urlStr];
 	return url;
+}
+
+- (void)onComplete
+{
+	NSLog(@"Moment Complete");
+	[[RKThreadStore sharedInstance] setHidden:YES forItemId:[self itemId]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageUpdated object:self userInfo:@{
+		@"message": self,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
+		@"type": @"message",
+		@"message": self,
+		@"name": kRKMessageUpdated,
+	}];
 }
 
 @end

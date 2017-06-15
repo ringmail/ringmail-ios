@@ -205,11 +205,13 @@
 				"m.msg_body AS msg_body, "
 				"m.msg_type AS msg_type, "
 				"m.msg_class AS msg_class, "
+				"m.msg_uuid AS msg_uuid, "
 				"m.msg_inbound AS msg_inbound, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
 				"c.call_duration AS call_duration, "
 				"c.call_video AS call_video, "
+				"c.call_uuid AS call_uuid, "
 				"c.call_inbound AS call_inbound, "
 				"c.call_result AS call_result "
             "FROM ("
@@ -225,7 +227,7 @@
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
-            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			RKContact* ct;
 			RKAddress* addr = [RKAddress newWithString:row[@"address"]];
 			if (NILIFNULL(row[@"contact_id"]) != nil)
@@ -261,6 +263,7 @@
 					@"type": row[@"msg_type"],
 					@"direction": row[@"msg_inbound"],
 					@"class": row[@"msg_class"],
+					@"uuid": row[@"msg_uuid"],
 				};
 			}
 			else if (NILIFNULL(row[@"call_id"]) != nil)
@@ -273,15 +276,25 @@
 					@"direction": row[@"call_inbound"],
 					@"video": row[@"call_video"],
 					@"result": row[@"call_result"],
+					@"uuid": row[@"call_uuid"],
 				};
+			}
+			NSDate* dt = [NSDate date];
+			NSNumber* curId = @0;
+			NSNumber* ver = @0;
+			if (! [itemType isEqualToString:@"none"])
+			{
+				dt = [NSDate parse:row[@"ts_created"]];
+				curId = row[@"item_id"];
+				ver = row[@"version"];
 			}
 			NSDictionary* res = @{
 				@"thread": thr,
 				@"type": itemType,
 				@"detail": detail,
-				@"item_id": row[@"item_id"],
-				@"version": row[@"version"],
-				@"timestamp": [NSDate parse:row[@"ts_created"]],
+				@"item_id": curId,
+				@"version": ver,
+				@"timestamp": dt,
 			};
 			[result addObject:res];
 		}

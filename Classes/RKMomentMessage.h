@@ -17,6 +17,6 @@
 + (instancetype)newWithData:(NSDictionary*)param;
 
 - (instancetype)initWithData:(NSDictionary*)param;
-
+- (void)onComplete;
 
 @end
