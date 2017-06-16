@@ -43,27 +43,28 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="15">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="15">
                             <rect key="frame" x="100" y="45" width="170" height="150"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="170" id="Ceu-Nv-PTW"/>
                                 <constraint firstAttribute="height" constant="150" id="faD-9E-hob"/>
                             </constraints>
+                            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="18"/>
                                 <outlet property="delegate" destination="-1" id="19"/>
                             </connections>
                         </tableView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_unknown_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="2bV-0i-7mI" userLabel="avatarEditImage">
-                            <rect key="frame" x="5" y="75" width="80" height="80"/>
+                            <rect key="frame" x="0.0" y="75" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="WFI-dz-fkw"/>
                                 <constraint firstAttribute="width" constant="80" id="d1J-tT-dEb"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22" userLabel="avatarButton">
-                            <rect key="frame" x="5" y="75" width="80" height="80"/>
+                            <rect key="frame" x="0.0" y="75" width="80" height="80"/>
                             <accessibility key="accessibilityConfiguration" label="Contact avatar">
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
@@ -86,9 +87,9 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="15" firstAttribute="leading" secondItem="22" secondAttribute="trailing" constant="15" id="YmM-Op-Qw8"/>
+                        <constraint firstItem="15" firstAttribute="leading" secondItem="22" secondAttribute="trailing" constant="20" id="YmM-Op-Qw8"/>
                         <constraint firstItem="2bV-0i-7mI" firstAttribute="top" secondItem="15" secondAttribute="top" constant="30" id="cBG-yq-V3E"/>
-                        <constraint firstItem="15" firstAttribute="leading" secondItem="2bV-0i-7mI" secondAttribute="trailing" constant="15" id="nvy-hC-2NJ"/>
+                        <constraint firstItem="15" firstAttribute="leading" secondItem="2bV-0i-7mI" secondAttribute="trailing" constant="20" id="nvy-hC-2NJ"/>
                         <constraint firstItem="22" firstAttribute="top" secondItem="15" secondAttribute="top" constant="30" id="qYA-m7-9lv"/>
                     </constraints>
                 </view>

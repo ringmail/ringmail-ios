@@ -18,6 +18,7 @@
  */
 
 #import "UIEditableTableViewCell.h"
+#import "UIColor+Hex.h"
 
 @implementation UIEditableTableViewCell
 
@@ -28,6 +29,7 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
 	if (self) {
 		UITextField *tf = [[UITextField alloc] init];
 		[tf setHidden:TRUE];
@@ -42,6 +44,8 @@
 		[self.detailTextLabel setFont:font];
 		[self.detailTextField setFont:font];
         
+        self.textLabel.textColor = [UIColor colorWithHex:@"#428db7"];
+        
 		[self.contentView addSubview:detailTextField];
 
 		// a separator
@@ -53,7 +57,6 @@
 
 		[self.contentView addSubview:verticalSep];
         
-        
 	}
 	return self;
 }
@@ -64,27 +67,27 @@
 	[super layoutSubviews];
     
 	CGRect detailEditFrame;
-	detailEditFrame.origin.x = 15;
-	detailEditFrame.origin.y = 15;
+	detailEditFrame.origin.x = 20;
+	detailEditFrame.origin.y = 35;
 	detailEditFrame.size.height = 20;
 
 	if ([[self.textLabel text] length] != 0) {
-        detailEditFrame.origin.y = 22;
+        detailEditFrame.origin.y = 35;
 //		// shrink left text width by 10px
 		CGRect leftLabelFrame = [self.textLabel frame];
 		leftLabelFrame.size.width -= 10;
-        leftLabelFrame.origin.y = 4;
+        leftLabelFrame.origin.y = 18;
 		[self.textLabel setFrame:leftLabelFrame];
         
 		// place separator
 		CGRect separatorFrame = [self.verticalSep frame];
-		separatorFrame.origin.x = self.frame.origin.x + 15;
+		separatorFrame.origin.x = self.frame.origin.x + 20;
         separatorFrame.origin.y = self.frame.size.height - 1;
-        separatorFrame.size.width = self.frame.size.width - 30;
+        separatorFrame.size.width = self.frame.size.width - 40;
 		[self.verticalSep setFrame:separatorFrame];
 		[self.verticalSep setHidden:FALSE];
 	}
-
+    
 	// put the detailed text edit view at the correct position
 	CGRect superframe = [[self.detailTextField superview] frame];
 	detailEditFrame.size.width = superframe.size.width - detailEditFrame.origin.x;
@@ -92,20 +95,33 @@
 	
 	// RingMail
 	CGRect labelFrame = [self.textLabel frame];
-	labelFrame.origin.y += 2;
+	labelFrame.origin.y = 18;
+    labelFrame.origin.x = 20;
 	[self.textLabel setFrame:labelFrame];
 	
-	CGRect textFrame = [self.detailTextLabel frame];
-	textFrame.origin.y = 22;
-    textFrame.origin.x = 15;
+    CGRect textFrame = [self.detailTextLabel frame];
+    textFrame.origin.y = 35;
+    textFrame.origin.x = 20;
     textFrame.size.height = 20;
-	[self.detailTextLabel setFrame:textFrame];
+    [self.detailTextLabel setFrame:textFrame];
+    
+    if ([self.reuseIdentifier isEqual: @"ContactDetailsHeaderCell"])
+    {
+        CGRect textFrame2 = [self.detailTextField frame];
+        textFrame2.origin.y = 20;
+        textFrame2.origin.x = 0;
+        [self.detailTextField setFrame:textFrame2];
+    }
+    
 }
+
+
 
 #pragma mark - UITableViewCell Functions
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
 	[super setEditing:editing animated:animated];
+    
 	if (editing) {
 		[self.detailTextField setHidden:FALSE];
 		[self.detailTextLabel setHidden:TRUE];

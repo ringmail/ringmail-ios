@@ -31,9 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, inviteButton.frame.size.height - 2, self.view.frame.size.width - 30, 1)];
-    lineView2 = [[UIView alloc] initWithFrame:CGRectMake(0, shareContactButton.frame.size.height - 2, self.view.frame.size.width - 30, 1)];
-    lineView3 = [[UIView alloc] initWithFrame:CGRectMake(0, shareLocationButton.frame.size.height - 2, self.view.frame.size.width - 30, 1)];
+    lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, inviteButton.frame.size.height - 2, self.view.frame.size.width - 40, 1)];
+    lineView2 = [[UIView alloc] initWithFrame:CGRectMake(0, shareContactButton.frame.size.height - 2, self.view.frame.size.width - 40, 1)];
+    lineView3 = [[UIView alloc] initWithFrame:CGRectMake(0, shareLocationButton.frame.size.height - 2, self.view.frame.size.width - 40, 1)];
     
     lineView1.backgroundColor = [UIColor lightGrayColor];
     lineView2.backgroundColor = [UIColor lightGrayColor];

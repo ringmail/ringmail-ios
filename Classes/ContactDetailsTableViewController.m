@@ -498,7 +498,6 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     NSString *capLabel = [self capFirstLtr:label];
     
 	[cell.textLabel setText:capLabel];
-    [cell.textLabel setTextColor:[UIColor blackColor]];
     cell.textAlignment = NSTextAlignmentLeft;
 	[cell.detailTextLabel setText:value];
 	[cell.detailTextField setText:value];
@@ -509,8 +508,10 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		[cell.detailTextField setKeyboardType:UIKeyboardTypeASCIICapable];
 		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Email address", nil)];
 	}
+    
 	return cell;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -681,14 +682,14 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         return [optionsController view];
     } else {
         
-        UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
+        UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
         tmp.backgroundColor = UIColor.whiteColor;
         
-        UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, self.view.bounds.size.width - 30, 20)];
-        phoneLabel.font = [UIFont fontWithName:@"SFUIText-Regular" size:18];
+        UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 24, self.view.bounds.size.width - 40, 18)];
+        phoneLabel.font = [UIFont fontWithName:@"SFUIText-Medium" size:16];
         phoneLabel.numberOfLines = 1;
         phoneLabel.backgroundColor = [UIColor clearColor];
-        phoneLabel.textColor = [UIColor blackColor];
+        phoneLabel.textColor = [UIColor colorWithHex:@"#428db7"];
         phoneLabel.textAlignment = NSTextAlignmentLeft;
         
         if (section == ContactSections_Email)
@@ -723,13 +724,13 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         return [UIContactDetailsOptions height];
     } else if (section == ContactSections_Number) {
         if ([[dataCache objectAtIndex:0] count] > 0) {
-            return 40;
+            return 45;
         } else {
             return 0.000001f;
         }
     } else if (section == ContactSections_Email) {
         if ([[dataCache objectAtIndex:1] count] > 0) {
-            return 40;
+            return 45;
         } else {
             return 0.000001f;
         }
@@ -753,7 +754,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 65;
 }
 
 #pragma mark - ContactDetailsLabelDelegate Functions

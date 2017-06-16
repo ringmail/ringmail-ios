@@ -312,6 +312,10 @@
 		4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B031E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
 		4DAA6B041E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
+		4DB7BB2F1EF44C6700391365 /* contact_gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB7BB2E1EF44C6700391365 /* contact_gradient@2x.png */; };
+		4DB7BB301EF44C6700391365 /* contact_gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB7BB2E1EF44C6700391365 /* contact_gradient@2x.png */; };
+		4DB7BB331EF4507A00391365 /* button_remove_contact@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB7BB321EF4507A00391365 /* button_remove_contact@2x.png */; };
+		4DB7BB341EF4507A00391365 /* button_remove_contact@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB7BB321EF4507A00391365 /* button_remove_contact@2x.png */; };
 		4DC8861B1EC63F6000CF226A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC8861A1EC63F6000CF226A /* Roboto-Medium.ttf */; };
 		4DC8861C1EC63F6000CF226A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC8861A1EC63F6000CF226A /* Roboto-Medium.ttf */; };
 		4DC886221EC6503600CF226A /* google_signin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DC886211EC6503600CF226A /* google_signin@2x.png */; };
@@ -2639,6 +2643,8 @@
 		4DAA6AFE1E6E16C700D9DE84 /* RgSearchBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgSearchBarViewController.h; sourceTree = "<group>"; };
 		4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgSearchBarViewController.m; sourceTree = "<group>"; };
 		4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgSearchBarViewController.xib; sourceTree = "<group>"; };
+		4DB7BB2E1EF44C6700391365 /* contact_gradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "contact_gradient@2x.png"; path = "Resources/contact_gradient@2x.png"; sourceTree = "<group>"; };
+		4DB7BB321EF4507A00391365 /* button_remove_contact@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_remove_contact@2x.png"; path = "Resources/button_remove_contact@2x.png"; sourceTree = "<group>"; };
 		4DC8861A1EC63F6000CF226A /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "Resources/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		4DC886211EC6503600CF226A /* google_signin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "google_signin@2x.png"; path = "Resources/google_signin@2x.png"; sourceTree = "<group>"; };
 		4DCEA6821EBAA5C200E6760D /* RgOptionsModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgOptionsModalViewController.h; sourceTree = "<group>"; };
@@ -5207,6 +5213,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4DB7BB321EF4507A00391365 /* button_remove_contact@2x.png */,
+				4DB7BB2E1EF44C6700391365 /* contact_gradient@2x.png */,
 				4D0C61A11EF1F95F002D261D /* rm_contact_indicator@2x.png */,
 				4DE427B71ECFA27900872002 /* video_selected.png */,
 				4DE427B81ECFA27900872002 /* video_pressed.png */,
@@ -6346,6 +6354,7 @@
 				C41D67DC1CA722A100D7BA72 /* ringmail_plus@2x.png in Resources */,
 				C48DA1DA1E8454E6007CBCFB /* VideoCameraViewController.xib in Resources */,
 				C456065E1E78A27400572943 /* ringmail_action_video_presssed@2x.png in Resources */,
+				4DB7BB2F1EF44C6700391365 /* contact_gradient@2x.png in Resources */,
 				C444F3D11C92240300134788 /* menu-home_active@3x.png in Resources */,
 				D3F83F621582223B00336684 /* numpad_seven_over.png in Resources */,
 				D3F83F641582223B00336684 /* numpad_eight_default.png in Resources */,
@@ -6733,6 +6742,7 @@
 				C45B552E1EE6221A0054A10A /* message_summary_photo_normal@2x.png in Resources */,
 				D3A74EB415C69392001500B9 /* add_call_disabled~ipad.png in Resources */,
 				C42C0DCC1CAEE9D100AD5A91 /* ringmail_speaker@3x.png in Resources */,
+				4DB7BB331EF4507A00391365 /* button_remove_contact@2x.png in Resources */,
 				C43F65DA1D540233004CEC70 /* ringmail_delete@2x.png in Resources */,
 				D3A74EB615C69392001500B9 /* add_call_over~ipad.png in Resources */,
 				D3A74EB815C69392001500B9 /* add_contact_default~ipad.png in Resources */,
@@ -7413,6 +7423,7 @@
 				C44669E31E8B1E310062329B /* icon_close@2x.png in Resources */,
 				C4AC28A31D3963FA003B6232 /* avatar_unknown.png in Resources */,
 				C4AC28A41D3963FA003B6232 /* menu-more_active.png in Resources */,
+				4DB7BB301EF44C6700391365 /* contact_gradient@2x.png in Resources */,
 				C4AC28A51D3963FA003B6232 /* avatar_unknown_small.png in Resources */,
 				C4E1CB491E6E281E00698166 /* camera-cancel@2x.png in Resources */,
 				C4AC28A61D3963FA003B6232 /* avatar_shadow.png in Resources */,
@@ -7467,6 +7478,7 @@
 				C4AC28D11D3963FA003B6232 /* options_add_over.png in Resources */,
 				C4AC28D21D3963FA003B6232 /* options_transfer_default.png in Resources */,
 				C4AC28D31D3963FA003B6232 /* options_transfer_over.png in Resources */,
+				4DB7BB341EF4507A00391365 /* button_remove_contact@2x.png in Resources */,
 				C4AC28D41D3963FA003B6232 /* WizardViewController.xib in Resources */,
 				C445D1BE1E674CF70037A9DE /* background_favorites@2x.png in Resources */,
 				C4AC28D51D3963FA003B6232 /* setup_back_default.png in Resources */,

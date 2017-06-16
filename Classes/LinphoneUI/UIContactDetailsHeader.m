@@ -248,8 +248,8 @@
 		[cell.detailTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
 		[cell.detailTextField setKeyboardType:UIKeyboardTypeDefault];
 		[cell setBackgroundColor:[UIColor clearColor]];
-	}
-
+    }
+    
 	// setup placeholder
 	ABPropertyID property = [[propertyList objectAtIndex:[indexPath row]] intValue];
 	if (property == kABPersonFirstNameProperty) {
@@ -262,7 +262,7 @@
 		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Company", nil)];
         [cell.detailTextField setTextColor:[UIColor whiteColor]];
 	}
-
+    
 	[cell.detailTextField setKeyboardType:UIKeyboardTypeDefault];
 
 	// setup values, if they exist
@@ -473,6 +473,11 @@
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
 		   editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	return UITableViewCellEditingStyleNone;
+}
+
+- (BOOL)tableView:(UITableView *)tableView
+shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 #pragma mark - UITextFieldDelegate Functions
