@@ -514,6 +514,7 @@
 		if (mainContent)
 		{
 			newContentViewController = mainContent;
+			[viewControllerCache setValue:newContentViewController forKey:description.content]; // Cache last custom controller
 		}
 		else
 		{

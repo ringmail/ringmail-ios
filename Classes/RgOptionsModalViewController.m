@@ -24,6 +24,7 @@
 @synthesize numberLabel;
 @synthesize contactLabel;
 @synthesize contactNew;
+@synthesize chatButton;
 
 - (id)initWithData:(NSDictionary*)param
 {
@@ -42,13 +43,13 @@
     [contactButton setTitle:[NSString stringWithUTF8String:"\uf054"] forState:UIControlStateNormal];
 	if (modalData[@"image"])
 	{
-		[avatarImg setImage:modalData[@"image"]];
 		avatarImg.contentMode = UIViewContentModeScaleAspectFit;
+		avatarImg.image = modalData[@"image"];
 	}
     avatarImg.layer.cornerRadius = avatarImg.frame.size.width / 2;
-    avatarImg.clipsToBounds = true;
+    avatarImg.clipsToBounds = YES;
     nameLabel.text = modalData[@"name"];
-    numberLabel.text = modalData[@"address"];
+    numberLabel.text = modalData[@"displayAddress"];
 	contactNew = modalData[@"new"];
 	if ([contactNew boolValue])
 	{
@@ -59,6 +60,14 @@
 	{
 		contactLabel.text = @"View Contact";
 		numberLabel.font = [UIFont systemFontOfSize:14.0f];
+	}
+	if ([modalData[@"context"] isEqualToString:@"chat"])
+	{
+		chatButton.hidden = YES;
+	}
+	else
+	{
+		chatButton.hidden = NO;
 	}
 }
 
@@ -83,12 +92,19 @@
 
 - (IBAction)onText:(id)event
 {
-    NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:modalData[@"address"] to:nil contact:modalData[@"contact_id"] uuid:nil];
-    [[LinphoneManager instance] setChatSession:sessionData[@"id"]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgDismissOptionsModal" object:nil userInfo:@{
 		@"clear": @YES,
 	}];
-	[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
+	RKCommunicator *comm = [RKCommunicator sharedInstance];
+	RKThread *thread = [comm getThreadByAddress:modalData[@"address"]];
+	if (thread != nil)
+	{
+		[[RKCommunicator sharedInstance] startMessageView:thread];
+	}
+	else
+	{
+		NSAssert(FALSE, @"Invalid thread for address: '%@'", modalData[@"address"]);
+	}
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:NULL];
 }
 

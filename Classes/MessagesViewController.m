@@ -141,7 +141,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Event Functions
 
-- (void)handleSegControl {
+- (void)handleSegControl
+{
     printf("recents segement controller hit\n");
 }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,6 +25,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RgOptionsModalViewController">
             <connections>
                 <outlet property="avatarImg" destination="bLL-8E-49G" id="hyt-8m-WzJ"/>
+                <outlet property="chatButton" destination="5wi-Mz-eMg" id="cKt-FI-poK"/>
                 <outlet property="contactButton" destination="bue-3V-2mk" id="Y7i-It-ug8"/>
                 <outlet property="contactLabel" destination="aKP-ye-6BE" id="N2W-Ab-YKZ"/>
                 <outlet property="nameLabel" destination="kTl-QU-YQh" id="jvK-WO-b2i"/>
@@ -122,9 +123,9 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVG-eS-uoZ" customClass="RgModalButtonView">
-                                    <rect key="frame" x="0.0" y="55" width="345" height="52"/>
+                                    <rect key="frame" x="0.0" y="55" width="345" height="55"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-Xa-Pz2">
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-Xa-Pz2">
                                             <rect key="frame" x="0.0" y="3" width="345" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="46" id="vps-2V-cId"/>
@@ -138,7 +139,7 @@
                                                 <action selector="onVideoChat:" destination="-1" eventType="touchUpInside" id="UMh-Or-gk4"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_normal_vid.png" translatesAutoresizingMaskIntoConstraints="NO" id="ncA-c9-22X">
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="modal_icon_normal_vid.png" translatesAutoresizingMaskIntoConstraints="NO" id="ncA-c9-22X">
                                             <rect key="frame" x="297" y="14" width="28" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="28" id="006-Vu-tiG"/>
@@ -156,24 +157,24 @@
                                         <constraint firstItem="oaT-Xa-Pz2" firstAttribute="leading" secondItem="qVG-eS-uoZ" secondAttribute="leading" id="uLO-OY-2Hh"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wi-Mz-eMg" customClass="RgModalButtonView">
-                                    <rect key="frame" x="0.0" y="107" width="345" height="55"/>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wi-Mz-eMg" customClass="RgModalButtonView">
+                                    <rect key="frame" x="0.0" y="110" width="345" height="52"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modal_icon_text_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="NJd-K0-TzT">
-                                            <rect key="frame" x="297" y="16" width="28" height="24"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="modal_icon_text_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="NJd-K0-TzT">
+                                            <rect key="frame" x="297" y="15.5" width="28" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="Xz6-tN-KiX"/>
                                                 <constraint firstAttribute="width" constant="28" id="ogN-YB-87h"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srk-Yg-MqC">
-                                            <rect key="frame" x="0.0" y="5" width="345" height="46"/>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srk-Yg-MqC">
+                                            <rect key="frame" x="0.0" y="4.5" width="345" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="46" id="G8D-cc-4Kb"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="19"/>
                                             <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="Messages">
+                                            <state key="normal" title="Message">
                                                 <color key="titleColor" red="0.20392156859999999" green="0.26274509800000001" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>

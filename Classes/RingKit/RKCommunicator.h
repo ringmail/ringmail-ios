@@ -12,22 +12,9 @@ extern NSString *const kRKItemActivity;
 extern NSString *const kRKMessageSent;
 extern NSString *const kRKMessageReceived;
 extern NSString *const kRKMessageUpdated;
-extern NSString *const kRKMessageViewChanged;
 extern NSString *const kRKCallBegin;
 extern NSString *const kRKCallUpdated;
 extern NSString *const kRKCallEnd;
-
-@protocol RKCommunicatorViewDelegate <NSObject>
-@optional
-
-- (void)showMessageView;
-//- (void)showCallView;
-- (void)showHashtagView:(NSString*)hashtag;
-- (void)showContactView:(NSNumber*)contactId;
-- (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
-- (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete;
-
-@end
 
 @class RKAdapterXMPP;
 @class RKAddress;
@@ -37,10 +24,23 @@ extern NSString *const kRKCallEnd;
 @class RKMessage;
 @class RKMomentMessage;
 
+@protocol RKCommunicatorViewDelegate <NSObject>
+@optional
+
+- (void)showMessageView:(RKThread*)thread;
+//- (void)showCallView;
+- (void)showHashtagView:(NSString*)hashtag;
+- (void)showContactView:(NSNumber*)contactId;
+- (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
+- (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete;
+
+@end
+
+// ---------------------------------------------
+
 @interface RKCommunicator : NSObject
 
 @property (nonatomic, strong) RKAdapterXMPP* adapterXMPP;
-@property (nonatomic, strong) RKThread* currentThread;
 @property (nonatomic, weak) id<RKCommunicatorViewDelegate>viewDelegate;
 
 + (instancetype)sharedInstance;

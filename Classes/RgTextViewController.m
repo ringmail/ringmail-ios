@@ -6,6 +6,7 @@
 #import "UIResponder+SLKAdditions.h"
 #import "SLKUIConstants.h"
 #import "UIColor+Hex.h"
+#import "UIChatNavBar.h"
 
 /** Feature flagged while waiting to implement a more reliable technique. */
 #define SLKBottomPanningEnabled 0
@@ -37,6 +38,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 @property (nonatomic, strong) NSLayoutConstraint *typingIndicatorViewHC;
 @property (nonatomic, strong) NSLayoutConstraint *autoCompletionViewHC;
 @property (nonatomic, strong) NSLayoutConstraint *keyboardHC;
+@property (nonatomic, strong) NSLayoutConstraint *originalToViewHC;
 
 // YES if the user is moving the keyboard with a gesture
 @property (nonatomic, assign, getter = isMovingKeyboard) BOOL movingKeyboard;
@@ -65,10 +67,11 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 @synthesize scrollViewProxy = _scrollViewProxy;
 @synthesize presentedInPopover = _presentedInPopover;
 @synthesize currentLayout = _currentLayout;
+@synthesize originalToView = _originalToView;
 
 #pragma mark - Initializer
 
-- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout thread:(RKThread*)thread
 {
     NSAssert([self class] != [RgTextViewController class], @"Oops! You must subclass RgTextViewController.");
     NSAssert([layout isKindOfClass:[UICollectionViewLayout class]], @"Oops! You must pass a valid UICollectionViewLayout object.");
@@ -76,8 +79,33 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     if (self = [super initWithNibName:nil bundle:nil])
     {
 		self.currentLayout = layout;
-		self.chatThread = [[RKCommunicator sharedInstance] currentThread];
+		self.chatThread = thread;
         self.scrollViewProxy = [self collectionViewWithLayout:layout];
+		
+		if (thread.originalTo == nil)
+		{
+			self.originalToView = [[UIView alloc] initWithFrame:CGRectZero];
+		}
+		else
+		{
+    		CGSize screensize = [UIScreen mainScreen].bounds.size;
+    		self.originalToView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screensize.width, 20)];
+            CAGradientLayer *gradient = [CAGradientLayer layer];
+            gradient.frame = self.originalToView.bounds;
+            gradient.colors = @[(id)[UIColor whiteColor].CGColor, (id)[UIColor grayColor].CGColor];
+            [self.originalToView.layer insertSublayer:gradient atIndex:0];
+			
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screensize.width, 20)];
+            [label setText:thread.originalTo.address];
+            [label setBackgroundColor: [UIColor clearColor]];
+            [label setNumberOfLines: 0];
+            [label sizeToFit];
+			[label setCenter:CGPointMake(self.originalToView.center.x, self.originalToView.center.y)];
+			[label setFont:[UIFont fontWithName:@"SFUIText-Semibold" size:12.0f]];
+			[label setTextAlignment:NSTextAlignmentCenter];
+			[self.view addSubview:label];
+		}
+		
         [self slk_commonInit];
     }
     return self;
@@ -115,6 +143,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [super viewDidLoad];
 	
     [self.view addSubview:self.backgroundImageView];
+	[self.view addSubview:self.originalToView];
     [self.view addSubview:self.scrollViewProxy];
     [self.view addSubview:self.autoCompletionView];
     [self.view addSubview:self.typingIndicatorProxyView];
@@ -131,31 +160,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 {
     [super viewWillAppear:animated];
 	
-	//TODO: Refresh collection data instead of recreating the container
-	/*NSNumber* threadID = [[LinphoneManager instance] chatSession];
-	if (! [threadID isEqualToNumber:self.chatRoom.chatThreadID])
-	{
-		NSLog(@"%s Change chat room", __PRETTY_FUNCTION__);
-		[_chatRoom removeFromParentViewController];
-		_chatRoom = nil;
-		[_scrollViewProxy removeFromSuperview];
-		_scrollViewProxy = nil;
-		_collectionView = nil;
-		[self setScrollViewProxy:[self collectionViewWithLayout:_currentLayout]];
-		
-		CGFloat height = [self slk_appropriateScrollViewHeight];
-		CGRect scrollFrame = [_scrollViewProxy frame];
-		scrollFrame.size.height = height;
-		[_scrollViewProxy setFrame:scrollFrame];
-		
-		[self.view insertSubview:_scrollViewProxy belowSubview:self.autoCompletionView];
-    	[self addChildViewController:_chatRoom];
-        [_chatRoom didMoveToParentViewController:self];
-		
-		[NSLayoutConstraint deactivateConstraints:self.view.constraints];
-		[self slk_setupViewConstraints];
-	}*/
-    
     // Invalidates this flag when the view appears
     self.textView.didNotResignFirstResponder = NO;
     
@@ -166,6 +170,10 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
         // Reloads any cached text
         [self slk_reloadTextView];
     }];
+
+	[[NSNotificationCenter defaultCenter] postNotificationName:kChatNavBarUpdate object:self userInfo:@{
+		@"thread": _chatThread,
+	}];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -2131,15 +2139,18 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
                             @"autoCompletionView": self.autoCompletionView,
                             @"typingIndicatorView": self.typingIndicatorProxyView,
                             @"textInputbar": self.textInputbar,
+                            @"originalToView": self.originalToView,
                             };
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[scrollView(0@750)][typingIndicatorView(0)]-0@999-[textInputbar(0)]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[originalToView(0)][scrollView(0@750)][typingIndicatorView(0)]-0@999-[textInputbar(0)]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[autoCompletionView(0@750)][typingIndicatorView]" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[originalToView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[scrollView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[autoCompletionView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[typingIndicatorView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[textInputbar]|" options:0 metrics:nil views:views]];
     
+    self.originalToViewHC = [self.view slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.originalToView secondItem:nil];
     self.scrollViewHC = [self.view slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.scrollViewProxy secondItem:nil];
     self.autoCompletionViewHC = [self.view slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.autoCompletionView secondItem:nil];
     self.typingIndicatorViewHC = [self.view slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.typingIndicatorProxyView secondItem:nil];
@@ -2234,7 +2245,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter addObserver:self selector:@selector(chatSentEvent:) name:kRKMessageSent object:nil];
 	[notificationCenter addObserver:self selector:@selector(chatReceivedEvent:) name:kRKMessageReceived object:nil];
     [notificationCenter addObserver:self selector:@selector(chatUpdateEvent:) name:kRKMessageUpdated object:nil];
-    [notificationCenter addObserver:self selector:@selector(chatRoomChange:) name:kRKMessageViewChanged object:nil];
+    //[notificationCenter addObserver:self selector:@selector(chatRoomChange:) name:kRKMessageViewChanged object:nil];
 }
 
 - (void)slk_unregisterNotifications
@@ -2273,7 +2284,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 	[notificationCenter removeObserver:self name:kRKMessageSent object:nil];
     [notificationCenter removeObserver:self name:kRKMessageReceived object:nil];
     [notificationCenter removeObserver:self name:kRKMessageUpdated object:nil];
-    [notificationCenter removeObserver:self name:kRKMessageViewChanged object:nil];
+    //[notificationCenter removeObserver:self name:kRKMessageViewChanged object:nil];
 }
 
 #pragma mark - View Auto-Rotation
@@ -2386,41 +2397,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (void)chatUpdateEvent:(NSNotification*)event
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)chatRoomChange:(NSNotification*)event
-{
-	NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSDictionary* info = event.userInfo;
-	RKThread* inputThread = info[@"thread"];
-	RKThread* chatThread = [_chatRoom chatThread];
-	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
-	{
-		NSLog(@"Same Chat Room");
-	}
-	else
-	{
-		NSLog(@"New Chat Room: %@", inputThread.threadId);
-		_chatThread = inputThread;
-		[_chatRoom removeFromParentViewController];
-		_chatRoom = nil;
-		[_scrollViewProxy removeFromSuperview];
-		_scrollViewProxy = nil;
-		_collectionView = nil;
-		[self setScrollViewProxy:[self collectionViewWithLayout:_currentLayout]];
-		
-		CGFloat height = [self slk_appropriateScrollViewHeight];
-		CGRect scrollFrame = [_scrollViewProxy frame];
-		scrollFrame.size.height = height;
-		[_scrollViewProxy setFrame:scrollFrame];
-		
-		[self.view insertSubview:_scrollViewProxy belowSubview:self.autoCompletionView];
-    	[self addChildViewController:_chatRoom];
-        [_chatRoom didMoveToParentViewController:self];
-		
-		[NSLayoutConstraint deactivateConstraints:self.view.constraints];
-		[self slk_setupViewConstraints];
-	}
 }
 
 @end

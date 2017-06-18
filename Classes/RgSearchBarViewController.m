@@ -9,6 +9,8 @@
 #import "RgSearchBarViewController.h"
 #import "UIColor+Hex.h"
 #import "Utils.h"
+#import "LinphoneManager.h"
+#import "RingKit.h"
 
 @implementation RgSearchBarViewController
 
@@ -115,9 +117,49 @@ bool animInactive = YES;
 
 - (IBAction)onTriangleButton:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:@{
-		@"address": addressField.text,
+	NSString* address = addressField.text;
+	RKAddress *raddress = [RKAddress newWithString:address];
+	
+    // Contact ID lookup attemp
+	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+	UIImage *customImage = nil;
+	NSString *name = [address copy];
+	NSString *addr = @"New ";
+	if ([raddress isPhone])
+	{
+		addr = [addr stringByAppendingString:@"Number"];
+	}
+	else
+	{
+		addr = [addr stringByAppendingString:@"Address"];
+	}
+	NSNumber *contactNew = @YES;
+	NSNumber *contactId = nil;
+	if (contact)
+	{
+        //LOGI(@"RingMail: Matched contact for options modal");
+		customImage = [FastAddressBook getContactImage:contact thumbnail:true];
+        name = [FastAddressBook getContactDisplayName:contact];
+		addr = [address copy];
+		contactNew = @NO;
+		contactId = [[[LinphoneManager instance] fastAddressBook] getContactId:contact];
+	}
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{
+		@"context": @"navbar",
+		@"name": name,
+		@"address": raddress,
+		@"displayAddress": addr,
+		@"new": contactNew,
 	}];
+	if (customImage != nil)
+	{
+		params[@"image"] = customImage;
+	}
+	if (contactId != nil)
+	{
+		params[@"contact_id"] = contactId;
+	}
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:params];
 }
 
 -(void)animateRocket:(bool)activeAddress

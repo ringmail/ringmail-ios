@@ -12,20 +12,36 @@
 
 @implementation RgViewDelegate
 
+@synthesize lastThreadId;
+@synthesize messageView;
+
 + (instancetype)sharedInstance
 {
     static RgViewDelegate *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 		sharedInstance = [[RgViewDelegate alloc] init];
+		[sharedInstance setLastThreadId:@0];
+		sharedInstance.messageView = nil;
 		[[RKCommunicator sharedInstance] setViewDelegate:sharedInstance];
     });
     return sharedInstance;
 }
 
-- (void)showMessageView
+- (void)showMessageView:(RKThread*)thread
 {
-	[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
+	MessageViewController* mv;
+	if ([lastThreadId isEqualToNumber:thread.threadId])
+	{
+		mv = messageView;
+	}
+	else
+	{
+		lastThreadId = thread.threadId;
+		mv = [[MessageViewController alloc] initWithThread:thread];
+		messageView = mv;
+	}
+	[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] content:mv push:TRUE];
 }
 
 - (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params

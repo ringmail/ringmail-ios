@@ -249,7 +249,7 @@
 			}];
 			if (! [row[@"original_to"] isEqualToString:@""])
 			{
-				thrdata[@"originalTo"] = row[@"original_to"];
+				thrdata[@"originalTo"] = [RKAddress newWithString:row[@"original_to"]];
 			}
 			RKThread* thr = [RKThread newWithData:thrdata];
 			NSString* itemType = @"none";
@@ -621,7 +621,7 @@
 			}];
 			if (! [row[@"original_to"] isEqualToString:@""])
 			{
-				thrdata[@"originalTo"] = row[@"original_to"];
+				thrdata[@"originalTo"] = [RKAddress newWithString:row[@"original_to"]];
 			}
 			RKThread* thr = [RKThread newWithData:thrdata];
 			result = [RKCall newWithData:@{
@@ -696,7 +696,7 @@
 			}];
 			if (! [row[@"original_to"] isEqualToString:@""])
 			{
-				thrdata[@"originalTo"] = row[@"original_to"];
+				thrdata[@"originalTo"] = [RKAddress newWithString:row[@"original_to"]];
 			}
 			RKThread* thr = [RKThread newWithData:thrdata];
 			if (NILIFNULL(row[@"message_id"]) != nil)

@@ -21,7 +21,6 @@ NSString *const kRKItemActivity = @"RKItemActivity";
 NSString *const kRKMessageSent = @"RKMessageSent";
 NSString *const kRKMessageReceived = @"RKMessageReceived";
 NSString *const kRKMessageUpdated = @"RKMessageUpdated";
-NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
 NSString *const kRKCallBegin = @"RKCallBegin";
 NSString *const kRKCallUpdated = @"RKCallUpdated";
 NSString *const kRKCallEnd = @"RKCallEnd";
@@ -29,7 +28,6 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 @implementation RKCommunicator
 
 @synthesize adapterXMPP;
-@synthesize currentThread;
 @synthesize viewDelegate;
 
 + (instancetype)sharedInstance
@@ -39,7 +37,6 @@ NSString *const kRKCallEnd = @"RKCallEnd";
     dispatch_once(&onceToken, ^{
 		sharedInstance = [[RKCommunicator alloc] init];
 		sharedInstance.adapterXMPP = [[RKAdapterXMPP alloc] init];
-		sharedInstance.currentThread = nil;
     });
     return sharedInstance;
 }
@@ -172,13 +169,9 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 
 - (void)startMessageView:(RKThread*)thread
 {
-	[self setCurrentThread:thread];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageViewChanged object:self userInfo:@{
-		@"thread": thread,
-	}];	
-	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showMessageView)])
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showMessageView:)])
 	{
-		[self.viewDelegate showMessageView];
+		[self.viewDelegate showMessageView:thread];
 	}
 }
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
+#import "RingKit.h"
 
 @interface RgOptionsModalViewController : UIViewController
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) IBOutlet UILabel* numberLabel;
 @property (nonatomic, strong) IBOutlet UILabel* contactLabel;
 @property (nonatomic, strong) IBOutlet NSNumber* contactNew;
+@property (nonatomic, strong) IBOutlet UIView* chatButton;
 
 - (id)initWithData:(NSDictionary*)param;
 - (IBAction)onContact:(id)event;
