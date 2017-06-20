@@ -25,4 +25,21 @@
 	}
 }
 
+- (void)showImageMedia
+{
+	RKPhotoMessage* media = self.data[@"item"];
+	if (
+		[media.mediaType isEqualToString:@"image/png"] ||
+		[media.mediaType isEqualToString:@"image/jpg"] ||
+		[media.mediaType isEqualToString:@"image/jpeg"]
+	) {
+    	if (media.mediaData == nil)
+    	{
+    		media.mediaData = [NSData dataWithContentsOfURL:[media documentURL]];
+    	}	
+		UIImage* image = [UIImage imageWithData:media.mediaData];
+		[[RKCommunicator sharedInstance] startImageView:image parameters:@{}];
+	}
+}
+
 @end

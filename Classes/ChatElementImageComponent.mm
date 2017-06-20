@@ -55,6 +55,7 @@
 						{
     						{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @15.0},
                             {@selector(setClipsToBounds:), @YES},
+							{CKComponentTapGestureAttribute(@selector(didTapImage))},
 						}
 					} component:
 						[CKImageComponent newWithImage:image]
@@ -85,6 +86,7 @@
 						{
     						{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @15.0},
                             {@selector(setClipsToBounds:), @YES},
+							{CKComponentTapGestureAttribute(@selector(didTapImage))},
 						}
 					} component:
 						[CKImageComponent newWithImage:image]
@@ -107,6 +109,11 @@
 		c->_element = elem;
 	}
 	return c;
+}
+
+- (void)didTapImage
+{
+	[self.element showImageMedia];
 }
 
 @end

@@ -137,6 +137,7 @@
     		}];
     		[comm sendMessage:message];
 		}
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:self userInfo:nil];
    		[comm startMessageView:thread];
 	}
 }

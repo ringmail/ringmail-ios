@@ -124,10 +124,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.extendedLayoutIncludesOpaqueBars = YES;
-	
-	UIImage *bgImage = [UIImage imageNamed:@"ringmail_chat_background.png"];
-	UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
-	self.backgroundImageView = bgImageView;
+
 }
 
 
@@ -141,6 +138,10 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	UIImage *bgImage = [UIImage imageNamed:@"ringmail_chat_background.png"];
+	UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
+	self.backgroundImageView = bgImageView;
 	
     [self.view addSubview:self.backgroundImageView];
 	[self.view addSubview:self.originalToView];
