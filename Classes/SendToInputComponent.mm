@@ -54,11 +54,14 @@
 - (void)didMount {
 	[super didMount];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetText:) name:kRgSendComponentReset object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setSendContact:) name:kRgSendComponentSelectContact object:nil];
+    
 }
 
 - (void)didUnmount {
 	[super didUnmount];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentSelectContact object:nil];
 }
 
 - (void)resetText:(NSNotification*)notif
@@ -66,6 +69,28 @@
 	SendToInputComponent* cp = (SendToInputComponent*)self.component;
 	SendToInputView* tv = cp.sendToView;
 	[tv setText:@""];
+}
+
+- (void)setSendContact:(NSNotification*)notif
+{
+    SendToInputComponent* cp = (SendToInputComponent*)self.component;
+    SendToInputView* tv = cp.sendToView;
+//    NSMutableDictionary* contact = notif.userInfo[@"contact"];
+    
+    NSArray* emails = notif.userInfo[@"emails"];
+    NSString* emailContact;
+    
+    for (id object in emails) {
+        emailContact = emails[0];
+        NSLog(@"contact emails:  %@", object);
+    }
+    
+    [tv setText:[NSString stringWithFormat:@"%@", emailContact]];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSetContact object:nil userInfo:
+    @{
+       @"to": emailContact
+    }];
 }
 
 @end

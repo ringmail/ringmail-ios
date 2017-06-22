@@ -46,6 +46,9 @@ extern NSString *const kRgUserUnauthorized;
 extern NSString *const kRgSendComponentReset;
 extern NSString *const kRgSendComponentAddMedia;
 extern NSString *const kRgSendComponentRemoveMedia;
+extern NSString *const kRgSendComponentDisplayContacts;
+extern NSString *const kRgSendComponentSelectContact;
+extern NSString *const kRgSendComponentSetContact;
 
 extern NSString *const kRgPresentOptionsModal;
 extern NSString *const kRgDismissOptionsModal;

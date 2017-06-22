@@ -460,7 +460,8 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		// Background View
 		UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
 		cell.selectedBackgroundView = selectedBackgroundView;
-		[selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+//		[selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+        [selectedBackgroundView setBackgroundColor:[UIColor colorWithHex:@"#D3D3D3"]];  // mrkbxt
 	}
     
 	NSMutableArray *sectionDict = [self getSectionData:[indexPath section]];
@@ -518,51 +519,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	NSMutableArray *sectionDict = [self getSectionData:[indexPath section]];
 	Entry *entry = [sectionDict objectAtIndex:[indexPath row]];
 	if (![self isEditing]) {
-		NSString *dest = NULL;
-        NSString *destPlain = NULL;
-		if (contactSections[[indexPath section]] == ContactSections_Number) {
-			ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
-			NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
-			NSString *valueRef = CFBridgingRelease(ABMultiValueCopyValueAtIndex(lMap, index));
-			if (valueRef != NULL) {
-                //NSLog(@"RingMail: Phone Click - %@", valueRef);
-                NSString *telStr = [NSString stringWithFormat:@"tel://%@", valueRef];
-                NSURL *telUrl = [NSURL URLWithString:[telStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                [[UIApplication sharedApplication] openURL:telUrl];
-				/*char normalizedPhoneNumber[256];
-				linphone_proxy_config_normalize_number(linphone_core_get_default_proxy_config([LinphoneManager getLc]),
-													   [valueRef UTF8String], normalizedPhoneNumber,
-													   sizeof(normalizedPhoneNumber));
-				dest = [NSString stringWithUTF8String:normalizedPhoneNumber];*/
-			}
-			CFRelease(lMap);
-		} else if (contactSections[[indexPath section]] == ContactSections_Email) {
-			ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonEmailProperty);
-			NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
-			NSString *valueRef = CFBridgingRelease(ABMultiValueCopyValueAtIndex(lMap, index));
-			if (valueRef != NULL) {
-                destPlain = valueRef;
-                dest = [RgManager addressToSIP:valueRef];
-                //NSLog(@"RingMail: Call 1 - %@", dest);
-				//dest = [FastAddressBook normalizeSipURI:dest];
-                //NSLog(@"RingMail: Call 2 - %@", dest);
-			}
-			CFRelease(lMap);
-		}
-		if (dest != nil) {
-            NSString *displayName = [FastAddressBook getContactDisplayName:contact];
-            DTAlertView *alert = [[DTAlertView alloc]
-                                initWithTitle:displayName
-                                message:@"Select Communication:"];
-            [alert addCancelButtonWithTitle:@"Cancel" block:^{}];
-            [alert addButtonWithTitle:@"Email" block:^{
-                MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-                controller.mailComposeDelegate = self;
-                [controller setToRecipients:[NSArray arrayWithObjects:destPlain, nil]];
-                if (controller) [[PhoneMainView instance] presentViewController:controller animated:YES completion:NULL];
-            }];
-            [alert show];
-		}
+ 
 	} else {
 		NSString *key = nil;
 		ABPropertyID property = [self propertyIDForSection:contactSections[indexPath.section]];
@@ -693,9 +650,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         phoneLabel.textAlignment = NSTextAlignmentLeft;
         
         if (section == ContactSections_Email)
-            phoneLabel.text = NSLocalizedString(@"Email addresses", nil);
+            phoneLabel.text = NSLocalizedString(@"Email Addresses", nil);
         else if (section == ContactSections_Number)
-            phoneLabel.text = NSLocalizedString(@"Phone numbers", nil);
+            phoneLabel.text = NSLocalizedString(@"Phone Numbers", nil);
         
         [tmp addSubview:phoneLabel];
         return tmp;

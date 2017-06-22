@@ -113,7 +113,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     else if (width == 414) {
 		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
     }
-
+    
     self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
     self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
     self.isSearchBarVisible = YES;

@@ -40,8 +40,6 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	avatarMap = [[NSMutableDictionary alloc] init];
     ringMailContacts = [NSDictionary dictionary];
     
-    selectedContacts = [[NSMutableArray alloc] init];
-
 	addressBook = ABAddressBookCreateWithOptions(nil, nil);
 
 	ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, (__bridge void *)(self));
@@ -289,14 +287,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     }
     
 	[cell setContact:contact];
-    
-     // mrkbxt
-    if([selectedContacts containsObject:indexPath]) {
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    
+        
 	return cell;
 }
 
@@ -321,20 +312,6 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 			[controller editContact:lPerson address:[ContactSelection getAddAddress]];
 		}
 	}
-    
-// mrkbxt
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    if(cell.accessoryType == UITableViewCellAccessoryNone) {
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//        [selectedContacts addObject:indexPath];
-//    }
-//    else {
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//        [selectedContacts removeObject:indexPath];
-//    }
-//    
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 #pragma mark - UITableViewDelegate Functions

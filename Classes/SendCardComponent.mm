@@ -109,7 +109,9 @@
 				   .alignItems = CKStackLayoutAlignItemsStart
 				}
 				children:{
-					{[CKImageComponent newWithImage:[UIImage imageNamed:@"plus_icon_normal.png"] size:{.height = 40, .width = 40}]},
+                    {[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+                        {UIControlStateNormal,[UIImage imageNamed:@"plus_icon_normal.png"]},
+                    } backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionAddContact:) size:{.height = 40, .width = 40} attributes:{} accessibilityConfiguration:{}]},
 					{[CKInsetComponent newWithInsets:{.top = 10, .bottom = 10, .left = 0, .right = 0} component:
 						[CKLabelComponent newWithLabelAttributes:{
 							.string = @"To:",

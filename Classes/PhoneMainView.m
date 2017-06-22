@@ -236,6 +236,10 @@ static RootViewManager *rootViewManagerInstance = nil;
                                              selector:@selector(dismissOptionsModal:)
                                                  name:kRgDismissOptionsModal
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(displayContactsController)
+                                                 name:kRgSendComponentDisplayContacts
+                                               object:nil];
     
 	[self.view addSubview:mainViewController.view];
 	
@@ -252,6 +256,7 @@ static RootViewManager *rootViewManagerInstance = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgUserUnauthorized object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgPresentOptionsModal object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgDismissOptionsModal object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentDisplayContacts object:nil];
 }
 
 #pragma mark - Options Model Functions
@@ -824,6 +829,19 @@ static RootViewManager *rootViewManagerInstance = nil;
     }];
     [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:^{}];
     [sheet showInView:self.view];
+}
+
+-(void)displayContactsController {
+    [ContactSelection setSelectionMode:ContactSelectionModeEdit];
+//    [ContactSelection setAddAddress:addr];
+    [ContactSelection setSipFilter:nil];
+    [ContactSelection setNameOrEmailFilter:nil];
+    [ContactSelection enableEmailFilter:FALSE];
+    SendContactsViewController *controller = DYNAMIC_CAST(
+      [[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] push:TRUE],
+      SendContactsViewController);
+    if (controller != nil) {
+    }
 }
 
 #pragma mark - ActionSheet Functions

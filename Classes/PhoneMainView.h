@@ -45,6 +45,8 @@
 
 #import "RgOptionsModalViewController.h"
 
+#import "SendContactsViewController.h"
+
 #import <Google/SignIn.h>
 
 @class PhoneMainView;

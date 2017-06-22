@@ -21,5 +21,6 @@
 - (void)didMount;
 - (void)didUnmount;
 - (void)resetText:(NSNotification*)notif;
+- (void)setSendContact:(NSNotification*)notif;
 
 @end

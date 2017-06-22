@@ -18,7 +18,7 @@ static NSString *const kAppearAnimation = @"appear";
 static NSString *const kDisappearAnimation = @"disappear";
 
 typedef enum {
-    Ring, Explore, Recents, Contacts, ContactDetails, Settings, HTagCard, Chat, ContactDetailsLabel
+    Ring, Explore, Recents, Contacts, ContactDetails, Settings, HTagCard, Chat, ContactDetailsLabel, SendContacts
 } NavView;
 
 int backState = 0;
@@ -165,16 +165,16 @@ int backState = 0;
     switch (navView)
     {
         case Ring:
-        case Explore:
         case Recents:
-            [segmentButton setEnabled:YES];
-            [segmentButton setHidden:NO];
-            break;
         case Contacts:
         case ContactDetails:
         case Settings:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
+            break;
+        case Explore:
+            [segmentButton setEnabled:YES];
+            [segmentButton setHidden:NO];
             break;
         case HTagCard:
             [segmentButton setEnabled:NO];
@@ -187,6 +187,11 @@ int backState = 0;
             break;
         case ContactDetailsLabel:
             headerLabel.text = @"Contact Details";
+            [segmentButton setEnabled:NO];
+            [segmentButton setHidden:YES];
+            [backButton setHidden:NO];
+            [backButton setEnabled:YES];
+        case SendContacts:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
             [backButton setHidden:NO];
@@ -207,8 +212,8 @@ int backState = 0;
         @"Contact Details": @(ContactDetails),
         @"Settings": @(Settings),
         @"Hashtag Card": @(HTagCard),
-        @"ContactDetailsLabel": @(ContactDetailsLabel)
-        
+        @"ContactDetailsLabel": @(ContactDetailsLabel),
+        @"Select Contacts": @(SendContacts)
     };
     
     return [[navViews valueForKey:sIn] intValue];
@@ -226,6 +231,9 @@ int backState = 0;
 
 - (IBAction)onBackClick:(id)event {
     if ([[[PhoneMainView instance] currentView] equal:[ContactDetailsLabelViewController compositeViewDescription]]) {
+        [[PhoneMainView instance] popCurrentView];
+    }
+    else if ([[[PhoneMainView instance] currentView] equal:[SendContactsViewController compositeViewDescription]]) {
         [[PhoneMainView instance] popCurrentView];
     }
     else {

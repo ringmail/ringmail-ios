@@ -22,5 +22,9 @@
 - (void)actionMediaTap:(CKButtonComponent *)sender;
 - (void)actionMediaRemove:(CKButtonComponent *)sender;
 
+- (void)actionAddContact:(CKButtonComponent *)sender;
+
+- (void)updateToState:(NSNotification *)notif;
+
 @end
 

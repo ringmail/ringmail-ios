@@ -27,7 +27,6 @@
     OrderedDictionary* addressBookMap;
     NSDictionary* ringMailContacts;
     NSMutableDictionary* avatarMap;
-    NSMutableArray* selectedContacts;
     
     ABAddressBookRef addressBook;
 }

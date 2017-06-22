@@ -19,6 +19,8 @@
 #import "TextInputComponent.h"
 #import "UIColor+Hex.h"
 #import "RgManager.h"
+#import "RingKit.h"
+
 
 @implementation SendCardComponentController
 
@@ -34,6 +36,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextViewTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSend:) name:kRgSendComponentReset object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateToState:) name:kRgSendComponentSetContact object:nil];
 }
 
 - (void)didUnmount {
@@ -41,6 +44,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentSetContact object:nil];
 }
 
 - (BOOL)enableSend
@@ -91,6 +95,20 @@
 	//NSLog(@"Tag: %@ - Text: %@", [NSNumber numberWithInteger:tag], text);
 }
 
+- (void)updateToState:(NSNotification *)notif {
+    [self state][@"to"] = notif.userInfo[@"to"];
+    BOOL is_enabled = [[self state][@"enable_send"] boolValue];
+    BOOL now_enabled = [self enableSend];
+    BOOL changed = ((! is_enabled) && now_enabled) || ((! now_enabled) && is_enabled);
+    __block NSMutableDictionary *st = [self state];
+    if (changed)
+    {
+        [self.component updateState:^(id oldState){
+            return st;
+        } mode:CKUpdateModeAsynchronous];
+    }
+}
+
 - (void)resetSend:(NSNotification *)notif
 {
 	[self setState:[NSMutableDictionary dictionaryWithDictionary:@{
@@ -112,9 +130,23 @@
 	NSDictionary *msgdata = [self state];
 	if ([msgdata[@"enable_send"] boolValue])
 	{
-		[obj sendMessage:msgdata];
+        if ([RKAddress validAddress:msgdata[@"to"]])
+        {
+            [obj sendMessage:msgdata];
+        }
+        else
+        {
+            [self resetSend:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:nil];
+        }
 	}
 }
+
+- (void)actionAddContact:(CKButtonComponent *)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentDisplayContacts object:nil];
+}
+
 
 - (void)actionMediaRemove:(CKButtonComponent *)sender
 {

@@ -50,7 +50,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTS-UH-a3H" userLabel="Left">
-                    <rect key="frame" x="50" y="37" width="50" height="21"/>
+                    <rect key="frame" x="50" y="37.333333333333336" width="50" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="VRR-2T-QTT"/>
                         <constraint firstAttribute="height" constant="21" id="mjl-sZ-gf4"/>
@@ -60,7 +60,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rt-2P-RyV">
-                    <rect key="frame" x="120" y="37" width="175" height="21"/>
+                    <rect key="frame" x="120.33333333333331" y="37.333333333333336" width="175" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="175" id="Ct6-hP-FF7"/>
                         <constraint firstAttribute="height" constant="21" id="Fns-t7-EwN"/>
@@ -70,7 +70,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32Y-5x-k5m" userLabel="Right">
-                    <rect key="frame" x="354" y="37" width="50" height="21"/>
+                    <rect key="frame" x="354" y="37.333333333333336" width="50" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="4nZ-y8-auq"/>
                         <constraint firstAttribute="height" constant="21" id="Rhl-BB-pKG"/>
@@ -80,7 +80,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="83b-0d-TgV">
-                    <rect key="frame" x="122" y="63" width="170" height="29"/>
+                    <rect key="frame" x="122.33333333333331" y="63.333333333333329" width="170" height="28.999999999999986"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="PyR-M1-2vv"/>
                     </constraints>
