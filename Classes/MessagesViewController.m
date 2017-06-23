@@ -71,9 +71,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 														  tabBarEnabled:true
 															 fullscreen:false
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:true
-                                                                segLeft:@"All"
-                                                               segRight:@"Missed"];
+														   portraitMode:true];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;
@@ -143,7 +141,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Event Functions
 
-- (void)handleSegControl {
+- (void)handleSegControl
+{
     printf("recents segement controller hit\n");
 }
 

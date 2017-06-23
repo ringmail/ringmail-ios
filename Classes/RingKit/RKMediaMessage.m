@@ -7,6 +7,8 @@
 //
 
 #import "RKMediaMessage.h"
+#import "RKMomentMessage.h"
+#import "RKVideoMessage.h"
 #import "RKAddress.h"
 #import "RKThread.h"
 #import "RKThreadStore.h"
@@ -21,6 +23,7 @@
 @synthesize remoteURL;
 @synthesize mediaData;
 @synthesize mediaType;
+@synthesize localPath;
 
 + (instancetype)newWithData:(NSDictionary*)param
 {
@@ -59,6 +62,15 @@
 		{
 			self->mediaType = nil;
 		}
+		if (param[@"localPath"])
+        {
+            NSAssert([param[@"localPath"] isKindOfClass:[NSString class]], @"localPath is not NSString object");
+            [self setLocalPath:param[@"localPath"]];
+        }
+		else
+		{
+			self->localPath = nil;
+		}
 	}
 	return self;
 }
@@ -77,6 +89,7 @@
 		@"deliveryStatus": _RKMessageStatus(self.deliveryStatus),
 		@"remoteURL": NULLIFNIL(self.remoteURL),
 		@"mediaType": NULLIFNIL(self.mediaType),
+		@"localPath": NULLIFNIL(self.localPath),
 	};
     NSMutableString *data = [[NSMutableString alloc] init];
     for (NSString *k in input.allKeys)
@@ -101,6 +114,7 @@
 			@"msg_inbound": [NSNumber numberWithInteger:[self direction]],
 			@"msg_body": [self body],
 			@"msg_remote_url": NULLIFNIL([self remoteURL]),
+			@"msg_local_path": NULLIFNIL([self localPath]),
 		},
 	}];
 	NSNumber* detailId = [ndb lastInsertId];
@@ -124,6 +138,7 @@
 		@"update": @{
 			@"msg_status": [NSNumber numberWithInteger:[self deliveryStatus]],
 			@"msg_remote_url": NULLIFNIL([self remoteURL]),
+			@"msg_local_path": NULLIFNIL([self localPath]),
 		},
 		@"where": @{
 			@"id": [self messageId],
@@ -134,28 +149,57 @@
 // TODO: add error handlers
 - (void)uploadMedia:(void (^)(BOOL success))complete
 {
-    [[RgNetwork instance] uploadImage:self.mediaData uuid:self.uuid callback:^(NSURLSessionTask *operation, id responseObject) {
+	NSString *ct = [self mediaType];
+	NSString *ext = nil;
+	if ([ct isEqualToString:@"image/png"])
+	{
+		ext = @"png";
+	}
+	else if ([ct isEqualToString:@"image/jpeg"])
+	{
+		ext = @"jpg";
+	}
+	else if ([ct isEqualToString:@"video/mp4"])
+	{
+		ext = @"mov";
+	}
+	NSAssert(ext, @"Invalid mime type for upload");
+	RgNetworkCallback cb = ^(NSURLSessionTask *operation, id responseObject) {
         NSDictionary* res = responseObject;
+		NSLog(@"Upload Result: %@", res);
         NSString *ok = res[@"result"];
         if ([ok isEqualToString:@"ok"])
         {
-			self.remoteURL = [NSURL URLWithString:res[@"url"]];
-			[[RKThreadStore sharedInstance] updateItem:self];
+   			self.remoteURL = [NSURL URLWithString:res[@"url"]];
+			if (! [self isKindOfClass:[RKMomentMessage class]])
+			{
+    			[[RKThreadStore sharedInstance] updateItem:self];
+			}
 			complete(TRUE);
 		}
 		else
 		{
 			complete(FALSE);
 		}
-	}];
+	};
+	if (self.localPath != nil)
+	{
+		// Stream file urls
+		[[RgNetwork instance] uploadURL:[self documentURL] mimeType:ct extension:ext uuid:self.uuid callback:cb];
+	}
+	else
+	{
+		// Send entire NSData
+		[[RgNetwork instance] uploadData:self.mediaData mimeType:ct extension:ext uuid:self.uuid callback:cb];
+	}
 }
 
 // TODO: add error handlers
 - (void)downloadMedia:(void (^)(BOOL success))complete
 {
 	NSAssert(self.remoteURL, @"Remote URL required");
-	NSString* imageUrl = [self.remoteURL absoluteString];
-    [[RgNetwork instance] downloadImage:imageUrl callback:^(NSURLSessionTask *operation, id responseObject) {
+   	NSString* url = [self.remoteURL absoluteString];
+    [[RgNetwork instance] downloadData:url callback:^(NSURLSessionTask *operation, id responseObject) {
         NSLog(@"%s: Download Complete", __PRETTY_FUNCTION__);
         NSData* imageData = responseObject;
 		self.mediaType = @"image/png"; // TODO: customize
@@ -171,10 +215,19 @@
 
 - (NSURL*)documentURL
 {
+	NSAssert(FALSE, @"Abstract method");
 	NSString* mainUuid = [self uuid];
+	NSString* otherPath = [self localPath];
 	NSURL* url = [self applicationDocumentsDirectory];
 	NSString* urlStr = [url absoluteString];
-	urlStr = [urlStr stringByAppendingPathComponent:mainUuid];
+	if (otherPath != nil)
+	{
+		urlStr = [urlStr stringByAppendingPathComponent:otherPath];
+	}
+	else
+	{
+		urlStr = [urlStr stringByAppendingPathComponent:mainUuid];
+	}
 	url = [NSURL URLWithString:urlStr];
 	return url;
 }

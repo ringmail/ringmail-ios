@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSURL* remoteURL;
 @property (nonatomic, strong) NSData* mediaData;
 @property (nonatomic, strong) NSString* mediaType;
+@property (nonatomic, strong) NSString* localPath;
 
 + (instancetype)newWithData:(NSDictionary*)param;
 
@@ -22,5 +23,6 @@
 - (void)uploadMedia:(void (^)(BOOL success))complete;
 - (void)downloadMedia:(void (^)(BOOL success))complete;
 - (NSURL*)documentURL;
+- (NSURL*)applicationDocumentsDirectory;
 
 @end

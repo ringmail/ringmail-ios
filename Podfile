@@ -29,6 +29,7 @@ target 'RingMail-Dev' do
   pod 'SlackTextViewController'
   pod 'LoremIpsum'
   pod 'Google/SignIn'
+  pod 'M13ProgressSuite'
 #  pod 'FCUUID'
 #  pod 'TesseractOCRiOS', '~> 4.0.0'
 #  pod 'OpenCV'

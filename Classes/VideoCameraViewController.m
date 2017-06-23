@@ -3,7 +3,9 @@
 #import "Utils.h"
 #import "PhoneMainView.h"
 #import "LLSimpleCamera.h"
-#import "MomentEditViewController.h"
+#import "VideoViewController.h"
+#import "RingKit.h"
+#import "ThumbnailFactory.h"
 
 @implementation VideoCameraViewController
 
@@ -36,9 +38,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 														  tabBarEnabled:false
 															 fullscreen:true
 														  landscapeMode:false
-														   portraitMode:true
-                                                                segLeft:@""
-                                                               segRight:@""];
+														   portraitMode:true];
 	}
 	return compositeDescription;
 }
@@ -57,7 +57,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     // create camera vc
     self.camera = [[LLSimpleCamera alloc] initWithQuality:AVCaptureSessionPresetHigh
                                                  position:LLCameraPositionRear
-                                             videoEnabled:NO];
+                                             videoEnabled:YES];
     
     // attach to a view controller
     [self.camera attachToViewController:self withFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
@@ -66,6 +66,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     // you probably will want to set this to YES, if you are going view the image outside iOS.
     /// self.camera.fixOrientationAfterCapture = NO;
     self.camera.fixOrientationAfterCapture = YES;
+    self.camera.useDeviceOrientation = YES;
     
     // take the required actions on a device change
     __weak VideoCameraViewController* weakSelf = self;
@@ -114,6 +115,11 @@ static UICompositeViewDescription *compositeDescription = nil;
             }
         }
     }];
+	
+	[self.camera setOnStartRecording:^(LLSimpleCamera* camera) {
+        weakSelf.snapButton.layer.borderColor = [UIColor greenColor].CGColor;
+        weakSelf.snapButton.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5];
+	}];
 
     // ----- camera buttons -------- //
     
@@ -180,6 +186,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+- (NSURL*)documentURL:(NSString*)mainUuid
+{
+	NSURL* url = [self applicationDocumentsDirectory];
+	NSString* urlStr = [url absoluteString];
+	urlStr = [urlStr stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov", mainUuid]];
+	url = [NSURL URLWithString:urlStr];
+	return url;
+}
+
 - (void)switchButtonPressed:(UIButton *)button
 {
     [self.camera togglePosition];
@@ -205,21 +220,45 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)snapButtonPressed:(UIButton *)button
 {
-    //__weak VideoCameraViewController* weakSelf = self;
-	[self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
-		if(!error) {
-			//NSLog(@"Image captured!!!!");
-			//[[PhoneMainView instance] setMomentImage:image];
-			MomentEditViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:NO], MomentEditViewController);
-			[ctl editImage:image];
-			//[editor setImage:image];
-			//ImageViewController *imageVC = [[ImageViewController alloc] initWithImage:image];
-			//[weakSelf presentViewController:imageVC animated:NO completion:nil];
-		}
-		else {
-			NSLog(@"An error has occured: %@", error);
-		}
-	} exactSeenImage:YES];
+    if (self.camera.isRecording)
+	{
+        self.flashButton.hidden = NO;
+        self.switchButton.hidden = NO;
+
+        self.snapButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.snapButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+		[self.camera stopRecording];
+	}
+	else
+	{
+        self.flashButton.hidden = YES;
+        self.switchButton.hidden = YES;
+
+        self.snapButton.layer.borderColor = [UIColor blueColor].CGColor;
+        self.snapButton.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
+
+		// start recording
+		__block NSString* mainUuid = [[NSUUID UUID] UUIDString];
+		__block NSURL *outputURL = [self documentURL:mainUuid];
+		[self.camera startRecordingWithOutputUrl:outputURL didRecord:^(LLSimpleCamera *camera, NSURL *outputFileUrl, NSError *error) {
+			NSLog(@"Done Recording: %@", outputURL);
+			AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:outputURL options:nil];
+			CGFloat scale = [UIScreen mainScreen].scale;
+			UIImage* thumb = [ThumbnailFactory thumbnailForVideoAsset:asset size:CGSizeMake(90 * scale, 90 * scale)];
+			RgMainViewController* ctl = DYNAMIC_CAST(
+				[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE],
+				RgMainViewController
+			);
+			[ctl addMedia:@{
+    			@"file": [outputURL path],
+    			@"mediaType": @"video/mp4",
+    			@"localPath": [NSString stringWithFormat:@"%@.mov", mainUuid],
+    			@"thumbnail": thumb,
+    		}];
+			//VideoViewController *vc = [[VideoViewController alloc] initWithVideoUrl:outputURL];
+			//[[PhoneMainView instance] changeCurrentView:[VideoViewController compositeViewDescription] content:vc push:YES];
+		}];
+    }
 }
 
 - (void)closeButtonPressed:(UIButton *)button

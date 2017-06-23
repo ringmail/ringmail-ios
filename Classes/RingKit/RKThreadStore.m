@@ -35,7 +35,7 @@
 - (void)setupDatabase
 {
 	NSString *path = @"ringmail_message_store";
-    path = [path stringByAppendingString:@"_v1.db"];
+    path = [path stringByAppendingString:@"_v0.1.db"];
 	NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
 	path = [docsPath stringByAppendingPathComponent:path];
 	[self setDbqueue:[FMDatabaseQueue databaseQueueWithPath:path]];
@@ -81,6 +81,7 @@
 				"thread_id INTEGER NOT NULL, "
 				"message_id INTEGER NULL DEFAULT NULL, "
 				"call_id INTEGER NULL DEFAULT NULL, "
+				"hidden INTEGER NOT NULL DEFAULT 0, "
                 "ts_created TEXT NOT NULL,"
                 "version INTEGER DEFAULT 1"
 			");",
@@ -98,6 +99,7 @@
 				"msg_status INTEGER NOT NULL DEFAULT '', "
 				"msg_type TEXT DEFAULT 'text/plain', "
 				"msg_class TEXT DEFAULT '', "
+				"msg_local_path TEXT DEFAULT NULL, "
 				"msg_remote_url TEXT DEFAULT NULL"
 			");",
             @"CREATE INDEX IF NOT EXISTS msg_uuid_1 ON rk_message (msg_uuid);",
@@ -203,16 +205,18 @@
 				"m.msg_body AS msg_body, "
 				"m.msg_type AS msg_type, "
 				"m.msg_class AS msg_class, "
+				"m.msg_uuid AS msg_uuid, "
 				"m.msg_inbound AS msg_inbound, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
 				"c.call_duration AS call_duration, "
 				"c.call_video AS call_video, "
+				"c.call_uuid AS call_uuid, "
 				"c.call_inbound AS call_inbound, "
 				"c.call_result AS call_result "
             "FROM ("
 				"SELECT t.id AS thread_id, t.address, t.contact_id, t.original_to, t.uuid, "
-				"(SELECT i.id FROM rk_thread_item i WHERE i.thread_id=t.id ORDER BY i.id DESC LIMIT 1) as item_id "
+				"(SELECT i.id FROM rk_thread_item i WHERE i.thread_id=t.id AND i.hidden = 0 ORDER BY i.id DESC LIMIT 1) as item_id "
                 "FROM rk_thread t"
             ") AS l "
             "LEFT JOIN rk_thread_item ti ON ti.id = l.item_id "
@@ -223,7 +227,7 @@
 		while ([rs next])
         {
 			NSDictionary* row = [rs resultDictionary];
-            //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+            NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
 			RKContact* ct;
 			RKAddress* addr = [RKAddress newWithString:row[@"address"]];
 			if (NILIFNULL(row[@"contact_id"]) != nil)
@@ -245,7 +249,7 @@
 			}];
 			if (! [row[@"original_to"] isEqualToString:@""])
 			{
-				thrdata[@"originalTo"] = row[@"original_to"];
+				thrdata[@"originalTo"] = [RKAddress newWithString:row[@"original_to"]];
 			}
 			RKThread* thr = [RKThread newWithData:thrdata];
 			NSString* itemType = @"none";
@@ -259,6 +263,7 @@
 					@"type": row[@"msg_type"],
 					@"direction": row[@"msg_inbound"],
 					@"class": row[@"msg_class"],
+					@"uuid": row[@"msg_uuid"],
 				};
 			}
 			else if (NILIFNULL(row[@"call_id"]) != nil)
@@ -271,15 +276,25 @@
 					@"direction": row[@"call_inbound"],
 					@"video": row[@"call_video"],
 					@"result": row[@"call_result"],
+					@"uuid": row[@"call_uuid"],
 				};
+			}
+			NSDate* dt = [NSDate date];
+			NSNumber* curId = @0;
+			NSNumber* ver = @0;
+			if (! [itemType isEqualToString:@"none"])
+			{
+				dt = [NSDate parse:row[@"ts_created"]];
+				curId = row[@"item_id"];
+				ver = row[@"version"];
 			}
 			NSDictionary* res = @{
 				@"thread": thr,
 				@"type": itemType,
 				@"detail": detail,
-				@"item_id": row[@"item_id"],
-				@"version": row[@"version"],
-				@"timestamp": [NSDate parse:row[@"ts_created"]],
+				@"item_id": curId,
+				@"version": ver,
+				@"timestamp": dt,
 			};
 			[result addObject:res];
 		}
@@ -311,6 +326,7 @@
 				"m.msg_status AS msg_status, "
 				"m.msg_class AS msg_class, "
 				"m.msg_remote_url AS msg_remote_url, "
+				"m.msg_local_path AS msg_local_path, "
 				"c.id AS call_id, "
 				"c.call_sip AS call_sip, "
 				"c.call_duration AS call_duration, "
@@ -329,6 +345,7 @@
     		sql = [sql stringByAppendingString:@""
     			"WHERE ti.thread_id=? "
     			"AND ti.id > ? "
+    			"AND ti.hidden = 0 "
 				"ORDER BY ti.id ASC"
 			];
 			NSLog(@"SQL: %@", sql);
@@ -338,6 +355,7 @@
 		{
     		sql = [sql stringByAppendingString:@""
     			"WHERE ti.thread_id=? "
+    			"AND ti.hidden = 0 "
 				"ORDER BY ti.id ASC"
 			];
 			rs = [db executeQuery:sql, thread.threadId];
@@ -364,6 +382,10 @@
 				if (NILIFNULL(row[@"msg_remote_url"]) != nil)
 				{
 					param[@"remoteURL"] = [NSURL URLWithString:row[@"msg_remote_url"]];
+				}
+				if (NILIFNULL(row[@"msg_local_path"]) != nil)
+				{
+					param[@"localPath"] = row[@"msg_local_path"];
 				}
 				RKMessage* msg = [RKMessage newWithData:param];
 				[result addObject:msg];
@@ -599,7 +621,7 @@
 			}];
 			if (! [row[@"original_to"] isEqualToString:@""])
 			{
-				thrdata[@"originalTo"] = row[@"original_to"];
+				thrdata[@"originalTo"] = [RKAddress newWithString:row[@"original_to"]];
 			}
 			RKThread* thr = [RKThread newWithData:thrdata];
 			result = [RKCall newWithData:@{
@@ -643,7 +665,8 @@
 				"m.msg_uuid AS msg_uuid, "
 				"m.msg_status AS msg_status, "
 				"m.msg_class AS msg_class, "
-				"m.msg_remote_url AS msg_remote_url "
+				"m.msg_remote_url AS msg_remote_url, "
+				"m.msg_local_path AS msg_local_path "
             "FROM rk_message m, rk_thread_item ti, rk_thread t "
             "WHERE m.id=ti.message_id AND m.thread_id = t.id "
             "AND m.msg_uuid = ?";
@@ -673,7 +696,7 @@
 			}];
 			if (! [row[@"original_to"] isEqualToString:@""])
 			{
-				thrdata[@"originalTo"] = row[@"original_to"];
+				thrdata[@"originalTo"] = [RKAddress newWithString:row[@"original_to"]];
 			}
 			RKThread* thr = [RKThread newWithData:thrdata];
 			if (NILIFNULL(row[@"message_id"]) != nil)
@@ -695,11 +718,31 @@
 				{
 					param[@"remoteURL"] = [NSURL URLWithString:row[@"msg_remote_url"]];
 				}
+				if (NILIFNULL(row[@"msg_local_path"]) != nil)
+				{
+					param[@"localPath"] = row[@"msg_local_path"];
+				}
 				result = [RKMessage newWithData:param];
 			}
 		}
 	}];
 	return result;
+}
+
+- (void)setHidden:(BOOL)hidden forItemId:(NSNumber*)itemId
+{
+	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		[ndb set:@{
+			@"table": @"rk_thread_item",
+			@"update": @{
+				@"hidden": [NSNumber numberWithBool:hidden],
+			},
+			@"where": @{
+				@"id": itemId,
+			},
+		}];
+	}];
 }
 
 @end

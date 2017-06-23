@@ -8,6 +8,8 @@
 #import "PhotoCameraViewController.h"
 #import "VideoCameraViewController.h"
 #import "MomentCameraViewController.h"
+#import "VideoViewController.h"
+#import "PhoneMainView.h"
 
 @implementation Send
 
@@ -32,15 +34,25 @@
 		RKThread* thread = [comm getThreadByAddress:address];
 		if (self.data[@"send_media"] != nil)
 		{
-			__block NSString* file = self.data[@"send_file"];
-			__block PHAsset* asset = self.data[@"send_asset"];
+			NSDictionary* media = self.data[@"send_media"];
+			__block NSString* file = media[@"file"];
+			__block PHAsset* asset = media[@"asset"];
+   			__block NSString *mediaType = media[@"mediaType"];
    			__block NSData *imgData = nil;
-   			__block NSString *mediaType = nil;
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				BOOL msg_image = NO;
+				BOOL msg_video = NO;
     			if (file != nil)
     			{
-					imgData = [NSData dataWithContentsOfFile:file];
-					mediaType = @"image/png";
+					if ([mediaType isEqualToString:@"video/mp4"])
+					{
+						msg_video = YES;
+					}
+					else
+					{
+						msg_image = YES;
+    					imgData = [NSData dataWithContentsOfFile:file];
+					}
     			}
     			else if (asset != nil)
     			{
@@ -53,34 +65,66 @@
     					imgData = imageData;
             		}];
 					mediaType = @"image/png"; // TODO: customize
+					msg_image = YES;
     			}
-				RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
-        			@"thread": thread,
-        			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-        			@"body": msgdata[@"message"],
-        			@"deliveryStatus": @(RKMessageStatusSending),
-    				@"mediaData": imgData,
-    				@"mediaType": mediaType,
-    			}];
-    			if (file != nil)
-    			{
-				    if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[[pmsg documentURL] path] error:NULL] == NO)
-                    {
-						NSAssert(FALSE, @"File copy failure");
-                    }
-                    else
-                    {
-                        [[NSFileManager defaultManager] removeItemAtPath:file error:NULL];
-                    }
+				if (msg_image)
+				{
+      				RKMediaMessage* pmsg;
+					if (media[@"moment"] != nil)
+					{
+				        pmsg = [RKMomentMessage newWithData:@{
+                			@"thread": thread,
+                			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+                			@"body": msgdata[@"message"],
+                			@"deliveryStatus": @(RKMessageStatusSending),
+            				@"mediaData": imgData,
+            				@"mediaType": mediaType,
+            			}];	
+					}
+					else
+					{
+        				pmsg = [RKPhotoMessage newWithData:@{
+                			@"thread": thread,
+                			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+                			@"body": msgdata[@"message"],
+                			@"deliveryStatus": @(RKMessageStatusSending),
+            				@"mediaData": imgData,
+            				@"mediaType": mediaType,
+            			}];
+					}
+        			if (file != nil)
+        			{
+    				    if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[[pmsg documentURL] path] error:NULL] == NO)
+                        {
+    						NSAssert(FALSE, @"File copy failure");
+                        }
+                        else
+                        {
+                            [[NSFileManager defaultManager] removeItemAtPath:file error:NULL];
+                        }
+    				}
+    				else if (asset != nil)
+        			{
+    					UIImage *img = [UIImage imageWithData:imgData];
+    					NSData *pngData = UIImagePNGRepresentation(img);
+    					[pngData writeToURL:[pmsg documentURL] atomically:YES];
+    				}
+        			NSLog(@"Photo Message: %@", pmsg);
+					[comm sendMessage:pmsg];
 				}
-				else if (asset != nil)
-    			{
-					UIImage *img = [UIImage imageWithData:imgData];
-					NSData *pngData = UIImagePNGRepresentation(img);
-					[pngData writeToURL:[pmsg documentURL] atomically:YES];
+				else
+				{
+			    	RKVideoMessage* vmsg = [RKVideoMessage newWithData:@{
+            			@"thread": thread,
+            			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+            			@"body": msgdata[@"message"],
+            			@"deliveryStatus": @(RKMessageStatusSending),
+        				@"localPath": media[@"localPath"],
+        				@"mediaType": mediaType,
+        			}];
+        			NSLog(@"Video Message: %@", vmsg);
+					[comm sendMessage:vmsg];
 				}
-    			NSLog(@"Photo Message: %@", pmsg);
-        		[comm sendMessage:pmsg];
 			});
 		}
 		else
@@ -93,47 +137,8 @@
     		}];
     		[comm sendMessage:message];
 		}
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:self userInfo:nil];
    		[comm startMessageView:thread];
-		
-		/*
-        RgChatManager* mgr = [[LinphoneManager instance] chatManager];
-    	NSString* to = msgdata[@"to"];
-		if ([msgdata[@"message"] length] > 0)
-		{
-        	NSString* body = msgdata[@"message"];
-            NSString* uuid = [mgr sendMessageTo:to from:nil body:body contact:nil];
-        	NSLog(@"Sent Text Message UUID: %@", uuid);
-		}
-		if (self.data[@"send_media"] != nil)
-		{
-			__block NSString* file = self.data[@"send_file"];
-			__block PHAsset* asset = self.data[@"send_asset"];
-           	NSLog(@"Sending Image Message");
-			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    			__block UIImage *img;
-    			if (file != nil)
-    			{
-    				img = [UIImage imageWithContentsOfFile:file];
-    			}
-    			else if (asset != nil)
-    			{
-                	PHImageManager* imageManager = [PHImageManager defaultManager];
-                	PHImageRequestOptions* opts = [PHImageRequestOptions new];
-                	opts.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-                	opts.synchronous = YES;
-            		[imageManager requestImageDataForAsset:asset options:opts resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
-    					img = [UIImage imageWithData:imageData];
-            		}];
-    			}
-                NSString* uuid = [mgr sendMessageTo:to from:nil image:img contact:nil];
-            	NSLog(@"Sent Image Message UUID: %@", uuid);
-			});
-		}
-    	[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:nil];
-		NSDictionary *sessionData = [mgr dbGetSessionID:to to:nil contact:nil uuid:nil];
-		[[LinphoneManager instance] setChatSession:sessionData[@"id"]];
-		[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
-		*/
 	}
 }
 
@@ -150,6 +155,46 @@
 - (void)showMomentCamera
 {
 	[[PhoneMainView instance] changeCurrentView:[MomentCameraViewController compositeViewDescription] push:TRUE];
+}
+
+- (void)showVideoMedia
+{
+	NSDictionary* media = self.data[@"send_media"];
+	if ([media[@"mediaType"] isEqualToString:@"video/mp4"])
+	{
+		NSURL* fileUrl = [NSURL fileURLWithPath:media[@"file"]];
+        VideoViewController *vc = [[VideoViewController alloc] initWithVideoUrl:fileUrl];
+        [[PhoneMainView instance] changeCurrentView:[VideoViewController compositeViewDescription] content:vc push:YES];
+	}
+}
+
+- (void)showImageMedia
+{
+	NSDictionary* media = self.data[@"send_media"];
+	if (media[@"asset"] != nil)
+	{
+    	PHImageManager* imageManager = [PHImageManager defaultManager];
+    	PHImageRequestOptions* opts = [PHImageRequestOptions new];
+		opts.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+		opts.resizeMode = PHImageRequestOptionsResizeModeExact;
+    	opts.synchronous = YES;
+		__block UIImage* res;
+		[imageManager requestImageForAsset:media[@"asset"] targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:opts resultHandler:^(UIImage* image, NSDictionary* info) {
+			res = image;
+		}];
+		[[RKCommunicator sharedInstance] startImageView:res parameters:@{}];
+	}
+	else if (media[@"file"] != nil)
+	{
+    	if (
+    		[media[@"mediaType"] isEqualToString:@"image/png"] ||
+    		[media[@"mediaType"] isEqualToString:@"image/jpeg"]
+    	) {
+    		NSURL* fileUrl = [NSURL fileURLWithPath:media[@"file"]];
+    		UIImage* img = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileUrl]];
+    		[[RKCommunicator sharedInstance] startImageView:img parameters:@{}];
+		}
+	}
 }
 
 @end

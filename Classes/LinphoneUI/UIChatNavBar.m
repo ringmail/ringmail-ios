@@ -2,13 +2,15 @@
 #import "PhoneMainView.h"
 #import "CAAnimation+Blocks.h"
 
+NSString *const kChatNavBarUpdate = @"ChatNavBarUpdate";
+
 @implementation UIChatNavBar
 
 @synthesize background;
 @synthesize avatarImage;
 @synthesize backButton;
 @synthesize headerLabel;
-
+@synthesize chatThread;
 
 #pragma mark - Lifecycle Functions
 
@@ -24,54 +26,22 @@
 
 #pragma mark - ViewController Functions
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateLabelsBtns:)
-                                                 name:@"navBarViewChange"
-                                               object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"navBarViewChange" object:nil];
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillEnterForeground:)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    
     [backButton setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeader:) name:kChatNavBarUpdate object:nil];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationWillEnterForegroundNotification
-                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatNavBarUpdate object:nil];
 }
 
-- (void)viewDidLayoutSubviews {
-    [self setInstance: [UIScreen mainScreen].applicationFrame.size.width];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-- (void)setInstance:(int)widthIn
+- (void)viewDidLayoutSubviews
 {
+	int widthIn = [UIScreen mainScreen].applicationFrame.size.width;
     UIImage* tmpImg = [UIImage imageNamed:@"header_navigation_tabs_blue@2x.jpg"];
     if (widthIn == 320)
 	{
@@ -92,36 +62,20 @@
     [backButton setCenter:CGPointMake(backButton.center.x,(tmpImg.size.height / 2))];
 }
 
-// mrkbxt
-- (void)updateLabelsBtns:(NSNotification *)notification {
-    
-    //NSDictionary *dict = notification.userInfo;
-    
-    [headerLabel setHidden:NO];
-    [backButton setHidden:NO];
-    [backButton setEnabled:YES];
+- (void)updateHeader:(NSNotification *)notification
+{
+    NSDictionary *updates = notification.userInfo;
+	chatThread = updates[@"thread"];
+    headerLabel.text = chatThread.remoteAddress.displayName;
 	
-	LinphoneManager *lm = [LinphoneManager instance];
-    NSNumber *session = [lm chatSession];
-    UIImage *image = nil;
-	NSDictionary *sdata = [[lm chatManager] dbGetSessionData:session];
-    NSLog(@"RingMail Chat Session Data: %@", sdata);
-    NSString *displayName = sdata[@"session_tag"];
-    ABRecordRef acontact = NULL;
-	if (! [sdata[@"contact_id"] isKindOfClass:[NSNull class]])
+	UIImage *avatar = chatThread.remoteAddress.avatarImage;
+	if (avatar == nil)
 	{
-		acontact = [[lm fastAddressBook] getContactById:sdata[@"contact_id"]];
+		avatar = [UIImage imageNamed:@"avatar_unknown_small.png"];
 	}
-    else
-    {
-		acontact = [[lm fastAddressBook] getContact:sdata[@"session_tag"]];
-    }
-    if (acontact != NULL)
-    {
-        displayName = [FastAddressBook getContactDisplayName:acontact];
-        image = [FastAddressBook getContactImage:acontact thumbnail:true];
-    }
-    headerLabel.text = displayName;
+    [avatarImage setImage:avatar];
+	avatarImage.layer.cornerRadius = 20;
+	avatarImage.layer.masksToBounds = YES;
 	
     // TODO: Original To
     /*if (! [sdata[@"session_to"] isEqualToString:@""])
@@ -134,27 +88,39 @@
         // No Original-To
         originalToView.hidden = YES;
     }*/
-
-    // Avatar
-    if (image == nil) {
-        image = [UIImage imageNamed:@"avatar_unknown_small.png"];
-    }
-    
-    [avatarImage setImage:image];
-	avatarImage.layer.cornerRadius = 20;
-	avatarImage.layer.masksToBounds = YES;
 }
-
-#pragma mark - Event Functions
-
-- (void)applicationWillEnterForeground:(NSNotification *)notif {
-
-}
-
 
 #pragma mark - Action Functions
 
-- (IBAction)onBackClick:(id)event {
+- (IBAction)onActionClick:(id)event
+{
+	NSNumber* contactNew = @YES;
+	NSNumber* contactId = chatThread.contact.contactId;
+	if (contactId != nil)
+	{
+		contactNew = @NO;
+	}
+	NSString* addr = chatThread.remoteAddress.address;
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{
+		@"context": @"chat",
+		@"name": headerLabel.text,
+		@"address": chatThread.remoteAddress,
+		@"displayAddress": addr,
+		@"new": contactNew,
+	}];
+	if (contactId != nil)
+	{
+		params[@"contact_id"] = contactId;
+	}
+	if (chatThread.remoteAddress.avatarImage != nil)
+	{
+		params[@"image"] = chatThread.remoteAddress.avatarImage;
+	}
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:params];
+}
+
+- (IBAction)onBackClick:(id)event
+{
 	[[PhoneMainView instance] popCurrentView];
 }
 

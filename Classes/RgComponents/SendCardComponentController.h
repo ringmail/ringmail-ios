@@ -20,6 +20,7 @@
 - (void)textFieldDidChange:(NSNotification *)notif;
 - (void)actionSend:(CKButtonComponent *)sender;
 - (void)actionMediaTap:(CKButtonComponent *)sender;
+- (void)actionImageTap:(CKButtonComponent *)sender;
 - (void)actionMediaRemove:(CKButtonComponent *)sender;
 
 - (void)actionAddContact:(CKButtonComponent *)sender;

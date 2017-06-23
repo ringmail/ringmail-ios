@@ -4,6 +4,8 @@
 #import "ChatElementTextComponent.h"
 #import "ChatElementCallComponent.h"
 #import "ChatElementImageComponent.h"
+#import "ChatElementMomentComponent.h"
+#import "ChatElementVideoComponent.h"
 
 #import "UIColor+Hex.h"
 #import "RingKit.h"
@@ -21,17 +23,22 @@ static CKComponent *chatComponent(ChatElement *elem, ChatElementContext *context
 	NSLog(@"Item: %@", data[@"item"]);
 	if ([data[@"item"] isKindOfClass:[RKPhotoMessage class]])
 	{
-		NSLog(@"Photo message");
 		return [ChatElementImageComponent newWithChatElement:elem context:context];
+	}
+	else if ([data[@"item"] isKindOfClass:[RKMomentMessage class]])
+	{
+		return [ChatElementMomentComponent newWithChatElement:elem context:context];
+	}
+	else if ([data[@"item"] isKindOfClass:[RKVideoMessage class]])
+	{
+		return [ChatElementVideoComponent newWithChatElement:elem context:context];
 	}
 	else if ([data[@"item"] isKindOfClass:[RKMessage class]])
 	{
-		NSLog(@"Text message");
 		return [ChatElementTextComponent newWithChatElement:elem context:context];
 	}
 	else if ([data[@"item"] isKindOfClass:[RKCall class]])
 	{
-		NSLog(@"Call item");
 		return [ChatElementCallComponent newWithChatElement:elem context:context];
 	}
 	return nil;

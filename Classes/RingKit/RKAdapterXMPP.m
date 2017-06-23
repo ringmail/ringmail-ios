@@ -11,6 +11,7 @@
 #import "RgNetwork.h"
 #import "NSString+MD5.h"
 #import "NSXMLElement+XMPP.h"
+#import "NSXMLElement+XEP_0335.h"
 #import "RKAddress.h"
 #import "RKContact.h"
 #import "RKThread.h"
@@ -315,9 +316,12 @@
         NSString* uuid = [[xmppMessage attributeForName:@"id"] stringValue];
 		RKCommunicator* comm = [RKCommunicator sharedInstance];
 		RKMessage* message = [comm getMessageByUUID:uuid];
-		message.deliveryStatus = RKMessageStatusSent;
-		[comm didUpdateMessage:message];
-		NSLog(@"Updated message: %@", message);
+		if (message != nil)
+		{
+    		message.deliveryStatus = RKMessageStatusSent;
+    		[comm didUpdateMessage:message];
+    		NSLog(@"Updated message: %@", message);
+		}
     }
 }
 
@@ -350,6 +354,7 @@
 				}
 			}
             NSString *threadUuid = [[[xmppMessage attributeForName:@"uuid"] stringValue] lowercaseString];
+			NSString *msgClass = [[xmppMessage attributeForName:@"class"] stringValue];
 			NSString *origTo = [[xmppMessage attributeForName:@"original-to"] stringValue];
 			RKAddress *originalTo = nil;
 			if (origTo != nil)
@@ -370,13 +375,21 @@
 				@"timestamp": timestamp,
 				@"direction": [NSNumber numberWithInteger:RKItemDirectionInbound],
 				@"body": body,
-				@"deliveryStatus": @(RKMessageStatusReceived)
+				@"deliveryStatus": @(RKMessageStatusReceived),
+				@"class": msgClass
 			}];
             if (attach != nil)
             {
                 NSString *imageUrl = [[attach attributeForName:@"url"] stringValue];
 				param[@"remoteURL"] = [NSURL URLWithString:imageUrl];
-				param[@"class"] = @"RKPhotoMessage";
+			}
+			NSXMLElement *jsonHolder = [xmppMessage JSONContainer];
+			if (jsonHolder != nil)
+			{
+    		    NSData *jsonHolderData = [jsonHolder JSONContainerData];
+                NSError *jsonErr = nil;
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:jsonHolderData options:0 error:&jsonErr];
+				param[@"data"] = jsonData;
 			}
 			__block RKMessage *message = [RKMessage newWithData:param];
             if (attach != nil)
@@ -494,9 +507,16 @@
                 NSString* uuid = [[delivered attributeForName:@"id"] stringValue];
 				RKCommunicator* comm = [RKCommunicator sharedInstance];
         		RKMessage* message = [comm getMessageByUUID:uuid];
-        		message.deliveryStatus = RKMessageStatusDelivered;
-        		[comm didUpdateMessage:message];
-        		NSLog(@"Updated message: %@", message);
+				if (message != nil)
+				{
+            		message.deliveryStatus = RKMessageStatusDelivered;
+            		[comm didUpdateMessage:message];
+            		NSLog(@"Updated message: %@", message);
+				}
+				else
+				{
+            		NSLog(@"Message UUID not found: %@", uuid);
+				}
             }
         }
     }

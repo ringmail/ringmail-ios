@@ -85,6 +85,42 @@
 				]},
 			}];
 		}
+		else if ([data[@"detail"][@"class"] isEqualToString:@"RKMomentMessage"])
+		{
+            lastItem = [CKStackLayoutComponent newWithView:{} size:{} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStart
+            } children:{
+				{[CKInsetComponent newWithInsets:{.left = 0, .right = 0, .top = 2, .bottom = 0} component:
+					[CKImageComponent newWithImage:[context imageNamed:@"message_summary_moment_normal.png"] size:{.height = 28, .width = 117}]
+				]},
+			}];
+		}
+		else if ([data[@"detail"][@"class"] isEqualToString:@"RKVideoMessage"])
+		{
+			msg = @"Video";
+            NSDictionary *attrsDictionary = @{
+                NSFontAttributeName: [UIFont boldSystemFontOfSize:15],
+                NSForegroundColorAttributeName: [UIColor colorWithHex:@"#7254A3"],
+            };
+			NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
+            lastItem = [CKStackLayoutComponent newWithView:{} size:{} style:{
+                .direction = CKStackLayoutDirectionHorizontal,
+                .alignItems = CKStackLayoutAlignItemsStart
+            } children:{
+				{[CKInsetComponent newWithInsets:{.left = 0, .right = 0, .top = 2, .bottom = 0} component:
+					[CKImageComponent newWithImage:[context imageNamed:@"message_summary_video_normal.png"] size:{.height = 25, .width = 27}]
+				]},
+        		{[CKInsetComponent newWithInsets:{.left = 6, .right = 0, .top = 5, .bottom = 0} component:
+    					[CKTextComponent newWithTextAttributes:{
+                        .attributedString = attrString,
+                    } viewAttributes:{
+                        {@selector(setBackgroundColor:), [UIColor clearColor]},
+                        {@selector(setUserInteractionEnabled:), @NO},
+                    } options:{} size:{}]
+				]},
+			}];
+		}
 		else
 		{
     		msg = data[@"detail"][@"body"];
@@ -157,7 +193,7 @@
             } children:{
 				{[CKStackLayoutComponent newWithView:{
 					[UIView class],
-					{CKComponentTapGestureAttribute(@selector(actionChat:))}
+					{CKComponentTapGestureAttribute(@selector(actionChatOrMoment:))}
 				} size:{.width = width - 94, .height = 62} style:{
 					.direction = CKStackLayoutDirectionHorizontal,
 					.alignItems = CKStackLayoutAlignItemsStart
@@ -239,7 +275,7 @@
         } children:{
 			{[CKStackLayoutComponent newWithView:{
                 [UIView class],
-                {CKComponentTapGestureAttribute(@selector(actionChat:))}
+                {CKComponentTapGestureAttribute(@selector(actionChatOrMoment:))}
 			} size:{.width = width - 94, .height = 62} style:{
                 .direction = CKStackLayoutDirectionHorizontal,
                 .alignItems = CKStackLayoutAlignItemsStart
@@ -326,8 +362,23 @@
 	} mode:CKUpdateModeAsynchronous];
 }
 
+- (void)actionChatOrMoment:(CKButtonComponent *)sender
+{
+	NSDictionary* data = [self currentThread].data;
+	if ([data[@"detail"][@"class"] isEqualToString:@"RKMomentMessage"])
+	{
+		RKMomentMessage* mmsg = (RKMomentMessage*)[[RKCommunicator sharedInstance] getMessageByUUID:data[@"detail"][@"uuid"]];
+		[[RKCommunicator sharedInstance] startMomentView:mmsg];
+	}
+	else // Chat
+	{
+		[[RKCommunicator sharedInstance] startMessageView:self.currentThread.data[@"thread"]];
+	}
+}
+
 - (void)actionChat:(CKButtonComponent *)sender
 {
+	
 	[[RKCommunicator sharedInstance] startMessageView:self.currentThread.data[@"thread"]];
 }
 

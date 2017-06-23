@@ -9,6 +9,8 @@
 #import "RgSearchBarViewController.h"
 #import "UIColor+Hex.h"
 #import "Utils.h"
+#import "LinphoneManager.h"
+#import "RingKit.h"
 
 @implementation RgSearchBarViewController
 
@@ -116,8 +118,8 @@ bool animInactive = YES;
 - (IBAction)onTriangleButton:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:@{
-		@"address": addressField.text,
-	}];
+       @"address": addressField.text,
+    }];
 }
 
 -(void)animateRocket:(bool)activeAddress

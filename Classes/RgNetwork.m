@@ -237,18 +237,75 @@ static RgNetwork* theRgNetwork = nil;
     }
 }
 
-- (void)uploadImage:(NSData*)imageData uuid:(NSString*)uuid callback:(RgNetworkCallback)callback
+// Stream upload :)
+
+- (void)uploadURL:(NSURL*)localUrl mimeType:(NSString*)ct extension:(NSString*)ext uuid:(NSString*)uuid callback:(RgNetworkCallback)callback
+{
+    NSError *attributesError = nil;
+    __block NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[localUrl path] error:&attributesError];
+    NSInputStream *fileStream = [NSInputStream inputStreamWithURL:localUrl];
+    NSError *requestError;
+    NSString *requestURI = [NSString stringWithFormat:@"https://%@/internal/app/chat_upload", self.networkHost];
+    NSDictionary *parameters = @{
+		@"mime_type": ct,
+    };
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:requestURI parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSString *name = [NSString stringWithFormat:@"%@.%@", uuid, ext];
+        [formData appendPartWithInputStream:fileStream name:@"userfile" fileName:name length:[fileAttributes fileSize] mimeType:ct];
+    } error:&requestError];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    __block NSURLSessionUploadTask *uploadTask;
+	NSLog(@"Begin Upload: %@", localUrl);
+    uploadTask = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress* uploadProgress) {
+        // This is not called back on the main queue.
+        // You are responsible for dispatching to the main queue for UI updates
+        NSLog(@"Upload: %f", uploadProgress.fractionCompleted);
+    } completionHandler:^(NSURLResponse* response, id responseObject, NSError* error) {
+        if (error) {
+            NSLog(@"Upload Error: %@", [error userInfo]);
+        } else {
+			NSLog(@"Upload Success: %@ %@", response, responseObject);
+            callback(uploadTask, responseObject);
+        }
+	}];
+	[uploadTask resume];
+}
+
+- (void)downloadURL:(NSURL*)source destination:(NSURL*)dest callback:(RgNetworkCallback)callback
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURLRequest *request = [NSURLRequest requestWithURL:source];
+    __block NSURLSessionDownloadTask *downloadTask;
+    downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+		NSLog(@"Download: %f", downloadProgress.fractionCompleted);
+    } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        return dest;
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        if (error) {
+            NSLog(@"Download Error: %@", [error userInfo]);
+        } else {
+			NSLog(@"Downlaod Success: %@", response);
+			callback(downloadTask, @{@"result": @"ok"});
+        }
+    }];
+    [downloadTask resume];
+}
+
+- (void)uploadData:(NSData*)imageData mimeType:(NSString*)ct extension:(NSString*)ext uuid:(NSString*)uuid callback:(RgNetworkCallback)callback
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSDictionary *parameters = @{};
+    NSDictionary *parameters = @{
+		@"mime_type": ct,
+	};
     [manager POST:[NSString stringWithFormat:@"https://%@/internal/app/chat_upload", self.networkHost] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:@"userfile" fileName:[NSString stringWithFormat:@"%@.png", uuid] mimeType:@"image/png"];
+        [formData appendPartWithFileData:imageData name:@"userfile" fileName:[NSString stringWithFormat:@"%@.%@", uuid, ext] mimeType:ct];
     } progress:nil success:callback failure:^(NSURLSessionTask *operation, NSError *error) {
         NSLog(@"RingMail - Chat Upload Error: %@", error);
     }];
 }
 
-- (void)downloadImage:(NSString*)url callback:(RgNetworkCallback)callback
+- (void)downloadData:(NSString*)url callback:(RgNetworkCallback)callback
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary *parameters = @{};

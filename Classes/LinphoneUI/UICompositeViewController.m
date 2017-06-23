@@ -34,8 +34,6 @@
 @synthesize fullscreen;
 @synthesize landscapeMode;
 @synthesize portraitMode;
-@synthesize segLeft;
-@synthesize segRight;
 
 - (id)copy {
 	UICompositeViewDescription *copy = [UICompositeViewDescription alloc];
@@ -50,8 +48,6 @@
 	copy.landscapeMode = self.landscapeMode;
 	copy.portraitMode = self.portraitMode;
 	copy.darkBackground = self.darkBackground;
-    copy.segLeft = self.segLeft;
-    copy.segRight = self.segRight;
 	return copy;
 }
 
@@ -71,8 +67,7 @@
 		 fullscreen:(BOOL)afullscreen
 	  landscapeMode:(BOOL)alandscapeMode
 	   portraitMode:(BOOL)aportraitMode
-            segLeft:aSegLeft
-            segRight:aSegRight;{
+{
 	self.name = aname;
 	self.content = acontent;
 	self.stateBar = astateBar;
@@ -85,8 +80,6 @@
 	self.landscapeMode = alandscapeMode;
 	self.portraitMode = aportraitMode;
     self.darkBackground = false;
-    self.segLeft = aSegLeft;
-    self.segRight = aSegRight;
 
 	return self;
 }
@@ -274,7 +267,7 @@
     [self.navBarViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	[self.tabBarViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	[self.stateBarViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	[self update:nil navBar:nil tabBar:nil stateBar:nil fullscreen:nil];
+	[self update:nil navBar:nil tabBar:nil stateBar:nil fullscreen:nil content:nil];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
@@ -474,7 +467,9 @@
         navBar:(NSNumber *)navBar
 		tabBar:(NSNumber *)tabBar
 	  stateBar:(NSNumber *)stateBar
-	fullscreen:(NSNumber *)fullscreen {
+	fullscreen:(NSNumber *)fullscreen
+	   content:(UIViewController*)mainContent
+{
     
     NSLog(@"CVC Input: tabbar:%@ fullscreen:%@", tabBar, fullscreen);
     
@@ -515,7 +510,16 @@
             }
 		}
 
-		UIViewController *newContentViewController = [self getCachedController:description.content];
+		UIViewController *newContentViewController;
+		if (mainContent)
+		{
+			newContentViewController = mainContent;
+			[viewControllerCache setValue:newContentViewController forKey:description.content]; // Cache last custom controller
+		}
+		else
+		{
+			newContentViewController = [self getCachedController:description.content];
+		}
 		UIViewController *newStateBarViewController = [self getCachedController:description.stateBar];
 		UIViewController *newTabBarViewController = [self getCachedController:description.tabBar];
         UIViewController *newNavBarViewController = [self getCachedController:description.navBar];
@@ -713,21 +717,21 @@
 	// Dealloc old view description
 }
 
-- (void)changeView:(UICompositeViewDescription *)description {
+- (void)changeView:(UICompositeViewDescription *)description content:(UIViewController*)content {
 	[self view]; // Force view load
-	[self update:description navBar:nil tabBar:nil stateBar:nil fullscreen:nil];
+	[self update:description navBar:nil tabBar:nil stateBar:nil fullscreen:nil content:content];
 }
 
 - (void)setFullScreen:(BOOL)enabled {
-	[self update:nil navBar:nil tabBar:nil stateBar:nil fullscreen:[NSNumber numberWithBool:enabled]];
+	[self update:nil navBar:nil tabBar:nil stateBar:nil fullscreen:[NSNumber numberWithBool:enabled] content:nil];
 }
 
 - (void)setToolBarHidden:(BOOL)hidden {
-	[self update:nil navBar:[NSNumber numberWithBool:!hidden] tabBar:[NSNumber numberWithBool:!hidden] stateBar:nil fullscreen:nil];
+	[self update:nil navBar:[NSNumber numberWithBool:!hidden] tabBar:[NSNumber numberWithBool:!hidden] stateBar:nil fullscreen:nil content:nil];
 }
 
 - (void)setStateBarHidden:(BOOL)hidden {
-	[self update:nil navBar:nil tabBar:nil stateBar:[NSNumber numberWithBool:!hidden] fullscreen:nil];
+	[self update:nil navBar:nil tabBar:nil stateBar:[NSNumber numberWithBool:!hidden] fullscreen:nil content:nil];
 }
 
 - (UIViewController *)getCurrentViewController {

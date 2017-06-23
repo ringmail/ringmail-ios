@@ -11,7 +11,6 @@
 #import "MessageTextView.h"
 #import "TypingIndicatorView.h"
 #import "UIColor+Hex.h"
-#import "RingKit.h"
 
 #import <LoremIpsum/LoremIpsum.h>
 
@@ -49,9 +48,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 														  tabBarEnabled:NO
 															 fullscreen:NO
 														  landscapeMode:[LinphoneManager runningOnIpad]
-														   portraitMode:YES
-                                                                segLeft:@"All"
-                                                               segRight:@"Missed"];
+														   portraitMode:YES];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;
@@ -59,13 +56,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Init
 
-- (instancetype)init
+- (instancetype)initWithThread:(RKThread*)thread
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumInteritemSpacing:0];
     [flowLayout setMinimumLineSpacing:0];
-    self = [super initWithCollectionViewLayout:flowLayout];
+    self = [super initWithCollectionViewLayout:flowLayout thread:thread];
     if (self) {
         [self commonInit];
     }
@@ -341,14 +338,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// Send message!
 	NSString *text = [self.textView.text copy];
 	//NSLog(@"Send Message: %@", text);
-	RKCommunicator* comm = [RKCommunicator sharedInstance];
 	RKMessage* message = [RKMessage newWithData:@{
-		@"thread": [comm currentThread],
+		@"thread": [self chatThread],
 		@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
 		@"body": text,
 		@"deliveryStatus": @(RKMessageStatusSending),
 	}];
-	[comm sendMessage:message];
+	[[RKCommunicator sharedInstance] sendMessage:message];
     [super didPressRightButton:sender];
 }
 

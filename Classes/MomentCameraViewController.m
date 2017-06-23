@@ -3,7 +3,7 @@
 #import "Utils.h"
 #import "PhoneMainView.h"
 #import "LLSimpleCamera.h"
-#import "MomentEditViewController.h"
+#import "ImageEditViewController.h"
 
 @implementation MomentCameraViewController
 
@@ -36,9 +36,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 														  tabBarEnabled:false
 															 fullscreen:true
 														  landscapeMode:false
-														   portraitMode:true
-                                                                segLeft:@""
-                                                               segRight:@""];
+														   portraitMode:true];
 	}
 	return compositeDescription;
 }
@@ -205,13 +203,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)snapButtonPressed:(UIButton *)button
 {
-    //__weak MomentCameraViewController* weakSelf = self;
+    //__weak PhotoCameraViewController* weakSelf = self;
 	[self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
 		if(!error) {
 			//NSLog(@"Image captured!!!!");
-			MomentEditViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[MomentEditViewController compositeViewDescription] push:NO], MomentEditViewController);
-			[ctl setEditMode:RgSendMediaEditModeMoment];
-			[ctl editImage:image];
+			ImageEditViewController* ctl = [[ImageEditViewController alloc] initWithImage:image editMode:RgSendMediaEditModeMoment];
+			[[PhoneMainView instance] changeCurrentView:[ImageEditViewController compositeViewDescription] content:ctl push:NO];
 		}
 		else {
 			NSLog(@"An error has occured: %@", error);

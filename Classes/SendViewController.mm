@@ -116,21 +116,19 @@
 	opts.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
 	opts.resizeMode = PHImageRequestOptionsResizeModeExact;
 	opts.synchronous = YES;
-	[imageManager requestImageForAsset:data[@"asset"] targetSize:CGSizeMake(180, 180) contentMode:PHImageContentModeAspectFill options:opts resultHandler:^(UIImage* image, NSDictionary* info){
-		sendInfo[@"send_media"] = image;
+	CGFloat scale = [UIScreen mainScreen].scale;
+	__block NSMutableDictionary *media = [NSMutableDictionary dictionary];
+	[imageManager requestImageForAsset:data[@"asset"] targetSize:CGSizeMake(90 * scale, 90 * scale) contentMode:PHImageContentModeAspectFill options:opts resultHandler:^(UIImage* image, NSDictionary* info){
+		media[@"thumbnail"] = image;
 	}];
-	sendInfo[@"send_asset"] = data[@"asset"];
-	if (_hostView != nil)
-	{
-    	Send *send = [[Send alloc] initWithData:sendInfo];
-    	[_hostView updateModel:send mode:CKUpdateModeAsynchronous];
-	}
+	media[@"mediaType"] = @"image/png"; // TODO: get correct mime type
+	media[@"asset"] = data[@"asset"];
+	[self addMedia:media];
 }
 
 - (void)addMedia:(NSDictionary*)param
 {
-	sendInfo[@"send_media"] = param[@"thumbnail"];
-	sendInfo[@"send_file"] = param[@"file"];
+	sendInfo[@"send_media"] = [param copy];
 	if (_hostView != nil)
 	{
     	Send *send = [[Send alloc] initWithData:sendInfo];
@@ -143,14 +141,6 @@
 	if (sendInfo[@"send_media"])
 	{
 		[sendInfo removeObjectForKey:@"send_media"];
-	}
-	if (sendInfo[@"send_file"])
-	{
-		[sendInfo removeObjectForKey:@"send_file"];
-	}
-	if (sendInfo[@"send_asset"])
-	{
-		[sendInfo removeObjectForKey:@"send_asset"];
 	}
 	if (_hostView != nil)
 	{

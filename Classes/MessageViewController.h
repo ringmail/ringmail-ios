@@ -8,7 +8,10 @@
 
 #import "UICompositeViewController.h"
 #import "RgTextViewController.h"
+#import "RingKit.h"
 
 @interface MessageViewController : RgTextViewController <UICompositeViewDelegate>
+
+- (instancetype)initWithThread:(RKThread*)thread;
 
 @end

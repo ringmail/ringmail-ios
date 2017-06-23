@@ -11,4 +11,7 @@
 - (void)showVideoCamera;
 - (void)showMomentCamera;
 
+- (void)showVideoMedia;
+- (void)showImageMedia;
+
 @end

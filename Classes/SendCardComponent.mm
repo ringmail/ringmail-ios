@@ -52,6 +52,28 @@
 	std::vector<CKStackLayoutComponentChild> sendContent;
 	if ([item data][@"send_media"] != nil)
 	{
+		NSDictionary* media = [item data][@"send_media"];
+		CKComponent* mediaItem;
+		if ([media[@"mediaType"] isEqualToString:@"video/mp4"])
+		{
+			mediaItem = [CKCompositeComponent newWithView:{} component:
+				[CKBackgroundLayoutComponent newWithComponent:
+					[CKInsetComponent newWithInsets:{.top = 69, .bottom = 4, .left = 4, .right = 69} component:
+						[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_video_badge.png"] size:{.height = 17, .width = 17}]
+					]
+				background:
+					[CKButtonComponent newWithTitles:{} titleColors:{} images:{
+        				{UIControlStateNormal, media[@"thumbnail"]},
+        			} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionMediaTap:) size:{.height = 90, .width = 90} attributes:{} accessibilityConfiguration:{}]
+				]
+			];
+		}
+		else
+		{
+	 		mediaItem = [CKButtonComponent newWithTitles:{} titleColors:{} images:{
+				{UIControlStateNormal, media[@"thumbnail"]},
+			} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionImageTap:) size:{.height = 90, .width = 90} attributes:{} accessibilityConfiguration:{}];
+		}
 		sendContent.push_back(
 			{[CKInsetComponent newWithInsets:{.top = 5, .bottom = 0, .left = 15, .right = 0} component:
 				[CKCompositeComponent newWithView:{
@@ -62,16 +84,12 @@
                     }
 				} component:
 					[CKBackgroundLayoutComponent newWithComponent:
-						[CKInsetComponent newWithInsets:{.top = 0, .bottom = 66, .left = 66, .right = 0} component:
+						[CKInsetComponent newWithInsets:{.top = 2, .bottom = 64, .left = 64, .right = 2} component:
 							[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-								{UIControlStateNormal,[UIImage imageNamed:@"icon_close.png"]},
-							} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionMediaRemove:) size:{.height = 24, .width = 24} attributes:{} accessibilityConfiguration:{}]
+								{UIControlStateNormal,[UIImage imageNamed:@"ringpanel_media_remove.png"]},
+							} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionMediaRemove:) size:{.height = 26, .width = 26} attributes:{} accessibilityConfiguration:{}]
 						]
-					 background:
-				 		[CKButtonComponent newWithTitles:{} titleColors:{} images:{
-							{UIControlStateNormal,[item data][@"send_media"]},
-						} backgroundImages:{} titleFont:nil selected:NO enabled:YES action:@selector(actionMediaTap:) size:{.height = 90, .width = 90} attributes:{} accessibilityConfiguration:{}]
-					]
+					 background:mediaItem]
 				]
 			]}
 		);

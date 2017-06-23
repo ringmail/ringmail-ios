@@ -27,6 +27,7 @@
 @synthesize numberLabel;
 @synthesize contactLabel;
 @synthesize contactNew;
+@synthesize chatButton;
 
 - (id)initWithData:(NSDictionary*)param
 {
@@ -43,32 +44,62 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.0]];
     [contactButton setTitle:[NSString stringWithUTF8String:"\uf054"] forState:UIControlStateNormal];
-    if (modalData[@"validAddress"])
+    
+    // TODO: check for domain, domains are not contacts...
+    NSString *address = modalData[@"address"];
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+    UIImage *customImage = nil;
+    NSString *name = [address copy];
+    NSString *addr = @"New ";
+    
+    if ([RKAddress validAddress: address])
     {
+        RKAddress *raddress = [RKAddress newWithString:address];
+        
+        if ([raddress isPhone])
+            addr = [addr stringByAppendingString:@"Number"];
+        else
+            addr = [addr stringByAppendingString:@"Address"];
+        
+        NSNumber *contactIsNew = @YES;
+        NSNumber *contactId = nil;
+        
+        if (contact)
+        {
+            name = [FastAddressBook getContactDisplayName:contact];
+            addr = [address copy];
+            contactIsNew = @NO;
+            contactId = [[[LinphoneManager instance] fastAddressBook] getContactId:contact];
+            customImage = [FastAddressBook getContactImage:contact thumbnail:true];
+            if (customImage)
+            {
+                avatarImg.contentMode = UIViewContentModeScaleAspectFit;
+                avatarImg.image = customImage;
+            }
+        }
+        
+        avatarImg.layer.cornerRadius = avatarImg.frame.size.width / 2;
+        avatarImg.clipsToBounds = YES;
+        
+        nameLabel.text = name;
+        numberLabel.text = addr;
+        numberLabel.font = [UIFont italicSystemFontOfSize:14.0f];
+        
+        if ([contactIsNew boolValue])
+            contactLabel.text = @"Add To Contact";
+        else
+            contactLabel.text = @"View Contact";
+        
+        if ([modalData[@"context"] isEqualToString:@"chat"])
+            chatButton.hidden = YES;
+        else
+            chatButton.hidden = NO;
+        
         contactView.hidden = false;
         invalidView.hidden = true;
-        
-        if (modalData[@"image"])
-        {
-            [avatarImg setImage:modalData[@"image"]];
-            avatarImg.contentMode = UIViewContentModeScaleAspectFit;
-        }
-        avatarImg.layer.cornerRadius = avatarImg.frame.size.width / 2;
-        avatarImg.clipsToBounds = true;
-        nameLabel.text = modalData[@"name"];
-        numberLabel.text = modalData[@"address"];
-        contactNew = modalData[@"new"];
-        if ([contactNew boolValue])
-        {
-            contactLabel.text = @"Add To Contact";
-            numberLabel.font = [UIFont italicSystemFontOfSize:14.0f];
-        }
-        else
-        {
-            contactLabel.text = @"View Contact";
-            numberLabel.font = [UIFont systemFontOfSize:14.0f];
-        }
-    } else {
+    }
+    else
+    {
         contactView.hidden = true;
         invalidView.hidden = false;
     }
@@ -95,12 +126,19 @@
 
 - (IBAction)onText:(id)event
 {
-    NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:modalData[@"address"] to:nil contact:modalData[@"contact_id"] uuid:nil];
-    [[LinphoneManager instance] setChatSession:sessionData[@"id"]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgDismissOptionsModal" object:nil userInfo:@{
 		@"clear": @YES,
 	}];
-	[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
+	RKCommunicator *comm = [RKCommunicator sharedInstance];
+	RKThread *thread = [comm getThreadByAddress:modalData[@"address"]];
+	if (thread != nil)
+	{
+		[[RKCommunicator sharedInstance] startMessageView:thread];
+	}
+	else
+	{
+		NSAssert(FALSE, @"Invalid thread for address: '%@'", modalData[@"address"]);
+	}
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:NULL];
 }
 

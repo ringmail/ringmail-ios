@@ -12,6 +12,7 @@
 #import "RKContact.h"
 #import "RKCall.h"
 #import "RKMessage.h"
+#import "RKMomentMessage.h"
 #import "RKThread.h"
 
 #import "NSXMLElement+XMPP.h"
@@ -20,7 +21,6 @@ NSString *const kRKItemActivity = @"RKItemActivity";
 NSString *const kRKMessageSent = @"RKMessageSent";
 NSString *const kRKMessageReceived = @"RKMessageReceived";
 NSString *const kRKMessageUpdated = @"RKMessageUpdated";
-NSString *const kRKMessageViewChanged = @"RKMessageViewChanged";
 NSString *const kRKCallBegin = @"RKCallBegin";
 NSString *const kRKCallUpdated = @"RKCallUpdated";
 NSString *const kRKCallEnd = @"RKCallEnd";
@@ -28,7 +28,6 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 @implementation RKCommunicator
 
 @synthesize adapterXMPP;
-@synthesize currentThread;
 @synthesize viewDelegate;
 
 + (instancetype)sharedInstance
@@ -38,15 +37,17 @@ NSString *const kRKCallEnd = @"RKCallEnd";
     dispatch_once(&onceToken, ^{
 		sharedInstance = [[RKCommunicator alloc] init];
 		sharedInstance.adapterXMPP = [[RKAdapterXMPP alloc] init];
-		sharedInstance.currentThread = nil;
     });
     return sharedInstance;
 }
 
 - (void)sendMessage:(RKMessage*)message
 {
-	RKThreadStore* store = [RKThreadStore sharedInstance];
-	[store insertItem:message];
+	if (! [message isKindOfClass:[RKMomentMessage class]]) // Do not store moments
+	{
+		RKThreadStore* store = [RKThreadStore sharedInstance];
+		[store insertItem:message];
+	}
 	[message prepareMessage:^(NSObject* xml) {
 		[adapterXMPP sendMessage:(NSXMLElement*)xml];
 		[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageSent object:self userInfo:@{
@@ -168,13 +169,21 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 
 - (void)startMessageView:(RKThread*)thread
 {
-	[self setCurrentThread:thread];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageViewChanged object:self userInfo:@{
-		@"thread": thread,
-	}];	
-	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showMessageView)])
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showMessageView:)])
 	{
-		[self.viewDelegate showMessageView];
+		[self.viewDelegate showMessageView:thread];
+	}
+}
+
+- (void)startMomentView:(RKMomentMessage*)message
+{
+	message.mediaData = [NSData dataWithContentsOfURL:[message documentURL]];
+	UIImage* image = [UIImage imageWithData:message.mediaData];
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showMomentView:parameters:complete:)])
+	{
+		[self.viewDelegate showMomentView:image parameters:@{} complete:^{
+			[message onComplete];
+		}];
 	}
 }
 
@@ -193,6 +202,14 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showHashtagView:)])
 	{
 		[self.viewDelegate showHashtagView:hashtag];
+	}
+}
+
+- (void)startImageView:(UIImage*)image parameters:(NSDictionary*)params
+{
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showImageView:parameters:)])
+	{
+		[self.viewDelegate showImageView:image parameters:params];
 	}
 }
 

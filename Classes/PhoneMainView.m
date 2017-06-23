@@ -136,7 +136,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 @synthesize statusBarBG;
 @synthesize volumeView;
 @synthesize webDelegate;
-@synthesize momentImage;
 @synthesize optionsModalViewController;
 @synthesize optionsModalBG;
 
@@ -262,58 +261,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 #pragma mark - Options Model Functions
 - (void)presentOptionsModal:(NSNotification *)notif
 {
-	// TODO: check for domain, domains are not contacts...
-	NSString *address = notif.userInfo[@"address"];
-	
-    // Contact ID lookup attemp
-	ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-	UIImage *customImage = nil;
-	NSString *name = [address copy];
-	NSString *addr = @"New ";
-    
-    NSMutableDictionary *params;
-    
-    if ([RKAddress validAddress: address])
-    {
-        RKAddress *raddress = [RKAddress newWithString:address];
-        
-        if ([raddress isPhone])
-            addr = [addr stringByAppendingString:@"Number"];
-        else
-            addr = [addr stringByAppendingString:@"Address"];
-
-        NSNumber *contactNew = @YES;
-        NSNumber *contactId = nil;
-        
-        if (contact)
-        {
-            //LOGI(@"RingMail: Matched contact for options modal");
-            customImage = [FastAddressBook getContactImage:contact thumbnail:true];
-            name = [FastAddressBook getContactDisplayName:contact];
-            addr = [address copy];
-            contactNew = @NO;
-            contactId = [[[LinphoneManager instance] fastAddressBook] getContactId:contact];
-        }
-        
-        params = [NSMutableDictionary dictionaryWithDictionary:@{
-            @"name": name,
-            @"address": addr,
-            @"new": contactNew,
-            @"validAddress" : @"YES"
-        }];
-        
-        if (customImage)
-            params[@"image"] = customImage;
-        
-        if (contactId)
-            params[@"contact_id"] = contactId;
-    }
-    else {
-        params = [NSMutableDictionary dictionaryWithDictionary:@{}];
-    }
-    
     optionsModalBG.hidden = NO;
-    optionsModalViewController = [[RgOptionsModalViewController alloc] initWithData:params];
+    optionsModalViewController = [[RgOptionsModalViewController alloc] initWithData:notif.userInfo];
     optionsModalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [self presentViewController:optionsModalViewController animated:YES completion:nil];
 }
@@ -657,8 +606,8 @@ static RootViewManager *rootViewManagerInstance = nil;
     printf("updating Nav Bar for: %s\n", [vc.name UTF8String]);  // mrkbxt
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     dict[@"header"] = vc.name;
-    dict[@"lSeg"] = vc.segLeft;
-    dict[@"rSeg"] = vc.segRight;
+    dict[@"lSeg"] = @"Categories";
+    dict[@"rSeg"] = @"My Activity";
     [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:nil userInfo:dict];
 }
 
@@ -667,11 +616,22 @@ static RootViewManager *rootViewManagerInstance = nil;
 	[mainViewController setFullScreen:enabled];
 }
 
-- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view {
-	return [self changeCurrentView:view push:FALSE];
+- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view
+{
+	return [self changeCurrentView:view content:nil push:FALSE];
 }
 
-- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view push:(BOOL)push {
+- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view content:(UIViewController*)mainContent
+{
+	return [self changeCurrentView:view content:mainContent push:FALSE];
+}
+
+- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view push:(BOOL)push
+{
+	return [self changeCurrentView:view content:nil push:push];
+}
+
+- (UIViewController *)changeCurrentView:(UICompositeViewDescription *)view content:(UIViewController*)mainContent push:(BOOL)push {
 	BOOL force = push;
 	NSMutableArray *viewStack = [RootViewManager instance].viewDescriptionStack;
 	if (!push) {
@@ -679,10 +639,11 @@ static RootViewManager *rootViewManagerInstance = nil;
 		[viewStack removeAllObjects];
 	}
 	[viewStack addObject:view];
-	return [self _changeCurrentView:view transition:nil force:force];
+	return [self _changeCurrentView:view content:mainContent transition:nil force:force];
 }
 
 - (UIViewController *)_changeCurrentView:(UICompositeViewDescription *)view
+								 content:(UIViewController*)mainContent
 							  transition:(CATransition *)transition
 								   force:(BOOL)force {
 	LOGI(@"PhoneMainView: Change current view to %@", [view name]);
@@ -694,7 +655,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 
         [vc.mainViewController setViewTransition:nil];
 		[vc updateStatusBar:view];
-		[vc.mainViewController changeView:view];
+		[vc.mainViewController changeView:view content:mainContent];
 		vc->currentView = view;
         [vc updateNavBar:view];
 	}
@@ -712,7 +673,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	while ([viewStack count] > 1 && ![[viewStack lastObject] equal:view]) {
 		[viewStack removeLastObject];
 	}
-	[self _changeCurrentView:[viewStack lastObject] transition:[PhoneMainView getBackwardTransition] force:TRUE];
+	[self _changeCurrentView:[viewStack lastObject] content:nil transition:[PhoneMainView getBackwardTransition] force:TRUE];
 }
 
 - (UICompositeViewDescription *)firstView {
@@ -738,7 +699,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	NSMutableArray *viewStack = [RootViewManager instance].viewDescriptionStack;
 	if ([viewStack count] > 1) {
 		[viewStack removeLastObject];
-		[self _changeCurrentView:[viewStack lastObject] transition:[PhoneMainView getBackwardTransition] force:TRUE];
+		[self _changeCurrentView:[viewStack lastObject] content:nil transition:[PhoneMainView getBackwardTransition] force:TRUE];
 		return [mainViewController getCurrentViewController];
 	}
 	return nil;

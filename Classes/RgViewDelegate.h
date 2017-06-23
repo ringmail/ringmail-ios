@@ -7,15 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MessageViewController.h"
 #import "RingKit.h"
 
 @interface RgViewDelegate : NSObject<RKCommunicatorViewDelegate>
 
+@property (nonatomic, strong) NSNumber* lastThreadId;
+@property (nonatomic, strong) MessageViewController* messageView;
+		
+
 + (instancetype)sharedInstance;
 
-- (void)showMessageView;
+- (void)showMessageView:(RKThread*)thread;
 //- (void)showCallView;
 //- (void)showHashtagView:(NSString*)hashtag;
 //- (void)showContactView:(NSNumber*)contactId;
+- (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
+- (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete;
 
 @end

@@ -36,6 +36,7 @@
     [message addAttributeWithName:@"id" stringValue:self.uuid];
     [message addAttributeWithName:@"conversation" stringValue:self.thread.uuid];
     [message addAttributeWithName:@"type" stringValue:@"chat"];
+	[message addAttributeWithName:@"class" stringValue:[NSString stringWithFormat:@"%s", object_getClassName(self)]];
     [message addAttributeWithName:@"timestamp" stringValue:[self.timestamp strftime]];
     [message addAttributeWithName:@"to" stringValue:msgTo];
 	if (self.thread.originalTo != nil)
@@ -68,6 +69,16 @@
         	send(message);
 		}
 	}];
+}
+
+- (NSURL*)documentURL
+{
+	NSString* mainUuid = [self uuid];
+	NSURL* url = [self applicationDocumentsDirectory];
+	NSString* urlStr = [url absoluteString];
+	urlStr = [urlStr stringByAppendingPathComponent:mainUuid];
+	url = [NSURL URLWithString:urlStr];
+	return url;
 }
 
 @end

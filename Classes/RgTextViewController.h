@@ -49,6 +49,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <
 @property (nonatomic, retain) ChatRoomCollectionViewController* chatRoom;
 @property (nonatomic, retain) UIImageView* backgroundImageView;
 @property (nonatomic, retain) UICollectionViewLayout* currentLayout;
+@property (nonatomic, retain) UIView* originalToView;
 
 /** The main collection view managed by the controller object. Not nil if the controller is initialised with -initWithCollectionViewLayout: */
 @property (nonatomic, readonly) UICollectionView *_Nullable collectionView;
@@ -130,7 +131,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <
  @param layout The layout object to associate with the collection view. The layout controls how the collection view presents its cells and supplementary views.
  @return An initialized RgTextViewController object or nil if the object could not be created.
  */
-- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout;
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout thread:(RKThread*)thread;
 
 #pragma mark - Keyboard Handling
 ///------------------------------------------------
