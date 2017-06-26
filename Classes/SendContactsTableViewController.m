@@ -252,7 +252,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         // Background View
         UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
         cell.selectedBackgroundView = selectedBackgroundView;
-        [selectedBackgroundView setBackgroundColor:[UIColor colorWithHex:@"#D3D3D3"]];  // mrkbxt
+        [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];  // mrkbxt
     }
     OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
     
