@@ -42,4 +42,10 @@
 	}
 }
 
+- (void)showMomentMedia
+{
+	RKMomentMessage* mmsg = self.data[@"item"];
+	[[RKCommunicator sharedInstance] startMomentView:mmsg];
+}
+
 @end

@@ -48,7 +48,13 @@
 							{CKComponentTapGestureAttribute(@selector(didTapVideo))},
 						}
 					} component:
-						[CKImageComponent newWithImage:image]
+						[CKBackgroundLayoutComponent newWithComponent:
+        					[CKInsetComponent newWithInsets:{.top = image.size.height - 21, .bottom = 4, .left = 4, .right = image.size.width - 21} component:
+        						[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_video_badge.png"] size:{.height = 17, .width = 17}]
+        					]
+						background:
+							[CKImageComponent newWithImage:image]
+						]
 					]}
         		}]
     		]}
@@ -79,7 +85,13 @@
 							{CKComponentTapGestureAttribute(@selector(didTapVideo))},
 						}
 					} component:
-						[CKImageComponent newWithImage:image]
+						[CKBackgroundLayoutComponent newWithComponent:
+        					[CKInsetComponent newWithInsets:{.top = image.size.height - 21, .bottom = 4, .left = 4, .right = image.size.width - 21} component:
+        						[CKImageComponent newWithImage:[UIImage imageNamed:@"ringpanel_video_badge.png"] size:{.height = 17, .width = 17}]
+        					]
+						background:
+							[CKImageComponent newWithImage:image]
+						]
 					]}
         		}]
     		]}

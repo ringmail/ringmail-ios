@@ -13,50 +13,66 @@
 	NSDictionary* data = elem.data;
 	CKComponentScope scope(self, data[@"uuid"]);
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-	CGFloat scale = [UIScreen mainScreen].scale;
-	
-	int maxBubbleWidth = (int)((width - (12 * scale)) / 3) * 2;
-	//int maxBubbleHeight = (int)(maxBubbleWidth * 0.5862);
-	int maxBubbleHeight = (int)(maxBubbleWidth * 1.2);
 	
 	CKComponent* res;
 	
-	//UIImage* mainImage = [context getImageByID:data[@"id"] key:@"msg_data" size:CGSizeMake(maxBubbleWidth, maxBubbleHeight)];
-	RKMomentMessage* message = data[@"item"];
-	//NSLog(@"Chat Image Component - Message: %@", message);
-	message.mediaData = [NSData dataWithContentsOfURL:[message documentURL]];
-	UIImage* image = [UIImage imageWithData:message.mediaData];
-	CGSize maxSize = CGSizeMake(maxBubbleWidth, maxBubbleHeight);
-	if (image.size.height > maxSize.height || image.size.width > maxSize.width)
-	{
-		image = [image scaleImageToSize:maxSize];
-	}
+	UIImage* image = [context imageNamed:@"message_summary_moment_normal.png"];
 
 	res = [CKStackLayoutComponent newWithView:{} size:{
 		.width = width,
 	} style: {
-		.direction = CKStackLayoutDirectionHorizontal,
+		.direction = CKStackLayoutDirectionVertical,
 		.alignItems = CKStackLayoutAlignItemsStart,
 	} children:{
-		{[CKInsetComponent newWithInsets:{.top = 3, .left = 12, .bottom = 3, .right = (width - maxBubbleWidth) + 12} component:
-			[CKStackLayoutComponent newWithView:{} size:{
-				.width = maxBubbleWidth,
-			} style: {
-				.direction = CKStackLayoutDirectionHorizontal,
-				.alignItems = CKStackLayoutAlignItemsStart,
-			} children:{
-				{[CKCompositeComponent newWithView:{
-					[UIView class],
-					{
-						{CKComponentViewAttribute::LayerAttribute(@selector(setCornerRadius:)), @15.0},
-                        {@selector(setClipsToBounds:), @YES},
-					}
-				} component:
-					[CKImageComponent newWithImage:image]
-				]}
-    		}]
-		]}
+		{[CKComponent newWithView:{
+            [UIView class],
+            {
+                {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#D1D1D1"]},
+            }
+        } size:{.width = width, .height = 1 / [UIScreen mainScreen].scale}]},
+		{[CKBackgroundLayoutComponent newWithComponent:
+			[CKCompositeComponent newWithView:{
+				[UIView class],
+				{
+					{CKComponentTapGestureAttribute(@selector(didTapMoment))},
+				}
+			} component:
+                [CKStackLayoutComponent newWithView:{} size:{
+                	.width = width,
+                } style: {
+                	.direction = CKStackLayoutDirectionHorizontal,
+                	.alignItems = CKStackLayoutAlignItemsStretch,
+                } children:{
+                	{
+                		.component = [CKComponent new],
+                		.flexGrow = @YES,
+                	},
+                	{[CKInsetComponent newWithInsets:{.top = 20, .left = 0, .bottom = 20, .right = 0} component:
+                		[CKImageComponent newWithImage:image]
+                	]},
+                	{
+                		.component = [CKComponent new],
+                		.flexGrow = @YES,
+                	}
+                }]
+			]
+		background:
+			[CKComponent newWithView:{
+                [UIView class],
+                {
+                    {@selector(setBackgroundColor:), [UIColor colorWithWhite:1.0f alpha:0.5f]},
+                }
+			} size:{}]
+		]},
+		{[CKComponent newWithView:{
+            [UIView class],
+            {
+                {@selector(setBackgroundColor:), [UIColor colorWithHex:@"#D1D1D1"]},
+            }
+        } size:{.width = width, .height = 1 / [UIScreen mainScreen].scale}]},
 	}];
+	
+	res = [CKInsetComponent newWithInsets:{.top = 10, .left = 0, .bottom = 10, .right = 0} component:res];
 
 	if (data[@"first_element"])
 	{
@@ -72,6 +88,11 @@
 		c->_element = elem;
 	}
 	return c;
+}
+
+- (void)didTapMoment
+{
+	[self.element showMomentMedia];
 }
 
 @end

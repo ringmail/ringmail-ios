@@ -93,6 +93,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onImageTap:(id)sender
 {
+	if (timer != nil)
+	{
+		[timer invalidate];
+		timer = nil;
+	}
 	if (self.onComplete != nil)
 	{
 		self.onComplete();
@@ -114,6 +119,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	if (self->count >= steps)
 	{
 		[timer invalidate];
+		timer = nil;
         if (self.onComplete != nil)
         {
 			self.onComplete();
