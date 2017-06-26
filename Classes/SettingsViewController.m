@@ -332,7 +332,9 @@
 	// iOS7 transparent background is *really* transparent: with an alpha != 0
 	// it messes up the transitions. Use non-transparent BG for iOS7
 	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
-		[view setBackgroundColor:LINPHONE_SETTINGS_BG_IOS7];
+//		[view setBackgroundColor:LINPHONE_SETTINGS_BG_IOS7];
+//        [view setBackgroundColor: [UIColor colorWithHex:@"#F4F4F4"]]
+        [view setBackgroundColor:[UIColor clearColor]];
 	else
 		[view setBackgroundColor:[UIColor clearColor]];
 }
@@ -425,7 +427,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-
+    
 	settingsStore = [[LinphoneCoreSettingsStore alloc] init];
 
 	settingsController.showDoneButton = FALSE;
@@ -438,6 +440,22 @@ static UICompositeViewDescription *compositeDescription = nil;
 	navigationController.view.frame = self.view.frame;
 	[navigationController pushViewController:settingsController animated:FALSE];
 	[self.view addSubview:navigationController.view];
+    
+    int width = [UIScreen mainScreen].applicationFrame.size.width;
+    UIImageView *background;
+    
+    if (width == 320) {
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip5p@2x.png"]];
+    }
+    else if (width == 375) {
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip6-7s@2x.png"]];
+    }
+    else if (width == 414) {
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
+    }
+    
+    [self.view addSubview:background];
+    [self.view sendSubviewToBack:background];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

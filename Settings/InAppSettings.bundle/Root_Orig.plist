@@ -18,6 +18,30 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Settings</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string>video_menu</string>
+			<key>File</key>
+			<string>Video</string>
+			<key>Title</key>
+			<string>Video</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Advanced</string>
+			<key>Title</key>
+			<string>Advanced</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>
