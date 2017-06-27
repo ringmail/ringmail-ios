@@ -104,7 +104,7 @@
 {
 	NSLog(@"Moment Complete");
 	[[RKThreadStore sharedInstance] setHidden:YES forItemId:[self itemId]];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageUpdated object:self userInfo:@{
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageRemoved object:self userInfo:@{
 		@"message": self,
 	}];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{

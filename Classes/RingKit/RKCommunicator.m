@@ -21,6 +21,7 @@ NSString *const kRKItemActivity = @"RKItemActivity";
 NSString *const kRKMessageSent = @"RKMessageSent";
 NSString *const kRKMessageReceived = @"RKMessageReceived";
 NSString *const kRKMessageUpdated = @"RKMessageUpdated";
+NSString *const kRKMessageRemoved = @"RKMessageRemoved";
 NSString *const kRKCallBegin = @"RKCallBegin";
 NSString *const kRKCallUpdated = @"RKCallUpdated";
 NSString *const kRKCallEnd = @"RKCallEnd";

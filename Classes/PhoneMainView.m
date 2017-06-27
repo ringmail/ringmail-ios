@@ -798,9 +798,8 @@ static RootViewManager *rootViewManagerInstance = nil;
     [ContactSelection setSipFilter:nil];
     [ContactSelection setNameOrEmailFilter:nil];
     [ContactSelection enableEmailFilter:FALSE];
-	[SendContactsViewController initWithSelectio
     SendContactsViewController *controller = DYNAMIC_CAST(
-      [[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] content:asdf push:TRUE],
+      [[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] push:TRUE],
       SendContactsViewController);
     if (controller != nil) {
     }

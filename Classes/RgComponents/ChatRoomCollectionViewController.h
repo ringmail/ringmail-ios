@@ -20,7 +20,9 @@
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout chatThread:(RKThread*)chatThread;
 
 - (void)scrollToBottom:(BOOL)animate;
-- (void)refreshMessages;
+- (void)appendNewMessages;
+- (void)updateMessage:(RKItem*)msg;
+- (void)removeMessage:(RKItem*)msg;
 
 @end
 

@@ -148,7 +148,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)updateMessageList:(NSNotification*)event
 {
-	[mainViewController updateCollection];
+	if (! [event.userInfo[@"name"] isEqualToString:kRKMessageUpdated]) // skip updated messages
+	{
+		[mainViewController updateCollection];
+	}
 }
 
 #pragma mark -
