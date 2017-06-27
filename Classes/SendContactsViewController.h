@@ -25,4 +25,6 @@ typedef enum _SendContactSelectionMode {
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic) SendContactSelectionMode selectionMode;
 
+- (instancetype) initWithSelectionMode:(SendContactSelectionMode)mode;
+
 @end

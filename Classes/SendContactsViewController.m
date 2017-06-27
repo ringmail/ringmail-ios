@@ -34,6 +34,16 @@
     return self;
 }
 
+- (instancetype) initWithSelectionMode:(SendContactSelectionMode)mode
+{
+	self = [super init];
+	if (self)
+	{
+		[self setSelectionMode:mode];
+	}
+    return self;
+}
+
 #pragma mark - UICompositeViewDelegate Functions
 
 static UICompositeViewDescription *compositeDescription = nil;
