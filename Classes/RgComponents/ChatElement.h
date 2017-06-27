@@ -7,5 +7,6 @@
 - (instancetype)initWithData:(NSDictionary *)data;
 - (void)showVideoMedia;
 - (void)showImageMedia;
+- (void)showMomentMedia;
 
 @end

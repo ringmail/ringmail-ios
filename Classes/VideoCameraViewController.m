@@ -8,12 +8,25 @@
 #import "ThumbnailFactory.h"
 
 @implementation VideoCameraViewController
+{
+	int count;
+	double progress;
+}
+
+@synthesize timer;
+@synthesize timerBar;
+@synthesize timerView;
+@synthesize seconds;
+@synthesize steps;
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
 	self = [super initWithNibName:@"VideoCameraViewController" bundle:[NSBundle mainBundle]];
 	if (self != nil) {
+		self.timerBar = [[M13ProgressViewSegmentedBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 200.0, 10.0)];
+		self.seconds = 60;
+		self.steps = 120;
 	}
 	return self;
 }
@@ -163,6 +176,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.closeButton.imageEdgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
     [self.closeButton addTarget:self action:@selector(closeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.closeButton];
+	
+	timerBar.primaryColor = [UIColor blackColor];
+	timerBar.secondaryColor = [UIColor whiteColor];
+	timerBar.segmentShape = M13ProgressViewSegmentedBarSegmentShapeCircle;
+	timerBar.progressDirection = M13ProgressViewSegmentedBarProgressDirectionLeftToRight;
+
+	[timerView addSubview:timerBar];
+	[timerView removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -170,8 +191,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 	NSLog(@"%s", __PRETTY_FUNCTION__);
     [super viewWillAppear:animated];
 	
+	[timerBar setProgress:0.0 animated:NO];
+	[timerView setHidden:YES];
+	
     // start the camera
     [self.camera start];
+	
+	[self.view addSubview:timerView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -222,12 +248,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
     if (self.camera.isRecording)
 	{
-        self.flashButton.hidden = NO;
-        self.switchButton.hidden = NO;
-
-        self.snapButton.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.snapButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
-		[self.camera stopRecording];
+		[self timerStop];
+		[self stopRecording];
 	}
 	else
 	{
@@ -237,33 +259,95 @@ static UICompositeViewDescription *compositeDescription = nil;
         self.snapButton.layer.borderColor = [UIColor blueColor].CGColor;
         self.snapButton.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
 
+		[self timerStart];
+		
 		// start recording
 		__block NSString* mainUuid = [[NSUUID UUID] UUIDString];
 		__block NSURL *outputURL = [self documentURL:mainUuid];
+		__block __weak VideoCameraViewController* weakSelf = self;
 		[self.camera startRecordingWithOutputUrl:outputURL didRecord:^(LLSimpleCamera *camera, NSURL *outputFileUrl, NSError *error) {
-			NSLog(@"Done Recording: %@", outputURL);
-			AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:outputURL options:nil];
-			CGFloat scale = [UIScreen mainScreen].scale;
-			UIImage* thumb = [ThumbnailFactory thumbnailForVideoAsset:asset size:CGSizeMake(90 * scale, 90 * scale)];
-			RgMainViewController* ctl = DYNAMIC_CAST(
-				[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE],
-				RgMainViewController
-			);
-			[ctl addMedia:@{
-    			@"file": [outputURL path],
-    			@"mediaType": @"video/mp4",
-    			@"localPath": [NSString stringWithFormat:@"%@.mov", mainUuid],
-    			@"thumbnail": thumb,
-    		}];
-			//VideoViewController *vc = [[VideoViewController alloc] initWithVideoUrl:outputURL];
-			//[[PhoneMainView instance] changeCurrentView:[VideoViewController compositeViewDescription] content:vc push:YES];
+			[weakSelf doneRecording:outputURL uuid:mainUuid];
 		}];
-    }
+   }
+}
+
+- (void)stopRecording
+{
+    self.flashButton.hidden = NO;
+    self.switchButton.hidden = NO;
+
+    self.snapButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.snapButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+	[self.camera stopRecording];
+}
+
+- (void)doneRecording:(NSURL*)outputURL uuid:(NSString*)mainUuid
+{
+	NSLog(@"Done Recording: %@", outputURL);
+	AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:outputURL options:nil];
+	CGFloat scale = [UIScreen mainScreen].scale;
+	UIImage* thumb = [ThumbnailFactory thumbnailForVideoAsset:asset size:CGSizeMake(90 * scale, 90 * scale)];
+	RgMainViewController* ctl = DYNAMIC_CAST(
+		[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE],
+		RgMainViewController
+	);
+	[ctl addMedia:@{
+		@"file": [outputURL path],
+		@"mediaType": @"video/mp4",
+		@"localPath": [NSString stringWithFormat:@"%@.mov", mainUuid],
+		@"thumbnail": thumb,
+	}];
+}
+
+- (void)timerStart
+{
+	dispatch_async(dispatch_get_main_queue(), ^{ // Always run timer on main queue
+    	[timerBar setProgress:0.0 animated:NO];
+    	[timerView setHidden:NO];
+    	self->count = 0;
+    	self->progress = 0.0f;
+    	double stepsize = ((double)seconds / (double)steps);
+    	timer = [NSTimer scheduledTimerWithTimeInterval:stepsize target:self selector:@selector(timerUpdate:) userInfo:nil repeats:YES];
+	});
+}
+
+- (void)timerStop
+{
+	dispatch_async(dispatch_get_main_queue(), ^{
+    	[timerView setHidden:YES];
+    	if (timer != nil)
+    	{
+    		[timer invalidate];
+    		timer = nil;
+    	}
+	});
+}
+
+- (void)timerUpdate:(NSTimer*)ct
+{
+	NSLog(@"%s Step %d of %ld", __PRETTY_FUNCTION__, self->count, (long)steps);
+	self->count++;
+	self->progress = (double)self->count / (double)steps;
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[timerBar setProgress:self->progress animated:NO];
+	});
+	if (self->count >= steps)
+	{
+		[timer invalidate];
+		timer = nil;
+		
+		// Stop recording and close
+		if (self.camera.isRecording)
+    	{
+    		[self stopRecording];
+    	}
+	}
 }
 
 - (void)closeButtonPressed:(UIButton *)button
 {
 	NSLog(@"Close button pressed");
+	[self timerStop];
 	[self.camera stop];
 	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE];
 }

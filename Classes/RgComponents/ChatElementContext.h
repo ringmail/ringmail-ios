@@ -3,6 +3,8 @@
 
 @interface ChatElementContext : NSObject
 
-- (UIImage*)getImageByID:(NSNumber*)imageID key:(NSString*)key size:(CGSize)maxSize;
+- (instancetype)initWithImages:(NSDictionary *)addImages;
+
+- (UIImage *)imageNamed:(NSString *)imageName;
 
 @end

@@ -53,7 +53,9 @@
 	self.collectionView.backgroundColor = [UIColor clearColor];
 	self.collectionView.delegate = self;
 	
-	ChatElementContext *context = [[ChatElementContext alloc] init];
+	ChatElementContext *context = [[ChatElementContext alloc] initWithImages:@{
+		@"message_summary_moment_normal.png": [UIImage imageNamed:@"message_summary_moment_normal.png"],
+	}];
 	_dataSource = [[CKCollectionViewDataSource alloc] initWithCollectionView:self.collectionView
 												 supplementaryViewDataSource:nil
 														   componentProvider:[self class]
