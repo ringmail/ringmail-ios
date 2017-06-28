@@ -54,6 +54,7 @@ NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
 NSString *const kRgSendComponentDisplayContacts = @"kRgSendComponentDisplayContacts";
 NSString *const kRgSendComponentSelectContact = @"kRgSendComponentSelectContact";
 NSString *const kRgSendComponentSetContact = @"kRgSendComponentSetContact";
+NSString *const kRgSendComponentSetMultiContact = @"kRgSendComponentSetMultiContact";
 
 
 static LevelDB* theConfigDatabase = nil;

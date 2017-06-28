@@ -26,6 +26,8 @@
 #import "UIMessageButton.h"
 #import "UIDigitButton.h"
 
+#import "SendContactsTableViewController.h"
+
 @interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate> {
 }
 
@@ -35,5 +37,7 @@
 
 - (void)handleSegControl;
 - (void)addMedia:(NSDictionary*)param;
+- (void)sendTo:(NSDictionary*)param;
+- (void)sendMulti:(NSDictionary*)param;
 
 @end

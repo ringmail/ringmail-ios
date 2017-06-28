@@ -27,8 +27,10 @@ int backState = 0;
 @synthesize backButton;
 @synthesize segmentButton;
 @synthesize headerLabel;
+@synthesize logo;
 @synthesize leftLabel;
 @synthesize rightLabel;
+@synthesize submitButton;
 
 
 #pragma mark - Lifecycle Functions
@@ -159,12 +161,21 @@ int backState = 0;
     [rightLabel setHidden:YES];
     [backButton setHidden:YES];
     [backButton setEnabled:NO];
+    [headerLabel setHidden:NO];
+    [logo setHidden:YES];
+    [submitButton setHidden:YES];
+    [submitButton setEnabled:YES];
     
     NavView navView = [self navViewFromString:header];
     
     switch (navView)
     {
         case Ring:
+            [logo setHidden:NO];
+            [headerLabel setHidden:YES];
+            [segmentButton setEnabled:NO];
+            [segmentButton setHidden:YES];
+            break;
         case Recents:
         case Contacts:
         case ContactDetails:
@@ -191,13 +202,19 @@ int backState = 0;
             [segmentButton setHidden:YES];
             [backButton setHidden:NO];
             [backButton setEnabled:YES];
+            break;
         case SendContacts:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
-            [backButton setHidden:NO];
-            [backButton setEnabled:YES];
+            break;
         default:
             break;
+    }
+    
+    SendContactsViewController* vc = (SendContactsViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"SendContactsViewController"];
+    if (vc.selectionMode == SendContactSelectionModeMulti && navView == SendContacts) {
+        [submitButton setHidden:NO];
+        [submitButton setEnabled:YES];
     }
 }
 
@@ -213,7 +230,7 @@ int backState = 0;
         @"Settings": @(Settings),
         @"Hashtag Card": @(HTagCard),
         @"ContactDetailsLabel": @(ContactDetailsLabel),
-        @"Select Contacts": @(SendContacts)
+        @"Send To": @(SendContacts)
     };
     
     return [[navViews valueForKey:sIn] intValue];
@@ -239,6 +256,10 @@ int backState = 0;
     else {
         [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{@"category_id": @"0",}];
     }
+}
+
+-(IBAction) onSubmitClick:(id) event {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSetMultiContact object:nil];
 }
 
 

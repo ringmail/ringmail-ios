@@ -26,7 +26,7 @@
 	CKComponentScope scope(self);
 	NSMutableDictionary* currentState = scope.state();
 	CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-	
+        
 	// There is a copy of this check in the component controller
 	BOOL enable = NO;
 	if ((item.data[@"send_media"] != nil) && ([currentState[@"to"] length] > 0))

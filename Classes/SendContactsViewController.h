@@ -12,10 +12,6 @@
 #import "UICompositeViewController.h"
 #import "SendContactsTableViewController.h"
 
-typedef enum _SendContactSelectionMode {
-    SendContactSelectionModeSingle,
-    SendContactSelectionModeMulti
-} SendContactSelectionMode;
 
 @interface SendContactsViewController : UIViewController<UICompositeViewDelegate> {
     BOOL use_systemView;
@@ -24,6 +20,7 @@ typedef enum _SendContactSelectionMode {
 @property (nonatomic, strong) IBOutlet SendContactsTableViewController* tableController;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic) SendContactSelectionMode selectionMode;
+@property (nonatomic, weak) id <SendContactsTableViewControllerDelegate> delegate;
 
 - (instancetype) initWithSelectionMode:(SendContactSelectionMode)mode;
 

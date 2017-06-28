@@ -461,7 +461,6 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
 		cell.selectedBackgroundView = selectedBackgroundView;
 		[selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
-//        [selectedBackgroundView setBackgroundColor:[UIColor colorWithHex:@"#D3D3D3"]];  // mrkbxt
 	}
     
 	NSMutableArray *sectionDict = [self getSectionData:[indexPath section]];
