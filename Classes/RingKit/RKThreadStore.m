@@ -745,4 +745,18 @@
 	}];
 }
 
+- (void)removeContact:(NSNumber*)contact
+{
+    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
+		NoteRow *chatRow = [ndb row:@"session" where:@{@"contact_id": contact}];
+		if (chatRow != nil)
+		{
+			[chatRow update:@{
+				@"contact_id": [NSNull null],
+			}];
+		}
+    }];
+}
+
 @end

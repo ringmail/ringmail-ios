@@ -820,6 +820,8 @@
 		C484AC531C991DD500AE2E5D /* bubble_ringmail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C484AC501C991DD500AE2E5D /* bubble_ringmail@2x.png */; };
 		C484AC571C991DF700AE2E5D /* bubble_ringmail_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = C484AC551C991DF700AE2E5D /* bubble_ringmail_blue.png */; };
 		C484AC581C991DF700AE2E5D /* bubble_ringmail_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C484AC561C991DF700AE2E5D /* bubble_ringmail_blue@2x.png */; };
+		C4885CE41F043DDE00419F46 /* RKContactStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4885CE31F043DDE00419F46 /* RKContactStore.m */; };
+		C4885CE51F043DDE00419F46 /* RKContactStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4885CE31F043DDE00419F46 /* RKContactStore.m */; };
 		C48A1F031CDFFADA00E095F8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */; };
 		C48A1F061CE127C600E095F8 /* ringmail_wizard_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A1F051CE127C600E095F8 /* ringmail_wizard_background.png */; };
 		C48AE3D41E6DCF5100F3C9B1 /* SendCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48AE3D31E6DCF5100F3C9B1 /* SendCardComponent.mm */; };
@@ -3202,6 +3204,8 @@
 		C484AC501C991DD500AE2E5D /* bubble_ringmail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble_ringmail@2x.png"; path = "Resources/bubble_ringmail@2x.png"; sourceTree = "<group>"; };
 		C484AC551C991DF700AE2E5D /* bubble_ringmail_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bubble_ringmail_blue.png; path = Resources/bubble_ringmail_blue.png; sourceTree = "<group>"; };
 		C484AC561C991DF700AE2E5D /* bubble_ringmail_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble_ringmail_blue@2x.png"; path = "Resources/bubble_ringmail_blue@2x.png"; sourceTree = "<group>"; };
+		C4885CDA1F043DCC00419F46 /* RKContactStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKContactStore.h; path = RingKit/RKContactStore.h; sourceTree = "<group>"; };
+		C4885CE31F043DDE00419F46 /* RKContactStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKContactStore.m; sourceTree = "<group>"; };
 		C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		C48A1F051CE127C600E095F8 /* ringmail_wizard_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_wizard_background.png; path = Resources/ringmail_wizard_background.png; sourceTree = "<group>"; };
 		C48AE3CA1E6DCF4500F3C9B1 /* SendCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendCardComponent.h; path = RgComponents/SendCardComponent.h; sourceTree = "<group>"; };
@@ -5074,6 +5078,8 @@
 				C45B93231ECE398300974011 /* RKCommunicator.m */,
 				C45B932E1ECE4E5E00974011 /* RKThreadStore.h */,
 				C45B932F1ECE4E5E00974011 /* RKThreadStore.m */,
+				C4885CDA1F043DCC00419F46 /* RKContactStore.h */,
+				C4885CE31F043DDE00419F46 /* RKContactStore.m */,
 				C4600C1A1ED4F64800C1C964 /* RKAdapterXMPP.h */,
 				C4600C171ED4F61C00C1C964 /* RKAdapterXMPP.m */,
 				C4C5283C1ED3B17D0081214C /* RingKit.h */,
@@ -8264,6 +8270,7 @@
 				C44A40DC1E70E415000F3E24 /* CLBloomEffect.m in Sources */,
 				C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */,
 				4DCEA68C1EBBBB0C00E6760D /* RgModalButtonView.m in Sources */,
+				C4885CE41F043DDE00419F46 /* RKContactStore.m in Sources */,
 				D3ED3E871586291E006C0DE4 /* UIMainBar.m in Sources */,
 				C476A7131CF254F100CA3772 /* HashtagCardComponent.mm in Sources */,
 				D35497FE15875372000081D8 /* ContactsViewController.m in Sources */,
@@ -8543,6 +8550,7 @@
 				C4AC2AE21D3963FA003B6232 /* RgCallComponent.mm in Sources */,
 				C4AC2AE41D3963FA003B6232 /* NSObject+NSPerformSelector.m in Sources */,
 				4D9BAEA51EFAFA8C0080CA79 /* SendContactsViewController.m in Sources */,
+				C4885CE51F043DDE00419F46 /* RKContactStore.m in Sources */,
 				C44A40F11E70E415000F3E24 /* CLFilterTool.m in Sources */,
 				C4AC2AE51D3963FA003B6232 /* HashtagCategoryHeaderComponent.mm in Sources */,
 				C473F87E1ECCDED8008B548B /* ChatElementImageComponent.mm in Sources */,

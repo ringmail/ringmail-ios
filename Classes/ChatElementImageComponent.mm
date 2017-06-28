@@ -94,6 +94,41 @@
         		}]
     		]}
 		}];
+		
+		// Message status
+		if (data[@"last_element"])
+		{
+			NSString* status = _RKMessageStatus(message.deliveryStatus);
+			res = [CKStackLayoutComponent newWithView:{} size:{
+    			.width = width,
+    		} style: {
+    			.direction = CKStackLayoutDirectionVertical,
+    			.alignItems = CKStackLayoutAlignItemsStart,
+    		} children:{
+				{res},
+				{[CKInsetComponent newWithInsets:{.top = 2, .bottom = 0, .left = 0, .right = 18} component:
+					[CKStackLayoutComponent newWithView:{} size:{
+        				.width = width,
+        			} style: {
+        				.direction = CKStackLayoutDirectionHorizontal,
+        				.alignItems = CKStackLayoutAlignItemsStretch,
+        			} children:{
+    					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
+						{[CKLabelComponent newWithLabelAttributes:{
+                            .string = status,
+                            .font = [UIFont systemFontOfSize:10.0f],
+                            .color = [UIColor colorWithHex:@"#222222"],
+							.alignment = NSTextAlignmentRight,
+                            .maximumNumberOfLines = 1
+                        }
+                        viewAttributes:{
+                            {@selector(setBackgroundColor:), [UIColor clearColor]},
+                            {@selector(setUserInteractionEnabled:), @NO},
+                        } size:{}]}
+					}]
+				]}
+    		}];
+		}
 	}
 	if (data[@"first_element"])
 	{
