@@ -19,6 +19,7 @@
 @private
 	NSDateFormatter *dateFormatter;
     NSLocale *enUSPOSIXLocale;
+	FMDatabase *database;
 }
 
 @property (nonatomic, retain) FMDatabaseQueue *dbqueue;
@@ -30,9 +31,10 @@
 - (void)updateMatches:(NSArray*)rgMatches;
 - (BOOL)updateDetails:(NSArray*)rgUsers;
 - (BOOL)isEnabled:(NSString*)addr;
+- (BOOL)contactEnabled:(NSString*)contactID;
 - (NSDictionary*)getEnabledContacts;
 - (NSString*)defaultPrimaryAddress:(ABRecordRef)lPerson;
 - (NSString*)defaultPrimaryAddress:(ABRecordRef)lPerson current:(NSString*)cur;
-- (NSString*)getPrimaryAddress:(NSNumber*)contactID;
+- (NSString*)getPrimaryAddress:(NSString*)contactID;
 
 @end

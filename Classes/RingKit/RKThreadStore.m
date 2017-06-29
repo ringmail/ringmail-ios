@@ -749,7 +749,7 @@
 {
     [[self dbqueue] inDatabase:^(FMDatabase *db) {
 		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
-		NoteRow *chatRow = [ndb row:@"session" where:@{@"contact_id": contact}];
+		NoteRow *chatRow = [ndb row:@"rk_thread" where:@{@"contact_id": contact}];
 		if (chatRow != nil)
 		{
 			[chatRow update:@{
@@ -757,6 +757,7 @@
 			}];
 		}
     }];
+	// TODO: Send notificaitons...
 }
 
 @end

@@ -14,6 +14,7 @@
 #import "UACellBackgroundView.h"
 #import "Utils.h"
 #import "RgContactManager.h"
+#import "RKContactStore.h"
 
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
@@ -79,7 +80,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         [addressBookMap removeAllObjects];
         
         // Read RingMail Contacts
-        ringMailContacts = [[[LinphoneManager instance] contactManager] dbGetRgContacts];
+        ringMailContacts = [[RKContactStore sharedInstance] getEnabledContacts];
         //NSLog(@"RingMail Enabled Contact IDs: %@", ringMailContacts);
         
         NSArray *lContacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));

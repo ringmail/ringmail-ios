@@ -15,6 +15,9 @@
 #import <NSHash/NSString+NSHash.h>
 
 @implementation RKContactStore
+{
+	BOOL database_block;
+}
 
 @synthesize dbqueue;
 
@@ -24,6 +27,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 		sharedInstance = [[RKContactStore alloc] init];
+		sharedInstance->database_block = NO;
 		[sharedInstance setupDatabase];
     });
     return sharedInstance;
@@ -52,12 +56,22 @@
 	[self setupTables];
 }
 
-- (void)dbBlock:(void (^)(NoteDatabase *ndb))block
+- (void)inDatabase:(void (^)(FMDatabase *db))block
 {
-	[[self dbqueue] inDatabase:^(FMDatabase *db) {
-		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
-		block(ndb);
-	}];
+	if (self->database_block)
+	{
+		block(self->database);
+	}
+	else
+	{
+		self->database_block = YES;
+    	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+			self->database = db;
+    		block(db);
+			self->database = nil;
+    	}];
+		self->database_block = NO;
+	}
 }
 
 - (void)setupTables
@@ -95,7 +109,7 @@
 
 - (void)updateMatches:(NSArray*)rgMatches
 {
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
         // Get current ringmail users
         NSMutableDictionary *cur = [NSMutableDictionary dictionary];
         FMResultSet *rs = [db executeQuery:@"SELECT item_hash FROM contact_match"];
@@ -139,7 +153,7 @@
 - (BOOL)updateDetails:(NSArray*)rgUsers
 {
     __block BOOL refresh = NO;
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
         // Get current ringmail users
         NSMutableDictionary *cur = [NSMutableDictionary dictionary];
         NSMutableDictionary *addrs = [NSMutableDictionary dictionary];
@@ -197,7 +211,7 @@
 {
     __block NSString *data = [[NSString stringWithFormat:@"r!ng:%@", addrStr] SHA256];
     __block BOOL matched = NO;
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:@"SELECT count(item_hash) FROM contact_match WHERE item_hash = ?", data];
         if ([rs next])
         {
@@ -212,10 +226,28 @@
 	return matched;
 }
 
+- (BOOL)contactEnabled:(NSString*)contactID
+{
+    __block BOOL res = NO;
+    [self inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT COUNT(oid) FROM contacts WHERE ringmail_enabled = 1 AND apple_id = ?", contactID];
+        while ([rs next])
+        {
+            NSNumber *count = [rs objectForColumnIndex:0];
+            if ([count intValue] == 1)
+            {
+                res = YES;
+            }
+        }
+        [rs close];
+    }];
+    return res;
+}
+
 - (NSDictionary*)getEnabledContacts
 {
     NSMutableDictionary *res = [NSMutableDictionary dictionary];
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:@"SELECT apple_id FROM contact_detail WHERE ringmail_enabled = 1"];
         while ([rs next])
         {
@@ -228,10 +260,10 @@
     return res;
 }
 
-- (NSString*)getPrimaryAddress:(NSNumber*)contactID
+- (NSString*)getPrimaryAddress:(NSString*)contactID
 {
     __block NSString* addr = @"";
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:@"SELECT primary_address FROM contact_detail WHERE apple_id = ?", contactID];
         while ([rs next])
         {
