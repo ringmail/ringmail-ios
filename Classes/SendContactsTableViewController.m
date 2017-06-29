@@ -276,14 +276,28 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 
 #pragma mark - UITableViewDelegate Functions
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 26.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    [header.textLabel setTextColor:[UIColor colorWithHex:@"#222222"]];
-    [header.textLabel setFont:[UIFont fontWithName:@"SFUIText-Bold" size:20]];
-    header.contentView.backgroundColor = [UIColor colorWithHex:@"#FFFFFF"];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 26)];
+    [view setBackgroundColor:[UIColor colorWithHex:@"#FFFFFF"]];
+    
     UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_contacts_header.png"]];
-    [header.contentView addSubview:imageView];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [view addSubview:imageView];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 4, 30, 20)];
+    [label setFont:[UIFont fontWithName:@"SFUIText-Bold" size:20]];
+    [label setTextColor:[UIColor colorWithHex:@"#222222"]];
+    
+    NSString *string = [self tableView:tableView titleForHeaderInSection:section];
+    
+    [label setText:string];
+    [view addSubview:label];
+    return view;
 }
 
 #pragma mark - 
