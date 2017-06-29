@@ -14,4 +14,6 @@
 - (void)showVideoMedia;
 - (void)showImageMedia;
 
+- (void)showContactSelect;
+
 @end

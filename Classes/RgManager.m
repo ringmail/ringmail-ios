@@ -52,11 +52,7 @@ NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
 NSString *const kRgSendComponentReset = @"kRgSendComponentReset";
 NSString *const kRgSendComponentAddMedia = @"kRgSendComponentAddMedia";
 NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
-NSString *const kRgSendComponentDisplayContacts = @"kRgSendComponentDisplayContacts";
-NSString *const kRgSendComponentSelectContact = @"kRgSendComponentSelectContact";
-NSString *const kRgSendComponentSetContact = @"kRgSendComponentSetContact";
-NSString *const kRgSendComponentSetMultiContact = @"kRgSendComponentSetMultiContact";
-
+NSString *const kRgSendContactSelectDone = @"kRgSendContactSelectDone";
 
 static LevelDB* theConfigDatabase = nil;
 

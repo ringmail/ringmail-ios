@@ -12,8 +12,7 @@
 @property (nonatomic, strong) NSMutableDictionary *sendInfo;
 
 - (id)init;
-- (void)updateSend;
-- (void)updateTo:(NSDictionary*)param;
+- (void)updateTo:(NSString*)address;
 - (void)selectMedia:(NSNotification *)notif;
 - (void)addMedia:(NSDictionary*)param;
 - (void)removeMedia;

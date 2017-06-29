@@ -28,7 +28,7 @@
 
 #import "SendContactsTableViewController.h"
 
-@interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate> {
+@interface RgMainViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, SendContactSelectDelegate> {
 }
 
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
@@ -37,7 +37,7 @@
 
 - (void)handleSegControl;
 - (void)addMedia:(NSDictionary*)param;
-- (void)sendTo:(NSDictionary*)param;
-- (void)sendMulti:(NSDictionary*)param;
+
+- (void)didSelectSingleContact:(NSArray*)emails;
 
 @end

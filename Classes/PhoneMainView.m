@@ -236,11 +236,7 @@ static RootViewManager *rootViewManagerInstance = nil;
                                              selector:@selector(dismissOptionsModal:)
                                                  name:kRgDismissOptionsModal
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(displayContactsController:)
-                                                 name:kRgSendComponentDisplayContacts
-                                               object:nil];
-    
+
 	[self.view addSubview:mainViewController.view];
 	
     optionsModalBG = [[UIView alloc] initWithFrame:self.view.frame];
@@ -256,7 +252,6 @@ static RootViewManager *rootViewManagerInstance = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgUserUnauthorized object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgPresentOptionsModal object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgDismissOptionsModal object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentDisplayContacts object:nil];
 }
 
 #pragma mark - Options Model Functions
@@ -792,7 +787,7 @@ static RootViewManager *rootViewManagerInstance = nil;
     [sheet showInView:self.view];
 }
 
--(void)displayContactsController:(NSNotification*)notif {
+/*- (void)displayContactsController:(NSNotification*)notif {
     
     SendContactsViewController *vc;
     
@@ -805,7 +800,7 @@ static RootViewManager *rootViewManagerInstance = nil;
     
     vc.delegate = self;
     [[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] content:vc push:YES];
-}
+}*/
 
 #pragma mark - ActionSheet Functions
 
@@ -922,28 +917,5 @@ static RootViewManager *rootViewManagerInstance = nil;
      [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - SendContactsTableViewControllerDelegate Functions
-
-- (void)didSelectSingleSendContact:(NSArray*)emails
-{
-    if([emails count])
-    {
-        RgMainViewController* vc = (RgMainViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"RgMainViewController"];
-        [vc sendTo:@{@"to":emails[0]}];
-    }
-}
-
-- (void)didSelectMultiSendContact:(NSMutableArray*)contacts
-{
-    for (id obj in contacts)
-        NSLog(@"didSelectMultiSendContact:  %@", obj);
-    
-    NSLog(@"momentData[file]: %@",momentData[@"file"]);
-    
-    RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO], RgMainViewController);
-    
-    momentData = @{};
-    [ctl sendMulti:@{}];
-}
 
 @end

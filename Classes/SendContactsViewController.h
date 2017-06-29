@@ -20,7 +20,7 @@
 @property (nonatomic, strong) IBOutlet SendContactsTableViewController* tableController;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic) SendContactSelectionMode selectionMode;
-@property (nonatomic, weak) id <SendContactsTableViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <SendContactSelectDelegate> delegate;
 
 - (instancetype) initWithSelectionMode:(SendContactSelectionMode)mode;
 

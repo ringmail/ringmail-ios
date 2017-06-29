@@ -19,9 +19,10 @@ typedef enum _SendContactSelectionMode {
 
 @class SendContactsTableViewController;
 
-@protocol SendContactsTableViewControllerDelegate <NSObject>
-- (void)didSelectSingleSendContact:(NSArray*)emails;
-- (void)didSelectMultiSendContact:(NSMutableArray*)contacts;
+@protocol SendContactSelectDelegate <NSObject>
+@optional
+- (void)didSelectSingleContact:(NSString*)address;
+- (void)didSelectMultipleContacts:(NSMutableArray*)contacts;
 @end
 
 
@@ -36,7 +37,7 @@ typedef enum _SendContactSelectionMode {
 
 - (void)loadData;
 
-@property (nonatomic, weak) id <SendContactsTableViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <SendContactSelectDelegate> delegate;
 @property (nonatomic) SendContactSelectionMode selectionMode;
 
 @end

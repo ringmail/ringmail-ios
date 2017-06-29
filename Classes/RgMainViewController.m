@@ -138,16 +138,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
-
-	// TODO: fix updating when there are new photos or videos (PHPhoto​Library​Change​Observer)
-	// Code below does NOT work
-	/*NSArray* update = [self getLatestMedia];
-	if ([self hasNewMedia:update current:sendInfo[@"media"]])
-	{
-		sendInfo[@"media"] = [self getMediaThumbnails:update];
-		[sendViewController setSendInfo:sendInfo];
-		[sendViewController updateSend];
-	}*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -304,14 +294,26 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[sendViewController addMedia:param];
 }
 
-- (void)sendTo:(NSDictionary*)param
+#pragma mark - SendContactSelectDelegate Functions
+
+- (void)didSelectSingleContact:(NSString*)address
 {
-    [sendViewController updateTo:param];
+	NSLog(@"%s: Address: %@", __PRETTY_FUNCTION__, address);
+    [sendViewController updateTo:address];
+    //RgMainViewController* vc = (RgMainViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"RgMainViewController"];
 }
 
-- (void)sendMulti:(NSDictionary*)param
+/*- (void)didSelectMultipleContacts:(NSMutableArray*)contacts
 {
+    for (id obj in contacts)
+        NSLog(@"didSelectMultiSendContact:  %@", obj);
     
-}
+    NSLog(@"momentData[file]: %@",momentData[@"file"]);
+    
+    RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO], RgMainViewController);
+    
+    momentData = @{};
+    [ctl sendMulti:@{}];
+}*/
 
 @end
