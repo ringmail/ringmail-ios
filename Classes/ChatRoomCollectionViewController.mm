@@ -12,6 +12,7 @@
 @implementation ChatRoomCollectionViewController
 {
     NSMutableArray *_elements;
+    NSMutableDictionary *_elementPaths;
 	NSNumber *_mainCount;
 	CKCollectionViewDataSource *_dataSource;
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
@@ -25,6 +26,7 @@
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleWidthAndHeight];
 		_elements = [NSMutableArray array];
+		_elementPaths = [NSMutableDictionary dictionary];
 		_mainCount = [NSNumber numberWithInteger:0];
 		self.lastMessageID = nil;
 		self.chatThread = thread;
@@ -37,11 +39,13 @@
     [super viewDidLoad];
 	
 	NSArray *elems = [[RKCommunicator sharedInstance] listThreadItems:chatThread];
+	NSInteger j = 0;
 	for (RKItem* i in elems)
 	{
 		[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:@{
 			@"item": i,
 		}]];
+		_elementPaths[i.itemId] = [NSNumber numberWithInteger:j++];
 	}
 	
     // Preload images for the component context that need to be used in component preparation. Components preparation
@@ -167,7 +171,7 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 	}
 }
 
-- (void)refreshMessages
+- (void)appendNewMessages
 {
 	NSArray* newMessages = [[RKCommunicator sharedInstance] listThreadItems:chatThread lastItemId:lastMessageID];
 	NSLog(@"%s: New Messages: %@", __PRETTY_FUNCTION__, newMessages);
@@ -192,11 +196,13 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 	}
 	
 	NSInteger start = count;
+	NSInteger j = start;
 	for (RKItem* i in newMessages)
 	{
 		[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:@{
 			@"item": i,
 		}]];
+		_elementPaths[i.itemId] = [NSNumber numberWithInteger:j++];
 	}
 	count = [_elements count];
 	
@@ -221,6 +227,62 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 		_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
 		__block NSInteger lastIndex = [_mainCount intValue] - 1;
     	dispatch_async(dispatch_get_main_queue(), ^{
+    		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i) {
+    			[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+			}];
+		});
+	}
+}
+
+- (void)updateMessage:(RKItem*)msg;
+{
+	NSNumber* position = _elementPaths[msg.itemId];
+	if (position != nil)
+	{
+		__block CKArrayControllerInputItems items;
+		_elements[[position integerValue]][@"item"] = msg;
+		ChatElement* item = [[ChatElement alloc] initWithData:_elements[[position integerValue]]];
+		items.update([NSIndexPath indexPathForRow:[position integerValue] inSection:0], item);
+		dispatch_async(dispatch_get_main_queue(), ^{
+    		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:NULL];
+		});
+	}
+}
+
+- (void)removeMessage:(RKItem*)msg;
+{
+	NSNumber* position = _elementPaths[msg.itemId];
+	if (position != nil)
+	{
+		__block CKArrayControllerInputItems items;
+		[_elements removeObjectAtIndex:[position integerValue]];
+		[_elementPaths removeObjectForKey:position];
+		for (NSInteger i = [position integerValue]; i < [_elements count]; i++)
+		{
+			_elementPaths[[(RKItem*)_elements[i] itemId]] = [NSNumber numberWithInteger:i];
+		}
+		
+		items.remove([NSIndexPath indexPathForRow:[position integerValue] inSection:0]);
+		
+		_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] - 1];
+		__block NSInteger lastIndex = [_mainCount intValue] - 1;
+		
+		if (_elements[0][@"first_element"] == nil)
+		{
+			_elements[0][@"first_element"] = @YES;
+			if (lastIndex != 0) // If only one element is left, update it below since it's both first and last.
+			{
+    			ChatElement* item = [[ChatElement alloc] initWithData:_elements[0]];
+    			items.update([NSIndexPath indexPathForRow:0 inSection:0], item);
+			}
+		}
+		if (_elements[lastIndex][@"last_element"] == nil)
+		{
+			_elements[lastIndex][@"last_element"] = @YES;
+			ChatElement* item = [[ChatElement alloc] initWithData:_elements[lastIndex]];
+			items.update([NSIndexPath indexPathForRow:lastIndex inSection:0], item);
+		}
+		dispatch_async(dispatch_get_main_queue(), ^{
     		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i) {
     			[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
 			}];

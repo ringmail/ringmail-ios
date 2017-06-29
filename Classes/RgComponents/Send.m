@@ -197,4 +197,12 @@
 	}
 }
 
+- (void)showContactSelect
+{
+    SendContactsViewController *vc = [[SendContactsViewController alloc] initWithSelectionMode:SendContactSelectionModeSingle];
+	RgMainViewController* mainvc = (RgMainViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"RgMainViewController"];
+    vc.delegate = mainvc;
+    [[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] content:vc push:YES];
+}
+
 @end

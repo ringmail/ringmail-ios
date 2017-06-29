@@ -153,27 +153,17 @@
 
 - (void)resetSend
 {
+	sendInfo[@"to"] = @"";
 	[self removeMedia];
 }
 
-- (void)updateSend
+- (void)updateTo:(NSString*)address
 {
-	if (_hostView != nil)
-	{
-		NSLog(@"Update Send View");
-		Send *send = [[Send alloc] initWithData:sendInfo];
-		[_hostView updateModel:send mode:CKUpdateModeSynchronous];
-	}
-}
-
-- (void)updateTo:(NSDictionary*)param
-{
-    sendInfo[@"to"] = [param copy];
+    sendInfo[@"to"] = [address copy];
     if (_hostView != nil)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSelectContact object:nil userInfo: @{ @"to": param[@"to"]}];
-//        Send *send = [[Send alloc] initWithData:sendInfo];
-//        [_hostView updateModel:send mode:CKUpdateModeSynchronous];
+        Send *send = [[Send alloc] initWithData:sendInfo];
+        [_hostView updateModel:send mode:CKUpdateModeSynchronous];
     }
 }
 

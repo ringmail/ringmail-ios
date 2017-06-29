@@ -2246,6 +2246,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter addObserver:self selector:@selector(chatSentEvent:) name:kRKMessageSent object:nil];
 	[notificationCenter addObserver:self selector:@selector(chatReceivedEvent:) name:kRKMessageReceived object:nil];
     [notificationCenter addObserver:self selector:@selector(chatUpdateEvent:) name:kRKMessageUpdated object:nil];
+    [notificationCenter addObserver:self selector:@selector(chatRemoveEvent:) name:kRKMessageRemoved object:nil];
     //[notificationCenter addObserver:self selector:@selector(chatRoomChange:) name:kRKMessageViewChanged object:nil];
 }
 
@@ -2285,6 +2286,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 	[notificationCenter removeObserver:self name:kRKMessageSent object:nil];
     [notificationCenter removeObserver:self name:kRKMessageReceived object:nil];
     [notificationCenter removeObserver:self name:kRKMessageUpdated object:nil];
+    [notificationCenter removeObserver:self name:kRKMessageRemoved object:nil];
     //[notificationCenter removeObserver:self name:kRKMessageViewChanged object:nil];
 }
 
@@ -2379,7 +2381,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 	RKThread* chatThread = [_chatRoom chatThread];
 	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
 	{
-		[_chatRoom refreshMessages];
+		[_chatRoom appendNewMessages];
 	}
 }
 
@@ -2391,13 +2393,32 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 	RKThread* chatThread = [_chatRoom chatThread];
 	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
 	{
-		[_chatRoom refreshMessages];
+		[_chatRoom appendNewMessages];
 	}	
 }
 
 - (void)chatUpdateEvent:(NSNotification*)event
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSDictionary* info = event.userInfo;
+	RKThread* inputThread = [info[@"message"] thread];
+	RKThread* chatThread = [_chatRoom chatThread];
+	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
+	{
+		[_chatRoom updateMessage:info[@"message"]];
+	}
+}
+
+- (void)chatRemoveEvent:(NSNotification*)event
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSDictionary* info = event.userInfo;
+	RKThread* inputThread = [info[@"message"] thread];
+	RKThread* chatThread = [_chatRoom chatThread];
+	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
+	{
+		[_chatRoom removeMessage:info[@"message"]];
+	}
 }
 
 @end

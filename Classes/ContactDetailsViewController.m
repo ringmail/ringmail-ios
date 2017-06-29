@@ -20,6 +20,7 @@
 #import "ContactDetailsViewController.h"
 #import "PhoneMainView.h"
 #import "RgContactManager.h"
+#import "RKContactStore.h"
 
 @implementation ContactDetailsViewController
 
@@ -56,7 +57,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 		NSLog(@"RingMail - Update Contact Details");
     	UIContactDetailsHeader *headerController = [tableController headerController];
     	NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
-		[headerController setRgMember:[[[LinphoneManager instance] contactManager] dbHasRingMail:contactID]];
+		[headerController setRgMember:[[RKContactStore sharedInstance] contactEnabled:contactID]];
 		[headerController update];
 	});
 }

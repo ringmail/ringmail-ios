@@ -25,6 +25,7 @@
 #import "FastAddressBook.h"
 #import "DTAlertView.h"
 #import "Utils.h"
+#import "RKContactStore.h"
 
 @interface Entry : NSObject
 
@@ -410,7 +411,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	}
 	contact = acontact;
 	NSString* contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
-    self.member = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
+    self.member = [[RKContactStore sharedInstance] contactEnabled:contactID];
     [self loadData];
     [headerController setRgMember:self.member];
     [headerController setContact:contact];

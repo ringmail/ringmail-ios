@@ -17,6 +17,7 @@
 #import "PhoneMainView.h"
 #import "NBPhoneNumber.h"
 #import "NBPhoneNumberUtil.h"
+#import "RKContactStore.h"
 
 @implementation RgContactManager
 
@@ -25,37 +26,27 @@
 - (id)init {
     self = [super init];
     if (self) {
-        //addressBook = ABAddressBookCreateWithOptions(nil, nil);
         contacts = nil;
         dateFormatter = [[NSDateFormatter alloc] init];
         enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
         [dateFormatter setLocale:enUSPOSIXLocale];
         [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
         [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
-        [self setupDatabase];
-        //ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, (__bridge void *)(self));
     }
     return self;
 }
-
-//- (void)dealloc {
-//    //ABAddressBookUnregisterExternalChangeCallback(addressBook, sync_address_book, (__bridge void *)(self));
-//    CFRelease(addressBook);
-//}
 
 #pragma mark - Manage Contact Syncing
 
 - (NSArray*)getContactList
 {
-    return [self getContactList:0];
+    return [self getContactList:NO];
 }
 
 - (NSArray*)getContactList:(BOOL)reload
 {
     if (reload || contacts == nil)
     {
-//        ABAddressBookRevert(addressBook);
-//        contacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
 		contacts = [[[LinphoneManager instance] fastAddressBook] getContactsArray];
     }
     return contacts;
@@ -101,127 +92,15 @@
     return result;
 }
 
-- (NSMutableDictionary *)contactItem:(ABRecordRef)lPerson
-{
-    FastAddressBook *fab = [[LinphoneManager instance] fastAddressBook];
-	return [fab contactItem:lPerson];
-}
-
 - (NSMutableArray *)getContactData:(NSArray*)contactList
 {
     NSMutableArray *contactsArray = [NSMutableArray array];
+    FastAddressBook *fab = [[LinphoneManager instance] fastAddressBook];
     for (id lPerson in contactList)
     {
-        [contactsArray addObject:[self contactItem:(__bridge ABRecordRef)lPerson]];
+        [contactsArray addObject:[fab contactItem:(__bridge ABRecordRef)lPerson]];
     }
     return contactsArray;
-    //NSData *jsonData = [NSJSONSerialization dataWithJSONObject:final options:0 error:nil];
-    //NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    //return result;
-}
-
-- (NSString*)getRingMailAddress:(ABRecordRef)lPerson
-{
-	FastAddressBook *fab = [[LinphoneManager instance] fastAddressBook];
-	NSArray *emailList = [fab getEmailArray:lPerson];
-    NSString *res = nil;
-	for (NSString *val in emailList)
-	{
-        NSString *nval = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([self dbIsEnabled:nval])
-        {
-            res = nval;
-            break;
-        }
-    }
-    if (res != nil)
-    {
-        return res;
-    }
-	NSArray *phoneList = [fab getPhoneArray:lPerson];
-    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
-	for (NSString *val in phoneList)
-	{
-        NSError *anError = nil;
-        NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
-        if (anError == nil && [phoneUtil isValidNumber:myNumber])
-        {
-            NSString *nval = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
-            if ([self dbIsEnabled:nval])
-            {
-                res = nval;
-                break;
-            }
-        }
-    }
-    return res;
-}
-
-- (NSString*)getRingMailAddress:(ABRecordRef)lPerson current:(NSString*)cur
-{
-	FastAddressBook *fab = [[LinphoneManager instance] fastAddressBook];
-    BOOL found = NO;
-    NSString *res = nil;
-	NSArray *emailList = [fab getEmailArray:lPerson];
-	for (NSString *val in emailList)
-	{
-        NSString *nval = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([self dbIsEnabled:nval])
-        {
-            if ([nval isEqualToString:cur])
-            {
-                found = YES;
-                break;
-            }
-            else if (res == nil)
-            {
-                res = nval;
-            }
-        }
-    }
-    if (found)
-    {
-        return cur;
-    }
-    else if (res != nil)
-    {
-        return res;
-    }
-	NSArray *phoneList = [fab getPhoneArray:lPerson];
-    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
-	for (NSString *val in phoneList)
-	{
-        NSError *anError = nil;
-        NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
-        if (anError == nil && [phoneUtil isValidNumber:myNumber])
-        {
-            NSString *nval = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
-            if ([self dbIsEnabled:nval])
-            {
-                if ([nval isEqualToString:cur])
-                {
-                    found = YES;
-                    break;
-                }
-                else if (res == nil)
-                {
-                    res = nval;
-                }
-            }
-        }
-    }
-    if (found)
-    {
-        return cur;
-    }
-    else if (res != nil)
-    {
-        return res;
-    }
-    else
-    {
-        return @"";
-    }
 }
 
 - (void)inviteToRingMail:(ABRecordRef)contact
@@ -346,13 +225,13 @@
             if (rgMatches)
             {
                 //NSLog(@"RingMail: Updated Matches: %@", rgMatches);
-                [self dbUpdateMatches:rgMatches];
+                [[RKContactStore sharedInstance] updateMatches:rgMatches];
             }
             NSArray *rgContacts = [res objectForKey:@"rg_contacts"];
             if (rgContacts)
             {
                 //NSLog(@"RingMail: Updated Contacts: %@", rgContacts);
-                [self dbUpdateEnabled:rgContacts];
+                [[RKContactStore sharedInstance] updateDetails:rgContacts];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
             }
         }
@@ -365,256 +244,6 @@
             NSLog(@"RingMail API Error: %@", @"Update contacts failed");
         }
     }];
-}
-
-#pragma mark Contact database manager
-
-- (FMDatabaseQueue *)database
-{
-    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-	NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    NSString *dbPath;
-    if ([bundleIdentifier isEqualToString:@"com.ringmail.phone"])
-    {
-		dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contact"];
-	}
-	else
-	{
-		dbPath = [docsPath stringByAppendingPathComponent:@"ringmail_contact_dev"];
-	}
-    dbPath = [docsPath stringByAppendingPathComponent:@"_v0.1.db"];
-    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
-    return queue;
-}
-
-- (void)setupDatabase
-{
-    FMDatabaseQueue *dbq = [self database];
-    [dbq inDatabase:^(FMDatabase *db) {
-        NSArray *setup = [NSArray arrayWithObjects:
-            //@"DROP TABLE contacts;",
-            @"CREATE TABLE IF NOT EXISTS contacts (apple_id INT NOT NULL, ringmail_enabled BOOL DEFAULT 0, contact_data TEXT);",
-            @"CREATE UNIQUE INDEX IF NOT EXISTS apple_id_1 ON contacts (apple_id);",
-
-            @"CREATE TABLE IF NOT EXISTS contact_match ("
-              "id INTEGER PRIMARY KEY NOT NULL,"
-              "item_hash text NOT NULL"
-            ");",
-
-            @"CREATE UNIQUE INDEX IF NOT EXISTS item_hash_1 ON contact_match (item_hash);",
-        nil];
-        for (NSString *sql in setup)
-        {
-            [db executeStatements:sql];
-            if ([db hadError])
-            {
-                NSLog(@"SQL Error: %@\nSQL:\n%@", [db lastErrorMessage], sql);
-            }
-        }
-    }];
-    [dbq close];
-}
-
-- (void)dropTables
-{
-    FMDatabaseQueue *dbq = [self database];
-    [dbq inDatabase:^(FMDatabase *db) {
-        NSArray *setup = [NSArray arrayWithObjects:
-                          @"DROP TABLE contacts;",
-                          nil];
-        for (NSString *sql in setup)
-        {
-            [db executeStatements:sql];
-            if ([db hadError])
-            {
-                NSLog(@"SQL Error: %@\nSQL:\n%@", [db lastErrorMessage], sql);
-            }
-        }
-    }];
-    [dbq close];
-}
-
-- (void)dbUpdateMatches:(NSArray*)rgMatches
-{
-    FMDatabaseQueue *dbq = [self database];
-    [dbq inDatabase:^(FMDatabase *db) {
-        // Get current ringmail users
-        NSMutableDictionary *cur = [NSMutableDictionary dictionary];
-        FMResultSet *rs = [db executeQuery:@"SELECT item_hash FROM contact_match"];
-        while ([rs next])
-        {
-            NSString *match = [rs stringForColumnIndex:0];
-            [cur setObject:@(1) forKey:match];
-        }
-        [rs close];
-		//NSLog(@"Current: %@", cur);
-        
-        NSMutableDictionary *seen = [NSMutableDictionary dictionary];
-        for (NSString *newMatch in rgMatches)
-        {
-			if ([cur objectForKey:newMatch] != nil) // Found
-			{
-                //NSLog(@"RingMail: Contact Already Found: %@", newMatch);
-				[cur removeObjectForKey:newMatch];
-			}
-			else
-			{
-                //NSLog(@"RingMail: Contact Activate 1: %@", newMatch);
-				if (seen[newMatch] == nil)
-				{
-					//NSLog(@"RingMail: Contact Activate 2: %@", newMatch);
-					[db executeUpdate:@"INSERT INTO contact_match (item_hash) VALUES (?)", newMatch];
-				}
-			}
-			seen[newMatch] = @1;
-        }
-		
-        // Purge contacts that are no longer RingMail users :(
-        [cur enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            //NSLog(@"RingMail: Contact Deactivate: %@", key);
-            [db executeUpdate:@"DELETE FROM contact_match WHERE item_hash=?", key];
-
-        }];
-    }];
-    [dbq close];
-}
-
-- (BOOL)dbIsEnabled:(NSString*)item
-{
-    FMDatabaseQueue *dbq = [self database];
-    __block NSString *data = [[NSString stringWithFormat:@"r!ng:%@", item] SHA256];
-    __block BOOL matched = NO;
-    [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT count(item_hash) FROM contact_match WHERE item_hash = ?", data];
-        if ([rs next])
-        {
-			NSNumber *count = [rs objectForColumnIndex:0];
-			if ([count intValue] > 0)
-			{
-				matched = YES;
-			}
-		}
-		[rs close];
-    }];
-    [dbq close];
-	return matched;
-}
-
-- (void)dbUpdateEnabled:(NSArray *)rgUsers
-{
-    __block BOOL refresh = NO;
-    FMDatabaseQueue *dbq = [self database];
-    [dbq inDatabase:^(FMDatabase *db) {
-        // Get current ringmail users
-        NSMutableDictionary *cur = [NSMutableDictionary dictionary];
-        NSMutableDictionary *addrs = [NSMutableDictionary dictionary];
-        FMResultSet *rs = [db executeQuery:@"SELECT apple_id, contact_data FROM contacts WHERE ringmail_enabled = 1"];
-        while ([rs next])
-        {
-            NSNumber *contactID = [rs objectForColumnIndex:0];
-            [cur setObject:contactID forKey:[contactID stringValue]];
-            [addrs setObject:[rs objectForColumnIndex:1] forKey:[contactID stringValue]];
-        }
-        [rs close];
-        //NSLog(@"RingMail: Contact Matches: %@ From: %@", addrs, rgUsers);
-		
-        for (NSString *contactID in rgUsers)
-        {
-            FMResultSet *rs = [db executeQuery:@"SELECT count(oid) FROM contacts WHERE apple_id=?", contactID];
-            if ([rs next]) // found
-            {
-                NSNumber *count = [rs objectForColumnIndex:0];
-                //NSLog(@"RingMail: Contact Activate: %@ -> %@", contactID, count);
-                if ([count intValue] == 0) // Insert
-                {
-                    [db executeUpdate:@"INSERT INTO contacts (apple_id, ringmail_enabled, contact_data) VALUES (?, 1, '')", contactID];
-                }
-                else if ([count intValue] == 1) // Update
-                {
-                    [db executeUpdate:@"UPDATE contacts SET ringmail_enabled=1 WHERE apple_id=?", contactID];
-                }
-                refresh = YES;
-            }
-            [rs close];
-            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContactById:[cur objectForKey:contactID]];
-            NSString *firstAddr = [self getRingMailAddress:contact current:[addrs objectForKey:contactID]];
-            //NSLog(@"RingMail Set Contact %@ -> %@", contactID, firstAddr);
-            if (! [firstAddr isEqualToString:[addrs objectForKey:contactID]])
-            {
-                //NSLog(@"RingMail Update Contact %@ -> %@", contactID, firstAddr);
-                [db executeUpdate:@"UPDATE contacts SET contact_data=? WHERE apple_id=?", firstAddr, contactID];
-            }
-            [cur removeObjectForKey:contactID];
-        }
-        
-        // Purge contacts that are no longer RingMail users :(
-        [cur enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            //NSLog(@"RingMail: Contact Deactivate: %@", key);
-            [db executeUpdate:@"UPDATE contacts SET ringmail_enabled=0 WHERE apple_id=?", key];
-            [[[LinphoneManager instance] chatManager] dbRemoveContact:(NSNumber*)key];
-            refresh = YES;
-        }];
-    }];
-    [dbq close];
-    if (refresh)
-    {
-        NSLog(@"RingMail: Contact Refresh");
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactRefresh object:self userInfo:nil];
-    }
-}
-
-- (NSDictionary*)dbGetRgContacts
-{
-    NSMutableDictionary *res = [NSMutableDictionary dictionary];
-    FMDatabaseQueue *dbq = [self database];
-    [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT apple_id FROM contacts WHERE ringmail_enabled = 1"];
-        while ([rs next])
-        {
-            NSNumber *contactID = [rs objectForColumnIndex:0];
-            //NSLog(@"RingMail: Contact Item: %@", contactID);
-            [res setObject:@"" forKey:[contactID stringValue]];
-        }
-        [rs close];
-    }];
-    [dbq close];
-    return res;
-}
-
-- (BOOL)dbHasRingMail:(NSString*)contactID
-{
-    FMDatabaseQueue *dbq = [self database];
-    __block BOOL res = NO;
-    [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT COUNT(oid) FROM contacts WHERE ringmail_enabled = 1 AND apple_id = ?", contactID];
-        while ([rs next])
-        {
-            NSNumber *count = [rs objectForColumnIndex:0];
-            if ([count intValue] == 1)
-            {
-                res = YES;
-            }
-        }
-        [rs close];
-    }];
-    [dbq close];
-    return res;
-}
-
-- (NSString*)dbGetPrimaryAddress:(NSString*)contactID
-{
-    FMDatabaseQueue *dbq = [self database];
-    __block NSString* addr = @"";
-    [dbq inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT contact_data FROM contacts WHERE apple_id = ?", contactID];
-        while ([rs next])
-        {
-            addr = [rs objectForColumnIndex:0];
-        }
-        [rs close];
-    }];
-    [dbq close];
-    return addr;
 }
 
 @end

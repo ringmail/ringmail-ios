@@ -14,6 +14,7 @@
 #import "UACellBackgroundView.h"
 #import "Utils.h"
 #import "RgContactManager.h"
+#import "RKContactStore.h"
 
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
@@ -64,11 +65,11 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setSendContact) name:kRgSendComponentSetMultiContact object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMulti:) name:kRgSendContactSelectDone object:nil];
 }
 
 - (void)viewDidUnload {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentSetMultiContact object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendContactSelectDone object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,7 +88,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         [addressBookMap removeAllObjects];
         
         // Read RingMail Contacts
-        ringMailContacts = [[[LinphoneManager instance] contactManager] dbGetRgContacts];
+        ringMailContacts = [[RKContactStore sharedInstance] getEnabledContacts];
         //NSLog(@"RingMail Enabled Contact IDs: %@", ringMailContacts);
         
         NSArray *lContacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
@@ -246,19 +247,27 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     
     OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
     ABRecordRef lPerson = (__bridge ABRecordRef)([subDic objectForKey:[subDic keyAtIndex:[indexPath row]]]);
-    
+	
+	// TODO: change to get primary RingMail address
     NSArray* emails = [[[LinphoneManager instance] fastAddressBook] getEmailArray:lPerson];
     
-    if (selectionMode == SendContactSelectionModeSingle) {
-        [delegate didSelectSingleSendContact:emails];
+    if (selectionMode == SendContactSelectionModeSingle)
+	{
+		if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectSingleContact:)])
+    	{
+			[delegate didSelectSingleContact:emails[0]];
+    	}
         [[PhoneMainView instance] popCurrentView];
     }
-    else {
-        if(cell.accessoryType == UITableViewCellAccessoryNone) {
+    else
+	{
+        if (cell.accessoryType == UITableViewCellAccessoryNone)
+		{
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             [selectedContacts addObject:indexPath];
         }
-        else {
+        else
+		{
             cell.accessoryType = UITableViewCellAccessoryNone;
             [selectedContacts removeObject:indexPath];
         }
@@ -267,7 +276,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 
 #pragma mark - UITableViewDelegate Functions
 
--(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     [header.textLabel setTextColor:[UIColor colorWithHex:@"#222222"]];
@@ -277,20 +286,25 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     [header.contentView addSubview:imageView];
 }
 
-
 #pragma mark - 
 
--(void)setSendContact {
+- (void)selectMulti:(NSNotification*)notif
+{
     NSMutableArray* contacts = [[NSMutableArray alloc] init];
-    for (NSIndexPath* indexPath in selectedContacts) {
+    for (NSIndexPath* indexPath in selectedContacts)
+	{
         OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
         ABRecordRef lPerson = (__bridge ABRecordRef)([subDic objectForKey:[subDic keyAtIndex:[indexPath row]]]);
         NSArray* emails = [[[LinphoneManager instance] fastAddressBook] getEmailArray:lPerson];
-        
         if ([emails count])
+		{
             [contacts addObject:emails[0]];
+		}
     }
-    [delegate didSelectMultiSendContact:contacts];
+	if (self.delegate && [delegate respondsToSelector:@selector(didSelectMultipleContacts:)])
+	{
+		[delegate didSelectMultipleContacts:contacts];
+	}
 }
 
 @end

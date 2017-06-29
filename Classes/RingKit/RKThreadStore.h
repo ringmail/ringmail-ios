@@ -37,5 +37,6 @@
 - (RKCall*)getCallBySipId:(NSString*)sip;
 - (RKMessage*)getMessageByUUID:(NSString*)inputUUID;
 - (void)setHidden:(BOOL)hidden forItemId:(NSNumber*)itemId;
+- (void)removeContact:(NSNumber*)contact;
 
 @end

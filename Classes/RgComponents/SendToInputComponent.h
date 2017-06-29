@@ -10,7 +10,7 @@
 #import <ComponentKit/CKStatefulViewComponentController.h>
 
 @interface SendToInputComponent : CKStatefulViewComponent
-+ (instancetype)newWithTag:(NSNumber*)inputTag size:(const CKComponentSize &)size;
++ (instancetype)newWithText:(NSString*)text tag:(NSNumber*)inputTag size:(const CKComponentSize &)size;
 @end
 
 @interface SendToInputView : UITextField;
@@ -21,6 +21,5 @@
 - (void)didMount;
 - (void)didUnmount;
 - (void)resetText:(NSNotification*)notif;
-- (void)setSendContact:(NSNotification*)notif;
 
 @end

@@ -12,6 +12,7 @@ extern NSString *const kRKItemActivity;
 extern NSString *const kRKMessageSent;
 extern NSString *const kRKMessageReceived;
 extern NSString *const kRKMessageUpdated;
+extern NSString *const kRKMessageRemoved;
 extern NSString *const kRKCallBegin;
 extern NSString *const kRKCallUpdated;
 extern NSString *const kRKCallEnd;

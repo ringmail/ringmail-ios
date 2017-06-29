@@ -37,7 +37,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextViewTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSend:) name:kRgSendComponentReset object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateToState:) name:kRgSendComponentSetContact object:nil];
 }
 
 - (void)didUnmount {
@@ -45,7 +44,6 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentSetContact object:nil];
 }
 
 - (BOOL)enableSend
@@ -88,7 +86,7 @@
 	__block NSMutableDictionary *st = [self state];
 	if (changed)
 	{
-		NSLog(@"Enabled Send Changed 1");
+		NSLog(@"Enabled Send Changed 1: %@", [self state]);
 		[self.component updateState:^(id oldState){
 			return st;
 		} mode:CKUpdateModeAsynchronous];
@@ -96,7 +94,7 @@
 	//NSLog(@"Tag: %@ - Text: %@", [NSNumber numberWithInteger:tag], text);
 }
 
-- (void)updateToState:(NSNotification *)notif {
+/*- (void)updateToState:(NSNotification *)notif {
     [self state][@"to"] = notif.userInfo[@"to"];
     BOOL is_enabled = [[self state][@"enable_send"] boolValue];
     BOOL now_enabled = [self enableSend];
@@ -108,7 +106,7 @@
             return st;
         } mode:CKUpdateModeAsynchronous];
     }
-}
+}*/
 
 - (void)resetSend:(NSNotification *)notif
 {
@@ -145,9 +143,10 @@
 
 - (void)actionAddContact:(CKButtonComponent *)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentDisplayContacts object:nil userInfo:@{@"mode": @"single"}];
+	SendCardComponent* sc = (SendCardComponent*)self.component;
+	Send* obj = sc.send;
+	[obj showContactSelect];
 }
-
 
 - (void)actionMediaRemove:(CKButtonComponent *)sender
 {

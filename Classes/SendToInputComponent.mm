@@ -13,13 +13,14 @@
 @interface SendToInputComponent ()
 
 @property (nonatomic, strong) NSNumber* tag;
+@property (nonatomic, strong) NSString* initialText;
 @property (nonatomic, weak) SendToInputView* sendToView;
 
 @end
 
 @implementation SendToInputComponent
 
-+ (instancetype)newWithTag:(NSNumber*)inputTag size:(const CKComponentSize &)size
++ (instancetype)newWithText:(NSString*)text tag:(NSNumber*)inputTag size:(const CKComponentSize &)size
 {
 	CKComponentScope scope(self);
 	SendToInputComponent *c = [super newWithSize:size accessibility:{}];
@@ -27,6 +28,7 @@
 	{
 		c->_tag = inputTag;
 		c->_sendToView = nil;
+		c->_initialText = text;
 	}
 	return c;
 }
@@ -48,20 +50,21 @@
 	[statefulView setAutocorrectionType:UITextAutocorrectionTypeNo];
 	[statefulView setKeyboardType:UIKeyboardTypeEmailAddress];
 	[statefulView setTag:[component.tag integerValue]];
+	[statefulView setText:component.initialText];
+	component.initialText = @"";
 	component.sendToView = statefulView;
 }
 
-- (void)didMount {
+- (void)didMount
+{
 	[super didMount];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetText:) name:kRgSendComponentReset object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setSendContact:) name:kRgSendComponentSelectContact object:nil];
-    
 }
 
-- (void)didUnmount {
+- (void)didUnmount
+{
 	[super didUnmount];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentSelectContact object:nil];
 }
 
 - (void)resetText:(NSNotification*)notif
@@ -69,15 +72,6 @@
 	SendToInputComponent* cp = (SendToInputComponent*)self.component;
 	SendToInputView* tv = cp.sendToView;
 	[tv setText:@""];
-}
-
-- (void)setSendContact:(NSNotification*)notif
-{
-    SendToInputComponent* cp = (SendToInputComponent*)self.component;
-    SendToInputView* tv = cp.sendToView;
-    NSString* emailContact = notif.userInfo[@"to"];
-    [tv setText:emailContact];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSetContact object:nil userInfo:@{@"to": emailContact}];
 }
 
 @end

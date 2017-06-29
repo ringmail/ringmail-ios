@@ -25,6 +25,7 @@
 #import "DTActionSheet.h"
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
+#import "RKContactStore.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
@@ -120,12 +121,12 @@
 	
 	NSNumber* contactNum = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
     NSString* contactID = [contactNum stringValue];
-    rgMember = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
+    rgMember = [[RKContactStore sharedInstance] contactEnabled:contactID];
     NSLog(@"RingMail: Contact ID: %@ - has rg:%d", contactID, rgMember);
     if (rgMember)
     {
         BOOL fav = NO;
-        NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
+        NSString *rgAddress = [[RKContactStore sharedInstance] getPrimaryAddress:contactID];
         if (! [rgAddress isEqualToString:@""])
         {
 			NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
@@ -358,7 +359,7 @@
         LOGW(@"Cannot access contact: null contact");
         return;
     }
-    NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+    NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
     if (rgAddress != nil)
     {
 	   	LinphoneManager *lm = [LinphoneManager instance];
@@ -376,7 +377,7 @@
         LOGW(@"Cannot access contact: null contact");
         return;
     }
-    NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+    NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
     if (rgAddress != nil)
     {
         [RgManager startCall:rgAddress contact:contact video:NO];
@@ -389,7 +390,7 @@
         LOGW(@"Cannot access contact: null contact");
         return;
     }
-    NSString *rgAddress = [[[LinphoneManager instance] contactManager] getRingMailAddress:contact];
+    NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
     if (rgAddress != nil)
     {
         [RgManager startCall:rgAddress contact:contact video:YES];
@@ -404,11 +405,11 @@
     
 	NSNumber *contactNum = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
     NSString *contactID = [contactNum stringValue];
-    BOOL member = [[[LinphoneManager instance] contactManager] dbHasRingMail:contactID];
+    BOOL member = [[RKContactStore sharedInstance] contactEnabled:contactID];
     if (member)
     {
         BOOL fav = NO;
-        NSString *rgAddress = [[[LinphoneManager instance] contactManager] dbGetPrimaryAddress:contactID];
+		NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
 		NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
 		NSNumber *session = sessionData[@"id"];
         

@@ -63,7 +63,7 @@
 
 @end
 
-@interface PhoneMainView : UIViewController<IncomingCallViewDelegate, SendContactsTableViewControllerDelegate> {
+@interface PhoneMainView : UIViewController<IncomingCallViewDelegate> {
     @private
     NSMutableArray *inhibitedEvents;
 	NSMutableDictionary *errorIds;

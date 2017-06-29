@@ -25,7 +25,7 @@
 
 - (void)actionAddContact:(CKButtonComponent *)sender;
 
-- (void)updateToState:(NSNotification *)notif;
+//- (void)updateToState:(NSNotification *)notif;
 
 @end
 

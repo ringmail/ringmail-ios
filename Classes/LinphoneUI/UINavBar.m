@@ -258,10 +258,11 @@ int backState = 0;
     }
 }
 
--(IBAction) onSubmitClick:(id) event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSetMultiContact object:nil];
+- (IBAction)onSubmitClick:(id)event
+{
+    // Contact multi-select complete
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendContactSelectDone object:self userInfo:nil];
 }
-
 
 - (IBAction)segmentedControlChanged:(id)sender
 {

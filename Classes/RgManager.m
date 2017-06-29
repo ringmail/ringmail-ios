@@ -13,6 +13,7 @@
 #import "RgNetwork.h"
 #import "RgChatManager.h"
 #import "RKAdapterXMPP.h"
+#import "RKContactStore.h"
 #import "RingKit.h"
 
 /* RingMail */
@@ -51,11 +52,7 @@ NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
 NSString *const kRgSendComponentReset = @"kRgSendComponentReset";
 NSString *const kRgSendComponentAddMedia = @"kRgSendComponentAddMedia";
 NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
-NSString *const kRgSendComponentDisplayContacts = @"kRgSendComponentDisplayContacts";
-NSString *const kRgSendComponentSelectContact = @"kRgSendComponentSelectContact";
-NSString *const kRgSendComponentSetContact = @"kRgSendComponentSetContact";
-NSString *const kRgSendComponentSetMultiContact = @"kRgSendComponentSetMultiContact";
-
+NSString *const kRgSendContactSelectDone = @"kRgSendContactSelectDone";
 
 static LevelDB* theConfigDatabase = nil;
 
@@ -683,7 +680,7 @@ static LevelDB* theConfigDatabase = nil;
     RgContactManager *contactMgr = [mgr contactManager];
     
     // 1st round of ringmail-enabled contact updates from server (2nd is the reply to sendContactData)
-    [contactMgr dbUpdateEnabled:[res objectForKey:@"rg_contacts"]];
+    [[RKContactStore sharedInstance] updateDetails:[res objectForKey:@"rg_contacts"]];
     
     NSString *serverTimestamp = [res objectForKey:@"ts_latest"];
     BOOL send = 1; // send first time

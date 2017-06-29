@@ -109,13 +109,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 //    			@"thumbnail": thumb,
 //				@"moment": @1,
 //    		}];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentDisplayContacts object:nil userInfo:@{
+            /*[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentDisplayContacts object:nil userInfo:@{
                  @"mode": @"multi",
                  @"file": tmpfile,
                  @"mediaType": @"image/png",
                  @"thumbnail": thumb,
                  @"moment": @1,
-            }];
+            }];*/
 		}
 	}
 }
