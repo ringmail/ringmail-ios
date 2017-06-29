@@ -63,7 +63,7 @@
 
 @end
 
-@interface PhoneMainView : UIViewController<IncomingCallViewDelegate> {
+@interface PhoneMainView : UIViewController<IncomingCallViewDelegate, SendContactsTableViewControllerDelegate> {
     @private
     NSMutableArray *inhibitedEvents;
 	NSMutableDictionary *errorIds;
@@ -79,6 +79,8 @@
 
 @property (nonatomic, strong) RgOptionsModalViewController *optionsModalViewController;
 @property (nonatomic, strong) UIView *optionsModalBG;
+
+@property (nonatomic, strong) NSDictionary* momentData;
 
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView;
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView content:(UIViewController*)mainContent;

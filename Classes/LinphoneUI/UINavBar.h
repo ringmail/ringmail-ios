@@ -24,11 +24,14 @@
 @property (nonatomic, strong) IBOutlet UIButton* backButton;
 @property (nonatomic, strong) IBOutlet UISegmentedControl* segmentButton;
 @property (nonatomic, strong) IBOutlet UILabel* headerLabel;
+@property (nonatomic, strong) IBOutlet UIImageView* logo;
 @property (nonatomic, strong) IBOutlet UILabel* leftLabel;
 @property (nonatomic, strong) IBOutlet UILabel* rightLabel;
+@property (nonatomic, strong) IBOutlet UIButton* submitButton;
 
--(IBAction) onBackClick: (id) event;
+-(IBAction) onBackClick:(id) event;
 -(IBAction) segmentedControlChanged:(id)sender;
+-(IBAction) onSubmitClick:(id) event;
 
 - (void)setInstance:(int)widthIn;
 - (void)updateLabelsBtns:(NSNotification *) notification;

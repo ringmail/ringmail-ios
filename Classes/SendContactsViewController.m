@@ -21,7 +21,7 @@
 @synthesize tableController;
 @synthesize tableView;
 @synthesize selectionMode;
-
+@synthesize delegate;
 
 #pragma mark - Lifecycle Functions
 
@@ -77,7 +77,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.tableView.sectionIndexColor = [UIColor colorWithHex:@"#0A60FF"];
     self.tableView.sectionIndexBackgroundColor = [UIColor colorWithHex:@"#FFFFFF" alpha:0.33f];
-
+    
+    self.tableController.delegate = self.delegate;
+    self.tableController.selectionMode = self.selectionMode;
+    
     [self update];
 }
 

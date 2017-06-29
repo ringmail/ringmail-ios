@@ -10,6 +10,21 @@
 #import <AddressBook/AddressBook.h>
 #import "OrderedDictionary.h"
 
+
+typedef enum _SendContactSelectionMode {
+    SendContactSelectionModeSingle,
+    SendContactSelectionModeMulti
+} SendContactSelectionMode;
+
+
+@class SendContactsTableViewController;
+
+@protocol SendContactsTableViewControllerDelegate <NSObject>
+- (void)didSelectSingleSendContact:(NSArray*)emails;
+- (void)didSelectMultiSendContact:(NSMutableArray*)contacts;
+@end
+
+
 @interface SendContactsTableViewController : UITableViewController {
 @private
     OrderedDictionary* addressBookMap;
@@ -20,5 +35,8 @@
 }
 
 - (void)loadData;
+
+@property (nonatomic, weak) id <SendContactsTableViewControllerDelegate> delegate;
+@property (nonatomic) SendContactSelectionMode selectionMode;
 
 @end

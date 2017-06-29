@@ -138,14 +138,14 @@
         else
         {
             [self resetSend:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:nil];
+//          [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:nil];
         }
 	}
 }
 
 - (void)actionAddContact:(CKButtonComponent *)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentDisplayContacts object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentDisplayContacts object:nil userInfo:@{@"mode": @"single"}];
 }
 
 

@@ -284,6 +284,8 @@
 		4D33F81B1EC4DA5A00D913A7 /* SFUIText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F8121EC4DA5A00D913A7 /* SFUIText-Regular.ttf */; };
 		4D33F81C1EC4DA5A00D913A7 /* SFUIText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F8131EC4DA5A00D913A7 /* SFUIText-Semibold.ttf */; };
 		4D33F81D1EC4DA5A00D913A7 /* SFUIText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F8131EC4DA5A00D913A7 /* SFUIText-Semibold.ttf */; };
+		4D3D42221F03155B007519EC /* rm_logo_ringscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D42211F03155B007519EC /* rm_logo_ringscreen@2x.png */; };
+		4D3D42231F03155B007519EC /* rm_logo_ringscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D42211F03155B007519EC /* rm_logo_ringscreen@2x.png */; };
 		4D3D66A91E453AE900C2BCE3 /* UINavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D66A71E453AE900C2BCE3 /* UINavBar.m */; };
 		4D3D66AA1E453AE900C2BCE3 /* UINavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D66A71E453AE900C2BCE3 /* UINavBar.m */; };
 		4D3D66AD1E453BB500C2BCE3 /* UINavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3D66B01E453BB500C2BCE3 /* UINavBar.xib */; };
@@ -2645,6 +2647,7 @@
 		4D33F8111EC4DA5A00D913A7 /* SFUIText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFUIText-Medium.ttf"; path = "Resources/SFUIText-Medium.ttf"; sourceTree = "<group>"; };
 		4D33F8121EC4DA5A00D913A7 /* SFUIText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFUIText-Regular.ttf"; path = "Resources/SFUIText-Regular.ttf"; sourceTree = "<group>"; };
 		4D33F8131EC4DA5A00D913A7 /* SFUIText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFUIText-Semibold.ttf"; path = "Resources/SFUIText-Semibold.ttf"; sourceTree = "<group>"; };
+		4D3D42211F03155B007519EC /* rm_logo_ringscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rm_logo_ringscreen@2x.png"; path = "Resources/rm_logo_ringscreen@2x.png"; sourceTree = "<group>"; };
 		4D3D66101E452AF900C2BCE3 /* ComponentKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComponentKit.framework; path = "../Library/Developer/Xcode/DerivedData/ringmail-fiijohizvnzsdxamyqqzvjmihcml/Build/Products/Debug-iphonesimulator/ComponentKit/ComponentKit.framework"; sourceTree = "<group>"; };
 		4D3D66A61E453AE900C2BCE3 /* UINavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavBar.h; sourceTree = "<group>"; };
 		4D3D66A71E453AE900C2BCE3 /* UINavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavBar.m; sourceTree = "<group>"; };
@@ -5287,6 +5290,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4D3D42211F03155B007519EC /* rm_logo_ringscreen@2x.png */,
 				4DB7BB321EF4507A00391365 /* button_remove_contact@2x.png */,
 				4DB7BB2E1EF44C6700391365 /* contact_gradient@2x.png */,
 				4D0C61A11EF1F95F002D261D /* rm_contact_indicator@2x.png */,
@@ -6697,6 +6701,7 @@
 				D389363915A6D53200A3A3AA /* chat_bubble_incoming.9.png in Resources */,
 				D389363B15A6D53200A3A3AA /* chat_bubble_outgoing.9.png in Resources */,
 				4D33F7BD1EC4D5C400D913A7 /* tabs_contacts_selected@3x.png in Resources */,
+				4D3D42221F03155B007519EC /* rm_logo_ringscreen@2x.png in Resources */,
 				C444F3DD1C92240300134788 /* menu-contact.png in Resources */,
 				D3D14E7C15A711700074A527 /* avatar_shadow_small.png in Resources */,
 				4D33F7831EC4D5C400D913A7 /* header_navigation_arrow@3x.png in Resources */,
@@ -7241,6 +7246,7 @@
 				4D33F8151EC4DA5A00D913A7 /* SFUIText-Bold.ttf in Resources */,
 				4D33F8171EC4DA5A00D913A7 /* SFUIText-Light.ttf in Resources */,
 				4D33F8191EC4DA5A00D913A7 /* SFUIText-Medium.ttf in Resources */,
+				4D3D42231F03155B007519EC /* rm_logo_ringscreen@2x.png in Resources */,
 				4D33F81B1EC4DA5A00D913A7 /* SFUIText-Regular.ttf in Resources */,
 				C470BF831E68C7E6009968E2 /* arrow_pressed@2x.png in Resources */,
 				C4AC27D11D3963FA003B6232 /* HelveticaNeueLTStd-Cn.otf in Resources */,

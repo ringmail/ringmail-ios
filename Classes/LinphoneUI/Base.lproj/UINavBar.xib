@@ -25,8 +25,10 @@
                 <outlet property="background" destination="38p-KF-uvZ" id="Cou-UU-w4S"/>
                 <outlet property="headerLabel" destination="0rt-2P-RyV" id="Vcp-tR-fSR"/>
                 <outlet property="leftLabel" destination="bTS-UH-a3H" id="n39-cK-ezx"/>
+                <outlet property="logo" destination="njb-Wm-mMT" id="8G6-BT-8ai"/>
                 <outlet property="rightLabel" destination="32Y-5x-k5m" id="VX9-a3-Ytp"/>
                 <outlet property="segmentButton" destination="83b-0d-TgV" id="82i-s4-x02"/>
+                <outlet property="submitButton" destination="UDN-IQ-evr" id="Y3E-uO-gRB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -59,6 +61,13 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rm_logo_ringscreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="njb-Wm-mMT">
+                    <rect key="frame" x="154" y="24" width="106" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="TeT-rp-jL2"/>
+                        <constraint firstAttribute="width" constant="106" id="guk-8D-W1w"/>
+                    </constraints>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rt-2P-RyV">
                     <rect key="frame" x="120.33333333333331" y="37.333333333333336" width="175" height="21"/>
                     <constraints>
@@ -79,6 +88,20 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UDN-IQ-evr">
+                    <rect key="frame" x="331" y="22" width="75" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="4Hd-c4-RpE"/>
+                        <constraint firstAttribute="width" constant="75" id="in8-jh-ALz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="19"/>
+                    <state key="normal" title="Submit">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onSubmitClick:" destination="-1" eventType="touchUpInside" id="EtD-qT-zOa"/>
+                    </connections>
+                </button>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="83b-0d-TgV">
                     <rect key="frame" x="122.33333333333331" y="63.333333333333329" width="170" height="28.999999999999986"/>
                     <constraints>
@@ -96,18 +119,22 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="njb-Wm-mMT" firstAttribute="centerX" secondItem="0rt-2P-RyV" secondAttribute="centerX" id="0oh-gM-z9M"/>
                 <constraint firstItem="xaF-kH-DJ7" firstAttribute="bottom" secondItem="38p-KF-uvZ" secondAttribute="bottom" id="9VJ-IA-YEo"/>
                 <constraint firstItem="bTS-UH-a3H" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="9fa-0N-ajw"/>
                 <constraint firstAttribute="trailing" secondItem="32Y-5x-k5m" secondAttribute="trailing" constant="10" id="9gk-ML-bYW"/>
+                <constraint firstAttribute="trailing" secondItem="UDN-IQ-evr" secondAttribute="trailing" constant="8" id="DCH-z8-FwE"/>
                 <constraint firstItem="0rt-2P-RyV" firstAttribute="centerX" secondItem="38p-KF-uvZ" secondAttribute="centerX" id="DwV-vi-iYT"/>
                 <constraint firstItem="0rt-2P-RyV" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="G12-K8-RF8"/>
                 <constraint firstItem="xaF-kH-DJ7" firstAttribute="leading" secondItem="38p-KF-uvZ" secondAttribute="leading" id="KLU-yi-VRJ"/>
                 <constraint firstItem="38p-KF-uvZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ODH-Y4-yUd"/>
                 <constraint firstItem="xaF-kH-DJ7" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="WUl-RS-MFb"/>
+                <constraint firstItem="njb-Wm-mMT" firstAttribute="centerY" secondItem="0rt-2P-RyV" secondAttribute="centerY" id="WlT-MZ-ZhB"/>
                 <constraint firstItem="83b-0d-TgV" firstAttribute="centerX" secondItem="38p-KF-uvZ" secondAttribute="centerX" id="aQ4-MO-0pQ"/>
                 <constraint firstItem="bTS-UH-a3H" firstAttribute="leading" secondItem="xaF-kH-DJ7" secondAttribute="trailing" id="gTt-Iu-LKr"/>
                 <constraint firstItem="83b-0d-TgV" firstAttribute="top" secondItem="0rt-2P-RyV" secondAttribute="bottom" constant="5" id="gbr-N9-s6z"/>
                 <constraint firstItem="38p-KF-uvZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gkL-1Y-igh"/>
+                <constraint firstItem="UDN-IQ-evr" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="joL-R4-FBe"/>
                 <constraint firstItem="32Y-5x-k5m" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="lxO-IK-Zmj"/>
                 <constraint firstItem="xaF-kH-DJ7" firstAttribute="top" secondItem="38p-KF-uvZ" secondAttribute="top" id="qmc-jH-ldv"/>
             </constraints>
@@ -118,5 +145,6 @@
     </objects>
     <resources>
         <image name="header_navigation_tabs_blue.jpg" width="414" height="95"/>
+        <image name="rm_logo_ringscreen.png" width="106" height="46"/>
     </resources>
 </document>

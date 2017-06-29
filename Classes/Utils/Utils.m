@@ -23,6 +23,7 @@
 #import <sys/utsname.h>
 #import <asl.h>
 
+
 @implementation LinphoneLogger
 
 #define FILE_SIZE 32

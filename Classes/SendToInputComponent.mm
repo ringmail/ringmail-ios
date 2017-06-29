@@ -75,22 +75,9 @@
 {
     SendToInputComponent* cp = (SendToInputComponent*)self.component;
     SendToInputView* tv = cp.sendToView;
-//    NSMutableDictionary* contact = notif.userInfo[@"contact"];
-    
-    NSArray* emails = notif.userInfo[@"emails"];
-    NSString* emailContact;
-    
-    for (id object in emails) {
-        emailContact = emails[0];
-        NSLog(@"contact emails:  %@", object);
-    }
-    
-    [tv setText:[NSString stringWithFormat:@"%@", emailContact]];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSetContact object:nil userInfo:
-    @{
-       @"to": emailContact
-    }];
+    NSString* emailContact = notif.userInfo[@"to"];
+    [tv setText:emailContact];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSetContact object:nil userInfo:@{@"to": emailContact}];
 }
 
 @end

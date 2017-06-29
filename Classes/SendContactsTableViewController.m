@@ -25,6 +25,9 @@
 
 static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 
+@synthesize delegate;
+@synthesize selectionMode;
+
 #pragma mark - Lifecycle Functions
 
 - (void)initContactsTableViewController {
@@ -62,6 +65,11 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setSendContact) name:kRgSendComponentSetMultiContact object:nil];
+}
+
+- (void)viewDidUnload {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentSetMultiContact object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -171,7 +179,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         // Background View
         UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
         cell.selectedBackgroundView = selectedBackgroundView;
-        [selectedBackgroundView setBackgroundColor:[UIColor colorWithHex:@"#D3D3D3"]];  // mrkbxt
+        [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];  // mrkbxt
     }
     OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
     
@@ -216,12 +224,12 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     
     [cell setContact:contact];
     
-//    // mrkbxt
-//    if([selectedContacts containsObject:indexPath]) {
-//        //        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//    } else {
-//        //        cell.accessoryType = UITableViewCellAccessoryNone;
-//    }
+    
+    if([selectedContacts containsObject:indexPath]) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }
@@ -234,31 +242,28 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-
-//    NSNumber* contactId = [[[LinphoneManager instance] fastAddressBook] getContactId:lPerson];
-
-    if(cell.accessoryType == UITableViewCellAccessoryNone) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//        [selectedContacts addObject:indexPath]; 
-    }
-    else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-//        [selectedContacts removeObject:indexPath];
-    }
-
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
     OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
     ABRecordRef lPerson = (__bridge ABRecordRef)([subDic objectForKey:[subDic keyAtIndex:[indexPath row]]]);
     
-    NSMutableDictionary* contact = [[[LinphoneManager instance] fastAddressBook] contactItem:lPerson];
     NSArray* emails = [[[LinphoneManager instance] fastAddressBook] getEmailArray:lPerson];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSelectContact object:nil userInfo:@{
-       @"contact": contact, @"emails": emails
-    }];
-    
-    [[PhoneMainView instance] popCurrentView];
+    if (selectionMode == SendContactSelectionModeSingle) {
+        [delegate didSelectSingleSendContact:emails];
+        [[PhoneMainView instance] popCurrentView];
+    }
+    else {
+        if(cell.accessoryType == UITableViewCellAccessoryNone) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            [selectedContacts addObject:indexPath];
+        }
+        else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            [selectedContacts removeObject:indexPath];
+        }
+    }
 }
 
 #pragma mark - UITableViewDelegate Functions
@@ -271,6 +276,22 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     header.contentView.backgroundColor = [UIColor colorWithHex:@"#FFFFFF"];
     UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_contacts_header.png"]];
     [header.contentView addSubview:imageView];
+}
+
+
+#pragma mark - 
+
+-(void)setSendContact {
+    NSMutableArray* contacts = [[NSMutableArray alloc] init];
+    for (NSIndexPath* indexPath in selectedContacts) {
+        OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
+        ABRecordRef lPerson = (__bridge ABRecordRef)([subDic objectForKey:[subDic keyAtIndex:[indexPath row]]]);
+        NSArray* emails = [[[LinphoneManager instance] fastAddressBook] getEmailArray:lPerson];
+        
+        if ([emails count])
+            [contacts addObject:emails[0]];
+    }
+    [delegate didSelectMultiSendContact:contacts];
 }
 
 @end

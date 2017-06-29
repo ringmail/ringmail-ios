@@ -6,6 +6,7 @@
 #import "CLImageEditor.h"
 #import "ThumbnailFactory.h"
 
+
 @implementation ImageEditViewController
 
 @synthesize image;
@@ -101,13 +102,20 @@ static UICompositeViewDescription *compositeDescription = nil;
     	}
 		else if (mode == RgSendMediaEditModeMoment)
 		{
-	    	RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO], RgMainViewController);
-    		[ctl addMedia:@{
-    			@"file": tmpfile,
-    			@"mediaType": @"image/png",
-    			@"thumbnail": thumb,
-				@"moment": @1,
-    		}];	
+//	    	RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO], RgMainViewController);
+//    		[ctl addMedia:@{
+//    			@"file": tmpfile,
+//    			@"mediaType": @"image/png",
+//    			@"thumbnail": thumb,
+//				@"moment": @1,
+//    		}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentDisplayContacts object:nil userInfo:@{
+                 @"mode": @"multi",
+                 @"file": tmpfile,
+                 @"mediaType": @"image/png",
+                 @"thumbnail": thumb,
+                 @"moment": @1,
+            }];
 		}
 	}
 }

@@ -123,6 +123,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.view addGestureRecognizer:tapBackground];
 	
 	[sendViewController setSendInfo:sendInfo];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -301,6 +302,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)addMedia:(NSDictionary*)param
 {
 	[sendViewController addMedia:param];
+}
+
+- (void)sendTo:(NSDictionary*)param
+{
+    [sendViewController updateTo:param];
+}
+
+- (void)sendMulti:(NSDictionary*)param
+{
+    
 }
 
 @end

@@ -59,7 +59,7 @@
 		_hostView = [[CKComponentHostingView alloc] initWithComponentProvider:[self class] sizeRangeProvider:_sizeRangeProvider];
 		_hostView.delegate = self;
 		_hostView.frame = CGRectMake(0, 50, width, height);
-
+        
 		SendContext *context = [[SendContext alloc] init];
 		[_hostView updateContext:context mode:CKUpdateModeSynchronous];
 		
@@ -166,10 +166,22 @@
 	}
 }
 
+- (void)updateTo:(NSDictionary*)param
+{
+    sendInfo[@"to"] = [param copy];
+    if (_hostView != nil)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentSelectContact object:nil userInfo: @{ @"to": param[@"to"]}];
+//        Send *send = [[Send alloc] initWithData:sendInfo];
+//        [_hostView updateModel:send mode:CKUpdateModeSynchronous];
+    }
+}
+
 - (float)statusBarHeight
 {
     CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
     return MIN(statusBarSize.width, statusBarSize.height);
 }
+
 
 @end

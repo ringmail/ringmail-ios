@@ -138,6 +138,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 @synthesize webDelegate;
 @synthesize optionsModalViewController;
 @synthesize optionsModalBG;
+@synthesize momentData;
 
 #pragma mark - Lifecycle Functions
 
@@ -236,7 +237,7 @@ static RootViewManager *rootViewManagerInstance = nil;
                                                  name:kRgDismissOptionsModal
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(displayContactsController)
+                                             selector:@selector(displayContactsController:)
                                                  name:kRgSendComponentDisplayContacts
                                                object:nil];
     
@@ -603,7 +604,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 }
 
 - (void)updateNavBar:(UICompositeViewDescription*) vc {
-    printf("updating Nav Bar for: %s\n", [vc.name UTF8String]);  // mrkbxt
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     dict[@"header"] = vc.name;
     dict[@"lSeg"] = @"Categories";
@@ -792,17 +792,19 @@ static RootViewManager *rootViewManagerInstance = nil;
     [sheet showInView:self.view];
 }
 
--(void)displayContactsController {
-    [ContactSelection setSelectionMode:ContactSelectionModeEdit];
-//    [ContactSelection setAddAddress:addr];
-    [ContactSelection setSipFilter:nil];
-    [ContactSelection setNameOrEmailFilter:nil];
-    [ContactSelection enableEmailFilter:FALSE];
-    SendContactsViewController *controller = DYNAMIC_CAST(
-      [[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] push:TRUE],
-      SendContactsViewController);
-    if (controller != nil) {
+-(void)displayContactsController:(NSNotification*)notif {
+    
+    SendContactsViewController *vc;
+    
+    if ([notif.userInfo[@"mode"] isEqual:@"single"])
+        vc = [[SendContactsViewController alloc] initWithSelectionMode:SendContactSelectionModeSingle];
+    else {
+        vc = [[SendContactsViewController alloc] initWithSelectionMode:SendContactSelectionModeMulti];
+        momentData = notif.userInfo;
     }
+    
+    vc.delegate = self;
+    [[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] content:vc push:YES];
 }
 
 #pragma mark - ActionSheet Functions
@@ -918,6 +920,30 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 - (void)handleGoogleSignInCompleteEvent {
      [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - SendContactsTableViewControllerDelegate Functions
+
+- (void)didSelectSingleSendContact:(NSArray*)emails
+{
+    if([emails count])
+    {
+        RgMainViewController* vc = (RgMainViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"RgMainViewController"];
+        [vc sendTo:@{@"to":emails[0]}];
+    }
+}
+
+- (void)didSelectMultiSendContact:(NSMutableArray*)contacts
+{
+    for (id obj in contacts)
+        NSLog(@"didSelectMultiSendContact:  %@", obj);
+    
+    NSLog(@"momentData[file]: %@",momentData[@"file"]);
+    
+    RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO], RgMainViewController);
+    
+    momentData = @{};
+    [ctl sendMulti:@{}];
 }
 
 @end

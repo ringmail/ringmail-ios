@@ -5,6 +5,7 @@
 #import <Photos/Photos.h>
 #import "Send.h"
 #import "SendContext.h"
+#import "SendContactsTableViewController.h"
 
 @interface SendViewController : UIViewController
 
@@ -12,6 +13,7 @@
 
 - (id)init;
 - (void)updateSend;
+- (void)updateTo:(NSDictionary*)param;
 - (void)selectMedia:(NSNotification *)notif;
 - (void)addMedia:(NSDictionary*)param;
 - (void)removeMedia;
