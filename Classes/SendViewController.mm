@@ -159,12 +159,14 @@
 
 - (void)updateTo:(NSString*)address
 {
-    sendInfo[@"to"] = [address copy];
-    if (_hostView != nil)
-    {
-        Send *send = [[Send alloc] initWithData:sendInfo];
-        [_hostView updateModel:send mode:CKUpdateModeSynchronous];
-    }
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentUpdateTo object:nil userInfo:@{
+		@"to": address,
+	}];
+	if (_hostView != nil)
+	{
+    	Send *send = [[Send alloc] initWithData:sendInfo];
+    	[_hostView updateModel:send mode:CKUpdateModeAsynchronous];
+	}
 }
 
 - (float)statusBarHeight

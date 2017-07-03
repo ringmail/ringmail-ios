@@ -48,12 +48,7 @@
 	{
 		sendButtonImageName = @"arrow_normal.png";
 	}
-	NSString* initialText = @"";
-	if (item.data[@"to"])
-	{
-		initialText = item.data[@"to"];
-	}
-	
+
 	std::vector<CKStackLayoutComponentChild> sendContent;
 	if ([item data][@"send_media"] != nil)
 	{
@@ -147,8 +142,8 @@
 						}
 						size:{.height = 20, .width = 30}]
 					]},
-					{[CKInsetComponent newWithInsets:{.top = 11, .bottom = 9, .left = 0, .right = 0} component:
-						[SendToInputComponent newWithText:initialText tag:[NSNumber numberWithInt:0] size:{.height = 20, .width = width - 100}]
+					{[CKInsetComponent newWithInsets:{.top = 4, .bottom = 2, .left = 0, .right = 0} component:
+						[SendToInputComponent newWithTag:[NSNumber numberWithInt:0] size:{.height = 34, .width = width - 100}]
 					]}
 				}]},
 				{[CKStackLayoutComponent newWithView:{

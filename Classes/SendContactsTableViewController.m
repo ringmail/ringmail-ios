@@ -301,9 +301,12 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
             [contacts addObject:emails[0]];
 		}
     }
-	if (self.delegate && [delegate respondsToSelector:@selector(didSelectMultipleContacts:)])
+	if ([contacts count] > 0)
 	{
-		[delegate didSelectMultipleContacts:contacts];
+    	if (self.delegate && [delegate respondsToSelector:@selector(didSelectMultipleContacts:)])
+    	{
+    		[delegate didSelectMultipleContacts:contacts];
+    	}
 	}
 }
 

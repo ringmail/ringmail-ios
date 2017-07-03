@@ -1805,6 +1805,8 @@
 		C4E1CB5B1E6E3EC200698166 /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB581E6E3EC200698166 /* ImageEditViewController.xib */; };
 		C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */ = {isa = PBXBuildFile; fileRef = C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */; };
 		C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E985C91BAF98E200939A55 /* UIMessageButton.m */; };
+		C4FAC6111F0AD43E00420405 /* RgMomentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */; };
+		C4FAC6121F0AD43E00420405 /* RgMomentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */; };
 		C4FD784C1CF932950066BDB1 /* UIColor+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD784B1CF932950066BDB1 /* UIColor+Name.m */; };
 		C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */; };
 		C4FD785E1CF9429C0066BDB1 /* pattern_wov.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD785D1CF9429C0066BDB1 /* pattern_wov.png */; };
@@ -3347,6 +3349,8 @@
 		C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_linphone_ringmail.rc; path = Resources/wizard_linphone_ringmail.rc; sourceTree = "<group>"; };
 		C4E985C11BAF98D500939A55 /* UIMessageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMessageButton.h; sourceTree = "<group>"; };
 		C4E985C91BAF98E200939A55 /* UIMessageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMessageButton.m; sourceTree = "<group>"; };
+		C4FAC6071F0AD43200420405 /* RgMomentDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMomentDelegate.h; sourceTree = "<group>"; };
+		C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMomentDelegate.m; sourceTree = "<group>"; };
 		C4FD784B1CF932950066BDB1 /* UIColor+Name.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Name.m"; path = "Utils/UIColor+Name.m"; sourceTree = "<group>"; };
 		C4FD78551CF935C60066BDB1 /* UIColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "Utils/UIColor+Hex.h"; sourceTree = "<group>"; };
 		C4FD78561CF935CF0066BDB1 /* UIColor+Name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIColor+Name.h"; path = "Utils/UIColor+Name.h"; sourceTree = "<group>"; };
@@ -4182,6 +4186,8 @@
 				C422AD311B99F1A900D1F1CD /* RgNetwork.m */,
 				C498DE001ED7626800242330 /* RgViewDelegate.h */,
 				C498DE011ED7626800242330 /* RgViewDelegate.m */,
+				C4FAC6071F0AD43200420405 /* RgMomentDelegate.h */,
+				C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */,
 				4D5251C21E6756EA0064F955 /* RgLocationManager.h */,
 				4D5251C31E6756EA0064F955 /* RgLocationManager.m */,
 				C41B95251C10E0A900253BB7 /* RgContactManager.h */,
@@ -8412,6 +8418,7 @@
 				D3807FEE15C2894A005BE9BC /* IASKSettingsReader.m in Sources */,
 				D3807FF015C2894A005BE9BC /* IASKSettingsStore.m in Sources */,
 				C44A40E01E70E415000F3E24 /* CLHighlightShadowEffect.m in Sources */,
+				C4FAC6111F0AD43E00420405 /* RgMomentDelegate.m in Sources */,
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
 				C4A0858B1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */,
 				C4593A5D1E6A4A89001C3BDD /* FavoritesBarComponent.mm in Sources */,
@@ -8512,6 +8519,7 @@
 				C48C109A1E81AB820094F1F3 /* MediaModelController.m in Sources */,
 				C44A41031E70E415000F3E24 /* UIView+CLImageToolInfo.m in Sources */,
 				C4AC2AB81D3963FA003B6232 /* UIHangUpButton.m in Sources */,
+				C4FAC6121F0AD43E00420405 /* RgMomentDelegate.m in Sources */,
 				C44A40E71E70E415000F3E24 /* CLPosterizeEffect.m in Sources */,
 				C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */,
 				C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */,

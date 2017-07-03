@@ -5,7 +5,7 @@
 #import "PhoneMainView.h"
 #import "CLImageEditor.h"
 #import "ThumbnailFactory.h"
-
+#import "RgMomentDelegate.h"
 
 @implementation ImageEditViewController
 
@@ -83,7 +83,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	{
     	NSLog(@"Edit Complete");
 		UIImage* newImage = [imgView image];
-    	__block UIImage* thumb = [ThumbnailFactory thumbnailForImage:newImage size:CGSizeMake(180, 180)];
 		
     	// Write file
         NSString* imageUUID = [[NSUUID UUID] UUIDString];
@@ -93,6 +92,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     	RgSendMediaEditMode mode = editMode;
     	if (mode == RgSendMediaEditModeDefault) // Back to send panel
     	{
+			UIImage* thumb = [ThumbnailFactory thumbnailForImage:newImage size:CGSizeMake(180, 180)];
     		RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO], RgMainViewController);
     		[ctl addMedia:@{
     			@"file": tmpfile,
@@ -102,20 +102,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     	}
 		else if (mode == RgSendMediaEditModeMoment)
 		{
-//	    	RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO], RgMainViewController);
-//    		[ctl addMedia:@{
-//    			@"file": tmpfile,
-//    			@"mediaType": @"image/png",
-//    			@"thumbnail": thumb,
-//				@"moment": @1,
-//    		}];
-            /*[[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentDisplayContacts object:nil userInfo:@{
-                 @"mode": @"multi",
-                 @"file": tmpfile,
-                 @"mediaType": @"image/png",
-                 @"thumbnail": thumb,
-                 @"moment": @1,
-            }];*/
+		    SendContactsViewController *vc = [[SendContactsViewController alloc] initWithSelectionMode:SendContactSelectionModeMulti];
+			RgMomentDelegate* md = [RgMomentDelegate sharedInstance];
+			[md setFile:tmpfile];
+			vc.delegate = md;
+			[[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] content:vc push:YES];
 		}
 	}
 }
