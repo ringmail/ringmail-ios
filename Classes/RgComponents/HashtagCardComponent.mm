@@ -18,6 +18,8 @@
 #import "UIImage+Resize.h"
 #import "UIColor+Hex.h"
 
+#import "HashtagStore.h"
+
 @implementation HashtagCardComponent
 
 + (instancetype)newWithData:(NSDictionary *)data context:(CardContext *)context
@@ -218,6 +220,7 @@
 - (void)actionGo:(CKButtonComponent *)sender
 {
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
+    [[HashtagStore sharedInstance] insertCardData: card.data];
     [card gotoHashtag];
 }
 

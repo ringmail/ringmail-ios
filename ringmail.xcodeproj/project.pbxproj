@@ -316,6 +316,8 @@
 		4D9BAEA71EFAFA8C0080CA79 /* SendContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BAEA31EFAFA8C0080CA79 /* SendContactsViewController.xib */; };
 		4D9BAEAC1EFB00F00080CA79 /* SendContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BAEAA1EFB00F00080CA79 /* SendContactsTableViewController.m */; };
 		4D9BAEAD1EFB00F00080CA79 /* SendContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BAEAA1EFB00F00080CA79 /* SendContactsTableViewController.m */; };
+		4DA3DAC31F0AC86700D5A14B /* HashtagStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */; };
+		4DA3DAC41F0AC86700D5A14B /* HashtagStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */; };
 		4DAA6B011E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B031E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
@@ -2676,6 +2678,8 @@
 		4D9BAEA91EFB00F00080CA79 /* SendContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendContactsTableViewController.h; sourceTree = "<group>"; };
 		4D9BAEAA1EFB00F00080CA79 /* SendContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendContactsTableViewController.m; sourceTree = "<group>"; };
 		4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4DA3DAC11F0AC86700D5A14B /* HashtagStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagStore.h; path = RgComponents/HashtagStore.h; sourceTree = "<group>"; };
+		4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HashtagStore.m; path = RgComponents/HashtagStore.m; sourceTree = "<group>"; };
 		4DAA6AFE1E6E16C700D9DE84 /* RgSearchBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgSearchBarViewController.h; sourceTree = "<group>"; };
 		4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgSearchBarViewController.m; sourceTree = "<group>"; };
 		4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgSearchBarViewController.xib; sourceTree = "<group>"; };
@@ -4954,6 +4958,8 @@
 				C42B72181CA2313D0020A57F /* HashtagModelController.m */,
 				C42B71FC1CA22DD50020A57F /* HashtagCollectionViewController.h */,
 				C42B71FD1CA22DD50020A57F /* HashtagCollectionViewController.mm */,
+				4DA3DAC11F0AC86700D5A14B /* HashtagStore.h */,
+				4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */,
 			);
 			name = HashtagDirectory;
 			sourceTree = "<group>";
@@ -8250,6 +8256,7 @@
 				C445D1C11E6778220037A9DE /* TextInputComponent.mm in Sources */,
 				1D3623260D0F684500981E51 /* LinphoneAppDelegate.m in Sources */,
 				C44A40E81E70E415000F3E24 /* CLSpotEffect.m in Sources */,
+				4DA3DAC31F0AC86700D5A14B /* HashtagStore.m in Sources */,
 				C42C0DD51CAF2D9600AD5A91 /* RgCallDuration.m in Sources */,
 				C473F87D1ECCDED8008B548B /* ChatElementImageComponent.mm in Sources */,
 				631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */,
@@ -8673,6 +8680,7 @@
 				C4AC2B2A1D3963FA003B6232 /* IASKPSSliderSpecifierViewCell.m in Sources */,
 				C44A41171E7335CD000F3E24 /* CLEmoticonTool.m in Sources */,
 				C45B93291ECE39A200974011 /* RKAddress.m in Sources */,
+				4DA3DAC41F0AC86700D5A14B /* HashtagStore.m in Sources */,
 				C48C108E1E81AB230094F1F3 /* MediaContext.m in Sources */,
 				C45B93251ECE398300974011 /* RKCommunicator.m in Sources */,
 				C44A40DF1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
