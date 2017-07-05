@@ -300,7 +300,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
 	NSLog(@"%s: Address: %@", __PRETTY_FUNCTION__, address);
     [sendViewController updateTo:address];
-    //RgMainViewController* vc = (RgMainViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"RgMainViewController"];
 }
 
 /*- (void)didSelectMultipleContacts:(NSMutableArray*)contacts

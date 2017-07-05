@@ -21,8 +21,6 @@
 #import "RgManager.h"
 #import "RingKit.h"
 
-
-
 @implementation SendCardComponentController
 
 @synthesize state;
@@ -37,6 +35,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextViewTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSend:) name:kRgSendComponentReset object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTo:) name:kRgSendComponentUpdateTo object:nil];
 }
 
 - (void)didUnmount {
@@ -44,6 +43,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentUpdateTo object:nil];
 }
 
 - (BOOL)enableSend
@@ -52,7 +52,6 @@
 	Send* send = sc.send;
 	NSDictionary* data = send.data;
 	NSMutableDictionary* st = [self state];
-	//NSLog(@"Current: %ld %ld", [st[@"message"] length], [st[@"to"] length]);
 	
 	// This code is copied into the actual component
 	BOOL enable = NO;
@@ -94,19 +93,20 @@
 	//NSLog(@"Tag: %@ - Text: %@", [NSNumber numberWithInteger:tag], text);
 }
 
-/*- (void)updateToState:(NSNotification *)notif {
-    [self state][@"to"] = notif.userInfo[@"to"];
-    BOOL is_enabled = [[self state][@"enable_send"] boolValue];
-    BOOL now_enabled = [self enableSend];
-    BOOL changed = ((! is_enabled) && now_enabled) || ((! now_enabled) && is_enabled);
-    __block NSMutableDictionary *st = [self state];
-    if (changed)
-    {
-        [self.component updateState:^(id oldState){
-            return st;
-        } mode:CKUpdateModeAsynchronous];
-    }
-}*/
+- (void)updateTo:(NSNotification *)notif {
+	[self state][@"to"] = notif.userInfo[@"to"];
+	BOOL is_enabled = [[self state][@"enable_send"] boolValue];
+	BOOL now_enabled = [self enableSend];
+	BOOL changed = ((! is_enabled) && now_enabled) || ((! now_enabled) && is_enabled);
+	__block NSMutableDictionary *st = [self state];
+	if (changed)
+	{
+		NSLog(@"%s: Enabled Send Changed: %@", __PRETTY_FUNCTION__, [self state]);
+		[self.component updateState:^(id oldState){
+			return st;
+		} mode:CKUpdateModeAsynchronous];
+	}
+}
 
 - (void)resetSend:(NSNotification *)notif
 {
@@ -129,14 +129,9 @@
 	NSDictionary *msgdata = [self state];
 	if ([msgdata[@"enable_send"] boolValue])
 	{
-        if ([RKAddress validAddress:msgdata[@"to"]])
+        if ([msgdata[@"to"] length] > 0 && [RgManager checkRingMailAddress:msgdata[@"to"]])
         {
             [obj sendMessage:msgdata];
-        }
-        else
-        {
-            [self resetSend:nil];
-//          [[NSNotificationCenter defaultCenter] postNotificationName:kRgSendComponentReset object:nil];
         }
 	}
 }

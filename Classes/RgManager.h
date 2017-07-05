@@ -44,6 +44,7 @@ extern NSString *const kRgGoogleSignInError;
 extern NSString *const kRgUserUnauthorized;
 
 extern NSString *const kRgSendComponentReset;
+extern NSString *const kRgSendComponentUpdateTo;
 extern NSString *const kRgSendComponentAddMedia;
 extern NSString *const kRgSendComponentRemoveMedia;
 

@@ -817,6 +817,20 @@
 		C476A7081CF24DFE00CA3772 /* ringpage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7051CF24DFE00CA3772 /* ringpage@2x.png */; };
 		C476A7091CF24DFE00CA3772 /* ringpage.png in Resources */ = {isa = PBXBuildFile; fileRef = C476A7061CF24DFE00CA3772 /* ringpage.png */; };
 		C476A7131CF254F100CA3772 /* HashtagCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C476A7121CF254F100CA3772 /* HashtagCardComponent.mm */; };
+		C47E7DD21F0B478200EAA262 /* LNNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DC31F0B478200EAA262 /* LNNotification.m */; };
+		C47E7DD31F0B478200EAA262 /* LNNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DC31F0B478200EAA262 /* LNNotification.m */; };
+		C47E7DD41F0B478200EAA262 /* LNNotificationAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DC51F0B478200EAA262 /* LNNotificationAppSettings.m */; };
+		C47E7DD51F0B478200EAA262 /* LNNotificationAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DC51F0B478200EAA262 /* LNNotificationAppSettings.m */; };
+		C47E7DD61F0B478200EAA262 /* LNNotificationBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DC81F0B478200EAA262 /* LNNotificationBannerView.m */; };
+		C47E7DD71F0B478200EAA262 /* LNNotificationBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DC81F0B478200EAA262 /* LNNotificationBannerView.m */; };
+		C47E7DD81F0B478200EAA262 /* LNNotificationBannerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DCA1F0B478200EAA262 /* LNNotificationBannerWindow.m */; };
+		C47E7DD91F0B478200EAA262 /* LNNotificationBannerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DCA1F0B478200EAA262 /* LNNotificationBannerWindow.m */; };
+		C47E7DDA1F0B478200EAA262 /* LNNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DCC1F0B478200EAA262 /* LNNotificationCenter.m */; };
+		C47E7DDB1F0B478200EAA262 /* LNNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DCC1F0B478200EAA262 /* LNNotificationCenter.m */; };
+		C47E7DDC1F0B478200EAA262 /* LNNotificationsAppSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DCE1F0B478200EAA262 /* LNNotificationsAppSettingsController.m */; };
+		C47E7DDD1F0B478200EAA262 /* LNNotificationsAppSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DCE1F0B478200EAA262 /* LNNotificationsAppSettingsController.m */; };
+		C47E7DDE1F0B478200EAA262 /* LNNotificationSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DD01F0B478200EAA262 /* LNNotificationSettingsController.m */; };
+		C47E7DDF1F0B478200EAA262 /* LNNotificationSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47E7DD01F0B478200EAA262 /* LNNotificationSettingsController.m */; };
 		C482E46E1EA19612000E7BE5 /* ringmail_chat_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C482E46D1EA19612000E7BE5 /* ringmail_chat_send@2x.png */; };
 		C482E46F1EA19612000E7BE5 /* ringmail_chat_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C482E46D1EA19612000E7BE5 /* ringmail_chat_send@2x.png */; };
 		C482E4791EA197E8000E7BE5 /* ringmail_chat_attach@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C482E4781EA197E8000E7BE5 /* ringmail_chat_attach@2x.png */; };
@@ -1807,6 +1821,8 @@
 		C4E1CB5B1E6E3EC200698166 /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB581E6E3EC200698166 /* ImageEditViewController.xib */; };
 		C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */ = {isa = PBXBuildFile; fileRef = C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */; };
 		C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E985C91BAF98E200939A55 /* UIMessageButton.m */; };
+		C4FAC6111F0AD43E00420405 /* RgMomentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */; };
+		C4FAC6121F0AD43E00420405 /* RgMomentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */; };
 		C4FD784C1CF932950066BDB1 /* UIColor+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD784B1CF932950066BDB1 /* UIColor+Name.m */; };
 		C4FD78591CF939330066BDB1 /* NSObject+NSPerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78581CF939330066BDB1 /* NSObject+NSPerformSelector.m */; };
 		C4FD785E1CF9429C0066BDB1 /* pattern_wov.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD785D1CF9429C0066BDB1 /* pattern_wov.png */; };
@@ -3206,6 +3222,22 @@
 		C476A7061CF24DFE00CA3772 /* ringpage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringpage.png; path = Resources/ringpage.png; sourceTree = "<group>"; };
 		C476A7111CF254F100CA3772 /* HashtagCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCardComponent.h; path = RgComponents/HashtagCardComponent.h; sourceTree = "<group>"; };
 		C476A7121CF254F100CA3772 /* HashtagCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HashtagCardComponent.mm; path = RgComponents/HashtagCardComponent.mm; sourceTree = "<group>"; };
+		C47E7DC21F0B478200EAA262 /* LNNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotification.h; sourceTree = "<group>"; };
+		C47E7DC31F0B478200EAA262 /* LNNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotification.m; sourceTree = "<group>"; };
+		C47E7DC41F0B478200EAA262 /* LNNotificationAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationAppSettings.h; sourceTree = "<group>"; };
+		C47E7DC51F0B478200EAA262 /* LNNotificationAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationAppSettings.m; sourceTree = "<group>"; };
+		C47E7DC61F0B478200EAA262 /* LNNotificationAppSettings_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationAppSettings_Private.h; sourceTree = "<group>"; };
+		C47E7DC71F0B478200EAA262 /* LNNotificationBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationBannerView.h; sourceTree = "<group>"; };
+		C47E7DC81F0B478200EAA262 /* LNNotificationBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationBannerView.m; sourceTree = "<group>"; };
+		C47E7DC91F0B478200EAA262 /* LNNotificationBannerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationBannerWindow.h; sourceTree = "<group>"; };
+		C47E7DCA1F0B478200EAA262 /* LNNotificationBannerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationBannerWindow.m; sourceTree = "<group>"; };
+		C47E7DCB1F0B478200EAA262 /* LNNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationCenter.h; sourceTree = "<group>"; };
+		C47E7DCC1F0B478200EAA262 /* LNNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationCenter.m; sourceTree = "<group>"; };
+		C47E7DCD1F0B478200EAA262 /* LNNotificationsAppSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationsAppSettingsController.h; sourceTree = "<group>"; };
+		C47E7DCE1F0B478200EAA262 /* LNNotificationsAppSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationsAppSettingsController.m; sourceTree = "<group>"; };
+		C47E7DCF1F0B478200EAA262 /* LNNotificationSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationSettingsController.h; sourceTree = "<group>"; };
+		C47E7DD01F0B478200EAA262 /* LNNotificationSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationSettingsController.m; sourceTree = "<group>"; };
+		C47E7DD11F0B478200EAA262 /* LNNotificationsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationsUI.h; sourceTree = "<group>"; };
 		C482E46D1EA19612000E7BE5 /* ringmail_chat_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_chat_send@2x.png"; path = "Resources/ringmail_chat_send@2x.png"; sourceTree = "<group>"; };
 		C482E4781EA197E8000E7BE5 /* ringmail_chat_attach@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_chat_attach@2x.png"; path = "Resources/ringmail_chat_attach@2x.png"; sourceTree = "<group>"; };
 		C484AC501C991DD500AE2E5D /* bubble_ringmail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble_ringmail@2x.png"; path = "Resources/bubble_ringmail@2x.png"; sourceTree = "<group>"; };
@@ -3351,6 +3383,8 @@
 		C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_linphone_ringmail.rc; path = Resources/wizard_linphone_ringmail.rc; sourceTree = "<group>"; };
 		C4E985C11BAF98D500939A55 /* UIMessageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMessageButton.h; sourceTree = "<group>"; };
 		C4E985C91BAF98E200939A55 /* UIMessageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMessageButton.m; sourceTree = "<group>"; };
+		C4FAC6071F0AD43200420405 /* RgMomentDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMomentDelegate.h; sourceTree = "<group>"; };
+		C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMomentDelegate.m; sourceTree = "<group>"; };
 		C4FD784B1CF932950066BDB1 /* UIColor+Name.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Name.m"; path = "Utils/UIColor+Name.m"; sourceTree = "<group>"; };
 		C4FD78551CF935C60066BDB1 /* UIColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "Utils/UIColor+Hex.h"; sourceTree = "<group>"; };
 		C4FD78561CF935CF0066BDB1 /* UIColor+Name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIColor+Name.h"; path = "Utils/UIColor+Name.h"; sourceTree = "<group>"; };
@@ -4186,6 +4220,8 @@
 				C422AD311B99F1A900D1F1CD /* RgNetwork.m */,
 				C498DE001ED7626800242330 /* RgViewDelegate.h */,
 				C498DE011ED7626800242330 /* RgViewDelegate.m */,
+				C4FAC6071F0AD43200420405 /* RgMomentDelegate.h */,
+				C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */,
 				4D5251C21E6756EA0064F955 /* RgLocationManager.h */,
 				4D5251C31E6756EA0064F955 /* RgLocationManager.m */,
 				C41B95251C10E0A900253BB7 /* RgContactManager.h */,
@@ -5096,6 +5132,30 @@
 			name = RingKit;
 			sourceTree = "<group>";
 		};
+		C47E7DC11F0B478200EAA262 /* LNNotificationsUI */ = {
+			isa = PBXGroup;
+			children = (
+				C47E7DC21F0B478200EAA262 /* LNNotification.h */,
+				C47E7DC31F0B478200EAA262 /* LNNotification.m */,
+				C47E7DC41F0B478200EAA262 /* LNNotificationAppSettings.h */,
+				C47E7DC51F0B478200EAA262 /* LNNotificationAppSettings.m */,
+				C47E7DC61F0B478200EAA262 /* LNNotificationAppSettings_Private.h */,
+				C47E7DC71F0B478200EAA262 /* LNNotificationBannerView.h */,
+				C47E7DC81F0B478200EAA262 /* LNNotificationBannerView.m */,
+				C47E7DC91F0B478200EAA262 /* LNNotificationBannerWindow.h */,
+				C47E7DCA1F0B478200EAA262 /* LNNotificationBannerWindow.m */,
+				C47E7DCB1F0B478200EAA262 /* LNNotificationCenter.h */,
+				C47E7DCC1F0B478200EAA262 /* LNNotificationCenter.m */,
+				C47E7DCD1F0B478200EAA262 /* LNNotificationsAppSettingsController.h */,
+				C47E7DCE1F0B478200EAA262 /* LNNotificationsAppSettingsController.m */,
+				C47E7DCF1F0B478200EAA262 /* LNNotificationSettingsController.h */,
+				C47E7DD01F0B478200EAA262 /* LNNotificationSettingsController.m */,
+				C47E7DD11F0B478200EAA262 /* LNNotificationsUI.h */,
+			);
+			name = LNNotificationsUI;
+			path = Utils/LNNotificationsUI;
+			sourceTree = "<group>";
+		};
 		C4A929041E94288E00993A5C /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -5116,6 +5176,7 @@
 		D326483415887D4400930C67 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C47E7DC11F0B478200EAA262 /* LNNotificationsUI */,
 				C44A40791E70E415000F3E24 /* CLImageEditor */,
 				C44F5E071C31E341008E4F38 /* NoteSQL.h */,
 				C44F5E081C31E341008E4F38 /* NoteSQL.m */,
@@ -8155,7 +8216,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		511AEDDAB089CEDE7BC4DCD2 /* [CP] Copy Pods Resources */ = {
@@ -8272,6 +8333,7 @@
 				2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */,
 				C44A40E61E70E415000F3E24 /* CLPosterizeEffect.m in Sources */,
 				C42B71F51CA22AF90020A57F /* RgHashtagDirectoryViewController.m in Sources */,
+				C47E7DD21F0B478200EAA262 /* LNNotification.m in Sources */,
 				C4FD78751CFB70520066BDB1 /* HashtagCategoryCardComponent.mm in Sources */,
 				C4A853D61E660D9000FEAFB0 /* SendViewController.mm in Sources */,
 				22AA8B0113D83F6300B30535 /* UICamSwitch.m in Sources */,
@@ -8288,6 +8350,7 @@
 				C476A7131CF254F100CA3772 /* HashtagCardComponent.mm in Sources */,
 				D35497FE15875372000081D8 /* ContactsViewController.m in Sources */,
 				C4FF498D1EA2CF8700B3DCE6 /* UIChatNavBar.m in Sources */,
+				C47E7DDA1F0B478200EAA262 /* LNNotificationCenter.m in Sources */,
 				D3549816158761D0000081D8 /* ContactsTableViewController.m in Sources */,
 				D35498211587716B000081D8 /* UIStateBar.m in Sources */,
 				4D5251C41E6756EA0064F955 /* RgLocationManager.m in Sources */,
@@ -8332,6 +8395,7 @@
 				C44A40D81E70E415000F3E24 /* CLClippingTool.m in Sources */,
 				C48C10911E81AB4A0094F1F3 /* MediaPage.m in Sources */,
 				C4AB19FB1E8D9BB600C7A754 /* ChatElementContext.m in Sources */,
+				C47E7DDC1F0B478200EAA262 /* LNNotificationsAppSettingsController.m in Sources */,
 				C49544781EE8CDDB00B1B302 /* AVAsset+VideoOrientation.mm in Sources */,
 				C43438F21EEF4417002F4EC0 /* RKMomentMessage.m in Sources */,
 				C473F8801ECD0770008B548B /* UIImage+Scale.m in Sources */,
@@ -8395,6 +8459,7 @@
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				C45B93341ECE4EA700974011 /* RKThread.m in Sources */,
 				C44A40D21E70E415000F3E24 /* CLImageToolInfo.m in Sources */,
+				C47E7DD81F0B478200EAA262 /* LNNotificationBannerWindow.m in Sources */,
 				C4FE4C791CCDA03F006A6C94 /* MessagesViewController.m in Sources */,
 				C42C0D5D1CAED86800AD5A91 /* RgCallContext.m in Sources */,
 				C42B720F1CA22EDB0020A57F /* MessageThread.m in Sources */,
@@ -8419,6 +8484,7 @@
 				D3807FEE15C2894A005BE9BC /* IASKSettingsReader.m in Sources */,
 				D3807FF015C2894A005BE9BC /* IASKSettingsStore.m in Sources */,
 				C44A40E01E70E415000F3E24 /* CLHighlightShadowEffect.m in Sources */,
+				C4FAC6111F0AD43E00420405 /* RgMomentDelegate.m in Sources */,
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
 				C4A0858B1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */,
 				C4593A5D1E6A4A89001C3BDD /* FavoritesBarComponent.mm in Sources */,
@@ -8427,6 +8493,8 @@
 				C44A40D01E70E415000F3E24 /* CLImageEditorTheme.m in Sources */,
 				D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */,
 				C44A41161E7335CD000F3E24 /* CLEmoticonTool.m in Sources */,
+				C47E7DD61F0B478200EAA262 /* LNNotificationBannerView.m in Sources */,
+				C47E7DDE1F0B478200EAA262 /* LNNotificationSettingsController.m in Sources */,
 				C42BD4191ED642C8009B324D /* CardContext.m in Sources */,
 				C48C108D1E81AB230094F1F3 /* MediaContext.m in Sources */,
 				4D9BAEAC1EFB00F00080CA79 /* SendContactsTableViewController.m in Sources */,
@@ -8436,6 +8504,7 @@
 				C48DA1E11E846A44007CBCFB /* BaseCameraViewController.m in Sources */,
 				4D9684D41E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
+				C47E7DD41F0B478200EAA262 /* LNNotificationAppSettings.m in Sources */,
 				4D9BAEA41EFAFA8C0080CA79 /* SendContactsViewController.m in Sources */,
 				C4AB1A0B1E8D9D1900C7A754 /* ChatRoomCollectionViewController.mm in Sources */,
 				C42B71FE1CA22DD50020A57F /* HashtagCollectionViewController.mm in Sources */,
@@ -8519,6 +8588,7 @@
 				C48C109A1E81AB820094F1F3 /* MediaModelController.m in Sources */,
 				C44A41031E70E415000F3E24 /* UIView+CLImageToolInfo.m in Sources */,
 				C4AC2AB81D3963FA003B6232 /* UIHangUpButton.m in Sources */,
+				C4FAC6121F0AD43E00420405 /* RgMomentDelegate.m in Sources */,
 				C44A40E71E70E415000F3E24 /* CLPosterizeEffect.m in Sources */,
 				C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */,
 				C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */,
@@ -8549,6 +8619,7 @@
 				C48C10961E81AB6B0094F1F3 /* MediaComponent.mm in Sources */,
 				C4AC2AD71D3963FA003B6232 /* RgChatQuestionTable.m in Sources */,
 				C4AC2AD81D3963FA003B6232 /* MessageThreadPage.m in Sources */,
+				C47E7DD31F0B478200EAA262 /* LNNotification.m in Sources */,
 				C42BD4121ED64204009B324D /* CardsPage.m in Sources */,
 				C4AC2ADB1D3963FA003B6232 /* UILongTouchButton.m in Sources */,
 				C4AC2ADD1D3963FA003B6232 /* RgChatManager.m in Sources */,
@@ -8618,6 +8689,7 @@
 				C4AC2B081D3963FA003B6232 /* UIEditableTableViewCell.m in Sources */,
 				C4AC2B091D3963FA003B6232 /* ContactDetailsLabelViewController.m in Sources */,
 				C4AC2B0A1D3963FA003B6232 /* UIContactDetailsFooter.m in Sources */,
+				C47E7DD71F0B478200EAA262 /* LNNotificationBannerView.m in Sources */,
 				C44A41051E70E415000F3E24 /* CLClassList.m in Sources */,
 				C4AC2B0D1D3963FA003B6232 /* UITransparentTVCell.m in Sources */,
 				C4AC2B0E1D3963FA003B6232 /* UACellBackgroundView.m in Sources */,
@@ -8642,6 +8714,7 @@
 				C4C8FE971EE0BF0C002DDB3E /* ChatElementCallComponent.mm in Sources */,
 				C4E1CB361E6E1A2400698166 /* MomentCameraViewController.m in Sources */,
 				C4AC2B181D3963FA003B6232 /* MessagesViewController.m in Sources */,
+				C47E7DDD1F0B478200EAA262 /* LNNotificationsAppSettingsController.m in Sources */,
 				C44A40D31E70E415000F3E24 /* CLImageToolInfo.m in Sources */,
 				C4AC2B191D3963FA003B6232 /* RgCallContext.m in Sources */,
 				C4AC2B1A1D3963FA003B6232 /* MessageThread.m in Sources */,
@@ -8660,6 +8733,7 @@
 				C44A410F1E70E416000F3E24 /* _CLImageEditorViewController.m in Sources */,
 				C49544791EE8CDDB00B1B302 /* AVAsset+VideoOrientation.mm in Sources */,
 				C42BD4261ED64608009B324D /* HeaderComponent.mm in Sources */,
+				C47E7DDB1F0B478200EAA262 /* LNNotificationCenter.m in Sources */,
 				C44A40DB1E70E415000F3E24 /* CLDrawTool.m in Sources */,
 				C4A929111E9428BE00993A5C /* MessageViewController.m in Sources */,
 				C4AC2B231D3963FA003B6232 /* IASKAppSettingsWebViewController.m in Sources */,
@@ -8669,6 +8743,7 @@
 				C4AC2B251D3963FA003B6232 /* IASKSettingsReader.m in Sources */,
 				C4AC2B261D3963FA003B6232 /* IASKSettingsStore.m in Sources */,
 				4D9BAEAD1EFB00F00080CA79 /* SendContactsTableViewController.m in Sources */,
+				C47E7DD51F0B478200EAA262 /* LNNotificationAppSettings.m in Sources */,
 				C4AC2B271D3963FA003B6232 /* IASKSettingsStoreFile.m in Sources */,
 				4DCEA68D1EBBBB0C00E6760D /* RgModalButtonView.m in Sources */,
 				C44A40E11E70E415000F3E24 /* CLHighlightShadowEffect.m in Sources */,
@@ -8712,9 +8787,11 @@
 				C48DA1D01E845484007CBCFB /* PhotoCameraViewController.m in Sources */,
 				C44A41071E70E415000F3E24 /* CLSplineInterpolator.m in Sources */,
 				C4AC2B3F1D3963FA003B6232 /* DTActionSheet.m in Sources */,
+				C47E7DDF1F0B478200EAA262 /* LNNotificationSettingsController.m in Sources */,
 				C4AC2B401D3963FA003B6232 /* UIImage+operation.m in Sources */,
 				C473F87A1ECCDB41008B548B /* ChatElementTextComponent.mm in Sources */,
 				C4600C191ED4F61C00C1C964 /* RKAdapterXMPP.m in Sources */,
+				C47E7DD91F0B478200EAA262 /* LNNotificationBannerWindow.m in Sources */,
 				C4AC2B411D3963FA003B6232 /* UILinphoneTextField.m in Sources */,
 				C44A40D51E70E415000F3E24 /* CLAdjustmentTool.m in Sources */,
 				C4AC2B421D3963FA003B6232 /* UIColor+Hex.m in Sources */,

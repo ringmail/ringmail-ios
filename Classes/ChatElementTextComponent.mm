@@ -4,6 +4,7 @@
 
 #import "UIColor+Hex.h"
 #import "RingKit.h"
+#import <CoreText/CoreText.h>
 
 @implementation ChatElementTextComponent
 
@@ -30,14 +31,14 @@
         };
 		NSString* msg = message.body;
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
-		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
-			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-			attributes:@{
-				NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
-			} context:nil];
 		
-		int msgHeight = (int)bounds.size.height;
-		int msgWidth = (int)bounds.size.width;
+    	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attrString);
+        CGSize targetSize = CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX);
+        CGSize fitSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, [attrString length]), NULL, targetSize, NULL);
+        CFRelease(framesetter);
+		
+		int msgHeight = (int)fitSize.height;
+		int msgWidth = (int)fitSize.width;
 		msgHeight += 1;
 		msgWidth += 1;
 		//NSLog(@"Bounds: %f %f", bounds.size.width, bounds.size.height);
@@ -90,6 +91,7 @@
     						[CKTextComponent newWithTextAttributes:{
                                 .attributedString = attrString,
                                 .lineBreakMode = NSLineBreakByWordWrapping,
+                                .maximumNumberOfLines = 0,
                             } viewAttributes:{
                                 {@selector(setBackgroundColor:), [UIColor clearColor]},
                                 {@selector(setUserInteractionEnabled:), @NO},
@@ -112,14 +114,13 @@
         };
 		NSString* msg = message.body;
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
-		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
-			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-			attributes:@{
-				NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
-			} context:nil];
-					
-		int msgHeight = (int)bounds.size.height;
-		int msgWidth = (int)bounds.size.width;
+		CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attrString);
+        CGSize targetSize = CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX);
+        CGSize fitSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, [attrString length]), NULL, targetSize, NULL);
+        CFRelease(framesetter);
+
+		int msgHeight = (int)fitSize.height;
+		int msgWidth = (int)fitSize.width;
 		msgHeight += 1;
 		msgWidth += 1;
 		

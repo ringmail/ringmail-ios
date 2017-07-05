@@ -13,14 +13,13 @@
 @interface SendToInputComponent ()
 
 @property (nonatomic, strong) NSNumber* tag;
-@property (nonatomic, strong) NSString* initialText;
 @property (nonatomic, weak) SendToInputView* sendToView;
 
 @end
 
 @implementation SendToInputComponent
 
-+ (instancetype)newWithText:(NSString*)text tag:(NSNumber*)inputTag size:(const CKComponentSize &)size
++ (instancetype)newWithTag:(NSNumber*)inputTag size:(const CKComponentSize &)size
 {
 	CKComponentScope scope(self);
 	SendToInputComponent *c = [super newWithSize:size accessibility:{}];
@@ -28,10 +27,10 @@
 	{
 		c->_tag = inputTag;
 		c->_sendToView = nil;
-		c->_initialText = text;
 	}
 	return c;
 }
+
 @end
 
 @implementation SendToInputComponentController
@@ -46,12 +45,12 @@
 {
 	statefulView.backgroundColor = [UIColor clearColor];
 	statefulView.font = [UIFont systemFontOfSize:18];
+	statefulView.minimumFontSize = 14.0f;
+	[statefulView setAdjustsFontSizeToFitWidth:YES];
 	[statefulView setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 	[statefulView setAutocorrectionType:UITextAutocorrectionTypeNo];
 	[statefulView setKeyboardType:UIKeyboardTypeEmailAddress];
 	[statefulView setTag:[component.tag integerValue]];
-	[statefulView setText:component.initialText];
-	component.initialText = @"";
 	component.sendToView = statefulView;
 }
 
@@ -59,12 +58,14 @@
 {
 	[super didMount];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetText:) name:kRgSendComponentReset object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTo:) name:kRgSendComponentUpdateTo object:nil];
 }
 
 - (void)didUnmount
 {
 	[super didUnmount];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentReset object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSendComponentUpdateTo object:nil];
 }
 
 - (void)resetText:(NSNotification*)notif
@@ -74,7 +75,15 @@
 	[tv setText:@""];
 }
 
+- (void)updateTo:(NSNotification*)notif
+{
+	SendToInputComponent* cp = (SendToInputComponent*)self.component;
+	SendToInputView* tv = cp.sendToView;
+	[tv setText:notif.userInfo[@"to"]];
+}
+
 @end
 
 @implementation SendToInputView
+
 @end

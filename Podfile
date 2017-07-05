@@ -30,6 +30,8 @@ target 'RingMail-Dev' do
   pod 'LoremIpsum'
   pod 'Google/SignIn'
   pod 'M13ProgressSuite'
+#  pod 'LNNotificationsUI', :git => 'https://github.com/bonokite/LNNotificationsUI'
+
 #  pod 'FCUUID'
 #  pod 'TesseractOCRiOS', '~> 4.0.0'
 #  pod 'OpenCV'
