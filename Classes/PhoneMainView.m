@@ -30,7 +30,7 @@
 #import "UIColor+Hex.h"
 #import "DTActionSheet.h"
 #import "RegexKitLite/RegexKitLite.h"
-
+#import "LNNotificationsUI.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 
@@ -243,6 +243,8 @@ static RootViewManager *rootViewManagerInstance = nil;
     [optionsModalBG setBackgroundColor:[UIColor colorWithHex:@"#212121" alpha:0.65f]];
     optionsModalBG.hidden = YES;
     [self.view addSubview:optionsModalBG];
+	
+	[[LNNotificationCenter defaultCenter] registerApplicationWithIdentifier:@"message_event" name:@"RingMail" icon:[UIImage imageNamed:@"rm_contact_indicator.png"] defaultSettings:[LNNotificationAppSettings defaultNotificationAppSettings]];
 }
 
 - (void)viewDidUnload {

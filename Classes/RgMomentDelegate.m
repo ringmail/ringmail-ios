@@ -9,6 +9,7 @@
 #import "RgMomentDelegate.h"
 #import "PhoneMainView.h"
 #import "ImageCountdownViewController.h"
+#import "LNNotificationsUI.h"
 
 @implementation RgMomentDelegate
 
@@ -45,6 +46,15 @@
 	}
 	[[NSFileManager defaultManager] removeItemAtPath:file error:NULL];
 	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO];
+	NSInteger ct = [contacts count];
+	NSString* s = @"s";
+	if (ct == 1)
+	{
+		s = @"";
+	}
+	NSString* msg = [NSString stringWithFormat:@"Sent Moment To %ld Contact%@", ct, s];
+	LNNotification* notification = [LNNotification notificationWithMessage:msg];
+	[[LNNotificationCenter defaultCenter] presentNotification:notification forApplicationIdentifier:@"message_event"];
 }
 
 @end
