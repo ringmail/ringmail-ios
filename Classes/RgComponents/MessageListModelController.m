@@ -43,9 +43,7 @@
         NSInteger mainIndex = [mainCount integerValue] + i;
         if ([mainList count] > mainIndex)
         {
-			NSMutableDictionary* dt = [NSMutableDictionary dictionaryWithDictionary:mainList[mainIndex]];
-			dt[@"index"] = [NSNumber numberWithInteger:mainIndex];
-            MessageThread *card = [[MessageThread alloc] initWithData:dt];
+            MessageThread *card = [[MessageThread alloc] initWithData:mainList[mainIndex]];
             [cards addObject:card];
             added++;
         }
