@@ -72,7 +72,12 @@ static NSInteger const pageSize = 10;
     // Insert the initial section
     CKArrayControllerSections sections;
     sections.insert(0);
-    [_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
+    sections.insert(1);
+    sections.insert(2);
+    CKArrayControllerInputItems items;
+    items.insert([NSIndexPath indexPathForRow:0 inSection:0], @{@"height": @8});
+    items.insert([NSIndexPath indexPathForRow:0 inSection:2], @{@"height": @8});
+    [_dataSource enqueueChangeset:{sections, items} constrainedSize:{}];
     [self _enqueuePage:[_cardModelController fetchNewPageWithCount:pageSize]];
 }
 
@@ -86,7 +91,7 @@ static NSInteger const pageSize = 10;
     CKArrayControllerInputItems items;
     for (NSInteger i = 0; i < [cards count]; i++)
 	{
-        items.insert([NSIndexPath indexPathForRow:position + i inSection:0], cards[i]);
+        items.insert([NSIndexPath indexPathForRow:position + i inSection:1], cards[i]);
         hasitems = YES;
     }
     if (hasitems)
@@ -132,7 +137,7 @@ static NSInteger const pageSize = 10;
             if (! [curId isEqualToNumber:newId]) // item changed
             {
                 MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
-                items.update([NSIndexPath indexPathForRow:i inSection:0], card);
+                items.update([NSIndexPath indexPathForRow:i inSection:1], card);
             }
             else
             {
@@ -143,7 +148,7 @@ static NSInteger const pageSize = 10;
                 {
                     // Regenerate card
                     MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
-                    items.update([NSIndexPath indexPathForRow:i inSection:0], card);
+                    items.update([NSIndexPath indexPathForRow:i inSection:1], card);
                 }
 				// TODO: compare thread image & displayName
                 /*else if (! [current[j][@"label"] isEqualToString:newlist[j][@"label"]])
@@ -170,14 +175,14 @@ static NSInteger const pageSize = 10;
         else if (hasnew)
         {
             MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
-            items.insert([NSIndexPath indexPathForRow:i inSection:0], card);
+            items.insert([NSIndexPath indexPathForRow:i inSection:1], card);
             [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] + 1]];
             
         }
         else if (hascur)
         {
             // need to remove
-            items.remove([NSIndexPath indexPathForRow:i inSection:0]);
+            items.remove([NSIndexPath indexPathForRow:i inSection:1]);
             [_cardModelController setMainCount:[NSNumber numberWithInt:[[_cardModelController mainCount] intValue] - 1]];
         }
     }
@@ -192,7 +197,7 @@ static NSInteger const pageSize = 10;
 {
 	// Obsolete
     __block CKArrayControllerInputItems items;
-    items.remove([NSIndexPath indexPathForRow:[index intValue] inSection:0]);
+    items.remove([NSIndexPath indexPathForRow:[index intValue] inSection:1]);
     dispatch_async(dispatch_get_main_queue(), ^{
         [_dataSource enqueueChangeset:{{}, items}
                       constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
@@ -224,9 +229,25 @@ static NSInteger const pageSize = 10;
 
 #pragma mark - CKComponentProvider
 
-+ (CKComponent *)componentForModel:(MessageThread *)thr context:(MessageThreadContext *)context
++ (CKComponent *)componentForModel:(NSObject *)thr context:(MessageThreadContext *)context
 {
-    return [MessageThreadComponent newWithMessageThread:thr context:context];
+	if ([thr isKindOfClass:[MessageThread class]])
+	{
+		return [MessageThreadComponent newWithMessageThread:(MessageThread*)thr context:context];
+	}
+	else if ([thr isKindOfClass:[NSDictionary class]])
+	{
+		NSDictionary *dt = (NSDictionary *)thr;
+		return [CKComponent newWithView:{} size:{
+			.height = [(NSNumber*)dt[@"height"] intValue],
+			.width = [UIScreen mainScreen].bounds.size.width,
+		}];
+	}
+	else
+	{
+		NSAssert(FALSE, @"Invalid model for component");
+	}
+	return nil;
 }
 
 #pragma mark - UIScrollViewDelegate

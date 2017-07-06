@@ -337,11 +337,6 @@
             } size:{}]
         ]
     ];
-	// TODO: fix this
-	if ([data[@"index"] integerValue] == 0)
-	{
-		card = [CKInsetComponent newWithInsets:{.left = 0, .right = 0, .top = 8, .bottom = 0} component:card];
-	}
     MessageThreadComponent *c = [super newWithView:{} component:card];
     [c setCurrentThread:itemThread];
     return c;

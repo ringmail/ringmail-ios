@@ -110,7 +110,7 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"message",
 		@"message": self,
-		@"name": kRKMessageUpdated,
+		@"name": kRKMessageRemoved,
 	}];
 }
 
