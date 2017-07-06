@@ -377,11 +377,11 @@
         LOGW(@"Cannot access contact: null contact");
         return;
     }
-    NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
+    /*NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
     if (rgAddress != nil)
     {
         [RgManager startCall:rgAddress contact:contact video:NO];
-    }
+    }*/
 }
 
 - (IBAction)onActionVideo:(id)event {
@@ -390,11 +390,11 @@
         LOGW(@"Cannot access contact: null contact");
         return;
     }
-    NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
+    /*NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
     if (rgAddress != nil)
     {
         [RgManager startCall:rgAddress contact:contact video:YES];
-    }
+    }*/
 }
 
 - (IBAction)onActionFavorite:(id)event {

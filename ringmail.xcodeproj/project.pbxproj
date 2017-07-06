@@ -44,7 +44,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2214783D1386A2030020F8B8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2214783B1386A2030020F8B8 /* Localizable.strings */; };
-		2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB7912F846B1002A5394 /* UICallButton.m */; };
+		2214EB7A12F846B1002A5394 /* UIHashtagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB7912F846B1002A5394 /* UIHashtagButton.m */; };
 		2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB8812F84EBB002A5394 /* UIHangUpButton.m */; };
 		22276E8713C73D8A00210156 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22276E8613C73D8A00210156 /* CoreVideo.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		22276E8913C73DC000210156 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22276E8813C73DC000210156 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -1651,7 +1651,7 @@
 		C4AC2AB31D3963FA003B6232 /* RgCallDuration.m in Sources */ = {isa = PBXBuildFile; fileRef = C42C0DD41CAF2D9600AD5A91 /* RgCallDuration.m */; };
 		C4AC2AB41D3963FA003B6232 /* UIDigitButtonLongPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */; };
 		C4AC2AB51D3963FA003B6232 /* UIDigitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2248E90D12F7E4CF00220D9C /* UIDigitButton.m */; };
-		C4AC2AB61D3963FA003B6232 /* UICallButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB7912F846B1002A5394 /* UICallButton.m */; };
+		C4AC2AB61D3963FA003B6232 /* UIHashtagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB7912F846B1002A5394 /* UIHashtagButton.m */; };
 		C4AC2AB81D3963FA003B6232 /* UIHangUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214EB8812F84EBB002A5394 /* UIHangUpButton.m */; };
 		C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B71F31CA22AF90020A57F /* RgHashtagDirectoryViewController.m */; };
 		C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C4FD78741CFB70520066BDB1 /* HashtagCategoryCardComponent.mm */; };
@@ -2514,8 +2514,8 @@
 		1D6058910D05DD3D006BFB54 /* ringmail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ringmail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2214783C1386A2030020F8B8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2214EB7812F846B1002A5394 /* UICallButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICallButton.h; sourceTree = "<group>"; };
-		2214EB7912F846B1002A5394 /* UICallButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICallButton.m; sourceTree = "<group>"; };
+		2214EB7812F846B1002A5394 /* UIHashtagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHashtagButton.h; sourceTree = "<group>"; };
+		2214EB7912F846B1002A5394 /* UIHashtagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHashtagButton.m; sourceTree = "<group>"; };
 		2214EB8712F84EBB002A5394 /* UIHangUpButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHangUpButton.h; sourceTree = "<group>"; };
 		2214EB8812F84EBB002A5394 /* UIHangUpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHangUpButton.m; sourceTree = "<group>"; };
 		22276E8613C73D8A00210156 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -4368,8 +4368,8 @@
 				D35E7580159328EB0066B1C1 /* UIAddressTextField.m */,
 				C4E985C11BAF98D500939A55 /* UIMessageButton.h */,
 				C4E985C91BAF98E200939A55 /* UIMessageButton.m */,
-				2214EB7812F846B1002A5394 /* UICallButton.h */,
-				2214EB7912F846B1002A5394 /* UICallButton.m */,
+				2214EB7812F846B1002A5394 /* UIHashtagButton.h */,
+				2214EB7912F846B1002A5394 /* UIHashtagButton.m */,
 				22AA8AFF13D83F6300B30535 /* UICamSwitch.h */,
 				22AA8B0013D83F6300B30535 /* UICamSwitch.m */,
 				D31B4B1E159876C0002E6C72 /* UICompositeViewController.h */,
@@ -8323,7 +8323,7 @@
 				631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */,
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
 				C49544741EE8B3E600B1B302 /* RKVideoMessage.m in Sources */,
-				2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */,
+				2214EB7A12F846B1002A5394 /* UIHashtagButton.m in Sources */,
 				C44A41001E70E415000F3E24 /* CLToolbarMenuItem.m in Sources */,
 				4D039A9F1ECE2F080091F8EF /* RgContactSearchViewController.m in Sources */,
 				C42BD41D1ED644B3009B324D /* InteractiveCardComponent.mm in Sources */,
@@ -8583,7 +8583,7 @@
 				C4AC2AB31D3963FA003B6232 /* RgCallDuration.m in Sources */,
 				C4AC2AB41D3963FA003B6232 /* UIDigitButtonLongPlus.m in Sources */,
 				C4AC2AB51D3963FA003B6232 /* UIDigitButton.m in Sources */,
-				C4AC2AB61D3963FA003B6232 /* UICallButton.m in Sources */,
+				C4AC2AB61D3963FA003B6232 /* UIHashtagButton.m in Sources */,
 				C44A41011E70E415000F3E24 /* CLToolbarMenuItem.m in Sources */,
 				C48C109A1E81AB820094F1F3 /* MediaModelController.m in Sources */,
 				C44A41031E70E415000F3E24 /* UIView+CLImageToolInfo.m in Sources */,

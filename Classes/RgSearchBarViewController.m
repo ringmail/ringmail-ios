@@ -99,19 +99,19 @@ bool animInactive = YES;
     }
 }
 
-
 - (IBAction)onSearch:(id)sender
 {
     bool addressActive = [addressField isFirstResponder];
     bool addressEmpty = [addressField.text isEqual:@""];
     
     if (!addressActive && addressEmpty)
+	{
         [self animateRocket:YES];
+	}
     else
     {
         [addressField resignFirstResponder];
         addressLabel.layer.opacity = 0.0;
-        [addressField setText:@""];
     }
 }
 
@@ -306,35 +306,22 @@ bool animInactive = YES;
             animation3b.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
             [addressLabel.layer addAnimation:animation3b forKey:@"text_slide"];
         }
-        
         [CATransaction commit];
     }
-    
 }
-
 
 - (void)setAddress:(NSString *)address {
     [addressField setText:address];
 }
 
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    UITouch *touch = [[event allTouches] anyObject];
-    if ([[touch.view class] isSubclassOfClass:[RgSearchBackgroundView class]]) {
-		// ???
-    }
-}
-
 #pragma mark - Text Field Functions
 
--(void)dismissKeyboard:(id)sender
+- (void)dismissKeyboard:(id)sender
 {
     [self.view endEditing:YES];
-    [addressField setText:@""];
     [addressField resignFirstResponder];
 }
-
 
 #pragma mark - UITextFieldDelegate Functions
 

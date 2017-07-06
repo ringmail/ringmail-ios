@@ -9,6 +9,7 @@
 #import "RKCommunicator.h"
 #import "RKThreadStore.h"
 #import "RKAdapterXMPP.h"
+#import "RKAddress.h"
 #import "RKContact.h"
 #import "RKCall.h"
 #import "RKMessage.h"
@@ -16,6 +17,7 @@
 #import "RKThread.h"
 
 #import "NSXMLElement+XMPP.h"
+#import "RegexKitLite/RegexKitLite.h"
 
 NSString *const kRKItemActivity = @"RKItemActivity";
 NSString *const kRKMessageSent = @"RKMessageSent";
@@ -88,6 +90,14 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 		@"message": message,
 		@"name": kRKMessageUpdated,
 	}];
+}
+
+- (void)startCall:(RKAddress*)dest video:(BOOL)video
+{
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(startCall:video:)])
+	{
+		[self.viewDelegate startCall:dest video:video];
+	}
 }
 
 - (void)didBeginCall:(RKCall*)call

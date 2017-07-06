@@ -380,26 +380,14 @@
 
 - (void)actionCall:(CKButtonComponent *)sender
 {
-/*
-    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
-    [card startCall:NO];
-*/
+	RKThread* thr = self.currentThread.data[@"thread"];
+	[[RKCommunicator sharedInstance] startCall:thr.remoteAddress video:NO];
 }
 
 - (void)actionVideo:(CKButtonComponent *)sender
 {
-/*
-    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
-    [card startCall:YES];
-*/
-}
-
-- (void)actionContact:(CKButtonComponent *)sender
-{
-/*
-    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
-    [card gotoContact];
-*/
+	RKThread* thr = self.currentThread.data[@"thread"];
+	[[RKCommunicator sharedInstance] startCall:thr.remoteAddress video:YES];
 }
 
 /*

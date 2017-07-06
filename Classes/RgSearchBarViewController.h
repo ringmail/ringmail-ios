@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UICallButton.h"
+#import "UIHashtagButton.h"
 #import "UIMessageButton.h"
 #import "RgSearchBackgroundView.h"
 
 @interface RgSearchBarViewController : UIViewController <UITextFieldDelegate, CAAnimationDelegate>
 
 @property (nonatomic, strong) IBOutlet UITextField* addressField;
-@property (nonatomic, strong) IBOutlet UICallButton* goButton;
+@property (nonatomic, strong) IBOutlet UIHashtagButton* goButton;
 @property (nonatomic, strong) IBOutlet UIButton* triangleButton;
 @property (nonatomic, strong) IBOutlet UIButton* searchButton;
 @property (nonatomic, strong) IBOutlet UIImageView* rocketButtonImg;

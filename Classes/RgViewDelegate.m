@@ -60,4 +60,16 @@
 	[[PhoneMainView instance] changeCurrentView:[ImageCountdownViewController compositeViewDescription] content:ivc push:TRUE];
 }
 
+- (void)startCall:(RKAddress*)dest video:(BOOL)video
+{
+	NSLog(@"%s: Video:%d %@", __PRETTY_FUNCTION__, video, dest);
+    NSString* displayName = dest.displayName;
+	NSString* address = dest.address;
+    if ([address rangeOfString:@"@"].location != NSNotFound)
+    {
+        address = [RgManager addressToSIP:address];
+    }
+	[[LinphoneManager instance] call:address contact:dest.contact.contactId displayName:displayName transfer:FALSE video:video];
+}
+
 @end

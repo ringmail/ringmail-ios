@@ -22,7 +22,7 @@
 #import "UICompositeViewController.h"
 #import "HashtagCollectionViewController.h"
 
-#import "UICallButton.h"
+#import "UIHashtagButton.h"
 #import "UIMessageButton.h"
 #import "CardsPage.h"
 
