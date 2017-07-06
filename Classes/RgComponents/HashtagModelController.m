@@ -10,6 +10,8 @@
 #import "LinphoneManager.h"
 #import "Utils.h"
 
+#import "HashtagStore.h"
+
 NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/directory";
 
 @implementation HashtagModelController
@@ -32,11 +34,30 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     return self;
 }
 
-- (NSMutableArray *)readMainList
+- (CardsPage *)readMainList
 {
-    NSArray* list = [[[LinphoneManager instance] chatManager] dbGetMainList];
+    NSArray* list = [[HashtagStore sharedInstance] selectHistory];
     
-    return [NSMutableArray arrayWithArray:[self buildCards:list]];
+    NSMutableArray *_cards = [NSMutableArray new];
+    NSInteger added = 0;
+    
+    for (NSUInteger i = 0; i < [list count]; i++)
+    {
+            NSDictionary *itemData = list[i];
+            if (itemData != nil)
+            {
+                Card *card = [[Card alloc] initWithData:itemData header:[NSNumber numberWithBool:0]];
+                [_cards addObject:card];
+                added++;
+            }
+    }
+    
+    CardsPage* cardsPage = [[CardsPage alloc] initWithCards:_cards
+                                                   position:0];
+    
+    mainCount = [NSNumber numberWithInteger:[list count]];
+    
+    return cardsPage;
 }
 
 - (NSArray *)buildCards:(NSArray*)list
