@@ -300,7 +300,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     return view;
 }
 
-#pragma mark - 
+
+#pragma mark -
 
 - (void)selectMulti:(NSNotification*)notif
 {

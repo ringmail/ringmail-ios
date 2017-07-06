@@ -318,6 +318,8 @@
 		4D9BAEAD1EFB00F00080CA79 /* SendContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BAEAA1EFB00F00080CA79 /* SendContactsTableViewController.m */; };
 		4DA3DAC31F0AC86700D5A14B /* HashtagStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */; };
 		4DA3DAC41F0AC86700D5A14B /* HashtagStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */; };
+		4DA3DACF1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DACD1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm */; };
+		4DA3DAD01F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DACD1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm */; };
 		4DAA6B011E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */; };
 		4DAA6B031E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */; };
@@ -2696,6 +2698,8 @@
 		4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4DA3DAC11F0AC86700D5A14B /* HashtagStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagStore.h; path = RgComponents/HashtagStore.h; sourceTree = "<group>"; };
 		4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HashtagStore.m; path = RgComponents/HashtagStore.m; sourceTree = "<group>"; };
+		4DA3DACD1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HashtagMyActivityHeaderCardComponent.mm; sourceTree = "<group>"; };
+		4DA3DACE1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashtagMyActivityHeaderCardComponent.h; sourceTree = "<group>"; };
 		4DAA6AFE1E6E16C700D9DE84 /* RgSearchBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgSearchBarViewController.h; sourceTree = "<group>"; };
 		4DAA6AFF1E6E16C700D9DE84 /* RgSearchBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgSearchBarViewController.m; sourceTree = "<group>"; };
 		4DAA6B001E6E16C700D9DE84 /* RgSearchBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgSearchBarViewController.xib; sourceTree = "<group>"; };
@@ -4990,6 +4994,8 @@
 				C4FD78771CFB70AC0066BDB1 /* HashtagCategoryHeaderComponent.mm */,
 				C45CFFE91D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.h */,
 				C45CFFEA1D8B593400BEF75F /* HashtagDirectoryHeaderCardComponent.mm */,
+				4DA3DACE1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.h */,
+				4DA3DACD1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm */,
 				C42B72171CA2313D0020A57F /* HashtagModelController.h */,
 				C42B72181CA2313D0020A57F /* HashtagModelController.m */,
 				C42B71FC1CA22DD50020A57F /* HashtagCollectionViewController.h */,
@@ -8486,6 +8492,7 @@
 				C44A40E01E70E415000F3E24 /* CLHighlightShadowEffect.m in Sources */,
 				C4FAC6111F0AD43E00420405 /* RgMomentDelegate.m in Sources */,
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
+				4DA3DACF1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm in Sources */,
 				C4A0858B1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */,
 				C4593A5D1E6A4A89001C3BDD /* FavoritesBarComponent.mm in Sources */,
 				D3807FF415C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */,
@@ -8663,6 +8670,7 @@
 				C4752BB61EE9E8F6008B12F9 /* ChatElementVideoComponent.mm in Sources */,
 				C44A40F51E70E415000F3E24 /* CLRotateTool.m in Sources */,
 				C45B93411ECE4EF200974011 /* RKItem.m in Sources */,
+				4DA3DAD01F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm in Sources */,
 				C449E3CB1E945550008510AB /* RgTextViewController.m in Sources */,
 				C45CFFDE1D8B34F900BEF75F /* IAWCKImageDownloader.m in Sources */,
 				C4AC2AF61D3963FA003B6232 /* UITransparentView.m in Sources */,
