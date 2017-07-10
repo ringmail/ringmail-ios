@@ -24,6 +24,7 @@
                 <outlet property="firstNameLabel" destination="6" id="17"/>
                 <outlet property="inviteButton" destination="f6O-TR-yCk" id="yu0-Et-Bqp"/>
                 <outlet property="lastNameLabel" destination="10" id="18"/>
+                <outlet property="pressedImage" destination="Xdt-TB-0AS" id="sez-aO-lLJ"/>
                 <outlet property="rgImage" destination="25" id="26"/>
                 <outlet property="selectImage" destination="enq-29-NOC" id="5l0-VD-Zdi"/>
             </connections>
@@ -41,11 +42,15 @@
                     <rect key="frame" x="280" y="6" width="16" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="normal_icon.png" id="u3f-Wy-c0O">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="normal_icon.png" id="u3f-Wy-c0O">
                     <rect key="frame" x="277" y="0.0" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="selected_icon.png" highlightedImage="pressed_icon.png" id="enq-29-NOC">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pressed_icon.png" id="Xdt-TB-0AS">
+                    <rect key="frame" x="277" y="0.0" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="selected_icon.png" id="enq-29-NOC">
                     <rect key="frame" x="277" y="0.0" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                 </imageView>

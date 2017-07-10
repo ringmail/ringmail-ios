@@ -32,6 +32,7 @@
 @property (nonatomic, assign) ABRecordRef contact;
 @property (nonatomic, strong) IBOutlet UIButton* inviteButton;
 @property (nonatomic, strong) IBOutlet UIImageView *bgSelectImage;
+@property (nonatomic, strong) IBOutlet UIImageView *pressedImage;
 @property (nonatomic, strong) IBOutlet UIImageView *selectImage;
 @property (nonatomic) BOOL sendContactsTVC;
 @property (nonatomic,getter=isTempSelected) BOOL tempSelected;

@@ -32,6 +32,7 @@
 @synthesize contact;
 @synthesize inviteButton;
 @synthesize bgSelectImage;
+@synthesize pressedImage;
 @synthesize selectImage;
 @synthesize sendContactsTVC;
 @synthesize tempSelected;
@@ -145,6 +146,17 @@
     rgIconFrame.origin.x = lastNameLabel.frame.origin.x + lastNameLabel.frame.size.width + 8;
     rgIconFrame.origin.y = (lastNameLabel.frame.origin.y + lastNameLabel.frame.size.height / 2) - (rgIconFrame.size.height / 2);
     [rgImage setFrame:rgIconFrame];
+    
+    if (sendContactsTVC)
+    {
+        [bgSelectImage setHidden:FALSE];
+    }
+    else
+    {
+        [bgSelectImage setHidden:TRUE];
+        [selectImage setHidden:TRUE];
+        [pressedImage setHidden:TRUE];
+    }
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -154,38 +166,20 @@
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
 	[super setHighlighted:highlighted animated:animated];
     if (highlighted) {
-        [lastNameLabel setTextColor:[UIColor whiteColor]];
-        [firstNameLabel setTextColor:[UIColor whiteColor]];
+        [self setBackgroundColor:LINPHONE_TABLE_CELL_HIGHLIGHT_COLOR];
         if (sendContactsTVC)
         {
-            [bgSelectImage setHidden:FALSE];
-            [selectImage setHidden:FALSE];
-            [selectImage setHighlighted:TRUE];
-        }
-        else
-        {
-            [bgSelectImage setHidden:TRUE];
-        }
-    } else {
-        [lastNameLabel setTextColor:[UIColor blackColor]];
-        [firstNameLabel setTextColor:[UIColor blackColor]];
-    }
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated; {
-    if (sendContactsTVC)
-    {
-        [bgSelectImage setHidden:FALSE];
-        [selectImage setHidden:TRUE];
-        [selectImage setHighlighted:FALSE];
-        if (self.isTempSelected)
-        {
-            [selectImage setHidden:NO];
+            [pressedImage setHidden:FALSE];
+            [selectImage setHidden:TRUE];
         }
     }
     else
     {
-        [bgSelectImage setHidden:TRUE];
+        [self setBackgroundColor:[UIColor clearColor]];
+        if (sendContactsTVC)
+        {
+            [pressedImage setHidden:TRUE];
+        }
     }
 }
 
