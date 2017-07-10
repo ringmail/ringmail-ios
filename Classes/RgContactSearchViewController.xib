@@ -35,7 +35,7 @@
                     </connections>
                 </textField>
             </subviews>
-            <color key="backgroundColor" red="0.14509803921568629" green="0.17254901960784313" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.20784313725490194" green="0.37254901960784315" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

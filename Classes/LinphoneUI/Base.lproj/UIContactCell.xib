@@ -24,6 +24,7 @@
                 <outlet property="inviteButton" destination="f6O-TR-yCk" id="yu0-Et-Bqp"/>
                 <outlet property="lastNameLabel" destination="10" id="18"/>
                 <outlet property="rgImage" destination="25" id="26"/>
+                <outlet property="selectImage" destination="enq-29-NOC" id="5l0-VD-Zdi"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -38,6 +39,14 @@
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="rm_contact_indicator.png" id="25" userLabel="rgImage">
                     <rect key="frame" x="280" y="6" width="16" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="normal_icon.png" id="u3f-Wy-c0O">
+                    <rect key="frame" x="277" y="0.0" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="selected_icon.png" highlightedImage="pressed_icon.png" id="enq-29-NOC">
+                    <rect key="frame" x="277" y="0.0" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" misplaced="YES" text="John" lineBreakMode="tailTruncation" minimumFontSize="10" id="6" userLabel="firstName">
                     <rect key="frame" x="56" y="0.0" width="55" height="30"/>
@@ -58,9 +67,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="f6O-TR-yCk" userLabel="addButton">
-                    <rect key="frame" x="275" y="0.0" width="46" height="46"/>
+                    <rect key="frame" x="277" y="0.0" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button" image="icon_plus.png"/>
+                    <state key="normal" image="icon_plus.png"/>
                     <connections>
                         <action selector="inviteContact:" destination="-1" eventType="touchUpInside" id="Da2-R8-31j"/>
                     </connections>
@@ -81,7 +90,10 @@
     </objects>
     <resources>
         <image name="icon_plus.png" width="23" height="23"/>
+        <image name="normal_icon.png" width="24" height="24"/>
+        <image name="pressed_icon.png" width="24" height="24"/>
         <image name="rm_contact_indicator.png" width="16" height="16"/>
+        <image name="selected_icon.png" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

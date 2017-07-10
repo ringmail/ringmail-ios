@@ -31,6 +31,8 @@
 @synthesize rgImage;
 @synthesize contact;
 @synthesize inviteButton;
+@synthesize selectImage;
+@synthesize tempSelected;
 
 #pragma mark - Lifecycle Functions
 
@@ -75,7 +77,7 @@
     
 	NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
 	NSString *lLocalizedFirstName = [FastAddressBook localizedLabel:lFirstName];
-
+    
 	NSString *lLastName = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
 	NSString *lLocalizedLastName = [FastAddressBook localizedLabel:lLastName];
     
@@ -152,10 +154,21 @@
 	if (highlighted) {
 		[lastNameLabel setTextColor:[UIColor whiteColor]];
 		[firstNameLabel setTextColor:[UIColor whiteColor]];
+        [selectImage setHidden:FALSE];
+        [selectImage setHighlighted:TRUE];
 	} else {
 		[lastNameLabel setTextColor:[UIColor blackColor]];
 		[firstNameLabel setTextColor:[UIColor blackColor]];
 	}
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated; {
+    [selectImage setHidden:TRUE];
+    [selectImage setHighlighted:FALSE];
+    if (self.isTempSelected)
+    {
+        [selectImage setHidden:NO];
+    }
 }
 
 - (IBAction)inviteContact:(id)sender {

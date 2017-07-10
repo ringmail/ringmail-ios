@@ -316,6 +316,22 @@
 		4D9BAEA71EFAFA8C0080CA79 /* SendContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BAEA31EFAFA8C0080CA79 /* SendContactsViewController.xib */; };
 		4D9BAEAC1EFB00F00080CA79 /* SendContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BAEAA1EFB00F00080CA79 /* SendContactsTableViewController.m */; };
 		4D9BAEAD1EFB00F00080CA79 /* SendContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BAEAA1EFB00F00080CA79 /* SendContactsTableViewController.m */; };
+		4DA354871F13FDF3007ECA84 /* normal_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA3547F1F13FDF3007ECA84 /* normal_icon@2x.png */; };
+		4DA354881F13FDF3007ECA84 /* normal_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA3547F1F13FDF3007ECA84 /* normal_icon@2x.png */; };
+		4DA354891F13FDF3007ECA84 /* normal_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354801F13FDF3007ECA84 /* normal_icon@3x.png */; };
+		4DA3548A1F13FDF3007ECA84 /* normal_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354801F13FDF3007ECA84 /* normal_icon@3x.png */; };
+		4DA3548B1F13FDF3007ECA84 /* plus_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354811F13FDF3007ECA84 /* plus_icon@2x.png */; };
+		4DA3548C1F13FDF3007ECA84 /* plus_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354811F13FDF3007ECA84 /* plus_icon@2x.png */; };
+		4DA3548D1F13FDF3007ECA84 /* plus_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354821F13FDF3007ECA84 /* plus_icon@3x.png */; };
+		4DA3548E1F13FDF3007ECA84 /* plus_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354821F13FDF3007ECA84 /* plus_icon@3x.png */; };
+		4DA3548F1F13FDF3007ECA84 /* pressed_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354831F13FDF3007ECA84 /* pressed_icon@2x.png */; };
+		4DA354901F13FDF3007ECA84 /* pressed_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354831F13FDF3007ECA84 /* pressed_icon@2x.png */; };
+		4DA354931F13FDF3007ECA84 /* selected_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354851F13FDF3007ECA84 /* selected_icon@2x.png */; };
+		4DA354941F13FDF3007ECA84 /* selected_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354851F13FDF3007ECA84 /* selected_icon@2x.png */; };
+		4DA354951F13FDF3007ECA84 /* selected_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354861F13FDF3007ECA84 /* selected_icon@3x.png */; };
+		4DA354961F13FDF3007ECA84 /* selected_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354861F13FDF3007ECA84 /* selected_icon@3x.png */; };
+		4DA354991F13FEA8007ECA84 /* pressed_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354981F13FEA8007ECA84 /* pressed_icon@3x.png */; };
+		4DA3549A1F13FEA8007ECA84 /* pressed_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA354981F13FEA8007ECA84 /* pressed_icon@3x.png */; };
 		4DA3DAC31F0AC86700D5A14B /* HashtagStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */; };
 		4DA3DAC41F0AC86700D5A14B /* HashtagStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */; };
 		4DA3DACF1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3DACD1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm */; };
@@ -2696,6 +2712,14 @@
 		4D9BAEA91EFB00F00080CA79 /* SendContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendContactsTableViewController.h; sourceTree = "<group>"; };
 		4D9BAEAA1EFB00F00080CA79 /* SendContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendContactsTableViewController.m; sourceTree = "<group>"; };
 		4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4DA3547F1F13FDF3007ECA84 /* normal_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "normal_icon@2x.png"; path = "Resources/normal_icon@2x.png"; sourceTree = "<group>"; };
+		4DA354801F13FDF3007ECA84 /* normal_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "normal_icon@3x.png"; path = "Resources/normal_icon@3x.png"; sourceTree = "<group>"; };
+		4DA354811F13FDF3007ECA84 /* plus_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus_icon@2x.png"; path = "Resources/plus_icon@2x.png"; sourceTree = "<group>"; };
+		4DA354821F13FDF3007ECA84 /* plus_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus_icon@3x.png"; path = "Resources/plus_icon@3x.png"; sourceTree = "<group>"; };
+		4DA354831F13FDF3007ECA84 /* pressed_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pressed_icon@2x.png"; path = "Resources/pressed_icon@2x.png"; sourceTree = "<group>"; };
+		4DA354851F13FDF3007ECA84 /* selected_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selected_icon@2x.png"; path = "Resources/selected_icon@2x.png"; sourceTree = "<group>"; };
+		4DA354861F13FDF3007ECA84 /* selected_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selected_icon@3x.png"; path = "Resources/selected_icon@3x.png"; sourceTree = "<group>"; };
+		4DA354981F13FEA8007ECA84 /* pressed_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pressed_icon@3x.png"; path = "Resources/pressed_icon@3x.png"; sourceTree = "<group>"; };
 		4DA3DAC11F0AC86700D5A14B /* HashtagStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagStore.h; path = RgComponents/HashtagStore.h; sourceTree = "<group>"; };
 		4DA3DAC21F0AC86700D5A14B /* HashtagStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HashtagStore.m; path = RgComponents/HashtagStore.m; sourceTree = "<group>"; };
 		4DA3DACD1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HashtagMyActivityHeaderCardComponent.mm; sourceTree = "<group>"; };
@@ -5363,6 +5387,14 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4DA354981F13FEA8007ECA84 /* pressed_icon@3x.png */,
+				4DA3547F1F13FDF3007ECA84 /* normal_icon@2x.png */,
+				4DA354801F13FDF3007ECA84 /* normal_icon@3x.png */,
+				4DA354811F13FDF3007ECA84 /* plus_icon@2x.png */,
+				4DA354821F13FDF3007ECA84 /* plus_icon@3x.png */,
+				4DA354831F13FDF3007ECA84 /* pressed_icon@2x.png */,
+				4DA354851F13FDF3007ECA84 /* selected_icon@2x.png */,
+				4DA354861F13FDF3007ECA84 /* selected_icon@3x.png */,
 				4D3D42211F03155B007519EC /* rm_logo_ringscreen@2x.png */,
 				4DB7BB321EF4507A00391365 /* button_remove_contact@2x.png */,
 				4DB7BB2E1EF44C6700391365 /* contact_gradient@2x.png */,
@@ -6489,6 +6521,7 @@
 				D3F83F4C1582223B00336684 /* numpad_two_default.png in Resources */,
 				4D33F7AB1EC4D5C400D913A7 /* tabs_background@3x.png in Resources */,
 				D3F83F4E1582223B00336684 /* numpad_two_over.png in Resources */,
+				4DA354891F13FDF3007ECA84 /* normal_icon@3x.png in Resources */,
 				D3F83F501582223B00336684 /* numpad_three_default.png in Resources */,
 				C42C0DCF1CAEE9D100AD5A91 /* ringmail_mic-x@3x.png in Resources */,
 				C444F3D91C92240300134788 /* menu-hash_active@2x.png in Resources */,
@@ -6616,6 +6649,7 @@
 				C43F65D81D540233004CEC70 /* ringmail_delete@3x.png in Resources */,
 				D36C43D5158F2F370048BA40 /* header_conference.png in Resources */,
 				D36C43D7158F2F370048BA40 /* dialer_alt_default.png in Resources */,
+				4DA3548D1F13FDF3007ECA84 /* plus_icon@3x.png in Resources */,
 				C459A4191CC8633000CFFF30 /* ringmail_contact_back.png in Resources */,
 				C42C0DEE1CB16FF100AD5A91 /* ringmail_incoming_reject@2x.png in Resources */,
 				4D9BAEA61EFAFA8C0080CA79 /* SendContactsViewController.xib in Resources */,
@@ -6638,6 +6672,7 @@
 				D36C43F5158F61EA0048BA40 /* call_state_play_default.png in Resources */,
 				D36C43F7158F61EA0048BA40 /* call_state_play_over.png in Resources */,
 				C49744311C7C0A7400AD43A1 /* ringmail_input_call.png in Resources */,
+				4DA3548F1F13FDF3007ECA84 /* pressed_icon@2x.png in Resources */,
 				D35E757815931E5D0066B1C1 /* switch_camera_default.png in Resources */,
 				C459A42F1CC865F300CFFF30 /* ringmail_edit-cancel.png in Resources */,
 				4D33F7E51EC4D5C400D913A7 /* tabs_ring_normal@2x.png in Resources */,
@@ -6748,6 +6783,7 @@
 				D350F22815A43D3400149E54 /* setup_start_over.png in Resources */,
 				D350F22C15A43D3400149E54 /* setup_welcome_logo.png in Resources */,
 				D35406F715A47E9E007E7E81 /* button_background_default.png in Resources */,
+				4DA354991F13FEA8007ECA84 /* pressed_icon@3x.png in Resources */,
 				D35406F915A47E9E007E7E81 /* button_background_over.png in Resources */,
 				D3F795DD15A5831C0077328B /* chat_back_default.png in Resources */,
 				C42C0DBB1CAEE9D100AD5A91 /* ringmail_incall-contact.png in Resources */,
@@ -6860,6 +6896,7 @@
 				D3C31A5415BD8DED008ED271 /* options_default_landscape.png in Resources */,
 				4D4970161ECB8BFF00076090 /* answer_button_Incoming_call@2x.png in Resources */,
 				D3C31A5615BD8DED008ED271 /* options_disabled_landscape.png in Resources */,
+				4DA3548B1F13FDF3007ECA84 /* plus_icon@2x.png in Resources */,
 				D3C31A5815BD8DED008ED271 /* options_over_landscape.png in Resources */,
 				D3C31A5A15BD8DED008ED271 /* options_selected_landscape.png in Resources */,
 				D3C31A5C15BD8DED008ED271 /* options_transfer_default_landscape.png in Resources */,
@@ -6969,6 +7006,7 @@
 				4D33F7711EC4D5C400D913A7 /* explore_banner_ip6-7s@2x.png in Resources */,
 				D3A74F1015C69392001500B9 /* micro_on_over~ipad.png in Resources */,
 				C444F3E21C92240300134788 /* menu-contact_active.png in Resources */,
+				4DA354951F13FDF3007ECA84 /* selected_icon@3x.png in Resources */,
 				4D33F7F71EC4D5C400D913A7 /* tabs_settings_normal@2x.png in Resources */,
 				D3A74F1215C69392001500B9 /* options_add_default~ipad.png in Resources */,
 				C459A44D1CC870B600CFFF30 /* ringmail_favorite-pressed.png in Resources */,
@@ -7034,6 +7072,7 @@
 				D3A74F4C15C69392001500B9 /* transfer_call_over~ipad.png in Resources */,
 				4D33F7971EC4D5C400D913A7 /* login_background@2x.png in Resources */,
 				D3A74F4E15C69392001500B9 /* video_off_default~ipad.png in Resources */,
+				4DA354871F13FDF3007ECA84 /* normal_icon@2x.png in Resources */,
 				4D33F7DD1EC4D5C400D913A7 /* tabs_recents_selected_5@2x.png in Resources */,
 				4D33F7D51EC4D5C400D913A7 /* tabs_recents_normal@3x.png in Resources */,
 				4DE427C31ECFA27A00872002 /* video_pressed.png in Resources */,
@@ -7136,6 +7175,7 @@
 				C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */,
 				57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */,
 				F0B89C2A18DC973E0050B60E /* wizard_linphone_create.rc in Resources */,
+				4DA354931F13FDF3007ECA84 /* selected_icon@2x.png in Resources */,
 				2234C8E915EE2F7F00E18E83 /* chat_message_delivered.png in Resources */,
 				2234C8EB15EE2F7F00E18E83 /* chat_message_not_delivered.png in Resources */,
 				4D33F79B1EC4D5C400D913A7 /* login3_logo@2x.png in Resources */,
@@ -7377,6 +7417,7 @@
 				C4AC27FE1D3963FA003B6232 /* speaker_off_default.png in Resources */,
 				C4AC27FF1D3963FA003B6232 /* speaker_off_over.png in Resources */,
 				C4AC28001D3963FA003B6232 /* speaker_on_default.png in Resources */,
+				4DA354901F13FDF3007ECA84 /* pressed_icon@2x.png in Resources */,
 				C4AC28011D3963FA003B6232 /* speaker_on_over.png in Resources */,
 				C4AC28021D3963FA003B6232 /* chat_send.wav in Resources */,
 				C4AC28031D3963FA003B6232 /* shortring.caf in Resources */,
@@ -7508,6 +7549,7 @@
 				C4AC28631D3963FA003B6232 /* led_error.png in Resources */,
 				C4AC28641D3963FA003B6232 /* call_quality_indicator_0.png in Resources */,
 				C4AC28651D3963FA003B6232 /* ringmail_contact_back@2x.png in Resources */,
+				4DA354941F13FDF3007ECA84 /* selected_icon@2x.png in Resources */,
 				C4AC28661D3963FA003B6232 /* call_quality_indicator_1.png in Resources */,
 				C4AC28671D3963FA003B6232 /* call_quality_indicator_2.png in Resources */,
 				C4AC28681D3963FA003B6232 /* call_quality_indicator_3.png in Resources */,
@@ -7590,6 +7632,7 @@
 				C4AC28A61D3963FA003B6232 /* avatar_shadow.png in Resources */,
 				C4AC28A71D3963FA003B6232 /* ringmail_endcall.png in Resources */,
 				C4AC28A81D3963FA003B6232 /* add_call_default.png in Resources */,
+				4DA354961F13FDF3007ECA84 /* selected_icon@3x.png in Resources */,
 				C4AC28A91D3963FA003B6232 /* menu-hash@3x.png in Resources */,
 				C45B55311EE6221A0054A10A /* message_summary_photo_pressed@2x.png in Resources */,
 				C4E1CB471E6E281E00698166 /* camera-cancel.png in Resources */,
@@ -7707,6 +7750,7 @@
 				4D33F7B01EC4D5C400D913A7 /* tabs_contacts_normal@2x.png in Resources */,
 				C4AC290C1D3963FA003B6232 /* button_alert_background_default.png in Resources */,
 				C4AC290D1D3963FA003B6232 /* button_alert_background_over.png in Resources */,
+				4DA3549A1F13FEA8007ECA84 /* pressed_icon@3x.png in Resources */,
 				C4AC290E1D3963FA003B6232 /* SVWebViewController.bundle in Resources */,
 				C4AC290F1D3963FA003B6232 /* pattern_squared_metal.png in Resources */,
 				4DAA6B041E6E16C700D9DE84 /* RgSearchBarViewController.xib in Resources */,
@@ -7736,6 +7780,7 @@
 				C4AC29251D3963FA003B6232 /* history_details_add_default.png in Resources */,
 				C4AC29261D3963FA003B6232 /* history_details_add_over.png in Resources */,
 				C4AC29271D3963FA003B6232 /* history_details_back_default.png in Resources */,
+				4DA3548E1F13FDF3007ECA84 /* plus_icon@3x.png in Resources */,
 				C4AC29281D3963FA003B6232 /* history_details_back_over.png in Resources */,
 				C4AC29291D3963FA003B6232 /* contacts_back_default.png in Resources */,
 				4D33F76C1EC4D5C400D913A7 /* explore_background_ip6-7s@2x.png in Resources */,
@@ -7772,6 +7817,7 @@
 				C4AC29411D3963FA003B6232 /* options_over_landscape.png in Resources */,
 				C4AC29421D3963FA003B6232 /* options_selected_landscape.png in Resources */,
 				4D33F7E01EC4D5C400D913A7 /* tabs_recents_selected@2x.png in Resources */,
+				4DA3548A1F13FDF3007ECA84 /* normal_icon@3x.png in Resources */,
 				C4AC29431D3963FA003B6232 /* options_transfer_default_landscape.png in Resources */,
 				C4AC29441D3963FA003B6232 /* options_transfer_disabled_landscape.png in Resources */,
 				C4AC29451D3963FA003B6232 /* options_transfer_over_landscape.png in Resources */,
@@ -7787,6 +7833,7 @@
 				C4AC294D1D3963FA003B6232 /* speaker_off_over_landscape.png in Resources */,
 				C4AC294E1D3963FA003B6232 /* speaker_on_default_landscape.png in Resources */,
 				C4AC294F1D3963FA003B6232 /* speaker_on_disabled_landscape.png in Resources */,
+				4DA354881F13FDF3007ECA84 /* normal_icon@2x.png in Resources */,
 				C4AC29501D3963FA003B6232 /* speaker_on_over_landscape.png in Resources */,
 				C4AC29511D3963FA003B6232 /* statebar_background_landscape.png in Resources */,
 				C4AC29521D3963FA003B6232 /* video_off_default_landscape.png in Resources */,
@@ -8006,6 +8053,7 @@
 				C4AC2A011D3963FA003B6232 /* speaker_off_over_landscape~ipad.png in Resources */,
 				C4AC2A021D3963FA003B6232 /* speaker_on_default_landscape~ipad.png in Resources */,
 				C4AC2A031D3963FA003B6232 /* speaker_on_disabled_landscape~ipad.png in Resources */,
+				4DA3548C1F13FDF3007ECA84 /* plus_icon@2x.png in Resources */,
 				C4AC2A041D3963FA003B6232 /* speaker_on_over_landscape~ipad.png in Resources */,
 				C4AC2A051D3963FA003B6232 /* ringmail_edit.png in Resources */,
 				C4AC2A061D3963FA003B6232 /* ringmail_contact_add@3x.png in Resources */,
