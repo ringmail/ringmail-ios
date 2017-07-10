@@ -18,6 +18,25 @@
 	
 	int maxBubbleWidth = (int)((width - (12 * scale)) / 3) * 2;
 	
+	UIImage* callIcon;
+	if (call.direction == RKItemDirectionInbound)
+	{
+		if (
+			[call.callResult isEqualToString:@"missed"] ||
+			[call.callResult isEqualToString:@"declined"]
+		) {
+			callIcon = [context imageNamed:@"summary_call_missed.png"];
+		}
+		else
+		{
+			callIcon = [context imageNamed:@"summary_call_incoming.png"];
+		}
+	}
+	else
+	{
+		callIcon = [context imageNamed:@"summary_call_outgoing.png"];
+	}
+	
 	CKComponent* res;
 	if (call.direction == RKItemDirectionInbound)
 	{
@@ -25,7 +44,7 @@
             NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#222222"],
         };
-		NSString* msg = [NSString stringWithFormat:@"[Call:%@] %@", call.callResult, call.duration];
+		NSString* msg = [NSString stringWithFormat:@"Call: %@", call.duration];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
@@ -38,6 +57,8 @@
 		msgHeight += 1;
 		msgWidth += 1;
 		//NSLog(@"Bounds: %f %f", bounds.size.width, bounds.size.height);
+		
+		msgWidth += 12;
 		
 		// Draw bubble
 		CGSize size = CGSizeMake((int)msgWidth + 20, (int)msgHeight + 16 + 10);
@@ -84,14 +105,29 @@
     			} children:{
 					{[CKBackgroundLayoutComponent newWithComponent:
 						[CKInsetComponent newWithInsets:{.top = 8, .left = 10, .bottom = 8, .right = 10} component:
-    						[CKTextComponent newWithTextAttributes:{
-                                .attributedString = attrString,
-                                .lineBreakMode = NSLineBreakByWordWrapping,
-                            } viewAttributes:{
-                                {@selector(setBackgroundColor:), [UIColor clearColor]},
-                                {@selector(setUserInteractionEnabled:), @NO},
-                            } options:{} size:{.width = msgWidth, .height = msgHeight}]
-						]	
+                    		[CKStackLayoutComponent newWithView:{
+                				[UIView class],
+                				{},
+                			} size:{} style:{
+                				.direction = CKStackLayoutDirectionHorizontal,
+                				.alignItems = CKStackLayoutAlignItemsStart
+                			} children:{
+                				// Icon
+                				{[CKInsetComponent newWithInsets:{
+                					.top = 4, .left = 0, .right = 2, .bottom = 0
+                				} component:
+                					[CKImageComponent newWithImage:callIcon size:{.height = 10, .width = 10}]
+                				]},
+                				// Name & message
+                				{[CKTextComponent newWithTextAttributes:{
+                                    .attributedString = attrString,
+                                    .lineBreakMode = NSLineBreakByWordWrapping,
+                                } viewAttributes:{
+                                    {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                    {@selector(setUserInteractionEnabled:), @NO},
+                                } options:{} size:{.width = msgWidth - 12, .height = msgHeight}]},
+                			}]
+						]
 					background:
 						[CKInsetComponent newWithInsets:{.top = -10, .left = 0, .bottom = 0, .right = 0} component:
 							[CKImageComponent newWithImage:bubbleImage size:{.height = size.height, .width = size.width}]
@@ -107,7 +143,7 @@
             NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#FFFFFF"],
         };
-		NSString* msg = [NSString stringWithFormat:@"[Call:%@] %@", call.callResult, call.duration];
+		NSString* msg = [NSString stringWithFormat:@"Call: %@", call.duration];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 		CGRect bounds = [msg boundingRectWithSize:CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX)
 			options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)

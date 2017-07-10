@@ -140,19 +140,54 @@
 	}
 	else if ([data[@"type"] isEqualToString:@"call"])
 	{
-		msg = @"[Call]";
+		UIImage* callIcon;
+		if ([(NSNumber*)data[@"detail"][@"direction"] boolValue]) // Inbound
+		{
+			if (
+				[data[@"detail"][@"result"] isEqualToString:@"missed"] ||
+				[data[@"detail"][@"result"] isEqualToString:@"declined"]
+			) {
+				callIcon = [context imageNamed:@"summary_call_missed.png"];
+			}
+			else
+			{
+				callIcon = [context imageNamed:@"summary_call_incoming.png"];
+			}
+		}
+		else
+		{
+			callIcon = [context imageNamed:@"summary_call_outgoing.png"];
+		}
+		
+		msg = @"Call";
 		NSDictionary *attrsDictionary = @{
             NSFontAttributeName: [UIFont systemFontOfSize:14],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#353535"],
         };
 		NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
-		lastItem = [CKTextComponent newWithTextAttributes:{
-                .attributedString = attrString,
-                .lineBreakMode = NSLineBreakByWordWrapping,
-            } viewAttributes:{
-                {@selector(setBackgroundColor:), [UIColor clearColor]},
-                {@selector(setUserInteractionEnabled:), @NO},
-            } options:{} size:{.height = 34, .width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/ + 4/*inset*/ )}];
+		lastItem = [CKStackLayoutComponent newWithView:{
+				[UIView class],
+				{},
+			} size:{.height = 34, .width = width - (20/*margin*/ + 66/*icon*/ + 74/*actions*/ + 4/*inset*/ )} style:{
+				.direction = CKStackLayoutDirectionHorizontal,
+				.alignItems = CKStackLayoutAlignItemsStart
+			} children:{
+				// Icon
+				{[CKInsetComponent newWithInsets:{
+					.top = 4, .left = 0, .right = 2, .bottom = 0
+				} component:
+					[CKImageComponent newWithImage:callIcon size:{.height = 10, .width = 10}]
+				]},
+				// Name & message
+				{[CKTextComponent newWithTextAttributes:{
+                    .attributedString = attrString,
+                    .lineBreakMode = NSLineBreakByWordWrapping,
+                } viewAttributes:{
+                    {@selector(setBackgroundColor:), [UIColor clearColor]},
+                    {@selector(setUserInteractionEnabled:), @NO},
+                } options:{} size:{}]},
+			}
+		];
 	}
 	else if ([data[@"type"] isEqualToString:@"none"])
 	{

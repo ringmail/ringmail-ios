@@ -58,6 +58,9 @@ static NSInteger const pageSize = 10;
 		@"message_summary_photo_normal.png": [UIImage imageNamed:@"message_summary_photo_normal.png"],
 		@"message_summary_video_normal.png": [UIImage imageNamed:@"message_summary_video_normal.png"],
 		@"avatar_unknown_small.png": [UIImage imageNamed:@"avatar_unknown_small.png"],
+		@"summary_call_incoming.png": [UIImage imageNamed:@"summary_call_incoming.png"],
+		@"summary_call_missed.png": [UIImage imageNamed:@"summary_call_missed.png"],
+		@"summary_call_outgoing.png": [UIImage imageNamed:@"summary_call_outgoing.png"],
 	};
     MessageThreadContext *context = [[MessageThreadContext alloc] initWithImages:images];
     

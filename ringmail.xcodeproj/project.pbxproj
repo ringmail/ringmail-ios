@@ -794,6 +794,12 @@
 		C45CFFF91D8B600A00BEF75F /* ringmail_astronaut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */; };
 		C4600C181ED4F61C00C1C964 /* RKAdapterXMPP.m in Sources */ = {isa = PBXBuildFile; fileRef = C4600C171ED4F61C00C1C964 /* RKAdapterXMPP.m */; };
 		C4600C191ED4F61C00C1C964 /* RKAdapterXMPP.m in Sources */ = {isa = PBXBuildFile; fileRef = C4600C171ED4F61C00C1C964 /* RKAdapterXMPP.m */; };
+		C463126E1F14313300E503AB /* summary_call_incoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C463126B1F14313300E503AB /* summary_call_incoming@2x.png */; };
+		C463126F1F14313300E503AB /* summary_call_incoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C463126B1F14313300E503AB /* summary_call_incoming@2x.png */; };
+		C46312701F14313300E503AB /* summary_call_missed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C463126C1F14313300E503AB /* summary_call_missed@2x.png */; };
+		C46312711F14313300E503AB /* summary_call_missed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C463126C1F14313300E503AB /* summary_call_missed@2x.png */; };
+		C46312721F14313300E503AB /* summary_call_outgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C463126D1F14313300E503AB /* summary_call_outgoing@2x.png */; };
+		C46312731F14313300E503AB /* summary_call_outgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C463126D1F14313300E503AB /* summary_call_outgoing@2x.png */; };
 		C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C46997AC1BC19168007B3658 /* incall_buttons_background.png */; };
 		C470BF781E68C540009968E2 /* SendToInputComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C470BF771E68C540009968E2 /* SendToInputComponent.mm */; };
 		C470BF791E68C540009968E2 /* SendToInputComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C470BF771E68C540009968E2 /* SendToInputComponent.mm */; };
@@ -3219,6 +3225,9 @@
 		C45CFFF51D8B600A00BEF75F /* ringmail_astronaut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_astronaut@2x.png"; path = "Resources/ringmail_astronaut@2x.png"; sourceTree = "<group>"; };
 		C4600C171ED4F61C00C1C964 /* RKAdapterXMPP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKAdapterXMPP.m; path = RingKit/RKAdapterXMPP.m; sourceTree = "<group>"; };
 		C4600C1A1ED4F64800C1C964 /* RKAdapterXMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKAdapterXMPP.h; path = RingKit/RKAdapterXMPP.h; sourceTree = "<group>"; };
+		C463126B1F14313300E503AB /* summary_call_incoming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "summary_call_incoming@2x.png"; path = "Resources/summary_call_incoming@2x.png"; sourceTree = "<group>"; };
+		C463126C1F14313300E503AB /* summary_call_missed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "summary_call_missed@2x.png"; path = "Resources/summary_call_missed@2x.png"; sourceTree = "<group>"; };
+		C463126D1F14313300E503AB /* summary_call_outgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "summary_call_outgoing@2x.png"; path = "Resources/summary_call_outgoing@2x.png"; sourceTree = "<group>"; };
 		C46997AC1BC19168007B3658 /* incall_buttons_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incall_buttons_background.png; path = Resources/incall_buttons_background.png; sourceTree = "<group>"; };
 		C470BF6E1E68C532009968E2 /* SendToInputComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendToInputComponent.h; path = RgComponents/SendToInputComponent.h; sourceTree = "<group>"; };
 		C470BF771E68C540009968E2 /* SendToInputComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SendToInputComponent.mm; sourceTree = "<group>"; };
@@ -5387,6 +5396,9 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C463126B1F14313300E503AB /* summary_call_incoming@2x.png */,
+				C463126C1F14313300E503AB /* summary_call_missed@2x.png */,
+				C463126D1F14313300E503AB /* summary_call_outgoing@2x.png */,
 				4DA354981F13FEA8007ECA84 /* pressed_icon@3x.png */,
 				4DA3547F1F13FDF3007ECA84 /* normal_icon@2x.png */,
 				4DA354801F13FDF3007ECA84 /* normal_icon@3x.png */,
@@ -6801,6 +6813,7 @@
 				D3A8BB7B15A6CC3200F96BE5 /* chat_bubble_outgoing.png in Resources */,
 				D3A8BB7D15A6CC3200F96BE5 /* chat_bubble_incoming.png in Resources */,
 				63D2680F1B174A5E00A2CC11 /* numpad_one_voicemail_default.png in Resources */,
+				C46312721F14313300E503AB /* summary_call_outgoing@2x.png in Resources */,
 				F0C1F9101A28781F009402C9 /* corner-left-bottom.png in Resources */,
 				D3A8BB7F15A6CC3200F96BE5 /* setup_back_disabled.png in Resources */,
 				D3A8BB8115A6CC3200F96BE5 /* setup_cancel_disabled.png in Resources */,
@@ -7263,7 +7276,9 @@
 				D3D52A7F1614495300DEB00A /* accept_default~ipad.png in Resources */,
 				D3D52A811614495300DEB00A /* accept_over_landscape~ipad.png in Resources */,
 				C4FD78651CF9477C0066BDB1 /* pattern_swirl_pattern.png in Resources */,
+				C463126E1F14313300E503AB /* summary_call_incoming@2x.png in Resources */,
 				C4FD78661CF9477C0066BDB1 /* pattern_squared_metal@2X.png in Resources */,
+				C46312701F14313300E503AB /* summary_call_missed@2x.png in Resources */,
 				C49744321C7C0A7400AD43A1 /* ringmail_input_chat.png in Resources */,
 				D3D52A831614495300DEB00A /* accept_over~ipad.png in Resources */,
 				F070E6361A2622EC00E17AFD /* incall_padding_left.png in Resources */,
@@ -7536,6 +7551,7 @@
 				C4AC28561D3963FA003B6232 /* corner-right-top.png in Resources */,
 				4D33F7EC1EC4D5C400D913A7 /* tabs_ring_pressed@2x.png in Resources */,
 				C4AC28571D3963FA003B6232 /* list_details_over.png in Resources */,
+				C463126F1F14313300E503AB /* summary_call_incoming@2x.png in Resources */,
 				C4AC28581D3963FA003B6232 /* UIStateBar.xib in Resources */,
 				C4AC28591D3963FA003B6232 /* UIContactCell.xib in Resources */,
 				C4AC285A1D3963FA003B6232 /* chat_in_view.wav in Resources */,
@@ -7771,6 +7787,7 @@
 				C4AC291E1D3963FA003B6232 /* dialer_alt_background.png in Resources */,
 				C4AC2B9E1D3975F6003B6232 /* ringmail_dev_logo@2x.png in Resources */,
 				C4AC291F1D3963FA003B6232 /* contact_cancel_default.png in Resources */,
+				C46312731F14313300E503AB /* summary_call_outgoing@2x.png in Resources */,
 				C4AC29201D3963FA003B6232 /* contact_cancel_over.png in Resources */,
 				4D33F7C81EC4D5C400D913A7 /* tabs_explore_pressed@2x.png in Resources */,
 				C4AC29211D3963FA003B6232 /* ringmail_incall-arrow.png in Resources */,
@@ -8124,6 +8141,7 @@
 				C48DA1D71E8454D2007CBCFB /* PhotoCameraViewController.xib in Resources */,
 				C4AC2A3B1D3963FA003B6232 /* dialer_padding_right.png in Resources */,
 				C4AC2A3C1D3963FA003B6232 /* setup_cancel_disabled_landscape~ipad.png in Resources */,
+				C46312711F14313300E503AB /* summary_call_missed@2x.png in Resources */,
 				C4AC2A3D1D3963FA003B6232 /* setup_cancel_disabled~ipad.png in Resources */,
 				C4AC2A3E1D3963FA003B6232 /* setup_cancel_over_landscape~ipad.png in Resources */,
 				C4AC2A3F1D3963FA003B6232 /* setup_start_default_landscape~ipad.png in Resources */,
