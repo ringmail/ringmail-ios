@@ -99,7 +99,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary 
             style:{.direction = CKStackLayoutDirectionVertical,}
             children:{
                 {[CKInsetComponent
-                newWithInsets:{.left = 20, .right = 0, .top = 23, .bottom = 8}
+                newWithInsets:{.left = 20, .right = 0, .top = 18, .bottom = 6}
                 component:
                     [CKLabelComponent
                     newWithLabelAttributes:{
@@ -115,7 +115,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary 
                     size:{.width=*wIn}]
                 ]},
                 {[CKInsetComponent
-                  newWithInsets:{.left = 20, .right = 0, .top = 0, .bottom = 23}
+                  newWithInsets:{.left = 20, .right = 0, .top = 0, .bottom = 20}
                   component:
                     [CKLabelComponent newWithLabelAttributes:{
                         .string = [data objectForKey:@"parent_name"],
@@ -148,7 +148,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary 
          style:{.direction = CKStackLayoutDirectionVertical,}
          children:{
              {[CKInsetComponent
-               newWithInsets:{.left = 20, .right = 0, .top = 23, .bottom = 8}
+               newWithInsets:{.left = 20, .right = 0, .top = 18, .bottom = 6}
                component:
                [CKLabelComponent
                 newWithLabelAttributes:{
@@ -164,7 +164,7 @@ CKStackLayoutComponent* hashtagDirHeaderLabelComponent(float* wIn, NSDictionary 
                 size:{.width=*wIn}]
                ]},
              {[CKInsetComponent
-               newWithInsets:{.left = 20, .right = 0, .top = 0, .bottom = 23}
+               newWithInsets:{.left = 20, .right = 0, .top = 0, .bottom = 20}
                component:
                [CKLabelComponent newWithLabelAttributes:{
                  .string = @"",

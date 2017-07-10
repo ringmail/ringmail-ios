@@ -39,7 +39,9 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     NSArray* list = [[HashtagStore sharedInstance] selectHistory];
     
     NSMutableArray *_cards = [NSMutableArray new];
-    NSInteger added = 0;
+
+    Card *hdCard = [[Card alloc] initWithData:@{@"type": @"hashtag_myactivity_header"} header:[NSNumber numberWithBool:0]];
+    [_cards insertObject:hdCard atIndex:0];
     
     for (NSUInteger i = 0; i < [list count]; i++)
     {
@@ -48,7 +50,6 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
             {
                 Card *card = [[Card alloc] initWithData:itemData header:[NSNumber numberWithBool:0]];
                 [_cards addObject:card];
-                added++;
             }
     }
     

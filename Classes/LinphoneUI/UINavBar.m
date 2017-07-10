@@ -188,8 +188,8 @@ int backState = 0;
             [segmentButton setHidden:NO];
             break;
         case HTagCard:
-            [segmentButton setEnabled:NO];
-            [segmentButton setHidden:YES];
+//            [segmentButton setEnabled:NO];
+//            [segmentButton setHidden:YES];
             [backButton setHidden:NO];
             [backButton setEnabled:YES];
             backState = 1;

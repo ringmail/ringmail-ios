@@ -31,6 +31,10 @@
 @synthesize rgImage;
 @synthesize contact;
 @synthesize inviteButton;
+@synthesize bgSelectImage;
+@synthesize selectImage;
+@synthesize sendContactsTVC;
+@synthesize tempSelected;
 
 #pragma mark - Lifecycle Functions
 
@@ -75,7 +79,7 @@
     
 	NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
 	NSString *lLocalizedFirstName = [FastAddressBook localizedLabel:lFirstName];
-
+    
 	NSString *lLastName = CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
 	NSString *lLocalizedLastName = [FastAddressBook localizedLabel:lLastName];
     
@@ -149,13 +153,40 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
 	[super setHighlighted:highlighted animated:animated];
-	if (highlighted) {
-		[lastNameLabel setTextColor:[UIColor whiteColor]];
-		[firstNameLabel setTextColor:[UIColor whiteColor]];
-	} else {
-		[lastNameLabel setTextColor:[UIColor blackColor]];
-		[firstNameLabel setTextColor:[UIColor blackColor]];
-	}
+    if (highlighted) {
+        [lastNameLabel setTextColor:[UIColor whiteColor]];
+        [firstNameLabel setTextColor:[UIColor whiteColor]];
+        if (sendContactsTVC)
+        {
+            [bgSelectImage setHidden:FALSE];
+            [selectImage setHidden:FALSE];
+            [selectImage setHighlighted:TRUE];
+        }
+        else
+        {
+            [bgSelectImage setHidden:TRUE];
+        }
+    } else {
+        [lastNameLabel setTextColor:[UIColor blackColor]];
+        [firstNameLabel setTextColor:[UIColor blackColor]];
+    }
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated; {
+    if (sendContactsTVC)
+    {
+        [bgSelectImage setHidden:FALSE];
+        [selectImage setHidden:TRUE];
+        [selectImage setHighlighted:FALSE];
+        if (self.isTempSelected)
+        {
+            [selectImage setHidden:NO];
+        }
+    }
+    else
+    {
+        [bgSelectImage setHidden:TRUE];
+    }
 }
 
 - (IBAction)inviteContact:(id)sender {

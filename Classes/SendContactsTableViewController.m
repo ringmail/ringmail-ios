@@ -208,6 +208,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     [[cell avatarImage] setImage:image];
     
     [[cell inviteButton] setHidden:YES];  // mrkbxt
+    cell.sendContactsTVC=TRUE;
     
     NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
     if ([ringMailContacts objectForKey:[recordId stringValue]])
@@ -225,10 +226,13 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     [cell setContact:contact];
     
     
-    if([selectedContacts containsObject:indexPath]) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    if([selectedContacts containsObject:indexPath])
+    {
+        cell.tempSelected = YES;
+        [[cell selectImage] setHidden:NO];
     } else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.tempSelected = NO;
+        [[cell selectImage] setHidden:YES];
     }
     
     return cell;
@@ -241,7 +245,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    UIContactCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -250,6 +254,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	
 	// TODO: change to get primary RingMail address
     NSArray* emails = [[[LinphoneManager instance] fastAddressBook] getEmailArray:lPerson];
+    
+    cell.sendContactsTVC=TRUE;
     
     if (selectionMode == SendContactSelectionModeSingle)
 	{
@@ -261,15 +267,17 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     }
     else
 	{
-        if (cell.accessoryType == UITableViewCellAccessoryNone)
+        if (cell.isTempSelected)
 		{
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            [selectedContacts addObject:indexPath];
+            [selectedContacts removeObject:indexPath];
+            [[cell selectImage] setHidden:YES];
+            cell.tempSelected = NO;
         }
         else
 		{
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            [selectedContacts removeObject:indexPath];
+            [selectedContacts addObject:indexPath];
+            [[cell selectImage] setHidden:NO];
+            cell.tempSelected = YES;
         }
     }
 }
@@ -300,7 +308,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     return view;
 }
 
-#pragma mark - 
+
+#pragma mark -
 
 - (void)selectMulti:(NSNotification*)notif
 {

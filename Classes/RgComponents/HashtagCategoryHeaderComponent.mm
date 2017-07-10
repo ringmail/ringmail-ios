@@ -49,12 +49,12 @@ CKInsetComponent* hashtagCatDirHeaderLabelComponent(float* wIn, NSDictionary * d
     return
     [
         CKInsetComponent
-        newWithInsets:{.left = 20, .right = 0, .top = 23, .bottom = 23}
+        newWithInsets:{.left = 20, .right = 0, .top = 18, .bottom = 20}
         component:
             [CKStackLayoutComponent
             newWithView:{}
             size:{}
-            style:{.spacing = 8}
+            style:{.spacing = 6}
             children:{
                 {[CKLabelComponent newWithLabelAttributes:{
                     .string = [data objectForKey:@"category_name"],

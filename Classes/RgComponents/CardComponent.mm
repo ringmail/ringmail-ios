@@ -18,6 +18,7 @@
 #import "HashtagCategoryHeaderComponent.h"
 #import "HashtagCategoryGroupCardComponent.h"
 #import "HashtagDirectoryHeaderCardComponent.h"
+#include "HashtagMyActivityHeaderCardComponent.h"
 
 @implementation CardComponent
 
@@ -67,6 +68,12 @@ static CKComponent *cardComponent(Card *card, CardContext *context)
             return [HashtagDirectoryHeaderCardComponent
                       newWithData:card.data
                       context:context];
+        }
+        else if ([type isEqualToString:@"hashtag_myactivity_header"])
+        {
+            return [HashtagMyActivityHeaderCardComponent
+                    newWithData:card.data
+                    context:context];
         }
     }
 	return nil;
