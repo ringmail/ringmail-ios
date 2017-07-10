@@ -240,14 +240,9 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	UIContactCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
 	if (cell == nil) {
 		cell = [[UIContactCell alloc] initWithIdentifier:kCellId];
-
-		// Background View
-		UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
-		cell.selectedBackgroundView = selectedBackgroundView;
-		[selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
 	}
 	OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
-
+    
 	NSString *key = [[subDic allKeys] objectAtIndex:[indexPath row]];
 	ABRecordRef contact = (__bridge ABRecordRef)([subDic objectForKey:key]);
     
@@ -288,6 +283,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     }
     
 	[cell setContact:contact];
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
 	return cell;
 }

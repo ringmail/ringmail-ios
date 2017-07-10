@@ -175,11 +175,6 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     UIContactCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
     if (cell == nil) {
         cell = [[UIContactCell alloc] initWithIdentifier:kCellId];
-        
-        // Background View
-        UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
-        cell.selectedBackgroundView = selectedBackgroundView;
-        [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];  // mrkbxt
     }
     OrderedDictionary *subDic = [addressBookMap objectForKey:[addressBookMap keyAtIndex:[indexPath section]]];
     
@@ -230,10 +225,13 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     {
         cell.tempSelected = YES;
         [[cell selectImage] setHidden:NO];
+        [cell setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
     } else {
         cell.tempSelected = NO;
         [[cell selectImage] setHidden:YES];
     }
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return cell;
 }
@@ -271,12 +269,14 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 		{
             [selectedContacts removeObject:indexPath];
             [[cell selectImage] setHidden:YES];
+            [cell setBackgroundColor:[UIColor clearColor]];
             cell.tempSelected = NO;
         }
         else
 		{
             [selectedContacts addObject:indexPath];
             [[cell selectImage] setHidden:NO];
+            [cell setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
             cell.tempSelected = YES;
         }
     }
