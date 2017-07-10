@@ -165,7 +165,8 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
 	[super setHighlighted:highlighted animated:animated];
-    if (highlighted) {
+    if (highlighted)
+    {
         [self setBackgroundColor:LINPHONE_TABLE_CELL_HIGHLIGHT_COLOR];
         if (sendContactsTVC)
         {
@@ -179,6 +180,10 @@
         if (sendContactsTVC)
         {
             [pressedImage setHidden:TRUE];
+            if (tempSelected)
+            {
+                [self setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+            }
         }
     }
 }
