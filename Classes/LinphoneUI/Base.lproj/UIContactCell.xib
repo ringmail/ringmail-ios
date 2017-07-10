@@ -19,6 +19,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIContactCell">
             <connections>
                 <outlet property="avatarImage" destination="23" id="24"/>
+                <outlet property="bgSelectImage" destination="u3f-Wy-c0O" id="Ihu-f9-vvl"/>
                 <outlet property="contactLabel" destination="NkG-mp-MyZ" id="msD-lT-GTT"/>
                 <outlet property="firstNameLabel" destination="6" id="17"/>
                 <outlet property="inviteButton" destination="f6O-TR-yCk" id="yu0-Et-Bqp"/>

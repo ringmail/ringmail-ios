@@ -31,7 +31,9 @@
 @synthesize rgImage;
 @synthesize contact;
 @synthesize inviteButton;
+@synthesize bgSelectImage;
 @synthesize selectImage;
+@synthesize sendContactsTVC;
 @synthesize tempSelected;
 
 #pragma mark - Lifecycle Functions
@@ -151,23 +153,39 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
 	[super setHighlighted:highlighted animated:animated];
-	if (highlighted) {
-		[lastNameLabel setTextColor:[UIColor whiteColor]];
-		[firstNameLabel setTextColor:[UIColor whiteColor]];
-        [selectImage setHidden:FALSE];
-        [selectImage setHighlighted:TRUE];
-	} else {
-		[lastNameLabel setTextColor:[UIColor blackColor]];
-		[firstNameLabel setTextColor:[UIColor blackColor]];
-	}
+    if (highlighted) {
+        [lastNameLabel setTextColor:[UIColor whiteColor]];
+        [firstNameLabel setTextColor:[UIColor whiteColor]];
+        if (sendContactsTVC)
+        {
+            [bgSelectImage setHidden:FALSE];
+            [selectImage setHidden:FALSE];
+            [selectImage setHighlighted:TRUE];
+        }
+        else
+        {
+            [bgSelectImage setHidden:TRUE];
+        }
+    } else {
+        [lastNameLabel setTextColor:[UIColor blackColor]];
+        [firstNameLabel setTextColor:[UIColor blackColor]];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated; {
-    [selectImage setHidden:TRUE];
-    [selectImage setHighlighted:FALSE];
-    if (self.isTempSelected)
+    if (sendContactsTVC)
     {
-        [selectImage setHidden:NO];
+        [bgSelectImage setHidden:FALSE];
+        [selectImage setHidden:TRUE];
+        [selectImage setHighlighted:FALSE];
+        if (self.isTempSelected)
+        {
+            [selectImage setHidden:NO];
+        }
+    }
+    else
+    {
+        [bgSelectImage setHidden:TRUE];
     }
 }
 

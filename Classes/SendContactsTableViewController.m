@@ -208,6 +208,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     [[cell avatarImage] setImage:image];
     
     [[cell inviteButton] setHidden:YES];  // mrkbxt
+    cell.sendContactsTVC=TRUE;
     
     NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
     if ([ringMailContacts objectForKey:[recordId stringValue]])
@@ -253,6 +254,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	
 	// TODO: change to get primary RingMail address
     NSArray* emails = [[[LinphoneManager instance] fastAddressBook] getEmailArray:lPerson];
+    
+    cell.sendContactsTVC=TRUE;
     
     if (selectionMode == SendContactSelectionModeSingle)
 	{
