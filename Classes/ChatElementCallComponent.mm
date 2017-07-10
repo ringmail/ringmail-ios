@@ -158,6 +158,8 @@
 		
 		//NSLog(@"Bounds: %f %f", bounds.size.width, msgHeight);
 		
+		msgWidth += 12;
+		
 		// Draw bubble
 		CGSize size = CGSizeMake((int)msgWidth + 20, (int)msgHeight + 16 + 10);
 		CGSize scaledSize = CGSizeMake((int)size.width * scale, (int)size.height * scale);
@@ -250,13 +252,28 @@
 					{.flexGrow = YES, .component = [CKComponent newWithView:{} size:{}]},
 					{[CKBackgroundLayoutComponent newWithComponent:
 						[CKInsetComponent newWithInsets:{.top = 8, .left = 10, .bottom = 8, .right = 10} component:
-    						[CKTextComponent newWithTextAttributes:{
-                                .attributedString = attrString,
-                                .lineBreakMode = NSLineBreakByWordWrapping,
-                            } viewAttributes:{
-                                {@selector(setBackgroundColor:), [UIColor clearColor]},
-                                {@selector(setUserInteractionEnabled:), @NO},
-                            } options:{} size:{.width = msgWidth, .height = msgHeight}]
+    						[CKStackLayoutComponent newWithView:{
+                				[UIView class],
+                				{},
+                			} size:{} style:{
+                				.direction = CKStackLayoutDirectionHorizontal,
+                				.alignItems = CKStackLayoutAlignItemsStart
+                			} children:{
+                				// Icon
+                				{[CKInsetComponent newWithInsets:{
+                					.top = 4, .left = 0, .right = 2, .bottom = 0
+                				} component:
+                					[CKImageComponent newWithImage:callIcon size:{.height = 10, .width = 10}]
+                				]},
+                				// Name & message
+                				{[CKTextComponent newWithTextAttributes:{
+                                    .attributedString = attrString,
+                                    .lineBreakMode = NSLineBreakByWordWrapping,
+                                } viewAttributes:{
+                                    {@selector(setBackgroundColor:), [UIColor clearColor]},
+                                    {@selector(setUserInteractionEnabled:), @NO},
+                                } options:{} size:{.width = msgWidth - 12, .height = msgHeight}]},
+                			}]
 						]	
 					background:
 						[CKInsetComponent newWithInsets:{.top = 0, .left = 0, .bottom = -10, .right = 0} component:
