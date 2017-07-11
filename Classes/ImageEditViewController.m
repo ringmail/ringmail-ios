@@ -85,9 +85,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 		UIImage* newImage = [imgView image];
 		
     	// Write file
-//        NSString* imageUUID = [[NSUUID UUID] UUIDString];
-        NSString* imageMoment = @"tmp_overwritable_momentImg";  // prevents memory leak from back button cycle
-        __block NSString* tmpfile = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageMoment]];
+        NSString* imageUUID = [[NSUUID UUID] UUIDString];
+//        NSString* imageMoment = @"tmp_overwritable_momentImg";  // static file nae prevents memory leak from back button cycle, but new image not passed on back click
+        __block NSString* tmpfile = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageUUID]];
         [UIImagePNGRepresentation(newImage) writeToFile:tmpfile atomically:YES];
     	
     	RgSendMediaEditMode mode = editMode;
