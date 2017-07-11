@@ -218,6 +218,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         [[cell rgImage] setHidden:YES];
     }
     
+    
     [cell setContact:contact];
     
     

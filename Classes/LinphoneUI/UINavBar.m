@@ -9,6 +9,8 @@
 #import "UINavBar.h"
 #import "PhoneMainView.h"
 #import "CAAnimation+Blocks.h"
+#import "ImageEditViewController.h"
+#import "RgMomentDelegate.h"
 
 
 @implementation UINavBar
@@ -206,6 +208,8 @@ int backState = 0;
         case SendContacts:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
+            [backButton setHidden:NO];
+            [backButton setEnabled:YES];
             break;
         default:
             break;
@@ -251,7 +255,16 @@ int backState = 0;
         [[PhoneMainView instance] popCurrentView];
     }
     else if ([[[PhoneMainView instance] currentView] equal:[SendContactsViewController compositeViewDescription]]) {
-        [[PhoneMainView instance] popCurrentView];
+        SendContactsViewController* vc = (SendContactsViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"SendContactsViewController"];
+        if (vc.selectionMode == SendContactSelectionModeMulti) {
+            RgMomentDelegate* md = [RgMomentDelegate sharedInstance];
+            ImageEditViewController* ctl = [[ImageEditViewController alloc] initWithImage:[UIImage imageNamed:md.file] editMode:RgSendMediaEditModeMoment];
+            [[PhoneMainView instance] changeCurrentView:[ImageEditViewController compositeViewDescription] content:ctl push:NO];
+        }
+        else if (vc.selectionMode == SendContactSelectionModeSingle)
+        {
+                    [[PhoneMainView instance] popCurrentView];
+        }
     }
     else {
         [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{@"category_id": @"0",}];
