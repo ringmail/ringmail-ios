@@ -480,7 +480,8 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 			label = [FastAddressBook localizedLabel:labelRef];
 		}
 		NSString *valueRef = CFBridgingRelease(ABMultiValueCopyValueAtIndex(lMap, index));
-		value = [RgManager formatPhoneNumber:valueRef];
+		value = valueRef;
+		//value = [RgManager formatPhoneNumber:valueRef];
 		CFRelease(lMap);
 	} else if (contactSections[[indexPath section]] == ContactSections_Email) {
 		ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonEmailProperty);

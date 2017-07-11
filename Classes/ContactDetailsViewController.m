@@ -30,6 +30,7 @@
 @synthesize backButton;
 @synthesize cancelButton;
 @synthesize background;
+@synthesize contactData;
 
 static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 
@@ -41,6 +42,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 		inhibUpdate = FALSE;
 		addressBook = ABAddressBookCreateWithOptions(nil, nil);
 		ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, (__bridge void *)(self));
+		contactData = @{};
 	}
 	return self;
 }
@@ -161,6 +163,10 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	[self resetData];
 	contact = acontact;
 	[tableController setContact:contact];
+	
+	// Load current data
+	contactData = [[LinphoneManager instance].fastAddressBook contactData:contact];
+	NSLog(@"%s: Contact Data: %@", __PRETTY_FUNCTION__, contactData);
 
 	if (reload) {
 		[self enableEdit:FALSE];
@@ -220,8 +226,8 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	[super viewDidLoad];
 
 	// Set selected+over background: IB lack !
-	[editButton setImage:[UIImage imageNamed:@"ringmail_edit-save-pressed.png"]
-						  forState:(UIControlStateHighlighted | UIControlStateSelected)];
+	/*[editButton setImage:[UIImage imageNamed:@"ringmail_edit-save-pressed.png"]
+						  forState:(UIControlStateHighlighted | UIControlStateSelected)];*/
 
 	// Set selected+disabled background: IB lack !
 	//[editButton setImage:[UIImage imageNamed:@"contact_ok_disabled.png"]
@@ -284,6 +290,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	if (![tableController isEditing]) {
 		[tableController setEditing:TRUE animated:animated];
 	}
+	[editButton setTitle:@"Save" forState:UIControlStateNormal];
 	[editButton setOn];
 	[cancelButton setHidden:FALSE];
 	[backButton setHidden:TRUE];
@@ -293,6 +300,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	if ([tableController isEditing]) {
 		[tableController setEditing:FALSE animated:animated];
 	}
+	[editButton setTitle:@"Edit" forState:UIControlStateNormal];
 	[editButton setOff];
 	[cancelButton setHidden:TRUE];
 	[backButton setHidden:FALSE];

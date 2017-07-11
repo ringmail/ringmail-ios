@@ -362,12 +362,10 @@
     NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
     if (rgAddress != nil)
     {
-	   	LinphoneManager *lm = [LinphoneManager instance];
-    	NSNumber *contactNum = [[lm fastAddressBook] getContactId:contact];
-		NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
-		NSNumber *session = sessionData[@"id"];
-        [lm setChatSession:session];
-        [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
+		RKCommunicator* comm = [RKCommunicator sharedInstance];
+		RKAddress* address = [RKAddress newWithString:rgAddress];
+		RKThread* thread = [comm getThreadByAddress:address];
+		[comm startMessageView:thread];
     }
 }
 
@@ -377,11 +375,13 @@
         LOGW(@"Cannot access contact: null contact");
         return;
     }
-    /*NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
+	NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
     if (rgAddress != nil)
     {
-        [RgManager startCall:rgAddress contact:contact video:NO];
-    }*/
+		RKCommunicator* comm = [RKCommunicator sharedInstance];
+		RKAddress* address = [RKAddress newWithString:rgAddress];
+		[comm startCall:address video:NO];
+    }
 }
 
 - (IBAction)onActionVideo:(id)event {
@@ -390,11 +390,13 @@
         LOGW(@"Cannot access contact: null contact");
         return;
     }
-    /*NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
+	NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
     if (rgAddress != nil)
     {
-        [RgManager startCall:rgAddress contact:contact video:YES];
-    }*/
+		RKCommunicator* comm = [RKCommunicator sharedInstance];
+		RKAddress* address = [RKAddress newWithString:rgAddress];
+		[comm startCall:address video:YES];
+    }	
 }
 
 - (IBAction)onActionFavorite:(id)event {
