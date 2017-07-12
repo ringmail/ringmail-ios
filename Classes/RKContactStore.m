@@ -230,7 +230,7 @@
 {
     __block BOOL res = NO;
     [self inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT COUNT(oid) FROM contacts WHERE ringmail_enabled = 1 AND apple_id = ?", contactID];
+        FMResultSet *rs = [db executeQuery:@"SELECT COUNT(oid) FROM contact_detail WHERE ringmail_enabled = 1 AND apple_id = ?", contactID];
         while ([rs next])
         {
             NSNumber *count = [rs objectForColumnIndex:0];
