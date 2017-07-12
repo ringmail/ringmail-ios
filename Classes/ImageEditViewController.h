@@ -13,11 +13,13 @@ typedef NS_ENUM(NSInteger, RgSendMediaEditMode) {
 }
 
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
+@property (nonatomic, strong) NSString* currentFile;
 @property (nonatomic, strong) UIImage* image;
 @property (nonatomic, strong) CLImageEditor* editor;
 @property (nonatomic) RgSendMediaEditMode editMode;
 
 - (id)initWithImage:(UIImage*)img editMode:(RgSendMediaEditMode)editMode;
+- (id)initWithFilePath:(NSString*)imgPath editMode:(RgSendMediaEditMode)inputMode;
 
 - (void)imageEditor:(CLImageEditor*)editor didDismissWithImageView:(UIImageView*)imageView canceled:(BOOL)canceled;
 

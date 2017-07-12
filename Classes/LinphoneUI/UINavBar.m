@@ -258,7 +258,7 @@ int backState = 0;
         SendContactsViewController* vc = (SendContactsViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"SendContactsViewController"];
         if (vc.selectionMode == SendContactSelectionModeMulti) {
             RgMomentDelegate* md = [RgMomentDelegate sharedInstance];
-            ImageEditViewController* ctl = [[ImageEditViewController alloc] initWithImage:[UIImage imageNamed:md.file] editMode:RgSendMediaEditModeMoment];
+            ImageEditViewController* ctl = [[ImageEditViewController alloc] initWithFilePath:md.file editMode:RgSendMediaEditModeMoment];
             [[PhoneMainView instance] changeCurrentView:[ImageEditViewController compositeViewDescription] content:ctl push:NO];
         }
         else if (vc.selectionMode == SendContactSelectionModeSingle)
