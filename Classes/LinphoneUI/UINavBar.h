@@ -28,10 +28,12 @@
 @property (nonatomic, strong) IBOutlet UILabel* leftLabel;
 @property (nonatomic, strong) IBOutlet UILabel* rightLabel;
 @property (nonatomic, strong) IBOutlet UIButton* submitButton;
+@property (nonatomic, strong) IBOutlet UIButton* addContactButton;
 
 -(IBAction) onBackClick:(id) event;
 -(IBAction) segmentedControlChanged:(id)sender;
 -(IBAction) onSubmitClick:(id) event;
+-(IBAction) onAddContactClick:(id) event;
 
 - (void)setInstance:(int)widthIn;
 - (void)updateLabelsBtns:(NSNotification *) notification;

@@ -21,6 +21,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UINavBar">
             <connections>
+                <outlet property="addContactButton" destination="VV7-rS-Dfa" id="xEe-hy-wvM"/>
                 <outlet property="backButton" destination="xaF-kH-DJ7" id="6FB-Rc-NP1"/>
                 <outlet property="background" destination="38p-KF-uvZ" id="Cou-UU-w4S"/>
                 <outlet property="headerLabel" destination="0rt-2P-RyV" id="Vcp-tR-fSR"/>
@@ -88,6 +89,20 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VV7-rS-Dfa">
+                    <rect key="frame" x="346" y="22" width="60" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="MbB-Uu-7Pt"/>
+                        <constraint firstAttribute="width" constant="60" id="Rt5-hk-yXe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="32"/>
+                    <state key="normal" title="+">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onAddContactClick:" destination="-1" eventType="touchUpInside" id="YfW-Ye-lob"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UDN-IQ-evr">
                     <rect key="frame" x="331" y="22.333333333333329" width="75" height="50"/>
                     <constraints>
@@ -133,6 +148,8 @@
                 <constraint firstItem="xaF-kH-DJ7" firstAttribute="centerY" secondItem="38p-KF-uvZ" secondAttribute="centerY" id="WUl-RS-MFb"/>
                 <constraint firstItem="njb-Wm-mMT" firstAttribute="centerY" secondItem="0rt-2P-RyV" secondAttribute="centerY" id="WlT-MZ-ZhB"/>
                 <constraint firstItem="83b-0d-TgV" firstAttribute="centerX" secondItem="38p-KF-uvZ" secondAttribute="centerX" id="aQ4-MO-0pQ"/>
+                <constraint firstAttribute="trailing" secondItem="VV7-rS-Dfa" secondAttribute="trailing" constant="8" id="b3d-oz-p4D"/>
+                <constraint firstItem="VV7-rS-Dfa" firstAttribute="centerY" secondItem="0rt-2P-RyV" secondAttribute="centerY" id="c4n-nI-5vz"/>
                 <constraint firstItem="bTS-UH-a3H" firstAttribute="leading" secondItem="xaF-kH-DJ7" secondAttribute="trailing" id="gTt-Iu-LKr"/>
                 <constraint firstItem="83b-0d-TgV" firstAttribute="top" secondItem="0rt-2P-RyV" secondAttribute="bottom" constant="5" id="gbr-N9-s6z"/>
                 <constraint firstItem="38p-KF-uvZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gkL-1Y-igh"/>

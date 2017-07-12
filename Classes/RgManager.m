@@ -55,6 +55,8 @@ NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
 NSString *const kRgSendContactSelectDone = @"kRgSendContactSelectDone";
 NSString *const kRgSendComponentUpdateTo = @"kRgSendComponentUpdateTo";
 
+NSString *const kRgAddContact = @"kRgAddContact";
+
 static LevelDB* theConfigDatabase = nil;
 
 @implementation RgManager
