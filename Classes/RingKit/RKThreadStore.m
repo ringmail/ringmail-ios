@@ -72,7 +72,8 @@
             ");",
             @"CREATE UNIQUE INDEX IF NOT EXISTS uuid_1 ON rk_thread (uuid);",
             @"CREATE UNIQUE INDEX IF NOT EXISTS address_1 ON rk_thread (address, original_to);",
-            @"CREATE UNIQUE INDEX IF NOT EXISTS contact_id_1 ON rk_thread (contact_id);",
+            @"DROP INDEX contact_id_1;",
+            @"CREATE UNIQUE INDEX IF NOT EXISTS contact_id_1 ON rk_thread (contact_id, original_to);",
             @"CREATE INDEX IF NOT EXISTS address_md5_1 ON rk_thread (address_md5);",
             @"CREATE INDEX IF NOT EXISTS ts_activity_1 ON rk_thread (ts_activity);",
 			
@@ -454,7 +455,7 @@
 				curId = [NSNumber numberWithLong:[rs1 longForColumnIndex:0]];
 				curUUID = [rs1 stringForColumnIndex:1];
 				curAddress = [rs1 stringForColumnIndex:2];
-				curContact = [NSNumber numberWithLong:[rs1 longForColumnIndex:3]];
+				curContact = [rs1 objectForColumnIndex:3];
 				curOrigTo = [rs1 stringForColumnIndex:4];
                 found = YES;
     		}
@@ -462,14 +463,14 @@
 		}
 		if ((! found) && (contactId != nil))
 		{
-            FMResultSet *rs2 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE contact_id = ? COLLATE NOCASE", contactId];
+            FMResultSet *rs2 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE contact_id = ? COLLATE NOCASE AND original_to = ? COLLATE NOCASE", contactId, originalTo];
     		if ([rs2 next])
     		{
 				NSLog(@"Found contact_id");
 				curId = [NSNumber numberWithLong:[rs2 longForColumnIndex:0]];
 				curUUID = [rs2 stringForColumnIndex:1];
 				curAddress = [rs2 stringForColumnIndex:2];
-				curContact = [NSNumber numberWithLong:[rs2 longForColumnIndex:3]];
+				curContact = [rs2 objectForColumnIndex:3];
 				curOrigTo = [rs2 stringForColumnIndex:4];
                 found = YES;
     		}
@@ -484,7 +485,7 @@
 				curId = [NSNumber numberWithLong:[rs3 longForColumnIndex:0]];
 				curUUID = [rs3 stringForColumnIndex:1];
 				curAddress = [rs3 stringForColumnIndex:2];
-				curContact = [NSNumber numberWithLong:[rs3 longForColumnIndex:3]];
+				curContact = [rs3 objectForColumnIndex:3];
 				curOrigTo = [rs3 stringForColumnIndex:4];
                 found = YES;
             }
@@ -597,11 +598,10 @@
         FMResultSet *rs1 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE id = ? COLLATE NOCASE", lookupId];
 		if ([rs1 next])
 		{
-			NSLog(@"Found uuid");
 			curId = [NSNumber numberWithLong:[rs1 longForColumnIndex:0]];
 			curUUID = [rs1 stringForColumnIndex:1];
 			curAddress = [rs1 stringForColumnIndex:2];
-			curContact = [NSNumber numberWithLong:[rs1 longForColumnIndex:3]];
+			curContact = [rs1 objectForColumnIndex:3];
 			curOrigTo = [rs1 stringForColumnIndex:4];
             found = YES;
 		}
@@ -849,6 +849,10 @@
 					@"address": key,
 				},
 			}];
+		}];
+		[changes[@"add"] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+			NSString* sql = @"UPDATE rk_thread SET contact_id = ? WHERE contact_id IS NULL AND address = ?";
+			[db executeUpdate:sql withArgumentsInArray:@[ contact, key ]];
 		}];
     }];
 }
