@@ -93,16 +93,21 @@
     
     ABMultiValueRef phones = ABRecordCopyValue(contact, kABPersonPhoneProperty);
     CFStringRef phone = ABMultiValueCopyValueAtIndex(phones, 0);
-    NSString *lLocalizedPhone = [FastAddressBook localizedLabel:CFBridgingRelease(phone)];
-    
+    NSString *phoneStr = CFBridgingRelease(phone);
+	NSString *lLocalizedPhone = [RgManager formatPhoneNumber:phoneStr];
+    //NSString *lLocalizedPhone = [FastAddressBook localizedLabel:CFBridgingRelease(phone)];
     
 	[firstNameLabel setText:lLocalizedFirstName];
 	[lastNameLabel setText:lLocalizedLastName];
     
-    if (![lLocalizedEmail isEqual: @""])
+    if (! [lLocalizedEmail isEqual: @""])
+	{
         [contactLabel setText:lLocalizedEmail];
+	}
     else if (![lLocalizedPhone isEqual: @""])
+	{
         [contactLabel setText:lLocalizedPhone];
+	}
     
 	if (
         (lLocalizedFirstName == nil && lLocalizedLastName == nil) ||

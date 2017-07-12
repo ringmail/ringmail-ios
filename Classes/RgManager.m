@@ -18,9 +18,9 @@
 
 /* RingMail */
 
-NSString *const kRgTextReceived = @"RgTextReceived";
-NSString *const kRgTextSent = @"RgTextSent";
-NSString *const kRgTextUpdate = @"RgTextUpdate";
+NSString *const kRgTextReceived = @"RgTextReceived"; // deprec
+NSString *const kRgTextSent = @"RgTextSent"; // deprec
+NSString *const kRgTextUpdate = @"RgTextUpdate"; // deprec
 NSString *const kRgContactsUpdated = @"RgContactsUpdated";
 NSString *const kRgSetAddress = @"RgSetAddress";
 NSString *const kRgMainRefresh = @"RgMainRefresh";
@@ -30,10 +30,6 @@ NSString *const kRgAttemptVerify = @"kRgAttemptVerify";
 NSString *const kRgLaunchBrowser = @"kRgLaunchBrowser";
 NSString *const kRgToggleNumberPad = @"kRgToggleNumberPad";
 NSString *const kRgCallRefresh = @"kRgCallRefresh";
-NSString *const kRgContactRefresh = @"kRgContactRefresh";
-NSString *const kRgSelf = @"self";
-NSString *const kRgSelfName = @"Self";
-
 NSString *const kRgNavBarViewChange = @"kRgNavBarViewChange";
 NSString *const kRgHashtagDirectoryUpdatePath = @"kRgHashtagDirectoryUpdatePath";
 NSString *const kRgHashtagDirectoryRefreshPath = @"kRgHashtagDirectoryRefreshPath";
@@ -44,7 +40,6 @@ NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
 NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
 NSString *const kRgGoogleSignInError = @"kRgGoogleSignInError";
 NSString *const kRgUserUnauthorized = @"kRgUserUnauthorized";
-
 NSString *const kRgPresentOptionsModal = @"kRgPresentOptionsModal";
 NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
 

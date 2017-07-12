@@ -37,6 +37,7 @@ NSString *const kChatNavBarUpdate = @"ChatNavBarUpdate";
     [super viewDidUnload];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatNavBarUpdate object:nil];
+
 }
 
 - (void)viewDidLayoutSubviews

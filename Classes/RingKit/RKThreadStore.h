@@ -30,13 +30,16 @@
 - (void)setupTables;
 - (void)insertItem:(RKItem*)item;
 - (void)updateItem:(RKItem*)item;
+- (void)dumpThreads;
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
 - (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
+- (RKThread*)getThreadById:(NSNumber*)lookupId;
 - (RKCall*)getCallBySipId:(NSString*)sip;
 - (RKMessage*)getMessageByUUID:(NSString*)inputUUID;
 - (void)setHidden:(BOOL)hidden forItemId:(NSNumber*)itemId;
 - (void)removeContact:(NSNumber*)contact;
+- (void)updateContact:(NSNumber*)contact changes:(NSDictionary*)changes;
 
 @end

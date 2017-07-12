@@ -242,7 +242,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context) {
-    //NSLog(@"FastAddressBook Change Detected");
+    NSLog(@"FastAddressBook Change Detected");
     [[[LinphoneManager instance] contactManager] sendContactData];
 	FastAddressBook *fastAddressBook = (__bridge FastAddressBook *)context;
 	[fastAddressBook loadData];
@@ -396,11 +396,6 @@ void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void 
 - (NSDictionary *)contactData:(ABRecordRef)lPerson
 {
     @synchronized(addressBookMap) {
-		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-		NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-        [dateFormatter setLocale:enUSPOSIXLocale];
-        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-        [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
         ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
         NSMutableArray *emailArray = [NSMutableArray array];
         if (emailMap) {
@@ -408,7 +403,7 @@ void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void 
                 NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
                 if (val)
                 {
-                    val = [val stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    val = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                     [emailArray addObject:val];
                 }
             }
@@ -433,11 +428,9 @@ void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void 
             }
             CFRelease(phoneMap);
         }
-        NSDate *modDate = CFBridgingRelease(ABRecordCopyValue((ABRecordRef)lPerson, kABPersonModificationDateProperty));
-        NSString *modDateGMT = [dateFormatter stringFromDate:modDate];
         NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
         NSString *recordStr = [NSString stringWithFormat:@"%@", recordId];
-        NSDictionary *contactBase = @{ @"email": emailArray, @"phone": phoneArray, @"updated": modDateGMT, @"id": recordStr };
+        NSDictionary *contactBase = @{ @"email": emailArray, @"phone": phoneArray, @"id": recordStr };
         NSMutableDictionary *contact = [NSMutableDictionary dictionaryWithDictionary:contactBase];
         
         NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonFirstNameProperty));

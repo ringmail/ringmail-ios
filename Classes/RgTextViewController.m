@@ -171,6 +171,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
         // Reloads any cached text
         [self slk_reloadTextView];
     }];
+	
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:kChatNavBarUpdate object:self userInfo:@{
 		@"thread": _chatThread,
@@ -2248,6 +2249,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter addObserver:self selector:@selector(chatUpdateEvent:) name:kRKMessageUpdated object:nil];
     [notificationCenter addObserver:self selector:@selector(chatRemoveEvent:) name:kRKMessageRemoved object:nil];
     [notificationCenter addObserver:self selector:@selector(callEndEvent:) name:kRKCallEnd object:nil];
+    [notificationCenter addObserver:self selector:@selector(contactsUpdatedEvent:) name:kRgContactsUpdated object:nil];
 }
 
 - (void)slk_unregisterNotifications
@@ -2288,7 +2290,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [notificationCenter removeObserver:self name:kRKMessageUpdated object:nil];
     [notificationCenter removeObserver:self name:kRKMessageRemoved object:nil];
     [notificationCenter removeObserver:self name:kRKCallEnd object:nil];
-    //[notificationCenter removeObserver:self name:kRKMessageViewChanged object:nil];
+	[notificationCenter removeObserver:self name:kRgContactsUpdated object:nil];
 }
 
 #pragma mark - View Auto-Rotation
@@ -2432,6 +2434,15 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 	{
 		[_chatRoom appendNewMessages];
 	}	
+}
+
+- (void)contactsUpdatedEvent:(NSNotification*)event
+{
+	NSNumber* threadId = _chatThread.threadId;
+	_chatThread = [[RKCommunicator sharedInstance] getThreadById:threadId];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kChatNavBarUpdate object:self userInfo:@{
+		@"thread": _chatThread,
+	}];
 }
 
 @end

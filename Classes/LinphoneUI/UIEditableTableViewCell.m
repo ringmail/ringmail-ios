@@ -105,17 +105,14 @@
     textFrame.size.height = 20;
     [self.detailTextLabel setFrame:textFrame];
     
-    if ([self.reuseIdentifier isEqual: @"ContactDetailsHeaderCell"])
+    if ([self.reuseIdentifier isEqual:@"ContactDetailsHeaderCell"])
     {
         CGRect textFrame2 = [self.detailTextField frame];
         textFrame2.origin.y = 20;
         textFrame2.origin.x = 0;
         [self.detailTextField setFrame:textFrame2];
     }
-    
 }
-
-
 
 #pragma mark - UITableViewCell Functions
 

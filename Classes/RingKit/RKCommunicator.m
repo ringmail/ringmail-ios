@@ -157,6 +157,11 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	return [[RKThreadStore sharedInstance] listThreadItems:thread lastItemId:lastItemId];
 }
 
+- (RKThread*)getThreadById:(NSNumber*)lookupId
+{
+	return [[RKThreadStore sharedInstance] getThreadById:lookupId];
+}
+
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;
 {
 	RKContact* contact = [RKContact newByMatchingAddress:remoteAddress];

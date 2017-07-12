@@ -231,8 +231,10 @@
             if (rgContacts)
             {
                 //NSLog(@"RingMail: Updated Contacts: %@", rgContacts);
-                [[RKContactStore sharedInstance] updateDetails:rgContacts];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
+                if ([[RKContactStore sharedInstance] updateDetails:rgContacts])
+				{
+					[[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
+				}
             }
         }
         else if ([ok isEqualToString:@"Unauthorized"])

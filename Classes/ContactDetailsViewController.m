@@ -21,6 +21,10 @@
 #import "PhoneMainView.h"
 #import "RgContactManager.h"
 #import "RKContactStore.h"
+#import "NSString+NSHash.h"
+#import "DeepCopy.h"
+#import "RKThreadStore.h"
+#import "RgManager.h"
 
 @implementation ContactDetailsViewController
 
@@ -31,6 +35,7 @@
 @synthesize cancelButton;
 @synthesize background;
 @synthesize contactData;
+@synthesize contactMD5;
 
 static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 
@@ -43,6 +48,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 		addressBook = ABAddressBookCreateWithOptions(nil, nil);
 		ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, (__bridge void *)(self));
 		contactData = @{};
+		contactMD5 = @"";
 	}
 	return self;
 }
@@ -154,8 +160,28 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
         RgContactManager *ct = [[LinphoneManager instance] contactManager];
         NSArray *updated = [ct getContactList:YES];
         [ct sendContactData:updated];
+		
+		NSString* origMD5 = contactMD5;
+		NSDictionary* origData = [contactData deepCopy];
+		NSLog(@"Old Contact Data(%@): %@", contactMD5, contactData);
+		contactData = [[LinphoneManager instance].fastAddressBook contactData:contact];
+		contactMD5 = [[self toJSON:contactData] MD5];
+		NSLog(@"New Contact Data(%@): %@", contactMD5, contactData);
+		if (! [origMD5 isEqualToString:contactMD5])
+		{
+			NSDictionary* changes = [self findContactChanges:contactData from:origData];
+			NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
+			NSLog(@"%s: Contact Changes(%@): %@", __PRETTY_FUNCTION__, recordId, changes);
+			[[RKThreadStore sharedInstance] updateContact:recordId changes:changes];
+			[[RKThreadStore sharedInstance] dumpThreads];
+			[[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{
+				@"id": recordId,
+			}];
+		}
 	}
 	[[LinphoneManager instance].fastAddressBook reload];
+	
+	[tableController.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 - (void)selectContact:(ABRecordRef)acontact andReload:(BOOL)reload {
@@ -166,6 +192,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 	
 	// Load current data
 	contactData = [[LinphoneManager instance].fastAddressBook contactData:contact];
+	contactMD5 = [[self toJSON:contactData] MD5];
 	NSLog(@"%s: Contact Data: %@", __PRETTY_FUNCTION__, contactData);
 
 	if (reload) {
@@ -343,6 +370,99 @@ static UICompositeViewDescription *compositeDescription = nil;
 	} else {
 		[editButton setEnabled:FALSE];
 	}
+}
+
+- (NSString*)toJSON:(NSDictionary*)input
+{
+    NSError *writeError = nil; 
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:input options:NSJSONWritingPrettyPrinted error:&writeError];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]; 
+    return jsonString;
+}
+
+- (NSDictionary*)findContactChanges:(NSDictionary*)current from:(NSDictionary*)original
+{
+	// Find removals & additions
+	NSMutableDictionary* add_email = [NSMutableDictionary dictionary];
+	NSMutableDictionary* del_email = [NSMutableDictionary dictionary];
+	for (NSString* s in (NSArray*)original[@"email"])
+	{
+		del_email[s] = @1;
+	}
+	for (NSString* s in (NSArray*)current[@"email"])
+	{
+		if (del_email[s] != nil)
+		{
+			[del_email removeObjectForKey:s];
+		}
+		else
+		{
+			add_email[s] = @1;
+		}
+	}
+	NSMutableDictionary* add_phone = [NSMutableDictionary dictionary];
+	NSMutableDictionary* del_phone = [NSMutableDictionary dictionary];
+	for (NSString* s in (NSArray*)original[@"phone"])
+	{
+		del_phone[s] = @1;
+	}
+	for (NSString* s in (NSArray*)current[@"phone"])
+	{
+		if (del_phone[s] != nil)
+		{
+			[del_phone removeObjectForKey:s];
+		}
+		else
+		{
+			add_phone[s] = @1;
+		}
+	}
+	
+	NSMutableDictionary* changes = [NSMutableDictionary dictionary];
+	NSInteger original_emails = [(NSArray*)original[@"email"] count];
+	NSInteger current_emails = [(NSArray*)current[@"email"] count];
+	NSInteger max_emails = MAX(original_emails, current_emails);
+	for (NSInteger i = 0; i < max_emails; i++)
+	{
+		if (i < original_emails && i < current_emails)
+		{
+			if (! [original[@"email"][i] isEqualToString:current[@"email"][i]])
+			{
+				if (del_email[original[@"email"][i]] && add_email[current[@"email"][i]])
+				{
+    				changes[original[@"email"][i]] = current[@"email"][i];
+					[del_email removeObjectForKey:original[@"email"][i]];
+					[add_email removeObjectForKey:current[@"email"][i]];
+				}
+			}
+		}
+	}	
+	NSInteger original_phones = [(NSArray*)original[@"phone"] count];
+	NSInteger current_phones = [(NSArray*)current[@"phone"] count];
+	NSInteger max_phones = MAX(original_phones, current_phones);
+	for (NSInteger i = 0; i < max_phones; i++)
+	{
+		if (i < original_phones && i < current_phones)
+		{
+			if (! [original[@"phone"][i] isEqualToString:current[@"phone"][i]])
+			{
+				if (del_phone[original[@"phone"][i]] && add_phone[current[@"phone"][i]])
+				{
+    				changes[original[@"phone"][i]] = current[@"phone"][i];
+					[del_phone removeObjectForKey:original[@"phone"][i]];
+					[add_phone removeObjectForKey:current[@"phone"][i]];
+				}
+			}
+		}
+	}
+	
+	[add_phone addEntriesFromDictionary:add_email];
+	[del_phone addEntriesFromDictionary:del_email];
+	return @{
+		@"change": changes,
+		@"add": add_phone,
+		@"delete": del_phone,
+	};
 }
 
 @end

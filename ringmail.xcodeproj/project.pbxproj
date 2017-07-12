@@ -574,6 +574,8 @@
 		C43F65DB1D540233004CEC70 /* ringmail_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D61D540233004CEC70 /* ringmail_delete@2x.png */; };
 		C43F65DC1D540233004CEC70 /* ringmail_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D71D540233004CEC70 /* ringmail_delete.png */; };
 		C43F65DD1D540233004CEC70 /* ringmail_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = C43F65D71D540233004CEC70 /* ringmail_delete.png */; };
+		C44484041F168C6000436D33 /* DeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = C44484031F168C6000436D33 /* DeepCopy.m */; };
+		C44484051F168C6000436D33 /* DeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = C44484031F168C6000436D33 /* DeepCopy.m */; };
 		C444F3C71C92240300134788 /* menu-more_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3A61C92240300134788 /* menu-more_active@2x.png */; };
 		C444F3C81C92240300134788 /* menu-more_active.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3A71C92240300134788 /* menu-more_active.png */; };
 		C444F3C91C92240300134788 /* menu-more_active@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C444F3A81C92240300134788 /* menu-more_active@3x.png */; };
@@ -3019,6 +3021,8 @@
 		C43F65D51D540233004CEC70 /* ringmail_delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_delete@3x.png"; path = "Resources/ringmail_delete@3x.png"; sourceTree = "<group>"; };
 		C43F65D61D540233004CEC70 /* ringmail_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_delete@2x.png"; path = "Resources/ringmail_delete@2x.png"; sourceTree = "<group>"; };
 		C43F65D71D540233004CEC70 /* ringmail_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_delete.png; path = Resources/ringmail_delete.png; sourceTree = "<group>"; };
+		C44484021F168C6000436D33 /* DeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeepCopy.h; path = Utils/DeepCopy.h; sourceTree = "<group>"; };
+		C44484031F168C6000436D33 /* DeepCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeepCopy.m; path = Utils/DeepCopy.m; sourceTree = "<group>"; };
 		C444F3A61C92240300134788 /* menu-more_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-more_active@2x.png"; path = "Resources/menu-more_active@2x.png"; sourceTree = "<group>"; };
 		C444F3A71C92240300134788 /* menu-more_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-more_active.png"; path = "Resources/menu-more_active.png"; sourceTree = "<group>"; };
 		C444F3A81C92240300134788 /* menu-more_active@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-more_active@3x.png"; path = "Resources/menu-more_active@3x.png"; sourceTree = "<group>"; };
@@ -5222,6 +5226,8 @@
 				D37E3ECA1619C27A0087659A /* CAAnimationBlocks */,
 				D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */,
 				D380801115C29984005BE9BC /* ColorSpaceUtilities.h */,
+				C44484021F168C6000436D33 /* DeepCopy.h */,
+				C44484031F168C6000436D33 /* DeepCopy.m */,
 				D3807FB615C28940005BE9BC /* DCRoundSwitch */,
 				D37EE15F160377D7003608A6 /* DTFoundation */,
 				D32B9DFA15A2F131000B6DEC /* FastAddressBook.h */,
@@ -8604,6 +8610,7 @@
 				C44A41061E70E415000F3E24 /* CLSplineInterpolator.m in Sources */,
 				D37EE162160377D7003608A6 /* DTActionSheet.m in Sources */,
 				C45B93401ECE4EF200974011 /* RKItem.m in Sources */,
+				C44484041F168C6000436D33 /* DeepCopy.m in Sources */,
 				C402BF031C2623E10076B60C /* UIImage+operation.m in Sources */,
 				D35E91F4160CA10B0023116B /* UILinphoneTextField.m in Sources */,
 				C44A40D41E70E415000F3E24 /* CLAdjustmentTool.m in Sources */,
@@ -8846,6 +8853,7 @@
 				C4AC2B301D3963FA003B6232 /* NSString+MD5.m in Sources */,
 				C4AC2B341D3963FA003B6232 /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
 				C4AC2B351D3963FA003B6232 /* IASKSlider.m in Sources */,
+				C44484051F168C6000436D33 /* DeepCopy.m in Sources */,
 				C42B84441EDE68CB00EB9C7F /* RKMediaMessage.m in Sources */,
 				C48C10A21E81ABC00094F1F3 /* MediaBarComponent.mm in Sources */,
 				C48C10A81E81CCC40094F1F3 /* MediaAssetProvider.m in Sources */,

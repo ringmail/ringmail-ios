@@ -16,10 +16,9 @@
 #import "NBPhoneNumber.h"
 
 /* RingMail */
-extern NSString *const kRgTextReceived;
-extern NSString *const kRgTextSent;
-extern NSString *const kRgTextUpdate;
-extern NSString *const kRgContactsUpdated;
+extern NSString *const kRgTextReceived; // deprec
+extern NSString *const kRgTextSent; // deprec
+extern NSString *const kRgTextUpdate; // deprec
 extern NSString *const kRgSetAddress;
 extern NSString *const kRgMainRefresh;
 extern NSString *const kRgMainRemove;
@@ -28,10 +27,7 @@ extern NSString *const kRgAttemptVerify;
 extern NSString *const kRgLaunchBrowser;
 extern NSString *const kRgToggleNumberPad;
 extern NSString *const kRgCallRefresh;
-extern NSString *const kRgContactRefresh;
-extern NSString *const kRgSelf;
-extern NSString *const kRgSelfName;
-
+extern NSString *const kRgContactsUpdated;
 extern NSString *const kRgNavBarViewChange;
 extern NSString *const kRgHashtagDirectoryUpdatePath;
 extern NSString *const kRgHashtagDirectoryRefreshPath;
@@ -42,14 +38,11 @@ extern NSString *const kRgGoogleSignInComplete;
 extern NSString *const kRgGoogleSignInVerifed;
 extern NSString *const kRgGoogleSignInError;
 extern NSString *const kRgUserUnauthorized;
-
 extern NSString *const kRgSendComponentReset;
 extern NSString *const kRgSendComponentUpdateTo;
 extern NSString *const kRgSendComponentAddMedia;
 extern NSString *const kRgSendComponentRemoveMedia;
-
 extern NSString *const kRgSendContactSelectDone;
-
 extern NSString *const kRgPresentOptionsModal;
 extern NSString *const kRgDismissOptionsModal;
 
