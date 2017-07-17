@@ -72,7 +72,6 @@
             ");",
             @"CREATE UNIQUE INDEX IF NOT EXISTS uuid_1 ON rk_thread (uuid);",
             @"CREATE UNIQUE INDEX IF NOT EXISTS address_1 ON rk_thread (address, original_to);",
-            @"DROP INDEX contact_id_1;",
             @"CREATE UNIQUE INDEX IF NOT EXISTS contact_id_1 ON rk_thread (contact_id, original_to);",
             @"CREATE INDEX IF NOT EXISTS address_md5_1 ON rk_thread (address_md5);",
             @"CREATE INDEX IF NOT EXISTS ts_activity_1 ON rk_thread (ts_activity);",
