@@ -272,7 +272,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
     if ([ringMailContacts objectForKey:[recordId stringValue]])
     {
-        //NSLog(@"Found Contact: %@", recordId);
+//        NSLog(@"Found Contact: %@", recordId);
 //		[[cell inviteButton] setHidden:YES];
         [[cell rgImage] setHidden:NO];
     }

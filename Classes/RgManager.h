@@ -43,6 +43,7 @@ extern NSString *const kRgSendComponentUpdateTo;
 extern NSString *const kRgSendComponentAddMedia;
 extern NSString *const kRgSendComponentRemoveMedia;
 extern NSString *const kRgSendContactSelectDone;
+extern NSString *const kRgAddContact;
 extern NSString *const kRgPresentOptionsModal;
 extern NSString *const kRgDismissOptionsModal;
 

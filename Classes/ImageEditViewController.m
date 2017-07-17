@@ -13,6 +13,7 @@
 @synthesize imageView;
 @synthesize editMode;
 @synthesize editor;
+@synthesize currentFile;
 
 #pragma mark - Lifecycle Functions
 
@@ -20,11 +21,24 @@
 {
 	self = [super initWithNibName:@"ImageEditViewController" bundle:[NSBundle mainBundle]];
 	if (self != nil) {
+        currentFile = @"";
 		image = img;
 		editMode = inputMode;
 		editor = nil;
 	}
 	return self;
+}
+
+- (id)initWithFilePath:(NSString*)imgPath editMode:(RgSendMediaEditMode)inputMode
+{
+    self = [super initWithNibName:@"ImageEditViewController" bundle:[NSBundle mainBundle]];
+    if (self != nil) {
+        currentFile = imgPath;
+        image = [UIImage imageWithContentsOfFile:imgPath];
+        editMode = inputMode;
+        editor = nil;
+    }
+    return self;
 }
 
 - (void)dealloc {
@@ -83,10 +97,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 	{
     	NSLog(@"Edit Complete");
 		UIImage* newImage = [imgView image];
+        __block NSString* tmpfile;
 		
-    	// Write file
-        NSString* imageUUID = [[NSUUID UUID] UUIDString];
-        __block NSString* tmpfile = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageUUID]];
+    	// Set file path
+        if ([currentFile isEqual: @""])
+        {
+            tmpfile = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [[NSUUID UUID] UUIDString]]];
+        }
+        else
+        {
+            tmpfile = currentFile;
+        }
+        // Write file
         [UIImagePNGRepresentation(newImage) writeToFile:tmpfile atomically:YES];
     	
     	RgSendMediaEditMode mode = editMode;

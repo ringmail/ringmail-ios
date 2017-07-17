@@ -9,6 +9,8 @@
 #import "UINavBar.h"
 #import "PhoneMainView.h"
 #import "CAAnimation+Blocks.h"
+#import "ImageEditViewController.h"
+#import "RgMomentDelegate.h"
 
 
 @implementation UINavBar
@@ -31,6 +33,7 @@ int backState = 0;
 @synthesize leftLabel;
 @synthesize rightLabel;
 @synthesize submitButton;
+@synthesize addContactButton;
 
 
 #pragma mark - Lifecycle Functions
@@ -164,7 +167,9 @@ int backState = 0;
     [headerLabel setHidden:NO];
     [logo setHidden:YES];
     [submitButton setHidden:YES];
-    [submitButton setEnabled:YES];
+    [submitButton setEnabled:NO];
+    [addContactButton setHidden:YES];
+    [addContactButton setEnabled:NO];
     
     NavView navView = [self navViewFromString:header];
     
@@ -176,9 +181,12 @@ int backState = 0;
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
             break;
-        case Recents:
         case Contacts:
+            [addContactButton setHidden:NO];
+            [addContactButton setEnabled:YES];
+            break;
         case ContactDetails:
+        case Recents:
         case Settings:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
@@ -188,8 +196,6 @@ int backState = 0;
             [segmentButton setHidden:NO];
             break;
         case HTagCard:
-//            [segmentButton setEnabled:NO];
-//            [segmentButton setHidden:YES];
             [backButton setHidden:NO];
             [backButton setEnabled:YES];
             backState = 1;
@@ -206,6 +212,8 @@ int backState = 0;
         case SendContacts:
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
+            [backButton setHidden:NO];
+            [backButton setEnabled:YES];
             break;
         default:
             break;
@@ -251,7 +259,16 @@ int backState = 0;
         [[PhoneMainView instance] popCurrentView];
     }
     else if ([[[PhoneMainView instance] currentView] equal:[SendContactsViewController compositeViewDescription]]) {
-        [[PhoneMainView instance] popCurrentView];
+        SendContactsViewController* vc = (SendContactsViewController*)[[PhoneMainView instance].mainViewController getCachedController:@"SendContactsViewController"];
+        if (vc.selectionMode == SendContactSelectionModeMulti) {
+            RgMomentDelegate* md = [RgMomentDelegate sharedInstance];
+            ImageEditViewController* ctl = [[ImageEditViewController alloc] initWithFilePath:md.file editMode:RgSendMediaEditModeMoment];
+            [[PhoneMainView instance] changeCurrentView:[ImageEditViewController compositeViewDescription] content:ctl push:NO];
+        }
+        else if (vc.selectionMode == SendContactSelectionModeSingle)
+        {
+                    [[PhoneMainView instance] popCurrentView];
+        }
     }
     else {
         [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{@"category_id": @"0",}];
@@ -272,6 +289,11 @@ int backState = 0;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kRgSegmentControl object:nil userInfo:dict];
     
+}
+
+- (IBAction)onAddContactClick:(id)event
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgAddContact object:self userInfo:nil];
 }
 
 
