@@ -214,7 +214,7 @@
         </view>
     </objects>
     <resources>
-        <image name="avatar_unknown_small.png" width="131" height="131"/>
+        <image name="avatar_unknown_small.png" width="66" height="66"/>
         <image name="message_normal.png" width="84" height="84"/>
         <image name="message_selected.png" width="84" height="84"/>
         <image name="phone_normal.png" width="84" height="84"/>

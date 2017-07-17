@@ -516,7 +516,15 @@
 		}
 		if (contactId != nil)
 		{
-			if (! [contactId isEqualToNumber:curContact])
+			if ([curContact isKindOfClass:[NSNumber class]])
+			{
+    			if (! [contactId isEqualToNumber:curContact])
+    			{
+    				updates[@"contact_id"] = contactId;
+    				update = YES;
+    			} // else contact is same
+			}
+			else // curContact is NSNull
 			{
 				updates[@"contact_id"] = contactId;
 				update = YES;
@@ -525,15 +533,13 @@
 		}
 		else
 		{
-			if (! [curContact isKindOfClass:[NSNull class]]) // Input contact nil but database not so clear out contact (require match on server-side)
+			if ([curContact isKindOfClass:[NSNumber class]])
     		{
-    			updates[@"contact_id"] = [NSNull null];
-    			update = YES;
-				params[@"contact"] = [RKContact newWithData:@{@"addressList": @[remoteAddress]}];
+				params[@"contact"] = [RKContact newWithData:@{@"contactId": curContact, @"addressList": @[remoteAddress]}];
     		}
 			else
 			{
-				params[@"contact"] = [RKContact newWithData:@{@"contactId": curContact, @"addressList": @[remoteAddress]}];
+				params[@"contact"] = [RKContact newWithData:@{@"addressList": @[remoteAddress]}];
 			}
 		}
 		if (! [from isEqualToString:curAddress])

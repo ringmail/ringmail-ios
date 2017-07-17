@@ -40,6 +40,7 @@ NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
 NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
 NSString *const kRgGoogleSignInError = @"kRgGoogleSignInError";
 NSString *const kRgUserUnauthorized = @"kRgUserUnauthorized";
+NSString *const kRgAddContact = @"kRgAddContact";
 NSString *const kRgPresentOptionsModal = @"kRgPresentOptionsModal";
 NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
 
@@ -50,7 +51,6 @@ NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
 NSString *const kRgSendContactSelectDone = @"kRgSendContactSelectDone";
 NSString *const kRgSendComponentUpdateTo = @"kRgSendComponentUpdateTo";
 
-NSString *const kRgAddContact = @"kRgAddContact";
 
 static LevelDB* theConfigDatabase = nil;
 

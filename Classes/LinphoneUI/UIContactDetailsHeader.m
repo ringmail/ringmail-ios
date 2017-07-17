@@ -254,14 +254,17 @@
 	// setup placeholder
 	ABPropertyID property = [[propertyList objectAtIndex:[indexPath row]] intValue];
 	if (property == kABPersonFirstNameProperty) {
-		[cell.detailTextField setPlaceholder:NSLocalizedString(@"First Name", nil)];
-        [cell.detailTextField setTextColor:[UIColor whiteColor]];
+		NSAttributedString *str = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"First Name", nil) attributes:@{ NSForegroundColorAttributeName : [UIColor colorWithHex:@"#939393"] }];
+		cell.detailTextField.attributedPlaceholder = str;
+        cell.detailTextField.textColor = [UIColor whiteColor];
 	} else if (property == kABPersonLastNameProperty) {
-		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Last Name", nil)];
-        [cell.detailTextField setTextColor:[UIColor whiteColor]];
+		NSAttributedString *str = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Last Name", nil) attributes:@{ NSForegroundColorAttributeName : [UIColor colorWithHex:@"#939393"] }];
+		cell.detailTextField.attributedPlaceholder = str;
+        cell.detailTextField.textColor = [UIColor whiteColor];
 	} else if (property == kABPersonOrganizationProperty) {
-		[cell.detailTextField setPlaceholder:NSLocalizedString(@"Company", nil)];
-        [cell.detailTextField setTextColor:[UIColor whiteColor]];
+		NSAttributedString *str = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Company", nil) attributes:@{ NSForegroundColorAttributeName : [UIColor colorWithHex:@"#939393"] }];
+		cell.detailTextField.attributedPlaceholder = str;
+        cell.detailTextField.textColor = [UIColor whiteColor];
 	}
     
 	[cell.detailTextField setKeyboardType:UIKeyboardTypeDefault];
