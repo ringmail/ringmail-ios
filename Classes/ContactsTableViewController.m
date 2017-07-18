@@ -133,7 +133,8 @@ static int ms_strcmpfuz(const char *fuzzy_word, const char *sentence) {
 	@synchronized(addressBookMap) {
 
 		// Reset Address book
-		[addressBookMap removeAllObjects];
+        int needsReset = 1;
+//		[addressBookMap removeAllObjects];
         
         // Read RingMail Contacts
         ringMailContacts = [[RKContactStore sharedInstance] getEnabledContacts];
@@ -183,6 +184,12 @@ static int ms_strcmpfuz(const char *fuzzy_word, const char *sentence) {
 					if ([ContactSelection getNameOrEmailFilter] == nil ||
 						(ms_strcmpfuz([[[ContactSelection getNameOrEmailFilter] lowercaseString] UTF8String],
 									  [[name lowercaseString] UTF8String]) == 0)) {
+                        
+                        if (needsReset)
+                        {
+                            [addressBookMap removeAllObjects];
+                            needsReset = 0;
+                        }
 
 						// Sort contacts by first letter. We need to translate the name to ASCII first, because of UTF-8
 						// issues. For instance
