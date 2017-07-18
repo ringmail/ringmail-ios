@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12121"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoPlayerViewController">
+            <connections>
+                <outlet property="contentView" destination="NnV-On-lfP" id="M01-SN-dtB"/>
+                <outlet property="contentViewAspectRatioConstraint" destination="KtH-xH-2XO" id="43R-RI-tfE"/>
+                <outlet property="contentViewBottomSpaceConstraint" destination="gDX-bo-KQO" id="c8q-o5-roc"/>
+                <outlet property="videoContainerView" destination="Yz6-Lz-3zA" id="ZXf-hR-mjF"/>
+                <outlet property="view" destination="9d1-vw-zge" id="v4u-Iv-Y5s"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="9d1-vw-zge">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NnV-On-lfP" userLabel="Content view">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="659"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yz6-Lz-3zA" userLabel="Video Container View" customClass="DZVideoPlayerViewControllerContainerView">
+                            <rect key="frame" x="0.0" y="-0.5" width="375" height="659"/>
+                            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                    <integer key="value" value="0"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Yz6-Lz-3zA" secondAttribute="trailing" id="2gZ-68-fiY"/>
+                        <constraint firstAttribute="width" secondItem="NnV-On-lfP" secondAttribute="height" multiplier="16:9" priority="250" id="KtH-xH-2XO"/>
+                        <constraint firstAttribute="bottom" secondItem="Yz6-Lz-3zA" secondAttribute="bottom" id="MB8-X5-Y7p"/>
+                        <constraint firstItem="Yz6-Lz-3zA" firstAttribute="top" secondItem="NnV-On-lfP" secondAttribute="top" id="Xlt-H9-bFM"/>
+                        <constraint firstItem="Yz6-Lz-3zA" firstAttribute="leading" secondItem="NnV-On-lfP" secondAttribute="leading" id="fFZ-U0-NUN"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="NnV-On-lfP" firstAttribute="top" secondItem="9d1-vw-zge" secondAttribute="top" id="fcx-XY-l9l"/>
+                <constraint firstAttribute="bottomMargin" secondItem="NnV-On-lfP" secondAttribute="bottom" priority="750" id="gDX-bo-KQO"/>
+                <constraint firstItem="NnV-On-lfP" firstAttribute="leading" secondItem="9d1-vw-zge" secondAttribute="leading" id="sgv-Kz-XEa"/>
+                <constraint firstAttribute="trailing" secondItem="NnV-On-lfP" secondAttribute="trailing" id="wya-qF-X1j"/>
+            </constraints>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>

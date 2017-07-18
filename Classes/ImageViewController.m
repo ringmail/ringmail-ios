@@ -27,8 +27,16 @@
 
 #pragma mark - Lifecycle Functions
 
-- (id)init {
-	return [super initWithNibName:@"ImageViewController" bundle:[NSBundle mainBundle]];
+- (instancetype)initWithImage:(UIImage*)aimage
+{
+	self = [super init];
+	if (self)
+	{
+		self->image = aimage;
+		IDMPhoto* photo = [IDMPhoto photoWithImage:aimage];
+		self->photoBrowser = [[IDMPhotoBrowser alloc] initWithPhotos:@[photo]];
+	}
+	return self;
 }
 
 #pragma mark - UICompositeViewDelegate Functions
@@ -50,18 +58,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 														   portraitMode:true];
 	}
 	return compositeDescription;
-}
-
-- (instancetype)initWithImage:(UIImage*)aimage
-{
-	self = [super init];
-	if (self)
-	{
-		self->image = aimage;
-		IDMPhoto* photo = [IDMPhoto photoWithImage:aimage];
-		self->photoBrowser = [[IDMPhotoBrowser alloc] initWithPhotos:@[photo]];
-	}
-	return self;
 }
 
 - (void)viewDidLoad
