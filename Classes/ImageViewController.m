@@ -20,97 +20,10 @@
 #import "ImageViewController.h"
 #import "PhoneMainView.h"
 
-@implementation UIImageScrollView
-
-@synthesize image;
-@synthesize imageView;
-
-#pragma mark - Lifecycle Functions
-
-- (void)initUIImageScrollView {
-	imageView = [[UIImageView alloc] init];
-	self.delegate = self;
-	[self addSubview:imageView];
-}
-
-- (id)init {
-	self = [super init];
-	if (self != nil) {
-		[self initUIImageScrollView];
-	}
-	return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-	self = [super initWithCoder:aDecoder];
-	if (self != nil) {
-		[self initUIImageScrollView];
-	}
-	return self;
-}
-
-- (id)initWithFrame:(CGRect)frame {
-	self = [super initWithFrame:frame];
-	if (self != nil) {
-		[self initUIImageScrollView];
-	}
-	return self;
-}
-
-#pragma mark - ViewController Functions
-
-- (void)layoutSubviews {
-	[super layoutSubviews];
-	// center the image as it becomes smaller than the size of the screen
-	CGSize boundsSize = self.bounds.size;
-	CGRect frameToCenter = imageView.frame;
-
-	// center horizontally
-	if (frameToCenter.size.width < boundsSize.width)
-		frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2;
-	else
-		frameToCenter.origin.x = 0;
-
-	// center vertically
-	if (frameToCenter.size.height < boundsSize.height)
-		frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2;
-	else
-		frameToCenter.origin.y = 0;
-
-	imageView.frame = frameToCenter;
-}
-
-#pragma mark - Property Functions
-
-- (void)setImage:(UIImage *)aimage {
-	self.minimumZoomScale = 0;
-	self.zoomScale = 1;
-
-	CGRect rect = CGRectMake(0, 0, aimage.size.width, aimage.size.height);
-	imageView.image = aimage;
-	imageView.frame = rect;
-	self.contentSize = rect.size;
-	[self zoomToRect:rect animated:FALSE];
-	self.minimumZoomScale = self.zoomScale;
-}
-
-- (UIImage *)image {
-	return imageView.image;
-}
-
-#pragma mark - UIScrollViewDelegate Functions
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-	return imageView;
-}
-
-@end
-
 @implementation ImageViewController
 
-@synthesize scrollView;
-@synthesize backButton;
 @synthesize image;
+@synthesize photoBrowser;
 
 #pragma mark - Lifecycle Functions
 
@@ -132,26 +45,39 @@ static UICompositeViewDescription *compositeDescription = nil;
 																 tabBar:nil
                                                           navBarEnabled:false
 														  tabBarEnabled:false
-															 fullscreen:false
+															 fullscreen:true
 														  landscapeMode:[LinphoneManager runningOnIpad]
 														   portraitMode:true];
 	}
 	return compositeDescription;
 }
 
-#pragma mark - Property Functions
-
-- (void)setImage:(UIImage *)aimage {
-	scrollView.image = aimage;
+- (instancetype)initWithImage:(UIImage*)aimage
+{
+	self = [super init];
+	if (self)
+	{
+		self->image = aimage;
+		IDMPhoto* photo = [IDMPhoto photoWithImage:aimage];
+		self->photoBrowser = [[IDMPhotoBrowser alloc] initWithPhotos:@[photo]];
+	}
+	return self;
 }
 
-- (UIImage *)image {
-	return scrollView.image;
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	[self addChildViewController:self.photoBrowser];
+	self.photoBrowser.view.frame = self.view.frame;
+	[self.view addSubview:self.photoBrowser.view];
+	[self.photoBrowser didMoveToParentViewController:self];
+	self.photoBrowser.delegate = self;
 }
 
 #pragma mark - Action Functions
 
-- (IBAction)onBackClick:(id)sender {
+- (void)willDisappearPhotoBrowser:(IDMPhotoBrowser *)photoBrowser;
+{
 	if ([[[PhoneMainView instance] currentView] equal:[ImageViewController compositeViewDescription]]) {
 		[[PhoneMainView instance] popCurrentView];
 	}

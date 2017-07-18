@@ -20,22 +20,17 @@
 #import <UIKit/UIKit.h>
 
 #import "UICompositeViewController.h"
+#import "IDMPhotoBrowser.h"
 
-@interface UIImageScrollView : UIScrollView<UIScrollViewDelegate>
-    
-@property (nonatomic, strong) UIImage  *image;
-@property (readonly) IBOutlet UIImageView *imageView;
-
-@end
-
-@interface ImageViewController : UIViewController<UICompositeViewDelegate> {
-	
+@interface ImageViewController : UIViewController<UICompositeViewDelegate, IDMPhotoBrowserDelegate> {
 }
+	
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) IDMPhotoBrowser *photoBrowser;
 
-@property (nonatomic, strong) IBOutlet UIImageScrollView *scrollView;
-@property (nonatomic, strong) UIImage  *image;
-@property (nonatomic, strong) IBOutlet UIButton *backButton;
+- (instancetype)initWithImage:(UIImage*)aimage;
 
-- (IBAction)onBackClick:(id)sender;
+- (void)willDisappearPhotoBrowser:(IDMPhotoBrowser *)photoBrowser;
+
 
 @end

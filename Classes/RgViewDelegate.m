@@ -48,8 +48,10 @@
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"Show Image: %f, %f", image.size.height, image.size.width);
-	ImageViewController* ivc = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE], ImageViewController);
-	[ivc setImage:image];
+	ImageViewController* ivc = [[ImageViewController alloc] initWithImage:image];
+	[[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] content:ivc push:TRUE];
+	//ImageViewController* ivc = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE], ImageViewController);
+	//[ivc setImage:image];
 }
 
 - (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete
