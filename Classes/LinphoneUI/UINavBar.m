@@ -64,6 +64,8 @@ int backState = 0;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgNavBarViewChange object:nil];
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    
 }
 
 - (void)viewDidLoad {
@@ -223,6 +225,7 @@ int backState = 0;
     if (vc.selectionMode == SendContactSelectionModeMulti && navView == SendContacts) {
         [submitButton setHidden:NO];
         [submitButton setEnabled:YES];
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     }
 }
 
