@@ -211,12 +211,6 @@
             size:{.height = 1 / [UIScreen mainScreen].scale}];
 }*/
 
-- (void)actionChat:(CKButtonComponent *)sender
-{
-    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
-    [card showMessages];
-}
-
 - (void)actionGo:(CKButtonComponent *)sender
 {
     Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];

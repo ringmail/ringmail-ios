@@ -242,7 +242,7 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
 }
 
 void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void *context) {
-    //NSLog(@"FastAddressBook Change Detected");
+    NSLog(@"FastAddressBook Change Detected");
     [[[LinphoneManager instance] contactManager] sendContactData];
 	FastAddressBook *fastAddressBook = (__bridge FastAddressBook *)context;
 	[fastAddressBook loadData];
@@ -388,6 +388,69 @@ void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info, void 
         if (lLocalizedlOrganization != nil)
         {
             [contact setObject:(NSString*)lLocalizedlOrganization forKey:@"co"];
+        }
+        return contact;
+    }
+}
+
+- (NSDictionary *)contactData:(ABRecordRef)lPerson
+{
+    @synchronized(addressBookMap) {
+        ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+        NSMutableArray *emailArray = [NSMutableArray array];
+        if (emailMap) {
+            for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
+                NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(emailMap, i));
+                if (val)
+                {
+                    val = [[val lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    [emailArray addObject:val];
+                }
+            }
+            CFRelease(emailMap);
+        }
+        ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
+        NSMutableArray *phoneArray = [NSMutableArray array];
+        NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+        if (phoneMap) {
+            for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
+                NSString* val = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneMap, i));
+                if (val)
+                {
+                    NSError *anError = nil;
+                    NBPhoneNumber *myNumber = [phoneUtil parse:val defaultRegion:@"US" error:&anError];
+                    if (anError == nil && [phoneUtil isValidNumber:myNumber])
+                    {
+                        val = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+                        [phoneArray addObject:val];
+                    }
+                }
+            }
+            CFRelease(phoneMap);
+        }
+        NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
+        NSString *recordStr = [NSString stringWithFormat:@"%@", recordId];
+        NSDictionary *contactBase = @{ @"email": emailArray, @"phone": phoneArray, @"id": recordStr };
+        NSMutableDictionary *contact = [NSMutableDictionary dictionaryWithDictionary:contactBase];
+        
+        NSString *lFirstName = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonFirstNameProperty));
+    	NSString *lLocalizedFirstName = [FastAddressBook localizedLabel:lFirstName];
+    	NSString *lLastName = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonLastNameProperty));
+    	NSString *lLocalizedLastName = [FastAddressBook localizedLabel:lLastName];
+    	NSString *lOrganization = CFBridgingRelease(ABRecordCopyValue(lPerson, kABPersonOrganizationProperty));
+    	NSString *lLocalizedlOrganization = [FastAddressBook localizedLabel:lOrganization];
+        
+        if (lLocalizedFirstName != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedFirstName forKey:@"first_name"];
+        }
+        if (lLocalizedLastName != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedLastName forKey:@"last_name"];
+        }
+        if (lLocalizedlOrganization != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedlOrganization forKey:@"company"];
         }
         return contact;
     }

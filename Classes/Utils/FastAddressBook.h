@@ -46,6 +46,7 @@
 - (NSArray *)getPhoneArray:(ABRecordRef)contact;
 - (NSDate *)getModDate:(ABRecordRef)person;
 - (NSMutableDictionary *)contactItem:(ABRecordRef)lPerson;
+- (NSDictionary *)contactData:(ABRecordRef)lPerson;
 - (NSNumber *)getContactId:(ABRecordRef)lPerson;
 
 // TOOLS

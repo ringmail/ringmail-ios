@@ -24,5 +24,6 @@
 //- (void)showContactView:(NSNumber*)contactId;
 - (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
 - (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete;
+- (void)startCall:(RKAddress*)dest video:(BOOL)video;
 
 @end

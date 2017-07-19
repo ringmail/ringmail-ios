@@ -22,7 +22,7 @@
 
 #import "UICompositeViewController.h"
 #import "UICamSwitch.h"
-#import "UICallButton.h"
+#import "UIHashtagButton.h"
 #import "UIMessageButton.h"
 #import "UIDigitButton.h"
 

@@ -35,6 +35,8 @@
 @property (nonatomic, strong) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) IBOutlet UIButton *cancelButton;
 @property (nonatomic, strong) IBOutlet UIImageView *background;
+@property (nonatomic, strong) NSDictionary* contactData;
+@property (nonatomic, strong) NSString* contactMD5;
 
 - (IBAction)onBackClick:(id)event;
 - (IBAction)onCancelClick:(id)event;

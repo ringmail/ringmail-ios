@@ -59,6 +59,9 @@
 	
 	ChatElementContext *context = [[ChatElementContext alloc] initWithImages:@{
 		@"message_summary_moment_normal.png": [UIImage imageNamed:@"message_summary_moment_normal.png"],
+		@"summary_call_incoming.png": [UIImage imageNamed:@"summary_call_incoming.png"],
+		@"summary_call_missed.png": [UIImage imageNamed:@"summary_call_missed.png"],
+		@"summary_call_outgoing.png": [UIImage imageNamed:@"summary_call_outgoing.png"],
 	}];
 	_dataSource = [[CKCollectionViewDataSource alloc] initWithCollectionView:self.collectionView
 												 supplementaryViewDataSource:nil

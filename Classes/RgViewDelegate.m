@@ -48,8 +48,10 @@
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"Show Image: %f, %f", image.size.height, image.size.width);
-	ImageViewController* ivc = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE], ImageViewController);
-	[ivc setImage:image];
+	ImageViewController* ivc = [[ImageViewController alloc] initWithImage:image];
+	[[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] content:ivc push:TRUE];
+	//ImageViewController* ivc = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE], ImageViewController);
+	//[ivc setImage:image];
 }
 
 - (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete
@@ -58,6 +60,18 @@
 	NSLog(@"Show Moment Image: %f, %f", image.size.height, image.size.width);
 	ImageCountdownViewController* ivc = [[ImageCountdownViewController alloc] initWithImage:image complete:complete];
 	[[PhoneMainView instance] changeCurrentView:[ImageCountdownViewController compositeViewDescription] content:ivc push:TRUE];
+}
+
+- (void)startCall:(RKAddress*)dest video:(BOOL)video
+{
+	NSLog(@"%s: Video:%d %@", __PRETTY_FUNCTION__, video, dest);
+    NSString* displayName = dest.displayName;
+	NSString* address = dest.address;
+    if ([address rangeOfString:@"@"].location != NSNotFound)
+    {
+        address = [RgManager addressToSIP:address];
+    }
+	[[LinphoneManager instance] call:address contact:dest.contact.contactId displayName:displayName transfer:FALSE video:video];
 }
 
 @end

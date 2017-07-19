@@ -173,16 +173,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.view addSubview:tableView];
     [self update];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(contactsUpdated:)
-                                                 name:kRgContactsUpdated
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleSegControl)
-                                                 name:kRgSegmentControl
-                                               object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contactsUpdated:) name:kRgContactsUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSegControl) name:kRgSegmentControl object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAddContactClick:) name:kRgAddContact object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -293,6 +286,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[tableController loadData];
 }
 
+- (void)onAddContactClick:(id)notif {
+	// Go to Contact details view
+	ContactDetailsViewController *controller = DYNAMIC_CAST(
+		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
+		ContactDetailsViewController);
+	if (controller != nil)
+	{
+		[controller newContact];
+	}
+}
+
 #pragma mark - Action Functions
 
 - (IBAction)onAllClick:(id)event {
@@ -303,24 +307,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[self changeView:History_Linphone];
 }
 
-- (IBAction)onAddContactClick:(id)event {
-	// Go to Contact details view
-	ContactDetailsViewController *controller = DYNAMIC_CAST(
-		[[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE],
-		ContactDetailsViewController);
-	if (controller != nil) {
-		if ([ContactSelection getAddAddress] == nil) {
-			[controller newContact];
-		} else {
-			[controller newContact:[ContactSelection getAddAddress]];
-		}
-	}
-}
 
 - (IBAction)onBackClick:(id)event {
 	[[PhoneMainView instance] popCurrentView];
 }
-
 
 - (void)handleSegControl {
     printf("contacts segement controller hit\n");

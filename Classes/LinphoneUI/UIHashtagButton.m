@@ -1,4 +1,4 @@
-/* UICallButton.m
+/* UIHashtagButton.m
  *
  * Copyright (C) 2011  Belledonne Comunications, Grenoble, France
  *
@@ -17,27 +17,27 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#import "UICallButton.h"
+#import "UIHashtagButton.h"
 #import "LinphoneManager.h"
 
 #import "PhoneMainView.h"
 
 #import <CoreTelephony/CTCallCenter.h>
 
-@implementation UICallButton
+@implementation UIHashtagButton
 
 @synthesize addressField;
 
 #pragma mark - Lifecycle Functions
 
-- (void)initUICallButton {
+- (void)initUIHashtagButton {
 	[self addTarget:self action:@selector(touchUp:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (id)init {
 	self = [super init];
 	if (self) {
-		[self initUICallButton];
+		[self initUIHashtagButton];
 	}
 	return self;
 }
@@ -45,7 +45,7 @@
 - (id)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
-		[self initUICallButton];
+		[self initUIHashtagButton];
 	}
 	return self;
 }
@@ -53,7 +53,7 @@
 - (id)initWithCoder:(NSCoder *)decoder {
 	self = [super initWithCoder:decoder];
 	if (self) {
-		[self initUICallButton];
+		[self initUIHashtagButton];
 	}
 	return self;
 }
@@ -61,21 +61,17 @@
 #pragma mark -
 
 - (void)touchUp:(id)sender {
-	__block NSString *address = [addressField text];
+	NSString *address = [addressField text];
 	address = [address stringByReplacingOccurrencesOfRegex:@"^\\s+" withString:@""];
 	address = [address stringByReplacingOccurrencesOfRegex:@"\\s+$" withString:@""];
 	if ([address length] > 0)
     {
         if ([RgManager checkRingMailAddress:address])
         {
-            addressField.text = @"";
 			if ([[address substringToIndex:1] isEqualToString:@"#"])
 			{
+				addressField.text = @"";
 				[RgManager startHashtag:address];
-			}
-			else
-			{
-				[RgManager startCall:address contact:NULL video:NO];
 			}
         }
 	}

@@ -7,6 +7,7 @@
 @interface MessageListViewController : UICollectionViewController
 
 - (void)updateCollection;
+- (void)updateCollection:(BOOL)force;
 //- (void)removeMessageThread:(NSNumber*)index;
 
 @end

@@ -110,29 +110,19 @@
 
 - (IBAction)onCall:(id)event
 {
-	ABRecordRef contact = NULL;
-	if (modalData[@"contact_id"])
-	{
-		contact = [[[LinphoneManager instance] fastAddressBook] getContactById:modalData[@"contact_id"]];
-	}
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgDismissOptionsModal" object:nil userInfo:@{
 		@"clear": @YES,
 	}];
-	[RgManager startCall:modalData[@"address"] contact:contact video:NO];
+	[[RKCommunicator sharedInstance] startCall:modalData[@"address"] video:NO];
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (IBAction)onVideoChat:(id)event
 {
-	ABRecordRef contact = NULL;
-	if (modalData[@"contact_id"])
-	{
-		contact = [[[LinphoneManager instance] fastAddressBook] getContactById:modalData[@"contact_id"]];
-	}
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgDismissOptionsModal" object:nil userInfo:@{
 		@"clear": @YES,
 	}];
-	[RgManager startCall:modalData[@"address"] contact:contact video:YES];
+	[[RKCommunicator sharedInstance] startCall:modalData[@"address"] video:YES];
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:NULL];
 }
 

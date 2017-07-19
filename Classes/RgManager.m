@@ -18,9 +18,9 @@
 
 /* RingMail */
 
-NSString *const kRgTextReceived = @"RgTextReceived";
-NSString *const kRgTextSent = @"RgTextSent";
-NSString *const kRgTextUpdate = @"RgTextUpdate";
+NSString *const kRgTextReceived = @"RgTextReceived"; // deprec
+NSString *const kRgTextSent = @"RgTextSent"; // deprec
+NSString *const kRgTextUpdate = @"RgTextUpdate"; // deprec
 NSString *const kRgContactsUpdated = @"RgContactsUpdated";
 NSString *const kRgSetAddress = @"RgSetAddress";
 NSString *const kRgMainRefresh = @"RgMainRefresh";
@@ -30,10 +30,6 @@ NSString *const kRgAttemptVerify = @"kRgAttemptVerify";
 NSString *const kRgLaunchBrowser = @"kRgLaunchBrowser";
 NSString *const kRgToggleNumberPad = @"kRgToggleNumberPad";
 NSString *const kRgCallRefresh = @"kRgCallRefresh";
-NSString *const kRgContactRefresh = @"kRgContactRefresh";
-NSString *const kRgSelf = @"self";
-NSString *const kRgSelfName = @"Self";
-
 NSString *const kRgNavBarViewChange = @"kRgNavBarViewChange";
 NSString *const kRgHashtagDirectoryUpdatePath = @"kRgHashtagDirectoryUpdatePath";
 NSString *const kRgHashtagDirectoryRefreshPath = @"kRgHashtagDirectoryRefreshPath";
@@ -44,7 +40,7 @@ NSString *const kRgGoogleSignInComplete = @"kRgGoogleSignInComplete";
 NSString *const kRgGoogleSignInVerifed = @"kRgGoogleSignInVerifed";
 NSString *const kRgGoogleSignInError = @"kRgGoogleSignInError";
 NSString *const kRgUserUnauthorized = @"kRgUserUnauthorized";
-
+NSString *const kRgAddContact = @"kRgAddContact";
 NSString *const kRgPresentOptionsModal = @"kRgPresentOptionsModal";
 NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
 
@@ -55,7 +51,6 @@ NSString *const kRgSendComponentRemoveMedia = @"kRgSendComponentRemoveMedia";
 NSString *const kRgSendContactSelectDone = @"kRgSendContactSelectDone";
 NSString *const kRgSendComponentUpdateTo = @"kRgSendComponentUpdateTo";
 
-NSString *const kRgAddContact = @"kRgAddContact";
 
 static LevelDB* theConfigDatabase = nil;
 
@@ -157,47 +152,6 @@ static LevelDB* theConfigDatabase = nil;
         LOGI(@"RingMail: NBPhoneNumberUtil Error '%@'", [anError localizedDescription]);
     }
     return res;
-}
-
-+ (void)startCall:(NSString*)address contact:(ABRecordRef)contact video:(BOOL)video
-{
-    NSString* displayName = [address copy];
-    NSNumber* contactNum = nil;
-    if (contact == NULL)
-    {
-        contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    }
-    if (contact != NULL)
-    {
-        contactNum = [[[LinphoneManager instance] fastAddressBook] getContactId:contact];
-        displayName = [FastAddressBook getContactDisplayName:contact];
-    }
-    else
-    {
-        displayName = [NSString stringWithString:address];
-    }
-    if ([address rangeOfString:@"@"].location != NSNotFound)
-    {
-        address = [RgManager addressToSIP:address];
-    }
-    [[LinphoneManager instance] call:address contact:(NSNumber*)contactNum displayName:displayName transfer:FALSE video:video];
-}
-
-+ (void)startMessage:(NSString*)address contact:(ABRecordRef)contact
-{
-    LinphoneManager *lm = [LinphoneManager instance];
-    NSNumber *contactNum = nil;
-    if (contact == NULL)
-    {
-        contact = [[lm fastAddressBook] getContact:address];
-    }
-    if (contact != NULL)
-    {
-        contactNum = [[lm fastAddressBook] getContactId:contact];
-    }
-    NSDictionary *sessionData = [[lm chatManager] dbGetSessionID:address to:nil contact:contactNum uuid:nil];
-    [lm setChatSession:sessionData[@"id"]];
-    [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
 }
 
 + (void)startMessageMD5
@@ -356,8 +310,9 @@ static LevelDB* theConfigDatabase = nil;
             [ringuri replaceOccurrencesOfRegex:@"^(message|chat|text)/" withString:@""];
             if ([RgManager checkRingMailAddress:ringuri])
             {
-                ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:ringuri];
-                [RgManager startMessage:[RgManager filterRingMailAddress:ringuri] contact:contact];
+				RKCommunicator* comm = [RKCommunicator sharedInstance];
+				RKThread* thr = [comm getThreadByAddress:[RKAddress newWithString:ringuri]];
+				[comm startMessageView:thr];
             }
             return;
         }
@@ -398,18 +353,19 @@ static LevelDB* theConfigDatabase = nil;
             if (startCall)
             {
                 LOGI(@"RingMail: Start Call Now");
-                [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:NULL video:video];
+				RKCommunicator* comm = [RKCommunicator sharedInstance];
+				[comm startCall:[RKAddress newWithString:ringuri] video:video];
             }
             else
             {
                 LOGI(@"RingMail: Queue Call");
-                LinphoneManager *mgr = [LinphoneManager instance];
+				LinphoneManager *mgr = [LinphoneManager instance];
                 [[mgr opQueue] setSuspended:YES];
                 [[mgr opQueue] cancelAllOperations]; // reset queue
                 [[mgr opQueue] addOperationWithBlock:^{
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                        ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:ringuri];
-                        [RgManager startCall:[RgManager filterRingMailAddress:ringuri] contact:contact video:video];
+        				RKCommunicator* comm = [RKCommunicator sharedInstance];
+        				[comm startCall:[RKAddress newWithString:ringuri] video:video];
                     }];
                 }];
             }

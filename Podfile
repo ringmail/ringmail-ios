@@ -30,6 +30,9 @@ target 'RingMail-Dev' do
   pod 'LoremIpsum'
   pod 'Google/SignIn'
   pod 'M13ProgressSuite'
+  pod 'IDMPhotoBrowser', :git => 'git@nova1.revalead.com:ringmail/idmphotobrowser.git', :branch => 'ringmail'
+  pod 'DACircularProgress'
+  pod 'DZVideoPlayerViewController'
 #  pod 'LNNotificationsUI', :git => 'https://github.com/bonokite/LNNotificationsUI'
 
 #  pod 'FCUUID'

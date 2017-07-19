@@ -34,6 +34,7 @@ extern NSString *const kRKCallEnd;
 - (void)showContactView:(NSNumber*)contactId;
 - (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
 - (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete;
+- (void)startCall:(RKAddress*)dest video:(BOOL)video;
 
 @end
 
@@ -50,7 +51,7 @@ extern NSString *const kRKCallEnd;
 - (void)didReceiveMessage:(RKMessage*)message;
 - (void)didUpdateMessage:(RKMessage*)message;
 
-//- (void)startCall:(RKCall*)call;
+- (void)startCall:(RKAddress*)dest video:(BOOL)video;
 - (void)didBeginCall:(RKCall*)call;
 - (void)didUpdateCall:(RKCall*)call;
 - (void)didEndCall:(RKCall*)call;
@@ -58,6 +59,7 @@ extern NSString *const kRKCallEnd;
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
 - (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
+- (RKThread*)getThreadById:(NSNumber*)lookupId;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 - (RKCall*)getCallBySipId:(NSString*)sip;

@@ -8,7 +8,7 @@
 #import "PhotoCameraViewController.h"
 #import "VideoCameraViewController.h"
 #import "MomentCameraViewController.h"
-#import "VideoViewController.h"
+#import "VideoPlayerViewController.h"
 #import "PhoneMainView.h"
 
 @implementation Send
@@ -160,8 +160,8 @@
 	if ([media[@"mediaType"] isEqualToString:@"video/mp4"])
 	{
 		NSURL* fileUrl = [NSURL fileURLWithPath:media[@"file"]];
-        VideoViewController *vc = [[VideoViewController alloc] initWithVideoUrl:fileUrl];
-        [[PhoneMainView instance] changeCurrentView:[VideoViewController compositeViewDescription] content:vc push:YES];
+        VideoPlayerViewController *vc = [[VideoPlayerViewController alloc] initWithVideoUrl:fileUrl];
+        [[PhoneMainView instance] changeCurrentView:[VideoPlayerViewController compositeViewDescription] content:vc push:YES];
 	}
 }
 

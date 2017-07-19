@@ -58,6 +58,9 @@ static NSInteger const pageSize = 10;
 		@"message_summary_photo_normal.png": [UIImage imageNamed:@"message_summary_photo_normal.png"],
 		@"message_summary_video_normal.png": [UIImage imageNamed:@"message_summary_video_normal.png"],
 		@"avatar_unknown_small.png": [UIImage imageNamed:@"avatar_unknown_small.png"],
+		@"summary_call_incoming.png": [UIImage imageNamed:@"summary_call_incoming.png"],
+		@"summary_call_missed.png": [UIImage imageNamed:@"summary_call_missed.png"],
+		@"summary_call_outgoing.png": [UIImage imageNamed:@"summary_call_outgoing.png"],
 	};
     MessageThreadContext *context = [[MessageThreadContext alloc] initWithImages:images];
     
@@ -104,6 +107,11 @@ static NSInteger const pageSize = 10;
 
 - (void)updateCollection
 {
+	[self updateCollection:NO];
+}
+
+- (void)updateCollection:(BOOL)force
+{
     NSArray *current = [_cardModelController mainList];
     NSArray *newlist = [[RKCommunicator sharedInstance] listThreads];
 	
@@ -134,7 +142,7 @@ static NSInteger const pageSize = 10;
         {
             NSNumber* curId = current[j][@"item_id"];
             NSNumber* newId = newlist[j][@"item_id"];
-            if (! [curId isEqualToNumber:newId]) // item changed
+            if (force || ! [curId isEqualToNumber:newId]) // item changed
             {
                 MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
                 items.update([NSIndexPath indexPathForRow:i inSection:1], card);

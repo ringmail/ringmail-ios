@@ -122,29 +122,29 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.view addGestureRecognizer:tapBackground];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMessageList:) name:kRKItemActivity object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateContacts:) name:kRgContactsUpdated object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSegControl) name:kRgSegmentControl object:nil];
-	
-    //[mainViewController updateCollection];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSegControl) name:kRgSegmentControl object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
 }
 
 #pragma mark - Event Functions
 
-- (void)handleSegControl
+/*- (void)handleSegControl
 {
     printf("recents segement controller hit\n");
-}
+}*/
 
 - (void)updateMessageList:(NSNotification*)event
 {
@@ -152,6 +152,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 	{
 		[mainViewController updateCollection];
 	}
+}
+
+- (void)updateContacts:(NSNotification*)event
+{
+	[mainViewController updateCollection:YES];
 }
 
 #pragma mark -
