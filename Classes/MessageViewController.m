@@ -11,6 +11,8 @@
 #import "MessageTextView.h"
 #import "TypingIndicatorView.h"
 #import "UIColor+Hex.h"
+#import "DTActionSheet.h"
+#import "PhoneMainView.h"
 
 #import <LoremIpsum/LoremIpsum.h>
 
@@ -320,18 +322,36 @@ static UICompositeViewDescription *compositeDescription = nil;
     // Notifies the view controller when the left button's action has been triggered, manually.
     
     [super didPressLeftButton:sender];
-    
-    UIViewController *vc = [UIViewController new];
-    vc.view.backgroundColor = [UIColor whiteColor];
-    vc.title = @"Details";
-    
-    [self.navigationController pushViewController:vc animated:YES];
+	NSLog(@"%s: Left Button", __PRETTY_FUNCTION__);
+	
+	DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Select Option", nil)];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Take Photo", nil) block:^() {
+			// Show photo stuff
+		}];
+    }
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Library", nil) block:^() {
+    		ImagePickerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:description push:TRUE], ImagePickerViewController);
+            if (controller != nil)
+    		{
+                controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                controller.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+                controller.allowsEditing = NO;
+                controller.imagePickerDelegate = self;
+            }
+        }];
+    }
+    [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:^{
+		//self.popoverController = nil;
+    }];
+    [sheet showInView:[PhoneMainView instance].view];
 }
 
 - (void)didPressRightButton:(id)sender
 {
     // Notifies the view controller when the right button's action has been triggered, manually or by using the keyboard return key.
-    
+	
     // This little trick validates any pending auto-correction or auto-spelling just after hitting the 'Send' button
     [self.textView refreshFirstResponder];
 	
@@ -580,6 +600,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - ImagePickerDelegate Functions
+
+- (void)imagePickerDelegateImage:(UIImage *)image info:(NSDictionary *)info
+{
+
 }
 
 @end

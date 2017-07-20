@@ -32,7 +32,7 @@ target 'RingMail-Dev' do
   pod 'M13ProgressSuite'
   pod 'IDMPhotoBrowser', :git => 'git@nova1.revalead.com:ringmail/idmphotobrowser.git', :branch => 'ringmail'
   pod 'DACircularProgress'
-  pod 'DZVideoPlayerViewController'
+  pod 'DZVideoPlayerViewController', :git => 'git@nova1.revalead.com:ringmail/dzvideoplayerviewcontroller.git', :branch => 'ringmail'
 #  pod 'LNNotificationsUI', :git => 'https://github.com/bonokite/LNNotificationsUI'
 
 #  pod 'FCUUID'

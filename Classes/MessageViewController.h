@@ -8,9 +8,10 @@
 
 #import "UICompositeViewController.h"
 #import "RgTextViewController.h"
+#import "ImagePickerViewController.h"
 #import "RingKit.h"
 
-@interface MessageViewController : RgTextViewController <UICompositeViewDelegate>
+@interface MessageViewController : RgTextViewController <UICompositeViewDelegate, ImagePickerDelegate>
 
 - (instancetype)initWithThread:(RKThread*)thread;
 
