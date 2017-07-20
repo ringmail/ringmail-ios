@@ -332,7 +332,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         [sheet addButtonWithTitle:NSLocalizedString(@"Library", nil) block:^() {
-    		ImagePickerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:description push:TRUE], ImagePickerViewController);
+    		ImagePickerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImagePickerViewController compositeViewDescription] push:TRUE], ImagePickerViewController);
             if (controller != nil)
     		{
                 controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
