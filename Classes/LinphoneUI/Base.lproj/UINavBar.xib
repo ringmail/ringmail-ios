@@ -89,16 +89,17 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VV7-rS-Dfa">
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VV7-rS-Dfa">
                     <rect key="frame" x="356" y="22" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="MbB-Uu-7Pt"/>
                         <constraint firstAttribute="width" constant="50" id="Rt5-hk-yXe"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="32"/>
-                    <state key="normal" title="+">
+                    <state key="normal" image="normal_rm+contact_icon.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="pressed-rm+contact_icon.png"/>
+                    <state key="highlighted" image="pressed-rm+contact_icon.png"/>
                     <connections>
                         <action selector="onAddContactClick:" destination="-1" eventType="touchUpInside" id="YfW-Ye-lob"/>
                     </connections>
@@ -165,6 +166,8 @@
         <image name="button_contact_normal.png" width="52" height="22"/>
         <image name="button_contact_pressed.png" width="52" height="22"/>
         <image name="header_navigation_tabs_blue.jpg" width="414" height="95"/>
+        <image name="normal_rm+contact_icon.png" width="40" height="40"/>
+        <image name="pressed-rm+contact_icon.png" width="40" height="40"/>
         <image name="rm_logo_ringscreen.png" width="106" height="46"/>
     </resources>
 </document>

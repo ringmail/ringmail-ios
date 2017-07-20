@@ -82,6 +82,14 @@
 		4D039AA51ECE322A0091F8EF /* icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D039AA31ECE322A0091F8EF /* icon_search@2x.png */; };
 		4D0C61A21EF1F95F002D261D /* rm_contact_indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C61A11EF1F95F002D261D /* rm_contact_indicator@2x.png */; };
 		4D0C61A31EF1F95F002D261D /* rm_contact_indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C61A11EF1F95F002D261D /* rm_contact_indicator@2x.png */; };
+		4D2847A11F213719007830A6 /* normal_rm+contact_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D28479D1F213719007830A6 /* normal_rm+contact_icon@2x.png */; };
+		4D2847A21F213719007830A6 /* normal_rm+contact_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D28479D1F213719007830A6 /* normal_rm+contact_icon@2x.png */; };
+		4D2847A31F213719007830A6 /* normal_rm+contact_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D28479E1F213719007830A6 /* normal_rm+contact_icon@3x.png */; };
+		4D2847A41F213719007830A6 /* normal_rm+contact_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D28479E1F213719007830A6 /* normal_rm+contact_icon@3x.png */; };
+		4D2847A51F213719007830A6 /* pressed_rm+contact_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D28479F1F213719007830A6 /* pressed_rm+contact_icon@2x.png */; };
+		4D2847A61F213719007830A6 /* pressed_rm+contact_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D28479F1F213719007830A6 /* pressed_rm+contact_icon@2x.png */; };
+		4D2847A71F213719007830A6 /* pressed-rm+contact_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D2847A01F213719007830A6 /* pressed-rm+contact_icon@3x.png */; };
+		4D2847A81F213719007830A6 /* pressed-rm+contact_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D2847A01F213719007830A6 /* pressed-rm+contact_icon@3x.png */; };
 		4D33F7491EC4D5C400D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */; };
 		4D33F74A1EC4D5C400D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */; };
 		4D33F74B1EC4D5C400D913A7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D33F6EA1EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */; };
@@ -2628,6 +2636,10 @@
 		4D039A9E1ECE2F080091F8EF /* RgContactSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgContactSearchViewController.xib; sourceTree = "<group>"; };
 		4D039AA31ECE322A0091F8EF /* icon_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_search@2x.png"; path = "Resources/icon_search@2x.png"; sourceTree = "<group>"; };
 		4D0C61A11EF1F95F002D261D /* rm_contact_indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rm_contact_indicator@2x.png"; path = "Resources/rm_contact_indicator@2x.png"; sourceTree = "<group>"; };
+		4D28479D1F213719007830A6 /* normal_rm+contact_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "normal_rm+contact_icon@2x.png"; path = "Resources/normal_rm+contact_icon@2x.png"; sourceTree = "<group>"; };
+		4D28479E1F213719007830A6 /* normal_rm+contact_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "normal_rm+contact_icon@3x.png"; path = "Resources/normal_rm+contact_icon@3x.png"; sourceTree = "<group>"; };
+		4D28479F1F213719007830A6 /* pressed_rm+contact_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pressed_rm+contact_icon@2x.png"; path = "Resources/pressed_rm+contact_icon@2x.png"; sourceTree = "<group>"; };
+		4D2847A01F213719007830A6 /* pressed-rm+contact_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pressed-rm+contact_icon@3x.png"; path = "Resources/pressed-rm+contact_icon@3x.png"; sourceTree = "<group>"; };
 		4D33F6E91EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "explore_hashtag_category_sample_banner1_ip5@2x.jpg"; path = "Resources/explore_hashtag_category_sample_banner1_ip5@2x.jpg"; sourceTree = "<group>"; };
 		4D33F6EA1EC4D5C200D913A7 /* explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg"; path = "Resources/explore_hashtag_category_sample_banner1_ip6-7s@2x.jpg"; sourceTree = "<group>"; };
 		4D33F6EB1EC4D5C200D913A7 /* explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg"; path = "Resources/explore_hashtag_directory_sample_banner1_ip6-7p@3x.jpg"; sourceTree = "<group>"; };
@@ -5482,6 +5494,10 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4D28479D1F213719007830A6 /* normal_rm+contact_icon@2x.png */,
+				4D28479E1F213719007830A6 /* normal_rm+contact_icon@3x.png */,
+				4D28479F1F213719007830A6 /* pressed_rm+contact_icon@2x.png */,
+				4D2847A01F213719007830A6 /* pressed-rm+contact_icon@3x.png */,
 				C46E39BF1F1588080012BF16 /* avatar_unknown_small@2x.png */,
 				C463126B1F14313300E503AB /* summary_call_incoming@2x.png */,
 				C463126C1F14313300E503AB /* summary_call_missed@2x.png */,
@@ -6584,6 +6600,7 @@
 				C44A40CC1E70E415000F3E24 /* CLImageEditor.bundle in Resources */,
 				C4FD78711CF94EEE0066BDB1 /* ringmail_forward@2x.png in Resources */,
 				C4E1CB4A1E6E281E00698166 /* camera-cancel@3x.png in Resources */,
+				4D2847A11F213719007830A6 /* normal_rm+contact_icon@2x.png in Resources */,
 				4DA354A11F1557AA007ECA84 /* button_contact_normal@3x.png in Resources */,
 				4DE427DB1ED62E4700872002 /* UIContactDetailsOptions.xib in Resources */,
 				D3F83F10158205A100336684 /* micro_on_default.png in Resources */,
@@ -7082,6 +7099,7 @@
 				4D33F7F51EC4D5C400D913A7 /* tabs_settings_normal_5@2x.png in Resources */,
 				D3A74EE215C69392001500B9 /* contacts_default_landscape~ipad.png in Resources */,
 				C459A4351CC8665700CFFF30 /* ringmail_edit-cancel-pressed.png in Resources */,
+				4D2847A31F213719007830A6 /* normal_rm+contact_icon@3x.png in Resources */,
 				D3A74EE415C69392001500B9 /* contacts_default~ipad.png in Resources */,
 				D3A74EE615C69392001500B9 /* contacts_over_landscape~ipad.png in Resources */,
 				D3A74EE815C69392001500B9 /* contacts_over~ipad.png in Resources */,
@@ -7163,6 +7181,7 @@
 				F0C1F9111A28781F009402C9 /* corner-left-top.png in Resources */,
 				D3A74F3015C69392001500B9 /* settings_default~ipad.png in Resources */,
 				C470BF841E68C7E6009968E2 /* plus_icon_normal@2x.png in Resources */,
+				4D2847A51F213719007830A6 /* pressed_rm+contact_icon@2x.png in Resources */,
 				C48D3C121D0276FE00FAC3A6 /* ping_out_send.wav in Resources */,
 				D3A74F3215C69392001500B9 /* settings_over_landscape~ipad.png in Resources */,
 				D3A74F3415C69392001500B9 /* settings_over~ipad.png in Resources */,
@@ -7290,6 +7309,7 @@
 				C41D67DD1CA722A100D7BA72 /* ringmail_plus.png in Resources */,
 				C470BF931E68C834009968E2 /* ringpanel_button3_moments@2x.png in Resources */,
 				57F005C815EE2D9200914747 /* linphonerc-factory in Resources */,
+				4D2847A71F213719007830A6 /* pressed-rm+contact_icon@3x.png in Resources */,
 				C4D7E0631BA90A7700CC5E1F /* ringmail_splashscreen_iphone5.png in Resources */,
 				57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */,
 				F0B89C2A18DC973E0050B60E /* wizard_linphone_create.rc in Resources */,
@@ -7743,6 +7763,7 @@
 				C4AC28961D3963FA003B6232 /* chat_add_over.png in Resources */,
 				4D33F7A81EC4D5C400D913A7 /* tabs_background_5@2x.png in Resources */,
 				C4AC28971D3963FA003B6232 /* ringmail_forward@3x.png in Resources */,
+				4D2847A41F213719007830A6 /* normal_rm+contact_icon@3x.png in Resources */,
 				C4AC28991D3963FA003B6232 /* list_delete_default.png in Resources */,
 				4D33F7AC1EC4D5C400D913A7 /* tabs_background@3x.png in Resources */,
 				C4AC289A1D3963FA003B6232 /* incall_padding_left_landscape.png in Resources */,
@@ -7915,6 +7936,7 @@
 				C4AC29251D3963FA003B6232 /* history_details_add_default.png in Resources */,
 				C4AC29261D3963FA003B6232 /* history_details_add_over.png in Resources */,
 				C4AC29271D3963FA003B6232 /* history_details_back_default.png in Resources */,
+				4D2847A21F213719007830A6 /* normal_rm+contact_icon@2x.png in Resources */,
 				4DA3548E1F13FDF3007ECA84 /* plus_icon@3x.png in Resources */,
 				C4AC29281D3963FA003B6232 /* history_details_back_over.png in Resources */,
 				C4AC29291D3963FA003B6232 /* contacts_back_default.png in Resources */,
@@ -8031,6 +8053,7 @@
 				C4AC297E1D3963FA003B6232 /* contacts_over~ipad.png in Resources */,
 				4D33F7781EC4D5C400D913A7 /* google@2x.png in Resources */,
 				C4AC297F1D3963FA003B6232 /* contacts_selected_landscape~ipad.png in Resources */,
+				4D2847A81F213719007830A6 /* pressed-rm+contact_icon@3x.png in Resources */,
 				C4AC29801D3963FA003B6232 /* contacts_selected~ipad.png in Resources */,
 				C4AC29811D3963FA003B6232 /* dialer_address_background_landscape~ipad.png in Resources */,
 				C4E1CB5B1E6E3EC200698166 /* ImageEditViewController.xib in Resources */,
@@ -8303,6 +8326,7 @@
 				C4AC2A5F1D3963FA003B6232 /* LaunchScreen.xib in Resources */,
 				C4AC2A601D3963FA003B6232 /* incall_buttons_background.png in Resources */,
 				C4AC2A611D3963FA003B6232 /* field_background.9@2x.png in Resources */,
+				4D2847A61F213719007830A6 /* pressed_rm+contact_icon@2x.png in Resources */,
 				C4AC2A621D3963FA003B6232 /* button_background_default.9@2x.png in Resources */,
 				C4AC2A631D3963FA003B6232 /* button_background_over.9@2x.png in Resources */,
 				C4AC2A641D3963FA003B6232 /* ringmail_incoming_reject.png in Resources */,
@@ -8414,7 +8438,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		511AEDDAB089CEDE7BC4DCD2 /* [CP] Copy Pods Resources */ = {

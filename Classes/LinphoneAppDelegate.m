@@ -194,7 +194,7 @@
 		UIUserNotificationSettings *userSettings =
 			[UIUserNotificationSettings settingsForTypes:notifTypes categories:categories];
 		[app registerUserNotificationSettings:userSettings];
-
+        
 		
         [app registerForRemoteNotifications];
 	} /*else {
