@@ -162,6 +162,11 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	return [[RKThreadStore sharedInstance] getThreadById:lookupId];
 }
 
+- (RKThread*)getThreadByMD5:(NSString*)lookupHash
+{
+	return [[RKThreadStore sharedInstance] getThreadByMD5:lookupHash];
+}
+
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;
 {
 	RKContact* contact = [RKContact newByMatchingAddress:remoteAddress];

@@ -60,6 +60,7 @@ extern NSString *const kRKCallEnd;
 - (NSArray*)listThreadItems:(RKThread*)thread;
 - (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
 - (RKThread*)getThreadById:(NSNumber*)lookupId;
+- (RKThread*)getThreadByMD5:(NSString*)lookupHash;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 - (RKCall*)getCallBySipId:(NSString*)sip;

@@ -15,6 +15,7 @@
 #import "RKMessage.h"
 
 #import "NSString+MD5.h"
+#import "RegexKitLite/RegexKitLite.h"
 #import "NoteSQL.h"
 
 @implementation RKThreadStore
@@ -55,10 +56,10 @@
     [[self dbqueue] inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
 			// Reset database
-            //@"DROP TABLE rk_thread;",
-            //@"DROP TABLE rk_thread_item;",
-            //@"DROP TABLE rk_message;",
-            //@"DROP TABLE rk_call;",
+            @"DROP TABLE rk_thread;",
+            @"DROP TABLE rk_thread_item;",
+            @"DROP TABLE rk_message;",
+            @"DROP TABLE rk_call;",
 			
             @"CREATE TABLE IF NOT EXISTS rk_thread ("
                 "id INTEGER PRIMARY KEY NOT NULL, "
@@ -636,6 +637,55 @@
     return result;
 }
 
+- (RKThread*)getThreadByMD5:(NSString*)lookupHash
+{
+	//NSLog(@"%s: address:%@ originalTo:%@ contactId:%@ uuid:%@", __PRETTY_FUNCTION__, remoteAddress.address, origTo, ctid, uuid);
+	NSAssert(lookupHash, @"lookupHash required");
+	NSAssert([lookupHash isMatchedByRegex:@"^[A-Fa-f0-9]{6,32}$"], @"invalid hash");
+	__block BOOL found = NO;
+	__block NSNumber *curId = nil;
+	__block NSString *curUUID = nil;
+	__block NSString *curAddress = nil;
+	__block NSNumber *curContact = nil;
+	__block NSString *curOrigTo = @"";
+    __block NSString *lookup = [lookupHash stringByAppendingString:@"%"];
+    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs1 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE address_md5 LIKE ?", lookup];
+		if ([rs1 next])
+		{
+			curId = [NSNumber numberWithLong:[rs1 longForColumnIndex:0]];
+			curUUID = [rs1 stringForColumnIndex:1];
+			curAddress = [rs1 stringForColumnIndex:2];
+			curContact = [rs1 objectForColumnIndex:3];
+			curOrigTo = [rs1 stringForColumnIndex:4];
+            found = YES;
+		}
+		[rs1 close];
+	}];
+    RKThread* result = nil;
+	if (found)
+	{
+		NSMutableDictionary* params = [NSMutableDictionary dictionary];
+		params[@"remoteAddress"] = [RKAddress newWithString:curAddress];
+		params[@"threadId"] = curId;
+		params[@"uuid"] = curUUID;
+		if (! [curOrigTo isEqualToString:@""])
+		{
+			params[@"originalTo"] = [RKAddress newWithString:curOrigTo];
+		}
+		if ([curContact isKindOfClass:[NSNull class]])
+	 	{
+			params[@"contact"] = [RKContact newWithData:@{@"addressList": @[params[@"remoteAddress"]]}];
+		}
+		else
+		{
+			params[@"contact"] = [RKContact newWithData:@{@"contactId": curContact, @"addressList": @[params[@"remoteAddress"]]}];
+		}
+		result = [RKThread newWithData:params];
+	}
+    return result;
+}
+
 - (RKCall*)getCallBySipId:(NSString*)sip
 {
 	__block RKCall* result = nil;
@@ -836,6 +886,7 @@
 				@"table": @"rk_thread",
 				@"update": @{
 					@"address": obj,
+					@"address_md5": [obj md5HexDigest]
 				},
 				@"where": @{
 					@"contact_id": contact,

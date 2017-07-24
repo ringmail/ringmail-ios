@@ -607,7 +607,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
 		@"thread": self.chatThread,
 		@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-		@"body": @"",
+		@"body": @"Photo",
 		@"deliveryStatus": @(RKMessageStatusSending),
 		@"mediaData": imgData,
 		@"mediaType": @"image/png",
@@ -627,7 +627,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
 		@"thread": self.chatThread,
 		@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-		@"body": @"",
+		@"body": @"Photo",
 		@"deliveryStatus": @(RKMessageStatusSending),
 		@"mediaData": imgData,
 		@"mediaType": notif.userInfo[@"mediaType"],

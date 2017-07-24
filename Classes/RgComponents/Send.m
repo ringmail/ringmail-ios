@@ -65,31 +65,21 @@
 				mediaType = @"image/png"; // TODO: customize
 				msg_image = YES;
 			}
+			NSString* msgtext = msgdata[@"message"];
 			if (msg_image)
 			{
-  				RKMediaMessage* pmsg;
-				if (media[@"moment"] != nil)
+				if ([msgtext isEqualToString:@""])
 				{
-			        pmsg = [RKMomentMessage newWithData:@{
-            			@"thread": thread,
-            			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-            			@"body": msgdata[@"message"],
-            			@"deliveryStatus": @(RKMessageStatusSending),
-        				@"mediaData": imgData,
-        				@"mediaType": mediaType,
-        			}];	
+					msgtext = @"Photo";
 				}
-				else
-				{
-    				pmsg = [RKPhotoMessage newWithData:@{
-            			@"thread": thread,
-            			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-            			@"body": msgdata[@"message"],
-            			@"deliveryStatus": @(RKMessageStatusSending),
-        				@"mediaData": imgData,
-        				@"mediaType": mediaType,
-        			}];
-				}
+  				RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
+        			@"thread": thread,
+        			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+        			@"body": msgtext,
+        			@"deliveryStatus": @(RKMessageStatusSending),
+    				@"mediaData": imgData,
+    				@"mediaType": mediaType,
+    			}];
     			if (file != nil)
     			{
 				    if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[[pmsg documentURL] path] error:NULL] == NO)
@@ -112,10 +102,14 @@
 			}
 			else
 			{
+				if ([msgtext isEqualToString:@""])
+				{
+					msgtext = @"Video";
+				}
 		    	RKVideoMessage* vmsg = [RKVideoMessage newWithData:@{
         			@"thread": thread,
         			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-        			@"body": msgdata[@"message"],
+        			@"body": msgtext,
         			@"deliveryStatus": @(RKMessageStatusSending),
     				@"localPath": media[@"localPath"],
     				@"mediaType": mediaType,

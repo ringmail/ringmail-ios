@@ -64,6 +64,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
 	[super viewDidLoad];
 	[self addChildViewController:self.photoBrowser];
+	self.photoBrowser.displayActionButton = NO;
 	self.photoBrowser.view.frame = self.view.frame;
 	[self.view addSubview:self.photoBrowser.view];
 	[self.photoBrowser didMoveToParentViewController:self];

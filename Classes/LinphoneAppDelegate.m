@@ -27,6 +27,9 @@
 
 #import "LinphoneCoreSettingsStore.h"
 
+#import "RingKit.h"
+#import "RKAdapterXMPP.h"
+
 #include "LinphoneManager.h"
 #include "linphone/linphonecore.h"
 
@@ -73,10 +76,7 @@
     	}
         [[LinphoneManager instance] resignActive];
     }
-    if ([[instance chatManager] isConnected]) // if connected
-    {
-        [[instance chatManager] disconnect];
-    }
+	[[RKCommunicator sharedInstance].adapterXMPP disconnect];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -359,8 +359,23 @@
     if ([actionKey isEqualToString:@"CHAT"])
     {
         NSString *chatMd5 = [userInfo objectForKey:@"tag"];
-        [lm setChatMd5:chatMd5];
-        [RgManager startMessageMD5];
+		RKCommunicator* comm = [RKCommunicator sharedInstance];
+		RKThread* thread = [comm getThreadByMD5:chatMd5];
+		if (thread != nil)
+		{
+			[comm startMessageView:thread];
+		}
+		else
+		{
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2000 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+				RKCommunicator* comm = [RKCommunicator sharedInstance];
+        		RKThread* thread = [comm getThreadByMD5:chatMd5];
+        		if (thread != nil)
+        		{
+        			[comm startMessageView:thread];
+        		}				
+			});
+		}
 		completionHandler(UIBackgroundFetchResultNewData);
 		return;
     }

@@ -37,7 +37,7 @@
 		RKMomentMessage* pmsg = [RKMomentMessage newWithData:@{
 			@"thread": thread,
 			@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
-			@"body": @"",
+			@"body": @"Moment",
 			@"deliveryStatus": @(RKMessageStatusSending),
 			@"mediaData": imgData,
 			@"mediaType": @"image/png",
