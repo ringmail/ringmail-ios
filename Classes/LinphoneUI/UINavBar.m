@@ -235,7 +235,7 @@ int backState = 0;
     NSDictionary<NSString*,NSNumber*> *navViews = @{
         @"RingMail": @(Ring),
         @"Explore": @(Explore),
-        @"Recent Activity": @(Recents),
+        @"Messages": @(Recents),
         @"Contacts": @(Contacts),
         @"Contact Details": @(ContactDetails),
         @"Settings": @(Settings),

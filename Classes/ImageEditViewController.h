@@ -4,11 +4,6 @@
 #import "UICompositeViewController.h"
 #import "CLImageEditor.h"
 
-typedef NS_ENUM(NSInteger, RgSendMediaEditMode) {
-        RgSendMediaEditModeDefault,
-        RgSendMediaEditModeMoment
-};
-
 @interface ImageEditViewController : UIViewController<UICompositeViewDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate> {
 }
 

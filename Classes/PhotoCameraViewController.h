@@ -4,6 +4,7 @@
 #import "UICompositeViewController.h"
 #import "LLSimpleCamera.h"
 #import "BaseCameraViewController.h"
+#import "ImageEditViewController.h"
 
 @interface PhotoCameraViewController : BaseCameraViewController<UICompositeViewDelegate> {
 }
@@ -14,5 +15,6 @@
 @property (strong, nonatomic) UIButton *switchButton;
 @property (strong, nonatomic) UIButton *flashButton;
 @property (strong, nonatomic) UIButton *closeButton;
+@property (nonatomic) RgSendMediaEditMode editMode;
 
 @end

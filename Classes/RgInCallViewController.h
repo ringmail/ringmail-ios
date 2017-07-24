@@ -26,8 +26,6 @@
 #import "RgCallDuration.h"
 #import "UIDigitButton.h"
 
-@class VideoViewController;
-
 @interface RgInCallViewController : UIViewController <UIGestureRecognizerDelegate, UICompositeViewDelegate> {
     @private
     UITapGestureRecognizer* singleFingerTap;

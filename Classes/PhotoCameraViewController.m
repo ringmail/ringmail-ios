@@ -3,9 +3,10 @@
 #import "Utils.h"
 #import "PhoneMainView.h"
 #import "LLSimpleCamera.h"
-#import "ImageEditViewController.h"
 
 @implementation PhotoCameraViewController
+
+@synthesize editMode;
 
 #pragma mark - Lifecycle Functions
 
@@ -204,10 +205,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)snapButtonPressed:(UIButton *)button
 {
     //__weak PhotoCameraViewController* weakSelf = self;
+	__block RgSendMediaEditMode mode = self.editMode;
 	[self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
 		if(!error) {
 			//NSLog(@"Image captured!!!!");
-			ImageEditViewController* ctl = [[ImageEditViewController alloc] initWithImage:image editMode:RgSendMediaEditModeDefault];
+			ImageEditViewController* ctl = [[ImageEditViewController alloc] initWithImage:image editMode:mode];
 			[[PhoneMainView instance] changeCurrentView:[ImageEditViewController compositeViewDescription] content:ctl push:NO];
 		}
 		else {
@@ -220,7 +222,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 {
 	NSLog(@"Close button pressed");
 	[self.camera stop];
-	[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE];
+	if (self.editMode == RgSendMediaEditModeMessage)
+	{
+		[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:FALSE];
+	}
+	else
+	{
+		[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:FALSE];
+	}
 }
 
 /* other lifecycle methods */

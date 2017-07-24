@@ -141,17 +141,21 @@
 
 - (void)showPhotoCamera
 {
-	[[PhoneMainView instance] changeCurrentView:[PhotoCameraViewController compositeViewDescription] push:TRUE];
+	PhotoCameraViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[PhotoCameraViewController compositeViewDescription] push:YES], PhotoCameraViewController);
+	if (controller != nil)
+	{
+		controller.editMode = RgSendMediaEditModeSendPanel;
+	}
 }
 
 - (void)showVideoCamera
 {
-	[[PhoneMainView instance] changeCurrentView:[VideoCameraViewController compositeViewDescription] push:TRUE];
+	[[PhoneMainView instance] changeCurrentView:[VideoCameraViewController compositeViewDescription] push:YES];
 }
 
 - (void)showMomentCamera
 {
-	[[PhoneMainView instance] changeCurrentView:[MomentCameraViewController compositeViewDescription] push:TRUE];
+	[[PhoneMainView instance] changeCurrentView:[MomentCameraViewController compositeViewDescription] push:YES];
 }
 
 - (void)showVideoMedia

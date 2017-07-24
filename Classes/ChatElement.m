@@ -1,6 +1,6 @@
 #import "ChatElement.h"
 
-#import "VideoViewController.h"
+#import "VideoPlayerViewController.h"
 #import "PhoneMainView.h"
 
 @implementation ChatElement
@@ -20,8 +20,8 @@
 	if ([media.mediaType isEqualToString:@"video/mp4"])
 	{
 		NSURL* fileUrl = [media documentURL];
-        VideoViewController *vc = [[VideoViewController alloc] initWithVideoUrl:fileUrl];
-        [[PhoneMainView instance] changeCurrentView:[VideoViewController compositeViewDescription] content:vc push:YES];
+        VideoPlayerViewController *vc = [[VideoPlayerViewController alloc] initWithVideoUrl:fileUrl];
+        [[PhoneMainView instance] changeCurrentView:[VideoPlayerViewController compositeViewDescription] content:vc push:YES];
 	}
 }
 
