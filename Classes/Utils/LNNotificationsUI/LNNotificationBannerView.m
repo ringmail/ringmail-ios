@@ -235,7 +235,7 @@ static const CGFloat LNNotificationRelativeLabelCollapse = 5.0 * 60.0;
 		[drawerBG addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contV]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(contV)]];
 		[drawerBG addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[contV]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(contV)]];
 		
-		drawerBG.hidden = YES;
+		//drawerBG.hidden = YES;
 
 		[bgView.contentView addSubview:drawerBG];
 		

@@ -61,7 +61,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"Recent Activity"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"Messages"
 																content:@"MessagesViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true

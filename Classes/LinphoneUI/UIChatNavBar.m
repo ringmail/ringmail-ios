@@ -122,7 +122,7 @@ NSString *const kChatNavBarUpdate = @"ChatNavBarUpdate";
 
 - (IBAction)onBackClick:(id)event
 {
-	[[PhoneMainView instance] popCurrentView];
+	[[PhoneMainView instance] changeCurrentView:[MessagesViewController compositeViewDescription]];
 }
 
 #pragma mark - TPMultiLayoutViewController Functions

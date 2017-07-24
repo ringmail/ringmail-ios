@@ -76,6 +76,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
 	editor = [[CLImageEditor alloc] init];
 	editor.delegate = self;
+	editor.editMode = self.editMode;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -112,7 +113,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [UIImagePNGRepresentation(newImage) writeToFile:tmpfile atomically:YES];
     	
     	RgSendMediaEditMode mode = editMode;
-    	if (mode == RgSendMediaEditModeDefault) // Back to send panel
+    	if (mode == RgSendMediaEditModeSendPanel) // Back to send panel
     	{
 			UIImage* thumb = [ThumbnailFactory thumbnailForImage:newImage size:CGSizeMake(180, 180)];
     		RgMainViewController* ctl = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription] push:NO], RgMainViewController);
@@ -129,6 +130,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[md setFile:tmpfile];
 			vc.delegate = md;
 			[[PhoneMainView instance] changeCurrentView:[SendContactsViewController compositeViewDescription] content:vc push:YES];
+		}
+		else if (mode == RgSendMediaEditModeMessage)
+		{
+			[[NSNotificationCenter defaultCenter] postNotificationName:kRgAddMessageMedia object:nil userInfo:@{
+    			@"file": tmpfile,
+    			@"mediaType": @"image/png",
+			}];
+			[[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:NO];
 		}
 	}
 }

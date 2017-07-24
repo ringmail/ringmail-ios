@@ -13,6 +13,8 @@
 #import "UIColor+Hex.h"
 #import "DTActionSheet.h"
 #import "PhoneMainView.h"
+#import "ImageEditViewController.h"
+#import "PhotoCameraViewController.h"
 
 #import <LoremIpsum/LoremIpsum.h>
 
@@ -88,6 +90,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)commonInit
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textInputbarDidMove:) name:SLKTextInputbarDidMoveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMessageMedia:) name:kRgAddMessageMedia object:nil];
     
     // Register a SLKTextView subclass, if you need any special appearance and/or behavior customisation.
     [self registerClassForTextView:[MessageTextView class]];
@@ -219,20 +222,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (void)togglePIPWindow:(id)sender
+- (void)showPIPWindow
 {
-    if (!_pipWindow) {
-        [self showPIPWindow:sender];
-    }
-    else {
-        [self hidePIPWindow:sender];
-    }
-}
-
-- (void)showPIPWindow:(id)sender
-{
-    CGRect frame = CGRectMake(CGRectGetWidth(self.view.frame) - 60.0, 0.0, 50.0, 50.0);
-    frame.origin.y = CGRectGetMinY(self.textInputbar.frame) - 60.0;
+    CGRect frame = CGRectMake(CGRectGetWidth(self.view.frame) - 110.0, 0.0, 100.0, 100.0);
+    frame.origin.y = CGRectGetMinY(self.textInputbar.frame) - 110.0;
     
     _pipWindow = [[UIWindow alloc] initWithFrame:frame];
     _pipWindow.backgroundColor = [UIColor blackColor];
@@ -249,7 +242,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                      }];
 }
 
-- (void)hidePIPWindow:(id)sender
+- (void)hidePIPWindow
 {
     [UIView animateWithDuration:0.3
                      animations:^{
@@ -327,7 +320,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 	DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Select Option", nil)];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [sheet addButtonWithTitle:NSLocalizedString(@"Take Photo", nil) block:^() {
-			// Show photo stuff
+			PhotoCameraViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[PhotoCameraViewController compositeViewDescription] push:TRUE], PhotoCameraViewController);
+			if (controller != nil)
+    		{
+				controller.editMode = RgSendMediaEditModeMessage;
+			}
 		}];
     }
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
@@ -593,8 +590,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [super scrollViewDidScroll:scrollView];
 }
 
-
-
 #pragma mark - Lifeterm
 
 - (void)dealloc
@@ -607,7 +602,45 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)imagePickerDelegateImage:(UIImage *)image info:(NSDictionary *)info
 {
+	RKCommunicator* comm = [RKCommunicator sharedInstance];
+	NSData *imgData = UIImagePNGRepresentation(image);
+	RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
+		@"thread": self.chatThread,
+		@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+		@"body": @"",
+		@"deliveryStatus": @(RKMessageStatusSending),
+		@"mediaData": imgData,
+		@"mediaType": @"image/png",
+	}];
+	[imgData writeToURL:[pmsg documentURL] atomically:YES];
+	[comm sendMessage:pmsg];
+}
 
+#pragma mark - Media Message Functions
+
+- (void)addMessageMedia:(NSNotification*)notif
+{
+	NSLog(@"%s: Notif: %@", __PRETTY_FUNCTION__, notif.userInfo);
+	RKCommunicator* comm = [RKCommunicator sharedInstance];
+	NSString* file = notif.userInfo[@"file"];
+	NSData* imgData = [NSData dataWithContentsOfFile:file];
+	RKPhotoMessage* pmsg = [RKPhotoMessage newWithData:@{
+		@"thread": self.chatThread,
+		@"direction": [NSNumber numberWithInteger:RKItemDirectionOutbound],
+		@"body": @"",
+		@"deliveryStatus": @(RKMessageStatusSending),
+		@"mediaData": imgData,
+		@"mediaType": notif.userInfo[@"mediaType"],
+	}];
+	if ([[NSFileManager defaultManager] copyItemAtPath:file toPath:[[pmsg documentURL] path] error:NULL] == NO)
+    {
+		NSAssert(FALSE, @"File copy failure");
+    }
+    else
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:file error:NULL];
+    }
+	[comm sendMessage:pmsg];
 }
 
 @end
