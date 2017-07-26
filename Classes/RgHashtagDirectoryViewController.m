@@ -97,11 +97,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kRgSegmentControl
                                                object:nil];
     
-    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
-    self.didSubscribeToCurrentLocation = YES;
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
-    
     
     if ([self needsRefresh])
     {
@@ -115,11 +112,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
-    if (self.didSubscribeToCurrentLocation)
-    {
-        [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
-        self.didSubscribeToCurrentLocation = NO;
-    }
 }
 
 - (void)viewDidLoad {
@@ -183,13 +175,20 @@ static UICompositeViewDescription *compositeDescription = nil;
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
+    
+    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
+    self.didSubscribeToCurrentLocation = YES;
 }
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kRgHashtagDirectoryUpdatePath object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgHashtagDirectoryRefreshPath object:nil];
-    
+    if (self.didSubscribeToCurrentLocation)
+    {
+        [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
+        self.didSubscribeToCurrentLocation = NO;
+    }
 }
 
 #pragma mark - Event Functions
