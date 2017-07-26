@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,7 +25,7 @@
                 <outlet property="chatButton" destination="F6z-Sd-uf3" id="dsx-Hl-7wg"/>
                 <outlet property="editView" destination="13" id="16"/>
                 <outlet property="normalView" destination="12" id="17"/>
-                <outlet property="rgInvite" destination="iEM-vL-GAO" id="9Sy-8x-eOH"/>
+                <outlet property="rgInvite" destination="6kh-sr-g0W" id="a6s-SY-Nsm"/>
                 <outlet property="tableView" destination="15" id="20"/>
                 <outlet property="videoButton" destination="bFT-px-iZV" id="Drn-YQ-cxJ"/>
                 <outlet property="view" destination="4" id="5"/>
@@ -120,17 +120,6 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEM-vL-GAO" userLabel="Invite">
-                            <rect key="frame" x="77" y="191" width="166" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="3zv-cU-cZm"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="20"/>
-                            <state key="normal" title="Invite To RingMail"/>
-                            <connections>
-                                <action selector="onInvite:" destination="-1" eventType="touchUpInside" id="Wnt-Cp-pRA"/>
-                            </connections>
-                        </button>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ceE-Y3-ZPI">
                             <rect key="frame" x="63" y="189" width="195" height="45"/>
                             <subviews>
@@ -181,16 +170,30 @@
                                 </button>
                             </subviews>
                         </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kh-sr-g0W">
+                            <rect key="frame" x="61" y="192" width="198" height="38"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="198" id="HrU-nJ-opu"/>
+                                <constraint firstAttribute="height" constant="38" id="pwi-2P-Gwh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                            <state key="normal" title="Invite to RingMail" backgroundImage="invite_to_rm_button.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onInvite:" destination="-1" eventType="touchUpInside" id="02L-Q6-0PI"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="6" firstAttribute="top" secondItem="12" secondAttribute="top" constant="45" id="3sH-yR-h0W"/>
-                        <constraint firstItem="iEM-vL-GAO" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="25" id="6Gz-N5-2xp"/>
                         <constraint firstItem="ceE-Y3-ZPI" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="7so-t4-IPr"/>
-                        <constraint firstItem="6" firstAttribute="centerX" secondItem="iEM-vL-GAO" secondAttribute="centerX" id="Hsl-eh-dag"/>
                         <constraint firstItem="6" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="J0a-Qe-dje"/>
                         <constraint firstAttribute="bottom" secondItem="ceE-Y3-ZPI" secondAttribute="bottom" constant="46" id="OD6-0c-u5M"/>
                         <constraint firstItem="8" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="12" id="mjP-cF-8Uu"/>
+                        <constraint firstItem="6kh-sr-g0W" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="qZg-GR-JG1"/>
+                        <constraint firstItem="6kh-sr-g0W" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="26" id="tr1-ip-QlT"/>
                         <constraint firstItem="6" firstAttribute="centerX" secondItem="8" secondAttribute="centerX" id="wdP-he-CXI"/>
                     </constraints>
                 </view>
@@ -198,6 +201,7 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="13" firstAttribute="width" secondItem="4" secondAttribute="width" id="6eh-Jk-Fsd"/>
+                <constraint firstItem="6kh-sr-g0W" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="9Aq-zb-ofr"/>
                 <constraint firstItem="15" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" constant="25" id="LeJ-cy-l91"/>
                 <constraint firstItem="12" firstAttribute="top" secondItem="13" secondAttribute="top" id="MUj-ld-Hkc"/>
                 <constraint firstItem="12" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="VPl-OY-WlI"/>
@@ -215,6 +219,7 @@
     </objects>
     <resources>
         <image name="avatar_unknown_small.png" width="66" height="66"/>
+        <image name="invite_to_rm_button.png" width="198" height="38"/>
         <image name="message_normal.png" width="84" height="84"/>
         <image name="message_selected.png" width="84" height="84"/>
         <image name="phone_normal.png" width="84" height="84"/>

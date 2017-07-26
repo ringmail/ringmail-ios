@@ -130,6 +130,7 @@
             CFRelease(emailMap);
         }
     }
+    
     if([MFMessageComposeViewController canSendText])
     {
         ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)contact, kABPersonPhoneProperty);
@@ -157,7 +158,7 @@
             CFRelease(phoneMap);
         }
     }
-
+    
     [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:^{}];
     [sheet showInView:[PhoneMainView instance].view];
 }

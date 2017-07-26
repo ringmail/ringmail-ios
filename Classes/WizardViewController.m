@@ -1117,7 +1117,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 
                 // TODO:
                 // (create RKContactStore DBs and get any previous RGContacts from server after first app use signin:
-                //                [RgManager updateContacts:res];
+                [RgManager updateContacts:res];
                 
                 [waitView setHidden:TRUE];
                 [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];

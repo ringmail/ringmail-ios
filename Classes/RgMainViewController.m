@@ -36,6 +36,7 @@
 
 @interface RgMainViewController()
 @property BOOL isSearchBarVisible;
+@property BOOL didSubscribeToCurrentLocation;
 @property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
 @property (nonatomic, retain) IBOutlet SendViewController* sendViewController;
 @end
@@ -46,6 +47,7 @@
 @synthesize backgroundImageView;
 @synthesize sendInfo;
 @synthesize isEditing;
+@synthesize didSubscribeToCurrentLocation;
 
 #pragma mark - Lifecycle Functions
 
@@ -98,6 +100,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
     self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
     self.isSearchBarVisible = YES;
+    self.didSubscribeToCurrentLocation = NO;
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
     
@@ -112,11 +115,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[backgroundImageView setImage:[UIImage imageNamed:@"explore_background_ip6-7p@3x.png"]];
     }
     
-    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
-    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
-    self.isSearchBarVisible = YES;
-    [self addChildViewController:self.searchBarViewController];
-    [self.view addSubview:self.searchBarViewController.view];
+//    self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
+//    self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
+//    self.isSearchBarVisible = YES;
+//    [self addChildViewController:self.searchBarViewController];
+//    [self.view addSubview:self.searchBarViewController.view];
     
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self.searchBarViewController action:@selector(dismissKeyboard:)];
     [tapBackground setNumberOfTapsRequired:1];
@@ -134,21 +137,26 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSegControl) name:kRgSegmentControl object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-	
+    
+	[[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
+    self.didSubscribeToCurrentLocation = YES;
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
-    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
 	
-    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
-
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    if (self.didSubscribeToCurrentLocation)
+    {
+        [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
+        self.didSubscribeToCurrentLocation = NO;
+    }
 }
 
 #pragma mark - Action Functions
@@ -288,6 +296,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 	return res;
 }
+
 
 - (void)addMedia:(NSDictionary*)param
 {

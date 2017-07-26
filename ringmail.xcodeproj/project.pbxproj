@@ -483,6 +483,10 @@
 		4DE427DA1ED62E4700872002 /* UIContactDetailsOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE427D71ED62E3D00872002 /* UIContactDetailsOptions.m */; };
 		4DE427DB1ED62E4700872002 /* UIContactDetailsOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */; };
 		4DE427DC1ED62E4700872002 /* UIContactDetailsOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */; };
+		4DEB40291F29153B00C8F32B /* invite_to_rm_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEB40281F29153B00C8F32B /* invite_to_rm_button@2x.png */; };
+		4DEB402A1F29153C00C8F32B /* invite_to_rm_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEB40281F29153B00C8F32B /* invite_to_rm_button@2x.png */; };
+		4DEB40341F29496D00C8F32B /* invite_to_rm_button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEB40331F29496D00C8F32B /* invite_to_rm_button@3x.png */; };
+		4DEB40351F29496E00C8F32B /* invite_to_rm_button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEB40331F29496D00C8F32B /* invite_to_rm_button@3x.png */; };
 		57F005C415EE2CCF00914747 /* linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C315EE2CCF00914747 /* linphonerc */; };
 		57F005C815EE2D9200914747 /* linphonerc-factory in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C615EE2D9200914747 /* linphonerc-factory */; };
 		57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C715EE2D9200914747 /* linphonerc-factory~ipad */; };
@@ -2912,6 +2916,8 @@
 		4DE427D61ED62E3C00872002 /* UIContactDetailsOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIContactDetailsOptions.h; sourceTree = "<group>"; };
 		4DE427D71ED62E3D00872002 /* UIContactDetailsOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIContactDetailsOptions.m; sourceTree = "<group>"; };
 		4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIContactDetailsOptions.xib; sourceTree = "<group>"; };
+		4DEB40281F29153B00C8F32B /* invite_to_rm_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "invite_to_rm_button@2x.png"; path = "Resources/invite_to_rm_button@2x.png"; sourceTree = "<group>"; };
+		4DEB40331F29496D00C8F32B /* invite_to_rm_button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "invite_to_rm_button@3x.png"; path = "Resources/invite_to_rm_button@3x.png"; sourceTree = "<group>"; };
 		57F005C315EE2CCF00914747 /* linphonerc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = linphonerc; path = Resources/linphonerc; sourceTree = "<group>"; };
 		57F005C615EE2D9200914747 /* linphonerc-factory */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linphonerc-factory"; path = "Resources/linphonerc-factory"; sourceTree = "<group>"; };
 		57F005C715EE2D9200914747 /* linphonerc-factory~ipad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linphonerc-factory~ipad"; path = "Resources/linphonerc-factory~ipad"; sourceTree = "<group>"; };
@@ -5533,6 +5539,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4DEB40331F29496D00C8F32B /* invite_to_rm_button@3x.png */,
+				4DEB40281F29153B00C8F32B /* invite_to_rm_button@2x.png */,
 				4D2847CE1F21798D007830A6 /* background_splash_iph6@2x.png */,
 				4D2847BC1F215D10007830A6 /* send_normal@3x.png */,
 				4D2847BD1F215D10007830A6 /* send_pressed@3x.png */,
@@ -7349,6 +7357,7 @@
 				C40FF4B01CACD248007EA0E7 /* ringmail_contact_add.png in Resources */,
 				D33988F815C6DD1600CAF1E4 /* video_off_default_landscape~ipad.png in Resources */,
 				D33988FA15C6DD1600CAF1E4 /* video_off_disabled_landscape~ipad.png in Resources */,
+				4DEB40291F29153B00C8F32B /* invite_to_rm_button@2x.png in Resources */,
 				D33988FC15C6DD1600CAF1E4 /* video_off_over_landscape~ipad.png in Resources */,
 				D33988FE15C6DD1600CAF1E4 /* video_on_default_landscape~ipad.png in Resources */,
 				C48D3C0B1D0276FE00FAC3A6 /* ping_out_send.caf in Resources */,
@@ -7382,6 +7391,7 @@
 				4D33F79B1EC4D5C400D913A7 /* login3_logo@2x.png in Resources */,
 				2234C8EE15EE744200E18E83 /* chat_message_inprogress.png in Resources */,
 				C444F3D71C92240300134788 /* menu-contact_active@2x.png in Resources */,
+				4DEB40341F29496D00C8F32B /* invite_to_rm_button@3x.png in Resources */,
 				C423AC3B1F1DD54B00676863 /* videoplayer_pause@1x.png in Resources */,
 				D3998D0416031937009DD22C /* background_alt.png in Resources */,
 				D3866C281608CA1600830F95 /* image_back_default.png in Resources */,
@@ -8228,6 +8238,7 @@
 				4D33F7661EC4D5C400D913A7 /* dialpad_icon_selected@2x.png in Resources */,
 				C4AC29CC1D3963FA003B6232 /* video_off_default~ipad.png in Resources */,
 				C4AC29CD1D3963FA003B6232 /* video_off_disabled~ipad.png in Resources */,
+				4DEB402A1F29153C00C8F32B /* invite_to_rm_button@2x.png in Resources */,
 				C4AC29CE1D3963FA003B6232 /* video_off_over~ipad.png in Resources */,
 				C4AC29CF1D3963FA003B6232 /* RgMainViewController.xib in Resources */,
 				4D33F7841EC4D5C400D913A7 /* header_navigation_arrow@3x.png in Resources */,
@@ -8455,6 +8466,7 @@
 				4D2847B91F214FBF007830A6 /* pressed_normal@2x.png in Resources */,
 				C4AC2A881D3963FA003B6232 /* route_speaker_off_default.png in Resources */,
 				4D33F7DE1EC4D5C400D913A7 /* tabs_recents_selected_5@2x.png in Resources */,
+				4DEB40351F29496E00C8F32B /* invite_to_rm_button@3x.png in Resources */,
 				C4AC2A891D3963FA003B6232 /* route_speaker_off_disabled.png in Resources */,
 				C423AC401F1DD54B00676863 /* videoplayer_pause@3x.png in Resources */,
 				C4AC2A8A1D3963FA003B6232 /* route_speaker_off_over.png in Resources */,

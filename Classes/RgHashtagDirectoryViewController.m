@@ -36,6 +36,7 @@
 
 @interface RgHashtagDirectoryViewController()
 @property BOOL isSearchBarVisible;
+@property BOOL didSubscribeToCurrentLocation;
 @property (strong, nonatomic) RgSearchBarViewController *searchBarViewController;
 @end
 
@@ -96,10 +97,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                  name:kRgSegmentControl
                                                object:nil];
     
-    
+    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
+    self.didSubscribeToCurrentLocation = YES;
     [[RgLocationManager sharedInstance] requestWhenInUseAuthorization];
     [[RgLocationManager sharedInstance] startUpdatingLocation];
-    [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
     
     
     if ([self needsRefresh])
@@ -114,7 +115,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgSegmentControl object:nil];
-    [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
+    if (self.didSubscribeToCurrentLocation)
+    {
+        [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
+        self.didSubscribeToCurrentLocation = NO;
+    }
 }
 
 - (void)viewDidLoad {
@@ -123,6 +128,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.searchBarViewController = [[RgSearchBarViewController alloc] initWithPlaceHolder:@"Hashtag, Domain or Email"];
     self.searchBarViewController.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50);
     self.isSearchBarVisible = YES;
+    self.didSubscribeToCurrentLocation = NO;
     [self addChildViewController:self.searchBarViewController];
     [self.view addSubview:self.searchBarViewController.view];
     
