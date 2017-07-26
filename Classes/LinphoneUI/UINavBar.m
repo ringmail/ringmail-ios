@@ -200,7 +200,7 @@ int backState = 0;
             [backButton setEnabled:YES];
             backState = 1;
             [headerLabel setHidden:NO];
-            headerLabel.text = @"Explore";
+            headerLabel.text = @"Hashtags";
             break;
         case ContactDetailsLabel:
             headerLabel.text = @"Contact Details";
@@ -231,7 +231,7 @@ int backState = 0;
     
     NSDictionary<NSString*,NSNumber*> *navViews = @{
         @"RingMail": @(Ring),
-        @"Explore": @(Explore),
+        @"Hashtags": @(Explore),
         @"Messages": @(Recents),
         @"Contacts": @(Contacts),
         @"Contact Details": @(ContactDetails),

@@ -327,6 +327,7 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
         self.coreReady = [NSNumber numberWithBool:0];
         self.opQueue = [[NSOperationQueue alloc] init];
         [self.opQueue setUnderlyingQueue:dispatch_queue_create("com.ringmail.uri", NULL)];
+		self->skipRegisterRefresh = NO;
 	}
 	return self;
 }
@@ -1544,9 +1545,15 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
     return YES;
 }
 
-- (void)becomeActive {
+- (void)becomeActive
+{
     NSLog(@"RingMail: Become Active");
-	[self refreshRegisters];
+	if (! self->skipRegisterRefresh)
+	{
+		[self refreshRegisters];
+	}
+	self->skipRegisterRefresh = NO;
+	
 	if (pausedCallBgTask) {
 		[[UIApplication sharedApplication] endBackgroundTask:pausedCallBgTask];
 		pausedCallBgTask = 0;

@@ -56,10 +56,10 @@
     [[self dbqueue] inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
 			// Reset database
-            @"DROP TABLE rk_thread;",
-            @"DROP TABLE rk_thread_item;",
-            @"DROP TABLE rk_message;",
-            @"DROP TABLE rk_call;",
+            //@"DROP TABLE rk_thread;",
+            //@"DROP TABLE rk_thread_item;",
+            //@"DROP TABLE rk_message;",
+            //@"DROP TABLE rk_call;",
 			
             @"CREATE TABLE IF NOT EXISTS rk_thread ("
                 "id INTEGER PRIMARY KEY NOT NULL, "

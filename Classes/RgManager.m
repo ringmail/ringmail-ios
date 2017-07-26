@@ -592,22 +592,9 @@ static LevelDB* theConfigDatabase = nil;
 + (void)chatConnect
 {
     LevelDB* cfg = [RgManager configDatabase];
-    LinphoneManager* mgr = [LinphoneManager instance];
-    if (mgr.chatManager != nil)
-    {
-        if (![[mgr.chatManager xmppStream] isDisconnected])
-        {
-            [mgr.chatManager disconnect];
-        }
-    }
-    else
-    {
-        mgr.chatManager = [[RgChatManager alloc] init];
-    }
     NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
     if (chatPass != nil && ! [chatPass isEqualToString:@""])
     {
-        //[mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
         [[RKCommunicator sharedInstance].adapterXMPP connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
     }
 }
@@ -615,17 +602,12 @@ static LevelDB* theConfigDatabase = nil;
 + (void)chatEnsureConnection
 {
     LevelDB* cfg = [RgManager configDatabase];
-    LinphoneManager* mgr = [LinphoneManager instance];
-    if (mgr.chatManager == nil)
-    {
-        mgr.chatManager = [[RgChatManager alloc] init];
-    }
-    if ([[mgr.chatManager xmppStream] isDisconnected])
+	BOOL connect = [[RKCommunicator sharedInstance].adapterXMPP.xmppStream isDisconnected];
+    if (connect)
     {
         NSString* chatPass = [cfg objectForKey:@"ringmail_chat_password"];
         if (chatPass != nil && ! [chatPass isEqualToString:@""])
         {
-            //[mgr.chatManager connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
 			[[RKCommunicator sharedInstance].adapterXMPP connectWithJID:[cfg objectForKey:@"ringmail_login"] password:chatPass];
         }
     }

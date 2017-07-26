@@ -16,7 +16,7 @@
 	
 	CKComponent* res;
 	
-	UIImage* image = [context imageNamed:@"message_summary_moment_normal.png"];
+	UIImage* image = [context imageNamed:@"message_moment_normal.png"];
 
 	res = [CKStackLayoutComponent newWithView:{} size:{
 		.width = width,

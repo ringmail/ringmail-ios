@@ -115,57 +115,6 @@
     }
 }
 
-- (UIUserNotificationCategory *)getMessageNotificationCategory {
-
-	UIMutableUserNotificationAction *reply = [[UIMutableUserNotificationAction alloc] init];
-	reply.identifier = @"reply";
-	reply.title = NSLocalizedString(@"Reply", nil);
-	reply.activationMode = UIUserNotificationActivationModeForeground;
-	reply.destructive = NO;
-	reply.authenticationRequired = YES;
-
-	UIMutableUserNotificationAction *mark_read = [[UIMutableUserNotificationAction alloc] init];
-	mark_read.identifier = @"mark_read";
-	mark_read.title = NSLocalizedString(@"Mark Read", nil);
-	mark_read.activationMode = UIUserNotificationActivationModeBackground;
-	mark_read.destructive = NO;
-	mark_read.authenticationRequired = NO;
-
-	NSArray *localRingActions = @[ mark_read, reply ];
-
-	UIMutableUserNotificationCategory *localRingNotifAction = [[UIMutableUserNotificationCategory alloc] init];
-	localRingNotifAction.identifier = @"incoming_msg";
-	[localRingNotifAction setActions:localRingActions forContext:UIUserNotificationActionContextDefault];
-	[localRingNotifAction setActions:localRingActions forContext:UIUserNotificationActionContextMinimal];
-
-	return localRingNotifAction;
-}
-
-- (UIUserNotificationCategory *)getCallNotificationCategory {
-	UIMutableUserNotificationAction *answer = [[UIMutableUserNotificationAction alloc] init];
-	answer.identifier = @"answer";
-	answer.title = NSLocalizedString(@"Answer", nil);
-	answer.activationMode = UIUserNotificationActivationModeForeground;
-	answer.destructive = NO;
-	answer.authenticationRequired = YES;
-
-	UIMutableUserNotificationAction *decline = [[UIMutableUserNotificationAction alloc] init];
-	decline.identifier = @"decline";
-	decline.title = NSLocalizedString(@"Decline", nil);
-	decline.activationMode = UIUserNotificationActivationModeBackground;
-	decline.destructive = YES;
-	decline.authenticationRequired = NO;
-
-	NSArray *localRingActions = @[ decline, answer ];
-
-	UIMutableUserNotificationCategory *localRingNotifAction = [[UIMutableUserNotificationCategory alloc] init];
-	localRingNotifAction.identifier = @"incoming_call";
-	[localRingNotifAction setActions:localRingActions forContext:UIUserNotificationActionContextDefault];
-	[localRingNotifAction setActions:localRingActions forContext:UIUserNotificationActionContextMinimal];
-
-	return localRingNotifAction;
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	[RgViewDelegate sharedInstance];
@@ -184,17 +133,29 @@
 	//BOOL background_mode = [instance lpConfigBoolForKey:@"backgroundmode_preference"];
 	//BOOL start_at_boot = [instance lpConfigBoolForKey:@"start_at_boot_preference"];
 
-	if ([app respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-		/* iOS8 notifications can be actioned! Awesome: */
-		UIUserNotificationType notifTypes =
-			UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+	if ([app respondsToSelector:@selector(registerUserNotificationSettings:)])
+	{
+        // registration
+		UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
+			completionHandler:^(BOOL granted, NSError * _Nullable error) {
+		    LevelDB* cfg = [RgManager configDatabase];
+			cfg[@"ringmail_allow_local_notifications"] = [NSNumber numberWithBool:granted];
+			if (granted)
+			{
+				UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        	    UNNotificationAction *acceptAction = [UNNotificationAction actionWithIdentifier:@"ringmail_call_answer" title:@"Answer" options:UNNotificationActionOptionForeground];
+                UNNotificationAction *declineAction = [UNNotificationAction actionWithIdentifier:@"ringmail_call_decline" title:@"Decline" options:UNNotificationActionOptionDestructive];
+                NSArray *notificationActions = @[ acceptAction, declineAction ];
 
-		NSSet *categories =
-			[NSSet setWithObjects:[self getCallNotificationCategory], [self getMessageNotificationCategory], nil];
-		UIUserNotificationSettings *userSettings =
-			[UIUserNotificationSettings settingsForTypes:notifTypes categories:categories];
-		[app registerUserNotificationSettings:userSettings];
+        		// create a category
+                UNNotificationCategory *answerCategory = [UNNotificationCategory categoryWithIdentifier:@"ringmail_call" actions:notificationActions intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
 
+                NSSet *categories = [NSSet setWithObject:answerCategory];
+				[center setNotificationCategories:categories];
+				center.delegate = self;
+			}
+		}];
 		
         [app registerForRemoteNotifications];
 	} /*else {
@@ -348,9 +309,8 @@
 
 // this method is implemented for iOS7. It is invoked when receiving a push notification for a call and it has
 // "content-available" in the aps section.
-- (void)application:(UIApplication *)application
-	didReceiveRemoteNotification:(NSDictionary *)userInfo
-		  fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
 	LOGI(@"%@ : %@", NSStringFromSelector(_cmd), userInfo);
     
     LinphoneManager *lm = [LinphoneManager instance];
@@ -405,8 +365,7 @@
 
 #pragma mark - PushNotification Functions
 
-- (void)application:(UIApplication *)application
-	didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 	LOGI(@"%@ : %@", NSStringFromSelector(_cmd), deviceToken);
     
     pushReg = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
@@ -431,28 +390,63 @@
     [[RgNetwork instance] registerPushTokenVoIP:credentials.token];
 }
 
--(void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
 {
     NSLog(@"RingMail: VoIP Push Received: %@", payload);
     
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
     {
-        UILocalNotification *notification = [[UILocalNotification alloc] init];
-        if (notification)
-        {
-            notification.soundName = @"call_in.caf";
-            notification.category = @"incoming_call";
-            notification.repeatInterval = 0;
-            notification.alertBody = [NSString stringWithFormat:@"Incoming Call\n%@", [payload.dictionaryPayload objectForKey:@"from"]];
-            notification.alertAction = NSLocalizedString(@"Answer", nil);
-            notification.userInfo = @{ };
-            notification.applicationIconBadgeNumber = 1;
-            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-        }
+	    LevelDB* cfg = [RgManager configDatabase];
+		NSNumber* allow = cfg[@"ringmail_allow_local_notifications"];
+		if (allow != nil && [allow boolValue])
+		{
+   			LinphoneManager* mgr = [LinphoneManager instance];
+		    if ([[mgr coreReady] boolValue])
+			{
+				[mgr refreshRegisters];
+    			mgr->skipRegisterRefresh = YES;
+			}
+		
+			UNMutableNotificationContent* content = [[UNMutableNotificationContent alloc] init];
+            content.title = @"Incoming Call";
+			content.body = [payload.dictionaryPayload objectForKey:@"from"];
+			content.userInfo = @{
+				@"call_id": [payload.dictionaryPayload objectForKey:@"call_id"],
+			};
+            content.sound = [UNNotificationSound soundNamed:@"call_in.caf"];
+            content.categoryIdentifier = @"ringmail_call";
+			UNNotificationRequest *notification = [UNNotificationRequest requestWithIdentifier:@"ringmail_call_notification" content:content trigger:nil];
+    		UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+			[center addNotificationRequest:notification withCompletionHandler:^(NSError * _Nullable error) {
+                if (error)
+				{
+                    NSAssert(FALSE, [error localizedDescription]);
+                }
+            }];
+		}
     }
 }
 
+#pragma mark - User notification response delegate
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void (^)())completionHandler
+{
+	NSLog(@"%s: %@", __PRETTY_FUNCTION__, response.actionIdentifier);
+	NSString *action = response.actionIdentifier;
+	if (
+		[action isEqualToString:@"com.apple.UNNotificationDefaultActionIdentifier"] ||
+		[action isEqualToString:@"ringmail_call_answer"]
+	) {
+		NSDictionary* userInfo = response.notification.request.content.userInfo;
+		NSLog(@"Notification: %@", userInfo);
+		[[LinphoneManager instance] acceptCallForCallId:userInfo[@"call_id"]];
+	}
+	completionHandler();
+}
+
 #pragma mark - User notifications
+
 
 - (void)application:(UIApplication *)application
 	didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {

@@ -69,7 +69,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:@"Explore"
+		compositeDescription = [[UICompositeViewDescription alloc] init:@"Hashtags"
 																content:@"RgHashtagDirectoryViewController"
 															   stateBar:@"UIStateBar"
 														stateBarEnabled:true

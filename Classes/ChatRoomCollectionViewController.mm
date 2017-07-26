@@ -59,6 +59,7 @@
 	
 	ChatElementContext *context = [[ChatElementContext alloc] initWithImages:@{
 		@"message_summary_moment_normal.png": [UIImage imageNamed:@"message_summary_moment_normal.png"],
+		@"message_moment_normal.png": [UIImage imageNamed:@"message_moment_normal.png"],
 		@"summary_call_incoming.png": [UIImage imageNamed:@"summary_call_incoming.png"],
 		@"summary_call_missed.png": [UIImage imageNamed:@"summary_call_missed.png"],
 		@"summary_call_outgoing.png": [UIImage imageNamed:@"summary_call_outgoing.png"],
@@ -270,24 +271,30 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 		_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] - 1];
 		__block NSInteger lastIndex = [_mainCount intValue] - 1;
 		
-		if (_elements[0][@"first_element"] == nil)
+		if ([_elements count] > 0)
 		{
-			_elements[0][@"first_element"] = @YES;
-			if (lastIndex != 0) // If only one element is left, update it below since it's both first and last.
-			{
-    			ChatElement* item = [[ChatElement alloc] initWithData:_elements[0]];
-    			items.update([NSIndexPath indexPathForRow:0 inSection:0], item);
-			}
-		}
-		if (_elements[lastIndex][@"last_element"] == nil)
-		{
-			_elements[lastIndex][@"last_element"] = @YES;
-			ChatElement* item = [[ChatElement alloc] initWithData:_elements[lastIndex]];
-			items.update([NSIndexPath indexPathForRow:lastIndex inSection:0], item);
+    		if (_elements[0][@"first_element"] == nil)
+    		{
+    			_elements[0][@"first_element"] = @YES;
+    			if (lastIndex != 0) // If only one element is left, update it below since it's both first and last.
+    			{
+        			ChatElement* item = [[ChatElement alloc] initWithData:_elements[0]];
+        			items.update([NSIndexPath indexPathForRow:0 inSection:0], item);
+    			}
+    		}
+    		if (_elements[lastIndex][@"last_element"] == nil)
+    		{
+    			_elements[lastIndex][@"last_element"] = @YES;
+    			ChatElement* item = [[ChatElement alloc] initWithData:_elements[lastIndex]];
+    			items.update([NSIndexPath indexPathForRow:lastIndex inSection:0], item);
+    		}
 		}
 		dispatch_async(dispatch_get_main_queue(), ^{
     		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i) {
-    			[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+				if (lastIndex >= 0)
+				{
+					[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+				}
 			}];
 		});
 	}

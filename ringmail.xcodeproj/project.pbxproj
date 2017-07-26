@@ -480,6 +480,8 @@
 		C41276931D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C41276921D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm */; };
 		C41276941D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C41276921D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm */; };
 		C41B95271C10E0A900253BB7 /* RgContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B95261C10E0A900253BB7 /* RgContactManager.m */; };
+		C41C945D1F26F6C900939296 /* message_moment_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C41C945C1F26F6C900939296 /* message_moment_normal@2x.png */; };
+		C41C945E1F26F6C900939296 /* message_moment_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C41C945C1F26F6C900939296 /* message_moment_normal@2x.png */; };
 		C41D67DC1CA722A100D7BA72 /* ringmail_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C41D67D91CA722A100D7BA72 /* ringmail_plus@2x.png */; };
 		C41D67DD1CA722A100D7BA72 /* ringmail_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C41D67DA1CA722A100D7BA72 /* ringmail_plus.png */; };
 		C41D67DE1CA722A100D7BA72 /* ringmail_plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C41D67DB1CA722A100D7BA72 /* ringmail_plus@3x.png */; };
@@ -1887,6 +1889,7 @@
 		C4E1CB5B1E6E3EC200698166 /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4E1CB581E6E3EC200698166 /* ImageEditViewController.xib */; };
 		C4E4708B1BA37DF6007512D7 /* wizard_linphone_ringmail.rc in Resources */ = {isa = PBXBuildFile; fileRef = C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */; };
 		C4E985CA1BAF98E200939A55 /* UIMessageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E985C91BAF98E200939A55 /* UIMessageButton.m */; };
+		C4EE308B1F2822D1007AD11F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EE30891F2822D1007AD11F /* UserNotifications.framework */; };
 		C4FAC6111F0AD43E00420405 /* RgMomentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */; };
 		C4FAC6121F0AD43E00420405 /* RgMomentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */; };
 		C4FD784C1CF932950066BDB1 /* UIColor+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD784B1CF932950066BDB1 /* UIColor+Name.m */; };
@@ -2947,6 +2950,7 @@
 		C41276951D68BE550065E3FF /* HashtagCategoryGroupCardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashtagCategoryGroupCardComponent.h; path = RgComponents/HashtagCategoryGroupCardComponent.h; sourceTree = "<group>"; };
 		C41B95251C10E0A900253BB7 /* RgContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgContactManager.h; sourceTree = "<group>"; };
 		C41B95261C10E0A900253BB7 /* RgContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgContactManager.m; sourceTree = "<group>"; };
+		C41C945C1F26F6C900939296 /* message_moment_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "message_moment_normal@2x.png"; path = "Resources/message_moment_normal@2x.png"; sourceTree = "<group>"; };
 		C41D67D91CA722A100D7BA72 /* ringmail_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_plus@2x.png"; path = "Resources/ringmail_plus@2x.png"; sourceTree = "<group>"; };
 		C41D67DA1CA722A100D7BA72 /* ringmail_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_plus.png; path = Resources/ringmail_plus.png; sourceTree = "<group>"; };
 		C41D67DB1CA722A100D7BA72 /* ringmail_plus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_plus@3x.png"; path = "Resources/ringmail_plus@3x.png"; sourceTree = "<group>"; };
@@ -3484,6 +3488,7 @@
 		C4E4708A1BA37DF6007512D7 /* wizard_linphone_ringmail.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_linphone_ringmail.rc; path = Resources/wizard_linphone_ringmail.rc; sourceTree = "<group>"; };
 		C4E985C11BAF98D500939A55 /* UIMessageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMessageButton.h; sourceTree = "<group>"; };
 		C4E985C91BAF98E200939A55 /* UIMessageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMessageButton.m; sourceTree = "<group>"; };
+		C4EE30891F2822D1007AD11F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		C4FAC6071F0AD43200420405 /* RgMomentDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgMomentDelegate.h; sourceTree = "<group>"; };
 		C4FAC6101F0AD43E00420405 /* RgMomentDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgMomentDelegate.m; sourceTree = "<group>"; };
 		C4FD784B1CF932950066BDB1 /* UIColor+Name.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Name.m"; path = "Utils/UIColor+Name.m"; sourceTree = "<group>"; };
@@ -4215,6 +4220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4EE308B1F2822D1007AD11F /* UserNotifications.framework in Frameworks */,
 				4D6EA4581EF30A6400B254E3 /* ComponentKit.framework in Frameworks */,
 				C48C10A41E81BA470094F1F3 /* Photos.framework in Frameworks */,
 				C44A41201E73380F000F3E24 /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -4607,6 +4613,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C4EE30891F2822D1007AD11F /* UserNotifications.framework */,
 				4D6EA4571EF30A6400B254E3 /* ComponentKit.framework */,
 				C48C10A31E81BA470094F1F3 /* Photos.framework */,
 				C44A411F1E73380F000F3E24 /* libstdc++.6.0.9.tbd */,
@@ -5482,6 +5489,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C41C945C1F26F6C900939296 /* message_moment_normal@2x.png */,
 				C46E39BF1F1588080012BF16 /* avatar_unknown_small@2x.png */,
 				C463126B1F14313300E503AB /* summary_call_incoming@2x.png */,
 				C463126C1F14313300E503AB /* summary_call_missed@2x.png */,
@@ -6901,6 +6909,7 @@
 				D3F795DF15A5831C0077328B /* chat_back_over.png in Resources */,
 				C470BF821E68C7E6009968E2 /* arrow_pressed@2x.png in Resources */,
 				D3B9A3E115A58C450096EA4E /* chat_ok_default.png in Resources */,
+				C41C945D1F26F6C900939296 /* message_moment_normal@2x.png in Resources */,
 				D3B9A3E315A58C450096EA4E /* chat_ok_over.png in Resources */,
 				4D33F7531EC4D5C400D913A7 /* header_navigation_tabs_5_blue@2x.jpg in Resources */,
 				D3B9A3E515A58C450096EA4E /* chat_send_default.png in Resources */,
@@ -7810,6 +7819,7 @@
 				C4AC28CD1D3963FA003B6232 /* cell_call_first_highlight.png in Resources */,
 				C4AC28CE1D3963FA003B6232 /* camera@2x.png in Resources */,
 				C4AC28CF1D3963FA003B6232 /* cell_call_highlight.png in Resources */,
+				C41C945E1F26F6C900939296 /* message_moment_normal@2x.png in Resources */,
 				4D33F7B21EC4D5C400D913A7 /* tabs_contacts_normal@3x.png in Resources */,
 				C4AC28D01D3963FA003B6232 /* options_add_default.png in Resources */,
 				C4AC28D11D3963FA003B6232 /* options_add_over.png in Resources */,
@@ -10149,7 +10159,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -10217,7 +10227,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -10285,7 +10295,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -10354,7 +10364,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Dev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",

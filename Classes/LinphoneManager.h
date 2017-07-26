@@ -119,6 +119,7 @@ typedef struct _LinphoneManagerSounds {
 	CTCallCenter* mCallCenter;
     NSDate *mLastKeepAliveDate;
 @public
+	BOOL skipRegisterRefresh;
     CallContext currentCallContextBeforeGoingBackground;
 }
 + (LinphoneManager*)instance;

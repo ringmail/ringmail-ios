@@ -20,12 +20,13 @@
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/ABPeoplePickerNavigationController.h>
 #import <PushKit/PushKit.h>
+#import <UserNotifications/UserNotifications.h>
 
 #import "LinphoneCoreSettingsStore.h"
 
 #import <Google/SignIn.h>
 
-@interface LinphoneAppDelegate : NSObject <UIApplicationDelegate,UIAlertViewDelegate,PKPushRegistryDelegate, GIDSignInDelegate> {
+@interface LinphoneAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate, PKPushRegistryDelegate, UNUserNotificationCenterDelegate, GIDSignInDelegate> {
     @private
 	UIBackgroundTaskIdentifier bgStartId;
     BOOL startedInBackground;
