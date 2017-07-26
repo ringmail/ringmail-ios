@@ -68,6 +68,10 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store insertItem:message];
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showNewMessage:)])
+	{
+		[self.viewDelegate showNewMessage:message];
+	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageReceived object:self userInfo:@{
 		@"message": message,
 	}];
@@ -231,6 +235,14 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(showImageView:parameters:)])
 	{
 		[self.viewDelegate showImageView:image parameters:params];
+	}
+}
+
+- (void)enableMessageNotifications:(BOOL)show
+{
+	if (self.viewDelegate && [self.viewDelegate respondsToSelector:@selector(enableMessageNotifications:)])
+	{
+		[self.viewDelegate enableMessageNotifications:show];
 	}
 }
 

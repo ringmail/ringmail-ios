@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) NSNumber* lastThreadId;
 @property (nonatomic, strong) MessageViewController* messageView;
-		
+@property (nonatomic) BOOL enableMessageNotify;
 
 + (instancetype)sharedInstance;
 
@@ -25,5 +25,8 @@
 - (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
 - (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete;
 - (void)startCall:(RKAddress*)dest video:(BOOL)video;
+- (void)showNewMessage:(RKMessage*)msg;
+- (void)showMessageNotification:(RKMessage*)msg;
+- (void)enableMessageNotifications:(BOOL)show;
 
 @end

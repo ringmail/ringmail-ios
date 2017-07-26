@@ -590,16 +590,17 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
         if (callid)
         {
             sip = [NSString stringWithCString:callid encoding:NSUTF8StringEncoding];
-            LOGI(@"RingMail Call State:[%p] %s", call, linphone_call_state_to_string(state));
-            if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingProgress)
-            {
-                // New call
+            LOGI(@"%s: Call State:[%p] %s", __PRETTY_FUNCTION__, call, linphone_call_state_to_string(state));
+			RKCall* rcall = nil;
+			RKCommunicator* comm = [RKCommunicator sharedInstance];
+			if (data->userInfos[@"call"] == nil)
+			{
+		        // New call
 				RKAddress* address = [RKAddress newWithString:callAddress];
 				RKItemDirection direction = (state == LinphoneCallIncomingReceived) ? RKItemDirectionInbound : RKItemDirectionOutbound;
-				RKCommunicator* comm = [RKCommunicator sharedInstance];
 				NSNumber *contactId = [data->userInfos objectForKey:@"contact"];
 				RKThread* thread = [comm getThreadByAddress:address orignalTo:nil contactId:contactId uuid:nil];
-				RKCall* rcall = [RKCall newWithData:@{
+				rcall = [RKCall newWithData:@{
 					@"thread": thread,
 					@"direction": [NSNumber numberWithInteger:direction],
 					@"video": [NSNumber numberWithBool:data->videoRequested],
@@ -609,14 +610,15 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 					@"duration": @0,
 				}];
 				[data->userInfos setObject:rcall forKey:@"call"];
+			}
+			NSLog(@"%s: RKCall: %@", __PRETTY_FUNCTION__, rcall);
+            if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingProgress)
+            {
 				[comm didBeginCall:rcall];
             }
             else
             {
                 // Update call
-				RKCommunicator* comm = [RKCommunicator sharedInstance];
-				RKCall* rcall = [data->userInfos objectForKey:@"call"];
-				NSLog(@"%s: RKCall: %@", __PRETTY_FUNCTION__, rcall);
 				rcall.callStatus = [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding];
 				if (state == LinphoneCallEnd || state == LinphoneCallError)
 				{

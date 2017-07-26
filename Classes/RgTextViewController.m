@@ -7,6 +7,7 @@
 #import "SLKUIConstants.h"
 #import "UIColor+Hex.h"
 #import "UIChatNavBar.h"
+#import "RgViewDelegate.h"
 
 /** Feature flagged while waiting to implement a more reliable technique. */
 #define SLKBottomPanningEnabled 0
@@ -2385,6 +2386,10 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])
 	{
 		[_chatRoom appendNewMessages];
+	}
+	else
+	{
+		[[RgViewDelegate sharedInstance] showMessageNotification:info[@"message"]];
 	}
 }
 

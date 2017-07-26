@@ -168,10 +168,10 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 
 - (void)scrollToBottom:(BOOL)animate
 {
-	NSInteger lastIndex = [_mainCount intValue] - 1;
-	if (lastIndex >= 0)
+	NSInteger last = [self.collectionView numberOfItemsInSection:0] - 1;
+	if (last >= 0)
 	{
-		[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:animate];
+		[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:last inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:animate];
 	}
 }
 
@@ -229,11 +229,11 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 	if (added > 0)
 	{
 		_mainCount = [NSNumber numberWithInteger:[_mainCount integerValue] + added];
-		__block NSInteger lastIndex = [_mainCount intValue] - 1;
     	dispatch_async(dispatch_get_main_queue(), ^{
     		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i) {
-    			[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-			}];
+				NSInteger last = [self.collectionView numberOfItemsInSection:0] - 1;
+    			[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:last inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+   			}];
 		});
 	}
 }

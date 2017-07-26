@@ -20,7 +20,7 @@
 	CGFloat fontSize = 16;
 	CGFloat scale = [UIScreen mainScreen].scale;
 	
-	int maxBubbleWidth = (int)((width - (12 * scale)) / 3) * 2;
+	int maxBubbleWidth = (int)((width - (12 * scale)) / 8) * 7;
 	
 	CKComponent* res;
 	if (message.direction == RKItemDirectionInbound)

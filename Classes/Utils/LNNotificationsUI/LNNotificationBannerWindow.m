@@ -12,8 +12,8 @@
 #import "LNNotificationCenter.h"
 
 static const NSTimeInterval LNNotificationAnimationDuration = 0.5;
-static const NSTimeInterval LNNotificationFullDuration = 10.0;
-static const NSTimeInterval LNNotificationCutOffDuration = 5.0;
+static const NSTimeInterval LNNotificationFullDuration = 5.0;
+static const NSTimeInterval LNNotificationCutOffDuration = 2.5;
 
 static const CGFloat LNNotificationViewHeight = 84.0;
 
@@ -129,7 +129,7 @@ static const CGFloat LNNotificationViewHeight = 84.0;
 		[_swipeView addGestureRecognizer:_tgr];
 		
 		[vc.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_swipeView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_swipeView)]];
-		[vc.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_swipeView(68)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_swipeView)]];
+		[vc.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_swipeView(84)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_swipeView)]];
 		
 		[self setRootViewController:vc];
 		

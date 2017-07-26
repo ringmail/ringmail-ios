@@ -178,6 +178,11 @@
     // postNotificationName:kOTRProtocolLoginSuccess object:self];
     XMPPPresence *presence = [XMPPPresence presenceWithType:@"available"]; // type="available" is implicit
     [[self xmppStream] sendElement:presence];
+	
+	// RingMail: after timeout enable message notifications
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[RKCommunicator sharedInstance] enableMessageNotifications:YES];
+    });
 }
 
 - (void)goOffline
@@ -253,6 +258,7 @@
 - (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
 {
     NSLog(@"%@: %@", THIS_FILE, THIS_METHOD);
+	[[RKCommunicator sharedInstance] enableMessageNotifications:NO];
 }
 
 - (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings

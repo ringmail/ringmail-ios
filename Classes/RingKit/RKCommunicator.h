@@ -35,6 +35,8 @@ extern NSString *const kRKCallEnd;
 - (void)showImageView:(UIImage*)image parameters:(NSDictionary*)params;
 - (void)showMomentView:(UIImage*)image parameters:(NSDictionary*)params complete:(void(^)(void))complete;
 - (void)startCall:(RKAddress*)dest video:(BOOL)video;
+- (void)showNewMessage:(RKMessage*)msg;
+- (void)enableMessageNotifications:(BOOL)show;
 
 @end
 
@@ -72,6 +74,7 @@ extern NSString *const kRKCallEnd;
 - (void)startContactView:(RKContact*)contact;
 - (void)startHashtagView:(NSString*)hashtag;
 - (void)startImageView:(UIImage*)image parameters:(NSDictionary*)params;
+- (void)enableMessageNotifications:(BOOL)show;
 
 @end
 

@@ -442,6 +442,25 @@
 		NSLog(@"Notification: %@", userInfo);
 		[[LinphoneManager instance] acceptCallForCallId:userInfo[@"call_id"]];
 	}
+	else if ([action isEqualToString:@"ringmail_call_decline"])
+	{
+		LinphoneManager *mgr = [LinphoneManager instance];
+		mgr->skipRegisterRefresh = NO;
+		if ([[mgr coreReady] boolValue])
+		{
+    		LinphoneCore *lc = [LinphoneManager getLc];
+    		LinphoneCall *call = linphone_core_get_current_call(lc);
+    		if (call)
+    		{
+    			linphone_core_decline_call(lc, call, LinphoneReasonDeclined);
+    		}
+		}
+	}
+	else
+	{
+		LinphoneManager *mgr = [LinphoneManager instance];
+		mgr->skipRegisterRefresh = NO;
+	}
 	completionHandler();
 }
 

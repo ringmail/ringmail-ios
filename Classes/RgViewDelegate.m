@@ -9,11 +9,13 @@
 #import "RgViewDelegate.h"
 #import "PhoneMainView.h"
 #import "ImageCountdownViewController.h"
+#import "LNNotificationsUI.h"
 
 @implementation RgViewDelegate
 
 @synthesize lastThreadId;
 @synthesize messageView;
+@synthesize enableMessageNotify;
 
 + (instancetype)sharedInstance
 {
@@ -23,6 +25,7 @@
 		sharedInstance = [[RgViewDelegate alloc] init];
 		[sharedInstance setLastThreadId:@0];
 		sharedInstance.messageView = nil;
+		sharedInstance.enableMessageNotify = NO;
 		[[RKCommunicator sharedInstance] setViewDelegate:sharedInstance];
     });
     return sharedInstance;
@@ -72,6 +75,37 @@
         address = [RgManager addressToSIP:address];
     }
 	[[LinphoneManager instance] call:address contact:dest.contact.contactId displayName:displayName transfer:FALSE video:video];
+}
+
+- (void)showNewMessage:(RKMessage*)msg
+{
+	UICompositeViewDescription* top = [[PhoneMainView instance] topView];
+	if (top != nil && ! [top equal:[MessageViewController compositeViewDescription]])
+	{
+		[self showMessageNotification:msg];
+	}
+}
+
+- (void)enableMessageNotifications:(BOOL)show
+{
+   	dispatch_async(dispatch_get_main_queue(), ^{
+		self.enableMessageNotify = show;
+	});
+}
+
+- (void)showMessageNotification:(RKMessage*)msg
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+   	dispatch_async(dispatch_get_main_queue(), ^{
+    	if (self.enableMessageNotify)
+    	{
+        	LNNotification* notification = [LNNotification notificationWithMessage:msg.body title:msg.thread.remoteAddress.displayName];
+        	notification.defaultAction = [LNNotificationAction actionWithTitle:@"Default Action" handler:^(LNNotificationAction *action) {
+        		[[RKCommunicator sharedInstance] startMessageView:msg.thread];
+        	}];
+        	[[LNNotificationCenter defaultCenter] presentNotification:notification forApplicationIdentifier:@"message_event"];
+    	}
+   	});
 }
 
 @end
