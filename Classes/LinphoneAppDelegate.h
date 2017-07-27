@@ -32,8 +32,6 @@
     BOOL startedInBackground;
 }
 
-- (void)processRemoteNotification:(NSDictionary*)userInfo;
-
 @property (nonatomic, retain) UIAlertView *waitingIndicator;
 @property (nonatomic, retain) NSString *configURL;
 @property (nonatomic, strong) UIWindow* window;

@@ -109,7 +109,7 @@
     			[[PhoneMainView instance] displayIncomingCall:call];
     			// in this case, the ringing sound comes from the notification.
     			// To stop it we have to do the iOS7 ring fix...
-    			[self fixRing];
+    			//[self fixRing];
     		}
     	}
     }
@@ -144,12 +144,12 @@
 			if (granted)
 			{
 				UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        	    UNNotificationAction *acceptAction = [UNNotificationAction actionWithIdentifier:@"ringmail_call_answer" title:@"Answer" options:UNNotificationActionOptionForeground];
-                UNNotificationAction *declineAction = [UNNotificationAction actionWithIdentifier:@"ringmail_call_decline" title:@"Decline" options:UNNotificationActionOptionDestructive];
+        	    UNNotificationAction *acceptAction = [UNNotificationAction actionWithIdentifier:@"call_answer" title:@"Answer" options:UNNotificationActionOptionForeground];
+                UNNotificationAction *declineAction = [UNNotificationAction actionWithIdentifier:@"call_decline" title:@"Decline" options:UNNotificationActionOptionDestructive];
                 NSArray *notificationActions = @[ acceptAction, declineAction ];
 
         		// create a category
-                UNNotificationCategory *answerCategory = [UNNotificationCategory categoryWithIdentifier:@"ringmail_call" actions:notificationActions intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
+                UNNotificationCategory *answerCategory = [UNNotificationCategory categoryWithIdentifier:@"call" actions:notificationActions intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
 
                 NSSet *categories = [NSSet setWithObject:answerCategory];
 				[center setNotificationCategories:categories];
@@ -182,8 +182,8 @@
 
 	NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
 	if (remoteNotif) {
-		LOGI(@"PushNotification from launch received.");
-		[self processRemoteNotification:remoteNotif];
+		LOGI(@"PushNotification from launch received: %@", remoteNotif);
+		//[self processRemoteNotification:remoteNotif];
 	}
 	/*if (bgStartId != UIBackgroundTaskInvalid)
 		[[UIApplication sharedApplication] endBackgroundTask:bgStartId];*/
@@ -226,15 +226,16 @@
 	return YES;
 }
 
-- (void)fixRing {
+/*- (void)fixRing {
 	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
 		// iOS7 fix for notification sound not stopping.
 		// see http://stackoverflow.com/questions/19124882/stopping-ios-7-remote-notification-sound
 		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
 		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 	}
-}
+}*/
 
+/*
 - (void)processRemoteNotification:(NSDictionary *)userInfo {
 
 	NSDictionary *aps = [userInfo objectForKey:@"aps"];
@@ -243,12 +244,10 @@
 		NSDictionary *alert = [aps objectForKey:@"alert"];
 		if (alert != nil) {
 			NSString *loc_key = [alert objectForKey:@"loc-key"];
-			/*if we receive a remote notification, it is probably because our TCP background socket was no more working.
-			 As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE*/
 			LinphoneCore *lc = [LinphoneManager getLc];
 			if (linphone_core_get_calls(lc) == NULL) { // if there are calls, obviously our TCP socket shall be working
 				linphone_core_set_network_reachable(lc, FALSE);
-				[LinphoneManager instance].connectivity = none; /*force connectivity to be discovered again*/
+				[LinphoneManager instance].connectivity = none; // force connectivity to be discovered again
 				[[LinphoneManager instance] refreshRegisters];
 				if (loc_key != nil) {
 
@@ -298,9 +297,11 @@
 		}
 	}
 }
+*/
 
 // this method is implemented for iOS7. It is invoked when receiving a push notification for a call and it has
 // "content-available" in the aps section.
+/*
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
 	LOGI(@"%@ : %@", NSStringFromSelector(_cmd), userInfo);
@@ -350,10 +351,11 @@
     
 	if (linphone_core_get_calls(lc) == NULL) {
 		linphone_core_set_network_reachable(lc, FALSE);
-		lm.connectivity = none; /*force connectivity to be discovered again*/
+		lm.connectivity = none; //force connectivity to be discovered again
 		[lm refreshRegisters];
 	}
 }
+*/
 
 #pragma mark - PushNotification Functions
 
@@ -406,7 +408,7 @@
 				@"call_id": [payload.dictionaryPayload objectForKey:@"call_id"],
 			};
             content.sound = [UNNotificationSound soundNamed:@"call_in.caf"];
-            content.categoryIdentifier = @"ringmail_call";
+            content.categoryIdentifier = @"call";
 			UNNotificationRequest *notification = [UNNotificationRequest requestWithIdentifier:@"ringmail_call_notification" content:content trigger:nil];
     		UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 			[center addNotificationRequest:notification withCompletionHandler:^(NSError * _Nullable error) {
@@ -424,41 +426,66 @@
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response
          withCompletionHandler:(void (^)())completionHandler
 {
-	NSLog(@"%s: %@", __PRETTY_FUNCTION__, response.actionIdentifier);
+	NSLog(@"%s: %@ %@", __PRETTY_FUNCTION__, response.actionIdentifier, response.notification.request.content.userInfo);
 	NSString *action = response.actionIdentifier;
-	if (
-		[action isEqualToString:@"com.apple.UNNotificationDefaultActionIdentifier"] ||
-		[action isEqualToString:@"ringmail_call_answer"]
-	) {
-		NSDictionary* userInfo = response.notification.request.content.userInfo;
-		NSLog(@"Notification: %@", userInfo);
-		[[LinphoneManager instance] acceptCallForCallId:userInfo[@"call_id"]];
-	}
-	else if ([action isEqualToString:@"ringmail_call_decline"])
+	NSString *category = response.notification.request.content.categoryIdentifier;
+	if ([category isEqualToString:@"msg"])
 	{
-		LinphoneManager *mgr = [LinphoneManager instance];
-		mgr->skipRegisterRefresh = NO;
-		if ([[mgr coreReady] boolValue])
+		NSString *chatMd5 = response.notification.request.content.userInfo[@"tag"];
+		RKCommunicator* comm = [RKCommunicator sharedInstance];
+		RKThread* thread = [comm getThreadByMD5:chatMd5];
+		if (thread != nil)
 		{
-    		LinphoneCore *lc = [LinphoneManager getLc];
-    		LinphoneCall *call = linphone_core_get_current_call(lc);
-    		if (call)
-    		{
-    			linphone_core_decline_call(lc, call, LinphoneReasonDeclined);
-    		}
+			[comm startMessageView:thread];
+		}
+		else
+		{
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2000 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+				RKCommunicator* comm = [RKCommunicator sharedInstance];
+        		RKThread* thread = [comm getThreadByMD5:chatMd5];
+        		if (thread != nil)
+        		{
+        			[comm startMessageView:thread];
+        		}				
+			});
 		}
 	}
-	else
+	else if ([category isEqualToString:@"call"])
 	{
-		LinphoneManager *mgr = [LinphoneManager instance];
-		mgr->skipRegisterRefresh = NO;
+    	if (
+    		[action isEqualToString:@"com.apple.UNNotificationDefaultActionIdentifier"] ||
+    		[action isEqualToString:@"call_answer"]
+    	) {
+    		NSDictionary* userInfo = response.notification.request.content.userInfo;
+    		NSLog(@"Notification: %@", userInfo);
+    		[[LinphoneManager instance] acceptCallForCallId:userInfo[@"call_id"]];
+    	}
+    	else if ([action isEqualToString:@"call_decline"])
+    	{
+    		LinphoneManager *mgr = [LinphoneManager instance];
+    		mgr->skipRegisterRefresh = NO;
+    		if ([[mgr coreReady] boolValue])
+    		{
+        		LinphoneCore *lc = [LinphoneManager getLc];
+        		LinphoneCall *call = linphone_core_get_current_call(lc);
+        		if (call)
+        		{
+        			linphone_core_decline_call(lc, call, LinphoneReasonDeclined);
+        		}
+    		}
+    	}
+    	else
+    	{
+    		LinphoneManager *mgr = [LinphoneManager instance];
+    		mgr->skipRegisterRefresh = NO;
+    	}
 	}
 	completionHandler();
 }
 
 #pragma mark - User notifications
 
-
+/*
 - (void)application:(UIApplication *)application
 	didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
 	LOGI(@"%@", NSStringFromSelector(_cmd));
@@ -506,7 +533,7 @@
 	LOGI(@"%@", NSStringFromSelector(_cmd));
 	completionHandler();
 }
-
+*/
 
 #pragma mark - NSUserActivity
 

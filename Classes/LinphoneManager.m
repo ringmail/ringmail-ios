@@ -611,6 +611,10 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 				}];
 				[data->userInfos setObject:rcall forKey:@"call"];
 			}
+			else
+			{
+				rcall = data->userInfos[@"call"];
+			}
 			NSLog(@"%s: RKCall: %@", __PRETTY_FUNCTION__, rcall);
             if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingProgress)
             {

@@ -36,7 +36,7 @@
 - (void)setupDatabase
 {
 	NSString *path = @"ringmail_message_store";
-    path = [path stringByAppendingString:@"_v0.1.db"];
+    path = [path stringByAppendingString:@"_v0.2.db"];
 	NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
 	path = [docsPath stringByAppendingPathComponent:path];
 	[self setDbqueue:[FMDatabaseQueue databaseQueueWithPath:path]];
@@ -83,6 +83,7 @@
 				"message_id INTEGER NULL DEFAULT NULL, "
 				"call_id INTEGER NULL DEFAULT NULL, "
 				"hidden INTEGER NOT NULL DEFAULT 0, "
+				"seen INTEGER NOT NULL DEFAULT 0, "
                 "ts_created TEXT NOT NULL,"
                 "version INTEGER DEFAULT 1"
 			");",
@@ -328,7 +329,7 @@
 {
 	NSAssert(thread.threadId != nil, @"Undefined thread id");
 	__block NSMutableArray *result = [NSMutableArray array];
-	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+	[[self dbqueue] inTransaction:^(FMDatabase *db, BOOL* rollback) {
 		NSString *sql = @""
             "SELECT "
 				"ti.id AS item_id, "
@@ -362,6 +363,7 @@
     			"WHERE ti.thread_id=? "
     			"AND ti.id > ? "
     			"AND ti.hidden = 0 "
+    			"AND ti.seen = 0 "
 				"ORDER BY ti.id ASC"
 			];
 			//NSLog(@"SQL: %@", sql);
@@ -380,6 +382,7 @@
         {
 			NSDictionary* row = [rs resultDictionary];
             //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
+			[db executeUpdate:@"UPDATE rk_thread_item SET seen = 1 WHERE id = ?", row[@"item_id"]];
 			if (NILIFNULL(row[@"message_id"]) != nil)
 			{
 				NSMutableDictionary* param = [NSMutableDictionary dictionaryWithDictionary:@{
