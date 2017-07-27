@@ -133,7 +133,7 @@
 	//BOOL background_mode = [instance lpConfigBoolForKey:@"backgroundmode_preference"];
 	//BOOL start_at_boot = [instance lpConfigBoolForKey:@"start_at_boot_preference"];
 
-	if ([app respondsToSelector:@selector(registerUserNotificationSettings:)])
+	if ([app respondsToSelector:@selector(registerUserNotificationSettings:)]) // TODO: change this to something more up-to-date
 	{
         // registration
 		UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -156,17 +156,9 @@
 				center.delegate = self;
 			}
 		}];
-		
         [app registerForRemoteNotifications];
-	} /*else {
-		if (!instance.isTesting) {
-			NSUInteger notifTypes = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound |
-									UIRemoteNotificationTypeBadge |
-									UIRemoteNotificationTypeNewsstandContentAvailability;
-			[app registerForRemoteNotificationTypes:notifTypes];
-		}
-	}*/
-    
+	}
+
 	/*if (state == UIApplicationStateBackground) {
 		// we've been woken up directly to background;
 		if (!start_at_boot || !background_mode) {

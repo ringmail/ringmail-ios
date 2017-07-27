@@ -55,6 +55,7 @@
 - (IBAction)onActionCall:(id)event;
 - (IBAction)onActionVideo:(id)event;
 - (IBAction)onActionFavorite:(id)event;
+- (IBAction)onInvite:(id)event;
 
 + (CGFloat)height:(BOOL)editing member:(BOOL)member;
 
@@ -63,5 +64,6 @@
 - (BOOL)isEditing;
 - (BOOL)isValid;
 - (void)update;
+
 
 @end

@@ -106,7 +106,7 @@
 - (void)inviteToRingMail:(ABRecordRef)contact
 {
     DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Invite To RingMail", nil)];
-
+    
     if ([MFMailComposeViewController canSendMail])
     {
         ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)contact, kABPersonEmailProperty);
@@ -130,6 +130,7 @@
             CFRelease(emailMap);
         }
     }
+    
     if([MFMessageComposeViewController canSendText])
     {
         ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)contact, kABPersonPhoneProperty);
@@ -157,7 +158,7 @@
             CFRelease(phoneMap);
         }
     }
-
+    
     [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:^{}];
     [sheet showInView:[PhoneMainView instance].view];
 }

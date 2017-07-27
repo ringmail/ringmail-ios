@@ -35,6 +35,8 @@
 @property (nonatomic, strong) NSMutableDictionary* sendInfo;
 @property (nonatomic, assign) BOOL isEditing;
 
+
+
 - (void)handleSegControl;
 - (void)addMedia:(NSDictionary*)param;
 

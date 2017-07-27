@@ -452,6 +452,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)registrationUpdate:(LinphoneRegistrationState)state message:(NSString *)message {
 	switch (state) {
 	case LinphoneRegistrationOk: {
+        // TODO:
+//        (create RKContactStore DBs and get any previous RGContacts from server after first app use signin:)
+        //                [RgManager updateContacts:res];  // needs a stubbed res object
 		[waitView setHidden:true];
 		[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
 		break;
@@ -1111,6 +1114,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [self addProxyConfig:[res objectForKey:@"sip_login"] password:[res objectForKey:@"sip_password"]
                               domain:[RgManager ringmailHostSIP] withTransport:@"tls"];
                 [RgManager updateCredentials:res];
+                
+                // TODO:
+                // (create RKContactStore DBs and get any previous RGContacts from server after first app use signin:
+                [RgManager updateContacts:res];
                 
                 [waitView setHidden:TRUE];
                 [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];

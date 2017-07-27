@@ -156,7 +156,7 @@
         [videoButton setHidden:YES];
         [rgInvite setHidden:NO];
     }
-
+    
 	// Avatar image
 	{
 		UIImage *image = [FastAddressBook getContactImage:contact thumbnail:false];
@@ -534,5 +534,6 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 - (IBAction)onInvite:(id)event {
     [[[LinphoneManager instance] contactManager] inviteToRingMail:contact];
 }
+
 
 @end

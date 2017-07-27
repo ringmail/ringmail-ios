@@ -44,6 +44,7 @@
     [shareLocationButton addSubview:lineView3];
     
     [[RgLocationManager sharedInstance] addObserver:self forKeyPath:kRgCurrentLocation options:NSKeyValueObservingOptionNew context:nil];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -69,10 +70,14 @@
     
     if (disableUserFeatures)
         shareContactButton.hidden = TRUE;
+    
+    // override -- hide invite button
+    [inviteButton setHidden:YES];
 }
 
 
 - (void) viewDidUnload {
+    [super viewDidUnload];
     [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
 }
 
