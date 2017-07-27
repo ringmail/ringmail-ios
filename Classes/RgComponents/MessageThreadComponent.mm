@@ -367,7 +367,6 @@
 				[CKImageComponent newWithImage:[context imageNamed:@"ringmail_chat_thread_new.png"] size:{.height = 12, .width = 12}]
 			]
 			background:card];
-		NSLog(@"New message! %@", data);
 	}
 	card = [CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 2, .bottom = 2} component:
         [CKBackgroundLayoutComponent newWithComponent:card background:
