@@ -77,6 +77,7 @@
 
 
 - (void) viewDidUnload {
+    [super viewDidUnload];
     [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
 }
 

@@ -150,6 +150,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidUnload
 {
+    [super viewDidUnload];
     if (self.didSubscribeToCurrentLocation)
     {
         [[RgLocationManager sharedInstance] removeObserver:self forKeyPath:kRgCurrentLocation context:nil];
