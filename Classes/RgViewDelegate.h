@@ -28,5 +28,6 @@
 - (void)showNewMessage:(RKMessage*)msg;
 - (void)showMessageNotification:(RKMessage*)msg;
 - (void)enableMessageNotifications:(BOOL)show;
+- (BOOL)showingMessageThread;
 
 @end

@@ -121,9 +121,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMessageList:) name:kRKItemActivity object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateContacts:) name:kRgContactsUpdated object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventRefresh:) name:kRgContactsUpdated object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventActivity:) name:kRKItemActivity object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventRefresh:) name:kRKThreadSeen object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -146,7 +146,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     printf("recents segement controller hit\n");
 }*/
 
-- (void)updateMessageList:(NSNotification*)event
+- (void)eventActivity:(NSNotification*)event
 {
 	if (! [event.userInfo[@"name"] isEqualToString:kRKMessageUpdated]) // skip updated messages
 	{
@@ -154,7 +154,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 }
 
-- (void)updateContacts:(NSNotification*)event
+- (void)eventRefresh:(NSNotification*)event
 {
 	[mainViewController updateCollection:YES];
 }

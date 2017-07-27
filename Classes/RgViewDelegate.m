@@ -108,4 +108,17 @@
    	});
 }
 
+- (BOOL)showingMessageThread
+{
+	UICompositeViewDescription* top = [[PhoneMainView instance] topView];
+	if (top != nil && [top equal:[MessageViewController compositeViewDescription]])
+	{
+		return YES;
+	}
+	else
+	{
+		return NO;
+	}
+}
+
 @end

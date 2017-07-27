@@ -2,8 +2,14 @@
 
 #import "VideoPlayerViewController.h"
 #import "PhoneMainView.h"
+#import "RgViewDelegate.h"
 
 @implementation ChatElement
+
++ (BOOL)showingMessageThread
+{
+	return [[RgViewDelegate sharedInstance] showingMessageThread];
+}
 
 - (instancetype)initWithData:(NSDictionary *)data
 {

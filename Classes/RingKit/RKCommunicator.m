@@ -27,6 +27,7 @@ NSString *const kRKMessageRemoved = @"RKMessageRemoved";
 NSString *const kRKCallBegin = @"RKCallBegin";
 NSString *const kRKCallUpdated = @"RKCallUpdated";
 NSString *const kRKCallEnd = @"RKCallEnd";
+NSString *const kRKThreadSeen = @"RKThreadSeen";
 
 @implementation RKCommunicator
 
@@ -53,13 +54,13 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	}
 	[message prepareMessage:^(NSObject* xml) {
 		[adapterXMPP sendMessage:(NSXMLElement*)xml];
-		[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageSent object:self userInfo:@{
-			@"message": message,
-		}];
 		[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 			@"type": @"message",
 			@"message": message,
 			@"name": kRKMessageSent,
+		}];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageSent object:self userInfo:@{
+			@"message": message,
 		}];
 	}];
 }
@@ -72,13 +73,13 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	{
 		[self.viewDelegate showNewMessage:message];
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageReceived object:self userInfo:@{
-		@"message": message,
-	}];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"message",
 		@"message": message,
 		@"name": kRKMessageReceived,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageReceived object:self userInfo:@{
+		@"message": message,
 	}];
 }
 
@@ -86,13 +87,13 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store updateItem:message];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageUpdated object:self userInfo:@{
-		@"message": message,
-	}];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"message",
 		@"message": message,
 		@"name": kRKMessageUpdated,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKMessageUpdated object:self userInfo:@{
+		@"message": message,
 	}];
 }
 
@@ -156,9 +157,9 @@ NSString *const kRKCallEnd = @"RKCallEnd";
 	return [[RKThreadStore sharedInstance] listThreadItems:thread];
 }
 
-- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId notify:(BOOL)notify
 {
-	return [[RKThreadStore sharedInstance] listThreadItems:thread lastItemId:lastItemId];
+	return [[RKThreadStore sharedInstance] listThreadItems:thread lastItemId:lastItemId notify:notify];
 }
 
 - (RKThread*)getThreadById:(NSNumber*)lookupId

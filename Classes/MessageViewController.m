@@ -34,7 +34,9 @@
 
 @end
 
-@implementation MessageViewController
+@implementation MessageViewController {
+	BOOL first;
+}
 
 #pragma mark - UICompositeViewDelegate Functions
 
@@ -89,6 +91,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)commonInit
 {
+	self->first = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textInputbarDidMove:) name:SLKTextInputbarDidMoveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMessageMedia:) name:kRgAddMessageMedia object:nil];
     
@@ -163,7 +166,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+	[super viewWillAppear:animated];
+	if (self->first)
+	{
+		self->first = NO;
+	}
+	else
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:nil userInfo:@{
+    		@"thread": [self chatThread],
+    	}];
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated

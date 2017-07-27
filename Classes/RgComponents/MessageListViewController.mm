@@ -54,6 +54,7 @@ static NSInteger const pageSize = 10;
 		@"ringmail_action_text_normal.png": [UIImage imageNamed:@"ringmail_action_text_normal.png"],
 		@"ringmail_triangle_green.png": [UIImage imageNamed:@"ringmail_triangle_green.png"],
 		@"ringmail_triangle_grey.png": [UIImage imageNamed:@"ringmail_triangle_grey.png"],
+		@"ringmail_chat_thread_new.png": [UIImage imageNamed:@"ringmail_chat_thread_new.png"],
 		@"message_summary_moment_normal.png": [UIImage imageNamed:@"message_summary_moment_normal.png"],
 		@"message_summary_photo_normal.png": [UIImage imageNamed:@"message_summary_photo_normal.png"],
 		@"message_summary_video_normal.png": [UIImage imageNamed:@"message_summary_video_normal.png"],

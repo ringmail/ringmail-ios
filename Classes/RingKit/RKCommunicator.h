@@ -16,6 +16,7 @@ extern NSString *const kRKMessageRemoved;
 extern NSString *const kRKCallBegin;
 extern NSString *const kRKCallUpdated;
 extern NSString *const kRKCallEnd;
+extern NSString *const kRKThreadSeen;
 
 @class RKAdapterXMPP;
 @class RKAddress;
@@ -60,7 +61,7 @@ extern NSString *const kRKCallEnd;
 
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
-- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId notify:(BOOL)notify;
 - (RKThread*)getThreadById:(NSNumber*)lookupId;
 - (RKThread*)getThreadByMD5:(NSString*)lookupHash;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;

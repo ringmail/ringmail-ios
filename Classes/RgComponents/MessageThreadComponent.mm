@@ -359,6 +359,16 @@
             }]}
         }];
     }
+	if (! [data[@"seen"] boolValue] && [data[@"detail"][@"direction"] integerValue] == RKItemDirectionInbound)
+	{
+		CGFloat extra = (showActions) ? 66 : 0;
+		card = [CKBackgroundLayoutComponent newWithComponent:
+			[CKInsetComponent newWithInsets:{.left = INFINITY, .right = 68, .top = 10, .bottom = (40 + extra)} component:
+				[CKImageComponent newWithImage:[context imageNamed:@"ringmail_chat_thread_new.png"] size:{.height = 12, .width = 12}]
+			]
+			background:card];
+		NSLog(@"New message! %@", data);
+	}
 	card = [CKInsetComponent newWithInsets:{.left = 10, .right = 10, .top = 2, .bottom = 2} component:
         [CKBackgroundLayoutComponent newWithComponent:card background:
             [CKComponent newWithView:{

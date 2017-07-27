@@ -177,9 +177,10 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 
 - (void)appendNewMessages
 {
-	NSArray* newMessages = [[RKCommunicator sharedInstance] listThreadItems:chatThread lastItemId:lastMessageID];
+	BOOL foreground = [ChatElement showingMessageThread];
+	NSLog(@"%s: Notify Seen: %d", __PRETTY_FUNCTION__, foreground);
+	NSArray* newMessages = [[RKCommunicator sharedInstance] listThreadItems:chatThread lastItemId:lastMessageID notify:foreground];
 	NSLog(@"%s: New Messages: %@", __PRETTY_FUNCTION__, newMessages);
-	
 	if ([newMessages count] == 0)
     {
 		return;

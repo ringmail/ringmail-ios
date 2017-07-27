@@ -137,6 +137,7 @@
 			@"thread_id": self.thread.threadId,
 			@"call_id": detailId,
 			@"ts_created": [[self timestamp] strftime],
+			@"seen": @YES,
 		},
 	}];
 	self.itemId = [ndb lastInsertId];

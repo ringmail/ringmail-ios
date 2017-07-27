@@ -33,7 +33,7 @@
 - (void)dumpThreads;
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
-- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId;
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId notify:(BOOL)notify;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 - (RKThread*)getThreadById:(NSNumber*)lookupId;
 - (RKThread*)getThreadByMD5:(NSString*)lookupHash;

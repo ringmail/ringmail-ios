@@ -13,6 +13,7 @@
 #import "RKItem.h"
 #import "RKCall.h"
 #import "RKMessage.h"
+#import "RKCommunicator.h"
 
 #import "NSString+MD5.h"
 #import "RegexKitLite/RegexKitLite.h"
@@ -215,6 +216,7 @@
 				"l.contact_id AS contact_id, "
 				"l.original_to AS original_to, "
 				"l.uuid AS uuid, "
+				"ti.seen AS seen, "
 				"ti.id AS item_id, "
 				"ti.ts_created AS ts_created, "
 				"ti.version AS version, "
@@ -311,6 +313,7 @@
 				@"detail": detail,
 				@"item_id": curId,
 				@"version": ver,
+				@"seen": row[@"seen"],
 				@"timestamp": dt,
 			};
 			[result addObject:res];
@@ -322,19 +325,21 @@
 
 - (NSArray*)listThreadItems:(RKThread*)thread
 {
-	return [self listThreadItems:thread lastItemId:nil];
+	return [self listThreadItems:thread lastItemId:nil notify:YES];
 }
 
-- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId notify:(BOOL)notify
 {
 	NSAssert(thread.threadId != nil, @"Undefined thread id");
 	__block NSMutableArray *result = [NSMutableArray array];
+	__block BOOL seen = 0;
 	[[self dbqueue] inTransaction:^(FMDatabase *db, BOOL* rollback) {
 		NSString *sql = @""
             "SELECT "
 				"ti.id AS item_id, "
 				"ti.ts_created AS ts_created, "
 				"ti.version AS version, "
+				"ti.seen AS seen, "
 				"m.id AS message_id, "
 				"m.msg_body AS msg_body, "
 				"m.msg_type AS msg_type, "
@@ -382,7 +387,11 @@
         {
 			NSDictionary* row = [rs resultDictionary];
             //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
-			[db executeUpdate:@"UPDATE rk_thread_item SET seen = 1 WHERE id = ?", row[@"item_id"]];
+			if (! [row[@"seen"] boolValue])
+			{
+				[db executeUpdate:@"UPDATE rk_thread_item SET seen = 1 WHERE id = ?", row[@"item_id"]];
+				seen = YES;
+			}
 			if (NILIFNULL(row[@"message_id"]) != nil)
 			{
 				NSMutableDictionary* param = [NSMutableDictionary dictionaryWithDictionary:@{
@@ -432,6 +441,12 @@
 		[rs close];
 	}];
 	//NSLog(@"%s: Thread Items: %@", __PRETTY_FUNCTION__, result);
+	if (seen && notify)
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:self userInfo:@{
+    		@"thread": thread,
+    	}];
+	}
 	return result;
 }
 
