@@ -46,6 +46,7 @@
 @synthesize chatButton;
 @synthesize videoButton;
 @synthesize favoriteButton;
+@synthesize stackView;
 
 #pragma mark - Lifecycle Functions
 
@@ -209,9 +210,11 @@
 	if (editing) {
 		[editView setAlpha:1.0f];
 		[normalView setAlpha:0.0f];
+        [stackView setHidden:YES];
 	} else {
 		[editView setAlpha:0.0f];
 		[normalView setAlpha:1.0f];
+        [stackView setHidden:NO];
 	}
 	if (animated) {
 		[UIView commitAnimations];

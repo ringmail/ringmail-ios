@@ -26,6 +26,7 @@
                 <outlet property="editView" destination="13" id="16"/>
                 <outlet property="normalView" destination="12" id="17"/>
                 <outlet property="rgInvite" destination="6kh-sr-g0W" id="a6s-SY-Nsm"/>
+                <outlet property="stackView" destination="ceE-Y3-ZPI" id="IB2-Ea-z1d"/>
                 <outlet property="tableView" destination="15" id="20"/>
                 <outlet property="videoButton" destination="bFT-px-iZV" id="Drn-YQ-cxJ"/>
                 <outlet property="view" destination="4" id="5"/>
@@ -101,77 +102,27 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_unknown_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="avatarImage">
-                            <rect key="frame" x="120" y="45" width="80" height="80"/>
+                            <rect key="frame" x="20" y="40" width="70" height="70"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="80" id="QAq-2r-CyN"/>
-                                <constraint firstAttribute="width" constant="80" id="QWY-zQ-NXn"/>
+                                <constraint firstAttribute="height" constant="70" id="QAq-2r-CyN"/>
+                                <constraint firstAttribute="width" constant="70" id="QWY-zQ-NXn"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="40"/>
+                                    <integer key="value" value="35"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Contact1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="addressLabel">
-                            <rect key="frame" x="108" y="137" width="104" height="29"/>
+                            <rect key="frame" x="110" y="61" width="104" height="29"/>
                             <accessibility key="accessibilityConfiguration" label="Contact name"/>
                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="24"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ceE-Y3-ZPI">
-                            <rect key="frame" x="63" y="189" width="195" height="45"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6z-Sd-uf3" userLabel="ChatButton">
-                                    <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" priority="999" constant="45" id="GYe-v4-6sh"/>
-                                        <constraint firstAttribute="width" priority="999" constant="45" id="rq9-cl-Uvy"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
-                                    <inset key="titleEdgeInsets" minX="-12" minY="70" maxX="-12" maxY="0.0"/>
-                                    <state key="normal" title="Message" backgroundImage="message_normal.png"/>
-                                    <state key="selected" backgroundImage="message_selected.png"/>
-                                    <state key="highlighted" backgroundImage="message_selected.png"/>
-                                    <connections>
-                                        <action selector="onActionChat:" destination="-1" eventType="touchUpInside" id="TBA-73-cx4"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWx-aW-PFf" userLabel="CallButton">
-                                    <rect key="frame" x="75" y="0.0" width="45" height="45"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" priority="999" constant="45" id="I0J-Cn-cqv"/>
-                                        <constraint firstAttribute="width" priority="999" constant="45" id="yfo-1g-fJE"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
-                                    <inset key="titleEdgeInsets" minX="0.0" minY="70" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="Call" backgroundImage="phone_normal.png"/>
-                                    <state key="selected" backgroundImage="phone_selected.png"/>
-                                    <state key="highlighted" backgroundImage="phone_pressed.png"/>
-                                    <connections>
-                                        <action selector="onActionCall:" destination="-1" eventType="touchUpInside" id="fja-9O-zoa"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFT-px-iZV" userLabel="VideoButton">
-                                    <rect key="frame" x="150" y="0.0" width="45" height="45"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" priority="999" constant="45" id="7Z4-0f-NPi"/>
-                                        <constraint firstAttribute="width" priority="999" constant="45" id="gfa-fg-ED4"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
-                                    <inset key="titleEdgeInsets" minX="-15" minY="70" maxX="-15" maxY="0.0"/>
-                                    <state key="normal" title="Video Call" backgroundImage="video_normal.png"/>
-                                    <state key="selected" backgroundImage="video_selected.png"/>
-                                    <state key="highlighted" backgroundImage="video_pressed.png"/>
-                                    <connections>
-                                        <action selector="onActionVideo:" destination="-1" eventType="touchUpInside" id="OjS-LX-x4B"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kh-sr-g0W">
-                            <rect key="frame" x="61" y="192" width="198" height="38"/>
+                            <rect key="frame" x="61" y="194" width="198" height="38"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="198" id="HrU-nJ-opu"/>
                                 <constraint firstAttribute="height" constant="38" id="pwi-2P-Gwh"/>
@@ -187,30 +138,99 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="6" firstAttribute="top" secondItem="12" secondAttribute="top" constant="45" id="3sH-yR-h0W"/>
-                        <constraint firstItem="ceE-Y3-ZPI" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="7so-t4-IPr"/>
-                        <constraint firstItem="6" firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="J0a-Qe-dje"/>
-                        <constraint firstAttribute="bottom" secondItem="ceE-Y3-ZPI" secondAttribute="bottom" constant="46" id="OD6-0c-u5M"/>
-                        <constraint firstItem="8" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="12" id="mjP-cF-8Uu"/>
-                        <constraint firstItem="6kh-sr-g0W" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="qZg-GR-JG1"/>
-                        <constraint firstItem="6kh-sr-g0W" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="26" id="tr1-ip-QlT"/>
-                        <constraint firstItem="6" firstAttribute="centerX" secondItem="8" secondAttribute="centerX" id="wdP-he-CXI"/>
+                        <constraint firstItem="6" firstAttribute="top" secondItem="12" secondAttribute="top" constant="40" id="3sH-yR-h0W"/>
+                        <constraint firstItem="8" firstAttribute="centerY" secondItem="6" secondAttribute="centerY" id="I6b-mz-G2r"/>
+                        <constraint firstItem="8" firstAttribute="leading" secondItem="6" secondAttribute="trailing" constant="20" id="Kuh-wy-9fT"/>
                     </constraints>
                 </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ceE-Y3-ZPI">
+                    <rect key="frame" x="0.0" y="124" width="320" height="156"/>
+                    <subviews>
+                        <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6z-Sd-uf3" userLabel="ChatButton">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+                            <color key="backgroundColor" red="0.20000000000000001" green="0.27450980392156865" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="52" id="HvW-op-ZKd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
+                            <inset key="titleEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                            <state key="normal" title="Message" image="message_normal.png"/>
+                            <state key="selected" image="message_selected.png"/>
+                            <state key="highlighted" image="message_pressed.png"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageView.contentMode">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onActionChat:" destination="-1" eventType="touchUpInside" id="TBA-73-cx4"/>
+                            </connections>
+                        </button>
+                        <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWx-aW-PFf" userLabel="CallButton">
+                            <rect key="frame" x="0.0" y="52" width="320" height="52"/>
+                            <color key="backgroundColor" red="0.16862745098039217" green="0.25490196078431371" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" priority="999" constant="52" id="I0J-Cn-cqv"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
+                            <inset key="titleEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                            <state key="normal" title="Call" image="phone_normal.png"/>
+                            <state key="selected" image="phone_selected.png"/>
+                            <state key="highlighted" image="phone_pressed.png"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageView.contentMode">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onActionCall:" destination="-1" eventType="touchUpInside" id="fja-9O-zoa"/>
+                            </connections>
+                        </button>
+                        <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFT-px-iZV" userLabel="VideoButton">
+                            <rect key="frame" x="0.0" y="104" width="320" height="52"/>
+                            <color key="backgroundColor" red="0.11764705882352941" green="0.20784313725490197" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" priority="999" constant="52" id="7Z4-0f-NPi"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
+                            <inset key="titleEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                            <state key="normal" title="Video Call" image="video_normal.png"/>
+                            <state key="selected" image="video_selected.png"/>
+                            <state key="highlighted" image="video_pressed.png"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageView.contentMode">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onActionVideo:" destination="-1" eventType="touchUpInside" id="OjS-LX-x4B"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="ceE-Y3-ZPI" secondAttribute="trailing" id="0Ai-Ac-V58"/>
                 <constraint firstItem="13" firstAttribute="width" secondItem="4" secondAttribute="width" id="6eh-Jk-Fsd"/>
                 <constraint firstItem="6kh-sr-g0W" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="9Aq-zb-ofr"/>
+                <constraint firstItem="ceE-Y3-ZPI" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="Idf-fU-KCv"/>
                 <constraint firstItem="15" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" constant="25" id="LeJ-cy-l91"/>
                 <constraint firstItem="12" firstAttribute="top" secondItem="13" secondAttribute="top" id="MUj-ld-Hkc"/>
                 <constraint firstItem="12" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="VPl-OY-WlI"/>
                 <constraint firstAttribute="bottom" secondItem="12" secondAttribute="bottom" id="WOj-hp-BVH"/>
+                <constraint firstAttribute="bottom" secondItem="ceE-Y3-ZPI" secondAttribute="bottom" id="Zjd-fA-fwH"/>
                 <constraint firstAttribute="bottom" secondItem="13" secondAttribute="bottom" id="dMt-ut-9e3"/>
                 <constraint firstItem="12" firstAttribute="leading" secondItem="13" secondAttribute="leading" id="eeZ-Ex-KzL"/>
                 <constraint firstItem="12" firstAttribute="top" secondItem="4" secondAttribute="top" id="fKY-OM-nPa"/>
+                <constraint firstItem="ceE-Y3-ZPI" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="fgv-n6-qLF"/>
                 <constraint firstItem="15" firstAttribute="top" secondItem="4" secondAttribute="top" constant="45" id="hB6-Rg-Kgr"/>
                 <constraint firstItem="12" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="meK-xd-HPj"/>
+                <constraint firstItem="6" firstAttribute="leading" secondItem="4" secondAttribute="leading" constant="20" id="uqM-Sj-fqw"/>
+                <constraint firstAttribute="bottom" secondItem="6kh-sr-g0W" secondAttribute="bottom" constant="48" id="v6w-J5-7xs"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -221,6 +241,7 @@
         <image name="avatar_unknown_small.png" width="66" height="66"/>
         <image name="invite_to_rm_button.png" width="198" height="38"/>
         <image name="message_normal.png" width="84" height="84"/>
+        <image name="message_pressed.png" width="84" height="84"/>
         <image name="message_selected.png" width="84" height="84"/>
         <image name="phone_normal.png" width="84" height="84"/>
         <image name="phone_pressed.png" width="84" height="84"/>

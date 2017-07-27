@@ -44,13 +44,13 @@
 		[self.detailTextLabel setFont:font];
 		[self.detailTextField setFont:font];
         
-        self.textLabel.textColor = [UIColor colorWithHex:@"#428db7"];
+        self.textLabel.textColor = [UIColor colorWithHex:@"#2678bc"];
         
 		[self.contentView addSubview:detailTextField];
 
 		// a separator
 		UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-		[v setBackgroundColor:[UIColor lightGrayColor]];
+		[v setBackgroundColor:[UIColor colorWithHex:@"#D1D1D1"]];
 		[v setHidden:TRUE];
 
 		self.verticalSep = v;
@@ -67,23 +67,24 @@
 	[super layoutSubviews];
     
 	CGRect detailEditFrame;
-	detailEditFrame.origin.x = 20;
+	detailEditFrame.origin.x = 35;
 	detailEditFrame.origin.y = 35;
 	detailEditFrame.size.height = 20;
-
+    
 	if ([[self.textLabel text] length] != 0) {
         detailEditFrame.origin.y = 35;
 //		// shrink left text width by 10px
 		CGRect leftLabelFrame = [self.textLabel frame];
-		leftLabelFrame.size.width -= 10;
+		leftLabelFrame.size.width -= 25;
         leftLabelFrame.origin.y = 18;
+        leftLabelFrame.origin.x = 15;
 		[self.textLabel setFrame:leftLabelFrame];
         
 		// place separator
 		CGRect separatorFrame = [self.verticalSep frame];
-		separatorFrame.origin.x = self.frame.origin.x + 20;
+		separatorFrame.origin.x = self.frame.origin.x + 35;
         separatorFrame.origin.y = self.frame.size.height - 1;
-        separatorFrame.size.width = self.frame.size.width - 40;
+        separatorFrame.size.width = self.frame.size.width - 70;
 		[self.verticalSep setFrame:separatorFrame];
 		[self.verticalSep setHidden:FALSE];
 	}
@@ -96,12 +97,12 @@
 	// RingMail
 	CGRect labelFrame = [self.textLabel frame];
 	labelFrame.origin.y = 18;
-    labelFrame.origin.x = 20;
+    labelFrame.origin.x = 35;
 	[self.textLabel setFrame:labelFrame];
 	
     CGRect textFrame = [self.detailTextLabel frame];
     textFrame.origin.y = 35;
-    textFrame.origin.x = 20;
+    textFrame.origin.x = 35;
     textFrame.size.height = 20;
     [self.detailTextLabel setFrame:textFrame];
     
