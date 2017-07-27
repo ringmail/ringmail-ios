@@ -14,6 +14,7 @@
 #import "RgChatManager.h"
 #import "RKAdapterXMPP.h"
 #import "RKContactStore.h"
+#import "HashtagStore.h"
 #import "RingKit.h"
 
 /* RingMail */
@@ -183,9 +184,23 @@ static LevelDB* theConfigDatabase = nil;
 {
     [[RgNetwork instance] lookupHashtag:@{ @"hashtag": address } callback:^(NSURLSessionTask *operation, id responseObject) {
         NSDictionary* res = responseObject;
+        NSDictionary *cardData = @{
+                                  @"image": [NSString stringWithFormat:@"%@@%@%@%@", @"https://", [RgManager ringmailHost], [res objectForKey:@"img_path"], [res objectForKey:@"avatar_img"]],
+                                  @"label": address,
+                                  @"session_tag": address
+                                  };
+        
+        //  cardData example
+        //        "image" = "https://www-mf.ringxml.com/img/hashtag_avatars/explore_hashtagdir_icon4.jpg";
+        //        "label" = "#AmcDineIntheaters";
+        //        "session_tag" = "#AmcDineIntheaters";
+        //        "type" = "hashtag";
+        
         NSString *ok = [res objectForKey:@"result"];
         if ([ok isEqualToString:@"ok"])
         {
+            [[HashtagStore sharedInstance] insertCardData: cardData];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
                 @"address": [res objectForKey:@"target"],
             }];
