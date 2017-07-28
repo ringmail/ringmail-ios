@@ -17,9 +17,11 @@
 
 #import "NSString+MD5.h"
 #import "RegexKitLite/RegexKitLite.h"
-#import "NoteSQL.h"
 
 @implementation RKThreadStore
+{
+	BOOL database_block;
+}
 
 @synthesize dbqueue;
 
@@ -44,17 +46,35 @@
 	[self setupTables];
 }
 
+- (void)inDatabase:(void (^)(FMDatabase *db))block
+{
+	if (self->database_block)
+	{
+		block(self->database);
+	}
+	else
+	{
+		self->database_block = YES;
+    	[[self dbqueue] inTransaction:^(FMDatabase *db, BOOL* rollback) {
+			self->database = db;
+    		block(db);
+			self->database = nil;
+    	}];
+		self->database_block = NO;
+	}
+}
+
 - (void)dbBlock:(void (^)(NoteDatabase *ndb))block
 {
-	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+	[self inDatabase:^(FMDatabase *db) {
 		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
-		block(ndb);
+    	block(ndb);
 	}];
 }
 
 - (void)setupTables
 {
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
         NSArray *setup = [NSArray arrayWithObjects:
 			// Reset database
             //@"DROP TABLE rk_thread;",
@@ -156,6 +176,13 @@
 	}];
 }
 
+- (void)updateItem:(RKItem*)item seen:(BOOL)seen
+{
+	[self dbBlock:^(NoteDatabase *ndb) {
+		[item updateItem:ndb seen:seen];
+	}];
+}
+
 - (void)insertThread:(RKThread*)thread
 {
 	if (thread.threadId == nil)
@@ -208,7 +235,7 @@
 - (NSArray*)listThreads
 {
 	__block NSMutableArray *result = [NSMutableArray array];
-	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+	[self inDatabase:^(FMDatabase *db) {
 		FMResultSet *rs = [db executeQuery:@""
             "SELECT "
 				"l.thread_id AS thread_id, "
@@ -333,7 +360,7 @@
 	NSAssert(thread.threadId != nil, @"Undefined thread id");
 	__block NSMutableArray *result = [NSMutableArray array];
 	__block BOOL seen = 0;
-	[[self dbqueue] inTransaction:^(FMDatabase *db, BOOL* rollback) {
+	[self inDatabase:^(FMDatabase *db) {
 		NSString *sql = @""
             "SELECT "
 				"ti.id AS item_id, "
@@ -463,7 +490,7 @@
 	__block NSString *curAddress = nil;
 	__block NSNumber *curContact = nil;
 	__block NSString *curOrigTo = @"";
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
 		if (uuid)
 		{
             FMResultSet *rs1 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE uuid = ? COLLATE NOCASE", uuid];
@@ -618,7 +645,7 @@
 	__block NSString *curAddress = nil;
 	__block NSNumber *curContact = nil;
 	__block NSString *curOrigTo = @"";
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
         FMResultSet *rs1 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE id = ? COLLATE NOCASE", lookupId];
 		if ([rs1 next])
 		{
@@ -667,7 +694,7 @@
 	__block NSNumber *curContact = nil;
 	__block NSString *curOrigTo = @"";
     __block NSString *lookup = [lookupHash stringByAppendingString:@"%"];
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
         FMResultSet *rs1 = [db executeQuery:@"SELECT id, uuid, address, contact_id, original_to FROM rk_thread WHERE address_md5 LIKE ?", lookup];
 		if ([rs1 next])
 		{
@@ -707,7 +734,7 @@
 - (RKCall*)getCallBySipId:(NSString*)sip
 {
 	__block RKCall* result = nil;
-	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+	[self inDatabase:^(FMDatabase *db) {
 		FMResultSet *rs = [db executeQuery:@""
             "SELECT "
 				"t.id AS thread_id, "
@@ -783,7 +810,7 @@
 - (RKMessage*)getMessageByUUID:(NSString*)inputUUID
 {
 	__block RKMessage *result = nil;
-	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+	[self inDatabase:^(FMDatabase *db) {
 		NSString *sql = @""
             "SELECT "
 				"t.id AS thread_id, "
@@ -867,7 +894,7 @@
 
 - (void)setHidden:(BOOL)hidden forItemId:(NSNumber*)itemId
 {
-	[[self dbqueue] inDatabase:^(FMDatabase *db) {
+	[self inDatabase:^(FMDatabase *db) {
 		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
 		[ndb set:@{
 			@"table": @"rk_thread_item",
@@ -883,7 +910,7 @@
 
 - (void)removeContact:(NSNumber*)contact
 {
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
 		NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
 		NoteRow *chatRow = [ndb row:@"rk_thread" where:@{@"contact_id": contact}];
 		if (chatRow != nil)
@@ -897,7 +924,7 @@
 
 - (void)updateContact:(NSNumber*)contact changes:(NSDictionary*)changes
 {
-    [[self dbqueue] inDatabase:^(FMDatabase *db) {
+    [self inDatabase:^(FMDatabase *db) {
 		__block NoteDatabase *ndb = [[NoteDatabase alloc] initWithDatabase:db];
         [changes[@"change"] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 			[ndb set:@{

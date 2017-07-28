@@ -109,14 +109,21 @@
 	FastAddressBook *addressBook = [[LinphoneManager instance] fastAddressBook];
 	NSMutableDictionary *details = [NSMutableDictionary dictionary];
 	ABRecordRef contact = [addressBook getContactById:contactId];
-	NSAssert(contact, @"Invalid contact id: %@", contactId);
-    details[@"displayName"] = [FastAddressBook getContactDisplayName:contact];
-    UIImage* avatar = [FastAddressBook getContactImage:contact thumbnail:YES];
-	if (avatar)
+	//NSAssert(contact, @"Invalid contact id: %@", contactId);
+	if (contact)
 	{
-		details[@"avatarImage"] = avatar;
+        details[@"displayName"] = [FastAddressBook getContactDisplayName:contact];
+        UIImage* avatar = [FastAddressBook getContactImage:contact thumbnail:YES];
+    	if (avatar)
+    	{
+    		details[@"avatarImage"] = avatar;
+    	}
+    	self.contactDetails = details;
 	}
-	self.contactDetails = details;
+	else
+	{
+		details[@"displayName"] = primaryAddress.address;
+	}
 }
 
 - (void)applyDetails:(RKAddress*)address

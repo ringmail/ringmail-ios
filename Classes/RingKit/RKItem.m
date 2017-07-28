@@ -8,6 +8,7 @@
 
 #import "RKThread.h"
 #import "RKItem.h"
+#import "RKCommunicator.h"
 
 @implementation RKItem
 
@@ -85,6 +86,17 @@
 - (void)updateItem:(NoteDatabase*)ndb
 {
     NSAssert(FALSE, @"Override this method: %s", __PRETTY_FUNCTION__);
+}
+
+- (void)updateItem:(NoteDatabase*)ndb seen:(BOOL)seen
+{
+	[[ndb database] executeUpdate:@"UPDATE rk_thread_item SET seen = ? WHERE id = ?" withArgumentsInArray:@[@(seen), self.itemId]];
+	if (self.thread)
+	{
+    	[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:self userInfo:@{
+       		@"thread": self.thread,
+       	}];
+	}
 }
 
 - (void)updateVersion:(NoteDatabase*)ndb

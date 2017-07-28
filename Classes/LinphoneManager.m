@@ -46,6 +46,7 @@
 #import "RegexKitLite/RegexKitLite.h"
 
 #import "RingKit.h"
+#import "RKThreadStore.h"
 
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
@@ -626,12 +627,14 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
 				rcall.callStatus = [NSString stringWithCString:linphone_call_state_to_string(state) encoding:NSUTF8StringEncoding];
 				if (state == LinphoneCallEnd || state == LinphoneCallError)
 				{
+					BOOL seen = NO;
 					LinphoneCallLog *log = linphone_call_get_call_log(call);
 					int sts = linphone_call_log_get_status(log);
     				if (sts == LinphoneCallSuccess)
     				{
     					rcall.callResult = @"success";
     					rcall.duration = [NSNumber numberWithInt:linphone_call_log_get_duration(log)];
+						seen = YES;
         			}
     				else if (sts == LinphoneCallMissed)
     				{
@@ -642,13 +645,19 @@ static void linphone_iphone_display_status(struct _LinphoneCore *lc, const char 
     				{
     					rcall.callResult = @"aborted";
 						rcall.duration = @0;
+						seen = YES;
     				}
     				else if (sts == LinphoneCallDeclined)
     				{
     					rcall.callResult = @"declined";
 						rcall.duration = @0;
+						seen = YES;
     				}
 					[comm didEndCall:rcall];
+					if (seen)
+					{
+						[[RKThreadStore sharedInstance] updateItem:rcall seen:YES];
+					}
 				}
 				else
 				{

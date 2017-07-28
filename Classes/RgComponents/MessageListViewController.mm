@@ -152,13 +152,23 @@ static NSInteger const pageSize = 10;
             {
                 NSNumber* curVer = current[j][@"version"];
                 NSNumber* newVer = newlist[j][@"version"];
-				
                 if (! [curVer isEqualToNumber:newVer])
                 {
                     // Regenerate card
                     MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
                     items.update([NSIndexPath indexPathForRow:i inSection:1], card);
                 }
+				else
+				{
+					NSNumber* curSeen = current[j][@"seen"];
+					NSNumber* newSeen = current[j][@"seen"];
+					if ([curSeen boolValue] != [newSeen boolValue])
+					{
+                        // Regenerate card
+                        MessageThread *card = [[MessageThread alloc] initWithData:newlist[j]];
+                        items.update([NSIndexPath indexPathForRow:i inSection:1], card);
+					}
+				}
 				// TODO: compare thread image & displayName
                 /*else if (! [current[j][@"label"] isEqualToString:newlist[j][@"label"]])
                 {

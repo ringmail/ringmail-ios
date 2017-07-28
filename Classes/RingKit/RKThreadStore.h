@@ -10,6 +10,7 @@
 #import "FMDatabaseQueue.h"
 #import "FMResultSet.h"
 #import "Utils.h"
+#import "NoteSQL.h"
 
 #import <Foundation/Foundation.h>
 
@@ -20,7 +21,11 @@
 @class RKCall;
 @class RKMessage;
 
-@interface RKThreadStore : NSObject
+@interface RKThreadStore : NSObject {
+@private
+	FMDatabase *database;
+}
+
 
 @property (nonatomic, retain) FMDatabaseQueue *dbqueue;
 
@@ -29,6 +34,7 @@
 - (void)setupDatabase;
 - (void)setupTables;
 - (void)insertItem:(RKItem*)item;
+- (void)updateItem:(RKItem*)item seen:(BOOL)seen;
 - (void)updateItem:(RKItem*)item;
 - (void)dumpThreads;
 - (NSArray*)listThreads;
