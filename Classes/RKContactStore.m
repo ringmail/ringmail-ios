@@ -93,6 +93,12 @@
 				"primary_address TEXT"
 			");",
             @"CREATE UNIQUE INDEX IF NOT EXISTS apple_id_1 ON contact_status (apple_id);",
+                          
+            @"CREATE TABLE IF NOT EXISTS contact_favorites ("
+                "apple_id INT NOT NULL, "
+                "favorite BOOL DEFAULT 0"
+            ");",
+            @"CREATE UNIQUE INDEX IF NOT EXISTS apple_id_1 ON contact_favorites (apple_id);",
 			nil
 		];
         for (NSString *sql in setup)
@@ -377,6 +383,41 @@
     {
         return @"";
     }
+}
+
+
+- (BOOL)isFavorite:(NSString*)contactID
+{
+    __block BOOL res = NO;
+    [self inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT COUNT(apple_id) FROM contact_favorites WHERE favorite = 1 AND apple_id = ?", contactID];
+        while ([rs next])
+        {
+            NSNumber *count = [rs objectForColumnIndex:0];
+            if ([count intValue] == 1)
+            {
+                res = YES;
+            }
+        }
+        [rs close];
+    }];
+    return res;
+}
+
+
+- (void)addFavorite:(NSString*)contactID
+{
+    [self inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"INSERT INTO contact_favorites (apple_id, favorite) VALUES (?, 1)", contactID];
+    }];
+}
+
+
+- (void)removeFavorite:(NSString*)contactID
+{
+    [self inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"DELETE FROM contact_favorites WHERE apple_id=?", contactID];
+    }];
 }
 
 @end

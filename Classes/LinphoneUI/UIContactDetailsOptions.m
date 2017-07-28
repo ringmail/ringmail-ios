@@ -10,6 +10,7 @@
 #import "PhoneMainView.h"
 #import "RgLocationManager.h"
 #import "RgNetwork.h"
+#import "RKContactStore.h"
 
 
 @implementation UIContactDetailsOptions
@@ -22,9 +23,11 @@
 @synthesize inviteButton;
 @synthesize shareContactButton;
 @synthesize shareLocationButton;
+@synthesize favoriteButton;
 
 @synthesize contact;
 @synthesize rgMember;
+@synthesize contactID;
 @synthesize disableUserFeatures;
 
 
@@ -61,11 +64,24 @@
     {
         inviteButton.hidden = TRUE;
         shareContactButton.hidden = FALSE;
+        favoriteButton.hidden = FALSE;
+        
+        contactID = [[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)] stringValue];
+        
+        if ([[RKContactStore sharedInstance] isFavorite:contactID])
+        {
+            [favoriteButton setTitle: @"Remove from Favorites" forState: UIControlStateNormal];
+        }
+        else
+        {
+            [favoriteButton setTitle: @"Add to Favorites" forState: UIControlStateNormal];
+        }
     }
     else
     {
         inviteButton.hidden = FALSE;
         shareContactButton.hidden = TRUE;
+        favoriteButton.hidden = TRUE;
     }
     
     if (disableUserFeatures)
@@ -145,6 +161,23 @@
 //          
 //          NSLog(@"RingMail API Error: %@", [error localizedDescription]);
 //      }];
+}
+
+
+- (IBAction)onActionFavorite:(id)event {
+    if (rgMember)
+    {
+        if ([[RKContactStore sharedInstance] isFavorite:contactID])
+        {
+            [[RKContactStore sharedInstance] removeFavorite:contactID];
+            [favoriteButton setTitle: @"Add to Favorites" forState: UIControlStateNormal];
+        }
+        else
+        {
+            [[RKContactStore sharedInstance] addFavorite:contactID];
+            [favoriteButton setTitle: @"Remove from Favorites" forState: UIControlStateNormal];
+        }
+    }
 }
 
 

@@ -37,4 +37,8 @@
 - (NSString*)defaultPrimaryAddress:(ABRecordRef)lPerson current:(NSString*)cur;
 - (NSString*)getPrimaryAddress:(NSString*)contactID;
 
+- (BOOL)isFavorite:(NSString*)contactID;
+- (void)addFavorite:(NSString*)contactID;
+- (void)removeFavorite:(NSString*)contactID;
+
 @end
