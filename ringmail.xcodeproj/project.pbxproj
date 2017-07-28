@@ -1860,7 +1860,7 @@
 		C4AC2B441D3963FA003B6232 /* UILoadingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D306459D1611EC2900BB571E /* UILoadingImageView.m */; };
 		C4AC2B451D3963FA003B6232 /* CAAnimation+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = D37E3ECC1619C27A0087659A /* CAAnimation+Blocks.m */; };
 		C4AC2B481D3963FA003B6232 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A1F021CDFFADA00E095F8 /* VideoToolbox.framework */; };
-		C4AC2B601D3963FA003B6232 /* libNinePatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
+		C4AC2B601D3963FA003B6232 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
 		C4AC2B621D3963FA003B6232 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5F03410CE6B2F00777D97 /* AddressBook.framework */; };
 		C4AC2B631D3963FA003B6232 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */; };
 		C4AC2B641D3963FA003B6232 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22405EED1600B4E400B92522 /* AssetsLibrary.framework */; };
@@ -1962,7 +1962,7 @@
 		C9C8254F15AE256100D493FA /* transfer_call_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254E15AE256100D493FA /* transfer_call_disabled.png */; };
 		D3012CC41610467D007CD926 /* linphone_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D3012CC31610467D007CD926 /* linphone_logo.png */; };
 		D3012CC616105ECF007CD926 /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F5F8D91609A86700D3DA1A /* bubble.png */; };
-		D30562151671DC4900C97967 /* libNinePatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
+		D30562151671DC4900C97967 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B90E1915C2CB5800F64F8C /* libNinePatch.a */; };
 		D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D306459D1611EC2900BB571E /* UILoadingImageView.m */; };
 		D30BBD1815D402A7000F93DD /* contact_ok_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D30BBD1715D402A7000F93DD /* contact_ok_disabled.png */; };
 		D3119E7215B6A4710005D4A4 /* contacts_back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3119E7015B6A4710005D4A4 /* contacts_back_default.png */; };
@@ -4236,7 +4236,7 @@
 				4DDB8CFB1D9444BC00F5FD71 /* libxml2.2.dylib in Frameworks */,
 				4DDB8CFC1D9444BC00F5FD71 /* libz.1.dylib in Frameworks */,
 				C48A1F031CDFFADA00E095F8 /* VideoToolbox.framework in Frameworks */,
-				D30562151671DC4900C97967 /* libNinePatch.a in Frameworks */,
+				D30562151671DC4900C97967 /* ReferenceProxy in Frameworks */,
 				22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */,
 				22B5EFA310CE50BD00777D97 /* AddressBookUI.framework in Frameworks */,
 				22405EEE1600B4E400B92522 /* AssetsLibrary.framework in Frameworks */,
@@ -4338,7 +4338,7 @@
 				4DE0EB051D948A300009E015 /* libvo-amrwbenc.a in Frameworks */,
 				4DE0EB061D948A300009E015 /* libvpx.a in Frameworks */,
 				4DE0EB071D948A300009E015 /* libx264.a in Frameworks */,
-				C4AC2B601D3963FA003B6232 /* libNinePatch.a in Frameworks */,
+				C4AC2B601D3963FA003B6232 /* ReferenceProxy in Frameworks */,
 				C44A411E1E7337F8000F3E24 /* AVFoundation.framework in Frameworks */,
 				C44A411B1E733776000F3E24 /* Accelerate.framework in Frameworks */,
 				C44A411D1E7337AB000F3E24 /* CoreImage.framework in Frameworks */,
@@ -4589,7 +4589,7 @@
 			path = LinphoneUI;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+		29B97314FDCFA39411CA2CEA = {
 			isa = PBXGroup;
 			children = (
 				4D5111531DAD90DA00695DD5 /* RingMail-Dev.entitlements */,
@@ -6544,7 +6544,7 @@
 				Base,
 				ar,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			mainGroup = 29B97314FDCFA39411CA2CEA;
 			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -8544,7 +8544,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		511AEDDAB089CEDE7BC4DCD2 /* [CP] Copy Pods Resources */ = {
@@ -8574,7 +8574,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/Tools/git_version.sh;
+			shellScript = "$SRCROOT/Tools/git_version.sh";
 		};
 		86ABA1FE7BFEB24019A2D297 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8603,7 +8603,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/Tools/git_version.sh;
+			shellScript = "$SRCROOT/Tools/git_version.sh";
 		};
 		C4AC2AAB1D3963FA003B6232 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8616,7 +8616,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/Tools/ImageOptim.sh;
+			shellScript = "$SRCROOT/Tools/ImageOptim.sh";
 		};
 		D33CF34715D3985000CD4B85 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8629,7 +8629,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/Tools/ImageOptim.sh;
+			shellScript = "$SRCROOT/Tools/ImageOptim.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 

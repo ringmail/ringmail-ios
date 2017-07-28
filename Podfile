@@ -33,6 +33,7 @@ target 'RingMail-Dev' do
   pod 'IDMPhotoBrowser', :git => 'git@nova1.revalead.com:ringmail/idmphotobrowser.git', :branch => 'ringmail'
   pod 'DACircularProgress'
   pod 'DZVideoPlayerViewController', :git => 'git@nova1.revalead.com:ringmail/dzvideoplayerviewcontroller.git', :branch => 'ringmail'
+  pod 'NSString+RemoveEmoji'
 #  pod 'LNNotificationsUI', :git => 'https://github.com/bonokite/LNNotificationsUI'
 
 #  pod 'FCUUID'

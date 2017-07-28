@@ -5,6 +5,7 @@
 @property (nonatomic, readonly, copy) NSDictionary *data;
 
 + (BOOL)showingMessageThread;
++ (BOOL)isAllEmojis:(NSString*)str;
 
 - (instancetype)initWithData:(NSDictionary *)data;
 - (void)showVideoMedia;

@@ -22,6 +22,19 @@
 	
 	int maxBubbleWidth = (int)((width - (12 * scale)) / 8) * 7;
 	
+	if ([ChatElement isAllEmojis:message.body])
+	{
+		NSUInteger ecount = [ChatElementTextComponent emojiCount:message.body];
+		if (ecount > 2)
+		{
+			fontSize = 40;
+		}
+		else
+		{
+			fontSize = 72;
+		}
+	}
+	
 	CKComponent* res;
 	if (message.direction == RKItemDirectionInbound)
 	{
@@ -284,6 +297,19 @@
 		c->_element = elem;
 	}
 	return c;
+}
+
++ (NSUInteger)emojiCount:(NSString*)str
+{
+    NSUInteger cnt = 0;
+    NSUInteger index = 0;
+    while (index < str.length)
+	{
+        NSRange range = [str rangeOfComposedCharacterSequenceAtIndex:index];
+        cnt++;
+        index += range.length;
+    }
+    return cnt;
 }
 
 @end

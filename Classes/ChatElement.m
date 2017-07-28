@@ -3,12 +3,29 @@
 #import "VideoPlayerViewController.h"
 #import "PhoneMainView.h"
 #import "RgViewDelegate.h"
+#import "NSString_RemoveEmoji-Swift.h"
 
 @implementation ChatElement
 
 + (BOOL)showingMessageThread
 {
 	return [[RgViewDelegate sharedInstance] showingMessageThread];
+}
+
++ (BOOL)isAllEmojis:(NSString*)str
+{
+	if ([str length] > 0)
+	{
+		if ([str containsEmoji])
+		{
+			NSString *trim = [str stringByRemovingEmoji];
+			if ([trim length] == 0)
+			{
+				return YES;
+			}
+		}
+	}
+	return NO;
 }
 
 - (instancetype)initWithData:(NSDictionary *)data
