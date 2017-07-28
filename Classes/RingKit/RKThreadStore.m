@@ -892,6 +892,22 @@
 	return result;
 }
 
+- (NSInteger)getUnseenCount
+{
+	__block NSInteger count = 0;
+	[self inDatabase:^(FMDatabase *db) {
+		NSString *sql = @"SELECT COUNT(id) AS ct FROM rk_thread_item WHERE hidden = 0 AND seen = 0";
+		FMResultSet *rs = [db executeQuery:sql];
+		while ([rs next])
+        {
+			NSDictionary* row = [rs resultDictionary];
+			count = [(NSNumber*)row[@"ct"] integerValue];
+		}
+		[rs close];
+	}];
+	return count;
+}
+
 - (void)setHidden:(BOOL)hidden forItemId:(NSNumber*)itemId
 {
 	[self inDatabase:^(FMDatabase *db) {

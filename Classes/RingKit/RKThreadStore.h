@@ -43,6 +43,7 @@
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 - (RKThread*)getThreadById:(NSNumber*)lookupId;
 - (RKThread*)getThreadByMD5:(NSString*)lookupHash;
+- (NSInteger)getUnseenCount;
 - (RKCall*)getCallBySipId:(NSString*)sip;
 - (RKMessage*)getMessageByUUID:(NSString*)inputUUID;
 - (void)setHidden:(BOOL)hidden forItemId:(NSNumber*)itemId;

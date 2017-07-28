@@ -20,6 +20,7 @@
 #import "UIMainBar.h"
 #import "PhoneMainView.h"
 #import "CAAnimation+Blocks.h"
+#import "RKThreadStore.h"
 
 @implementation UIMainBar
 
@@ -53,25 +54,41 @@ NSArray *buttonArray;
 
 #pragma mark - ViewController Functions
 
+- (void)viewDidLoad {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationWillEnterForeground:)
+												 name:UIApplicationWillEnterForegroundNotification
+											   object:nil];
+
+    /*if (! [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.ringmail.phone"])
+    {
+        UIImage *logo = [UIImage imageNamed:@"ringmail_dev_logo"];
+        [logoView setImage:logo];
+    }*/
+    
+    buttonArray = [[NSArray alloc] initWithObjects:messagesButton,contactsButton,ringmailButton,settingsButton,hashtagButton,nil];
+    
+    [self setInstance: [UIScreen mainScreen].applicationFrame.size.width];
+    
+	[super viewDidLoad]; // Have to be after due to TPMultiLayoutViewController
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(threadSeenEvent:) name:kRKThreadSeen object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemActivityEvent:) name:kRKItemActivity object:nil];
+	
+}
+
+- (void)viewDidUnload {
+	[super viewDidUnload];
+
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:UIApplicationWillEnterForegroundNotification
+												  object:nil];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(changeViewEvent:)
-												 name:kLinphoneMainViewChange
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(callUpdate:)
-												 name:kLinphoneCallUpdate
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(textReceived:)
-												 name:kRgTextReceived
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(settingsUpdate:)
-												 name:kLinphoneSettingsUpdate
-											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewEvent:) name:kLinphoneMainViewChange object:nil];
 	[self update:FALSE];
 
 }
@@ -80,11 +97,6 @@ NSArray *buttonArray;
 	[super viewWillDisappear:animated];
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneMainViewChange object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneCallUpdate object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneTextReceived object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kLinphoneSettingsUpdate object:nil];
-    
-    //missedCalls = [NSNumber numberWithInt:0];
 }
 
 - (void)flipImageForButton:(UIButton *)button {
@@ -102,32 +114,6 @@ NSArray *buttonArray;
 	}
 }
 
-- (void)viewDidLoad {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(applicationWillEnterForeground:)
-												 name:UIApplicationWillEnterForegroundNotification
-											   object:nil];
-
-    if (! [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.ringmail.phone"])
-    {
-        UIImage *logo = [UIImage imageNamed:@"ringmail_dev_logo"];
-        [logoView setImage:logo];
-    }
-    
-    buttonArray = [[NSArray alloc] initWithObjects:messagesButton,contactsButton,ringmailButton,settingsButton,hashtagButton,nil];
-    
-    [self setInstance: [UIScreen mainScreen].applicationFrame.size.width];
-    
-	[super viewDidLoad]; // Have to be after due to TPMultiLayoutViewController
-}
-
-- (void)viewDidUnload {
-	[super viewDidUnload];
-
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:UIApplicationWillEnterForegroundNotification
-												  object:nil];
-}
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 								duration:(NSTimeInterval)duration {
@@ -191,51 +177,35 @@ NSArray *buttonArray;
 	[self update:FALSE];
 }
 
-- (void)callUpdate:(NSNotification *)notif {
-	// LinphoneCall *call = [[notif.userInfo objectForKey: @"call"] pointerValue];
-	// LinphoneCallState state = [[notif.userInfo objectForKey: @"state"] intValue];
-    //missedCalls = [NSNumber numberWithInt:[missedCalls intValue] + linphone_core_get_missed_calls_count([LinphoneManager getLc])];
-	[self updateUnreadMessage:TRUE];
-}
-
 - (void)changeViewEvent:(NSNotification *)notif {
 	// UICompositeViewDescription *view = [notif.userInfo objectForKey: @"view"];
 	// if(view != nil)
 	[self updateView:[[PhoneMainView instance] firstView]];
 }
 
-- (void)settingsUpdate:(NSNotification *)notif {
-	/*if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == false) {
-		[self stopBounceAnimation:kBounceAnimation target:chatNotificationView];
-		chatNotificationView.layer.transform = CATransform3DIdentity;
-		[self stopBounceAnimation:kBounceAnimation target:historyNotificationView];
-		historyNotificationView.layer.transform = CATransform3DIdentity;
-	} else {
-		if (![chatNotificationView isHidden] && [chatNotificationView.layer animationForKey:kBounceAnimation] == nil) {
-			[self startBounceAnimation:kBounceAnimation target:chatNotificationView];
-		}
-		if (![historyNotificationView isHidden] &&
-			[historyNotificationView.layer animationForKey:kBounceAnimation] == nil) {
-			[self startBounceAnimation:kBounceAnimation target:historyNotificationView];
-		}
-	}*/
+- (void)threadSeenEvent:(NSNotification *)notif
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self updateUnread];
+    }];
 }
 
-- (void)textReceived:(NSNotification *)notif {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        [self updateUnreadMessage:TRUE];
-    }];
+- (void)itemActivityEvent:(NSNotification *)notif
+{
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	if (! [notif.userInfo[@"name"] isEqualToString:kRKMessageUpdated]) // skip updated messages
+	{
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            [self updateUnread];
+        }];
+	}
 }
 
 #pragma mark -
 
 - (void)update:(BOOL)appear {
 	[self updateView:[[PhoneMainView instance] firstView]];
-    /*if ([[[LinphoneManager instance] coreReady] boolValue])
-    {
-        missedCalls = [NSNumber numberWithInt:[missedCalls intValue] + linphone_core_get_missed_calls_count([LinphoneManager getLc])];
-    }*/
-	[self updateUnreadMessage:appear];
+	[self updateUnread];
     
     // center button text below button image
 //    for (UIButton* btn in buttonArray) {
@@ -247,16 +217,20 @@ NSArray *buttonArray;
 
 }
 
-- (void)updateUnreadMessage:(BOOL)appear {
-    NSNumber* unread = [[[LinphoneManager instance] chatManager] dbGetSessionUnread];
+- (void)updateUnread
+{
+    NSNumber* unread = [NSNumber numberWithInteger:[[RKThreadStore sharedInstance] getUnseenCount]];
 	int unreadMessage = [unread intValue];
-	if (unreadMessage > 0) {
+	if (unreadMessage > 0)
+	{
 		if ([chatNotificationView isHidden])
         {
 			[chatNotificationView setHidden:FALSE];
 		}
 		[chatNotificationLabel setText:[unread stringValue]];
-	} else {
+	}
+	else
+	{
 		if (![chatNotificationView isHidden])
         {
 			[chatNotificationView setHidden:TRUE];

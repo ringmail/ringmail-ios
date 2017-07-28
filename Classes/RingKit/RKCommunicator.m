@@ -109,13 +109,13 @@ NSString *const kRKThreadSeen = @"RKThreadSeen";
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store insertItem:call];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallBegin object:self userInfo:@{
-		@"call": call,
-	}];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"call",
 		@"call": call,
 		@"name": kRKCallBegin,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallBegin object:self userInfo:@{
+		@"call": call,
 	}];
 }
 
@@ -123,13 +123,13 @@ NSString *const kRKThreadSeen = @"RKThreadSeen";
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store updateItem:call];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallUpdated object:self userInfo:@{
-		@"call": call,
-	}];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"call",
 		@"call": call,
 		@"name": kRKCallUpdated,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallUpdated object:self userInfo:@{
+		@"call": call,
 	}];
 }
 
@@ -137,13 +137,13 @@ NSString *const kRKThreadSeen = @"RKThreadSeen";
 {
 	RKThreadStore* store = [RKThreadStore sharedInstance];
 	[store updateItem:call];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallEnd object:self userInfo:@{
-		@"call": call,
-	}];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kRKItemActivity object:self userInfo:@{
 		@"type": @"call",
 		@"call": call,
 		@"name": kRKCallEnd,
+	}];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKCallEnd object:self userInfo:@{
+		@"call": call,
 	}];
 }
 
