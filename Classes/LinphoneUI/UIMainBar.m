@@ -192,7 +192,6 @@ NSArray *buttonArray;
 
 - (void)itemActivityEvent:(NSNotification *)notif
 {
-	NSLog(@"%s", __PRETTY_FUNCTION__);
 	if (! [notif.userInfo[@"name"] isEqualToString:kRKMessageUpdated]) // skip updated messages
 	{
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
