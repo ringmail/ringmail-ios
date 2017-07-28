@@ -456,6 +456,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		[cell.detailTextField setDelegate:self];
 		[cell.detailTextField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		[cell.detailTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 		[cell setBackgroundColor:[UIColor whiteColor]];
         
 		// Background View
