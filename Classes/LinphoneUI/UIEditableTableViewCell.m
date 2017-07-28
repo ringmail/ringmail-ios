@@ -67,7 +67,7 @@
 	[super layoutSubviews];
     
 	CGRect detailEditFrame;
-	detailEditFrame.origin.x = 35;
+	detailEditFrame.origin.x = 55;
 	detailEditFrame.origin.y = 35;
 	detailEditFrame.size.height = 20;
     
@@ -77,14 +77,14 @@
 		CGRect leftLabelFrame = [self.textLabel frame];
 		leftLabelFrame.size.width -= 25;
         leftLabelFrame.origin.y = 18;
-        leftLabelFrame.origin.x = 15;
+        leftLabelFrame.origin.x = 35;
 		[self.textLabel setFrame:leftLabelFrame];
         
 		// place separator
 		CGRect separatorFrame = [self.verticalSep frame];
-		separatorFrame.origin.x = self.frame.origin.x + 35;
+		separatorFrame.origin.x = self.frame.origin.x + 55;
         separatorFrame.origin.y = self.frame.size.height - 1;
-        separatorFrame.size.width = self.frame.size.width - 70;
+        separatorFrame.size.width = self.frame.size.width - 90;
 		[self.verticalSep setFrame:separatorFrame];
 		[self.verticalSep setHidden:FALSE];
 	}
@@ -97,12 +97,12 @@
 	// RingMail
 	CGRect labelFrame = [self.textLabel frame];
 	labelFrame.origin.y = 18;
-    labelFrame.origin.x = 35;
+    labelFrame.origin.x = 55;
 	[self.textLabel setFrame:labelFrame];
 	
     CGRect textFrame = [self.detailTextLabel frame];
     textFrame.origin.y = 35;
-    textFrame.origin.x = 35;
+    textFrame.origin.x = 55;
     textFrame.size.height = 20;
     [self.detailTextLabel setFrame:textFrame];
     

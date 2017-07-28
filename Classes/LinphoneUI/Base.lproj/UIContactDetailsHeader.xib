@@ -102,7 +102,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_unknown_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="avatarImage">
-                            <rect key="frame" x="20" y="40" width="70" height="70"/>
+                            <rect key="frame" x="40" y="40" width="70" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="QAq-2r-CyN"/>
                                 <constraint firstAttribute="width" constant="70" id="QWY-zQ-NXn"/>
@@ -115,7 +115,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Contact1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="addressLabel">
-                            <rect key="frame" x="110" y="61" width="104" height="29"/>
+                            <rect key="frame" x="130" y="61" width="104" height="29"/>
                             <accessibility key="accessibilityConfiguration" label="Contact name"/>
                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="24"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -153,8 +153,8 @@
                                 <constraint firstAttribute="height" constant="52" id="HvW-op-ZKd"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
-                            <inset key="titleEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                            <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="16" minY="8" maxX="0.0" maxY="8"/>
                             <state key="normal" title="Message" image="message_normal.png"/>
                             <state key="selected" image="message_selected.png"/>
                             <state key="highlighted" image="message_pressed.png"/>
@@ -174,8 +174,8 @@
                                 <constraint firstAttribute="height" priority="999" constant="52" id="I0J-Cn-cqv"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
-                            <inset key="titleEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                            <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="16" minY="8" maxX="0.0" maxY="8"/>
                             <state key="normal" title="Call" image="phone_normal.png"/>
                             <state key="selected" image="phone_selected.png"/>
                             <state key="highlighted" image="phone_pressed.png"/>
@@ -195,8 +195,8 @@
                                 <constraint firstAttribute="height" priority="999" constant="52" id="7Z4-0f-NPi"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
-                            <inset key="titleEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                            <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="16" minY="8" maxX="0.0" maxY="8"/>
                             <state key="normal" title="Video Call" image="video_normal.png"/>
                             <state key="selected" image="video_selected.png"/>
                             <state key="highlighted" image="video_pressed.png"/>
@@ -229,7 +229,7 @@
                 <constraint firstItem="ceE-Y3-ZPI" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="fgv-n6-qLF"/>
                 <constraint firstItem="15" firstAttribute="top" secondItem="4" secondAttribute="top" constant="45" id="hB6-Rg-Kgr"/>
                 <constraint firstItem="12" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="meK-xd-HPj"/>
-                <constraint firstItem="6" firstAttribute="leading" secondItem="4" secondAttribute="leading" constant="20" id="uqM-Sj-fqw"/>
+                <constraint firstItem="6" firstAttribute="leading" secondItem="4" secondAttribute="leading" constant="40" id="uqM-Sj-fqw"/>
                 <constraint firstAttribute="bottom" secondItem="6kh-sr-g0W" secondAttribute="bottom" constant="48" id="v6w-J5-7xs"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

@@ -642,7 +642,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
         tmp.backgroundColor = UIColor.whiteColor;
         
-        UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 30, self.view.bounds.size.width - 40, 16)];
+        UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 30, self.view.bounds.size.width - 80, 16)];
         phoneLabel.font = [UIFont fontWithName:@"SFUIText-Medium" size:16];
         phoneLabel.numberOfLines = 1;
         phoneLabel.backgroundColor = [UIColor whiteColor];
