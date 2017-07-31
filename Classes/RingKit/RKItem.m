@@ -88,15 +88,14 @@
     NSAssert(FALSE, @"Override this method: %s", __PRETTY_FUNCTION__);
 }
 
-- (void)updateItem:(NoteDatabase*)ndb seen:(BOOL)seen
+- (RKThread*)updateItem:(NoteDatabase*)ndb seen:(BOOL)seen
 {
 	[[ndb database] executeUpdate:@"UPDATE rk_thread_item SET seen = ? WHERE id = ?" withArgumentsInArray:@[@(seen), self.itemId]];
 	if (self.thread)
 	{
-    	[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:self userInfo:@{
-       		@"thread": self.thread,
-       	}];
+		return self.thread;
 	}
+	return nil;
 }
 
 - (void)updateVersion:(NoteDatabase*)ndb

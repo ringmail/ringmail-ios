@@ -75,21 +75,19 @@ NSArray *buttonArray;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(threadSeenEvent:) name:kRKThreadSeen object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemActivityEvent:) name:kRKItemActivity object:nil];
 	
+	[self updateUnread];
 }
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
 
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:UIApplicationWillEnterForegroundNotification
-												  object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewEvent:) name:kLinphoneMainViewChange object:nil];
-	[self update:FALSE];
 
 }
 

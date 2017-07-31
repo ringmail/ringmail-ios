@@ -11,6 +11,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RingKit.h"
+#import "GGMutableDictionary.h"
 
 @interface ChatRoomCollectionViewController : UICollectionViewController
 

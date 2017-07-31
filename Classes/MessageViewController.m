@@ -173,10 +173,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 	}
 	else
 	{
-		[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:nil userInfo:@{
-    		@"thread": [self chatThread],
-    	}];
+		[[RKThreadStore sharedInstance] markThreadSeen:[self chatThread]];
 	}
+	[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:nil userInfo:@{
+		@"thread": [self chatThread],
+	}];
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -21,11 +21,7 @@
 @class RKCall;
 @class RKMessage;
 
-@interface RKThreadStore : NSObject {
-@private
-	FMDatabase *database;
-}
-
+@interface RKThreadStore : NSObject
 
 @property (nonatomic, retain) FMDatabaseQueue *dbqueue;
 
@@ -39,7 +35,8 @@
 - (void)dumpThreads;
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
-- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId notify:(BOOL)notify;
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId seen:(BOOL)seen;
+- (NSArray*)markThreadSeen:(RKThread*)thread;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress orignalTo:(RKAddress*)origTo contactId:(NSNumber*)ctid uuid:(NSString*)uuid;
 - (RKThread*)getThreadById:(NSNumber*)lookupId;
 - (RKThread*)getThreadByMD5:(NSString*)lookupHash;

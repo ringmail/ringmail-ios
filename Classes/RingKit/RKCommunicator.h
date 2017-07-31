@@ -61,7 +61,7 @@ extern NSString *const kRKThreadSeen;
 
 - (NSArray*)listThreads;
 - (NSArray*)listThreadItems:(RKThread*)thread;
-- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId notify:(BOOL)notify;
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId seen:(BOOL)seen;
 - (RKThread*)getThreadById:(NSNumber*)lookupId;
 - (RKThread*)getThreadByMD5:(NSString*)lookupHash;
 - (RKThread*)getThreadByAddress:(RKAddress*)remoteAddress;

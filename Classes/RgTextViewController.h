@@ -14,6 +14,7 @@
 
 #import "ChatRoomCollectionViewController.h"
 #import "RingKit.h"
+#import "RKThreadStore.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,7 +46,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface RgTextViewController : UIViewController <
                                                                                 UIGestureRecognizerDelegate, UIAlertViewDelegate>
 
 /** RingMail */
-@property (nonatomic, strong) RKThread* chatThread;
+@property (nonatomic, retain) RKThread* chatThread;
 @property (nonatomic, retain) ChatRoomCollectionViewController* chatRoom;
 @property (nonatomic, retain) UIImageView* backgroundImageView;
 @property (nonatomic, retain) UICollectionViewLayout* currentLayout;

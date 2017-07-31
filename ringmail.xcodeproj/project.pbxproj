@@ -885,6 +885,8 @@
 		C46312721F14313300E503AB /* summary_call_outgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C463126D1F14313300E503AB /* summary_call_outgoing@2x.png */; };
 		C46312731F14313300E503AB /* summary_call_outgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C463126D1F14313300E503AB /* summary_call_outgoing@2x.png */; };
 		C46997AD1BC19168007B3658 /* incall_buttons_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C46997AC1BC19168007B3658 /* incall_buttons_background.png */; };
+		C46E19C91F2FD51D00DB5479 /* GGMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C46E19C71F2FD51D00DB5479 /* GGMutableDictionary.m */; };
+		C46E19CA1F2FD51D00DB5479 /* GGMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C46E19C71F2FD51D00DB5479 /* GGMutableDictionary.m */; };
 		C46E39C01F1588080012BF16 /* avatar_unknown_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C46E39BF1F1588080012BF16 /* avatar_unknown_small@2x.png */; };
 		C46E39C11F1588080012BF16 /* avatar_unknown_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C46E39BF1F1588080012BF16 /* avatar_unknown_small@2x.png */; };
 		C470BF781E68C540009968E2 /* SendToInputComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C470BF771E68C540009968E2 /* SendToInputComponent.mm */; };
@@ -3356,6 +3358,8 @@
 		C463126C1F14313300E503AB /* summary_call_missed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "summary_call_missed@2x.png"; path = "Resources/summary_call_missed@2x.png"; sourceTree = "<group>"; };
 		C463126D1F14313300E503AB /* summary_call_outgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "summary_call_outgoing@2x.png"; path = "Resources/summary_call_outgoing@2x.png"; sourceTree = "<group>"; };
 		C46997AC1BC19168007B3658 /* incall_buttons_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incall_buttons_background.png; path = Resources/incall_buttons_background.png; sourceTree = "<group>"; };
+		C46E19C71F2FD51D00DB5479 /* GGMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGMutableDictionary.m; path = Utils/GGMutableDictionary.m; sourceTree = "<group>"; };
+		C46E19C81F2FD51D00DB5479 /* GGMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGMutableDictionary.h; path = Utils/GGMutableDictionary.h; sourceTree = "<group>"; };
 		C46E39BF1F1588080012BF16 /* avatar_unknown_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "avatar_unknown_small@2x.png"; path = "Resources/avatar_unknown_small@2x.png"; sourceTree = "<group>"; };
 		C470BF6E1E68C532009968E2 /* SendToInputComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendToInputComponent.h; path = RgComponents/SendToInputComponent.h; sourceTree = "<group>"; };
 		C470BF771E68C540009968E2 /* SendToInputComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SendToInputComponent.mm; sourceTree = "<group>"; };
@@ -5370,6 +5374,8 @@
 				C44A40791E70E415000F3E24 /* CLImageEditor */,
 				C44F5E071C31E341008E4F38 /* NoteSQL.h */,
 				C44F5E081C31E341008E4F38 /* NoteSQL.m */,
+				C46E19C81F2FD51D00DB5479 /* GGMutableDictionary.h */,
+				C46E19C71F2FD51D00DB5479 /* GGMutableDictionary.m */,
 				D37E3ECA1619C27A0087659A /* CAAnimationBlocks */,
 				D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */,
 				D380801115C29984005BE9BC /* ColorSpaceUtilities.h */,
@@ -8816,6 +8822,7 @@
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
 				4DA3DACF1F0ED82A00D5A14B /* HashtagMyActivityHeaderCardComponent.mm in Sources */,
 				C4A0858B1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */,
+				C46E19C91F2FD51D00DB5479 /* GGMutableDictionary.m in Sources */,
 				C4593A5D1E6A4A89001C3BDD /* FavoritesBarComponent.mm in Sources */,
 				D3807FF415C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */,
 				C4A929121E9428BE00993A5C /* MessageTableViewCell.m in Sources */,
@@ -8942,6 +8949,7 @@
 				C4AC2AD01D3963FA003B6232 /* UIContactCell.m in Sources */,
 				4DAA6B021E6E16C700D9DE84 /* RgSearchBarViewController.m in Sources */,
 				C423AC211F1DCDDC00676863 /* VideoPlayerViewController.m in Sources */,
+				C46E19CA1F2FD51D00DB5479 /* GGMutableDictionary.m in Sources */,
 				C41276941D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */,
 				C45B93451ECE4F5C00974011 /* RKContact.m in Sources */,
 				C4AC2AD21D3963FA003B6232 /* OrderedDictionary.m in Sources */,

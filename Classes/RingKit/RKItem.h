@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, RKItemDirection) {
 - (instancetype)initWithData:(NSDictionary*)param;
 - (void)insertItem:(NoteDatabase*)ndb;
 - (void)updateItem:(NoteDatabase*)ndb;
-- (void)updateItem:(NoteDatabase*)ndb seen:(BOOL)seen;
+- (RKThread*)updateItem:(NoteDatabase*)ndb seen:(BOOL)seen;
 - (void)updateVersion:(NoteDatabase*)ndb;
 
 @end

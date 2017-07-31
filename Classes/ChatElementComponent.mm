@@ -20,7 +20,7 @@
 static CKComponent *chatComponent(ChatElement *elem, ChatElementContext *context)
 {
 	NSDictionary* data = elem.data;
-	NSLog(@"Item: %@", data[@"item"]);
+	//NSLog(@"Item: %@", data[@"item"]);
 	if ([data[@"item"] isKindOfClass:[RKPhotoMessage class]])
 	{
 		return [ChatElementImageComponent newWithChatElement:elem context:context];

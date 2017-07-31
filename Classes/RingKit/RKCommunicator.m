@@ -157,9 +157,9 @@ NSString *const kRKThreadSeen = @"RKThreadSeen";
 	return [[RKThreadStore sharedInstance] listThreadItems:thread];
 }
 
-- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId notify:(BOOL)notify
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId seen:(BOOL)seen
 {
-	return [[RKThreadStore sharedInstance] listThreadItems:thread lastItemId:lastItemId notify:notify];
+	return [[RKThreadStore sharedInstance] listThreadItems:thread lastItemId:lastItemId seen:seen];
 }
 
 - (RKThread*)getThreadById:(NSNumber*)lookupId

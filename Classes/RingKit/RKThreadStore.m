@@ -19,9 +19,6 @@
 #import "RegexKitLite/RegexKitLite.h"
 
 @implementation RKThreadStore
-{
-	BOOL database_block;
-}
 
 @synthesize dbqueue;
 
@@ -48,20 +45,9 @@
 
 - (void)inDatabase:(void (^)(FMDatabase *db))block
 {
-	if (self->database_block)
-	{
-		block(self->database);
-	}
-	else
-	{
-		self->database_block = YES;
-    	[[self dbqueue] inTransaction:^(FMDatabase *db, BOOL* rollback) {
-			self->database = db;
-    		block(db);
-			self->database = nil;
-    	}];
-		self->database_block = NO;
-	}
+	[[self dbqueue] inTransaction:^(FMDatabase *db, BOOL* rollback) {
+		block(db);
+	}];
 }
 
 - (void)dbBlock:(void (^)(NoteDatabase *ndb))block
@@ -178,9 +164,16 @@
 
 - (void)updateItem:(RKItem*)item seen:(BOOL)seen
 {
+	__block RKThread* thread = nil;
 	[self dbBlock:^(NoteDatabase *ndb) {
-		[item updateItem:ndb seen:seen];
+		thread = [item updateItem:ndb seen:seen];
 	}];
+	if (thread != nil)
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:self userInfo:@{
+       		@"thread": thread,
+       	}];
+	}
 }
 
 - (void)insertThread:(RKThread*)thread
@@ -352,14 +345,13 @@
 
 - (NSArray*)listThreadItems:(RKThread*)thread
 {
-	return [self listThreadItems:thread lastItemId:nil notify:YES];
+	return [self listThreadItems:thread lastItemId:nil seen:YES];
 }
 
-- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId notify:(BOOL)notify
+- (NSArray*)listThreadItems:(RKThread*)thread lastItemId:(NSNumber*)lastItemId seen:(BOOL)seen
 {
 	NSAssert(thread.threadId != nil, @"Undefined thread id");
 	__block NSMutableArray *result = [NSMutableArray array];
-	__block BOOL seen = 0;
 	[self inDatabase:^(FMDatabase *db) {
 		NSString *sql = @""
             "SELECT "
@@ -414,10 +406,12 @@
         {
 			NSDictionary* row = [rs resultDictionary];
             //NSLog(@"%s Row: %@", __PRETTY_FUNCTION__, row);
-			if (! [row[@"seen"] boolValue])
+			if (seen)
 			{
-				[db executeUpdate:@"UPDATE rk_thread_item SET seen = 1 WHERE id = ?", row[@"item_id"]];
-				seen = YES;
+    			if (! [row[@"seen"] boolValue])
+    			{
+    				[db executeUpdate:@"UPDATE rk_thread_item SET seen = 1 WHERE id = ?", row[@"item_id"]];
+    			}
 			}
 			if (NILIFNULL(row[@"message_id"]) != nil)
 			{
@@ -468,12 +462,18 @@
 		[rs close];
 	}];
 	//NSLog(@"%s: Thread Items: %@", __PRETTY_FUNCTION__, result);
-	if (seen && notify)
-	{
-		[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:self userInfo:@{
-    		@"thread": thread,
-    	}];
-	}
+	return result;
+}
+
+- (NSArray*)markThreadSeen:(RKThread*)thread
+{
+	NSAssert(thread.threadId != nil, @"Undefined thread id");
+	__block NSMutableArray *result = [NSMutableArray array];
+	[self inDatabase:^(FMDatabase *db) {
+		NSString *sql = @"UPDATE rk_thread_item SET seen = 1 WHERE thread_id = ? AND seen = 0 ORDER BY id DESC LIMIT 50";
+		[db executeUpdate:sql withArgumentsInArray:@[thread.threadId]];
+	}];
+	//NSLog(@"%s: Thread Items: %@", __PRETTY_FUNCTION__, result);
 	return result;
 }
 

@@ -119,6 +119,8 @@ static NSInteger const pageSize = 10;
     NSInteger curcount = [current count];
     NSInteger newcount = [newlist count];
 	
+	NSAssert(newcount >= curcount, @"Query failure");
+	
     // Generate changeset
     NSInteger viewcount = [[_cardModelController mainCount] integerValue];
     if (viewcount < pageSize)

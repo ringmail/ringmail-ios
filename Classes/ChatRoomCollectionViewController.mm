@@ -12,7 +12,7 @@
 @implementation ChatRoomCollectionViewController
 {
     NSMutableArray *_elements;
-    NSMutableDictionary *_elementPaths;
+    GGMutableDictionary *_elementPaths;
 	NSNumber *_mainCount;
 	CKCollectionViewDataSource *_dataSource;
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
@@ -26,7 +26,7 @@
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleWidthAndHeight];
 		_elements = [NSMutableArray array];
-		_elementPaths = [NSMutableDictionary dictionary];
+		_elementPaths = [[GGMutableDictionary alloc] init];
 		_mainCount = [NSNumber numberWithInteger:0];
 		self.lastMessageID = nil;
 		self.chatThread = thread;
@@ -42,10 +42,13 @@
 	NSInteger j = 0;
 	for (RKItem* i in elems)
 	{
-		[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:@{
-			@"item": i,
-		}]];
-		_elementPaths[i.itemId] = [NSNumber numberWithInteger:j++];
+		if (_elementPaths[i.itemId] == nil)
+		{
+    		[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:@{
+    			@"item": i,
+    		}]];
+    		_elementPaths[i.itemId] = [NSNumber numberWithInteger:j++];
+		}
 	}
 	
     // Preload images for the component context that need to be used in component preparation. Components preparation
@@ -178,7 +181,7 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 - (void)appendNewMessages
 {
 	BOOL foreground = [ChatElement showingMessageThread];
-	NSArray* newMessages = [[RKCommunicator sharedInstance] listThreadItems:chatThread lastItemId:lastMessageID notify:foreground];
+	NSArray* newMessages = [[RKCommunicator sharedInstance] listThreadItems:chatThread lastItemId:lastMessageID seen:foreground];
 	//NSLog(@"%s: New Messages: %@", __PRETTY_FUNCTION__, newMessages);
 	if ([newMessages count] == 0)
     {
@@ -190,6 +193,30 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 	
 	// remove last_element tag
 	NSInteger count = [_elements count];
+	
+	NSInteger start = count;
+	NSInteger j = start;
+	for (RKItem* i in newMessages)
+	{
+		if (_elementPaths[i.itemId] == nil)
+		{
+    		[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:@{
+    			@"item": i,
+    		}]];
+    		_elementPaths[i.itemId] = [NSNumber numberWithInteger:j++];
+		}
+	}
+	NSInteger newcount = [_elements count];
+	if (newcount == count)
+	{
+		return;
+	}
+	else if (foreground)
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:kRKThreadSeen object:nil userInfo:@{
+    		@"thread": chatThread,
+    	}];
+	}
 	if (count > 0)
 	{
 		NSInteger last = count - 1;
@@ -199,25 +226,14 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 		items.update([NSIndexPath indexPathForRow:last inSection:0], lastItem);
 	}
 	
-	NSInteger start = count;
-	NSInteger j = start;
-	for (RKItem* i in newMessages)
-	{
-		[_elements addObject:[NSMutableDictionary dictionaryWithDictionary:@{
-			@"item": i,
-		}]];
-		_elementPaths[i.itemId] = [NSNumber numberWithInteger:j++];
-	}
-	count = [_elements count];
-	
 	NSInteger added = 0;
-	for (NSUInteger i = start; i < count; i++)
+	for (NSUInteger i = start; i < newcount; i++)
     {
 		if (i == 0)
 		{
 			_elements[i][@"first_element"] = @YES;
 		}
-		if (i == count - 1)
+		if (i == newcount - 1)
 		{
 			_elements[i][@"last_element"] = @YES;
 		}
