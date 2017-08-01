@@ -420,4 +420,28 @@
     }];
 }
 
+
+- (NSDictionary*)getFavorites
+{
+    NSMutableDictionary *res = [NSMutableDictionary dictionary];
+    [self inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT apple_id FROM contact_favorites WHERE favorite = 1"];
+        while ([rs next])
+        {
+            NSNumber *contactID = [rs objectForColumnIndex:0];
+            [res setObject:@"" forKey:contactID];
+        }
+        [rs close];
+    }];
+    return res;
+}
+
+
+- (void)updateFavorites
+{
+    [self inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"DELETE FROM contact_favorites WHERE apple_id NOT IN (SELECT apple_id FROM contact_detail WHERE ringmail_enabled = 1)"];
+    }];
+}
+
 @end

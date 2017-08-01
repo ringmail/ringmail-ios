@@ -71,12 +71,13 @@
 		}
 		[self.view addSubview:_hostView];
 	}
-	
+    
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMedia:) name:kRgSendComponentAddMedia object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMedia) name:kRgSendComponentRemoveMedia object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSend) name:kRgSendComponentReset object:nil];
+    
 }
 
 

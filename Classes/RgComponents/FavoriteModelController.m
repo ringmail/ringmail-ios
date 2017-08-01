@@ -5,6 +5,7 @@
 #import "Favorite.h"
 #import "FavoritesPage.h"
 #import "LinphoneManager.h"
+#import "RKContactStore.h"
 
 @implementation FavoriteModelController
 
@@ -22,15 +23,14 @@
 {
 	NSAssert(count >= 1, @"Count should be a positive integer");
 	// TODO: move this to SendViewController.mm and pass value into root component data
-	NSArray* favQuery = [[[LinphoneManager instance] chatManager] dbGetMainList:nil favorites:YES];
-	//
+    NSDictionary* favQuery = [[RKContactStore sharedInstance] getFavorites];
+    
 	UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
 	NSMutableArray* favData = [NSMutableArray array];
-	for (NSDictionary* r in favQuery)
+	for (NSNumber *contactId in favQuery)
     {
-        NSString *address = [r objectForKey:@"session_tag"];
-		NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:r];
-		NSNumber *contactId = r[@"contact_id"];
+//        NSString *address = [r objectForKey:@"session_tag"];
+		NSMutableDictionary *newdata = [[NSMutableDictionary alloc] init];
 		ABRecordRef contact = NULL;
 		if (NILIFNULL(contactId) != nil)
 		{
@@ -45,7 +45,7 @@
 	   	if (! contact)
 		{
             [newdata setObject:defaultImage forKey:@"image"];
-            [newdata setObject:address forKey:@"label"];
+//            [newdata setObject:address forKey:@"label"];
 		}
 		NSArray *nameParts = [newdata[@"label"] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 		newdata[@"name"] = nameParts[0];
@@ -53,18 +53,15 @@
 	}
 	NSMutableArray *favList = [NSMutableArray array];
 	NSInteger added = 0;
-	for (NSUInteger i = 0; i < count; i++)
+    for (NSUInteger i = 0; i < [favData count]; i++)
     {
-		NSInteger mainIndex = [mainCount intValue] + i;
-		if ([favData count] > mainIndex)
-		{
-			Favorite* favItem = [[Favorite alloc] initWithData:[favData objectAtIndex:mainIndex]];
-			[favList addObject:favItem];
-			added++;
-		}
-	}
-	FavoritesPage *favsPage = [[FavoritesPage alloc] initWithFavorites:favList position:[mainCount integerValue]];
-	mainCount = [NSNumber numberWithInteger:[mainCount integerValue] + added];
+        Favorite* favItem = [[Favorite alloc] initWithData:[favData objectAtIndex:i]];
+        [favList addObject:favItem];
+        added++;
+    }
+    
+	FavoritesPage *favsPage = [[FavoritesPage alloc] initWithFavorites:favList position:0];
+    
 	return favsPage;
 }
 
