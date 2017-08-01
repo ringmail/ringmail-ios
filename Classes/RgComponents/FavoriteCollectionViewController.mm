@@ -73,6 +73,27 @@ static NSInteger const pageSize = 50;
     [self updateCollection];
 }
 
+
+- (void)updateCollection
+{
+    CKArrayControllerInputItems items;
+    
+    NSArray *curFavs = _currentFavPage.favorites;
+    
+    if (curFavs.count)
+    {
+        for (NSInteger i = 0; i < curFavs.count; i++)
+        {
+            items.remove([NSIndexPath indexPathForRow:i inSection:0]);
+        }
+        [_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _enqueuePage:[_modelController fetchNewFavoritesPageWithCount:pageSize]];
+    });
+}
+
 - (void)_enqueuePage:(FavoritesPage *)favsPage
 {
     NSArray *favs = favsPage.favorites;
@@ -91,26 +112,6 @@ static NSInteger const pageSize = 50;
     {
         [_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
     }
-}
-
-- (void) updateCollection
-{
-    CKArrayControllerInputItems items;
-    
-    NSArray *curFavs = _currentFavPage.favorites;
-    
-    if (curFavs.count)
-    {
-        for (NSInteger i = 0; i < curFavs.count; i++)
-        {
-            items.remove([NSIndexPath indexPathForRow:i inSection:0]);
-        }
-        [_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
-    }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self _enqueuePage:[_modelController fetchNewFavoritesPageWithCount:pageSize]];
-    });
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
