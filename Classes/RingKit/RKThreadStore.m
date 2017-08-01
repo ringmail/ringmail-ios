@@ -896,7 +896,7 @@
 {
 	__block NSInteger count = 0;
 	[self inDatabase:^(FMDatabase *db) {
-		NSString *sql = @"SELECT COUNT(id) AS ct FROM rk_thread_item WHERE hidden = 0 AND seen = 0";
+		NSString *sql = @"SELECT COUNT(DISTINCT id) AS ct FROM rk_thread_item WHERE hidden = 0 AND seen = 0";
 		FMResultSet *rs = [db executeQuery:sql];
 		while ([rs next])
         {

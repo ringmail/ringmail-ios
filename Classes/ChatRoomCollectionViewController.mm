@@ -256,7 +256,7 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 
 - (void)updateMessage:(RKItem*)msg;
 {
-	NSNumber* position = _elementPaths[msg.itemId];
+	__block NSNumber* position = _elementPaths[msg.itemId];
 	if (position != nil)
 	{
 		__block CKArrayControllerInputItems items;
@@ -264,7 +264,11 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 		ChatElement* item = [[ChatElement alloc] initWithData:_elements[[position integerValue]]];
 		items.update([NSIndexPath indexPathForRow:[position integerValue] inSection:0], item);
 		dispatch_async(dispatch_get_main_queue(), ^{
-    		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:NULL];
+			NSInteger last = [self.collectionView numberOfItemsInSection:0] - 1;
+			if ([position integerValue] <= last)
+			{
+				[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:NULL];
+			}
 		});
 	}
 }

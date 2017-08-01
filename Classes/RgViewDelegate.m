@@ -103,6 +103,7 @@
         	notification.defaultAction = [LNNotificationAction actionWithTitle:@"Default Action" handler:^(LNNotificationAction *action) {
         		[[RKCommunicator sharedInstance] startMessageView:msg.thread];
         	}];
+        	[[LNNotificationCenter defaultCenter] clearAllPendingNotifications];
         	[[LNNotificationCenter defaultCenter] presentNotification:notification forApplicationIdentifier:@"message_event"];
     	}
    	});
