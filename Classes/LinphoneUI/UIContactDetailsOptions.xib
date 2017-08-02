@@ -15,6 +15,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIContactDetailsOptions">
             <connections>
+                <outlet property="favoriteButton" destination="6GD-Wq-cGb" id="aMa-kj-6kY"/>
                 <outlet property="inviteButton" destination="7oa-fZ-6YX" id="szb-0H-FxQ"/>
                 <outlet property="shareContactButton" destination="97l-96-k2l" id="cit-QG-1uW"/>
                 <outlet property="shareLocationButton" destination="qLA-3d-ioV" id="hm6-TS-7MN"/>
@@ -30,7 +31,10 @@
                     <rect key="frame" x="20" y="25" width="335" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
-                    <state key="normal" title="Invite to Ringmail"/>
+                    <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Invite to Ringmail">
+                        <color key="titleColor" red="0.14901960784313725" green="0.47058823529411764" blue="0.73725490196078436" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="onActionInvite:" destination="-1" eventType="touchUpInside" id="XUa-M7-hl3"/>
                     </connections>
@@ -39,7 +43,10 @@
                     <rect key="frame" x="20" y="25" width="335" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
-                    <state key="normal" title="Share contact"/>
+                    <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Share contact">
+                        <color key="titleColor" red="0.14901960784313725" green="0.47058823529411764" blue="0.73725490196078436" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="onActionShareContact:" destination="-1" eventType="touchUpInside" id="fdy-ze-oOb"/>
                     </connections>
@@ -48,9 +55,27 @@
                     <rect key="frame" x="20" y="75" width="335" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
-                    <state key="normal" title="Share my location"/>
+                    <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Share my location">
+                        <color key="titleColor" red="0.14901960784313725" green="0.47058823529411764" blue="0.73725490196078436" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="onActionShareLocation:" destination="-1" eventType="touchUpInside" id="qgk-bE-Kub"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6GD-Wq-cGb">
+                    <rect key="frame" x="20" y="25" width="335" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="titleEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Add to Favorites" image="contact_details_favorite_icon.png">
+                        <color key="titleColor" red="0.14901960784313725" green="0.47058823529411764" blue="0.73725490196078436" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="0.10045799046714925" green="0.21645820353567871" blue="0.28112862931282057" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onActionFavorite:" destination="-1" eventType="touchUpInside" id="jPv-Cm-qYe"/>
                     </connections>
                 </button>
             </subviews>
@@ -59,4 +84,7 @@
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="contact_details_favorite_icon.png" width="15" height="15"/>
+    </resources>
 </document>

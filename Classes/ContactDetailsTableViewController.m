@@ -456,6 +456,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		[cell.detailTextField setDelegate:self];
 		[cell.detailTextField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		[cell.detailTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 		[cell setBackgroundColor:[UIColor whiteColor]];
         
 		// Background View
@@ -639,14 +640,14 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         return [optionsController view];
     } else {
         
-        UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+        UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
         tmp.backgroundColor = UIColor.whiteColor;
         
-        UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 24, self.view.bounds.size.width - 40, 18)];
+        UILabel *phoneLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 30, self.view.bounds.size.width - 80, 16)];
         phoneLabel.font = [UIFont fontWithName:@"SFUIText-Medium" size:16];
         phoneLabel.numberOfLines = 1;
-        phoneLabel.backgroundColor = [UIColor clearColor];
-        phoneLabel.textColor = [UIColor colorWithHex:@"#428db7"];
+        phoneLabel.backgroundColor = [UIColor whiteColor];
+        phoneLabel.textColor = [UIColor colorWithHex:@"#444444"];
         phoneLabel.textAlignment = NSTextAlignmentLeft;
         
         if (section == ContactSections_Email)
@@ -681,13 +682,13 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         return [UIContactDetailsOptions height];
     } else if (section == ContactSections_Number) {
         if ([[dataCache objectAtIndex:0] count] > 0) {
-            return 45;
+            return 46;
         } else {
             return 0.000001f;
         }
     } else if (section == ContactSections_Email) {
         if ([[dataCache objectAtIndex:1] count] > 0) {
-            return 45;
+            return 46;
         } else {
             return 0.000001f;
         }

@@ -7,6 +7,7 @@
 #import "FavoriteCollectionViewController.h"
 #import "FavoriteModelController.h"
 #import "FavoritesPage.h"
+#import "RgManager.h"
 
 @interface FavoriteCollectionViewController () <CKComponentProvider, UICollectionViewDelegateFlowLayout>
 @end
@@ -16,6 +17,7 @@
     CKCollectionViewDataSource *_dataSource;
     FavoriteModelController *_modelController;
     CKComponentFlexibleSizeRangeProvider *_sizeRangeProvider;
+    FavoritesPage* _currentFavPage;
 }
 
 static NSInteger const pageSize = 50;
@@ -25,6 +27,7 @@ static NSInteger const pageSize = 50;
     if (self = [super initWithCollectionViewLayout:layout]) {
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleWidthAndHeight];
         _modelController = [[FavoriteModelController alloc] init];
+        _currentFavPage = [[FavoritesPage alloc] init];
     }
     return self;
 }
@@ -53,20 +56,56 @@ static NSInteger const pageSize = 50;
 		CKArrayControllerSections sections;
 		sections.insert(0);
 		[_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
-		[self _enqueuePage:[_modelController fetchNewFavoritesPageWithCount:pageSize]];
+        
 	});
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCollection) name:kRgContactsUpdated object:nil];
+}
+
+
+- (void)viewDidUnload
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRgContactsUpdated object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self updateCollection];
+}
+
+
+- (void)updateCollection
+{
+    CKArrayControllerInputItems items;
+    
+    NSArray *curFavs = _currentFavPage.favorites;
+    
+    if (curFavs.count)
+    {
+        for (NSInteger i = 0; i < curFavs.count; i++)
+        {
+            items.remove([NSIndexPath indexPathForRow:i inSection:0]);
+        }
+        [_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _enqueuePage:[_modelController fetchNewFavoritesPageWithCount:pageSize]];
+    });
 }
 
 - (void)_enqueuePage:(FavoritesPage *)favsPage
 {
     NSArray *favs = favsPage.favorites;
-    NSInteger position = favsPage.position;
     
     // Convert the array of cards to a valid changeset
     BOOL hasitems = NO;
     CKArrayControllerInputItems items;
+    
+    _currentFavPage = favsPage;
+    
     for (NSInteger i = 0; i < [favs count]; i++) {
-        items.insert([NSIndexPath indexPathForRow:position + i inSection:0], favs[i]);
+        items.insert([NSIndexPath indexPathForRow:i inSection:0], favs[i]);
         hasitems = YES;
     }
     if (hasitems)

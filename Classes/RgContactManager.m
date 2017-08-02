@@ -234,6 +234,7 @@
                 //NSLog(@"RingMail: Updated Contacts: %@", rgContacts);
                 if ([[RKContactStore sharedInstance] updateDetails:rgContacts])
 				{
+                    [[RKContactStore sharedInstance] updateFavorites];
 					[[NSNotificationCenter defaultCenter] postNotificationName:kRgContactsUpdated object:self userInfo:@{}];
 				}
             }

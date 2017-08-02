@@ -340,6 +340,8 @@
 		4D5251C41E6756EA0064F955 /* RgLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5251C31E6756EA0064F955 /* RgLocationManager.m */; };
 		4D5251C51E6756EA0064F955 /* RgLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5251C31E6756EA0064F955 /* RgLocationManager.m */; };
 		4D6EA4581EF30A6400B254E3 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6EA4571EF30A6400B254E3 /* ComponentKit.framework */; };
+		4D8DFD451F2BB04D002CA90F /* contact_details_favorite_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8DFD441F2BB04D002CA90F /* contact_details_favorite_icon@2x.png */; };
+		4D8DFD461F2BB04D002CA90F /* contact_details_favorite_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8DFD441F2BB04D002CA90F /* contact_details_favorite_icon@2x.png */; };
 		4D9684D41E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9684D31E48F4AA008464B7 /* RgSearchBackgroundView.m */; };
 		4D9684D51E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9684D31E48F4AA008464B7 /* RgSearchBackgroundView.m */; };
 		4D985CA31E96CA7700E1CCAB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D985CA21E96CA7600E1CCAB /* GoogleService-Info.plist */; };
@@ -2811,6 +2813,7 @@
 		4D79B6BE1E453C1A001F4BF7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UINavBar.strings; sourceTree = "<group>"; };
 		4D79B6C01E453C56001F4BF7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/UINavBar.strings; sourceTree = "<group>"; };
 		4D79D0341DAD889D002D1894 /* NSHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSHash.framework; path = "../Library/Developer/Xcode/DerivedData/ringmail-fiijohizvnzsdxamyqqzvjmihcml/Build/Products/Debug-iphoneos/NSHash/NSHash.framework"; sourceTree = "<group>"; };
+		4D8DFD441F2BB04D002CA90F /* contact_details_favorite_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contact_details_favorite_icon@2x.png"; sourceTree = "<group>"; };
 		4D9684D21E48F4AA008464B7 /* RgSearchBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgSearchBackgroundView.h; sourceTree = "<group>"; };
 		4D9684D31E48F4AA008464B7 /* RgSearchBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgSearchBackgroundView.m; sourceTree = "<group>"; };
 		4D985CA21E96CA7600E1CCAB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -5557,6 +5560,7 @@
 			children = (
 				C403ACB31F2A9D930067C051 /* ringmail_chat_thread_new@2x.png */,
 				C41C945C1F26F6C900939296 /* message_moment_normal@2x.png */,
+				4D8DFD441F2BB04D002CA90F /* contact_details_favorite_icon@2x.png */,
 				4DEB40331F29496D00C8F32B /* invite_to_rm_button@3x.png */,
 				4DEB40281F29153B00C8F32B /* invite_to_rm_button@2x.png */,
 				4D2847CE1F21798D007830A6 /* background_splash_iph6@2x.png */,
@@ -6955,6 +6959,7 @@
 				D3211BBE159CBFD60098460B /* back_default.png in Resources */,
 				C423AC331F1DD54B00676863 /* DZVideoPlayerViewController_simple.xib in Resources */,
 				D3211BC0159CBFD70098460B /* back_disabled.png in Resources */,
+				4D8DFD451F2BB04D002CA90F /* contact_details_favorite_icon@2x.png in Resources */,
 				4D985CA31E96CA7700E1CCAB /* GoogleService-Info.plist in Resources */,
 				4D33F7AF1EC4D5C400D913A7 /* tabs_contacts_normal@2x.png in Resources */,
 				D3211BC2159CBFD70098460B /* back_over.png in Resources */,
@@ -7961,6 +7966,7 @@
 				C4AC28E71D3963FA003B6232 /* chat_send_over.png in Resources */,
 				C4AC28E81D3963FA003B6232 /* ping_out_receive.wav in Resources */,
 				C4AC28E91D3963FA003B6232 /* chat_send_disabled.png in Resources */,
+				4D8DFD461F2BB04D002CA90F /* contact_details_favorite_icon@2x.png in Resources */,
 				C4AC28EB1D3963FA003B6232 /* chat_bubble_outgoing.png in Resources */,
 				4DC8861C1EC63F6000CF226A /* Roboto-Medium.ttf in Resources */,
 				C4AC28EC1D3963FA003B6232 /* chat_bubble_incoming.png in Resources */,
