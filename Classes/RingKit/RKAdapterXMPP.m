@@ -43,6 +43,13 @@
     [self teardownStream];
 }
 
+- (void)reset
+{
+	[self disconnect];
+	self.chatPassword = @"";
+	self.replyTo = @"";
+}
+
 - (void)setupStream
 {
     NSAssert(_xmppStream == nil, @"Method setupStream invoked multiple times");

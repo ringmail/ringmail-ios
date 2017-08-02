@@ -23,7 +23,6 @@ NSString *const kRgTextSent = @"RgTextSent"; // deprec
 NSString *const kRgTextUpdate = @"RgTextUpdate"; // deprec
 NSString *const kRgContactsUpdated = @"RgContactsUpdated";
 NSString *const kRgSetAddress = @"RgSetAddress";
-NSString *const kRgMainRefresh = @"RgMainRefresh";
 NSString *const kRgMainRemove = @"RgMainRemove";
 NSString *const kRgFavoriteRefresh = @"RgFavoriteRefresh";
 NSString *const kRgAttemptVerify = @"kRgAttemptVerify";
@@ -189,7 +188,6 @@ static LevelDB* theConfigDatabase = nil;
             [[NSNotificationCenter defaultCenter] postNotificationName:kRgLaunchBrowser object:self userInfo:@{
                 @"address": [res objectForKey:@"target"],
             }];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
         }
         else if ([ok isEqualToString:@"Unauthorized"])
         {
@@ -429,15 +427,9 @@ static LevelDB* theConfigDatabase = nil;
     // Restore original device UUID
     [cfg setObject:deviceUUID forKey:@"ringmail_device_uuid"];
     
-    // Remove sqlite database
-    NSString *dbPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[RgChatManager databasePath]];
-    if ([[NSFileManager defaultManager] removeItemAtPath:dbPath error:NULL])
-    {
-        LOGI(@"RingMail: SQLite Database Removed: %@", dbPath);
-    }
-    LinphoneManager* mgr = [LinphoneManager instance];
-    [[mgr chatManager] setupDatabase]; // Set it back up again for next time
-    
+    // Remove messages database
+	[[RKThreadStore sharedInstance] resetDatabase];
+	
     [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
     
     /*
@@ -718,8 +710,7 @@ static LevelDB* theConfigDatabase = nil;
     // clear linphone recent calls
     linphone_core_clear_call_logs([LinphoneManager getLc]);
     [[RgNetwork instance] signOut];
-    [[[LinphoneManager instance] chatManager] disconnect];
-    [LinphoneManager instance].chatManager = nil;
+	[[RKCommunicator sharedInstance].adapterXMPP reset];
     [RgManager configReset];
 }
 

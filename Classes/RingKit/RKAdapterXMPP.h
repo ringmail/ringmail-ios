@@ -36,5 +36,6 @@
 - (BOOL)isConnected;
 - (void)disconnect;
 - (void)sendMessage:(NSXMLElement*)msg;
+- (void)reset;
 
 @end

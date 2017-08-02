@@ -27,7 +27,12 @@
     static RKThreadStore *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+    	NSString *path = @"ringmail_message_store";
+        path = [path stringByAppendingString:@"_v0.2.db"];
+    	NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
+    	path = [docsPath stringByAppendingPathComponent:path];
 		sharedInstance = [[RKThreadStore alloc] init];
+		sharedInstance->path = path;
 		[sharedInstance setupDatabase];
     });
     return sharedInstance;
@@ -35,12 +40,17 @@
 
 - (void)setupDatabase
 {
-	NSString *path = @"ringmail_message_store";
-    path = [path stringByAppendingString:@"_v0.2.db"];
-	NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
-	path = [docsPath stringByAppendingPathComponent:path];
-	[self setDbqueue:[FMDatabaseQueue databaseQueueWithPath:path]];
+	[self setDbqueue:[FMDatabaseQueue databaseQueueWithPath:self->path]];
 	[self setupTables];
+}
+
+- (void)resetDatabase
+{
+    if ([[NSFileManager defaultManager] removeItemAtPath:self->path error:NULL])
+    {
+        LOGI(@"RKThreadStore Database Removed: %@", self->path);
+    }
+	[self setupDatabase];
 }
 
 - (void)inDatabase:(void (^)(FMDatabase *db))block

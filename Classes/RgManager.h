@@ -20,7 +20,6 @@ extern NSString *const kRgTextReceived; // deprec
 extern NSString *const kRgTextSent; // deprec
 extern NSString *const kRgTextUpdate; // deprec
 extern NSString *const kRgSetAddress;
-extern NSString *const kRgMainRefresh;
 extern NSString *const kRgMainRemove;
 extern NSString *const kRgFavoriteRefresh;
 extern NSString *const kRgAttemptVerify;

@@ -435,7 +435,8 @@
             [[[LinphoneManager instance] chatManager] dbAddFavorite:session];
             [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite.png"] forState:UIControlStateNormal];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+		// TODO: correct this
+        // [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
     }
 }
 

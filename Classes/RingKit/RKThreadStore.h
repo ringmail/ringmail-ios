@@ -21,13 +21,17 @@
 @class RKCall;
 @class RKMessage;
 
-@interface RKThreadStore : NSObject
+@interface RKThreadStore : NSObject {
+@private
+	NSString* path;
+}
 
 @property (nonatomic, retain) FMDatabaseQueue *dbqueue;
 
 + (instancetype)sharedInstance;
 
 - (void)setupDatabase;
+- (void)resetDatabase;
 - (void)setupTables;
 - (void)insertItem:(RKItem*)item;
 - (void)updateItem:(RKItem*)item seen:(BOOL)seen;
