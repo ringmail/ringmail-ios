@@ -46,6 +46,7 @@ extern NSString *const kRgAddContact;
 extern NSString *const kRgPresentOptionsModal;
 extern NSString *const kRgDismissOptionsModal;
 extern NSString *const kRgAddMessageMedia;
+extern NSString *const kRgReset;
 
 typedef NS_ENUM(NSInteger, RgSendMediaEditMode) {
         RgSendMediaEditModeSendPanel,

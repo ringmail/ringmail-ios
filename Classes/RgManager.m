@@ -49,6 +49,7 @@ NSString *const kRgSendComponentUpdateTo = @"kRgSendComponentUpdateTo";
 NSString *const kRgPresentOptionsModal = @"kRgPresentOptionsModal";
 NSString *const kRgDismissOptionsModal = @"kRgDismissOptionsModal";
 NSString *const kRgAddMessageMedia = @"kRgAddMessageMedia";
+NSString *const kRgReset = @"kRgReset";
 
 static LevelDB* theConfigDatabase = nil;
 
@@ -445,7 +446,7 @@ static LevelDB* theConfigDatabase = nil;
     // Remove messages database
 	[[RKThreadStore sharedInstance] resetDatabase];
 	
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgReset object:self userInfo:nil];
     
     /*
      // Clear out the whole database

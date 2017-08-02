@@ -1397,7 +1397,7 @@
     [dbq close];
     if (notify)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
     }
     result = [NSMutableArray arrayWithArray:[[result reverseObjectEnumerator] allObjects]];
     return result;

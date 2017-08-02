@@ -124,6 +124,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventRefresh:) name:kRgContactsUpdated object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventActivity:) name:kRKItemActivity object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventRefresh:) name:kRKThreadSeen object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventRefresh:) name:kRgReset object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

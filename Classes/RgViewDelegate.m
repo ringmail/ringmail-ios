@@ -26,9 +26,21 @@
 		[sharedInstance setLastThreadId:@0];
 		sharedInstance.messageView = nil;
 		sharedInstance.enableMessageNotify = NO;
+		[sharedInstance registerForNotifications];
 		[[RKCommunicator sharedInstance] setViewDelegate:sharedInstance];
     });
     return sharedInstance;
+}
+
+- (void)registerForNotifications
+{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset:) name:kRgReset object:nil];
+}
+
+- (void)reset:(NSNotification*)notif
+{
+	lastThreadId = @0;
+	messageView = nil;
 }
 
 - (void)showMessageView:(RKThread*)thread
