@@ -5,7 +5,7 @@
 
 @interface FavoriteComponent : CKCompositeComponent
 
-@property (nonatomic, retain) NSDictionary *favData;
+@property (nonatomic, strong, readonly) Favorite *favorite;
 
 + (instancetype)newWithFavorite:(Favorite *)fav context:(FavoriteContext *)context;
 

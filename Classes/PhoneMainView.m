@@ -527,7 +527,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		[self updateApplicationBadgeNumber]; // Update Badge at startup
         [[LinphoneManager instance] startLinphoneCore];
         [RgManager initialLogin];
-        [self changeCurrentView:[RgMainViewController compositeViewDescription]];
+        [self changeCurrentView:[RgHashtagDirectoryViewController compositeViewDescription]];
     }
     else
     {

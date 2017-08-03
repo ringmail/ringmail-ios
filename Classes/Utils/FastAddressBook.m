@@ -22,6 +22,7 @@
 #import "RgContactManager.h"
 #import "NBPhoneNumberUtil.h"
 #import "NBPhoneNumber.h"
+#import "RegexKitLite/RegexKitLite.h"
 
 @implementation FastAddressBook
 

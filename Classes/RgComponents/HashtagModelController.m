@@ -7,6 +7,7 @@
 #import "CardsPage.h"
 #import "HashtagCollectionViewController.h"
 #import "RgNetwork.h"
+#import "RgManager.h"
 #import "LinphoneManager.h"
 #import "Utils.h"
 

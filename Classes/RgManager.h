@@ -71,7 +71,6 @@ typedef NS_ENUM(NSInteger, RgSendMediaEditMode) {
 + (BOOL)checkEmailAddress:(NSString *)checkString;
 + (BOOL)checkRingMailAddress:(NSString *)checkString;
 + (NSString*)filterRingMailAddress:(NSString*)address;
-+ (void)startMessageMD5;
 + (void)startHashtag:(NSString*)address;
 
 + (LevelDB*)configDatabase;

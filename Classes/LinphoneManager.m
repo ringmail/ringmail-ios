@@ -130,10 +130,7 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 @synthesize silentPushCompletion;
 @synthesize wasRemoteProvisioned;
 @synthesize configDb;
-@synthesize chatManager;
 @synthesize contactManager;
-@synthesize chatSession;
-@synthesize chatMd5;
 @synthesize ringLogin;
 @synthesize coreReady;
 @synthesize opQueue;
@@ -321,8 +318,6 @@ struct codec_name_pref_table codec_pref_table[] = {{"speex", 8000, "speex_8k_pre
 		fastAddressBook = [[FastAddressBook alloc] init];
         
         /* RingMail */
-        self.chatSession = [NSNumber numberWithInt:0];
-        self.chatManager = nil;
         self.contactManager = [[RgContactManager alloc] init];
         self.ringLogin = @"";
         self.coreReady = [NSNumber numberWithBool:0];
@@ -1482,11 +1477,8 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		 [[UIApplication sharedApplication] backgroundTimeRemaining]);
 }
 
-- (BOOL)enterBackgroundMode {
-    if ([[self chatManager] isConnected]) // if connected
-    {
-        [[self chatManager] disconnect];
-    }
+- (BOOL)enterBackgroundMode
+{
     if (! [[self coreReady] boolValue])
     {
         return NO;
@@ -1541,7 +1533,8 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
         shouldEnterBgMode = TRUE;
     }
     /*stop the video preview*/
-    if (theLinphoneCore) {
+    if (theLinphoneCore)
+	{
         linphone_core_enable_video_preview(theLinphoneCore, FALSE);
         linphone_core_iterate(theLinphoneCore);
     }
@@ -1595,12 +1588,9 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 		}
 	}
     
-    if (! [[self chatManager] isConnected]) // if connected
+    if ([RgManager configReadyAndVerified])
     {
-        if ([RgManager configReadyAndVerified])
-        {
-            [RgManager chatConnect];
-        }
+        [RgManager chatEnsureConnection];
     }
 }
 

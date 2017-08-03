@@ -7,12 +7,13 @@
 
 @implementation FavoriteComponent
 
-@synthesize favData;
-
 + (instancetype)newWithFavorite:(Favorite *)fav context:(FavoriteContext *)context
 {
     FavoriteComponent *f = [super newWithComponent:favoriteComponent(fav, context)];
-    [f setFavData:fav.data];
+	if (f)
+	{
+		f->_favorite = fav;
+	}
     return f;
 }
 
@@ -53,7 +54,8 @@ static CKComponent *favoriteComponent(Favorite *fav, FavoriteContext *context)
 
 - (void)actionSelect:(CKButtonComponent *)sender
 {
-    NSLog(@"favorite selected for:  %@", [favData objectForKey:@"contactId"]);
+    NSLog(@"favorite selected for:  %@", [self.favorite.data objectForKey:@"contactId"]);
+	[self.favorite favoriteClick];
 }
 
 @end

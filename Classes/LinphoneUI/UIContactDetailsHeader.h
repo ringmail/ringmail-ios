@@ -43,7 +43,6 @@
 @property (nonatomic, strong) IBOutlet UIButton *callButton;
 @property (nonatomic, strong) IBOutlet UIButton *chatButton;
 @property (nonatomic, strong) IBOutlet UIButton *videoButton;
-@property (nonatomic, strong) IBOutlet UIButton *favoriteButton;
 @property (nonatomic, strong) IBOutlet UIStackView *stackView;
 
 @property (strong, nonatomic) ImagePickerViewController* popoverController;
@@ -55,7 +54,6 @@
 - (IBAction)onActionChat:(id)event;
 - (IBAction)onActionCall:(id)event;
 - (IBAction)onActionVideo:(id)event;
-- (IBAction)onActionFavorite:(id)event;
 - (IBAction)onInvite:(id)event;
 
 + (CGFloat)height:(BOOL)editing member:(BOOL)member;

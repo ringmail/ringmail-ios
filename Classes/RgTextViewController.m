@@ -8,6 +8,7 @@
 #import "UIColor+Hex.h"
 #import "UIChatNavBar.h"
 #import "RgViewDelegate.h"
+#import "RgManager.h"
 
 /** Feature flagged while waiting to implement a more reliable technique. */
 #define SLKBottomPanningEnabled 0

@@ -7,6 +7,7 @@
 //
 
 #import "LinphoneManager.h"
+#import "RgManager.h"
 #import "RgNetwork.h"
 #import "RgContactManager.h"
 #import "RgLocationManager.h"
@@ -178,16 +179,8 @@ static RgNetwork* theRgNetwork = nil;
     if (rgLogin != nil && rgPass != nil)
     {
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        NSDictionary *parameters = @{
-            @"first_name": params[@"first_name"],
-            @"last_name": params[@"last_name"],
-            @"email": rgLogin,
-            @"phone": params[@"phone"],
-            @"hashtag": params[@"hashtag"],
-            @"password": rgPass,
-        };
         NSString *postUrl = [NSString stringWithFormat:@"https://%@/internal/app/register_user", self.networkHost];
-        [manager POST:postUrl parameters:parameters progress:nil success:callback failure:^(NSURLSessionTask *operation, NSError *error) {
+        [manager POST:postUrl parameters:params progress:nil success:callback failure:^(NSURLSessionTask *operation, NSError *error) {
             NSLog(@"RingMail API Error: %@", error);
         }];
     }

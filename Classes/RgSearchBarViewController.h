@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "UIHashtagButton.h"
-#import "UIMessageButton.h"
 #import "RgSearchBackgroundView.h"
 
 @interface RgSearchBarViewController : UIViewController <UITextFieldDelegate, CAAnimationDelegate>

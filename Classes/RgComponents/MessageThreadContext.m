@@ -40,15 +40,6 @@
     return _images[imageName];
 }
 
-- (UIImage *)chatImage:(NSString *)uuid key:(NSString *)key
-{
-	NSData *imgData = [[[LinphoneManager instance] chatManager] dbGetMessageDataByUUID:uuid key:key];
-	UIImage *image = [UIImage imageWithData:imgData];
-	//image = [image scaleToFitSize:(CGSize){200, 200}];
-	//image = [image roundedCornerImage:10 borderSize:0];
-	return image;
-}
-
 static NSMutableDictionary *loadImageNames(NSSet *imageNames)
 {
   NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc] init];
