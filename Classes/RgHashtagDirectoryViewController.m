@@ -223,7 +223,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [categoryStack removeLastObject];
             path = [categoryStack lastObject];
             if ([path isEqual:@"0"])
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:self userInfo:@{@"header": @"Explore", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:self userInfo:@{@"header": @"Hashtags", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
         }
     }
     else

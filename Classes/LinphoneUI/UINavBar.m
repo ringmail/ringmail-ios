@@ -20,7 +20,7 @@ static NSString *const kAppearAnimation = @"appear";
 static NSString *const kDisappearAnimation = @"disappear";
 
 typedef enum {
-    Ring, Explore, Recents, Contacts, ContactDetails, Settings, HTagCard, Chat, ContactDetailsLabel, SendContacts
+    Ring, Hashtags, Recents, Contacts, ContactDetails, Settings, HTagCard, Chat, ContactDetailsLabel, SendContacts
 } NavView;
 
 int backState = 0;
@@ -155,7 +155,7 @@ int backState = 0;
     if ([backStateReset isEqual:@"reset"])
         backState = 0;
     
-    if (backState && [header isEqual: @"Explore"])
+    if (backState && [header isEqual: @"Hashtags"])
         header = @"Hashtag Card";
     
     headerLabel.text = header;
@@ -193,11 +193,13 @@ int backState = 0;
             [segmentButton setEnabled:NO];
             [segmentButton setHidden:YES];
             break;
-        case Explore:
+        case Hashtags:
             [segmentButton setEnabled:YES];
             [segmentButton setHidden:NO];
             break;
         case HTagCard:
+            [segmentButton setEnabled:YES];
+            [segmentButton setHidden:NO];
             [backButton setHidden:NO];
             [backButton setEnabled:YES];
             backState = 1;
@@ -234,7 +236,7 @@ int backState = 0;
     
     NSDictionary<NSString*,NSNumber*> *navViews = @{
         @"RingMail": @(Ring),
-        @"Hashtags": @(Explore),
+        @"Hashtags": @(Hashtags),
         @"Messages": @(Recents),
         @"Contacts": @(Contacts),
         @"Contact Details": @(ContactDetails),
