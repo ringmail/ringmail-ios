@@ -11,7 +11,6 @@
 #import "NSStringAdditions.h"
 #import "RgManager.h"
 #import "RgNetwork.h"
-#import "RgChatManager.h"
 #import "RKAdapterXMPP.h"
 #import "RKContactStore.h"
 #import "HashtagStore.h"
@@ -153,33 +152,6 @@ static LevelDB* theConfigDatabase = nil;
     return res;
 }
 
-+ (void)startMessageMD5
-{
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        LinphoneManager *lm = [LinphoneManager instance];
-        NSString* md5 = [lm chatMd5];
-        if (md5 != nil && ! [md5 isEqualToString:@""])
-        {
-            NSNumber *chat = [[lm chatManager] dbGetSessionByMD5:md5];
-            if ([chat intValue] != 0)
-            {
-                [lm setChatMd5:@""];
-                UICompositeViewDescription* curView = [[PhoneMainView instance] topView];
-                if ((curView == nil) || (!
-                                         ( // If not in the same chat room already
-                                          [curView equal:[MessageViewController compositeViewDescription]] &&
-                                          [lm chatSession] != nil &&
-                                          [chat isEqualToNumber:[lm chatSession]]
-                                          )
-                                         )) {
-                    [lm setChatSession:chat];
-                    [[PhoneMainView instance] changeCurrentView:[MessageViewController compositeViewDescription] push:TRUE];
-                }
-            }
-        }
-    }];
-}
-
 + (void)startHashtag:(NSString*)address
 {
     [[RgNetwork instance] lookupHashtag:@{ @"hashtag": address } callback:^(NSURLSessionTask *operation, id responseObject) {
@@ -211,8 +183,6 @@ static LevelDB* theConfigDatabase = nil;
         }
     }];
 }
-
-
 
 + (NSString*)pushToken:(NSData*)tokenData
 {

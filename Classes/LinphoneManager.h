@@ -35,7 +35,6 @@
 #include "linphone/linphonecore.h"
 #include "linphone/linphone_tunnel.h"
 
-#import "RgChatManager.h"
 #import "RgContactManager.h"
 
 extern NSString *const LINPHONERC_APPLICATION_KEY;
@@ -217,10 +216,7 @@ typedef struct _LinphoneManagerSounds {
 @property (copy) void (^silentPushCompletion)(UIBackgroundFetchResult);
 @property (readonly) BOOL wasRemoteProvisioned;
 @property (readonly) LpConfig *configDb;
-@property (nonatomic, strong) RgChatManager *chatManager;
 @property (nonatomic, strong) RgContactManager *contactManager;
-@property (nonatomic, strong) NSNumber *chatSession;
-@property (nonatomic, strong) NSString *chatMd5;
 @property (nonatomic, strong) NSString *ringLogin;
 @property (nonatomic, strong) NSOperationQueue *opQueue;
 @property (atomic,strong) NSNumber *coreReady;

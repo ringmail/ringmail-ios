@@ -45,7 +45,6 @@
 @synthesize callButton;
 @synthesize chatButton;
 @synthesize videoButton;
-@synthesize favoriteButton;
 @synthesize stackView;
 
 #pragma mark - Lifecycle Functions
@@ -126,24 +125,6 @@
     NSLog(@"RingMail: Contact ID: %@ - has rg:%d", contactID, rgMember);
     if (rgMember)
     {
-        BOOL fav = NO;
-        NSString *rgAddress = [[RKContactStore sharedInstance] getPrimaryAddress:contactID];
-        if (! [rgAddress isEqualToString:@""])
-        {
-			NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
-            fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:sessionData[@"id"]];
-        }
-        
-        if (fav)
-        {
-            [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite.png"] forState:UIControlStateNormal];
-        }
-        else
-        {
-            [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite-pressed.png"] forState:UIControlStateNormal];
-        }
-        
-        [favoriteButton setHidden:NO];
         [chatButton setHidden:NO];
         [callButton setHidden:NO];
         [videoButton setHidden:NO];
@@ -151,7 +132,6 @@
     }
     else
     {
-        [favoriteButton setHidden:YES];
         [chatButton setHidden:YES];
         [callButton setHidden:YES];
         [videoButton setHidden:YES];
@@ -166,7 +146,6 @@
 		}
 		
 		[avatarImage setImage:[image thumbnailImage:200 transparentBorder:0 cornerRadius:100 interpolationQuality:kCGInterpolationHigh]];
-
         [avatarEditImage setImage:[image thumbnailImage:160 transparentBorder:0 cornerRadius:80 interpolationQuality:kCGInterpolationHigh]];
 	}
 
@@ -403,44 +382,6 @@
 		RKAddress* address = [RKAddress newWithString:rgAddress];
 		[comm startCall:address video:YES];
     }	
-}
-
-- (IBAction)onActionFavorite:(id)event {
-	if (contact == NULL) {
-		LOGW(@"Cannot update favorite: null contact");
-		return;
-	}
-    
-	NSNumber *contactNum = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
-    NSString *contactID = [contactNum stringValue];
-    BOOL member = [[RKContactStore sharedInstance] contactEnabled:contactID];
-    if (member)
-    {
-        BOOL fav = NO;
-		NSString *rgAddress = [[RKContactStore sharedInstance] defaultPrimaryAddress:contact];
-		NSDictionary *sessionData = [[[LinphoneManager instance] chatManager] dbGetSessionID:rgAddress to:nil contact:contactNum uuid:nil];
-		NSNumber *session = sessionData[@"id"];
-        
-        LOGI(@"RingMail: Get Session ID: %@ | %@ -> %@", rgAddress, contactNum, session);
-        
-        if (! [rgAddress isEqualToString:@""])
-        {
-            fav = [[[LinphoneManager instance] chatManager] dbIsFavorite:session];
-        }
-        
-        if (fav)
-        {
-            [[[LinphoneManager instance] chatManager] dbDeleteFavorite:session];
-            [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite-pressed.png"] forState:UIControlStateNormal];
-        }
-        else
-        {
-            [[[LinphoneManager instance] chatManager] dbAddFavorite:session];
-            [favoriteButton setImage:[UIImage imageNamed:@"ringmail_favorite.png"] forState:UIControlStateNormal];
-        }
-		// TODO: correct this
-        // [[NSNotificationCenter defaultCenter] postNotificationName:kRgMainRefresh object:self userInfo:nil];
-    }
 }
 
 #pragma mark - ContactDetailsImagePickerDelegate Functions

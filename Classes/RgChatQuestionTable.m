@@ -8,7 +8,6 @@
 
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
-#import "RgChatManager.h"
 #import "RgChatQuestionTable.h"
 #import "RgChatQuestionInputCell.h"
 

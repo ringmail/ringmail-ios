@@ -23,7 +23,6 @@
 #import "HashtagCollectionViewController.h"
 
 #import "UIHashtagButton.h"
-#import "UIMessageButton.h"
 #import "CardsPage.h"
 
 #import <CoreLocation/CoreLocation.h>

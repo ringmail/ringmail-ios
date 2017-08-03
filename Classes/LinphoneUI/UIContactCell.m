@@ -21,6 +21,7 @@
 #import "Utils.h"
 #import "FastAddressBook.h"
 #import "LinphoneManager.h"
+#import "RgManager.h"
 
 @implementation UIContactCell
 

@@ -7,6 +7,7 @@
 //
 
 #import "LinphoneManager.h"
+#import "RgManager.h"
 #import "RgNetwork.h"
 #import "RgContactManager.h"
 #import "RgLocationManager.h"
