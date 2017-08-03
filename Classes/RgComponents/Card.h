@@ -16,7 +16,7 @@
 @property (nonatomic, readonly, copy) NSNumber *header;
 @property (nonatomic, readonly, copy) NSDictionary *data;
 
-- (instancetype)initWithData:(NSDictionary *)data header:(NSNumber *)header;
+- (instancetype)initWithData:(NSDictionary *)data;
 
 - (void)gotoHashtag;
 

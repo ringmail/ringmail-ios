@@ -211,7 +211,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [self.searchBarViewController dismissKeyboard:nil];
     
-    
     if ([newPath isEqual:@"Categories"])
     {
         // seg control changing back to last category view. exiting VC is removed and new re-allocated using exiting path value
@@ -223,7 +222,14 @@ static UICompositeViewDescription *compositeDescription = nil;
             [categoryStack removeLastObject];
             path = [categoryStack lastObject];
             if ([path isEqual:@"0"])
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:self userInfo:@{@"header": @"Hashtags", @"lSeg": @"Categories", @"rSeg": @"My Activity", @"backstate": @"reset"}];
+			{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRgNavBarViewChange object:self userInfo:@{
+					@"header": @"Hashtags",
+					@"lSeg": @"Categories",
+					@"rSeg": @"My Activity",
+					@"backstate": @"reset"
+				}];
+			}
         }
     }
     else
@@ -279,14 +285,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Action Functions
 
-
-- (void)handleSegControl:(NSNotification *)notif {
+- (void)handleSegControl:(NSNotification *)notif
+{
     NSString *segIndex = [notif.userInfo objectForKey:@"segIndex"];
-    
     if([segIndex isEqual: @"0"])
+	{
         [self updatePath:@"Categories"];
-    else if ([segIndex isEqual: @"1"])
+	}
+    else if ([segIndex isEqual:@"1"])
+	{
         [mainViewController updateCollection:true];
+	}
 }
 
 #pragma mark - KVO

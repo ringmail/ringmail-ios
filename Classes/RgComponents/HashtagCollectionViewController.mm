@@ -28,7 +28,7 @@
 
 @synthesize waitDelegate;
 
-static NSInteger const pageSize = 42;
+static NSInteger const pageSize = 50;
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout path:(NSString*)path
 {
@@ -36,6 +36,8 @@ static NSInteger const pageSize = 42;
         _sizeRangeProvider = [CKComponentFlexibleSizeRangeProvider providerWithFlexibility:CKComponentSizeRangeFlexibleHeight];
         _cardModelController = [[HashtagModelController alloc] init];
         [_cardModelController setMainPath:path];
+		self.loading = NO;
+		self.eof = NO;
     }
     return self;
 }
@@ -65,7 +67,6 @@ static NSInteger const pageSize = 42;
     sections.insert(0);
     [_dataSource enqueueChangeset:{sections, {}} constrainedSize:{}];
     [_cardModelController fetchPageWithCount:pageSize screenWidth:screenWidth caller:self];
-    
 }
 
 - (void)enqueuePage:(CardsPage *)cardsPage
@@ -76,7 +77,8 @@ static NSInteger const pageSize = 42;
     BOOL hasitems = NO;
     // Convert the array of cards to a valid changeset
     CKArrayControllerInputItems items;
-    for (NSInteger i = 0; i < [cards count]; i++) {
+    for (NSInteger i = 0; i < [cards count]; i++)
+	{
         items.insert([NSIndexPath indexPathForRow:position + i inSection:0], cards[i]);
         hasitems = YES;
     }
@@ -89,18 +91,16 @@ static NSInteger const pageSize = 42;
 
 #pragma mark - Update collection
 
-- (void)updateCollection:(bool)myActivity
+- (void)updateCollection:(BOOL)myActivity
 {
     if (myActivity)
     {
         CKArrayControllerInputItems items;
-        
         for (NSInteger i = 0; i < [[_cardModelController mainCount] integerValue]; i++)
+		{
             items.remove([NSIndexPath indexPathForRow:i inSection:0]);
-        
-        [_dataSource enqueueChangeset:{{}, items}
-                      constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
-        
+		}
+        [_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
         [self enqueuePage:[_cardModelController readMainList]];
     }
 }
@@ -141,12 +141,19 @@ static NSInteger const pageSize = 42;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if( scrollView.contentSize.height == 0 ) {
-        return ;
+    if (scrollView.contentSize.height == 0)
+	{
+        return;
     }
     
-    if (scrolledToBottomWithBuffer(scrollView.contentOffset, scrollView.contentSize, scrollView.contentInset, scrollView.bounds)) {
-        //[self enqueuePage:[_cardModelController fetchNewCardsPageWithCount:pageSize]];
+    if (scrolledToBottomWithBuffer(scrollView.contentOffset, scrollView.contentSize, scrollView.contentInset, scrollView.bounds))
+	{
+		if (! self.loading && ! self.eof)
+		{
+			self.loading = YES;
+		    NSString *screenWidth = [NSString stringWithFormat:@"%f", [UIScreen mainScreen].applicationFrame.size.width];
+			[_cardModelController fetchPageWithCount:pageSize screenWidth:screenWidth caller:self];
+		}
     }
 }
 

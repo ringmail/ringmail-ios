@@ -35,30 +35,24 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     return self;
 }
 
+// Hashtag activity
 - (CardsPage *)readMainList
 {
     NSArray* list = [[HashtagStore sharedInstance] selectHistory];
-    
-    NSMutableArray *_cards = [NSMutableArray new];
-
-    Card *hdCard = [[Card alloc] initWithData:@{@"type": @"hashtag_myactivity_header"} header:[NSNumber numberWithBool:0]];
+    NSMutableArray* _cards = [NSMutableArray new];
+    Card* hdCard = [[Card alloc] initWithData:@{@"type": @"hashtag_myactivity_header"}];
     [_cards insertObject:hdCard atIndex:0];
-    
     for (NSUInteger i = 0; i < [list count]; i++)
     {
-            NSDictionary *itemData = list[i];
-            if (itemData != nil)
-            {
-                Card *card = [[Card alloc] initWithData:itemData header:[NSNumber numberWithBool:0]];
-                [_cards addObject:card];
-            }
+        NSDictionary *itemData = list[i];
+        if (itemData != nil)
+        {
+            Card *card = [[Card alloc] initWithData:itemData];
+            [_cards addObject:card];
+        }
     }
-    
-    CardsPage* cardsPage = [[CardsPage alloc] initWithCards:_cards
-                                                   position:0];
-    
+    CardsPage* cardsPage = [[CardsPage alloc] initWithCards:_cards position:0];
     mainCount = [NSNumber numberWithInteger:[list count]];
-    
     return cardsPage;
 }
 
@@ -86,8 +80,9 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
                 [newdata setObject:avatarUrl forKey:@"avatar_url"];
             }
             else
+			{
                 [newdata setObject:@"" forKey:@"avatar_url"];
-            
+            }
             LOGI(@"RingMail: List Object: %@", newdata);
             [htagList addObject:newdata];
         }
@@ -99,9 +94,11 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 - (void)fetchPageWithCount:(NSInteger)count screenWidth:(NSString*)screenWidth caller:(HashtagCollectionViewController*)caller
 {
     [caller.waitDelegate showWaiting];
+	NSInteger offset = [mainCount integerValue];
     [[RgNetwork instance] hashtagDirectory:@{
         @"category_id": mainPath,
         @"screen_width": screenWidth,
+        @"offset": [NSNumber numberWithInteger:offset],
     } success:^(NSURLSessionTask *operation, id responseObject) {
         [caller.waitDelegate hideWaiting];
         NSDictionary* res = responseObject;
@@ -109,8 +106,32 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
         NSString *ok = [res objectForKey:@"result"];
         if (ok != nil && [ok isEqualToString:@"ok"])
         {
-            mainList = res[@"directory"];
-			mainHeader = res[@"header"];
+			NSInteger count = [(NSArray*)res[@"directory"] count];
+			if (count == 0)
+			{
+				caller.eof = YES;
+			}
+			else
+			{
+				if ([res[@"directory"][0][@"type"] isEqualToString:@"hashtag_category_group"])
+				{
+					// Category lists only have one page
+					caller.eof = YES;
+				}
+			}
+			if (offset == 0)
+			{
+                mainList = [NSMutableArray arrayWithArray:res[@"directory"]];
+    			mainHeader = res[@"header"];
+			}
+			else
+			{
+				NSArray* newItems = res[@"directory"];
+				for (id item in newItems)
+				{
+					[mainList addObject:item];
+				}
+			}
         }
 // TODO: check this
 //		else if (resultValue != nil && [resultValue isEqualToString:@"Unauthorized"])
@@ -118,6 +139,7 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 //			[[NSNotificationCenter defaultCenter] postNotificationName:kRgUserUnauthorized object:nil userInfo:nil];
 //		}
         [caller enqueuePage:[self fetchNewCardsPageWithCount:count]];
+		caller.loading = NO;
     } failure:^(NSURLSessionTask *operation, NSError *error) {
         [caller.waitDelegate hideWaiting];
         NSLog(@"RingMail API Error: %@", [error localizedDescription]);
@@ -143,29 +165,32 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
                     @"header_img_ht": mainHeader[@"image_height"],
                     @"category_name": mainHeader[@"category_name"],
                     @"parent_name": mainHeader[@"parent_name"],
-                } header:@NO];
+                }];
                 [_cards addObject:card];
                 added++;
             }
         }
         else
         {
-            NSInteger mainIndex = [mainCount intValue] + i - 1;
+            NSInteger mainIndex = [mainCount integerValue] + i;
+			if (mainHeader)
+			{
+				mainIndex--;
+			}
             if ([mainList count] > mainIndex)
             {
                 NSDictionary *itemData = mainList[mainIndex];
                 NSMutableDictionary *cardData = [NSMutableDictionary dictionaryWithDictionary:itemData];
                 if (itemData != nil)
                 {
-                    Card *card = [[Card alloc] initWithData:cardData header:[NSNumber numberWithBool:0]];
+                    Card *card = [[Card alloc] initWithData:cardData];
                     [_cards addObject:card];
                     added++;
                 }
             }
         }
     }
-    CardsPage *cardsPage = [[CardsPage alloc] initWithCards:_cards
-                                                     position:[mainCount integerValue]];
+    CardsPage *cardsPage = [[CardsPage alloc] initWithCards:_cards position:[mainCount integerValue]];
     mainCount = [NSNumber numberWithInteger:[mainCount integerValue] + added];
     return cardsPage;
 }

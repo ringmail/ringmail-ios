@@ -370,6 +370,7 @@ static RgNetwork* theRgNetwork = nil;
 		parameters[@"login"] = rgLogin;
 		parameters[@"password"] = rgPass;
 		parameters[@"category_id"] = params[@"category_id"];
+		parameters[@"offset"] = params[@"offset"];
         parameters[@"lat"] = lat;
         parameters[@"lon"] = lon;
         parameters[@"width"] = params[@"screen_width"];
@@ -398,6 +399,7 @@ static RgNetwork* theRgNetwork = nil;
 }
 
 
+/*
 - (void)shareLocation:(NSDictionary*)params success:(RgNetworkCallback)okay failure:(RgNetworkError)fail
 {
     LevelDB* cfg = [RgManager configDatabase];
@@ -438,6 +440,6 @@ static RgNetwork* theRgNetwork = nil;
         [manager POST:postUrl parameters:parameters progress:nil success:okay failure:fail];
     }
 }
-
+*/
 
 @end

@@ -213,7 +213,7 @@
 
 - (void)actionGo:(CKButtonComponent *)sender
 {
-    Card *card = [[Card alloc] initWithData:[self cardData] header:[NSNumber numberWithBool:NO]];
+    Card *card = [[Card alloc] initWithData:[self cardData]];
     [card gotoHashtag];
 }
 
