@@ -296,7 +296,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (view == validateAccountView)
     {
         LevelDB* cfg = [RgManager configDatabase];
-        
         [verifyEmailLabel setText:[cfg objectForKey:@"ringmail_login"]];
     }
     else if (view == validatePhoneView)
@@ -456,7 +455,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 //        (create RKContactStore DBs and get any previous RGContacts from server after first app use signin:)
         //                [RgManager updateContacts:res];  // needs a stubbed res object
 		[waitView setHidden:true];
-		[[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
+		[[PhoneMainView instance] changeCurrentView:[RgHashtagDirectoryViewController compositeViewDescription]];
 		break;
 	}
 	case LinphoneRegistrationNone:
@@ -635,15 +634,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         {
             LevelDB* cfg = [RgManager configDatabase];
             [cfg setObject:@"1" forKey:@"ringmail_verify_email"];
-            
-            // Add default hashtags for new users
-            if (res[@"default_hashtags"] != nil)
-            {
-                cfg[@"ringmail_hashtags"] = res[@"default_hashtags"];
-                [res removeObjectForKey:@"default_hashtags"];
-            }
-            //
-            
             [cfg setObject:res forKey:@"ringmail_initial"];
             verified = YES;
         }
@@ -696,9 +686,9 @@ static UICompositeViewDescription *compositeDescription = nil;
             BOOL verified = NO;
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
+            LevelDB* cfg = [RgManager configDatabase];
             if (ok != nil && [ok isEqualToString:@"ok"])
             {
-                LevelDB* cfg = [RgManager configDatabase];
                 [cfg setObject:@"1" forKey:@"ringmail_verify_phone"];
                 verified = YES;
             }
@@ -708,7 +698,26 @@ static UICompositeViewDescription *compositeDescription = nil;
             }
             if (verified)
             {
-                [self connectToRingMail];
+				if (cfg[@"google_oauth2_id_token"] != nil)
+				{
+    				[RgManager verifyLogin:^(NSURLSessionTask *operation, id responseObject) {
+                        [waitView setHidden:TRUE];
+                        NSMutableDictionary* res = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+                        NSString *ok = [res objectForKey:@"result"];
+                        if (ok != nil && [ok isEqualToString:@"ok"])
+                        {
+                            LevelDB* cfg = [RgManager configDatabase];
+                            [cfg setObject:res forKey:@"ringmail_initial"];
+							[self connectToRingMail];
+                        }
+					} failure:^(NSURLSessionTask *operation, NSError *error) {
+                       NSLog(@"Verify login failed with Google OAuth2");
+                    }];
+				}
+				else
+				{
+					[self connectToRingMail];
+				}
             }
             else
             {
@@ -921,22 +930,24 @@ static UICompositeViewDescription *compositeDescription = nil;
 	NSString *lastname = [WizardViewController findTextField:ViewElement_LastName view:contentView].text;
 	NSString *phone = [WizardViewController findTextField:ViewElement_Phone view:contentView].text;
     NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-    NSString *hashtag = @""; // mrkbxt_edit:  passing empty string for hashtag on register.
-//    NSString *hashtag = [WizardViewController findTextField:ViewElement_Hashtag view:contentView].text;
 	//NSString *password2 = [WizardViewController findTextField:ViewElement_Password2 view:contentView].text;
+	__block BOOL google_auth = ([WizardViewController findTextField:ViewElement_Username view:createAccountView].userInteractionEnabled) ? NO : YES;
     
-    // TODO: Re-download this data if it is missing
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithDictionary:@{
         @"first_name": firstname,
         @"last_name": lastname,
         @"email": username,
         @"phone": phone,
         @"password": password,
-        @"hashtag": hashtag,
     }];
 	if ([self verifyRegister:params])
     {
 		username = [username lowercaseString];
+		if (google_auth)
+		{
+            LevelDB* cfg = [RgManager configDatabase];
+			params[@"idToken"] = cfg[@"google_oauth2_id_token"];
+		}
         [[RgNetwork instance] registerUser:params callback:^(NSURLSessionTask *operation, id responseObject) {
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
@@ -950,9 +961,18 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [cfg setObject:params[@"last_name"] forKey:@"ringmail_last_name"];
                 [cfg setObject:params[@"phone"] forKey:@"ringmail_phone"];
                 [cfg setObject:@"" forKey:@"ringmail_chat_password"];
-                [cfg setObject:@"0" forKey:@"ringmail_verify_email"];
                 [cfg setObject:@"0" forKey:@"ringmail_verify_phone"];
-                [self changeView:validateAccountView back:FALSE animation:FALSE];
+				
+				if (google_auth)
+				{
+					[cfg setObject:@"1" forKey:@"ringmail_verify_email"];
+					[self changeView:validatePhoneView back:FALSE animation:FALSE];
+				}
+				else
+				{
+					[cfg setObject:@"0" forKey:@"ringmail_verify_email"];
+					[self changeView:validateAccountView back:FALSE animation:FALSE];
+				}
             }
             else
             {
@@ -1084,15 +1104,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     GIDGoogleUser *obj = notif.object;
 //    NSString *userId = obj.userID;
-    NSString *idToken = obj.authentication.idToken;
+    __block NSString *idToken = obj.authentication.idToken;
     NSString *login = [NSString stringWithFormat:@"%@", obj.profile.email];
-    
     NSString *accessToken = obj.authentication.accessToken;
     
     if (currentView == choiceView)
     {
         [[RgNetwork instance] loginGoogle:login idToken:idToken accessToken:accessToken callback:^(NSURLSessionTask *operation, id responseObject) {
-            
             NSDictionary* res = responseObject;
             NSString *ok = [res objectForKey:@"result"];
             if (ok != nil && [ok isEqualToString:@"ok"])
@@ -1105,8 +1123,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [cfg setObject:[res objectForKey:@"phone"] forKey:@"ringmail_phone"];
                 NSString *newPW = [res objectForKey:@"ringmail_password"];
                 if ([newPW length] != 0)
+				{
                     [cfg setObject:newPW forKey:@"ringmail_password"];
-                 NSLog(@"RingMail Logged In - Config: %@", cfg);
+				}
+                NSLog(@"RingMail Logged In - Config: %@", cfg);
                 [[LinphoneManager instance] setRingLogin:login];
                 [[LinphoneManager instance] startLinphoneCore];
                 [self reset];
@@ -1120,7 +1140,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [RgManager updateContacts:res];
                 
                 [waitView setHidden:TRUE];
-                [[PhoneMainView instance] changeCurrentView:[RgMainViewController compositeViewDescription]];
+                [[PhoneMainView instance] changeCurrentView:[RgHashtagDirectoryViewController compositeViewDescription]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryRefreshPath object:nil userInfo:nil];
             }
             else
@@ -1139,11 +1159,12 @@ static UICompositeViewDescription *compositeDescription = nil;
                     }
                     else if ([err isEqualToString:@"register"])
                     {
+                        LevelDB* cfg = [RgManager configDatabase];
+                        [cfg setObject:idToken forKey:@"google_oauth2_id_token"];
                         [waitView setHidden:TRUE];
                         
                         [WizardViewController findTextField:ViewElement_Username view:createAccountView].text = obj.profile.email;
                         [WizardViewController findTextField:ViewElement_Username view:createAccountView].userInteractionEnabled = false;
-                        
                         [WizardViewController findTextField:ViewElement_FirstName view:createAccountView].text = obj.profile.givenName;
                         [WizardViewController findTextField:ViewElement_LastName view:createAccountView].text = obj.profile.familyName;
                         
@@ -1155,9 +1176,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                         
                         [WizardViewController findTextField:ViewElement_Password view:createAccountView].text = randomString;
                         [WizardViewController findTextField:ViewElement_Password view:createAccountView].hidden = true;
-                        
                         passwordLabel.hidden = true;
-                        
                         [self changeView:createAccountView back:FALSE animation:FALSE];
                     }
                     else if ([err isEqualToString:@"credentials"])
