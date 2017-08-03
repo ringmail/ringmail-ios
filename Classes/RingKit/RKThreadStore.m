@@ -336,17 +336,17 @@
 				dt = [NSDate parse:row[@"ts_created"]];
 				curId = row[@"item_id"];
 				ver = row[@"version"];
+    			NSDictionary* res = @{
+    				@"thread": thr,
+    				@"type": itemType,
+    				@"detail": detail,
+    				@"item_id": curId,
+    				@"version": ver,
+    				@"seen": row[@"seen"],
+    				@"timestamp": dt,
+    			};
+    			[result addObject:res];
 			}
-			NSDictionary* res = @{
-				@"thread": thr,
-				@"type": itemType,
-				@"detail": detail,
-				@"item_id": curId,
-				@"version": ver,
-				@"seen": row[@"seen"],
-				@"timestamp": dt,
-			};
-			[result addObject:res];
 		}
 		[rs close];
 	}];

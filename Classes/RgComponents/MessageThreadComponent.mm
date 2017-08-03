@@ -25,7 +25,7 @@
 
 + (instancetype)newWithMessageThread:(MessageThread *)itemThread context:(MessageThreadContext *)context
 {
-	//NSLog(@"Component Data: %@", itemThread.data);
+	NSLog(@"Component Data: %@", itemThread.data);
 	NSDictionary* data = itemThread.data;
 	RKThread* thread = data[@"thread"];
     CKComponentScope scope(self, thread.threadId);

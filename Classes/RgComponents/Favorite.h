@@ -6,5 +6,6 @@
 @property (nonatomic, readonly, copy) NSDictionary *data;
 
 - (instancetype)initWithData:(NSDictionary *)data;
+- (void)favoriteClick;
 
 @end
