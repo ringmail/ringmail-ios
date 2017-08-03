@@ -49,6 +49,7 @@
 		}
 		NSArray *nameParts = [newdata[@"label"] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 		newdata[@"name"] = nameParts[0];
+        [newdata setObject:contactId forKey:@"contactId"];
 		[favData addObject:newdata];
 	}
 	NSMutableArray *favList = [NSMutableArray array];

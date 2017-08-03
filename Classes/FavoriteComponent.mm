@@ -7,17 +7,26 @@
 
 @implementation FavoriteComponent
 
+@synthesize favData;
+
 + (instancetype)newWithFavorite:(Favorite *)fav context:(FavoriteContext *)context
 {
-   return [super newWithComponent:favoriteComponent(fav, context)];
+    FavoriteComponent *f = [super newWithComponent:favoriteComponent(fav, context)];
+    [f setFavData:fav.data];
+    return f;
 }
 
 static CKComponent *favoriteComponent(Favorite *fav, FavoriteContext *context)
 {
     NSString* name = [fav.data objectForKey:@"name"];
-    UIImage *cardImage = [fav.data objectForKey:@"image"];
+    UIImage *cardImage = [fav.data objectForKey:@"image"];;
+    
     cardImage = [cardImage thumbnailImage:96 transparentBorder:0 cornerRadius:48 interpolationQuality:kCGInterpolationHigh];
-	return [CKStackLayoutComponent newWithView:{} size:{ .height = 76, .width = 80} style:{
+	return [CKStackLayoutComponent newWithView:{
+        [UIView class],{
+            {CKComponentTapGestureAttribute(@selector(actionSelect:))},
+        }
+    } size:{ .height = 76, .width = 80} style:{
 		.direction = CKStackLayoutDirectionVertical,
 		.alignItems = CKStackLayoutAlignItemsStart
 	}
@@ -38,6 +47,13 @@ static CKComponent *favoriteComponent(Favorite *fav, FavoriteContext *context)
 			size:{.height = 16, .width = 70}]
 		]}
 	}];
+    
+}
+
+
+- (void)actionSelect:(CKButtonComponent *)sender
+{
+    NSLog(@"favorite selected for:  %@", [favData objectForKey:@"contactId"]);
 }
 
 @end
