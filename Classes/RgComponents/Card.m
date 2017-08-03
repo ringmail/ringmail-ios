@@ -16,11 +16,10 @@
 
 @implementation Card
 
-- (instancetype)initWithData:(NSDictionary *)data header:(NSNumber *)header
+- (instancetype)initWithData:(NSDictionary *)data
 {
   if (self = [super init]) {
     _data = [data copy];
-    _header = [header copy];
   }
   return self;
 }

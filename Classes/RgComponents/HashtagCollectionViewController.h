@@ -19,6 +19,8 @@
 - (void)updateCollection:(bool)myActivity;
 
 @property (nonatomic, weak) id <CardPageLoading> waitDelegate;
+@property (nonatomic) BOOL loading;
+@property (nonatomic) BOOL eof;
 
 @end
 
