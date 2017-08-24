@@ -1,3 +1,5 @@
+#import <ComponentKit/ComponentKit.h>
+
 #import "ChatElement.h"
 #import "ChatElementContext.h"
 #import "ChatElementMomentComponent.h"
@@ -39,20 +41,22 @@
 			} component:
                 [CKStackLayoutComponent newWithView:{} size:{
                 	.width = width,
-                } style: {
+                } style:{
                 	.direction = CKStackLayoutDirectionHorizontal,
                 	.alignItems = CKStackLayoutAlignItemsStretch,
                 } children:{
                 	{
                 		.component = [CKComponent new],
-                		.flexGrow = @YES,
+                		.flexGrow = YES,
                 	},
-                	{[CKInsetComponent newWithInsets:{.top = 20, .left = 0, .bottom = 20, .right = 0} component:
-                		[CKImageComponent newWithImage:image]
-                	]},
+                	{
+						.component = [CKInsetComponent newWithInsets:{.top = 20, .left = 0, .bottom = 20, .right = 0} component:
+							[CKImageComponent newWithImage:image]
+						]
+					},
                 	{
                 		.component = [CKComponent new],
-                		.flexGrow = @YES,
+                		.flexGrow = YES,
                 	}
                 }]
 			]

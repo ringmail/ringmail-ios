@@ -13,6 +13,7 @@
 	NSDictionary* data = elem.data;
 	RKMessage* message = data[@"item"];
 	
+	NSLog(@"Text Element: %@", data);
 	//NSLog(@"Chat Text Component - Message: %@", message);
 	
 	CKComponentScope scope(self, message.uuid);

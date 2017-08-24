@@ -16,7 +16,7 @@
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout path:(NSString*)path;
 - (void)enqueuePage:(CardsPage *)cardsPage;
-- (void)updateCollection:(bool)myActivity;
+- (void)updateCollection:(BOOL)myActivity;
 
 @property (nonatomic, weak) id <CardPageLoading> waitDelegate;
 @property (nonatomic) BOOL loading;

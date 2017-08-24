@@ -333,7 +333,7 @@
 		{
     		message.deliveryStatus = RKMessageStatusSent;
     		[comm didUpdateMessage:message];
-    		NSLog(@"Updated message: %@", message);
+    		//NSLog(@"Updated message: %@", message);
 		}
     }
 }
@@ -431,7 +431,7 @@
 				{
             		message.deliveryStatus = RKMessageStatusDelivered;
             		[comm didUpdateMessage:message];
-            		NSLog(@"Updated message: %@", message);
+            		//NSLog(@"Updated message: %@", message);
 				}
 				else
 				{

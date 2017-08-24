@@ -2408,8 +2408,8 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 
 - (void)chatUpdateEvent:(NSNotification*)event
 {
-	NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSDictionary* info = event.userInfo;
+	NSLog(@"%s: %@", __PRETTY_FUNCTION__, info[@"message"]);
 	RKThread* inputThread = [info[@"message"] thread];
 	RKThread* chatThread = [_chatRoom chatThread];
 	if ([inputThread.threadId isEqualToNumber:chatThread.threadId])

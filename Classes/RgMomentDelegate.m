@@ -52,7 +52,7 @@
 	{
 		s = @"";
 	}
-	NSString* msg = [NSString stringWithFormat:@"Sent To %ld Contact%@", ct, s];
+	NSString* msg = [NSString stringWithFormat:@"Sent To %@ Contact%@", @(ct), s];
 	LNNotification* notification = [LNNotification notificationWithMessage:msg title:@"Moment"];
 	/*notification.defaultAction = [LNNotificationAction actionWithTitle:@"Default Action" handler:^(LNNotificationAction *action) {
 		//Handle default action

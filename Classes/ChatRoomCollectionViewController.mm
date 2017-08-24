@@ -103,7 +103,7 @@
 		self.collectionView.hidden = YES;
 		NSLog(@"%s: Start Enqueue", __PRETTY_FUNCTION__);
 		[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:^(BOOL i){
-			NSLog(@"%s: Enqueue batch complete! Last item: %ld", __PRETTY_FUNCTION__, lastIndex);
+			NSLog(@"%s: Enqueue batch complete! Last item: %@", __PRETTY_FUNCTION__, @(lastIndex));
 			[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:lastIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 			self.collectionView.hidden = NO;
 		}];
@@ -256,21 +256,32 @@ static BOOL scrolledToBottomWithBuffer(CGPoint contentOffset, CGSize contentSize
 
 - (void)updateMessage:(RKItem*)msg;
 {
-	__block NSNumber* position = _elementPaths[msg.itemId];
-	if (position != nil)
+	
+	NSInteger delay = 0;
+	RKMessage* message = (RKMessage*)msg;
+	if (message.deliveryStatus == RKMessageStatusSent)
 	{
-		__block CKArrayControllerInputItems items;
-		_elements[[position integerValue]][@"item"] = msg;
-		ChatElement* item = [[ChatElement alloc] initWithData:_elements[[position integerValue]]];
-		items.update([NSIndexPath indexPathForRow:[position integerValue] inSection:0], item);
-		dispatch_async(dispatch_get_main_queue(), ^{
-			NSInteger last = [self.collectionView numberOfItemsInSection:0] - 1;
-			if ([position integerValue] <= last)
-			{
-				[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:NULL];
-			}
-		});
+		delay = 100;
 	}
+	else if (message.deliveryStatus == RKMessageStatusDelivered)
+	{
+		delay = 200;
+	}
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+    	NSNumber* position = _elementPaths[msg.itemId];
+    	if (position != nil)
+    	{
+    		CKArrayControllerInputItems items;
+    		_elements[[position integerValue]][@"item"] = msg;
+    		ChatElement* item = [[ChatElement alloc] initWithData:_elements[[position integerValue]]];
+    		items.update([NSIndexPath indexPathForRow:[position integerValue] inSection:0], item);
+    		NSInteger last = [self.collectionView numberOfItemsInSection:0] - 1;
+    		if ([position integerValue] <= last)
+    		{
+    			[_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size] complete:NULL];
+    		}
+    	}
+	});
 }
 
 - (void)removeMessage:(RKItem*)msg;
