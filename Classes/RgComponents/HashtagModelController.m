@@ -75,7 +75,8 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
             [newdata setObject:address forKey:@"label"];
             [newdata setObject:defaultImage forKey:@"image"];
             
-            if (![[r objectForKey:@"avatar_img"] isEqual:[NSNull null]] && ![[r objectForKey:@"img_path"] isEqual:[NSNull null]]) {
+            if (![[r objectForKey:@"avatar_img"] isEqual:[NSNull null]] && ![[r objectForKey:@"img_path"] isEqual:[NSNull null]])
+			{
                 NSString *avatarUrl = [NSString stringWithFormat:@"%@%@%@%@",@"https://",[RgManager ringmailHost],[r objectForKey:@"img_path"],[r objectForKey:@"avatar_img"]];
                 [newdata setObject:avatarUrl forKey:@"avatar_url"];
             }

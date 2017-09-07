@@ -290,7 +290,7 @@ int backState = 0;
 {
     UISegmentedControl *s = (UISegmentedControl *)sender;
     
-    NSDictionary* dict = [NSDictionary dictionaryWithObject: [NSString stringWithFormat: @"%ld", s.selectedSegmentIndex] forKey:@"segIndex"];
+    NSDictionary* dict = [NSDictionary dictionaryWithObject: [NSString stringWithFormat: @"%@", @(s.selectedSegmentIndex)] forKey:@"segIndex"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kRgSegmentControl object:nil userInfo:dict];
     
