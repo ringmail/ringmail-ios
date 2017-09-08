@@ -33,6 +33,7 @@ static RgNetwork* theRgNetwork = nil;
     {
         self.networkHost = [RgManager ringmailHost];
         self.pushReady = [NSNumber numberWithBool:0];
+		NSLog(@"RingMail Host: %@", self.networkHost);
     }
     return self;
 }
@@ -54,7 +55,7 @@ static RgNetwork* theRgNetwork = nil;
 {
     NSLog(@"RingMail: Login Request");
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager.requestSerializer setTimeoutInterval:15]; // mrkbxt
+    [manager.requestSerializer setTimeoutInterval:15];
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     LevelDB* cfg = [RgManager configDatabase];
     NSDictionary *parameters = @{

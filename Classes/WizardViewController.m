@@ -849,6 +849,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 }
             }
             failure:^(NSURLSessionTask *operation, NSError *error) {
+				NSLog(@"RingMail API Error: %@", error);
                 LOGI(@"Login failure network error");
 
                 DTAlertView *alert = [[DTAlertView alloc]

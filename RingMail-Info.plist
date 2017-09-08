@@ -2,21 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SFUIText-Bold.ttf</string>
-		<string>SFUIText-Light.ttf</string>
-		<string>SFUIText-Regular.ttf</string>
-		<string>SFUIText-Semibold.ttf</string>
-		<string>SFUIText-Medium.ttf</string>
-		<string>fontawesome-webfont.tff</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
 	<string>RingMail</string>
 	<key>CFBundleExecutable</key>
-	<string>RingMail</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
 	<dict/>
 	<key>CFBundleIcons~ipad</key>
@@ -30,11 +21,11 @@
 		<string>en</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>RingMail</string>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.1.9</string>
+	<string>5.0.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -49,9 +40,21 @@
 				<string>ring</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.ringmail.phone</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.224803357623-b9n16dqjn97ovbuo3v00kflvc0h6tsd5</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -65,16 +68,29 @@
 	<string>Share photos with your friends and customize avatars</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Make calls with your friends</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Discover nearby hashtags</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Use microphone to make audio calls</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Share photos with your friends and customize avatars</string>
 	<key>NSSiriUsageDescription</key>
 	<string>Make calls and texts your contacts</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Discover nearby hashtags</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.ringmail.phone.handlecall</string>
+		<string>com.ringmail.phone.handlemsg</string>
+	</array>
 	<key>NSVoIPUsageDescription</key>
 	<string>Make audio/video calls</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SFUIText-Bold.ttf</string>
+		<string>SFUIText-Light.ttf</string>
+		<string>SFUIText-Regular.ttf</string>
+		<string>SFUIText-Semibold.ttf</string>
+		<string>SFUIText-Medium.ttf</string>
+	</array>
 	<key>UIApplicationExitsOnSuspend</key>
 	<false/>
 	<key>UIBackgroundModes</key>
