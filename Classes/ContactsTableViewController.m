@@ -339,8 +339,11 @@ static void sync_address_book(ABAddressBookRef addressBook, CFDictionaryRef info
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 26)];
     [view setBackgroundColor:[UIColor colorWithHex:@"#FFFFFF"]];
     
-    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_contacts_header.png"]];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_contacts_header.png"]];
+    UIImage *bgImage = [UIImage imageNamed:@"background_contacts_header.png"];
+    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, bgImage.size.height)];
+    imageView.image = bgImage;
+    imageView.contentMode = UIViewContentModeScaleToFill;
     [view addSubview:imageView];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 4, 30, 20)];

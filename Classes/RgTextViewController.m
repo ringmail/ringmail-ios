@@ -142,7 +142,11 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     [super viewDidLoad];
 	
 	UIImage *bgImage = [UIImage imageNamed:@"ringmail_chat_background.png"];
-	UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
+//	UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
+    UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, bgImage.size.height)];
+    bgImageView.image = bgImage;
+    bgImageView.contentMode = UIViewContentModeScaleToFill;
+    self.backgroundImageView.contentMode = UIViewContentModeScaleToFill;
 	self.backgroundImageView = bgImageView;
 	
     [self.view addSubview:self.backgroundImageView];
