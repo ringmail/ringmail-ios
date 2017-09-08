@@ -56,7 +56,8 @@ static LevelDB* theConfigDatabase = nil;
 
 + (NSString*)ringmailHost
 {
-    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *bundleIdentifier = [mainBundle bundleIdentifier];
     if ([bundleIdentifier isEqualToString:@"com.ringmail.phone"])
     {
         return @"ringmail.com";
