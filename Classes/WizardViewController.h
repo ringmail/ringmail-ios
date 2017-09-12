@@ -69,8 +69,13 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *verifyEmailLabel;
 @property (nonatomic, strong) IBOutlet UILabel *verifyPhoneLabel;
+@property (nonatomic, strong) IBOutlet UILabel *regTitleLabel;
+@property (nonatomic, strong) IBOutlet UIView *signInTitleHeader;
 
 @property (nonatomic, strong) IBOutlet UILabel *passwordLabel;
+
+@property (nonatomic, strong) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *signInHeaderImageView;
 
 
 - (void)reset;

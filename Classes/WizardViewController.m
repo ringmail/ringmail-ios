@@ -56,13 +56,19 @@ typedef enum _ViewElement {
 @synthesize remoteProvisioningButton;
 
 @synthesize choiceViewLogoImageView;
+@synthesize backgroundImageView;
+@synthesize signInHeaderImageView;
 
 @synthesize viewTapGestureRecognizer;
 
 @synthesize verifyEmailLabel;
 @synthesize verifyPhoneLabel;
+@synthesize regTitleLabel;
+@synthesize signInTitleHeader;
 
 @synthesize passwordLabel;
+
+
 
 
 #pragma mark - Lifecycle Functions
@@ -148,6 +154,16 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(googleSignInErrorEvent:)
                                                  name:kRgGoogleSignInError
                                                object:nil];
+    
+    
+    if (([[UIScreen mainScreen] bounds].size.width == 320) && ([[UIScreen mainScreen] bounds].size.height == 480))
+    {
+        backgroundImageView.image = [UIImage imageNamed:@"background_plain@2x.png"];
+        signInHeaderImageView.hidden = false;
+        regTitleLabel.frame = CGRectMake(regTitleLabel.frame.origin.x, 30, regTitleLabel.frame.size.width, regTitleLabel.frame.size.height);
+        signInTitleHeader.frame = CGRectMake(signInTitleHeader.frame.origin.x, 18, signInTitleHeader.frame.size.width, signInTitleHeader.frame.size.height);
+    }
+
 }
 
 - (void)viewDidUnload {

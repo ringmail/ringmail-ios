@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -24,6 +25,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardViewController">
             <connections>
+                <outlet property="backgroundImageView" destination="aEm-6E-Ggl" id="0rk-C2-b6R"/>
                 <outlet property="choiceView" destination="33" id="40"/>
                 <outlet property="connectAccountButton" destination="38" id="134"/>
                 <outlet property="connectAccountUsername" destination="68" id="9qb-9c-Y0k"/>
@@ -32,7 +34,10 @@
                 <outlet property="createAccountUsername" destination="74" id="ptL-W1-8vl"/>
                 <outlet property="createAccountView" destination="44" id="70"/>
                 <outlet property="passwordLabel" destination="Ies-50-mWg" id="Qq7-0d-UD4"/>
+                <outlet property="regTitleLabel" destination="Brv-3L-fDn" id="VdK-mm-b7Z"/>
                 <outlet property="registerButton" destination="77" id="A9h-Es-kxv"/>
+                <outlet property="signInHeaderImageView" destination="Ngf-qQ-Age" id="qiz-CC-ptO"/>
+                <outlet property="signInTitleHeader" destination="xKv-nB-M5I" id="oBD-gL-uJN"/>
                 <outlet property="validateAccountView" destination="WO6-VD-Rqp" id="aZA-DN-GJI"/>
                 <outlet property="validatePhoneView" destination="101" id="zxO-AA-aJJ"/>
                 <outlet property="verifyEmailLabel" destination="sN7-WO-hH8" id="ONY-h3-lHq"/>
@@ -51,7 +56,11 @@
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="aEm-6E-Ggl">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login3_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ngf-qQ-Age">
+                    <rect key="frame" x="141" y="85" width="95" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36" userLabel="createAccountButton">
                     <rect key="frame" x="30" y="454" width="315" height="45"/>
@@ -147,7 +156,7 @@
                     <color key="backgroundColor" red="0.32549019610000002" green="0.16078431369999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login3_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="aLK-Ep-Szu">
-                    <rect key="frame" x="140" y="92" width="95" height="39"/>
+                    <rect key="frame" x="140" y="85" width="95" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="duw-Fv-to7" userLabel="Input Fields">
@@ -448,7 +457,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login3_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="b9O-nG-aUj">
-                            <rect key="frame" x="140" y="92" width="95" height="39"/>
+                            <rect key="frame" x="140" y="85" width="95" height="39"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
@@ -490,7 +499,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="200" contentMode="left" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65x-Jk-Sle" userLabel="label">
-                    <rect key="frame" x="30" y="267" width="315" height="65"/>
+                    <rect key="frame" x="30" y="268" width="315" height="65"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <string key="text">Check your email for a message from RingMail.
 You are required to verifiy your email address to sign in.</string>
@@ -550,7 +559,7 @@ You are required to verifiy your email address to sign in.</string>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.94509803920000002" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login3_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ik6-mG-e5F">
-                    <rect key="frame" x="140" y="92" width="95" height="39"/>
+                    <rect key="frame" x="140" y="85" width="95" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Check Phone Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-dh-H4B" userLabel="title">
