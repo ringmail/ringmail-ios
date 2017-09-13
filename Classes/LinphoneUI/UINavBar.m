@@ -77,7 +77,7 @@ int backState = 0;
                                                object:nil];
     
     [backButton setTitle:[NSString stringWithUTF8String:"\uf053"] forState:UIControlStateNormal];
-
+    
 }
 
 - (void)viewDidUnload {
@@ -141,6 +141,11 @@ int backState = 0;
         [headerLabel setCenter:CGPointMake(headerLabel.center.x,(background.frame.size.height/3)+5)];
         [leftLabel setCenter:CGPointMake(leftLabel.center.x, (background.frame.size.height/3)+5)];
         [rightLabel setCenter:CGPointMake(rightLabel.center.x,(background.frame.size.height/3)+5)];
+    }
+    
+    if ((widthIn == 320) && ([[UIScreen mainScreen] bounds].size.height == 480))
+    {
+        logo.frame = CGRectMake(logo.frame.origin.x, logo.frame.origin.y + 10, logo.frame.size.width, logo.frame.size.height);
     }
 }
 
