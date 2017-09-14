@@ -47,6 +47,7 @@ NSString *const kChatNavBarUpdate = @"ChatNavBarUpdate";
     if (widthIn == 320)
 	{
         tmpImg = [UIImage imageNamed:@"header_navigation_tabs_5_blue@2x.jpg"];
+        [headerLabel setCenter:CGPointMake(avatarImage.center.x, tmpImg.size.height - 8)];
     }
     else if (widthIn == 375)
 	{
