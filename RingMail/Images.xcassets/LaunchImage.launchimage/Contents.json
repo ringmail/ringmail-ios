@@ -71,7 +71,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "736h",
-      "filename" : "ringmail_splash_iphone6p@3x.png",
+      "filename" : "login_view_iph7@3x.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -105,7 +105,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "ringmail_splash_iphone5@2x.png",
+      "filename" : "background_splash_iph5s@2x.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
