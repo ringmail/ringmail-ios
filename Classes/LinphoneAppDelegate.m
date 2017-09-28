@@ -424,7 +424,7 @@
 #pragma mark - User notification response delegate
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response
-         withCompletionHandler:(void (^)())completionHandler
+         withCompletionHandler:(void (^)(void))completionHandler
 {
 	NSLog(@"%s: %@ %@", __PRETTY_FUNCTION__, response.actionIdentifier, response.notification.request.content.userInfo);
 	NSString *action = response.actionIdentifier;
