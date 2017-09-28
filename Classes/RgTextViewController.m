@@ -1325,7 +1325,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     }*/
     
     // Stores the previous keyboard height
-    //CGFloat previousKeyboardHeight = self.keyboardHC.constant;
+    CGFloat previousKeyboardHeight = self.keyboardHC.constant;
     
     // Updates the height constraints' constants
     self.keyboardHC.constant = [self slk_appropriateKeyboardHeightFromNotification:notification];
@@ -1344,7 +1344,6 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
         [self slk_hideAutoCompletionViewIfNeeded];
     }
 	
-	/*
     NSInteger curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
@@ -1378,7 +1377,7 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
     else {
         animations();
     }
-	*/
+	
 }
 
 - (void)slk_didShowOrHideKeyboard:(NSNotification *)notification

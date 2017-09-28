@@ -79,78 +79,50 @@
 
 #pragma mark - Logs Functions callbacks
 
-/*void linphone_iphone_log_handler(const char *domain, OrtpLogLevel lev, const char *fmt, va_list args) {
-	NSString *format = [[NSString alloc] initWithUTF8String:fmt];
-	NSString *formatedString;
-    if (args == NULL)
-    {
-        formatedString = format;
-    }
-    else
-    {
-    	formatedString = [[NSString alloc] initWithFormat:format arguments:args];
-    }
-	NSString *lvl = @"";
-	switch (lev) {
-		case ORTP_FATAL:
-			lvl = @"F";
-			break;
-		case ORTP_ERROR:
-			lvl = @"E";
-			break;
-		case ORTP_WARNING:
-			lvl = @"W";
-			break;
-		case ORTP_MESSAGE:
-			lvl = @"I";
-			break;
-		case ORTP_DEBUG:
-		case ORTP_TRACE:
-			lvl = @"D";
-			break;
-		case ORTP_LOGLEV_END:
-			return;
-	}
-	if (!domain)
-		domain = "liblinphone";
-	// since \r are interpreted like \n, avoid double new lines when logging network packets (belle-sip)
-	// output format is like: I/ios/some logs. We truncate domain to **exactly** DOMAIN_SIZE characters to have
-	// fixed-length aligned logs
-	NSLog(@"%@/%*.*s/%@", lvl, DOMAIN_SIZE, DOMAIN_SIZE, domain,
-		  [formatedString stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"]);
-}*/
-
 void linphone_iphone_log_handler(const char *domain, OrtpLogLevel lev, const char *fmt, va_list args) {
-	NSString *format = [[NSString alloc] initWithUTF8String:fmt];
-	NSString *formatedString = [[NSString alloc] initWithFormat:format arguments:args];
-	int lvl = ASL_LEVEL_NOTICE;
-	switch (lev) {
-		case ORTP_FATAL:
-			lvl = ASL_LEVEL_CRIT;
-			break;
-		case ORTP_ERROR:
-			lvl = ASL_LEVEL_ERR;
-			break;
-		case ORTP_WARNING:
-			lvl = ASL_LEVEL_WARNING;
-			break;
-		case ORTP_MESSAGE:
-			lvl = ASL_LEVEL_NOTICE;
-			break;
-		case ORTP_DEBUG:
-		case ORTP_TRACE:
-			lvl = ASL_LEVEL_INFO;
-			break;
-		case ORTP_LOGLEV_END:
-			return;
-	}
-	if (!domain)
-		domain = "lib";
-	// since \r are interpreted like \n, avoid double new lines when logging network packets (belle-sip)
-	// output format is like: I/ios/some logs. We truncate domain to **exactly** DOMAIN_SIZE characters to have
-	// fixed-length aligned logs
-	asl_log(NULL, NULL, lvl, "%*.*s/%s", DOMAIN_SIZE, DOMAIN_SIZE, domain,
-			[formatedString stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"].UTF8String);
+    NSString *format = [[NSString alloc] initWithUTF8String:fmt];
+    NSString *formatedString = [[NSString alloc] initWithFormat:format arguments:args];
+    NSString *lvl;
+    
+    if (!domain)
+        domain = "lib";
+    // since \r are interpreted like \n, avoid double new lines when logging network packets (belle-sip)
+    // output format is like: I/ios/some logs. We truncate domain to **exactly** DOMAIN_SIZE characters to have
+    // fixed-length aligned logs
+    switch (lev) {
+        case ORTP_FATAL:
+            lvl = @"Fatal";
+            break;
+        case ORTP_ERROR:
+            lvl = @"Error";
+            break;
+        case ORTP_WARNING:
+            lvl = @"Warning";
+            break;
+        case ORTP_MESSAGE:
+            lvl = @"Message";
+            break;
+        case ORTP_DEBUG:
+            lvl = @"Debug";
+            break;
+        case ORTP_TRACE:
+            lvl = @"Trace";
+            break;
+        case ORTP_LOGLEV_END:
+            return;
+    }
+    if ([formatedString containsString:@"\n"]) {
+        NSArray *myWords = [[formatedString stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"]
+                            componentsSeparatedByString:@"\n"];
+        for (int i = 0; i < myWords.count; i++) {
+            NSString *tab = i > 0 ? @"\t" : @"";
+            if (((NSString *)myWords[i]).length > 0) {
+                NSLog(@"[%@] %@%@", lvl, tab, (NSString *)myWords[i]);
+            }
+        }
+    } else {
+        NSLog(@"[%@] %@", lvl, [formatedString stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"]);
+    }
 }
 
 @end
