@@ -1876,6 +1876,9 @@ static void audioRouteChangeListenerCallback(void *inUserData,					  // 1
 			net = @"wwan";
 		}
 		linphone_call_params_add_custom_header(lcallParams, "X-RingMail-Network", [net cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+        
+        // ZRTP
+        //linphone_call_params_set_media_encryption(lcallParams, LinphoneMediaEncryptionZRTP);
 		
 		if (displayName != nil) {
 			linphone_address_set_display_name(addr, displayName.UTF8String);
