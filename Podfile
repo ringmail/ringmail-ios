@@ -7,7 +7,7 @@ use_frameworks!
 
 project 'ringmail.xcodeproj’
 
-target 'RingMail-Dev' do
+def ringmail_pods
 #  pod 'ComponentKit', :git => 'https://github.com/facebook/componentkit.git', :tag => '0.15.1'
   pod 'ComponentKit', :git => 'git@nova1.revalead.com:ringmail/componentkit.git', :branch => 'ringmail'
   pod 'SVWebViewController', :git => 'git@nova1.revalead.com:ringmail/svwebviewcontroller.git', :tag => '1.1'
@@ -34,10 +34,18 @@ target 'RingMail-Dev' do
   pod 'DACircularProgress'
   pod 'DZVideoPlayerViewController', :git => 'git@nova1.revalead.com:ringmail/dzvideoplayerviewcontroller.git', :branch => 'ringmail'
   pod 'NSString+RemoveEmoji'
-#  pod 'LNNotificationsUI', :git => 'https://github.com/bonokite/LNNotificationsUI'
+end
 
+#  pod 'LNNotificationsUI', :git => 'https://github.com/bonokite/LNNotificationsUI'
 #  pod 'FCUUID'
 #  pod 'TesseractOCRiOS', '~> 4.0.0'
 #  pod 'OpenCV'
+
+target 'RingMail' do
+  ringmail_pods
+end
+
+target 'RingMail-Dev' do
+  ringmail_pods
 end
 

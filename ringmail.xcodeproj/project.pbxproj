@@ -240,6 +240,30 @@
 		C423AC4A1F1DD54B00676863 /* videoplayer_shrink@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C423AC2E1F1DD54B00676863 /* videoplayer_shrink@2x.png */; };
 		C423AC4C1F1DD54B00676863 /* videoplayer_shrink@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C423AC2F1F1DD54B00676863 /* videoplayer_shrink@3x.png */; };
 		C423AC501F1E9A7600676863 /* VideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C423AC4D1F1E9A7600676863 /* VideoPlayerViewController.xib */; };
+		C4240AC51F7EABAB0083BF7D /* bctoolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B21F7D7520000F9B2F /* bctoolbox.framework */; };
+		C4240AC61F7EABAB0083BF7D /* bctoolbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B21F7D7520000F9B2F /* bctoolbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240AC71F7EABAB0083BF7D /* linphone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AE1F7D751F000F9B2F /* linphone.framework */; };
+		C4240AC81F7EABAB0083BF7D /* linphone.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AE1F7D751F000F9B2F /* linphone.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240AC91F7EABAB0083BF7D /* linphonetester.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AF1F7D751F000F9B2F /* linphonetester.framework */; };
+		C4240ACA1F7EABAB0083BF7D /* linphonetester.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AF1F7D751F000F9B2F /* linphonetester.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240ACB1F7EABAB0083BF7D /* mediastreamer_base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3A91F7D751D000F9B2F /* mediastreamer_base.framework */; };
+		C4240ACC1F7EABAB0083BF7D /* mediastreamer_base.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3A91F7D751D000F9B2F /* mediastreamer_base.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240ACD1F7EABAB0083BF7D /* mediastreamer_voip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3A81F7D751D000F9B2F /* mediastreamer_voip.framework */; };
+		C4240ACE1F7EABAB0083BF7D /* mediastreamer_voip.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3A81F7D751D000F9B2F /* mediastreamer_voip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240ACF1F7EABAB0083BF7D /* msamr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B31F7D7520000F9B2F /* msamr.framework */; };
+		C4240AD01F7EABAB0083BF7D /* msamr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B31F7D7520000F9B2F /* msamr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240AD11F7EABAB0083BF7D /* mscodec2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B01F7D751F000F9B2F /* mscodec2.framework */; };
+		C4240AD21F7EABAB0083BF7D /* mscodec2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B01F7D751F000F9B2F /* mscodec2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240AD31F7EABAB0083BF7D /* msopenh264.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AD1F7D751F000F9B2F /* msopenh264.framework */; };
+		C4240AD41F7EABAB0083BF7D /* msopenh264.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AD1F7D751F000F9B2F /* msopenh264.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240AD51F7EABAB0083BF7D /* mssilk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AA1F7D751E000F9B2F /* mssilk.framework */; };
+		C4240AD61F7EABAB0083BF7D /* mssilk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AA1F7D751E000F9B2F /* mssilk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240AD71F7EABAB0083BF7D /* mswebrtc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AB1F7D751E000F9B2F /* mswebrtc.framework */; };
+		C4240AD81F7EABAB0083BF7D /* mswebrtc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AB1F7D751E000F9B2F /* mswebrtc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240AD91F7EABAB0083BF7D /* msx264.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AC1F7D751E000F9B2F /* msx264.framework */; };
+		C4240ADA1F7EABAB0083BF7D /* msx264.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3AC1F7D751E000F9B2F /* msx264.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C4240ADB1F7EABAB0083BF7D /* ortp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B11F7D7520000F9B2F /* ortp.framework */; };
+		C4240ADC1F7EABAB0083BF7D /* ortp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B11F7D7520000F9B2F /* ortp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C42B84441EDE68CB00EB9C7F /* RKMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B84421EDE68CB00EB9C7F /* RKMediaMessage.m */; };
 		C42B84481EDF4C8E00EB9C7F /* RKCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B84461EDF4C8E00EB9C7F /* RKCall.m */; };
 		C42BD4121ED64204009B324D /* CardsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C42BD4101ED64204009B324D /* CardsPage.m */; };
@@ -2509,6 +2533,7 @@
 		C4FFC3CA1F7D75BC000F9B2F /* ortp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B11F7D7520000F9B2F /* ortp.framework */; };
 		C4FFC3CB1F7D75BC000F9B2F /* ortp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFC3B11F7D7520000F9B2F /* ortp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C6FDDFAD0D82266845B7B945 /* Pods_RingMail_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1A5A6FEF94855D6B5CB4602 /* Pods_RingMail_Dev.framework */; };
+		FD5B76D83B6AC64649E72129 /* Pods_RingMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941D9F56FEC6DBCCF91A2FDF /* Pods_RingMail.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2590,6 +2615,28 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C4240AE51F7EABAB0083BF7D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C4240ACA1F7EABAB0083BF7D /* linphonetester.framework in Embed Frameworks */,
+				C4240ADA1F7EABAB0083BF7D /* msx264.framework in Embed Frameworks */,
+				C4240AD81F7EABAB0083BF7D /* mswebrtc.framework in Embed Frameworks */,
+				C4240ACC1F7EABAB0083BF7D /* mediastreamer_base.framework in Embed Frameworks */,
+				C4240AD21F7EABAB0083BF7D /* mscodec2.framework in Embed Frameworks */,
+				C4240AD61F7EABAB0083BF7D /* mssilk.framework in Embed Frameworks */,
+				C4240ACE1F7EABAB0083BF7D /* mediastreamer_voip.framework in Embed Frameworks */,
+				C4240AC61F7EABAB0083BF7D /* bctoolbox.framework in Embed Frameworks */,
+				C4240AC81F7EABAB0083BF7D /* linphone.framework in Embed Frameworks */,
+				C4240AD41F7EABAB0083BF7D /* msopenh264.framework in Embed Frameworks */,
+				C4240AD01F7EABAB0083BF7D /* msamr.framework in Embed Frameworks */,
+				C4240ADC1F7EABAB0083BF7D /* ortp.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C4A27A691F4F6FCA00110614 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -2633,6 +2680,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		127636BD5B91E4467684126C /* Pods-RingMail.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.distribution.xcconfig"; sourceTree = "<group>"; };
 		1599104316F746B2007BF52B /* route_bluetooth_off_default_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = route_bluetooth_off_default_landscape.png; path = Resources/route_bluetooth_off_default_landscape.png; sourceTree = "<group>"; };
 		1599104416F746B2007BF52B /* route_bluetooth_off_disabled_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = route_bluetooth_off_disabled_landscape.png; path = Resources/route_bluetooth_off_disabled_landscape.png; sourceTree = "<group>"; };
 		1599104516F746B2007BF52B /* route_bluetooth_off_over_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = route_bluetooth_off_over_landscape.png; path = Resources/route_bluetooth_off_over_landscape.png; sourceTree = "<group>"; };
@@ -2947,6 +2995,7 @@
 		4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIContactDetailsOptions.xib; sourceTree = "<group>"; };
 		4DEB40281F29153B00C8F32B /* invite_to_rm_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "invite_to_rm_button@2x.png"; path = "Resources/invite_to_rm_button@2x.png"; sourceTree = "<group>"; };
 		4DEB40331F29496D00C8F32B /* invite_to_rm_button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "invite_to_rm_button@3x.png"; path = "Resources/invite_to_rm_button@3x.png"; sourceTree = "<group>"; };
+		56BA019587041DEAD05D9643 /* Pods-RingMail.distributionadhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.distributionadhoc.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.distributionadhoc.xcconfig"; sourceTree = "<group>"; };
 		57F005C315EE2CCF00914747 /* linphonerc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = linphonerc; path = Resources/linphonerc; sourceTree = "<group>"; };
 		57F005C615EE2D9200914747 /* linphonerc-factory */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linphonerc-factory"; path = "Resources/linphonerc-factory"; sourceTree = "<group>"; };
 		57F005C715EE2D9200914747 /* linphonerc-factory~ipad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linphonerc-factory~ipad"; path = "Resources/linphonerc-factory~ipad"; sourceTree = "<group>"; };
@@ -3016,10 +3065,13 @@
 		63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTAlertView.m; sourceTree = "<group>"; };
 		63D2680D1B174A5E00A2CC11 /* numpad_one_voicemail_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_one_voicemail_default.png; path = Resources/numpad_one_voicemail_default.png; sourceTree = "<group>"; };
 		63D2680E1B174A5E00A2CC11 /* numpad_one_voicemail_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_one_voicemail_over.png; path = Resources/numpad_one_voicemail_over.png; sourceTree = "<group>"; };
+		647E0D9CEE38595E063E9F1F /* Pods-RingMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.debug.xcconfig"; sourceTree = "<group>"; };
 		70571E1913FABCB000CDD3C2 /* rootca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rootca.pem; path = "liblinphone-sdk/apple-darwin/share/linphone/rootca.pem"; sourceTree = "<group>"; };
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		74CE1C7A28EF7A0092E80943 /* Pods-RingMail-Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail-Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail-Dev/Pods-RingMail-Dev.debug.xcconfig"; sourceTree = "<group>"; };
+		941D9F56FEC6DBCCF91A2FDF /* Pods_RingMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RingMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B14A42E6E05E6ED73BEAEC42 /* Pods-RingMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail.release.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail/Pods-RingMail.release.xcconfig"; sourceTree = "<group>"; };
 		B4E6BF95C172AD2ACE1F0F63 /* Pods-RingMail-Dev.distributionadhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail-Dev.distributionadhoc.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail-Dev/Pods-RingMail-Dev.distributionadhoc.xcconfig"; sourceTree = "<group>"; };
 		BF138E3203696076F54A2D88 /* Pods-RingMail-Dev.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingMail-Dev.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-RingMail-Dev/Pods-RingMail-Dev.distribution.xcconfig"; sourceTree = "<group>"; };
 		C402BF011C2623E10076B60C /* UIImage+operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+operation.h"; sourceTree = "<group>"; };
@@ -3074,6 +3126,7 @@
 		C423AC4E1F1E9A7600676863 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/VideoPlayerViewController.xib; sourceTree = "<group>"; };
 		C425095A1C27D62B00BEC5DE /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		C42786141C70263300DD946D /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "Utils/UIColor+Hex.m"; sourceTree = "<group>"; };
+		C427C66C1F7EB87400C336F1 /* appstore-icon-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appstore-icon-1.png"; path = "Resources/appstore-icon-1.png"; sourceTree = "<group>"; };
 		C42B71F21CA22AF90020A57F /* RgHashtagDirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgHashtagDirectoryViewController.h; sourceTree = "<group>"; };
 		C42B71F31CA22AF90020A57F /* RgHashtagDirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgHashtagDirectoryViewController.m; sourceTree = "<group>"; };
 		C42B71F41CA22AF90020A57F /* RgHashtagDirectoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RgHashtagDirectoryViewController.xib; sourceTree = "<group>"; };
@@ -4279,6 +4332,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4240AC51F7EABAB0083BF7D /* bctoolbox.framework in Frameworks */,
+				C4240AC71F7EABAB0083BF7D /* linphone.framework in Frameworks */,
+				C4240AC91F7EABAB0083BF7D /* linphonetester.framework in Frameworks */,
+				C4240ACB1F7EABAB0083BF7D /* mediastreamer_base.framework in Frameworks */,
+				C4240ACD1F7EABAB0083BF7D /* mediastreamer_voip.framework in Frameworks */,
+				C4240ACF1F7EABAB0083BF7D /* msamr.framework in Frameworks */,
+				C4240AD11F7EABAB0083BF7D /* mscodec2.framework in Frameworks */,
+				C4240AD31F7EABAB0083BF7D /* msopenh264.framework in Frameworks */,
+				C4240AD51F7EABAB0083BF7D /* mssilk.framework in Frameworks */,
+				C4240AD71F7EABAB0083BF7D /* mswebrtc.framework in Frameworks */,
+				C4240AD91F7EABAB0083BF7D /* msx264.framework in Frameworks */,
+				C4240ADB1F7EABAB0083BF7D /* ortp.framework in Frameworks */,
 				C4A27A151F4F6FCA00110614 /* UserNotifications.framework in Frameworks */,
 				C4A27A161F4F6FCA00110614 /* ComponentKit.framework in Frameworks */,
 				C4A27A171F4F6FCA00110614 /* Photos.framework in Frameworks */,
@@ -4337,6 +4402,7 @@
 				C4A27A651F4F6FCA00110614 /* PushKit.framework in Frameworks */,
 				C4A27A661F4F6FCA00110614 /* SystemConfiguration.framework in Frameworks */,
 				C4A27A671F4F6FCA00110614 /* UIKit.framework in Frameworks */,
+				FD5B76D83B6AC64649E72129 /* Pods_RingMail.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4560,6 +4626,10 @@
 				D72D5F8323E927C45773A342 /* Pods-RingMail-Dev.release.xcconfig */,
 				BF138E3203696076F54A2D88 /* Pods-RingMail-Dev.distribution.xcconfig */,
 				B4E6BF95C172AD2ACE1F0F63 /* Pods-RingMail-Dev.distributionadhoc.xcconfig */,
+				647E0D9CEE38595E063E9F1F /* Pods-RingMail.debug.xcconfig */,
+				B14A42E6E05E6ED73BEAEC42 /* Pods-RingMail.release.xcconfig */,
+				127636BD5B91E4467684126C /* Pods-RingMail.distribution.xcconfig */,
+				56BA019587041DEAD05D9643 /* Pods-RingMail.distributionadhoc.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -4811,6 +4881,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				F1A5A6FEF94855D6B5CB4602 /* Pods_RingMail_Dev.framework */,
 				4D000B0B1DA7045000D606EC /* IntentsUI.framework */,
+				941D9F56FEC6DBCCF91A2FDF /* Pods_RingMail.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -5600,6 +5671,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C427C66C1F7EB87400C336F1 /* appstore-icon-1.png */,
 				C403ACB31F2A9D930067C051 /* ringmail_chat_thread_new@2x.png */,
 				C41C945C1F26F6C900939296 /* message_moment_normal@2x.png */,
 				4D8DFD441F2BB04D002CA90F /* contact_details_favorite_icon@2x.png */,
@@ -6494,12 +6566,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4A27A6F1F4F6FCA00110614 /* Build configuration list for PBXNativeTarget "RingMail" */;
 			buildPhases = (
+				82F47F444C2098E54803E666 /* [CP] Check Pods Manifest.lock */,
 				C4A275781F4F6FCA00110614 /* Resources */,
 				C4A279251F4F6FCA00110614 /* Run Script */,
 				C4A279261F4F6FCA00110614 /* ShellScript */,
 				C4A279271F4F6FCA00110614 /* Sources */,
 				C4A27A141F4F6FCA00110614 /* Frameworks */,
 				C4A27A691F4F6FCA00110614 /* CopyFiles */,
+				C4240AE51F7EABAB0083BF7D /* Embed Frameworks */,
+				961135163733957190D94966 /* [CP] Embed Pods Frameworks */,
+				B1BDB273D516848172E18EA9 /* [CP] Copy Pods Resources */,
+				C427C66B1F7EB3BE00C336F1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -8618,6 +8695,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingMail-Dev/Pods-RingMail-Dev-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		82F47F444C2098E54803E666 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RingMail-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		86ABA1FE7BFEB24019A2D297 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -8625,38 +8720,38 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RingMail-Dev/Pods-RingMail-Dev-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/CRMediaPickerController/CRMediaPickerController.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Colours/Colours.framework",
-				"${BUILT_PRODUCTS_DIR}/ComponentKit/ComponentKit.framework",
-				"${BUILT_PRODUCTS_DIR}/DACircularProgress/DACircularProgress.framework",
-				"${BUILT_PRODUCTS_DIR}/DXTableViewModel/DXTableViewModel.framework",
-				"${BUILT_PRODUCTS_DIR}/DZVideoPlayerViewController/DZVideoPlayerViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/IDMPhotoBrowser/IDMPhotoBrowser.framework",
-				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
-				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera/LLSimpleCamera.framework",
-				"${BUILT_PRODUCTS_DIR}/LoremIpsum/LoremIpsum.framework",
-				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite/M13ProgressSuite.framework",
-				"${BUILT_PRODUCTS_DIR}/NSHash/NSHash.framework",
-				"${BUILT_PRODUCTS_DIR}/NSString+RemoveEmoji/NSString_RemoveEmoji.framework",
-				"${BUILT_PRODUCTS_DIR}/Objective-LevelDB/Objective_LevelDB.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar/ObjectiveSugar.framework",
-				"${BUILT_PRODUCTS_DIR}/RegexKitLite/RegexKitLite.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVWebViewController/SVWebViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/UIImage-Categories/UIImage_Categories.framework",
-				"${BUILT_PRODUCTS_DIR}/XMPPFramework/XMPPFramework.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/libidn/libidn.framework",
-				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking-iOS10.0/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CRMediaPickerController-iOS10.0/CRMediaPickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket-iOS10.0/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS10.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Colours-iOS10.0/Colours.framework",
+				"${BUILT_PRODUCTS_DIR}/ComponentKit-iOS10.0/ComponentKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DACircularProgress-iOS10.0/DACircularProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/DXTableViewModel-iOS10.0/DXTableViewModel.framework",
+				"${BUILT_PRODUCTS_DIR}/DZVideoPlayerViewController-iOS10.0/DZVideoPlayerViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB-iOS10.0/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2-iOS10.0/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-iOS10.0/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS10.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IDMPhotoBrowser-iOS10.0/IDMPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/KissXML-iOS10.0/KissXML.framework",
+				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera-iOS10.0/LLSimpleCamera.framework",
+				"${BUILT_PRODUCTS_DIR}/LoremIpsum-iOS10.0/LoremIpsum.framework",
+				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite-iOS10.0/M13ProgressSuite.framework",
+				"${BUILT_PRODUCTS_DIR}/NSHash-iOS10.0/NSHash.framework",
+				"${BUILT_PRODUCTS_DIR}/NSString+RemoveEmoji-iOS10.0/NSString_RemoveEmoji.framework",
+				"${BUILT_PRODUCTS_DIR}/Objective-LevelDB-iOS10.0/Objective_LevelDB.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar-iOS10.0/ObjectiveSugar.framework",
+				"${BUILT_PRODUCTS_DIR}/RegexKitLite-iOS10.0/RegexKitLite.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS10.0/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVWebViewController-iOS10.0/SVWebViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/SlackTextViewController-iOS10.0/SlackTextViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/UIImage-Categories-iOS10.0/UIImage_Categories.framework",
+				"${BUILT_PRODUCTS_DIR}/XMPPFramework-iOS10.0/XMPPFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library-iOS10.0/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS-iOS10.0/libPhoneNumber_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/libidn-iOS10.0/libidn.framework",
+				"${BUILT_PRODUCTS_DIR}/pop-iOS10.0/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -8697,6 +8792,117 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingMail-Dev/Pods-RingMail-Dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		961135163733957190D94966 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RingMail/Pods-RingMail-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking-iOS10.3/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CRMediaPickerController-iOS10.3/CRMediaPickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket-iOS10.3/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS10.3/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Colours-iOS10.3/Colours.framework",
+				"${BUILT_PRODUCTS_DIR}/ComponentKit-iOS10.3/ComponentKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DACircularProgress-iOS10.3/DACircularProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/DXTableViewModel-iOS10.3/DXTableViewModel.framework",
+				"${BUILT_PRODUCTS_DIR}/DZVideoPlayerViewController-iOS10.3/DZVideoPlayerViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB-iOS10.3/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2-iOS10.3/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-iOS10.3/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS10.3/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IDMPhotoBrowser-iOS10.3/IDMPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/KissXML-iOS10.3/KissXML.framework",
+				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera-iOS10.3/LLSimpleCamera.framework",
+				"${BUILT_PRODUCTS_DIR}/LoremIpsum-iOS10.3/LoremIpsum.framework",
+				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite-iOS10.3/M13ProgressSuite.framework",
+				"${BUILT_PRODUCTS_DIR}/NSHash-iOS10.3/NSHash.framework",
+				"${BUILT_PRODUCTS_DIR}/NSString+RemoveEmoji-iOS10.3/NSString_RemoveEmoji.framework",
+				"${BUILT_PRODUCTS_DIR}/Objective-LevelDB-iOS10.3/Objective_LevelDB.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar-iOS10.3/ObjectiveSugar.framework",
+				"${BUILT_PRODUCTS_DIR}/RegexKitLite-iOS10.3/RegexKitLite.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS10.3/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVWebViewController-iOS10.3/SVWebViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/SlackTextViewController-iOS10.3/SlackTextViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/UIImage-Categories-iOS10.3/UIImage_Categories.framework",
+				"${BUILT_PRODUCTS_DIR}/XMPPFramework-iOS10.3/XMPPFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library-iOS10.3/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS-iOS10.3/libPhoneNumber_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/libidn-iOS10.3/libidn.framework",
+				"${BUILT_PRODUCTS_DIR}/pop-iOS10.3/pop.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRMediaPickerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Colours.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ComponentKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DACircularProgress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DXTableViewModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZVideoPlayerViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IDMPhotoBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LLSimpleCamera.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LoremIpsum.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13ProgressSuite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSString_RemoveEmoji.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Objective_LevelDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveSugar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RegexKitLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVWebViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIImage_Categories.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XMPPFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libPhoneNumber_iOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libidn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingMail/Pods-RingMail-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1BDB273D516848172E18EA9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RingMail/Pods-RingMail-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingMail/Pods-RingMail-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C427C66B1F7EB3BE00C336F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = Tools/filter_arch.sh;
 		};
 		C4A279251F4F6FCA00110614 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -10065,6 +10271,7 @@
 		};
 		C4A27A701F4F6FCA00110614 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 647E0D9CEE38595E063E9F1F /* Pods-RingMail.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -10080,6 +10287,10 @@
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -10135,6 +10346,7 @@
 		};
 		C4A27A711F4F6FCA00110614 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B14A42E6E05E6ED73BEAEC42 /* Pods-RingMail.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -10150,6 +10362,10 @@
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -10202,6 +10418,7 @@
 		};
 		C4A27A721F4F6FCA00110614 /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 127636BD5B91E4467684126C /* Pods-RingMail.distribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -10217,6 +10434,10 @@
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -10269,6 +10490,7 @@
 		};
 		C4A27A731F4F6FCA00110614 /* DistributionAdhoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56BA019587041DEAD05D9643 /* Pods-RingMail.distributionadhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -10284,6 +10506,10 @@
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 3V7D3ULU9N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
