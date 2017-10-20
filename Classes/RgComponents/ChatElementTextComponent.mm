@@ -23,6 +23,8 @@
 	
 	int maxBubbleWidth = (int)((width - (12 * scale)) / 8) * 7;
 	
+    NSString* msg = message.body;
+    BOOL hashtag = NO;
 	if ([ChatElement isAllEmojis:message.body])
 	{
 		NSUInteger ecount = [ChatElementTextComponent emojiCount:message.body];
@@ -35,6 +37,12 @@
 			fontSize = 72;
 		}
 	}
+    else if ([ChatElement isHashtag:message.body])
+    {
+        fontSize = 24;
+        msg = [NSString stringWithFormat:@"🚀%@", message.body];
+        hashtag = YES;
+    }
 	
 	CKComponent* res;
 	if (message.direction == RKItemDirectionInbound)
@@ -43,7 +51,7 @@
             NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#222222"],
         };
-		NSString* msg = message.body;
+		
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 		
     	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attrString);
@@ -126,7 +134,6 @@
             NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
             NSForegroundColorAttributeName: [UIColor colorWithHex:@"#FFFFFF"],
         };
-		NSString* msg = message.body;
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:msg attributes:attrsDictionary];
 		CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attrString);
         CGSize targetSize = CGSizeMake((maxBubbleWidth - 20), CGFLOAT_MAX);
@@ -284,6 +291,13 @@
     		}];
 		}
 	}
+    if (hashtag)
+    {
+        res = [CKCompositeComponent newWithView:{
+            [UIView class],
+            {CKComponentTapGestureAttribute(@selector(actionHashtag:))}
+        } component:res];
+    }
 	if (data[@"first_element"])
 	{
 		res = [CKInsetComponent newWithInsets:{.top = 20, .bottom = 0, .left = 0, .right = 0} component:res];
@@ -298,6 +312,13 @@
 		c->_element = elem;
 	}
 	return c;
+}
+
+- (void)actionHashtag:(CKComponent *)sender
+{
+    ChatElement *elm = [[ChatElement alloc] initWithData:self.element.data];
+    RKMessage* message = self.element.data[@"item"];
+    [elm startHashtag:message.body];
 }
 
 + (NSUInteger)emojiCount:(NSString*)str

@@ -4,6 +4,7 @@
 #import "PhoneMainView.h"
 #import "RgViewDelegate.h"
 #import "NSString_RemoveEmoji-Swift.h"
+#import "RegexKitLite/RegexKitLite.h"
 
 @implementation ChatElement
 
@@ -26,6 +27,11 @@
 		}
 	}
 	return NO;
+}
+
++ (BOOL)isHashtag:(NSString*)str
+{
+    return [[str lowercaseString] isMatchedByRegex:@"^#[a-z0-9_]+$"];
 }
 
 - (instancetype)initWithData:(NSDictionary *)data
@@ -69,6 +75,11 @@
 {
 	RKMomentMessage* mmsg = self.data[@"item"];
 	[[RKCommunicator sharedInstance] startMomentView:mmsg];
+}
+
+- (void)startHashtag:(NSString*)hashtag
+{
+    [RgManager startHashtag:hashtag];
 }
 
 @end
