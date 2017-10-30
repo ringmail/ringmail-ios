@@ -159,9 +159,23 @@ bool animInactive = YES;
 	{
 		params[@"contact_id"] = contactId;
 	}
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:params];
+    
+    if ([raddress isInvalid])
+    {
+        UIAlertView *error =
+        [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Invalid Address", nil)
+                                   message:NSLocalizedString(@"Please enter a valid phone or email address", nil)
+                                  delegate:nil
+                         cancelButtonTitle:NSLocalizedString(@"Continue", nil)
+                         otherButtonTitles:nil, nil];
+        [error show];
+    }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:params];
+    }
 }
-
+    
 -(void)animateRocket:(bool)activeAddress
 {
     if (animInactive)

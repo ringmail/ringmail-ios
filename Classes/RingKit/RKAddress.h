@@ -12,7 +12,8 @@ typedef NS_ENUM(NSInteger, RKAddressType) {
 	RKAddressTypeEmail,
 	RKAddressTypePhone,
 	RKAddressTypeDomain,
-	RKAddressTypeHashtag
+	RKAddressTypeHashtag,
+    RKAddressTypeInvalid
 };
 
 @class RKContact;
@@ -34,6 +35,7 @@ typedef NS_ENUM(NSInteger, RKAddressType) {
 - (BOOL)isPhone;
 - (BOOL)isDomain;
 - (BOOL)isHashtag;
+- (BOOL)isInvalid;
 - (BOOL)isEqual:(RKAddress*)object;
 
 @end

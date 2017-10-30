@@ -130,8 +130,8 @@
     {
         return RKAddressTypePhone;
     }
-	NSAssert(NO, @"Invalid RingMail address: '%@'", address);
-	return RKAddressTypeEmail;
+//	NSAssert(NO, @"Invalid RingMail address: '%@'", address);
+	return RKAddressTypeInvalid;
 }
 
 - (BOOL)isEmail
@@ -152,6 +152,11 @@
 - (BOOL)isHashtag;
 {
 	return ([self getAddressType] == RKAddressTypeHashtag) ? YES : NO;
+}
+
+- (BOOL)isInvalid
+{
+    return ([self getAddressType] == RKAddressTypeInvalid) ? YES : NO;
 }
 
 - (BOOL)isEqual:(RKAddress*)object;
