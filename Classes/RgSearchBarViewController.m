@@ -160,7 +160,11 @@ bool animInactive = YES;
 		params[@"contact_id"] = contactId;
 	}
     
-    if ([raddress isInvalid])
+    if ([raddress isValid])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:params];
+    }
+    else
     {
         UIAlertView *error =
         [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Invalid Address", nil)
@@ -169,10 +173,6 @@ bool animInactive = YES;
                          cancelButtonTitle:NSLocalizedString(@"Continue", nil)
                          otherButtonTitles:nil, nil];
         [error show];
-    }
-    else
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"kRgPresentOptionsModal" object:nil userInfo:params];
     }
 }
     

@@ -154,9 +154,9 @@
 	return ([self getAddressType] == RKAddressTypeHashtag) ? YES : NO;
 }
 
-- (BOOL)isInvalid
+- (BOOL)isValid
 {
-    return ([self getAddressType] == RKAddressTypeInvalid) ? YES : NO;
+    return ([self getAddressType] != RKAddressTypeInvalid) ? YES : NO;
 }
 
 - (BOOL)isEqual:(RKAddress*)object;
