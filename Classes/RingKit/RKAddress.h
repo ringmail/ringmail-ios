@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, RKAddressType) {
+    RKAddressTypeInvalid,
 	RKAddressTypeEmail,
 	RKAddressTypePhone,
 	RKAddressTypeDomain,
@@ -34,6 +35,7 @@ typedef NS_ENUM(NSInteger, RKAddressType) {
 - (BOOL)isPhone;
 - (BOOL)isDomain;
 - (BOOL)isHashtag;
+- (BOOL)isValid;
 - (BOOL)isEqual:(RKAddress*)object;
 
 @end
