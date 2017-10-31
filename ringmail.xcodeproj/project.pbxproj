@@ -401,6 +401,8 @@
 		C49544751EE8B3E600B1B302 /* RKVideoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C49544731EE8B3E600B1B302 /* RKVideoMessage.m */; };
 		C49544791EE8CDDB00B1B302 /* AVAsset+VideoOrientation.mm in Sources */ = {isa = PBXBuildFile; fileRef = C49544771EE8CDDB00B1B302 /* AVAsset+VideoOrientation.mm */; };
 		C498DE031ED7626800242330 /* RgViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C498DE011ED7626800242330 /* RgViewDelegate.m */; };
+		C49A750C1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C49A750B1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm */; };
+		C49A750D1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C49A750B1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm */; };
 		C4A0858C1EF1E6710002AC16 /* ImageCountdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0858A1EF1E6710002AC16 /* ImageCountdownViewController.m */; };
 		C4A085901EF1E6830002AC16 /* ImageCountdownViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4A0858D1EF1E6830002AC16 /* ImageCountdownViewController.xib */; };
 		C4A275791F4F6FCA00110614 /* button_contact_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA3549E1F1557AA007ECA84 /* button_contact_pressed@2x.png */; };
@@ -3544,6 +3546,8 @@
 		C497443B1C7C153100AD43A1 /* red_disk.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = red_disk.svg; path = Resources/red_disk.svg; sourceTree = "<group>"; };
 		C498DE001ED7626800242330 /* RgViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgViewDelegate.h; sourceTree = "<group>"; };
 		C498DE011ED7626800242330 /* RgViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgViewDelegate.m; sourceTree = "<group>"; };
+		C49A75021F9D1E71006E63C9 /* RingPageBusinessPlaceComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RingPageBusinessPlaceComponent.h; path = RgComponents/RingPageBusinessPlaceComponent.h; sourceTree = "<group>"; };
+		C49A750B1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RingPageBusinessPlaceComponent.mm; sourceTree = "<group>"; };
 		C4A085811EF1E6650002AC16 /* ImageCountdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCountdownViewController.h; sourceTree = "<group>"; };
 		C4A0858A1EF1E6710002AC16 /* ImageCountdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCountdownViewController.m; sourceTree = "<group>"; };
 		C4A0858E1EF1E6830002AC16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ImageCountdownViewController.xib; sourceTree = "<group>"; };
@@ -5270,6 +5274,8 @@
 				C42BD4181ED642C8009B324D /* CardContext.m */,
 				C42BD41F1ED64574009B324D /* CardComponent.h */,
 				C42BD4201ED64574009B324D /* CardComponent.mm */,
+				C49A75021F9D1E71006E63C9 /* RingPageBusinessPlaceComponent.h */,
+				C49A750B1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm */,
 				C42BD4231ED64608009B324D /* HeaderComponent.h */,
 				C42BD4241ED64608009B324D /* HeaderComponent.mm */,
 				C42BD41B1ED644B3009B324D /* InteractiveCardComponent.h */,
@@ -9175,6 +9181,7 @@
 				C4A279E61F4F6FCA00110614 /* HashtagStore.m in Sources */,
 				C4A279E71F4F6FCA00110614 /* MediaContext.m in Sources */,
 				C4A279E81F4F6FCA00110614 /* RKCommunicator.m in Sources */,
+				C49A750C1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm in Sources */,
 				C4A279E91F4F6FCA00110614 /* CLGloomEffect.m in Sources */,
 				C4A279EA1F4F6FCA00110614 /* BaseCameraViewController.m in Sources */,
 				C4A279EB1F4F6FCA00110614 /* RgSearchBackgroundView.m in Sources */,
@@ -9418,6 +9425,7 @@
 				4DA3DAC41F0AC86700D5A14B /* HashtagStore.m in Sources */,
 				C48C108E1E81AB230094F1F3 /* MediaContext.m in Sources */,
 				C45B93251ECE398300974011 /* RKCommunicator.m in Sources */,
+				C49A750D1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm in Sources */,
 				C44A40DF1E70E415000F3E24 /* CLGloomEffect.m in Sources */,
 				C48DA1E21E846A44007CBCFB /* BaseCameraViewController.m in Sources */,
 				4D9684D51E48F4AA008464B7 /* RgSearchBackgroundView.m in Sources */,

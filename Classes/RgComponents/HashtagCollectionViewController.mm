@@ -101,7 +101,7 @@ static NSInteger const pageSize = 50;
             items.remove([NSIndexPath indexPathForRow:i inSection:0]);
 		}
         [_dataSource enqueueChangeset:{{}, items} constrainedSize:[_sizeRangeProvider sizeRangeForBoundingSize:self.collectionView.bounds.size]];
-        [self enqueuePage:[_cardModelController readMainList]];
+        [self enqueuePage:[_cardModelController readActivityList]];
     }
 }
 
@@ -132,9 +132,7 @@ static NSInteger const pageSize = 50;
 
 + (CKComponent *)componentForModel:(Card *)card context:(CardContext *)context
 {
-    return [InteractiveCardComponent
-            newWithCard:card
-            context:context];
+    return [InteractiveCardComponent newWithCard:card context:context];
 }
 
 #pragma mark - UIScrollViewDelegate
