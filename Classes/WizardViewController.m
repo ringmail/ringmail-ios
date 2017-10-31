@@ -298,8 +298,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// Change toolbar buttons following view
     
 	if (
-        view == validateAccountView ||
-        view == validatePhoneView ||
+//        view == validateAccountView ||
+//        view == validatePhoneView ||
         view == choiceView
     ) {
 		[backButtonWiz setEnabled:FALSE];
@@ -587,6 +587,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 		[historyViews removeLastObject];
 		[self changeView:view back:TRUE animation:FALSE];
 	}
+    else
+    {
+        [self changeView:choiceView back:FALSE animation:FALSE];
+    }
 }
 
 - (IBAction)onCreateAccountClick:(id)sender {
