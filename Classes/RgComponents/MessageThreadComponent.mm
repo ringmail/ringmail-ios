@@ -381,7 +381,12 @@
             } size:{}]
         ]
     ];
-    MessageThreadComponent *c = [super newWithView:{} component:card];
+    MessageThreadComponent *c = [super newWithView:{
+        [UIView class],
+        {
+            {CKComponentGestureAttribute([UIPanGestureRecognizer class], &setupPanRecognizer, NSSelectorFromString(@"didPan:gesture:"), {})},
+        }
+    } component:card];
     [c setCurrentThread:itemThread];
     return c;
 }
@@ -434,13 +439,18 @@
 	[[RKCommunicator sharedInstance] startCall:thr.remoteAddress video:YES];
 }
 
-/*
+static void setupPanRecognizer(UIGestureRecognizer* recognizer)
+{
+    //UIPanGestureRecognizer* pan = (UIPanGestureRecognizer*)recognizer;
+}
+
 static void setupSwipeLeftRecognizer(UIGestureRecognizer* recognizer)
 {
     UISwipeGestureRecognizer* sw = (UISwipeGestureRecognizer*)recognizer;
     [sw setDirection:UISwipeGestureRecognizerDirectionLeft];
 }
 
+/*
 static void setupSwipeRightRecognizer(UIGestureRecognizer* recognizer)
 {
     UISwipeGestureRecognizer* sw = (UISwipeGestureRecognizer*)recognizer;
