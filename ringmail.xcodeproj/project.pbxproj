@@ -394,6 +394,8 @@
 		C48C10A21E81ABC00094F1F3 /* MediaBarComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48C10A01E81ABC00094F1F3 /* MediaBarComponent.mm */; };
 		C48C10A41E81BA470094F1F3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48C10A31E81BA470094F1F3 /* Photos.framework */; };
 		C48C10A81E81CCC40094F1F3 /* MediaAssetProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C48C10A61E81CCC40094F1F3 /* MediaAssetProvider.m */; };
+		C48CD5631FB23E06007F0ED8 /* DynamicComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48CD5621FB23E06007F0ED8 /* DynamicComponent.mm */; };
+		C48CD5641FB23E06007F0ED8 /* DynamicComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C48CD5621FB23E06007F0ED8 /* DynamicComponent.mm */; };
 		C48DA1D01E845484007CBCFB /* PhotoCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C48DA1CE1E845484007CBCFB /* PhotoCameraViewController.m */; };
 		C48DA1D71E8454D2007CBCFB /* PhotoCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C48DA1D51E8454D2007CBCFB /* PhotoCameraViewController.xib */; };
 		C48DA1DB1E8454E6007CBCFB /* VideoCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C48DA1D81E8454E6007CBCFB /* VideoCameraViewController.xib */; };
@@ -3511,6 +3513,8 @@
 		C48C10A31E81BA470094F1F3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		C48C10A51E81CCAE0094F1F3 /* MediaAssetProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaAssetProvider.h; path = Utils/MediaAssetProvider.h; sourceTree = "<group>"; };
 		C48C10A61E81CCC40094F1F3 /* MediaAssetProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAssetProvider.m; sourceTree = "<group>"; };
+		C48CD5591FB23DF7007F0ED8 /* DynamicComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicComponent.h; path = RgComponents/DynamicComponent.h; sourceTree = "<group>"; };
+		C48CD5621FB23E06007F0ED8 /* DynamicComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DynamicComponent.mm; sourceTree = "<group>"; };
 		C48D3BF41D0276FE00FAC3A6 /* call_in.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = call_in.caf; path = Resources/call_in.caf; sourceTree = "<group>"; };
 		C48D3BF51D0276FE00FAC3A6 /* chat_in_alert.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat_in_alert.caf; path = Resources/chat_in_alert.caf; sourceTree = "<group>"; };
 		C48D3BF61D0276FE00FAC3A6 /* chat_in_view.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat_in_view.caf; path = Resources/chat_in_view.caf; sourceTree = "<group>"; };
@@ -5276,6 +5280,8 @@
 				C42BD4181ED642C8009B324D /* CardContext.m */,
 				C42BD41F1ED64574009B324D /* CardComponent.h */,
 				C42BD4201ED64574009B324D /* CardComponent.mm */,
+				C48CD5591FB23DF7007F0ED8 /* DynamicComponent.h */,
+				C48CD5621FB23E06007F0ED8 /* DynamicComponent.mm */,
 				C49A75021F9D1E71006E63C9 /* RingPageBusinessPlaceComponent.h */,
 				C49A750B1F9D1E91006E63C9 /* RingPageBusinessPlaceComponent.mm */,
 				C42BD4231ED64608009B324D /* HeaderComponent.h */,
@@ -9008,6 +9014,7 @@
 				C453CEF71FAA8D76008A8157 /* MessageThreadComponentController.mm in Sources */,
 				C4A279431F4F6FCA00110614 /* UICamSwitch.m in Sources */,
 				C4A279441F4F6FCA00110614 /* RKMomentMessage.m in Sources */,
+				C48CD5631FB23E06007F0ED8 /* DynamicComponent.mm in Sources */,
 				C4A279451F4F6FCA00110614 /* RgIncomingCallComponent.mm in Sources */,
 				C4A279461F4F6FCA00110614 /* VideoZoomHandler.m in Sources */,
 				C4A279471F4F6FCA00110614 /* CLCircleView.m in Sources */,
@@ -9253,6 +9260,7 @@
 				C453CEF81FAA8D76008A8157 /* MessageThreadComponentController.mm in Sources */,
 				C4AC2AC11D3963FA003B6232 /* UICamSwitch.m in Sources */,
 				C43438F31EEF4417002F4EC0 /* RKMomentMessage.m in Sources */,
+				C48CD5641FB23E06007F0ED8 /* DynamicComponent.mm in Sources */,
 				C4AC2AC21D3963FA003B6232 /* RgIncomingCallComponent.mm in Sources */,
 				C4AC2AC41D3963FA003B6232 /* VideoZoomHandler.m in Sources */,
 				C44A40F91E70E415000F3E24 /* CLCircleView.m in Sources */,
