@@ -9,8 +9,8 @@ project 'ringmail.xcodeproj’
 
 def ringmail_pods
 #  pod 'ComponentKit', :git => 'https://github.com/facebook/componentkit.git', :tag => '0.15.1'
-  pod 'ComponentKit', :git => 'git@nova1.revalead.com:ringmail/componentkit.git', :branch => 'ringmail'
-  pod 'SVWebViewController', :git => 'git@nova1.revalead.com:ringmail/svwebviewcontroller.git', :tag => '1.1'
+  pod 'ComponentKit', :git => 'https://github.com/ringmail/componentkit.git', :branch => 'ringmail'
+  pod 'SVWebViewController', :git => 'https://github.com/ringmail/SVWebViewController.git', :tag => '1.1'
   pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :branch => 'master'
   pod 'CocoaLumberjack'
   pod 'RegexKitLite'
@@ -30,9 +30,9 @@ def ringmail_pods
   pod 'LoremIpsum'
   pod 'Google/SignIn'
   pod 'M13ProgressSuite'
-  pod 'IDMPhotoBrowser', :git => 'git@nova1.revalead.com:ringmail/idmphotobrowser.git', :branch => 'ringmail'
+  pod 'IDMPhotoBrowser', :git => 'https://github.com/ringmail/IDMPhotoBrowser.git', :branch => 'ringmail'
   pod 'DACircularProgress'
-  pod 'DZVideoPlayerViewController', :git => 'git@nova1.revalead.com:ringmail/dzvideoplayerviewcontroller.git', :branch => 'ringmail'
+  pod 'DZVideoPlayerViewController', :git => 'https://github.com/ringmail/DZVideoPlayerViewController.git', :branch => 'ringmail'
   pod 'NSString+RemoveEmoji'
 end
 
