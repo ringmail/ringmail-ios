@@ -18,7 +18,8 @@
 #import "HashtagCategoryHeaderComponent.h"
 #import "HashtagCategoryGroupCardComponent.h"
 #import "HashtagDirectoryHeaderCardComponent.h"
-#include "HashtagMyActivityHeaderCardComponent.h"
+#import "HashtagMyActivityHeaderCardComponent.h"
+#import "RingPageBusinessPlaceComponent.h"
 
 @implementation CardComponent
 
@@ -74,6 +75,10 @@ static CKComponent *cardComponent(Card *card, CardContext *context)
             return [HashtagMyActivityHeaderCardComponent
                     newWithData:card.data
                     context:context];
+        }
+        else if ([type isEqualToString:@"ringpage_business_place"])
+        {
+            return [RingPageBusinessPlaceComponent newWithData:card.data context:context];
         }
     }
 	return nil;

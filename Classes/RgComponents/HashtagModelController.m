@@ -36,7 +36,7 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 }
 
 // Hashtag activity
-- (CardsPage *)readMainList
+- (CardsPage *)readActivityList
 {
     NSArray* list = [[HashtagStore sharedInstance] selectHistory];
     NSMutableArray* _cards = [NSMutableArray new];
@@ -55,42 +55,6 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
     mainCount = [NSNumber numberWithInteger:[list count]];
     return cardsPage;
 }
-
-- (NSArray *)buildCards:(NSArray*)list
-{
-    NSMutableArray *htagList = [NSMutableArray array];
-    int item = 0;
-    UIImage *defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
-    for (NSDictionary* r in list)
-    {
-        NSString *address = [r objectForKey:@"session_tag"];
-        
-        NSMutableDictionary *newdata = [NSMutableDictionary dictionaryWithDictionary:r];
-        
-        [newdata setObject:[NSNumber numberWithInt:item++] forKey:@"index"];
-        
-        if ([address length] > 0 && [[address substringToIndex:1] isEqualToString:@"#"])
-        {
-            [newdata setObject:@"hashtag" forKey:@"type"];
-            [newdata setObject:address forKey:@"label"];
-            [newdata setObject:defaultImage forKey:@"image"];
-            
-            if (![[r objectForKey:@"avatar_img"] isEqual:[NSNull null]] && ![[r objectForKey:@"img_path"] isEqual:[NSNull null]])
-			{
-                NSString *avatarUrl = [NSString stringWithFormat:@"%@%@%@%@",@"https://",[RgManager ringmailHost],[r objectForKey:@"img_path"],[r objectForKey:@"avatar_img"]];
-                [newdata setObject:avatarUrl forKey:@"avatar_url"];
-            }
-            else
-			{
-                [newdata setObject:@"" forKey:@"avatar_url"];
-            }
-            LOGI(@"RingMail: List Object: %@", newdata);
-            [htagList addObject:newdata];
-        }
-    }
-    return htagList;
-}
-
 
 - (void)fetchPageWithCount:(NSInteger)count screenWidth:(NSString*)screenWidth caller:(HashtagCollectionViewController*)caller
 {
@@ -119,6 +83,11 @@ NSString *const RG_HASHTAG_DIRECTORY = @"http://data.ringmail.com/hashtag/direct
 					// Category lists only have one page
 					caller.eof = YES;
 				}
+                else if ([res[@"directory"][0][@"type"] isEqualToString:@"ringpage_business_place"])
+                {
+                    // RingPages only have one page
+                    caller.eof = YES;
+                }
 			}
 			if (offset == 0)
 			{

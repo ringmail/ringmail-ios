@@ -19,6 +19,7 @@
 #import "UIColor+Hex.h"
 
 #import "HashtagStore.h"
+#import "RgManager.h"
 
 @implementation HashtagCardComponent
 
@@ -213,8 +214,11 @@
 
 - (void)actionGo:(CKButtonComponent *)sender
 {
-    Card *card = [[Card alloc] initWithData:[self cardData]];
-    [card gotoHashtag];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRgHashtagDirectoryUpdatePath object:self userInfo:@{
+        @"category_id":[[self cardData] objectForKey:@"session_tag"]
+    }];
+    //Card *card = [[Card alloc] initWithData:[self cardData]];
+    //[card gotoHashtag];
 }
 
 static void setupSwipeLeftRecognizer(UIGestureRecognizer* recognizer) {
