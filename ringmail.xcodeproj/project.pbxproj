@@ -219,7 +219,6 @@
 		4DE427DC1ED62E4700872002 /* UIContactDetailsOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DE427D81ED62E3D00872002 /* UIContactDetailsOptions.xib */; };
 		4DEB402A1F29153C00C8F32B /* invite_to_rm_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEB40281F29153B00C8F32B /* invite_to_rm_button@2x.png */; };
 		4DEB40351F29496E00C8F32B /* invite_to_rm_button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEB40331F29496D00C8F32B /* invite_to_rm_button@3x.png */; };
-		A28A6F482A411C49AA129404 /* Pods_RingMail_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1A5A6FEF94855D6B5CB4602 /* Pods_RingMail_Dev.framework */; };
 		C403ACB51F2A9D930067C051 /* ringmail_chat_thread_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C403ACB31F2A9D930067C051 /* ringmail_chat_thread_new@2x.png */; };
 		C41276941D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = C41276921D68BAC20065E3FF /* HashtagCategoryGroupCardComponent.mm */; };
 		C41C945E1F26F6C900939296 /* message_moment_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C41C945C1F26F6C900939296 /* message_moment_normal@2x.png */; };
@@ -323,6 +322,8 @@
 		C44A411E1E7337F8000F3E24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9EA9A31D9499D0002E6E4B /* AVFoundation.framework */; };
 		C44A41201E73380F000F3E24 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C44A411F1E73380F000F3E24 /* libstdc++.6.0.9.tbd */; };
 		C452851F1E83455800ED669D /* SendCardComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C452851D1E83455800ED669D /* SendCardComponentController.mm */; };
+		C453CEF71FAA8D76008A8157 /* MessageThreadComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C453CEF61FAA8D76008A8157 /* MessageThreadComponentController.mm */; };
+		C453CEF81FAA8D76008A8157 /* MessageThreadComponentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C453CEF61FAA8D76008A8157 /* MessageThreadComponentController.mm */; };
 		C45606571E78A27400572943 /* ringmail_action_call_presssed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45606501E78A27400572943 /* ringmail_action_call_presssed@2x.png */; };
 		C45606591E78A27400572943 /* ringmail_action_text_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45606511E78A27400572943 /* ringmail_action_text_normal@2x.png */; };
 		C456065B1E78A27400572943 /* ringmail_action_text_presssed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45606521E78A27400572943 /* ringmail_action_text_presssed@2x.png */; };
@@ -3352,6 +3353,8 @@
 		C450DBBD1C70FFC80053592E /* MessageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MessageListViewController.h; path = RgComponents/MessageListViewController.h; sourceTree = "<group>"; };
 		C45285161E8341BD00ED669D /* SendCardComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendCardComponentController.h; path = RgComponents/SendCardComponentController.h; sourceTree = "<group>"; };
 		C452851D1E83455800ED669D /* SendCardComponentController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SendCardComponentController.mm; path = RgComponents/SendCardComponentController.mm; sourceTree = "<group>"; };
+		C453CEED1FAA8D56008A8157 /* MessageThreadComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageThreadComponentController.h; path = RgComponents/MessageThreadComponentController.h; sourceTree = "<group>"; };
+		C453CEF61FAA8D76008A8157 /* MessageThreadComponentController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MessageThreadComponentController.mm; sourceTree = "<group>"; };
 		C45606501E78A27400572943 /* ringmail_action_call_presssed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_action_call_presssed@2x.png"; path = "Resources/ringmail_action_call_presssed@2x.png"; sourceTree = "<group>"; };
 		C45606511E78A27400572943 /* ringmail_action_text_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_action_text_normal@2x.png"; path = "Resources/ringmail_action_text_normal@2x.png"; sourceTree = "<group>"; };
 		C45606521E78A27400572943 /* ringmail_action_text_presssed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_action_text_presssed@2x.png"; path = "Resources/ringmail_action_text_presssed@2x.png"; sourceTree = "<group>"; };
@@ -4480,7 +4483,6 @@
 				C4AC2B741D3963FA003B6232 /* PushKit.framework in Frameworks */,
 				C4AC2B751D3963FA003B6232 /* SystemConfiguration.framework in Frameworks */,
 				C4AC2B761D3963FA003B6232 /* UIKit.framework in Frameworks */,
-				A28A6F482A411C49AA129404 /* Pods_RingMail_Dev.framework in Frameworks */,
 				C6FDDFAD0D82266845B7B945 /* Pods_RingMail_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5365,6 +5367,8 @@
 				C42B72001CA22EDB0020A57F /* MessageThread.m */,
 				C42B72011CA22EDB0020A57F /* MessageThreadComponent.h */,
 				C42B720E1CA22EDB0020A57F /* MessageThreadComponent.mm */,
+				C453CEED1FAA8D56008A8157 /* MessageThreadComponentController.h */,
+				C453CEF61FAA8D76008A8157 /* MessageThreadComponentController.mm */,
 				C42B72071CA22EDB0020A57F /* MessageThreadPage.h */,
 				C42B72081CA22EDB0020A57F /* MessageThreadPage.m */,
 				C42B72051CA22EDB0020A57F /* MessageListModelController.h */,
@@ -6576,7 +6580,6 @@
 				C4240AE51F7EABAB0083BF7D /* Embed Frameworks */,
 				961135163733957190D94966 /* [CP] Embed Pods Frameworks */,
 				B1BDB273D516848172E18EA9 /* [CP] Copy Pods Resources */,
-				C427C66B1F7EB3BE00C336F1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -8720,38 +8723,38 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RingMail-Dev/Pods-RingMail-Dev-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking-iOS10.0/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/CRMediaPickerController-iOS10.0/CRMediaPickerController.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket-iOS10.0/CocoaAsyncSocket.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS10.0/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Colours-iOS10.0/Colours.framework",
-				"${BUILT_PRODUCTS_DIR}/ComponentKit-iOS10.0/ComponentKit.framework",
-				"${BUILT_PRODUCTS_DIR}/DACircularProgress-iOS10.0/DACircularProgress.framework",
-				"${BUILT_PRODUCTS_DIR}/DXTableViewModel-iOS10.0/DXTableViewModel.framework",
-				"${BUILT_PRODUCTS_DIR}/DZVideoPlayerViewController-iOS10.0/DZVideoPlayerViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB-iOS10.0/FMDB.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2-iOS10.0/GTMOAuth2.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-iOS10.0/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS10.0/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/IDMPhotoBrowser-iOS10.0/IDMPhotoBrowser.framework",
-				"${BUILT_PRODUCTS_DIR}/KissXML-iOS10.0/KissXML.framework",
-				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera-iOS10.0/LLSimpleCamera.framework",
-				"${BUILT_PRODUCTS_DIR}/LoremIpsum-iOS10.0/LoremIpsum.framework",
-				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite-iOS10.0/M13ProgressSuite.framework",
-				"${BUILT_PRODUCTS_DIR}/NSHash-iOS10.0/NSHash.framework",
-				"${BUILT_PRODUCTS_DIR}/NSString+RemoveEmoji-iOS10.0/NSString_RemoveEmoji.framework",
-				"${BUILT_PRODUCTS_DIR}/Objective-LevelDB-iOS10.0/Objective_LevelDB.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar-iOS10.0/ObjectiveSugar.framework",
-				"${BUILT_PRODUCTS_DIR}/RegexKitLite-iOS10.0/RegexKitLite.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS10.0/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVWebViewController-iOS10.0/SVWebViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/SlackTextViewController-iOS10.0/SlackTextViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/UIImage-Categories-iOS10.0/UIImage_Categories.framework",
-				"${BUILT_PRODUCTS_DIR}/XMPPFramework-iOS10.0/XMPPFramework.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library-iOS10.0/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS-iOS10.0/libPhoneNumber_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/libidn-iOS10.0/libidn.framework",
-				"${BUILT_PRODUCTS_DIR}/pop-iOS10.0/pop.framework",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CRMediaPickerController/CRMediaPickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Colours/Colours.framework",
+				"${BUILT_PRODUCTS_DIR}/ComponentKit/ComponentKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DACircularProgress/DACircularProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/DXTableViewModel/DXTableViewModel.framework",
+				"${BUILT_PRODUCTS_DIR}/DZVideoPlayerViewController/DZVideoPlayerViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IDMPhotoBrowser/IDMPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
+				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera/LLSimpleCamera.framework",
+				"${BUILT_PRODUCTS_DIR}/LoremIpsum/LoremIpsum.framework",
+				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite/M13ProgressSuite.framework",
+				"${BUILT_PRODUCTS_DIR}/NSHash/NSHash.framework",
+				"${BUILT_PRODUCTS_DIR}/NSString+RemoveEmoji/NSString_RemoveEmoji.framework",
+				"${BUILT_PRODUCTS_DIR}/Objective-LevelDB/Objective_LevelDB.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar/ObjectiveSugar.framework",
+				"${BUILT_PRODUCTS_DIR}/RegexKitLite/RegexKitLite.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVWebViewController/SVWebViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/UIImage-Categories/UIImage_Categories.framework",
+				"${BUILT_PRODUCTS_DIR}/XMPPFramework/XMPPFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/libidn/libidn.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -8800,38 +8803,38 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RingMail/Pods-RingMail-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking-iOS10.3/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/CRMediaPickerController-iOS10.3/CRMediaPickerController.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket-iOS10.3/CocoaAsyncSocket.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS10.3/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Colours-iOS10.3/Colours.framework",
-				"${BUILT_PRODUCTS_DIR}/ComponentKit-iOS10.3/ComponentKit.framework",
-				"${BUILT_PRODUCTS_DIR}/DACircularProgress-iOS10.3/DACircularProgress.framework",
-				"${BUILT_PRODUCTS_DIR}/DXTableViewModel-iOS10.3/DXTableViewModel.framework",
-				"${BUILT_PRODUCTS_DIR}/DZVideoPlayerViewController-iOS10.3/DZVideoPlayerViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB-iOS10.3/FMDB.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2-iOS10.3/GTMOAuth2.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-iOS10.3/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS10.3/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/IDMPhotoBrowser-iOS10.3/IDMPhotoBrowser.framework",
-				"${BUILT_PRODUCTS_DIR}/KissXML-iOS10.3/KissXML.framework",
-				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera-iOS10.3/LLSimpleCamera.framework",
-				"${BUILT_PRODUCTS_DIR}/LoremIpsum-iOS10.3/LoremIpsum.framework",
-				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite-iOS10.3/M13ProgressSuite.framework",
-				"${BUILT_PRODUCTS_DIR}/NSHash-iOS10.3/NSHash.framework",
-				"${BUILT_PRODUCTS_DIR}/NSString+RemoveEmoji-iOS10.3/NSString_RemoveEmoji.framework",
-				"${BUILT_PRODUCTS_DIR}/Objective-LevelDB-iOS10.3/Objective_LevelDB.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar-iOS10.3/ObjectiveSugar.framework",
-				"${BUILT_PRODUCTS_DIR}/RegexKitLite-iOS10.3/RegexKitLite.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS10.3/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVWebViewController-iOS10.3/SVWebViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/SlackTextViewController-iOS10.3/SlackTextViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/UIImage-Categories-iOS10.3/UIImage_Categories.framework",
-				"${BUILT_PRODUCTS_DIR}/XMPPFramework-iOS10.3/XMPPFramework.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library-iOS10.3/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS-iOS10.3/libPhoneNumber_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/libidn-iOS10.3/libidn.framework",
-				"${BUILT_PRODUCTS_DIR}/pop-iOS10.3/pop.framework",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CRMediaPickerController/CRMediaPickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Colours/Colours.framework",
+				"${BUILT_PRODUCTS_DIR}/ComponentKit/ComponentKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DACircularProgress/DACircularProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/DXTableViewModel/DXTableViewModel.framework",
+				"${BUILT_PRODUCTS_DIR}/DZVideoPlayerViewController/DZVideoPlayerViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IDMPhotoBrowser/IDMPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
+				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera/LLSimpleCamera.framework",
+				"${BUILT_PRODUCTS_DIR}/LoremIpsum/LoremIpsum.framework",
+				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite/M13ProgressSuite.framework",
+				"${BUILT_PRODUCTS_DIR}/NSHash/NSHash.framework",
+				"${BUILT_PRODUCTS_DIR}/NSString+RemoveEmoji/NSString_RemoveEmoji.framework",
+				"${BUILT_PRODUCTS_DIR}/Objective-LevelDB/Objective_LevelDB.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar/ObjectiveSugar.framework",
+				"${BUILT_PRODUCTS_DIR}/RegexKitLite/RegexKitLite.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVWebViewController/SVWebViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/UIImage-Categories/UIImage_Categories.framework",
+				"${BUILT_PRODUCTS_DIR}/XMPPFramework/XMPPFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/libidn/libidn.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -8890,19 +8893,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingMail/Pods-RingMail-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		C427C66B1F7EB3BE00C336F1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = Tools/filter_arch.sh;
 		};
 		C4A279251F4F6FCA00110614 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -9009,6 +8999,7 @@
 				C4A279401F4F6FCA00110614 /* RgHashtagDirectoryViewController.m in Sources */,
 				C4A279411F4F6FCA00110614 /* HashtagCategoryCardComponent.mm in Sources */,
 				C4A279421F4F6FCA00110614 /* SendViewController.mm in Sources */,
+				C453CEF71FAA8D76008A8157 /* MessageThreadComponentController.mm in Sources */,
 				C4A279431F4F6FCA00110614 /* UICamSwitch.m in Sources */,
 				C4A279441F4F6FCA00110614 /* RKMomentMessage.m in Sources */,
 				C4A279451F4F6FCA00110614 /* RgIncomingCallComponent.mm in Sources */,
@@ -9252,6 +9243,7 @@
 				C4AC2ABD1D3963FA003B6232 /* RgHashtagDirectoryViewController.m in Sources */,
 				C4AC2ABF1D3963FA003B6232 /* HashtagCategoryCardComponent.mm in Sources */,
 				C4A853D71E660D9000FEAFB0 /* SendViewController.mm in Sources */,
+				C453CEF81FAA8D76008A8157 /* MessageThreadComponentController.mm in Sources */,
 				C4AC2AC11D3963FA003B6232 /* UICamSwitch.m in Sources */,
 				C43438F31EEF4417002F4EC0 /* RKMomentMessage.m in Sources */,
 				C4AC2AC21D3963FA003B6232 /* RgIncomingCallComponent.mm in Sources */,
@@ -10318,7 +10310,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -10390,7 +10382,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -10462,7 +10454,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -10535,7 +10527,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/RingMail-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",

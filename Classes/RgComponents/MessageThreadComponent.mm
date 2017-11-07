@@ -384,7 +384,7 @@
     MessageThreadComponent *c = [super newWithView:{
         [UIView class],
         {
-            {CKComponentGestureAttribute([UIPanGestureRecognizer class], &setupPanRecognizer, NSSelectorFromString(@"didPan:gesture:"), {})},
+            //{CKComponentGestureAttribute([UIPanGestureRecognizer class], &setupPanRecognizer, NSSelectorFromString(@"didPan:gesture:"), {})},
         }
     } component:card];
     [c setCurrentThread:itemThread];
