@@ -24,44 +24,56 @@
         @"left": @"10",
         @"right": @"10",
         @"component": @{
-            @"type": @"stack",
-            @"direction": @"Horizontal",
-            @"alignItems": @"Start",
-            @"size": @{
-                //@"width": [NSString stringWithFormat:@"%f", screenWidth],
-                @"width": @"100%",
+            @"type": @"background",
+            @"component": @{
+                @"type": @"stack",
+                @"direction": @"Horizontal",
+                @"alignItems": @"Start",
+                @"size": @{ @"width": @"100%", @"height": @"46.5" },
+                @"children": @[
+                    @{
+                        @"type": @"label",
+                        @"string": @"Hello",
+                        @"font": @"system",
+                        @"font_size": @"20.0",
+                        @"color": @"#000000",
+                        @"size": @{@"height": @"25"},
+                        @"alignment": @"Left",
                     },
-            @"children": @[
-                @{
-                    @"type": @"label",
-                    @"string": @"Hello",
-                    @"font": @"system",
-                    @"font_size": @"20.0",
-                    @"color": @"#000000",
-                    @"size": @{@"height": @"25"},
-                    @"alignment": @"Left",
-                },
-                @{
-                    @"type": @"netimage",
-                    @"url": @"https://www-mf.ringxml.com/img/logo.png",
-                    @"size": @{@"height": @"46.5", @"width": @"113"},
-                },
-                @{ @"type": @"flexGrow"},
-                @{
-                    @"type": @"image",
-                    @"image": @"message_summary_video_normal.png",
-                    @"size": @{@"height": @"25", @"width": @"27"},
-                },
-                @{
-                    @"type": @"label",
-                    @"string": @"World!",
-                    @"font": @"system",
-                    @"font_size": @"20.0",
-                    @"color": @"#000000",
-                    @"size": @{@"height": @"25"},
-                    @"alignment": @"Right",
-                }
-            ],
+                    @{ @"type": @"flexGrow"},
+                    @{
+                        @"type": @"inset",
+                        @"right": @"10",
+                        @"component": @{
+                            @"type": @"image",
+                            @"image": @"message_summary_video_normal.png",
+                            @"size": @{@"height": @"25", @"width": @"27"},
+                        },
+                    },
+                    @{
+                        @"type": @"label",
+                        @"string": @"World!",
+                        @"font": @"system",
+                        @"font_size": @"20.0",
+                        @"color": @"#000000",
+                        @"size": @{@"height": @"25"},
+                        @"alignment": @"Right",
+                    }
+                ],
+            },
+            @"background": @{
+                @"type": @"stack",
+                @"direction": @"Horizontal",
+                @"alignItems": @"Start",
+                @"size": @{ @"width": @"100%", @"height": @"46.5"},
+                @"children": @[
+                    @{
+                        @"type": @"netimage",
+                        @"url": @"https://www-mf.ringxml.com/img/logo.png",
+                        @"size": @{@"height": @"46.5", @"width": @"113"},
+                    },
+                ],
+            },
         },
     };
     DynamicComponent *c = [super newWithComponent:[CKComponent new]];
@@ -275,6 +287,12 @@
             style.justifyContent = CKStackLayoutJustifyContentEnd;
         }
         return [CKStackLayoutComponent newWithView:view size:size style:style children:children];
+    }
+    else if ([type isEqualToString:@"background"])
+    {
+        CKComponent* comp = [self buildComponent:data[@"component"] context:context];
+        CKComponent* back = [self buildComponent:data[@"background"] context:context];
+        return [CKBackgroundLayoutComponent newWithComponent:comp background:back];
     }
     return nil;
 }
