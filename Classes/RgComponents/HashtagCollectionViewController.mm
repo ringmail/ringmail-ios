@@ -46,17 +46,16 @@ static NSInteger const pageSize = 50;
 {
     [super viewDidLoad];
     
-    // Preload images for the component context that need to be used in component preparation. Components preparation
-    // happens on background threads but +[UIImage imageNamed:] is not thread safe and needs to be called on the main
-    // thread. The preloaded images are then cached on the component context for use inside components.
-    NSDictionary *images = @{};
-    
     NSString *screenWidth = [NSString stringWithFormat:@"%f", [UIScreen mainScreen].applicationFrame.size.width];
 	
     self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4" alpha:0.0f];
     self.collectionView.delegate = self;
     
-    CardContext *context = [[CardContext alloc] initWithImages:images];
+    NSSet<NSString *> *imageNames = [NSSet setWithObjects:
+        @"message_summary_video_normal.png",
+        nil
+    ];
+    CardContext *context = [[CardContext alloc] initWithImageNames:imageNames];
     _dataSource = [[CKCollectionViewDataSource alloc] initWithCollectionView:self.collectionView
                                                  supplementaryViewDataSource:nil
                                                            componentProvider:[self class]

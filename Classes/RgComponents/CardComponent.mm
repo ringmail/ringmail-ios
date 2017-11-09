@@ -20,6 +20,7 @@
 #import "HashtagDirectoryHeaderCardComponent.h"
 #import "HashtagMyActivityHeaderCardComponent.h"
 #import "RingPageBusinessPlaceComponent.h"
+#import "DynamicComponent.h"
 
 @implementation CardComponent
 
@@ -79,6 +80,10 @@ static CKComponent *cardComponent(Card *card, CardContext *context)
         else if ([type isEqualToString:@"ringpage_business_place"])
         {
             return [RingPageBusinessPlaceComponent newWithData:card.data context:context];
+        }
+        else if ([type isEqualToString:@"dynamic"])
+        {
+            return [DynamicComponent newWithData:card.data context:context];
         }
     }
 	return nil;
